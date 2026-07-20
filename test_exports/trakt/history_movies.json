@@ -1,0 +1,66 @@
+[
+  {
+    "id": 9954120311,
+    "watched_at": "2026-07-01T21:00:25.000Z",
+    "action": "scrobble",
+    "type": "movie",
+    "movie": {
+      "title": "Knives Out",
+      "year": 2019,
+      "ids": {
+        "trakt": 397442,
+        "slug": "knives-out-2019",
+        "imdb": "tt8946378",
+        "tmdb": 546554
+      }
+    }
+  },
+  {
+    "id": 9941877204,
+    "watched_at": "2026-06-20T20:30:00.000Z",
+    "action": "checkin",
+    "type": "movie",
+    "movie": {
+      "title": "Inception",
+      "year": 2010,
+      "ids": {
+        "trakt": 16662,
+        "slug": "inception-2010",
+        "imdb": "tt1375666",
+        "tmdb": 27205
+      }
+    }
+  },
+  {
+    "id": 9930456118,
+    "watched_at": "2026-06-09T22:11:08.000Z",
+    "action": "watch",
+    "type": "movie",
+    "movie": {
+      "title": "Another Round",
+      "year": 2020,
+      "ids": {
+        "trakt": 486452,
+        "slug": "another-round-2020",
+        "imdb": "tt10288566",
+        "tmdb": 580175
+      }
+    }
+  },
+  {
+    "id": 9902341675,
+    "watched_at": "2026-05-20T19:05:47.000Z",
+    "action": "scrobble",
+    "type": "movie",
+    "movie": {
+      "title": "Parasite",
+      "year": 2019,
+      "ids": {
+        "trakt": 406125,
+        "slug": "parasite-2019",
+        "imdb": "tt6751668",
+        "tmdb": 496243
+      }
+    }
+  }
+]

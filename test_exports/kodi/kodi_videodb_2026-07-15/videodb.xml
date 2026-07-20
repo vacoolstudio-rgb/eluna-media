@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<videodb>
+    <version>1</version>
+    <movie>
+        <title>Pulp Fiction</title>
+        <originaltitle>Pulp Fiction</originaltitle>
+        <sorttitle></sorttitle>
+        <ratings>
+            <rating name="imdb" max="10" default="true">
+                <value>8.900000</value>
+                <votes>2301458</votes>
+            </rating>
+            <rating name="themoviedb" max="10">
+                <value>8.490000</value>
+                <votes>28046</votes>
+            </rating>
+        </ratings>
+        <userrating>9</userrating>
+        <top250>8</top250>
+        <outline></outline>
+        <plot>A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper.</plot>
+        <tagline>Just because you are a character doesn't mean you have character.</tagline>
+        <runtime>154</runtime>
+        <mpaa>R</mpaa>
+        <playcount>2</playcount>
+        <lastplayed>2026-05-13</lastplayed>
+        <file>Pulp Fiction (1994).mkv</file>
+        <path>smb://nas/movies/Pulp Fiction (1994)/</path>
+        <filenameandpath>smb://nas/movies/Pulp Fiction (1994)/Pulp Fiction (1994).mkv</filenameandpath>
+        <basepath>smb://nas/movies/</basepath>
+        <id>680</id>
+        <uniqueid type="imdb">tt0110912</uniqueid>
+        <uniqueid type="tmdb" default="true">680</uniqueid>
+        <genre>Crime</genre>
+        <genre>Drama</genre>
+        <country>United States of America</country>
+        <tag>BluRay</tag>
+        <hasvideoversions>false</hasvideoversions>
+        <hasvideoextras>false</hasvideoextras>
+        <isdefaultvideoversion>true</isdefaultvideoversion>
+        <credits>Quentin Tarantino</credits>
+        <director>Quentin Tarantino</director>
+        <premiered>1994-10-14</premiered>
+        <year>1994</year>
+        <status></status>
+        <code></code>
+        <aired></aired>
+        <studio>Miramax</studio>
+        <trailer></trailer>
+        <fileinfo>
+            <streamdetails>
+                <video>
+                    <codec>h264</codec>
+                    <aspect>2.390000</aspect>
+                    <width>1920</width>
+                    <height>800</height>
+                    <durationinseconds>9243</durationinseconds>
+                    <stereomode></stereomode>
+                    <hdrtype></hdrtype>
+                </video>
+                <audio>
+                    <codec>dtshd_ma</codec>
+                    <language>eng</language>
+                    <channels>6</channels>
+                </audio>
+            </streamdetails>
+        </fileinfo>
+        <actor>
+            <name>John Travolta</name>
+            <role>Vincent Vega</role>
+            <order>0</order>
+        </actor>
+        <resume>
+            <position>0.000000</position>
+            <total>0.000000</total>
+        </resume>
+        <dateadded>2026-05-10 08:00:00</dateadded>
+    </movie>
+    <movie>
+        <title>Oppenheimer</title>
+        <originaltitle>Oppenheimer</originaltitle>
+        <sorttitle></sorttitle>
+        <ratings>
+            <rating name="themoviedb" max="10" default="true">
+                <value>8.090000</value>
+                <votes>10312</votes>
+            </rating>
+        </ratings>
+        <userrating>0</userrating>
+        <top250>0</top250>
+        <outline></outline>
+        <plot>The story of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II.</plot>
+        <tagline>The world forever changes.</tagline>
+        <runtime>181</runtime>
+        <mpaa>R</mpaa>
+        <playcount>0</playcount>
+        <lastplayed></lastplayed>
+        <file>Oppenheimer (2023).mkv</file>
+        <path>smb://nas/movies/Oppenheimer (2023)/</path>
+        <filenameandpath>smb://nas/movies/Oppenheimer (2023)/Oppenheimer (2023).mkv</filenameandpath>
+        <basepath>smb://nas/movies/</basepath>
+        <id>872585</id>
+        <uniqueid type="imdb">tt15398776</uniqueid>
+        <uniqueid type="tmdb" default="true">872585</uniqueid>
+        <genre>Drama</genre>
+        <genre>History</genre>
+        <country>United States of America</country>
+        <hasvideoversions>false</hasvideoversions>
+        <hasvideoextras>false</hasvideoextras>
+        <isdefaultvideoversion>true</isdefaultvideoversion>
+        <credits>Christopher Nolan</credits>
+        <director>Christopher Nolan</director>
+        <premiered>2023-07-21</premiered>
+        <year>2023</year>
+        <status></status>
+        <code></code>
+        <aired></aired>
+        <studio>Universal Pictures</studio>
+        <trailer></trailer>
+        <resume>
+            <position>2964.500000</position>
+            <total>10860.000000</total>
+        </resume>
+        <dateadded>2026-04-20 11:45:20</dateadded>
+    </movie>
+    <tvshow>
+        <title>Breaking Bad</title>
+        <showtitle>Breaking Bad</showtitle>
+        <ratings>
+            <rating name="imdb" max="10" default="true">
+                <value>9.500000</value>
+                <votes>2254120</votes>
+            </rating>
+            <rating name="tmdb" max="10">
+                <value>8.886000</value>
+                <votes>15024</votes>
+            </rating>
+        </ratings>
+        <userrating>10</userrating>
+        <top250>0</top250>
+        <season>5</season>
+        <episode>62</episode>
+        <displayseason>-1</displayseason>
+        <displayepisode>-1</displayepisode>
+        <outline></outline>
+        <plot>Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live.</plot>
+        <tagline></tagline>
+        <runtime>0</runtime>
+        <mpaa>TV-MA</mpaa>
+        <playcount>0</playcount>
+        <lastplayed>2026-06-05</lastplayed>
+        <file></file>
+        <path>smb://nas/tv/Breaking Bad (2008)/</path>
+        <filenameandpath></filenameandpath>
+        <basepath>smb://nas/tv/</basepath>
+        <episodeguide>{"tmdb":"1396"}</episodeguide>
+        <id>1396</id>
+        <uniqueid type="imdb">tt0903747</uniqueid>
+        <uniqueid type="tmdb" default="true">1396</uniqueid>
+        <uniqueid type="tvdb">81189</uniqueid>
+        <genre>Drama</genre>
+        <genre>Crime</genre>
+        <premiered>2008-01-20</premiered>
+        <year>2008</year>
+        <status>Ended</status>
+        <code></code>
+        <aired></aired>
+        <studio>AMC</studio>
+        <trailer></trailer>
+        <actor>
+            <name>Bryan Cranston</name>
+            <role>Walter White</role>
+            <order>0</order>
+        </actor>
+        <namedseason number="1">Season 1</namedseason>
+        <resume>
+            <position>0.000000</position>
+            <total>0.000000</total>
+        </resume>
+        <dateadded>2026-05-28 18:00:11</dateadded>
+        <episodedetails>
+            <title>Pilot</title>
+            <showtitle>Breaking Bad</showtitle>
+            <ratings>
+                <rating name="imdb" max="10" default="true">
+                    <value>9.000000</value>
+                    <votes>22841</votes>
+                </rating>
+            </ratings>
+            <userrating>9</userrating>
+            <top250>0</top250>
+            <season>1</season>
+            <episode>1</episode>
+            <displayseason>-1</displayseason>
+            <displayepisode>-1</displayepisode>
+            <outline></outline>
+            <plot>A high-school chemistry teacher is diagnosed with terminal lung cancer and turns to a life of crime.</plot>
+            <tagline></tagline>
+            <runtime>58</runtime>
+            <mpaa>TV-MA</mpaa>
+            <playcount>1</playcount>
+            <lastplayed>2026-06-01</lastplayed>
+            <file>Breaking Bad S01E01.mkv</file>
+            <path>smb://nas/tv/Breaking Bad (2008)/Season 1/</path>
+            <filenameandpath>smb://nas/tv/Breaking Bad (2008)/Season 1/Breaking Bad S01E01.mkv</filenameandpath>
+            <basepath>smb://nas/tv/</basepath>
+            <id>62085</id>
+            <uniqueid type="imdb">tt0959621</uniqueid>
+            <uniqueid type="tmdb" default="true">62085</uniqueid>
+            <uniqueid type="tvdb">349232</uniqueid>
+            <credits>Vince Gilligan</credits>
+            <director>Vince Gilligan</director>
+            <premiered>2008-01-20</premiered>
+            <year>2008</year>
+            <status></status>
+            <code></code>
+            <aired>2008-01-20</aired>
+            <studio>AMC</studio>
+            <fileinfo>
+                <streamdetails>
+                    <video>
+                        <codec>h264</codec>
+                        <aspect>1.777778</aspect>
+                        <width>1920</width>
+                        <height>1080</height>
+                        <durationinseconds>3486</durationinseconds>
+                        <stereomode></stereomode>
+                        <hdrtype></hdrtype>
+                    </video>
+                    <audio>
+                        <codec>ac3</codec>
+                        <language>eng</language>
+                        <channels>6</channels>
+                    </audio>
+                </streamdetails>
+            </fileinfo>
+            <resume>
+                <position>0.000000</position>
+                <total>0.000000</total>
+            </resume>
+            <dateadded>2026-05-28 18:05:00</dateadded>
+        </episodedetails>
+        <episodedetails>
+            <title>Cat's in the Bag...</title>
+            <showtitle>Breaking Bad</showtitle>
+            <ratings>
+                <rating name="imdb" max="10" default="true">
+                    <value>8.600000</value>
+                    <votes>16412</votes>
+                </rating>
+            </ratings>
+            <userrating>0</userrating>
+            <top250>0</top250>
+            <season>1</season>
+            <episode>2</episode>
+            <displayseason>-1</displayseason>
+            <displayepisode>-1</displayepisode>
+            <outline></outline>
+            <plot>Walt and Jesse attempt to tie up loose ends.</plot>
+            <tagline></tagline>
+            <runtime>48</runtime>
+            <mpaa>TV-MA</mpaa>
+            <playcount>1</playcount>
+            <lastplayed>2026-06-02</lastplayed>
+            <file>Breaking Bad S01E02.mkv</file>
+            <path>smb://nas/tv/Breaking Bad (2008)/Season 1/</path>
+            <filenameandpath>smb://nas/tv/Breaking Bad (2008)/Season 1/Breaking Bad S01E02.mkv</filenameandpath>
+            <basepath>smb://nas/tv/</basepath>
+            <id>62086</id>
+            <uniqueid type="imdb">tt1054724</uniqueid>
+            <uniqueid type="tmdb" default="true">62086</uniqueid>
+            <uniqueid type="tvdb">349233</uniqueid>
+            <credits>Vince Gilligan</credits>
+            <director>Adam Bernstein</director>
+            <premiered>2008-01-27</premiered>
+            <year>2008</year>
+            <status></status>
+            <code></code>
+            <aired>2008-01-27</aired>
+            <studio>AMC</studio>
+            <resume>
+                <position>0.000000</position>
+                <total>0.000000</total>
+            </resume>
+            <dateadded>2026-05-28 18:05:00</dateadded>
+        </episodedetails>
+        <episodedetails>
+            <title>...And the Bag's in the River</title>
+            <showtitle>Breaking Bad</showtitle>
+            <ratings>
+                <rating name="imdb" max="10" default="true">
+                    <value>8.700000</value>
+                    <votes>15533</votes>
+                </rating>
+            </ratings>
+            <userrating>0</userrating>
+            <top250>0</top250>
+            <season>1</season>
+            <episode>3</episode>
+            <displayseason>-1</displayseason>
+            <displayepisode>-1</displayepisode>
+            <outline></outline>
+            <plot>Walt is struggling to decide what to do with Krazy-8.</plot>
+            <tagline></tagline>
+            <runtime>48</runtime>
+            <mpaa>TV-MA</mpaa>
+            <playcount>0</playcount>
+            <lastplayed></lastplayed>
+            <file>Breaking Bad S01E03.mkv</file>
+            <path>smb://nas/tv/Breaking Bad (2008)/Season 1/</path>
+            <filenameandpath>smb://nas/tv/Breaking Bad (2008)/Season 1/Breaking Bad S01E03.mkv</filenameandpath>
+            <basepath>smb://nas/tv/</basepath>
+            <id>62087</id>
+            <uniqueid type="imdb">tt1054725</uniqueid>
+            <uniqueid type="tmdb" default="true">62087</uniqueid>
+            <uniqueid type="tvdb">349234</uniqueid>
+            <credits>Vince Gilligan</credits>
+            <director>Adam Bernstein</director>
+            <premiered>2008-02-10</premiered>
+            <year>2008</year>
+            <status></status>
+            <code></code>
+            <aired>2008-02-10</aired>
+            <studio>AMC</studio>
+            <resume>
+                <position>1122.750000</position>
+                <total>2880.000000</total>
+            </resume>
+            <dateadded>2026-05-28 18:05:00</dateadded>
+        </episodedetails>
+    </tvshow>
+    <paths>
+        <path>
+            <url>smb://nas/movies/</url>
+            <scanrecursive>0</scanrecursive>
+            <usefoldernames>true</usefoldernames>
+            <content>movies</content>
+            <scraperpath>metadata.themoviedb.org.python</scraperpath>
+        </path>
+        <path>
+            <url>smb://nas/tv/</url>
+            <scanrecursive>0</scanrecursive>
+            <usefoldernames>false</usefoldernames>
+            <content>tvshows</content>
+            <scraperpath>metadata.tvshows.themoviedb.org.python</scraperpath>
+        </path>
+    </paths>
+</videodb>

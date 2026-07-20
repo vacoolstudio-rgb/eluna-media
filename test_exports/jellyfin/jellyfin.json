@@ -1,0 +1,50 @@
+{
+  "username": "elunatester",
+  "backupdate": "2026-07-15T09:00:00.123456",
+  "items": [
+    {
+      "Type": "Movie",
+      "Name": "The Matrix",
+      "Played": true,
+      "IsFavorite": false,
+      "imdbid": "tt0133093",
+      "tmdbid": "603"
+    },
+    {
+      "Type": "Movie",
+      "Name": "Pulp Fiction",
+      "Played": true,
+      "IsFavorite": true,
+      "imdbid": "tt0110912",
+      "tmdbid": "680"
+    },
+    {
+      "Type": "Movie",
+      "Name": "Oppenheimer",
+      "Played": false,
+      "IsFavorite": false,
+      "imdbid": "tt15398776",
+      "tmdbid": "872585"
+    },
+    {
+      "Type": "Episode",
+      "Name": "Pilot",
+      "Played": true,
+      "IsFavorite": false,
+      "SeriesName": "Breaking Bad",
+      "SeasonName": "Season 1",
+      "imdbid": "tt0959621",
+      "tvdbid": "349232"
+    },
+    {
+      "Type": "Episode",
+      "Name": "1:23:45",
+      "Played": true,
+      "IsFavorite": false,
+      "SeriesName": "Chernobyl",
+      "SeasonName": "Season 1",
+      "imdbid": "tt8162428",
+      "tvdbid": "7139251"
+    }
+  ]
+}

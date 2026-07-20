@@ -1,0 +1,3 @@
+ordering,s_key,name,type,description,is_public,user_id,objects,created_at,lists,list_count
+0,00000000-0000-0000-0000-000000000000,Prestige drama,list,,true,0,[map[created_at:1.780821600e+09 id:81189 type:series] map[created_at:1.780821650e+09 id:360893 type:series]],2026-06-07 12:00:00,,
+0,00000000-0000-0000-0000-000000000001,Movie night,list,,false,0,[map[created_at:1.781200000e+09 id:649 type:movie] map[created_at:1.781200060e+09 id:631 type:movie]],2026-06-11 13:06:40,,

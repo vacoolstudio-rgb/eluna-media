@@ -1,0 +1,47 @@
+{
+  "format": "eluna-import",
+  "version": 1,
+  "exported_at": "2026-07-15T09:00:00Z",
+  "items": [
+    {
+      "title": "Pulp Fiction",
+      "year": 1994,
+      "type": "movie",
+      "ids": { "imdb": "tt0110912", "tmdb": 680 },
+      "status": "completed",
+      "rating": 9,
+      "watched_at": "2026-05-13T20:15:33Z",
+      "rewatch_count": 1
+    },
+    {
+      "title": "Oppenheimer",
+      "year": 2023,
+      "type": "movie",
+      "ids": { "imdb": "tt15398776", "tmdb": 872585 },
+      "status": "planned",
+      "notes": "Recommended by a friend"
+    },
+    {
+      "title": "Breaking Bad",
+      "year": 2008,
+      "type": "show",
+      "ids": { "imdb": "tt0903747", "tmdb": 1396, "tvdb": 81189 },
+      "status": "watching",
+      "rating": 10,
+      "episodes": [
+        { "season": 1, "episode": 1, "watched_at": "2026-06-01T20:41:37Z", "rating": 9 },
+        { "season": 1, "episode": 2, "watched_at": "2026-06-02T21:10:04Z" }
+      ]
+    },
+    {
+      "title": "Hunter x Hunter (2011)",
+      "year": 2011,
+      "type": "anime",
+      "ids": { "mal": 11061, "anilist": 11061 },
+      "status": "completed",
+      "rating": 10,
+      "watched_at": "2026-06-30T21:45:10Z",
+      "notes": "Chimera Ant arc is peak fiction."
+    }
+  ]
+}

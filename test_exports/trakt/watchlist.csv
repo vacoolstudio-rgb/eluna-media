@@ -1,0 +1,6 @@
+rank,listed_at,type,title,year,trakt_id,imdb_id,tmdb_id,tvdb_id,url,released,runtime,season_number,season_trakt_id,season_tmdb_id,season_tvdb_id,episode_number,episode_title,episode_released,episode_trakt_id,episode_imdb_id,episode_tmdb_id,episode_tvdb_id,genres,country,language,trakt_rating,trakt_votes,imdb_rating,imdb_votes,tmdb_rating,tmdb_votes,rt_tomatometer,rt_audience,metascore
+1,2026-04-20T11:45:20.000Z,movie,Oppenheimer,2023,736074,tt15398776,872585,,https://trakt.tv/movies/oppenheimer-2023,2023-07-21,181,,,,,,,,,,,,,,,,,,,,,,,
+2,2026-05-03T08:30:15.000Z,show,The Witcher,2019,118266,tt5180504,71912,362696,https://trakt.tv/shows/the-witcher,2019-12-20,60,,,,,,,,,,,,,,,,,,,,,,,
+3,2026-05-18T17:12:33.000Z,movie,Mission: Impossible - Dead Reckoning Part One,2023,522491,tt9603212,575264,,https://trakt.tv/movies/mission-impossible-dead-reckoning-part-one-2023,2023-07-12,163,,,,,,,,,,,,,,,,,,,,,,,
+4,2026-06-01T19:55:02.000Z,show,Arcane,2021,156262,tt11126994,94605,371028,https://trakt.tv/shows/arcane,2021-11-06,41,,,,,,,,,,,,,,,,,,,,,,,
+5,2026-06-28T14:08:47.000Z,movie,The Boy and the Heron,2023,623776,tt21815562,508883,,https://trakt.tv/movies/the-boy-and-the-heron-2023,2023-12-08,124,,,,,,,,,,,,,,,,,,,,,,,

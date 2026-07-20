@@ -1,0 +1,679 @@
+import 'dart:io';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../core/converter.dart';
+import '../core/ffmpeg_args.dart';
+import '../core/hw_encoders.dart';
+import '../core/output_paths.dart';
+import '../core/queue_storage.dart';
+import '../domain/conversion_job.dart';
+import '../domain/conversion_settings.dart';
+import '../domain/media_format.dart';
+import '../services/foreground_service.dart';
+import '../services/haptics.dart';
+import '../services/notification_service.dart';
+import 'achievements_controller.dart';
+import 'app_meta_controller.dart';
+import 'settings_controller.dart';
+
+final converterProvider = Provider<FFmpegConverter>((ref) => FFmpegConverter());
+
+final notificationServiceProvider = Provider<NotificationService>(
+  (ref) => NotificationService.create(),
+);
+
+final foregroundServiceProvider = Provider<ForegroundService>((ref) => ForegroundService());
+
+/// Localised text the queue needs while it runs headless.
+///
+/// The controller has no `BuildContext`, so the strings are resolved by the UI
+/// at the moment the user presses Convert and handed over.
+class QueueStrings {
+  const QueueStrings({
+    required this.appTitle,
+    required this.progress,
+    required this.completed,
+    required this.completedWithFailures,
+  });
+
+  final String appTitle;
+
+  /// e.g. "3 of 8 done"
+  final String Function(int done, int total) progress;
+  final String Function(int done) completed;
+  final String Function(int done, int failed) completedWithFailures;
+}
+
+class QueueState {
+  const QueueState({
+    this.jobs = const [],
+    this.isRunning = false,
+    this.autoResume = false,
+  });
+
+  final List<ConversionJob> jobs;
+  final bool isRunning;
+
+  /// Set at launch when a batch was interrupted by process death and still has
+  /// work left. Consumed once by the UI, which owns the localised strings the
+  /// queue needs and can tell the user what just happened.
+  final bool autoResume;
+
+  List<ConversionJob> get pending =>
+      jobs.where((j) => j.status == JobStatus.queued).toList();
+
+  List<ConversionJob> get finished => jobs.where((j) => j.status.isTerminal).toList();
+
+  int get completedCount => jobs.where((j) => j.status == JobStatus.completed).length;
+
+  int get failedCount => jobs.where((j) => j.status == JobStatus.failed).length;
+
+  bool get hasPending => pending.isNotEmpty;
+
+  /// Batch progress: finished jobs count as whole units, the running one
+  /// contributes its fraction.
+  double get overallProgress {
+    if (jobs.isEmpty) return 0;
+    final total = jobs.fold<double>(0, (sum, j) {
+      if (j.status == JobStatus.completed) return sum + 1;
+      if (j.status == JobStatus.running) return sum + j.progress;
+      return sum;
+    });
+    return (total / jobs.length).clamp(0.0, 1.0);
+  }
+
+  QueueState copyWith({List<ConversionJob>? jobs, bool? isRunning, bool? autoResume}) => QueueState(
+        jobs: jobs ?? this.jobs,
+        isRunning: isRunning ?? this.isRunning,
+        autoResume: autoResume ?? this.autoResume,
+      );
+}
+
+/// Owns the batch queue and drives it **one job at a time**.
+///
+/// Serial execution is deliberate: FFmpeg already saturates the available cores
+/// per job, and running several transcodes concurrently on a phone buys no
+/// throughput while it does cost thermal headroom and battery — the single most
+/// common complaint about offline converters.
+class QueueController extends Notifier<QueueState> {
+  static const _storageKey = 'queue.v1';
+
+  var _idCounter = 0;
+  var _cancelBatch = false;
+  QueueStrings? _strings;
+
+  @override
+  QueueState build() {
+    final stored = QueueStorage.decode(ref.read(sharedPreferencesProvider).getString(_storageKey));
+    final jobs = QueueStorage.restore(
+      stored.jobs,
+      exists: (p) => File(p).existsSync(),
+      delete: _deletePartial,
+    );
+
+    // Only offer to resume a batch that was actually converting when the process
+    // died, and only if repairing the queue left something to convert. A job
+    // whose source vanished is now `failed`, not `queued`, so a queue of nothing
+    // but corpses will not restart itself.
+    final resumable = jobs.any((j) => j.status == JobStatus.queued);
+
+    return QueueState(jobs: jobs, autoResume: stored.wasRunning && resumable);
+  }
+
+  Future<void>? _pendingWrite;
+
+  /// Resolves once the most recent [_persist] has reached the platform. The
+  /// point of persisting is to survive process death, so callers that can wait
+  /// for the write should, and tests must.
+  Future<void> get persisted => _pendingWrite ?? Future<void>.value();
+
+  /// Called only on structural changes. Progress deliberately does not persist:
+  /// writing on every FFmpeg statistics callback would hammer storage to record
+  /// a number that a restored job discards anyway.
+  Future<void> _persist() {
+    final write = ref.read(sharedPreferencesProvider).setString(
+          _storageKey,
+          // `isRunning` is what a later launch reads to decide whether the batch
+          // was interrupted or simply finished.
+          QueueStorage.encode(state.jobs, wasRunning: state.isRunning),
+        );
+    return _pendingWrite = write;
+  }
+
+  String _nextId() => 'job_${DateTime.now().microsecondsSinceEpoch}_${_idCounter++}';
+
+  void addFiles(List<({String path, String name})> files, ConversionSettings settings) {
+    final added = files.map((f) {
+      var size = 0;
+      try {
+        size = File(f.path).lengthSync();
+      } on FileSystemException {
+        size = 0;
+      }
+      return ConversionJob(
+        id: _nextId(),
+        inputPath: f.path,
+        inputName: f.name,
+        settings: settings,
+        inputBytes: size,
+      );
+    });
+    final jobs = added.toList();
+    state = state.copyWith(jobs: [...state.jobs, ...jobs]);
+    _persist();
+
+    // Durations arrive lazily so adding files never blocks on ffprobe. The
+    // Convert tab uses them for output-size estimates; the encode itself
+    // re-probes and does not depend on this.
+    for (final job in jobs) {
+      _probeDuration(job.id);
+    }
+  }
+
+  Future<void> _probeDuration(String id) async {
+    int? ms;
+    try {
+      final job = _find(id);
+      if (job == null) return;
+      ms = await ref.read(converterProvider).probeDurationMs(job.inputPath);
+    } catch (_) {
+      return; // No probe on this platform/test host; estimates just stay off.
+    }
+    // The probe outlives the provider when the app (or a test) tears down
+    // mid-flight; touching `state` then throws.
+    if (!ref.mounted) return;
+
+    final current = _find(id);
+    if (ms != null && current != null && current.status == JobStatus.queued) {
+      _replace(current.copyWith(sourceDurationMs: ms));
+    }
+  }
+
+  void removeJob(String id) {
+    final job = _find(id);
+    if (job == null || job.status.isActive) return;
+    state = state.copyWith(jobs: state.jobs.where((j) => j.id != id).toList());
+    _persist();
+  }
+
+  void clearFinished() {
+    state = state.copyWith(
+      jobs: state.jobs.where((j) => !j.status.isTerminal).toList(),
+    );
+    _persist();
+  }
+
+  void clearAll() {
+    if (state.isRunning) return;
+    state = const QueueState();
+    _persist();
+  }
+
+  /// Collapses all pending jobs into one merge job that concatenates them in
+  /// the order they were added. No-op below two files.
+  void mergePending(ConversionSettings settings, String displayName) {
+    final pending = state.pending;
+    if (pending.length < 2) return;
+
+    final merged = ConversionJob(
+      id: _nextId(),
+      inputPath: pending.first.inputPath,
+      inputName: displayName,
+      settings: settings,
+      inputBytes: pending.fold(0, (sum, j) => sum + j.inputBytes),
+      extraInputPaths: [for (final j in pending.skip(1)) j.inputPath],
+    );
+
+    final pendingIds = {for (final j in pending) j.id};
+    state = state.copyWith(
+      jobs: [
+        for (final j in state.jobs)
+          if (!pendingIds.contains(j.id)) j,
+        merged,
+      ],
+    );
+    _persist();
+  }
+
+  /// Applies new settings to every job that has not started yet.
+  void updatePendingSettings(ConversionSettings settings) =>
+      updatePendingSettingsPerFile((_) => settings);
+
+  /// Per-file variant: the resolver sees each queued job and returns the
+  /// profile for it. A mixed selection (photos *and* videos) must not force
+  /// one profile onto both — that is how a photo ends up being "compressed"
+  /// as a video.
+  void updatePendingSettingsPerFile(
+    ConversionSettings Function(ConversionJob job) resolve,
+  ) {
+    state = state.copyWith(
+      jobs: [
+        for (final j in state.jobs)
+          j.status == JobStatus.queued ? j.copyWith(settings: resolve(j)) : j,
+      ],
+    );
+    _persist();
+  }
+
+  /// Reinstates jobs that an undo wants back. Only terminal jobs can have been
+  /// removed, so re-appending them cannot collide with the run loop.
+  void restoreJobs(List<ConversionJob> jobs) {
+    if (jobs.isEmpty) return;
+    final existing = state.jobs.map((j) => j.id).toSet();
+    final restored = jobs.where((j) => !existing.contains(j.id)).toList();
+    if (restored.isEmpty) return;
+    state = state.copyWith(jobs: [...state.jobs, ...restored]);
+    _persist();
+  }
+
+  /// Puts a failed or cancelled job back in line, from scratch. The output of
+  /// the failed attempt was already deleted when the job reached its terminal
+  /// state.
+  void retryJob(String id) {
+    final job = _find(id);
+    if (job == null || !(job.status == JobStatus.failed || job.status == JobStatus.cancelled)) {
+      return;
+    }
+    _replace(job.copyWith(
+      status: JobStatus.queued,
+      progress: 0,
+      clearError: true,
+      clearSession: true,
+    ));
+    _persist();
+  }
+
+  ConversionJob? _find(String id) {
+    for (final j in state.jobs) {
+      if (j.id == id) return j;
+    }
+    return null;
+  }
+
+  void _replace(ConversionJob updated) {
+    state = state.copyWith(
+      jobs: [
+        for (final j in state.jobs) j.id == updated.id ? updated : j,
+      ],
+    );
+  }
+
+  Future<void> cancelJob(String id) async {
+    final job = _find(id);
+    if (job == null || job.status.isTerminal) return;
+
+    if (job.status == JobStatus.running && job.sessionId != null) {
+      // The FFmpeg completion callback reports `cancel`, and the run loop turns
+      // that into the terminal state. Nothing to set here.
+      await ref.read(converterProvider).cancel(job.sessionId!);
+      return;
+    }
+    _replace(job.copyWith(status: JobStatus.cancelled, clearSession: true));
+    await _persist();
+  }
+
+  Future<void> cancelBatch() async {
+    _cancelBatch = true;
+    for (final job in state.jobs) {
+      if (job.status == JobStatus.queued) {
+        _replace(job.copyWith(status: JobStatus.cancelled));
+      }
+    }
+    await _persist();
+
+    final running = state.jobs.where((j) => j.status.isActive).toList();
+    for (final job in running) {
+      if (job.sessionId != null) {
+        await ref.read(converterProvider).cancel(job.sessionId!);
+      }
+    }
+  }
+
+  /// Processes every queued job in order. Safe to call while already running —
+  /// it returns immediately.
+  Future<void> start(QueueStrings strings) async {
+    if (state.isRunning) return;
+    if (!state.hasPending) return;
+
+    _cancelBatch = false;
+    _strings = strings;
+    state = state.copyWith(isRunning: true, autoResume: false);
+
+    final completedBefore = state.completedCount;
+    final completedIdsBefore = {
+      for (final j in state.jobs)
+        if (j.status == JobStatus.completed) j.id,
+    };
+    ref.read(hapticsProvider).batchStarted();
+
+    // Record "a batch is in flight" before any long work, so a process killed
+    // even during the first job is recognised as interrupted on the next launch.
+    await _persist();
+
+    final notifications = ref.read(notificationServiceProvider);
+    await notifications.requestPermission();
+
+    final foreground = ref.read(foregroundServiceProvider);
+    final converter = ref.read(converterProvider);
+
+    // Started while the app is still in the foreground, which is what Android
+    // requires for a dataSync service.
+    await foreground.start(
+      title: strings.appTitle,
+      text: strings.progress(state.completedCount, state.jobs.length),
+      progress: state.overallProgress,
+    );
+
+    try {
+      while (!_cancelBatch) {
+        final next = state.pending.firstOrNull;
+        if (next == null) break;
+        await _runJob(next.id, converter);
+      }
+    } finally {
+      // The service must come down even if a job threw, or the notification
+      // sticks around forever and the process stays pinned.
+      await foreground.stop();
+      state = state.copyWith(isRunning: false);
+      // Clears the interrupted flag: the batch ended on its own terms, so the
+      // next launch must not resume it.
+      await _persist();
+    }
+
+    // Lifetime success counter feeds the review milestones; the buzz reports
+    // the batch's outcome without the user having to look.
+    final newlyCompleted = state.completedCount - completedBefore;
+    ref.read(appMetaProvider.notifier).recordSuccessfulConversions(newlyCompleted);
+
+    // Achievements ingest exactly the jobs this run finished; the toast host
+    // watches freshUnlocksProvider and celebrates whatever comes back.
+    final batchJobs = [
+      for (final j in state.jobs)
+        if (j.status == JobStatus.completed && !completedIdsBefore.contains(j.id)) j,
+    ];
+    final unlocks = ref.read(achievementsProvider.notifier).recordBatch(batchJobs);
+    ref.read(freshUnlocksProvider.notifier).publish(unlocks);
+    final haptics = ref.read(hapticsProvider);
+    if (state.failedCount > 0) {
+      haptics.batchFailed();
+    } else if (newlyCompleted > 0) {
+      haptics.batchSucceeded();
+    }
+
+    await _notifyBatchDone(notifications, strings);
+  }
+
+  /// Mirrors batch progress into the foreground notification.
+  Future<void> _syncForeground() async {
+    final strings = _strings;
+    if (strings == null || !state.isRunning) return;
+    await ref.read(foregroundServiceProvider).update(
+          title: strings.appTitle,
+          text: strings.progress(state.completedCount, state.jobs.length),
+          progress: state.overallProgress,
+        );
+  }
+
+  Future<void> _runJob(String id, FFmpegConverter converter) async {
+    var job = _find(id);
+    if (job == null) return;
+
+    final outputPath = await OutputPaths.resolve(
+      inputFileName: job.inputName,
+      extension: job.settings.container.extension,
+    );
+
+    // Stills have no timeline, so FFmpeg's `time=` statistic cannot drive a
+    // percentage; the UI shows an indeterminate bar for them instead. A merge
+    // progresses over the *sum* of its inputs; one unknown input makes the
+    // total unknowable, and the bar honestly goes indeterminate. Per-input
+    // audio presence feeds the concat graph — a silent clip must be padded
+    // with silence, not crash the whole merge.
+    int? durationMs;
+    final mergeDurations = <int?>[];
+    final mergeHasAudio = <bool?>[];
+    if (job.settings.container.kind != MediaKind.image ||
+        job.settings.container.isAnimatedImage) {
+      durationMs = await converter.probeDurationMs(job.inputPath);
+      if (job.isMerge) {
+        mergeDurations.add(durationMs);
+        mergeHasAudio.add(await converter.probeHasAudio(job.inputPath));
+        var total = durationMs;
+        for (final extra in job.extraInputPaths) {
+          final extraMs = await converter.probeDurationMs(extra);
+          mergeDurations.add(extraMs);
+          mergeHasAudio.add(await converter.probeHasAudio(extra));
+          total = (total == null || extraMs == null) ? null : total + extraMs;
+        }
+        durationMs = total;
+      }
+    }
+    // Probing is async and can outlive the provider if the app tears down
+    // mid-batch; from here on `state` would throw.
+    if (!ref.mounted) return;
+
+    // What the progress bar divides by is the duration of what will be
+    // *encoded*: a trim shortens it, an active speed change compresses it.
+    // The raw duration still goes to the bitrate maths separately.
+    int? progressMs = durationMs;
+    final trim = job.settings.trim;
+    if (!job.isMerge && trim != null && trim.isValid) progressMs = trim.durationMs;
+    if (progressMs != null && FFmpegArgs.speedActive(job.settings)) {
+      progressMs = (progressMs / job.settings.speed.factor).round();
+    }
+
+    job = _find(id);
+    if (job == null || job.status.isTerminal) return;
+
+    // outputPath is committed *before* the encode so that, if the process dies
+    // mid-job, the next launch knows which truncated file to delete.
+    _replace(job.copyWith(
+      status: JobStatus.running,
+      progress: 0,
+      outputPath: outputPath,
+      sourceDurationMs: durationMs,
+      // Anchors the time-remaining estimate. Transient by design: a restored
+      // job starts from zero, and a stale start time would make the first
+      // estimate absurd.
+      startedAtMs: DateTime.now().millisecondsSinceEpoch,
+      clearError: true,
+    ));
+    await _persist();
+
+    // What the source spent per stream is the ceiling a constant-quality
+    // encode must not exceed, or "compressing" an already-efficient video
+    // inflates it.
+    final sourceRates = job.isMerge
+        ? const SourceRates()
+        : await converter.probeRates(job.inputPath);
+    if (!ref.mounted) return;
+
+    final prefs = ref.read(appPrefsProvider);
+
+    // Two-pass only when it can deliver what it promises: an opted-in user,
+    // a size-mode job whose bitrate is actually computable, and H.264
+    // specifically — libx265 routes its stats through `-x265-params`, not
+    // ffmpeg's generic pass plumbing, and would fail trying to write
+    // x265_2pass.log into an unwritable working directory.
+    final twoPass = prefs.twoPassFitToSize &&
+        !job.isMerge &&
+        job.settings.rateControl == RateControl.size &&
+        job.settings.videoCodec == VideoCodec.h264 &&
+        FFmpegArgs.targetKbps(job.settings, durationMs) != null;
+
+    // Hardware encoding is opportunistic: only when the user allows it, only
+    // when this FFmpeg build actually has the encoder, and — enforced inside
+    // the argument builder — only on bitrate-driven jobs. Two-pass overrides
+    // it: pass logs are an x264/x265 concept.
+    String? hwEncoder;
+    if (!twoPass && prefs.useHardwareEncoder) {
+      hwEncoder =
+          await ref.read(hwEncoderCatalogProvider).encoderFor(job.settings.videoCodec);
+      if (!ref.mounted) return;
+    }
+
+    Future<ConversionResult> attempt(String? hw) {
+      return converter.convert(
+        inputPath: job!.inputPath,
+        outputPath: outputPath,
+        settings: job.settings,
+        totalDurationMs: durationMs,
+        progressDurationMs: progressMs,
+        sourceRates: sourceRates,
+        hwVideoEncoder: hw,
+        extraInputPaths: job.extraInputPaths,
+        extraInputsHaveAudio: mergeHasAudio,
+        extraInputDurationsMs: mergeDurations,
+        twoPass: twoPass,
+        onSession: (sessionId) {
+          final current = _find(id);
+          if (current == null) return;
+          _replace(current.copyWith(sessionId: sessionId));
+          // A cancel that arrived while the session id was still unknown had
+          // nothing to kill; honour it the moment the handle exists, or the
+          // "cancelled" encode burns battery to completion.
+          if (_cancelBatch || current.status == JobStatus.cancelled) {
+            converter.cancel(sessionId);
+          }
+        },
+        onProgress: (p) {
+          final current = _find(id);
+          if (current != null && current.status.isActive) {
+            _replace(current.copyWith(progress: p));
+            // ForegroundService throttles this down to whole-percentage changes.
+            _syncForeground();
+          }
+        },
+      );
+    }
+
+    var result = await attempt(hwEncoder);
+    if (!ref.mounted) return;
+
+    // MediaCodec in particular fails on inputs the spec says it should take
+    // (odd dimensions, exotic profiles, vendor quirks). A hardware failure is
+    // an implementation detail the user should never see: clean up and run
+    // the same job again on the software encoder — unless the user cancelled
+    // meanwhile.
+    if (hwEncoder != null &&
+        result.outcome == ConversionOutcome.failed &&
+        _find(id)?.status.isActive == true) {
+      _deletePartial(outputPath);
+      final current = _find(id);
+      if (current != null) _replace(current.copyWith(progress: 0, clearSession: true));
+      result = await attempt(null);
+      if (!ref.mounted) return;
+    }
+
+    final current = _find(id);
+    if (current == null) return;
+
+    // A cancel can land while the session id was still unknown, marking the
+    // job terminal before FFmpeg reported back. That decision stands: a
+    // completed file the user cancelled is deleted, not resurrected.
+    if (current.status.isTerminal) {
+      _deletePartial(outputPath);
+      await _persist();
+      return;
+    }
+
+    switch (result.outcome) {
+      case ConversionOutcome.success:
+        var outBytes = 0;
+        try {
+          outBytes = File(outputPath).lengthSync();
+        } on FileSystemException {
+          outBytes = 0;
+        }
+        _replace(current.copyWith(
+          status: JobStatus.completed,
+          progress: 1,
+          outputPath: outputPath,
+          outputBytes: outBytes,
+          clearSession: true,
+        ));
+      case ConversionOutcome.cancelled:
+        _deletePartial(outputPath);
+        _replace(current.copyWith(status: JobStatus.cancelled, clearSession: true));
+      case ConversionOutcome.failed:
+        _deletePartial(outputPath);
+        _replace(current.copyWith(
+          status: JobStatus.failed,
+          errorMessage: result.message,
+          failure: JobFailure.ffmpeg,
+          clearSession: true,
+        ));
+    }
+
+    await _persist();
+
+    // One job finished, so the batch percentage jumped; push it immediately
+    // rather than waiting for the next job's first statistics callback.
+    await _syncForeground();
+  }
+
+  /// A cancelled or failed encode leaves a truncated, unplayable file behind.
+  void _deletePartial(String path) {
+    try {
+      final file = File(path);
+      if (file.existsSync()) file.deleteSync();
+    } on FileSystemException {
+      // Nothing useful to do; the file simply stays.
+    }
+  }
+
+  Future<void> _notifyBatchDone(
+    NotificationService notifications,
+    QueueStrings strings,
+  ) async {
+    final done = state.completedCount;
+    final failed = state.failedCount;
+    if (done == 0 && failed == 0) return;
+
+    await notifications.showBatchComplete(
+      title: strings.appTitle,
+      body: failed == 0
+          ? strings.completed(done)
+          : strings.completedWithFailures(done, failed),
+    );
+  }
+}
+
+final queueProvider =
+    NotifierProvider<QueueController, QueueState>(QueueController.new);
+
+/// One job, by id. A card watches only this, so a progress tick on the running
+/// job repaints that card alone instead of every card in the list.
+final jobProvider = Provider.family<ConversionJob?, String>((ref, id) {
+  return ref.watch(queueProvider.select((q) {
+    for (final job in q.jobs) {
+      if (job.id == id) return job;
+    }
+    return null;
+  }));
+});
+
+/// Which half of the queue a tab shows.
+enum QueueSection { active, finished }
+
+/// The ids in queue order, for one section. Changes only when jobs are added,
+/// removed or change status — never on a progress tick.
+///
+/// The selector yields a *String*, not a List, on purpose: Riverpod compares
+/// selected values with `==`, and two equal Lists are never `==`, so a List
+/// selector would notify on every rebuild and defeat the whole point.
+final jobIdsProvider = Provider.family<List<String>, QueueSection>((ref, section) {
+  final joined = ref.watch(queueProvider.select((q) {
+    final wantTerminal = section == QueueSection.finished;
+    return q.jobs
+        .where((j) => j.status.isTerminal == wantTerminal)
+        .map((j) => j.id)
+        .join(',');
+  }));
+  return joined.isEmpty ? const [] : joined.split(',');
+});
+
+extension _FirstOrNull<E> on List<E> {
+  E? get firstOrNull => isEmpty ? null : first;
+}

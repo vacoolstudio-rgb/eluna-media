@@ -1,0 +1,38 @@
+[
+  {
+    "rank": 1,
+    "id": 831540276,
+    "listed_at": "2026-05-03T08:30:15.000Z",
+    "notes": null,
+    "type": "show",
+    "show": {
+      "title": "The Witcher",
+      "year": 2019,
+      "ids": {
+        "trakt": 118266,
+        "slug": "the-witcher",
+        "tvdb": 362696,
+        "imdb": "tt5180504",
+        "tmdb": 71912
+      }
+    }
+  },
+  {
+    "rank": 2,
+    "id": 836102954,
+    "listed_at": "2026-06-01T19:55:02.000Z",
+    "notes": "Waiting for season 3 to binge everything.",
+    "type": "show",
+    "show": {
+      "title": "Arcane",
+      "year": 2021,
+      "ids": {
+        "trakt": 156262,
+        "slug": "arcane",
+        "tvdb": 371028,
+        "imdb": "tt11126994",
+        "tmdb": 94605
+      }
+    }
+  }
+]

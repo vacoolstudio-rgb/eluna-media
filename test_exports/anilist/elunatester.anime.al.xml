@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+		<myanimelist>
+
+			<myinfo>
+				<user_id></user_id>
+				<user_name>elunatester</user_name>
+				<user_export_type>1</user_export_type>
+				<user_total_anime>4</user_total_anime>
+				<user_total_watching>1</user_total_watching>
+				<user_total_completed>2</user_total_completed>
+				<user_total_onhold>0</user_total_onhold>
+				<user_total_dropped>0</user_total_dropped>
+				<user_total_plantowatch>1</user_total_plantowatch>
+			</myinfo>
+
+
+				<anime>
+					<my_tags><![CDATA[]]></my_tags>
+					<series_animedb_id>11061</series_animedb_id>
+					<series_title><![CDATA[Hunter x Hunter (2011)]]></series_title>
+					<series_type>TV</series_type>
+					<series_episodes>148</series_episodes>
+					<my_watched_episodes>148</my_watched_episodes>
+					<my_start_date>2026-04-10</my_start_date>
+					<my_finish_date>2026-06-30</my_finish_date>
+					<my_score>10</my_score>
+					<my_status>Completed</my_status>
+					<my_comments><![CDATA[]]></my_comments>
+					<my_times_watched>0</my_times_watched>
+					<update_on_import>0</update_on_import>
+				</anime>
+
+				<anime>
+					<my_tags><![CDATA[Favorites]]></my_tags>
+					<series_animedb_id>16498</series_animedb_id>
+					<series_title><![CDATA[Shingeki no Kyojin]]></series_title>
+					<series_type>TV</series_type>
+					<series_episodes>25</series_episodes>
+					<my_watched_episodes>8</my_watched_episodes>
+					<my_start_date>2026-07-03</my_start_date>
+					<my_finish_date>0000-00-00</my_finish_date>
+					<my_score>0</my_score>
+					<my_status>Watching</my_status>
+					<my_comments><![CDATA[]]></my_comments>
+					<my_times_watched>0</my_times_watched>
+					<update_on_import>0</update_on_import>
+				</anime>
+
+				<anime>
+					<my_tags><![CDATA[]]></my_tags>
+					<series_animedb_id>21</series_animedb_id>
+					<series_title><![CDATA[One Piece]]></series_title>
+					<series_type>TV</series_type>
+					<series_episodes>0</series_episodes>
+					<my_watched_episodes>1080</my_watched_episodes>
+					<my_start_date>2023-01-01</my_start_date>
+					<my_finish_date>0000-00-00</my_finish_date>
+					<my_score>9</my_score>
+					<my_status>Completed</my_status>
+					<my_comments><![CDATA[]]></my_comments>
+					<my_times_watched>0</my_times_watched>
+					<update_on_import>0</update_on_import>
+				</anime>
+
+				<anime>
+					<my_tags><![CDATA[]]></my_tags>
+					<series_animedb_id>52991</series_animedb_id>
+					<series_title><![CDATA[Sousou no Frieren]]></series_title>
+					<series_type>TV</series_type>
+					<series_episodes>28</series_episodes>
+					<my_watched_episodes>0</my_watched_episodes>
+					<my_start_date>0000-00-00</my_start_date>
+					<my_finish_date>0000-00-00</my_finish_date>
+					<my_score>0</my_score>
+					<my_status>Plan to Watch</my_status>
+					<my_comments><![CDATA[]]></my_comments>
+					<my_times_watched>0</my_times_watched>
+					<update_on_import>0</update_on_import>
+				</anime>
+
+		</myanimelist>

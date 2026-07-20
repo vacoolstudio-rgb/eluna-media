@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "generated_at": 1784106000.512,
+    "user": {
+      "avatar": {
+        "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+        "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
+      },
+      "sign": "",
+      "username": "elunatester",
+      "nickname": "Eluna Tester",
+      "id": 812345,
+      "user_group": 10
+    }
+  },
+  "data": [
+    {
+      "updated_at": "2026-04-08T11:28:29+08:00",
+      "comment": "东京，燃烧；经费，燃烧。寥寥数笔描绘一个时代。",
+      "tags": ["日本", "1988", "剧场版"],
+      "subject": {
+        "date": "1988-07-16",
+        "name": "AKIRA",
+        "name_cn": "阿基拉",
+        "score": 7.8,
+        "type": 2,
+        "id": 5118,
+        "eps": 1,
+        "volumes": 0,
+        "collection_total": 12402,
+        "rank": 419
+      },
+      "subject_id": 5118,
+      "vol_status": 0,
+      "ep_status": 1,
+      "subject_type": 2,
+      "type": 2,
+      "rate": 9,
+      "private": false,
+      "subject_data": {
+        "id": 5118,
+        "type": 2,
+        "name": "AKIRA",
+        "name_cn": "阿基拉",
+        "summary": "2019年，东京在爆炸中化为废墟……",
+        "date": "1988-07-16",
+        "eps": 1,
+        "total_episodes": 1,
+        "volumes": 0,
+        "rating": { "rank": 419, "total": 6210, "score": 7.8 }
+      },
+      "ep_data": {
+        "0": [
+          { "id": 46022, "type": 0, "name": "AKIRA", "name_cn": "阿基拉", "sort": 1, "airdate": "1988-07-16" }
+        ],
+        "1": [],
+        "2": [],
+        "3": []
+      },
+      "progress": {
+        "subject_id": 5118,
+        "eps": [{ "id": 46022, "status": { "id": 2, "css_name": "Watched", "url_name": "watched", "cn_name": "看过" } }]
+      }
+    },
+    {
+      "updated_at": "2026-07-10T22:05:44+08:00",
+      "comment": "",
+      "tags": ["日本", "TV"],
+      "subject": {
+        "date": "2004-01-01",
+        "name": "攻殻機動隊 S.A.C. 2nd GIG",
+        "name_cn": "攻壳机动队 S.A.C. 2nd GIG",
+        "score": 8.8,
+        "type": 2,
+        "id": 326,
+        "eps": 26,
+        "volumes": 0,
+        "collection_total": 8210,
+        "rank": 38
+      },
+      "subject_id": 326,
+      "vol_status": 0,
+      "ep_status": 13,
+      "subject_type": 2,
+      "type": 3,
+      "rate": 0,
+      "private": false,
+      "subject_data": {
+        "id": 326,
+        "type": 2,
+        "name": "攻殻機動隊 S.A.C. 2nd GIG",
+        "name_cn": "攻壳机动队 S.A.C. 2nd GIG",
+        "summary": "……",
+        "date": "2004-01-01",
+        "eps": 26,
+        "total_episodes": 26,
+        "volumes": 0,
+        "rating": { "rank": 38, "total": 5120, "score": 8.8 }
+      },
+      "ep_data": { "0": [], "1": [], "2": [], "3": [] },
+      "progress": null
+    },
+    {
+      "updated_at": "2026-07-01T14:05:00+08:00",
+      "comment": "",
+      "tags": [],
+      "subject": {
+        "date": "1995-10-04",
+        "name": "新世紀エヴァンゲリオン",
+        "name_cn": "新世纪福音战士",
+        "score": 8.4,
+        "type": 2,
+        "id": 253,
+        "eps": 26,
+        "volumes": 0,
+        "collection_total": 21044,
+        "rank": 102
+      },
+      "subject_id": 253,
+      "vol_status": 0,
+      "ep_status": 0,
+      "subject_type": 2,
+      "type": 1,
+      "rate": 0,
+      "private": false,
+      "subject_data": {
+        "id": 253,
+        "type": 2,
+        "name": "新世紀エヴァンゲリオン",
+        "name_cn": "新世纪福音战士",
+        "summary": "……",
+        "date": "1995-10-04",
+        "eps": 26,
+        "total_episodes": 26,
+        "volumes": 0,
+        "rating": { "rank": 102, "total": 11890, "score": 8.4 }
+      },
+      "ep_data": { "0": [], "1": [], "2": [], "3": [] },
+      "progress": null
+    }
+  ]
+}

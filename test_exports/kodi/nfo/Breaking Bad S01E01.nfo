@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<episodedetails>
+    <title>Pilot</title>
+    <showtitle>Breaking Bad</showtitle>
+    <ratings>
+        <rating name="imdb" max="10" default="true">
+            <value>9.000000</value>
+            <votes>22841</votes>
+        </rating>
+    </ratings>
+    <userrating>9</userrating>
+    <top250>0</top250>
+    <season>1</season>
+    <episode>1</episode>
+    <displayseason>-1</displayseason>
+    <displayepisode>-1</displayepisode>
+    <outline></outline>
+    <plot>A high-school chemistry teacher is diagnosed with terminal lung cancer and turns to a life of crime.</plot>
+    <tagline></tagline>
+    <runtime>58</runtime>
+    <mpaa>TV-MA</mpaa>
+    <playcount>1</playcount>
+    <lastplayed>2026-06-01</lastplayed>
+    <id>62085</id>
+    <uniqueid type="imdb">tt0959621</uniqueid>
+    <uniqueid type="tmdb" default="true">62085</uniqueid>
+    <uniqueid type="tvdb">349232</uniqueid>
+    <credits>Vince Gilligan</credits>
+    <director>Vince Gilligan</director>
+    <premiered>2008-01-20</premiered>
+    <year>2008</year>
+    <status></status>
+    <code></code>
+    <aired>2008-01-20</aired>
+    <studio>AMC</studio>
+    <trailer></trailer>
+    <fileinfo>
+        <streamdetails>
+            <video>
+                <codec>h264</codec>
+                <aspect>1.777778</aspect>
+                <width>1920</width>
+                <height>1080</height>
+                <durationinseconds>3486</durationinseconds>
+                <stereomode></stereomode>
+                <hdrtype></hdrtype>
+            </video>
+            <audio>
+                <codec>ac3</codec>
+                <language>eng</language>
+                <channels>6</channels>
+            </audio>
+        </streamdetails>
+    </fileinfo>
+    <resume>
+        <position>0.000000</position>
+        <total>0.000000</total>
+    </resume>
+    <dateadded>2026-05-28 18:05:00</dateadded>
+</episodedetails>

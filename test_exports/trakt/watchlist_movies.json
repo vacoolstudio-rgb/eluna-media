@@ -1,0 +1,53 @@
+[
+  {
+    "rank": 1,
+    "id": 830114521,
+    "listed_at": "2026-04-20T11:45:20.000Z",
+    "notes": "Everyone keeps recommending this one.",
+    "type": "movie",
+    "movie": {
+      "title": "Oppenheimer",
+      "year": 2023,
+      "ids": {
+        "trakt": 736074,
+        "slug": "oppenheimer-2023",
+        "imdb": "tt15398776",
+        "tmdb": 872585
+      }
+    }
+  },
+  {
+    "rank": 2,
+    "id": 833098412,
+    "listed_at": "2026-05-18T17:12:33.000Z",
+    "notes": null,
+    "type": "movie",
+    "movie": {
+      "title": "Mission: Impossible - Dead Reckoning Part One",
+      "year": 2023,
+      "ids": {
+        "trakt": 522491,
+        "slug": "mission-impossible-dead-reckoning-part-one-2023",
+        "imdb": "tt9603212",
+        "tmdb": 575264
+      }
+    }
+  },
+  {
+    "rank": 3,
+    "id": 838754209,
+    "listed_at": "2026-06-28T14:08:47.000Z",
+    "notes": null,
+    "type": "movie",
+    "movie": {
+      "title": "The Boy and the Heron",
+      "year": 2023,
+      "ids": {
+        "trakt": 623776,
+        "slug": "the-boy-and-the-heron-2023",
+        "imdb": "tt21815562",
+        "tmdb": 508883
+      }
+    }
+  }
+]

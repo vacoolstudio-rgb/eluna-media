@@ -1,0 +1,46 @@
+name: eluna_media
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.2.0
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  ffmpeg_kit_flutter_new: ^4.3.2
+  flutter_riverpod: ^3.3.2
+  file_picker: ^11.0.2
+  path_provider: ^2.1.5
+  share_plus: ^12.0.2
+  shared_preferences: ^2.5.3
+  flutter_local_notifications: ^20.1.0
+  intl: ^0.20.2
+  google_mobile_ads: ^6.0.0
+  in_app_review: ^2.0.10
+  gal: ^2.3.1
+  dynamic_color: ^1.7.0
+  battery_plus: ^6.2.1
+  open_filex: ^4.7.0
+  url_launcher: ^6.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  fonts:
+    # Manrope, SIL Open Font License (assets/fonts/OFL.txt) — the family the
+    # rest of the Eluna apps are set in.
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope-Variable.ttf

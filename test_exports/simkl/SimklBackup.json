@@ -1,0 +1,264 @@
+{
+  "shows": [
+    {
+      "added_to_watchlist_at": "2026-05-28T18:00:11Z",
+      "last_watched_at": "2026-06-05T23:59:59Z",
+      "user_rated_at": "2026-06-01T20:41:37Z",
+      "user_rating": 10,
+      "status": "watching",
+      "last_watched": "S02E02",
+      "next_to_watch": "S02E03",
+      "watched_episodes_count": 7,
+      "total_episodes_count": 62,
+      "not_aired_episodes_count": 0,
+      "show": {
+        "title": "Breaking Bad",
+        "poster": "23/2325761f4c26872a4",
+        "year": 2008,
+        "runtime": 45,
+        "ids": {
+          "simkl": 45480,
+          "slug": "breaking-bad",
+          "imdb": "tt0903747",
+          "tmdb": "1396",
+          "tvdb": "81189"
+        }
+      },
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            { "number": 1, "watched_at": "2026-06-01T20:41:37Z" },
+            { "number": 2, "watched_at": "2026-06-02T21:10:04Z" },
+            { "number": 3, "watched_at": "2026-06-03T21:33:52Z" },
+            { "number": 4, "watched_at": "2026-06-04T22:02:18Z" },
+            { "number": 5, "watched_at": "2026-06-05T22:48:19Z" }
+          ]
+        },
+        {
+          "number": 2,
+          "episodes": [
+            { "number": 1, "watched_at": "2026-06-05T23:35:41Z" },
+            { "number": 2, "watched_at": "2026-06-05T23:59:59Z" }
+          ]
+        }
+      ]
+    },
+    {
+      "added_to_watchlist_at": "2026-05-25T09:30:00Z",
+      "last_watched_at": "2026-06-02T22:14:55Z",
+      "user_rated_at": "2026-06-02T22:20:00Z",
+      "user_rating": 9,
+      "status": "completed",
+      "last_watched": "S01E05",
+      "next_to_watch": null,
+      "watched_episodes_count": 5,
+      "total_episodes_count": 5,
+      "not_aired_episodes_count": 0,
+      "show": {
+        "title": "Chernobyl",
+        "poster": "60/6023170f2eb84f2b1",
+        "year": 2019,
+        "runtime": 65,
+        "ids": {
+          "simkl": 1094043,
+          "slug": "chernobyl",
+          "imdb": "tt7366338",
+          "tmdb": "87108",
+          "tvdb": "360893"
+        }
+      },
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            { "number": 1, "watched_at": "2026-05-29T21:00:12Z" },
+            { "number": 2, "watched_at": "2026-05-30T21:14:33Z" },
+            { "number": 3, "watched_at": "2026-05-31T21:29:50Z" },
+            { "number": 4, "watched_at": "2026-06-01T22:01:26Z" },
+            { "number": 5, "watched_at": "2026-06-02T22:14:55Z" }
+          ]
+        }
+      ]
+    },
+    {
+      "added_to_watchlist_at": "2026-05-03T08:30:15Z",
+      "last_watched_at": null,
+      "user_rated_at": null,
+      "user_rating": null,
+      "status": "plantowatch",
+      "last_watched": null,
+      "next_to_watch": "S01E01",
+      "watched_episodes_count": 0,
+      "total_episodes_count": 16,
+      "not_aired_episodes_count": 0,
+      "show": {
+        "title": "The Witcher",
+        "poster": "77/77163242f14a29a5e",
+        "year": 2019,
+        "runtime": 60,
+        "ids": {
+          "simkl": 1132754,
+          "slug": "the-witcher",
+          "imdb": "tt5180504",
+          "tmdb": "71912",
+          "tvdb": "362696"
+        }
+      }
+    }
+  ],
+  "anime": [
+    {
+      "added_to_watchlist_at": "2026-04-10T12:00:00Z",
+      "last_watched_at": "2026-06-30T21:45:10Z",
+      "user_rated_at": "2026-06-30T21:50:00Z",
+      "user_rating": 10,
+      "status": "completed",
+      "last_watched": "E148",
+      "next_to_watch": null,
+      "watched_episodes_count": 148,
+      "total_episodes_count": 148,
+      "not_aired_episodes_count": 0,
+      "anime_type": "tv",
+      "show": {
+        "title": "Hunter x Hunter",
+        "poster": "89/8944312e19c02a5c8",
+        "year": 2011,
+        "runtime": 23,
+        "ids": {
+          "simkl": 40398,
+          "slug": "hunter-x-hunter",
+          "imdb": "tt2098220",
+          "mal": "11061",
+          "anidb": "8550"
+        }
+      }
+    },
+    {
+      "added_to_watchlist_at": "2026-06-15T10:20:30Z",
+      "last_watched_at": "2026-07-10T22:05:44Z",
+      "user_rated_at": null,
+      "user_rating": null,
+      "status": "watching",
+      "last_watched": "E8",
+      "next_to_watch": "E9",
+      "watched_episodes_count": 8,
+      "total_episodes_count": 25,
+      "not_aired_episodes_count": 0,
+      "anime_type": "tv",
+      "show": {
+        "title": "Shingeki no Kyojin",
+        "poster": "36/3635902e80a2b21c7",
+        "year": 2013,
+        "runtime": 24,
+        "ids": {
+          "simkl": 38636,
+          "slug": "shingeki-no-kyojin",
+          "imdb": "tt2560140",
+          "mal": "16498",
+          "anidb": "9541"
+        }
+      },
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            { "number": 1, "watched_at": "2026-07-03T21:10:00Z" },
+            { "number": 2, "watched_at": "2026-07-04T21:12:15Z" },
+            { "number": 3, "watched_at": "2026-07-05T21:30:41Z" },
+            { "number": 4, "watched_at": "2026-07-06T22:00:03Z" },
+            { "number": 5, "watched_at": "2026-07-07T21:44:29Z" },
+            { "number": 6, "watched_at": "2026-07-08T21:58:12Z" },
+            { "number": 7, "watched_at": "2026-07-09T22:15:36Z" },
+            { "number": 8, "watched_at": "2026-07-10T22:05:44Z" }
+          ]
+        }
+      ]
+    },
+    {
+      "added_to_watchlist_at": "2026-07-01T14:05:00Z",
+      "last_watched_at": null,
+      "user_rated_at": null,
+      "user_rating": null,
+      "status": "plantowatch",
+      "last_watched": null,
+      "next_to_watch": "E1",
+      "watched_episodes_count": 0,
+      "total_episodes_count": 28,
+      "not_aired_episodes_count": 0,
+      "anime_type": "tv",
+      "show": {
+        "title": "Sousou no Frieren",
+        "poster": "12/12873341ac5e10b88",
+        "year": 2023,
+        "runtime": 24,
+        "ids": {
+          "simkl": 1656920,
+          "slug": "sousou-no-frieren",
+          "imdb": "tt22248376",
+          "mal": "52991",
+          "anidb": "17617"
+        }
+      }
+    }
+  ],
+  "movies": [
+    {
+      "added_to_watchlist_at": "2026-05-10T08:00:00Z",
+      "last_watched_at": "2026-05-13T20:15:33Z",
+      "user_rated_at": "2026-05-14T18:22:10Z",
+      "user_rating": 9,
+      "status": "completed",
+      "movie": {
+        "title": "Pulp Fiction",
+        "poster": "41/4172301a04c21f8e2",
+        "year": 1994,
+        "runtime": 154,
+        "ids": {
+          "simkl": 8262,
+          "slug": "pulp-fiction",
+          "imdb": "tt0110912",
+          "tmdb": "680"
+        }
+      }
+    },
+    {
+      "added_to_watchlist_at": "2026-05-18T11:30:00Z",
+      "last_watched_at": "2026-05-20T19:05:47Z",
+      "user_rated_at": "2026-05-20T21:00:00Z",
+      "user_rating": 10,
+      "status": "completed",
+      "movie": {
+        "title": "Parasite",
+        "poster": "95/95203612bb1e4c9a7",
+        "year": 2019,
+        "runtime": 132,
+        "ids": {
+          "simkl": 1204207,
+          "slug": "parasite",
+          "imdb": "tt6751668",
+          "tmdb": "496243"
+        }
+      }
+    },
+    {
+      "added_to_watchlist_at": "2026-04-20T11:45:20Z",
+      "last_watched_at": null,
+      "user_rated_at": null,
+      "user_rating": null,
+      "status": "plantowatch",
+      "movie": {
+        "title": "Oppenheimer",
+        "poster": "18/1830412c9f10a6b34",
+        "year": 2023,
+        "runtime": 181,
+        "ids": {
+          "simkl": 1520879,
+          "slug": "oppenheimer",
+          "imdb": "tt15398776",
+          "tmdb": "872585"
+        }
+      }
+    }
+  ]
+}
