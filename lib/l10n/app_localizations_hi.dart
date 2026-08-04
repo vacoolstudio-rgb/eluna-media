@@ -649,10 +649,10 @@ class L10nHi extends L10n {
   String get hapticsLabel => 'वाइब्रेशन फ़ीडबैक';
 
   @override
-  String get adPrivacyTitle => 'Ad privacy settings';
+  String get adPrivacyTitle => 'विज्ञापन गोपनीयता सेटिंग';
 
   @override
-  String get adPrivacySubtitle => 'Change your consent for advertising';
+  String get adPrivacySubtitle => 'विज्ञापन के लिए अपनी सहमति बदलें';
 
   @override
   String get networkPrivacyTitle => 'नेटवर्क और प्राइवेसी';
@@ -1043,4 +1043,131 @@ class L10nHi extends L10n {
 
   @override
   String get achPlatinumBody => 'बाकी सभी अचीवमेंट अनलॉक करें।';
+
+  @override
+  String get storageTitle => 'स्टोरेज';
+
+  @override
+  String get storageBody =>
+      'कन्वर्ट की गई फ़ाइलें तब तक ऐप के अंदर रहती हैं जब तक आप उन्हें सहेजते या साझा नहीं करते; कोई फ़ाइल मैनेजर उन तक नहीं पहुँच सकता।';
+
+  @override
+  String get storageEmpty => 'कुछ भी संग्रहीत नहीं';
+
+  @override
+  String storageUsage(String size) {
+    return 'उपयोग: $size';
+  }
+
+  @override
+  String get storageClearTitle => 'संग्रहीत फ़ाइलें हटाएँ?';
+
+  @override
+  String get storageClearBody =>
+      'ऐप में अब भी रखे सभी पूर्ण परिणाम हटा देता है। पहले से सहेजी या साझा की गई फ़ाइलें अछूती रहती हैं।';
+
+  @override
+  String get storageClearAction => 'हटाएँ';
+
+  @override
+  String storageCleared(String size) {
+    return '$size खाली हुआ';
+  }
+
+  @override
+  String get autoSaveLabel => 'परिणाम अपने आप सहेजें';
+
+  @override
+  String get autoSaveHint =>
+      'हर तैयार फ़ाइल तुरंत गैलरी में — ऑडियो डाउनलोड में — रख देता है।';
+
+  @override
+  String get lowSpaceTitle => 'जगह कम बची है';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return 'इस बैच को लगभग $needed चाहिए और केवल $free खाली है। कन्वर्ज़न बीच में रुक सकता है।';
+  }
+
+  @override
+  String saveAll(int count) {
+    return 'सभी सहेजें ($count)';
+  }
+
+  @override
+  String savedAll(int count) {
+    return 'सहेजे गए: $count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return '$total में से $saved सहेजे गए';
+  }
+
+  @override
+  String get presetFitPhotoTitle => 'फ़ोटो को आकार में लाएँ';
+
+  @override
+  String get presetFitPhotoBody =>
+      'तस्वीर को सटीक सीमा के नीचे लाएँ — अपलोड फ़ॉर्म, आवेदन।';
+
+  @override
+  String get photoFitHint =>
+      'ऐप तब तक गुणवत्ता आज़माता है जब तक फ़ाइल सीमा में न आ जाए। सीमा बहुत छोटी हो तो फ़्रेम का आकार भी घटा देता है।';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb KB';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => 'लक्ष्य आकार (KB)';
+
+  @override
+  String get compareAction => 'तुलना करें';
+
+  @override
+  String get compareBefore => 'पहले';
+
+  @override
+  String get compareAfter => 'बाद में';
+
+  @override
+  String get compareHint => 'मूल देखने के लिए दबाकर रखें।';
+
+  @override
+  String get trimStart => 'प्रारंभ';
+
+  @override
+  String get trimEnd => 'समाप्ति';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return 'm:ss, अधिकतम $duration';
+  }
+
+  @override
+  String get imageScaleLabel => 'स्केल';
+
+  @override
+  String get audioChannelsLabel => 'चैनल';
+
+  @override
+  String get audioMono => 'मोनो';
+
+  @override
+  String get audioStereo => 'स्टीरियो';
+
+  @override
+  String get sampleRateLabel => 'सैंपल रेट';
+
+  @override
+  String get voiceAudioHint =>
+      '22.05 kHz मोनो आवाज़ की रिकॉर्डिंग को बिना सुनाई देने वाले नुकसान के लगभग एक-चौथाई कर देता है। संगीत के लिए दोनों मूल रहने दें।';
+
+  @override
+  String get moveUp => 'ऊपर ले जाएँ';
+
+  @override
+  String get moveDown => 'नीचे ले जाएँ';
 }

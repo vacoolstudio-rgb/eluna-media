@@ -5,17 +5,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/output_paths.dart';
 import '../core/rate_calc.dart';
+import '../core/time_input.dart';
 import '../domain/conversion_job.dart';
 import '../domain/conversion_settings.dart';
 import '../domain/media_format.dart';
 import '../domain/quick_presets.dart';
 import '../l10n/app_localizations.dart';
+import '../services/device_storage.dart';
 import '../state/queue_controller.dart';
 import '../state/selection_controller.dart';
 import '../state/settings_controller.dart';
 import 'queue_strings.dart';
 import 'theme.dart';
 import 'widgets/gradient_button.dart';
+import 'widgets/media_thumbnail.dart';
 import 'widgets/pressable.dart';
 import 'widgets/section_card.dart';
 
@@ -73,6 +76,7 @@ class ConvertTab extends ConsumerWidget {
     ref.listen(selectedPresetProvider, (_, __) => syncPendingSettings(ref));
     ref.listen(formatOverrideProvider, (_, __) => syncPendingSettings(ref));
     ref.listen(sizeTargetProvider, (_, __) => syncPendingSettings(ref));
+    ref.listen(photoSizeTargetProvider, (_, __) => syncPendingSettings(ref));
     ref.listen(settingsProvider, (_, __) => syncPendingSettings(ref));
     ref.listen(appPrefsProvider, (_, __) => syncPendingSettings(ref));
 
@@ -152,6 +156,8 @@ class _SourceCard extends ConsumerWidget {
     final theme = Theme.of(context);
     final mixed = ref.watch(isMixedSelectionProvider);
     final kind = ref.watch(primaryKindProvider);
+    final ordered = ref.watch(appPrefsProvider.select((p) => p.simpleMode)) &&
+        ref.watch(selectedPresetProvider).isMerge;
 
     if (pending.isEmpty) return _EmptyPicker(onPick: () => pickFilesIntoQueue(ref));
 
@@ -164,9 +170,13 @@ class _SourceCard extends ConsumerWidget {
         style: theme.textTheme.labelSmall,
       ),
       children: [
-        for (final job in pending)
+        for (final (index, job) in pending.indexed)
           _FileRow(
             job: job,
+            // Order is only meaningful for a merge — everywhere else the queue
+            // runs jobs independently and arrows would be noise.
+            position: ordered ? (index: index, total: pending.length) : null,
+            onMove: (delta) => ref.read(queueProvider.notifier).movePending(job.id, delta),
             onRemove: () => ref.read(queueProvider.notifier).removeJob(job.id),
           ),
         if (mixed) ...[
@@ -292,10 +302,21 @@ class _EmptyPicker extends ConsumerWidget {
 }
 
 class _FileRow extends StatelessWidget {
-  const _FileRow({required this.job, required this.onRemove});
+  const _FileRow({
+    required this.job,
+    required this.onRemove,
+    required this.onMove,
+    this.position,
+  });
 
   final ConversionJob job;
   final VoidCallback onRemove;
+
+  /// Called with -1 or +1 to move this file earlier or later in the merge.
+  final void Function(int delta) onMove;
+
+  /// Non-null when the order matters, i.e. during a merge.
+  final ({int index, int total})? position;
 
   static String _duration(int? ms) {
     if (ms == null || ms <= 0) return '';
@@ -321,7 +342,15 @@ class _FileRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          SectionIcon(icon: iconOfKind(kind), accent: accent, size: 30),
+          // The picture, not a generic icon: twenty rows of IMG_20260712_1433xx
+          // are indistinguishable, and "remove that one" needs to be aimable.
+          MediaThumbnail(
+            path: job.inputPath,
+            bytes: job.inputBytes,
+            icon: iconOfKind(kind),
+            accent: accent,
+            size: 34,
+          ),
           const SizedBox(width: 10),
           Expanded(
             child: Column(
@@ -338,6 +367,20 @@ class _FileRow extends StatelessWidget {
               ],
             ),
           ),
+          if (position case final at?) ...[
+            IconButton(
+              onPressed: at.index == 0 ? null : () => onMove(-1),
+              icon: const Icon(Icons.keyboard_arrow_up_rounded, size: 20),
+              visualDensity: VisualDensity.compact,
+              tooltip: L10n.of(context).moveUp,
+            ),
+            IconButton(
+              onPressed: at.index == at.total - 1 ? null : () => onMove(1),
+              icon: const Icon(Icons.keyboard_arrow_down_rounded, size: 20),
+              visualDensity: VisualDensity.compact,
+              tooltip: L10n.of(context).moveDown,
+            ),
+          ],
           IconButton(
             onPressed: onRemove,
             icon: const Icon(Icons.close_rounded, size: 18),
@@ -409,6 +452,7 @@ IconData _presetIcon(QuickPreset p) => switch (p) {
       QuickPreset.videoToGif => Icons.gif_box_outlined,
       QuickPreset.mergeVideos => Icons.merge_type,
       QuickPreset.compressImage => Icons.photo_size_select_small_outlined,
+      QuickPreset.fitPhotoToSize => Icons.straighten,
       QuickPreset.enhancePhoto => Icons.auto_awesome_outlined,
       QuickPreset.imageToWebp => Icons.image_outlined,
       QuickPreset.audioToMp3 => Icons.library_music_outlined,
@@ -423,6 +467,7 @@ IconData _presetIcon(QuickPreset p) => switch (p) {
       QuickPreset.videoToGif => (l10n.presetVideoToGifTitle, l10n.presetVideoToGifBody),
       QuickPreset.mergeVideos => (l10n.presetMergeTitle, l10n.presetMergeBody),
       QuickPreset.compressImage => (l10n.presetCompressImageTitle, l10n.presetCompressImageBody),
+      QuickPreset.fitPhotoToSize => (l10n.presetFitPhotoTitle, l10n.presetFitPhotoBody),
       QuickPreset.enhancePhoto => (l10n.presetEnhancePhotoTitle, l10n.presetEnhancePhotoBody),
       QuickPreset.imageToWebp => (l10n.presetImageToWebpTitle, l10n.presetImageToWebpBody),
       QuickPreset.audioToMp3 => (l10n.presetAudioToMp3Title, l10n.presetAudioToMp3Body),
@@ -439,6 +484,7 @@ class _SimpleView extends ConsumerWidget {
     final preset = ref.watch(selectedPresetProvider);
     final kind = ref.watch(primaryKindProvider);
     final targetBytes = ref.watch(sizeTargetProvider);
+    final photoTargetBytes = ref.watch(photoSizeTargetProvider);
     final pending = ref.watch(queueProvider.select((q) => q.pending));
     final accent = accentOfKind(kind);
 
@@ -498,14 +544,20 @@ class _SimpleView extends ConsumerWidget {
             title: l10n.sizeTargetTitle,
             icon: Icons.straighten,
             accent: accent,
-            children: [
-              _SizeTargetPicker(targetBytes: targetBytes),
-              const SizedBox(height: 8),
-              _SizeEstimate(
-                settings: preset.settings(sizeTargetBytes: targetBytes),
-                targetBytes: targetBytes,
-              ),
-            ],
+            children: preset.expectsKind == MediaKind.image
+                ? [
+                    _PhotoSizeTargetPicker(targetBytes: photoTargetBytes),
+                    const SizedBox(height: 8),
+                    Text(l10n.photoFitHint, style: theme.textTheme.bodySmall),
+                  ]
+                : [
+                    _SizeTargetPicker(targetBytes: targetBytes),
+                    const SizedBox(height: 8),
+                    _SizeEstimate(
+                      settings: preset.settings(sizeTargetBytes: targetBytes),
+                      targetBytes: targetBytes,
+                    ),
+                  ],
           ),
         ],
         if (preset.isMerge && pending.length < 2) ...[
@@ -538,7 +590,10 @@ class _FormatSection extends ConsumerWidget {
 
     final recommended = preset.settings().container;
     final selected = ref.watch(formatOverrideProvider) ?? recommended;
-    final options = ContainerFormat.outputsFor(kind);
+    final options = ContainerFormat.outputsFor(
+      kind,
+      animatedSource: ref.watch(animatedSourceProvider),
+    );
 
     return SectionCard(
       title: l10n.convertTo,
@@ -818,6 +873,77 @@ class _SizeTargetPicker extends ConsumerWidget {
   }
 }
 
+/// The photo budgets: kilobytes, not megabytes.
+///
+/// The numbers people actually meet for a photo are upload caps on web forms
+/// and applications — "under 500 KB", "max 2 MB" — which is a different scale
+/// from the messenger limits the video picker offers.
+class _PhotoSizeTargetPicker extends ConsumerWidget {
+  const _PhotoSizeTargetPicker({required this.targetBytes});
+
+  final int targetBytes;
+
+  Future<void> _askCustom(BuildContext context, WidgetRef ref) async {
+    final l10n = L10n.of(context);
+    final controller = TextEditingController();
+    final kb = await showDialog<int>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.sizeTargetDialogTitleKb),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(suffixText: 'KB'),
+          onSubmitted: (v) => Navigator.of(context).pop(int.tryParse(v)),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(l10n.commonCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(int.tryParse(controller.text)),
+            child: Text(l10n.commonOk),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (kb != null && kb > 0) {
+      ref.read(photoSizeTargetProvider.notifier).set(kb * 1000);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
+    final isNamed = PhotoSizeTarget.values.any((t) => t.bytes == targetBytes);
+
+    String label(int kilobytes) => kilobytes >= 1000
+        ? l10n.sizeTargetMb(kilobytes ~/ 1000)
+        : l10n.sizeTargetKb(kilobytes);
+
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        for (final t in PhotoSizeTarget.values)
+          ChoiceChip(
+            label: Text(label(t.kilobytes)),
+            selected: targetBytes == t.bytes,
+            onSelected: (_) => ref.read(photoSizeTargetProvider.notifier).set(t.bytes),
+          ),
+        ChoiceChip(
+          label: Text(isNamed ? l10n.sizeTargetCustom : label(targetBytes ~/ 1000)),
+          selected: !isNamed,
+          onSelected: (_) => _askCustom(context, ref),
+        ),
+      ],
+    );
+  }
+}
+
 /// Live output estimate for the size mode, and a warning when the budget is
 /// not physically reachable for one of the queued files.
 class _SizeEstimate extends ConsumerWidget {
@@ -890,6 +1016,7 @@ class _AdvancedView extends ConsumerWidget {
           settings: settings,
           controller: controller,
           sourceKind: sourceKind,
+          animatedSource: ref.watch(animatedSourceProvider),
         ),
         const SizedBox(height: 16),
         if (settings.kind == MediaKind.video) ...[
@@ -942,11 +1069,15 @@ class _OutputSection extends StatelessWidget {
     required this.settings,
     required this.controller,
     required this.sourceKind,
+    required this.animatedSource,
   });
 
   final ConversionSettings settings;
   final SettingsController controller;
   final MediaKind sourceKind;
+
+  /// A GIF selection, which may also be written to the video containers.
+  final bool animatedSource;
 
   @override
   Widget build(BuildContext context) {
@@ -955,7 +1086,7 @@ class _OutputSection extends StatelessWidget {
 
     // Only the containers this source can legally become. The old dropdown
     // listed all seventeen, so an MP3 could be told to become a JPEG.
-    final options = ContainerFormat.outputsFor(sourceKind);
+    final options = ContainerFormat.outputsFor(sourceKind, animatedSource: animatedSource);
     final value = options.contains(settings.container)
         ? settings.container
         : ContainerFormat.defaultOutputFor(sourceKind);
@@ -1186,6 +1317,31 @@ class _AudioSection extends StatelessWidget {
             onChanged: controller.setAudioBitrate,
           ),
         ],
+        // Neither survives a remux: `-ac`/`-ar` need an encoder to act on.
+        if (codec != AudioCodec.copy && codec != AudioCodec.none) ...[
+          const SizedBox(height: 8),
+          LabelledDropdown<AudioChannels>(
+            label: l10n.audioChannelsLabel,
+            value: settings.audioChannels,
+            items: AudioChannels.values,
+            labelOf: (c) => switch (c) {
+              AudioChannels.keep => l10n.presetOriginal,
+              AudioChannels.mono => l10n.audioMono,
+              AudioChannels.stereo => l10n.audioStereo,
+            },
+            onChanged: controller.setAudioChannels,
+          ),
+          const SizedBox(height: 16),
+          LabelledDropdown<SampleRate>(
+            label: l10n.sampleRateLabel,
+            value: settings.sampleRate,
+            items: SampleRate.values,
+            labelOf: (r) => r == SampleRate.keep ? l10n.presetOriginal : r.label,
+            onChanged: controller.setSampleRate,
+          ),
+          const SizedBox(height: 6),
+          Text(l10n.voiceAudioHint, style: Theme.of(context).textTheme.bodySmall),
+        ],
       ],
     );
   }
@@ -1270,10 +1426,55 @@ class _TrimSection extends ConsumerWidget {
   final ConversionSettings settings;
   final SettingsController controller;
 
-  String _mmss(int ms) {
-    final s = ms ~/ 1000;
-    final m = s ~/ 60;
-    return '$m:${(s % 60).toString().padLeft(2, '0')}';
+  /// Types an exact timestamp. The slider is fine for "drop the intro" and
+  /// hopeless for "start at 12:04": across a two-hour video one pixel is about
+  /// ten seconds, so the only way to land on a second is to say which one.
+  Future<void> _editBound(
+    BuildContext context, {
+    required bool isStart,
+    required TrimRange trim,
+    required int durationMs,
+  }) async {
+    final l10n = L10n.of(context);
+    final current = isStart ? trim.startMs : trim.endMs;
+    final field = TextEditingController(text: TimeInput.format(current));
+
+    final entered = await showDialog<int>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(isStart ? l10n.trimStart : l10n.trimEnd),
+        content: TextField(
+          controller: field,
+          autofocus: true,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          decoration: InputDecoration(
+            hintText: 'm:ss',
+            helperText: l10n.trimTimeHelp(TimeInput.format(durationMs)),
+          ),
+          onSubmitted: (v) => Navigator.of(context).pop(TimeInput.parse(v)),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(l10n.commonCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(TimeInput.parse(field.text)),
+            child: Text(l10n.commonOk),
+          ),
+        ],
+      ),
+    );
+    field.dispose();
+    if (entered == null) return;
+
+    final clamped = entered.clamp(0, durationMs);
+    // A range that starts after it ends is not a range; the edited bound wins
+    // and the other one gives way rather than the edit being thrown out.
+    final next = isStart
+        ? TrimRange(startMs: clamped, endMs: clamped < trim.endMs ? trim.endMs : durationMs)
+        : TrimRange(startMs: clamped > trim.startMs ? trim.startMs : 0, endMs: clamped);
+    if (next.isValid) controller.setTrim(next);
   }
 
   @override
@@ -1323,8 +1524,39 @@ class _TrimSection extends ConsumerWidget {
               }
             },
           ),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () => _editBound(
+                    context,
+                    isStart: true,
+                    trim: trim,
+                    durationMs: durationMs,
+                  ),
+                  child: Text('${l10n.trimStart}  ${TimeInput.format(trim.startMs)}'),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () => _editBound(
+                    context,
+                    isStart: false,
+                    trim: trim,
+                    durationMs: durationMs,
+                  ),
+                  child: Text('${l10n.trimEnd}  ${TimeInput.format(trim.endMs)}'),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
           Text(
-            l10n.trimRangeLabel(_mmss(trim.startMs), _mmss(trim.endMs)),
+            l10n.trimRangeLabel(
+              TimeInput.format(trim.startMs),
+              TimeInput.format(trim.endMs),
+            ),
             style: theme.textTheme.bodySmall,
           ),
         ],
@@ -1360,6 +1592,18 @@ class _ImageSection extends StatelessWidget {
           labelOf: (r) => _resolutionLabel(l10n, r),
           onChanged: controller.setResolution,
         ),
+        if (!container.isAnimatedImage) ...[
+          const SizedBox(height: 16),
+          // "Half the size" is how people think about a photo; the height
+          // presets above only ever answered "make it 1080p".
+          LabelledDropdown<ImageScale>(
+            label: l10n.imageScaleLabel,
+            value: settings.imageScale,
+            items: ImageScale.values,
+            labelOf: (s) => s == ImageScale.keep ? l10n.presetOriginal : s.label,
+            onChanged: controller.setImageScale,
+          ),
+        ],
         if (container.isAnimatedImage) ...[
           const SizedBox(height: 16),
           LabelledDropdown<FpsPreset>(
@@ -1514,10 +1758,53 @@ class _StartBar extends ConsumerWidget {
     return proceed ?? false;
   }
 
+  /// Checks there is somewhere to put the results before spending an hour of
+  /// battery on them.
+  ///
+  /// FFmpeg's own answer to a full disk is `No space left on device` on the
+  /// last line of a log, delivered at 98% of a batch — the single worst way to
+  /// learn this. A platform that declines to report free space is not a reason
+  /// to block anybody, so an unknown figure means "go ahead".
+  Future<bool> _confirmSpace(BuildContext context, WidgetRef ref) async {
+    final pending = ref.read(queueProvider).pending;
+    final total = pending.fold<int>(0, (sum, job) => sum + job.inputBytes);
+    final free = await ref.read(deviceStorageProvider).freeBytes();
+    if (SpaceCheck.fits(totalInputBytes: total, freeBytes: free)) return true;
+    if (!context.mounted) return true;
+
+    final l10n = L10n.of(context);
+    final proceed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.sd_card_alert_outlined),
+        title: Text(l10n.lowSpaceTitle),
+        content: Text(l10n.lowSpaceBody(
+          OutputPaths.humanBytes(SpaceCheck.requiredBytes(total)),
+          OutputPaths.humanBytes(free ?? 0),
+        )),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(l10n.commonCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(l10n.lowBatteryContinue),
+          ),
+        ],
+      ),
+    );
+    return proceed ?? false;
+  }
+
   /// The Advanced profile, with the batch-scoped bits filled in.
   ConversionSettings _advancedSettings(WidgetRef ref) {
     var s = ref.read(settingsProvider);
-    if (s.rateControl == RateControl.size) {
+    // Only video reads the size mode. A stale `size` left over from a video
+    // profile must not attach a megabyte-scale budget to a photo, where it
+    // would send the fit-to-size search hunting for a limit the picture is
+    // nowhere near.
+    if (s.rateControl == RateControl.size && s.container.kind == MediaKind.video) {
       s = s.copyWith(sizeTargetBytes: ref.read(sizeTargetProvider));
     }
     // Trim is offered only while exactly one file is queued, but the range
@@ -1563,6 +1850,8 @@ class _StartBar extends ConsumerWidget {
                     onPressed: pendingCount == 0
                         ? null
                         : () async {
+                            if (!await _confirmSpace(context, ref)) return;
+                            if (!context.mounted) return;
                             if (!await _confirmBattery(context)) return;
                             if (!context.mounted) return;
 

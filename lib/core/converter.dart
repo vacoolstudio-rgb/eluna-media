@@ -7,7 +7,9 @@ import 'package:ffmpeg_kit_flutter_new/return_code.dart';
 import 'package:ffmpeg_kit_flutter_new/statistics.dart';
 
 import '../domain/conversion_settings.dart';
+import '../domain/media_format.dart';
 import 'ffmpeg_args.dart';
+import 'quality_search.dart';
 
 enum ConversionOutcome { success, cancelled, failed }
 
@@ -139,6 +141,21 @@ class FFmpegConverter {
     void Function(int sessionId)? onSession,
     void Function(double progress)? onProgress,
   }) async {
+    // A still has no bitrate to solve for, so hitting a byte budget means
+    // encoding and measuring. It gets its own path entirely.
+    if (settings.container.kind == MediaKind.image &&
+        !settings.container.isAnimatedImage &&
+        settings.sizeTargetBytes != null &&
+        extraInputPaths.isEmpty) {
+      return _convertImageToSize(
+        inputPath: inputPath,
+        outputPath: outputPath,
+        settings: settings,
+        onSession: onSession,
+        onProgress: onProgress,
+      );
+    }
+
     if (twoPass && extraInputPaths.isEmpty) {
       return _convertTwoPass(
         inputPath: inputPath,
@@ -175,6 +192,101 @@ class FFmpegConverter {
       onSession: onSession,
       onProgress: onProgress,
     );
+  }
+
+  /// Encodes a still repeatedly, closing in on the largest version of it that
+  /// still fits [ConversionSettings.sizeTargetBytes].
+  ///
+  /// This is the photo half of the app's one real differentiator. The video
+  /// side computes a bitrate from a duration and a budget; a JPEG has neither,
+  /// so the only honest way to know what quality 70 costs is to write it and
+  /// measure. A binary search over the quality scale gets there in seven
+  /// encodes, and a phone photo encodes in tens of milliseconds.
+  ///
+  /// When no quality fits — a 12-megapixel photo will not become 100 KB by
+  /// coarsening alone — the search restarts on a smaller frame. Fewer pixels
+  /// is the lever that actually works, and it looks far better than quality 2.
+  /// If even that misses, the smallest achievable file is returned rather than
+  /// a failure: an honest result the user can see the size of beats an error
+  /// message, and the UI already warns when a budget looks unreachable.
+  Future<ConversionResult> _convertImageToSize({
+    required String inputPath,
+    required String outputPath,
+    required ConversionSettings settings,
+    void Function(int sessionId)? onSession,
+    void Function(double progress)? onProgress,
+  }) async {
+    final target = settings.sizeTargetBytes!;
+    const scales = [1.0, 0.7, 0.5];
+    // Enough halvings to close the quality interval exactly; see QualitySearch.
+    const probeBudget = 7;
+
+    var attempts = 0;
+    int? lastQuality;
+    var lastScale = double.nan;
+
+    Future<ConversionResult?> encode(int quality, double scale) async {
+      lastQuality = quality;
+      lastScale = scale;
+      final result = await _execute(
+        FFmpegArgs.build(
+          inputPath: inputPath,
+          outputPath: outputPath,
+          settings: settings.copyWith(imageQuality: quality),
+          imageDownscale: scale,
+        ),
+        onSession: onSession,
+      );
+      attempts++;
+      // Each probe is a real FFmpeg session, so a cancel lands here as an
+      // outcome rather than as an exception; anything but success ends it.
+      return result.isSuccess ? null : result;
+    }
+
+    int sizeOf(String path) {
+      try {
+        return File(path).lengthSync();
+      } on FileSystemException {
+        return 0;
+      }
+    }
+
+    for (final scale in scales) {
+      final search = QualitySearch(maxSteps: probeBudget);
+      while (true) {
+        final quality = search.next();
+        if (quality == null) break;
+
+        final failure = await encode(quality, scale);
+        if (failure != null) return failure;
+
+        search.record(
+          quality: quality,
+          bytes: sizeOf(outputPath),
+          targetBytes: target,
+        );
+        // Rough but honest: the bar moves per probe across the whole budget.
+        onProgress?.call((attempts / (probeBudget * scales.length)).clamp(0.0, 0.95));
+      }
+
+      final best = search.bestFitting;
+      if (best == null) continue; // Nothing fit at this size; shrink and retry.
+
+      // The file on disk belongs to the last probe, which is rarely the winner.
+      if (lastQuality != best || lastScale != scale) {
+        final failure = await encode(best, scale);
+        if (failure != null) return failure;
+      }
+      onProgress?.call(1);
+      return const ConversionResult(ConversionOutcome.success);
+    }
+
+    // Unreachable budget: hand back the smallest thing this app is willing to
+    // call a photo.
+    final failure = await encode(QualitySearch().minQuality, scales.last);
+    if (failure != null) return failure;
+    onProgress?.call(1);
+    return const ConversionResult(ConversionOutcome.success);
   }
 
   /// Two encodes of the same source: an analysis pass into a log file, then

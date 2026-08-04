@@ -634,10 +634,10 @@ class L10nJa extends L10n {
   String get hapticsLabel => 'バイブレーション';
 
   @override
-  String get adPrivacyTitle => 'Ad privacy settings';
+  String get adPrivacyTitle => '広告のプライバシー設定';
 
   @override
-  String get adPrivacySubtitle => 'Change your consent for advertising';
+  String get adPrivacySubtitle => '広告に関する同意を変更します';
 
   @override
   String get networkPrivacyTitle => 'ネットワークとプライバシー';
@@ -1013,4 +1013,127 @@ class L10nJa extends L10n {
 
   @override
   String get achPlatinumBody => '他のすべての実績を解除。';
+
+  @override
+  String get storageTitle => 'ストレージ';
+
+  @override
+  String get storageBody => '変換したファイルは保存または共有するまでアプリ内に残り、ファイルマネージャーからは見えません。';
+
+  @override
+  String get storageEmpty => '保存されたファイルはありません';
+
+  @override
+  String storageUsage(String size) {
+    return '使用中: $size';
+  }
+
+  @override
+  String get storageClearTitle => '保存中のファイルを削除しますか？';
+
+  @override
+  String get storageClearBody =>
+      'アプリが保持している完了済みの結果をすべて削除します。すでに保存または共有したファイルはそのままです。';
+
+  @override
+  String get storageClearAction => '削除';
+
+  @override
+  String storageCleared(String size) {
+    return '$size を解放しました';
+  }
+
+  @override
+  String get autoSaveLabel => '結果を自動的に保存';
+
+  @override
+  String get autoSaveHint => '完了したファイルをすぐにギャラリー（音声はダウンロード）へ保存します。';
+
+  @override
+  String get lowSpaceTitle => '空き容量が少なくなっています';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return 'この一括処理には約 $needed が必要ですが、空きは $free しかありません。途中で失敗する可能性があります。';
+  }
+
+  @override
+  String saveAll(int count) {
+    return 'すべて保存（$count）';
+  }
+
+  @override
+  String savedAll(int count) {
+    return '保存しました: $count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return '$total 件中 $saved 件を保存しました';
+  }
+
+  @override
+  String get presetFitPhotoTitle => '写真を指定サイズに';
+
+  @override
+  String get presetFitPhotoBody => '画像を指定の上限以下に圧縮します（アップロードフォームや申請書類向け）。';
+
+  @override
+  String get photoFitHint => '収まるまで画質を試します。指定サイズが小さすぎる場合は画像サイズも縮小します。';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb KB';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => '目標サイズ（KB）';
+
+  @override
+  String get compareAction => '比較';
+
+  @override
+  String get compareBefore => '変換前';
+
+  @override
+  String get compareAfter => '変換後';
+
+  @override
+  String get compareHint => '長押しすると元の画像が表示されます。';
+
+  @override
+  String get trimStart => '開始';
+
+  @override
+  String get trimEnd => '終了';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return 'm:ss 形式、最大 $duration';
+  }
+
+  @override
+  String get imageScaleLabel => '拡大縮小';
+
+  @override
+  String get audioChannelsLabel => 'チャンネル';
+
+  @override
+  String get audioMono => 'モノラル';
+
+  @override
+  String get audioStereo => 'ステレオ';
+
+  @override
+  String get sampleRateLabel => 'サンプリング周波数';
+
+  @override
+  String get voiceAudioHint =>
+      '22.05 kHz モノラルなら、音声録音は聞こえる劣化なしでおよそ 1/4 になります。音楽では両方とも元のままに。';
+
+  @override
+  String get moveUp => '上へ';
+
+  @override
+  String get moveDown => '下へ';
 }

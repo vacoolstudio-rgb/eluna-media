@@ -1,22 +1,17 @@
 {
   "@@locale": "it",
-
   "appTitle": "Eluna Media",
-
   "tabConvert": "Converti",
   "tabQueue": "Coda",
   "tabAbout": "Info",
-
   "addFiles": "Aggiungi file",
   "emptySelectionTitle": "Ancora nessun file",
   "emptySelectionBody": "Aggiungi foto, video o audio. Tutto viene elaborato su questo dispositivo.",
-
   "sectionOutput": "Output",
   "sectionVideo": "Video",
   "sectionAudio": "Audio",
   "sectionImage": "Immagine",
   "sectionPrivacy": "Privacy",
-
   "outputFormat": "Formato",
   "videoCodec": "Codec video",
   "audioCodec": "Codec audio",
@@ -53,7 +48,6 @@
   "enhanceStrong": "Forte",
   "stripMetadata": "Rimuovi metadati",
   "stripMetadataHint": "Elimina EXIF, GPS e timestamp dal risultato.",
-
   "startConversion": "Converti {count} file",
   "batchResumed": "Conversione interrotta ripresa.",
   "converting": "Conversione in corso…",
@@ -63,25 +57,19 @@
   "removeJob": "Rimuovi",
   "shareFile": "Condividi",
   "retryJob": "Riprova",
-
   "queueEmptyTitle": "La coda è vuota",
   "queueEmptyBody": "I file aggiunti nella scheda Converti compaiono qui.",
-
   "statusQueued": "In coda",
   "statusRunning": "In conversione",
   "statusCompleted": "Fatto",
   "statusFailed": "Errore",
   "statusCancelled": "Annullato",
-
   "batchSummary": "{done} di {total} completati",
-
   "batchCompleted": "{done, plural, =1{1 file convertito} other{{done} file convertiti}}",
   "batchCompletedWithFailures": "Convertiti: {done}, falliti: {failed}.",
-
   "savedPercent": "{percent}% più piccolo",
   "grewPercent": "{percent}% più grande",
   "sizeChange": "{from} → {to}",
-
   "appearance": "Aspetto",
   "theme": "Tema",
   "themeSystem": "Sistema",
@@ -89,18 +77,14 @@
   "themeDark": "Scuro",
   "language": "Lingua",
   "languageSystem": "Sistema",
-
   "privacyTitle": "Privacy",
   "privacyBody": "Eluna Media converte i tuoi file interamente su questo dispositivo con una copia integrata di FFmpeg. I file non lasciano mai il dispositivo, non serve alcun account e non c'è telemetria. L'unica cosa che usa la rete è un singolo banner pubblicitario non personalizzato, che non viene mai caricato mentre è in corso una conversione — trovi l'audit completo nella schermata «Rete e privacy».\n\nLa rimozione dei metadati è attiva per impostazione predefinita, quindi EXIF, coordinate GPS e timestamp vengono eliminati dai file esportati.",
   "licenseTitle": "Licenza",
   "licenseBody": "Questa app include FFmpeg compilato con x264, x265 e altri componenti GPL, perciò l'applicazione nel suo insieme è distribuita sotto licenza GNU GPL v3.",
-
   "formatUnsupportedForSource": "Questo formato non supporta il codec selezionato.",
   "sourceMissing": "Il file di origine non è più disponibile.",
   "errorTitle": "Conversione non riuscita",
-
   "tabSettings": "Impostazioni",
-
   "introTitle": "Privato per design",
   "introOfflineTitle": "Converte su questo dispositivo",
   "introOfflineBody": "Tutto il lavoro lo fa una copia integrata di FFmpeg. I file non lasciano mai il telefono — la conversione funziona anche in modalità aereo.",
@@ -110,10 +94,8 @@
   "introMetadataBody": "EXIF, GPS e timestamp vengono rimossi da ogni output per impostazione predefinita. Puoi disattivarlo.",
   "introAdNote": "La versione gratuita mostra un singolo banner non personalizzato — mai durante una conversione, e per i primi 14 giorni non compare affatto.",
   "introContinue": "Inizia",
-
   "modeSimple": "Semplice",
   "modeAdvanced": "Avanzato",
-
   "presetCompressVideoTitle": "Comprimi video",
   "presetCompressVideoBody": "MP4 molto più piccolo, la qualità resta buona",
   "presetFitToSizeTitle": "Adatta alla dimensione",
@@ -134,26 +116,21 @@
   "presetEnhancePhotoBody": "Più pulita, più nitida, colori migliori",
   "presetImageToWebpTitle": "Foto in WebP",
   "presetImageToWebpBody": "Formato moderno, più piccolo del JPEG",
-
   "sizeTargetTitle": "Dimensione target",
   "sizeTargetMb": "{mb} MB",
   "sizeTargetNamed": "{service} · {mb} MB",
   "sizeTargetCustom": "Personalizzata…",
   "sizeTargetDialogTitle": "Dimensione target in MB",
   "sizeTargetTooSmall": "Il target è troppo piccolo per questa durata; verrà usata la qualità più vicina possibile.",
-
   "estimatePerFile": "≈ {size} per file",
   "estimateTotal": "Dimensione stimata: ≈ {size}",
-
   "selectedFiles": "{count, plural, =1{1 file selezionato} other{{count} file selezionati}}",
   "clearSelection": "Svuota",
   "presetExpectsVideo": "Questo preset richiede file video.",
   "presetExpectsImage": "Questo preset richiede immagini.",
-
   "promiseOffline": "Conversione 100% offline",
   "promiseBatchFree": "L'elaborazione in serie è gratis",
   "promiseNoWatermark": "Nessun watermark",
-
   "sectionTransform": "Trasforma",
   "rotateLabel": "Ruota",
   "flipLabel": "Specchia orizzontalmente",
@@ -167,22 +144,17 @@
   "transformNeedsReencode": "Rotazione, specchio e velocità richiedono la ricodifica, quindi sono disattivati durante la copia dello stream.",
   "keepSubtitles": "Mantieni i sottotitoli",
   "keepSubtitlesHint": "Trasferisce le tracce dei sottotitoli nel risultato. Solo sottotitoli di testo.",
-
   "sectionTrim": "Taglio",
   "trimEnable": "Taglia l'originale",
   "trimHint": "Disponibile quando in coda c'è esattamente un file con durata nota.",
   "trimRangeLabel": "{from} – {to}",
-
   "rateControlSize": "Dimensione target",
-
   "lowBatteryTitle": "Batteria quasi scarica",
   "lowBatteryBody": "La conversione mette sotto sforzo il processore. Puoi prima collegare il caricabatterie, oppure continuare comunque.",
   "lowBatteryContinue": "Converti comunque",
   "commonCancel": "Annulla",
   "commonOk": "OK",
-
   "filesReceived": "{count, plural, =1{Ricevuto 1 file} other{Ricevuti {count} file}}",
-
   "saveFile": "Salva",
   "savedToGallery": "Salvato nella galleria, album «Eluna Media».",
   "savedToDownloads": "Salvato in Download.",
@@ -191,12 +163,10 @@
   "finishedClearedUndo": "Attività completate rimosse.",
   "undo": "Annulla",
   "errorDetailsTitle": "Dettagli dell'errore",
-
   "oledDark": "Tema scuro nero assoluto",
   "oledDarkHint": "Il nero vero risparmia energia sugli schermi OLED.",
   "dynamicColorLabel": "Colori di sistema (Material You)",
   "dynamicColorHint": "Segue la palette dello sfondo del dispositivo, dove supportato.",
-
   "sectionConversionPrefs": "Conversione",
   "powerModeLabel": "Modalità energetica",
   "powerEfficiency": "Fresco e veloce",
@@ -204,7 +174,6 @@
   "powerQuality": "Compressione massima",
   "powerModeHint": "Quanto intensamente lavora l'encoder video. Più fresco e veloce significa file un po' più grandi. Nient'altro viene limitato — mai.",
   "hapticsLabel": "Feedback aptico",
-
   "networkPrivacyTitle": "Rete e privacy",
   "netAuditIntro": "L'elenco completo di tutto ciò che in questa app può toccare la rete.",
   "netAuditAdTitle": "Il banner pubblicitario — l'unico che usa la rete",
@@ -213,7 +182,6 @@
   "netAuditConversionBody": "Avviene interamente su questo dispositivo tramite un FFmpeg integrato. Attiva la modalità aereo e converti — funziona.",
   "netAuditTelemetryTitle": "Telemetria",
   "netAuditTelemetryBody": "Non c'è. L'app non raccoglie analisi, né report dei crash, né identificatori, e non ha alcun sistema di account.",
-
   "sectionSupport": "Sostegno",
   "removeAdsTitle": "Rimuovi la pubblicità",
   "removeAdsSubtitle": "Acquisto una tantum. Tutte le funzioni sono già gratuite.",
@@ -228,25 +196,20 @@
   "adFreeBadge": "Senza pubblicità",
   "rateApp": "Valuta l'app",
   "openLicenses": "Licenze open source",
-
   "errorFallbackTitle": "Qualcosa è andato storto",
   "errorFallbackBody": "L'app ha incontrato un errore imprevisto. La coda e le impostazioni sono al sicuro — torna indietro e riprova.",
-
   "twoPassLabel": "Due passaggi per la dimensione esatta",
   "twoPassHint": "I lavori a dimensione target codificano due volte e centrano il budget di byte con precisione nettamente maggiore — al costo di circa il doppio di tempo e batteria.",
-
   "whatsNewTitle": "Novità",
   "whatsNew1": "Obiettivi — privati, contati solo su questo dispositivo.",
   "whatsNew2": "Unione video: unisci le clip in un unico MP4.",
   "whatsNew3": "Codifica hardware — più veloce e fresca sui dispositivi supportati.",
   "whatsNew4": "Ritaglio 1:1 / 9:16 / 16:9, volume audio, velocità 0,25–4×.",
   "whatsNew5": "Modalità opzionale a due passaggi per dimensioni esatte.",
-
   "achievementsTitle": "Obiettivi",
   "achievementsProgress": "{done} di {total}",
   "achievementUnlocked": "Obiettivo sbloccato: {title}",
   "achievementsPrivacyNote": "Contati solo su questo dispositivo. Nulla viene caricato da nessuna parte.",
-
   "achFirstConversionTitle": "Primi passi",
   "achFirstConversionBody": "Converti il tuo primo file.",
   "achTenConversionsTitle": "Riscaldamento",
@@ -283,7 +246,6 @@
   "achNightOwlBody": "Completa una conversione tra mezzanotte e le 5 del mattino.",
   "achPlatinumTitle": "Platino",
   "achPlatinumBody": "Sblocca tutti gli altri obiettivi.",
-
   "presetAudioToMp3Title": "Converti audio",
   "presetAudioToMp3Body": "In MP3 — si sente ovunque",
   "presetCompressAudioTitle": "Comprimi audio",
@@ -315,7 +277,6 @@
   "openFolder": "Mostra cartella",
   "noAppToOpen": "Nessuna app su questo dispositivo può aprire quel file.",
   "openFailed": "Impossibile aprire il file.",
-
   "modeAdvancedHint": "Mostra tutti i controlli di codec, bitrate e trasformazione al posto delle schede dei preset.",
   "rateDialogTitle": "Ti piace Eluna Media?",
   "rateDialogBody": "Tocca una stella. La tua valutazione resta tra te e lo store.",
@@ -336,5 +297,42 @@
   "queueNoFinishedTitle": "Ancora niente di completato",
   "queueNoFinishedBody": "I file convertiti finiscono qui, pronti da aprire, salvare o condividere.",
   "capBitrateLabel": "Non ingrandire mai il file",
-  "capBitrateHint": "Limita la codifica al bitrate del file originale. La qualità costante non ha un tetto proprio, quindi un video già compresso potrebbe altrimenti risultare più grande."
+  "capBitrateHint": "Limita la codifica al bitrate del file originale. La qualità costante non ha un tetto proprio, quindi un video già compresso potrebbe altrimenti risultare più grande.",
+  "storageTitle": "Archiviazione",
+  "storageBody": "I file convertiti restano nell'app finché non li salvi o condividi: nessun gestore file può raggiungerli.",
+  "storageEmpty": "Niente in archivio",
+  "storageUsage": "Occupati: {size}",
+  "storageClearTitle": "Cancellare i file archiviati?",
+  "storageClearBody": "Elimina tutti i risultati completati ancora conservati dall'app. I file già salvati o condivisi non vengono toccati.",
+  "storageClearAction": "Cancella",
+  "storageCleared": "Liberati {size}",
+  "autoSaveLabel": "Salva i risultati automaticamente",
+  "autoSaveHint": "Mette ogni file completato nella galleria — l'audio in Download — appena è pronto.",
+  "lowSpaceTitle": "Spazio quasi esaurito",
+  "lowSpaceBody": "Questo lotto richiede circa {needed} e sono liberi solo {free}. La conversione potrebbe interrompersi a metà.",
+  "saveAll": "Salva tutto ({count})",
+  "savedAll": "Salvati: {count}",
+  "savedSome": "Salvati {saved} su {total}",
+  "presetFitPhotoTitle": "Foto entro una dimensione",
+  "presetFitPhotoBody": "Comprimi un'immagine sotto un limite preciso: moduli di caricamento, domande.",
+  "photoFitHint": "L'app prova varie qualità finché una ci sta. Se il limite è troppo basso, riduce anche le dimensioni dell'immagine.",
+  "sizeTargetKb": "{kb} KB",
+  "sizeTargetDialogTitleKb": "Dimensione target in KB",
+  "compareAction": "Confronta",
+  "compareBefore": "Prima",
+  "compareAfter": "Dopo",
+  "compareHint": "Tieni premuto per vedere l'originale.",
+  "trimStart": "Inizio",
+  "trimEnd": "Fine",
+  "trimTimeHelp": "m:ss, fino a {duration}",
+  "imageScaleLabel": "Scala",
+  "audioChannelsLabel": "Canali",
+  "audioMono": "Mono",
+  "audioStereo": "Stereo",
+  "sampleRateLabel": "Frequenza di campionamento",
+  "voiceAudioHint": "Mono a 22,05 kHz riduce di circa quattro volte una registrazione vocale senza perdite udibili. Per la musica lascia entrambi come l'originale.",
+  "moveUp": "Sposta su",
+  "moveDown": "Sposta giù",
+  "adPrivacyTitle": "Privacy degli annunci",
+  "adPrivacySubtitle": "Modifica il consenso alla pubblicità"
 }

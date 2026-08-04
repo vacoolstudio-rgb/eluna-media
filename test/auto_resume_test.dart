@@ -72,6 +72,7 @@ const _strings = QueueStrings(
   progress: _progress,
   completed: _completed,
   completedWithFailures: _completedWithFailures,
+  cancelLabel: 'Stop',
 );
 
 String _progress(int done, int total) => '$done of $total';

@@ -8,4 +8,5 @@ QueueStrings queueStringsFrom(L10n l10n) => QueueStrings(
       progress: l10n.batchSummary,
       completed: l10n.batchCompleted,
       completedWithFailures: l10n.batchCompletedWithFailures,
+      cancelLabel: l10n.cancelBatch,
     );

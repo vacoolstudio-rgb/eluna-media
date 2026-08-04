@@ -13,6 +13,16 @@ enum JobFailure {
   sourceMissing,
 }
 
+/// Where a finished output was copied so the user can reach it without a file
+/// manager. Null until it has been.
+enum SavedTo {
+  /// The system gallery, in an "Eluna Media" album.
+  gallery,
+
+  /// Public Downloads — audio, and anything the gallery will not take.
+  downloads,
+}
+
 extension JobStatusX on JobStatus {
   bool get isTerminal =>
       this == JobStatus.completed ||
@@ -41,7 +51,13 @@ class ConversionJob {
     this.sourceDurationMs,
     this.extraInputPaths = const [],
     this.startedAtMs,
+    this.savedTo,
   });
+
+  /// Set once the output has been copied out of the app's sandbox, so the card
+  /// can say where it went instead of offering Save again as if nothing had
+  /// happened.
+  final SavedTo? savedTo;
 
   final String id;
   final String inputPath;
@@ -118,10 +134,12 @@ class ConversionJob {
     int? sourceDurationMs,
     ConversionSettings? settings,
     int? startedAtMs,
+    SavedTo? savedTo,
     bool clearError = false,
     bool clearSession = false,
   }) {
     return ConversionJob(
+      savedTo: savedTo ?? this.savedTo,
       id: id,
       inputPath: inputPath,
       inputName: inputName,
@@ -155,6 +173,7 @@ class ConversionJob {
         'outputBytes': outputBytes,
         if (sourceDurationMs != null) 'sourceDurationMs': sourceDurationMs,
         if (extraInputPaths.isNotEmpty) 'extraInputs': extraInputPaths,
+        if (savedTo != null) 'savedTo': savedTo!.name,
       };
 
   /// Returns null when the entry is too malformed to be worth resurrecting.
@@ -198,6 +217,9 @@ class ConversionJob {
           for (final p in json['extraInputs'] as List)
             if (p is String) p,
       ],
+      savedTo: json['savedTo'] == null
+          ? null
+          : enumByName(SavedTo.values, json['savedTo'], SavedTo.gallery),
     );
   }
 }

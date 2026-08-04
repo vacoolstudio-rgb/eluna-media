@@ -27,14 +27,14 @@ void main() {
 
   test('does nothing at all on an unsupported platform', () async {
     final s = service(supported: false);
-    await s.start(title: 't', text: 'x', progress: 0);
+    await s.start(title: 't', text: 'x', progress: 0, cancelLabel: 'Stop');
     await s.update(title: 't', text: 'y', progress: 0.5);
     await s.stop();
     expect(calls, isEmpty);
   });
 
   test('start posts the service intent with a whole percentage', () async {
-    await service().start(title: 'Eluna', text: '0 of 3', progress: 0.25);
+    await service().start(title: 'Eluna', text: '0 of 3', progress: 0.25, cancelLabel: 'Stop');
 
     expect(calls, hasLength(1));
     expect(calls.single.method, 'start');
@@ -42,11 +42,14 @@ void main() {
       'title': 'Eluna',
       'text': '0 of 3',
       'progress': 25,
+      // Carried on every post: the platform rebuilds the whole notification
+      // from these arguments, so a missing label would drop the Cancel button.
+      'cancelLabel': 'Stop',
     });
   });
 
   test('null progress is sent as the indeterminate sentinel', () async {
-    await service().start(title: 'Eluna', text: 'working');
+    await service().start(title: 'Eluna', text: 'working', cancelLabel: 'Stop');
     expect(calls.single.arguments['progress'], -1);
   });
 
@@ -57,7 +60,7 @@ void main() {
 
   test('sub-percent progress changes are throttled away', () async {
     final s = service();
-    await s.start(title: 'Eluna', text: 'a', progress: 0.10);
+    await s.start(title: 'Eluna', text: 'a', progress: 0.10, cancelLabel: 'Stop');
     calls.clear();
 
     // All of these round to 10%, and the caption is unchanged.
@@ -73,7 +76,7 @@ void main() {
 
   test('a changed caption is posted even at the same percentage', () async {
     final s = service();
-    await s.start(title: 'Eluna', text: '1 of 3', progress: 0.5);
+    await s.start(title: 'Eluna', text: '1 of 3', progress: 0.5, cancelLabel: 'Stop');
     calls.clear();
 
     await s.update(title: 'Eluna', text: '2 of 3', progress: 0.5);
@@ -86,7 +89,7 @@ void main() {
     await s.stop();
     expect(calls, isEmpty, reason: 'stop before start is a no-op');
 
-    await s.start(title: 'Eluna', text: 'a', progress: 0);
+    await s.start(title: 'Eluna', text: 'a', progress: 0, cancelLabel: 'Stop');
     calls.clear();
 
     await s.stop();
@@ -96,7 +99,7 @@ void main() {
 
   test('updates after stop are ignored', () async {
     final s = service();
-    await s.start(title: 'Eluna', text: 'a', progress: 0);
+    await s.start(title: 'Eluna', text: 'a', progress: 0, cancelLabel: 'Stop');
     await s.stop();
     calls.clear();
 
@@ -112,7 +115,7 @@ void main() {
 
     final s = service();
     // The conversion must survive losing its notification.
-    await expectLater(s.start(title: 'Eluna', text: 'a', progress: 0), completes);
+    await expectLater(s.start(title: 'Eluna', text: 'a', progress: 0, cancelLabel: 'Stop'), completes);
     await expectLater(s.stop(), completes);
   });
 }

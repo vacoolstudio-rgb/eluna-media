@@ -1,22 +1,17 @@
 {
   "@@locale": "hi",
-
   "appTitle": "Eluna Media",
-
   "tabConvert": "कन्वर्ट",
   "tabQueue": "कतार",
   "tabAbout": "जानकारी",
-
   "addFiles": "फ़ाइलें जोड़ें",
   "emptySelectionTitle": "अभी कोई फ़ाइल नहीं",
   "emptySelectionBody": "फ़ोटो, वीडियो या ऑडियो जोड़ें। सब कुछ इसी डिवाइस पर प्रोसेस होता है।",
-
   "sectionOutput": "आउटपुट",
   "sectionVideo": "वीडियो",
   "sectionAudio": "ऑडियो",
   "sectionImage": "इमेज",
   "sectionPrivacy": "प्राइवेसी",
-
   "outputFormat": "फ़ॉर्मैट",
   "videoCodec": "वीडियो कोडेक",
   "audioCodec": "ऑडियो कोडेक",
@@ -53,7 +48,6 @@
   "enhanceStrong": "ज़्यादा",
   "stripMetadata": "मेटाडेटा हटाएँ",
   "stripMetadataHint": "आउटपुट से EXIF, GPS और टाइमस्टैम्प हटा देता है।",
-
   "startConversion": "{count} फ़ाइलें कन्वर्ट करें",
   "batchResumed": "अधूरा कन्वर्ज़न फिर से शुरू किया गया।",
   "converting": "कन्वर्ट हो रहा है…",
@@ -63,25 +57,19 @@
   "removeJob": "हटाएँ",
   "shareFile": "शेयर करें",
   "retryJob": "फिर कोशिश करें",
-
   "queueEmptyTitle": "कतार खाली है",
   "queueEmptyBody": "कन्वर्ट टैब पर जोड़ी गई फ़ाइलें यहाँ दिखेंगी।",
-
   "statusQueued": "कतार में",
   "statusRunning": "कन्वर्ट हो रहा है",
   "statusCompleted": "पूर्ण",
   "statusFailed": "विफल",
   "statusCancelled": "रद्द",
-
   "batchSummary": "{total} में से {done} पूर्ण",
-
   "batchCompleted": "{done, plural, one{1 फ़ाइल कन्वर्ट हुई} other{{done} फ़ाइलें कन्वर्ट हुईं}}",
   "batchCompletedWithFailures": "{done} कन्वर्ट हुईं, {failed} विफल।",
-
   "savedPercent": "{percent}% छोटी",
   "grewPercent": "{percent}% बड़ी",
   "sizeChange": "{from} → {to}",
-
   "appearance": "दिखावट",
   "theme": "थीम",
   "themeSystem": "सिस्टम",
@@ -89,18 +77,14 @@
   "themeDark": "डार्क",
   "language": "भाषा",
   "languageSystem": "सिस्टम",
-
   "privacyTitle": "प्राइवेसी",
   "privacyBody": "Eluna Media आपकी फ़ाइलें पूरी तरह इसी डिवाइस पर, FFmpeg की बंडल्ड कॉपी से कन्वर्ट करता है। फ़ाइलें कभी डिवाइस से बाहर नहीं जातीं, अकाउंट की ज़रूरत नहीं और कोई टेलीमेट्री नहीं। नेटवर्क सिर्फ़ एक नॉन-पर्सनलाइज़्ड विज्ञापन बैनर इस्तेमाल करता है, और कन्वर्ज़न चलते समय वह कभी लोड नहीं होता — पूरा ऑडिट “नेटवर्क और प्राइवेसी” स्क्रीन पर देखें।\n\nमेटाडेटा हटाना डिफ़ॉल्ट रूप से चालू है, इसलिए एक्सपोर्ट की गई फ़ाइलों से EXIF, GPS निर्देशांक और टाइमस्टैम्प हट जाते हैं।",
   "licenseTitle": "लाइसेंस",
   "licenseBody": "इस ऐप में x264, x265 और अन्य GPL कॉम्पोनेन्ट के साथ बनी FFmpeg बंडल है, इसलिए पूरा ऐप्लिकेशन GNU GPL v3 के तहत वितरित होता है।",
-
   "formatUnsupportedForSource": "यह फ़ॉर्मैट चुने गए कोडेक को सपोर्ट नहीं करता।",
   "sourceMissing": "स्रोत फ़ाइल अब उपलब्ध नहीं है।",
   "errorTitle": "कन्वर्ज़न विफल",
-
   "tabSettings": "सेटिंग्स",
-
   "introTitle": "डिज़ाइन से ही प्राइवेट",
   "introOfflineTitle": "इसी डिवाइस पर कन्वर्ज़न",
   "introOfflineBody": "सारा काम FFmpeg की बंडल्ड कॉपी करती है। फ़ाइलें फ़ोन से बाहर नहीं जातीं — कन्वर्ज़न एयरप्लेन मोड में भी चलता है।",
@@ -110,10 +94,8 @@
   "introMetadataBody": "हर आउटपुट से EXIF, GPS और टाइमस्टैम्प डिफ़ॉल्ट रूप से हटा दिए जाते हैं। चाहें तो इसे बंद कर सकते हैं।",
   "introAdNote": "मुफ़्त वर्ज़न में सिर्फ़ एक नॉन-पर्सनलाइज़्ड बैनर दिखता है — कन्वर्ज़न के दौरान कभी नहीं, और पहले 14 दिन बिल्कुल नहीं।",
   "introContinue": "शुरू करें",
-
   "modeSimple": "सरल",
   "modeAdvanced": "एडवांस्ड",
-
   "presetCompressVideoTitle": "वीडियो कंप्रेस करें",
   "presetCompressVideoBody": "काफ़ी छोटा MP4, क्वालिटी बरकरार",
   "presetFitToSizeTitle": "साइज़ में फ़िट करें",
@@ -134,26 +116,21 @@
   "presetEnhancePhotoBody": "ज़्यादा साफ़, ज़्यादा शार्प, बेहतर रंग",
   "presetImageToWebpTitle": "फ़ोटो से WebP",
   "presetImageToWebpBody": "आधुनिक फ़ॉर्मैट, JPEG से छोटा",
-
   "sizeTargetTitle": "टारगेट साइज़",
   "sizeTargetMb": "{mb} MB",
   "sizeTargetNamed": "{service} · {mb} MB",
   "sizeTargetCustom": "कस्टम…",
   "sizeTargetDialogTitle": "टारगेट साइज़ (MB में)",
   "sizeTargetTooSmall": "इस अवधि के लिए टारगेट बहुत छोटा है; जितनी क़रीब क्वालिटी संभव होगी, उतनी इस्तेमाल होगी।",
-
   "estimatePerFile": "≈ {size} प्रति फ़ाइल",
   "estimateTotal": "अनुमानित आउटपुट: ≈ {size}",
-
   "selectedFiles": "{count, plural, one{1 फ़ाइल चुनी गई} other{{count} फ़ाइलें चुनी गईं}}",
   "clearSelection": "साफ़ करें",
   "presetExpectsVideo": "यह प्रीसेट वीडियो फ़ाइलों के लिए है।",
   "presetExpectsImage": "यह प्रीसेट इमेज के लिए है।",
-
   "promiseOffline": "100% ऑफ़लाइन कन्वर्ज़न",
   "promiseBatchFree": "बैच कन्वर्ज़न मुफ़्त",
   "promiseNoWatermark": "कोई वॉटरमार्क नहीं",
-
   "sectionTransform": "ट्रांसफ़ॉर्म",
   "rotateLabel": "घुमाएँ",
   "flipLabel": "हॉरिज़ॉन्टल मिरर",
@@ -167,22 +144,17 @@
   "transformNeedsReencode": "घुमाना, मिरर और स्पीड के लिए री-एन्कोडिंग ज़रूरी है, इसलिए स्ट्रीम कॉपी के दौरान ये बंद रहते हैं।",
   "keepSubtitles": "सबटाइटल रखें",
   "keepSubtitlesHint": "सबटाइटल ट्रैक आउटपुट में ले जाता है। सिर्फ़ टेक्स्ट सबटाइटल।",
-
   "sectionTrim": "ट्रिम",
   "trimEnable": "स्रोत ट्रिम करें",
   "trimHint": "तभी उपलब्ध जब कतार में ज्ञात अवधि वाली ठीक एक फ़ाइल हो।",
   "trimRangeLabel": "{from} – {to}",
-
   "rateControlSize": "टारगेट साइज़",
-
   "lowBatteryTitle": "बैटरी कम है",
   "lowBatteryBody": "कन्वर्ज़न प्रोसेसर पर काफ़ी भार डालता है। पहले चार्जर लगा सकते हैं, या ऐसे ही जारी रखें।",
   "lowBatteryContinue": "फिर भी कन्वर्ट करें",
   "commonCancel": "रद्द करें",
   "commonOk": "ठीक है",
-
   "filesReceived": "{count, plural, one{1 फ़ाइल मिली} other{{count} फ़ाइलें मिलीं}}",
-
   "saveFile": "सेव करें",
   "savedToGallery": "गैलरी में सेव हुई, एल्बम “Eluna Media”।",
   "savedToDownloads": "डाउनलोड्स में सेव हुई।",
@@ -191,12 +163,10 @@
   "finishedClearedUndo": "पूर्ण हुई जॉब्स साफ़ की गईं।",
   "undo": "पूर्ववत करें",
   "errorDetailsTitle": "त्रुटि का विवरण",
-
   "oledDark": "प्योर ब्लैक डार्क थीम",
   "oledDarkHint": "असली काला OLED स्क्रीन पर बैटरी बचाता है।",
   "dynamicColorLabel": "सिस्टम रंग (Material You)",
   "dynamicColorHint": "जहाँ सपोर्ट हो, डिवाइस वॉलपेपर का पैलेट अपनाता है।",
-
   "sectionConversionPrefs": "कन्वर्ज़न",
   "powerModeLabel": "पावर मोड",
   "powerEfficiency": "ठंडा और तेज़",
@@ -204,7 +174,6 @@
   "powerQuality": "अधिकतम कंप्रेशन",
   "powerModeHint": "वीडियो एन्कोडर कितनी मेहनत करे। ठंडा और तेज़ यानी फ़ाइलें थोड़ी बड़ी। बाकी कुछ भी धीमा नहीं किया जाता — कभी नहीं।",
   "hapticsLabel": "वाइब्रेशन फ़ीडबैक",
-
   "networkPrivacyTitle": "नेटवर्क और प्राइवेसी",
   "netAuditIntro": "इस ऐप में नेटवर्क छू सकने वाली हर चीज़ की पूरी सूची।",
   "netAuditAdTitle": "विज्ञापन बैनर — नेटवर्क का इकलौता उपयोगकर्ता",
@@ -213,7 +182,6 @@
   "netAuditConversionBody": "बंडल्ड FFmpeg के ज़रिए पूरी तरह इसी डिवाइस पर चलता है। एयरप्लेन मोड चालू करके कन्वर्ट करें — काम करता है।",
   "netAuditTelemetryTitle": "टेलीमेट्री",
   "netAuditTelemetryBody": "है ही नहीं। ऐप न कोई एनालिटिक्स इकट्ठा करता है, न क्रैश रिपोर्ट, न कोई आइडेंटिफ़ायर, और इसमें कोई अकाउंट सिस्टम भी नहीं है।",
-
   "sectionSupport": "सहयोग",
   "removeAdsTitle": "विज्ञापन हटाएँ",
   "removeAdsSubtitle": "एक बार की ख़रीद। हर फ़ीचर पहले से ही मुफ़्त है।",
@@ -228,25 +196,20 @@
   "adFreeBadge": "विज्ञापन-मुक्त",
   "rateApp": "ऐप को रेट करें",
   "openLicenses": "ओपन सोर्स लाइसेंस",
-
   "errorFallbackTitle": "कुछ गड़बड़ हो गई",
   "errorFallbackBody": "ऐप में अनपेक्षित त्रुटि आई। आपकी कतार और सेटिंग्स सुरक्षित हैं — पीछे जाकर फिर कोशिश करें।",
-
   "twoPassLabel": "सटीक साइज़ के लिए टू-पास",
   "twoPassHint": "साइज़-फ़िट जॉब दो बार एन्कोड होती हैं और बाइट बजट में काफ़ी ज़्यादा सटीक बैठती हैं — बदले में लगभग दोगुना समय और बैटरी।",
-
   "whatsNewTitle": "नया क्या है",
   "whatsNew1": "अचीवमेंट्स — प्राइवेट, सिर्फ़ इसी डिवाइस पर गिने जाते हैं।",
   "whatsNew2": "वीडियो जोड़ना: क्लिप्स को एक MP4 में।",
   "whatsNew3": "हार्डवेयर एन्कोडिंग — सपोर्टेड डिवाइस पर तेज़ और ठंडी।",
   "whatsNew4": "1:1 / 9:16 / 16:9 क्रॉप, ऑडियो वॉल्यूम, स्पीड 0.25–4×।",
   "whatsNew5": "सटीक टारगेट साइज़ के लिए वैकल्पिक टू-पास मोड।",
-
   "achievementsTitle": "अचीवमेंट्स",
   "achievementsProgress": "{total} में से {done}",
   "achievementUnlocked": "अचीवमेंट अनलॉक: {title}",
   "achievementsPrivacyNote": "सिर्फ़ इसी डिवाइस पर गिना जाता है। कहीं भी अपलोड नहीं होता।",
-
   "achFirstConversionTitle": "पहला कदम",
   "achFirstConversionBody": "अपनी पहली फ़ाइल कन्वर्ट करें।",
   "achTenConversionsTitle": "वार्म-अप",
@@ -283,7 +246,6 @@
   "achNightOwlBody": "आधी रात से सुबह 5 बजे के बीच कोई कन्वर्ज़न पूरा करें।",
   "achPlatinumTitle": "प्लैटिनम",
   "achPlatinumBody": "बाकी सभी अचीवमेंट अनलॉक करें।",
-
   "presetAudioToMp3Title": "ऑडियो कन्वर्ट करें",
   "presetAudioToMp3Body": "MP3 में — हर जगह चलता है",
   "presetCompressAudioTitle": "ऑडियो कंप्रेस करें",
@@ -315,7 +277,6 @@
   "openFolder": "फ़ोल्डर दिखाएँ",
   "noAppToOpen": "इस डिवाइस पर ऐसी कोई ऐप नहीं है जो यह फ़ाइल खोल सके।",
   "openFailed": "फ़ाइल नहीं खुल सकी।",
-
   "modeAdvancedHint": "प्रीसेट कार्ड की जगह कोडेक, बिटरेट और ट्रांसफ़ॉर्म के सारे कंट्रोल दिखाएँ।",
   "rateDialogTitle": "Eluna Media पसंद आ रहा है?",
   "rateDialogBody": "किसी स्टार पर टैप करें। आपकी रेटिंग आपके और स्टोर के बीच ही रहती है।",
@@ -336,5 +297,42 @@
   "queueNoFinishedTitle": "अभी तक कुछ पूरा नहीं हुआ",
   "queueNoFinishedBody": "कन्वर्ट हुई फ़ाइलें यहाँ आती हैं — खोलने, सेव करने या शेयर करने के लिए तैयार।",
   "capBitrateLabel": "फ़ाइल को कभी बड़ा न करें",
-  "capBitrateHint": "एन्कोडिंग को सोर्स के अपने बिटरेट तक सीमित करता है। कॉन्स्टेंट क्वालिटी की अपनी कोई ऊपरी सीमा नहीं होती, इसलिए पहले से कंप्रेस्ड वीडियो वरना बड़ा हो सकता है।"
+  "capBitrateHint": "एन्कोडिंग को सोर्स के अपने बिटरेट तक सीमित करता है। कॉन्स्टेंट क्वालिटी की अपनी कोई ऊपरी सीमा नहीं होती, इसलिए पहले से कंप्रेस्ड वीडियो वरना बड़ा हो सकता है।",
+  "storageTitle": "स्टोरेज",
+  "storageBody": "कन्वर्ट की गई फ़ाइलें तब तक ऐप के अंदर रहती हैं जब तक आप उन्हें सहेजते या साझा नहीं करते; कोई फ़ाइल मैनेजर उन तक नहीं पहुँच सकता।",
+  "storageEmpty": "कुछ भी संग्रहीत नहीं",
+  "storageUsage": "उपयोग: {size}",
+  "storageClearTitle": "संग्रहीत फ़ाइलें हटाएँ?",
+  "storageClearBody": "ऐप में अब भी रखे सभी पूर्ण परिणाम हटा देता है। पहले से सहेजी या साझा की गई फ़ाइलें अछूती रहती हैं।",
+  "storageClearAction": "हटाएँ",
+  "storageCleared": "{size} खाली हुआ",
+  "autoSaveLabel": "परिणाम अपने आप सहेजें",
+  "autoSaveHint": "हर तैयार फ़ाइल तुरंत गैलरी में — ऑडियो डाउनलोड में — रख देता है।",
+  "lowSpaceTitle": "जगह कम बची है",
+  "lowSpaceBody": "इस बैच को लगभग {needed} चाहिए और केवल {free} खाली है। कन्वर्ज़न बीच में रुक सकता है।",
+  "saveAll": "सभी सहेजें ({count})",
+  "savedAll": "सहेजे गए: {count}",
+  "savedSome": "{total} में से {saved} सहेजे गए",
+  "presetFitPhotoTitle": "फ़ोटो को आकार में लाएँ",
+  "presetFitPhotoBody": "तस्वीर को सटीक सीमा के नीचे लाएँ — अपलोड फ़ॉर्म, आवेदन।",
+  "photoFitHint": "ऐप तब तक गुणवत्ता आज़माता है जब तक फ़ाइल सीमा में न आ जाए। सीमा बहुत छोटी हो तो फ़्रेम का आकार भी घटा देता है।",
+  "sizeTargetKb": "{kb} KB",
+  "sizeTargetDialogTitleKb": "लक्ष्य आकार (KB)",
+  "compareAction": "तुलना करें",
+  "compareBefore": "पहले",
+  "compareAfter": "बाद में",
+  "compareHint": "मूल देखने के लिए दबाकर रखें।",
+  "trimStart": "प्रारंभ",
+  "trimEnd": "समाप्ति",
+  "trimTimeHelp": "m:ss, अधिकतम {duration}",
+  "imageScaleLabel": "स्केल",
+  "audioChannelsLabel": "चैनल",
+  "audioMono": "मोनो",
+  "audioStereo": "स्टीरियो",
+  "sampleRateLabel": "सैंपल रेट",
+  "voiceAudioHint": "22.05 kHz मोनो आवाज़ की रिकॉर्डिंग को बिना सुनाई देने वाले नुकसान के लगभग एक-चौथाई कर देता है। संगीत के लिए दोनों मूल रहने दें।",
+  "moveUp": "ऊपर ले जाएँ",
+  "moveDown": "नीचे ले जाएँ",
+  "adPrivacyTitle": "विज्ञापन गोपनीयता सेटिंग",
+  "adPrivacySubtitle": "विज्ञापन के लिए अपनी सहमति बदलें"
 }

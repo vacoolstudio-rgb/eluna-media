@@ -55,13 +55,31 @@ List<String> summariseSettings(L10n l10n, ConversionJob job) {
         ? '  ·  ${l10n.summaryBitrate(s.audioBitrateKbps)}'
         : '';
     out.add('${l10n.audioCodec}: ${s.audioCodec.label}$bitrate');
+    if (s.audioCodec != AudioCodec.copy) {
+      if (s.audioChannels != AudioChannels.keep) {
+        out.add('${l10n.audioChannelsLabel}: '
+            '${s.audioChannels == AudioChannels.mono ? l10n.audioMono : l10n.audioStereo}');
+      }
+      if (s.sampleRate != SampleRate.keep) {
+        out.add('${l10n.sampleRateLabel}: ${s.sampleRate.label}');
+      }
+    }
   }
 
   if (kind == MediaKind.image) {
     if (s.resolution != ResolutionPreset.keep) {
       out.add('${l10n.resolution}: ${s.resolution.label}');
     }
-    if (s.container == ContainerFormat.jpg ||
+    if (s.imageScale.isChanged) {
+      out.add('${l10n.imageScaleLabel}: ${s.imageScale.label}');
+    }
+    // A photo aiming at a byte budget has no fixed quality to report: the
+    // converter searches for whichever one fits, so the budget is the honest
+    // thing to show.
+    if (s.sizeTargetBytes case final target? when !s.container.isAnimatedImage) {
+      out.add('${l10n.rateControlSize}: '
+          '${l10n.summaryTargetSize(OutputPaths.humanBytes(target))}');
+    } else if (s.container == ContainerFormat.jpg ||
         (s.container == ContainerFormat.webp && !s.lossless)) {
       out.add(l10n.imageQuality(s.imageQuality));
     }
@@ -119,7 +137,11 @@ List<String> summaryChips(L10n l10n, ConversionJob job) {
     chips.add(l10n.summaryBitrate(s.audioBitrateKbps));
   } else if (s.container.kind == MediaKind.image &&
       (s.container == ContainerFormat.jpg || s.container == ContainerFormat.webp)) {
-    if (!s.lossless) chips.add(l10n.imageQuality(s.imageQuality));
+    if (s.sizeTargetBytes case final target?) {
+      chips.add(l10n.summaryTargetSize(OutputPaths.humanBytes(target)));
+    } else if (!s.lossless) {
+      chips.add(l10n.imageQuality(s.imageQuality));
+    }
   }
 
   if (s.container.kind == MediaKind.image && !s.container.isAnimatedImage && s.enhances) {

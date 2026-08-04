@@ -34,6 +34,9 @@ class SettingsController extends Notifier<ConversionSettings> {
   static const _kLossless = 'settings.lossless';
   static const _kStripMetadata = 'settings.stripMetadata';
   static const _kKeepSubtitles = 'settings.keepSubtitles';
+  static const _kImageScale = 'settings.imageScale';
+  static const _kAudioChannels = 'settings.audioChannels';
+  static const _kSampleRate = 'settings.sampleRate';
 
   SharedPreferences get _prefs => ref.read(sharedPreferencesProvider);
 
@@ -75,6 +78,13 @@ class SettingsController extends Notifier<ConversionSettings> {
       lossless: p.getBool(_kLossless) ?? false,
       stripMetadata: p.getBool(_kStripMetadata) ?? true,
       keepSubtitles: p.getBool(_kKeepSubtitles) ?? false,
+      imageScale: _enumFromName(ImageScale.values, p.getString(_kImageScale), ImageScale.keep),
+      audioChannels: _enumFromName(
+        AudioChannels.values,
+        p.getString(_kAudioChannels),
+        AudioChannels.keep,
+      ),
+      sampleRate: _enumFromName(SampleRate.values, p.getString(_kSampleRate), SampleRate.keep),
     );
   }
 
@@ -94,6 +104,9 @@ class SettingsController extends Notifier<ConversionSettings> {
     p.setBool(_kLossless, s.lossless);
     p.setBool(_kStripMetadata, s.stripMetadata);
     p.setBool(_kKeepSubtitles, s.keepSubtitles);
+    p.setString(_kImageScale, s.imageScale.name);
+    p.setString(_kAudioChannels, s.audioChannels.name);
+    p.setString(_kSampleRate, s.sampleRate.name);
   }
 
   void update(ConversionSettings next) {
@@ -123,6 +136,9 @@ class SettingsController extends Notifier<ConversionSettings> {
   void setStripMetadata(bool v) => update(state.copyWith(stripMetadata: v));
   void setKeepSubtitles(bool v) => update(state.copyWith(keepSubtitles: v));
   void setCapBitrateToSource(bool v) => update(state.copyWith(capBitrateToSource: v));
+  void setImageScale(ImageScale s) => update(state.copyWith(imageScale: s));
+  void setAudioChannels(AudioChannels c) => update(state.copyWith(audioChannels: c));
+  void setSampleRate(SampleRate r) => update(state.copyWith(sampleRate: r));
 
   // Transforms and trim are decisions about *this* batch, so they are held in
   // memory only: update() persists the shared keys above, and these fields
@@ -176,7 +192,19 @@ class AppPrefs {
     this.useHardwareEncoder = true,
     this.twoPassFitToSize = false,
     this.simpleMode = true,
+    this.autoSaveResults = true,
   });
+
+  /// Copy every finished output into the gallery (or Downloads, for audio) as
+  /// soon as it is done.
+  ///
+  /// On by default. Conversions land in the app's own folder, which is correct
+  /// — nothing reaches shared storage by accident — but that folder is inside
+  /// the sandbox and no file manager can reach it, so the honest default is
+  /// the one where the result appears where the user already looks. "I can't
+  /// find my file" is the category's most common complaint, and it is entirely
+  /// self-inflicted.
+  final bool autoSaveResults;
 
   final ThemeMode themeMode;
 
@@ -222,6 +250,7 @@ class AppPrefs {
     bool? useHardwareEncoder,
     bool? twoPassFitToSize,
     bool? simpleMode,
+    bool? autoSaveResults,
   }) =>
       AppPrefs(
         themeMode: themeMode ?? this.themeMode,
@@ -233,6 +262,7 @@ class AppPrefs {
         useHardwareEncoder: useHardwareEncoder ?? this.useHardwareEncoder,
         twoPassFitToSize: twoPassFitToSize ?? this.twoPassFitToSize,
         simpleMode: simpleMode ?? this.simpleMode,
+        autoSaveResults: autoSaveResults ?? this.autoSaveResults,
       );
 }
 
@@ -246,6 +276,7 @@ class AppPrefsController extends Notifier<AppPrefs> {
   static const _kHwEncoder = 'app.useHardwareEncoder';
   static const _kTwoPass = 'app.twoPassFitToSize';
   static const _kSimpleMode = 'app.simpleMode';
+  static const _kAutoSave = 'app.autoSaveResults';
 
   SharedPreferences get _prefs => ref.read(sharedPreferencesProvider);
 
@@ -262,6 +293,7 @@ class AppPrefsController extends Notifier<AppPrefs> {
       useHardwareEncoder: p.getBool(_kHwEncoder) ?? true,
       twoPassFitToSize: p.getBool(_kTwoPass) ?? false,
       simpleMode: p.getBool(_kSimpleMode) ?? true,
+      autoSaveResults: p.getBool(_kAutoSave) ?? true,
     );
   }
 
@@ -312,6 +344,11 @@ class AppPrefsController extends Notifier<AppPrefs> {
   void setSimpleMode(bool v) {
     state = state.copyWith(simpleMode: v);
     _prefs.setBool(_kSimpleMode, v);
+  }
+
+  void setAutoSaveResults(bool v) {
+    state = state.copyWith(autoSaveResults: v);
+    _prefs.setBool(_kAutoSave, v);
   }
 }
 

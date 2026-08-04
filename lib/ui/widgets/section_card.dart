@@ -146,7 +146,10 @@ class LabelledDropdown<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
-      value: value,
+      // The renamed `value`. It still tracks external changes: the state's
+      // didUpdateWidget calls setValue whenever this differs from the last
+      // build, which is what a Riverpod-driven dropdown depends on.
+      initialValue: value,
       decoration: InputDecoration(labelText: label),
       // Without this the button sizes itself to its widest item — "PCM 16-bit
       // (lossless)", "MPEG-4 Part 2" — and overflows a 320dp screen. Expanded,

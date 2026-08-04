@@ -1,22 +1,17 @@
 {
   "@@locale": "ja",
-
   "appTitle": "Eluna Media",
-
   "tabConvert": "変換",
   "tabQueue": "キュー",
   "tabAbout": "アプリについて",
-
   "addFiles": "ファイルを追加",
   "emptySelectionTitle": "ファイルがまだありません",
   "emptySelectionBody": "写真・動画・音声を追加してください。すべてこの端末上で処理されます。",
-
   "sectionOutput": "出力",
   "sectionVideo": "動画",
   "sectionAudio": "音声",
   "sectionImage": "画像",
   "sectionPrivacy": "プライバシー",
-
   "outputFormat": "形式",
   "videoCodec": "動画コーデック",
   "audioCodec": "音声コーデック",
@@ -53,7 +48,6 @@
   "enhanceStrong": "強",
   "stripMetadata": "メタデータを削除",
   "stripMetadataHint": "出力から EXIF・GPS・タイムスタンプを取り除きます。",
-
   "startConversion": "{count} 件のファイルを変換",
   "batchResumed": "中断された変換を再開しました。",
   "converting": "変換中…",
@@ -63,25 +57,19 @@
   "removeJob": "削除",
   "shareFile": "共有",
   "retryJob": "再試行",
-
   "queueEmptyTitle": "キューは空です",
   "queueEmptyBody": "「変換」タブで追加したファイルがここに表示されます。",
-
   "statusQueued": "待機中",
   "statusRunning": "変換中",
   "statusCompleted": "完了",
   "statusFailed": "失敗",
   "statusCancelled": "キャンセル済み",
-
   "batchSummary": "{total} 件中 {done} 件完了",
-
   "batchCompleted": "{done, plural, =1{1 件のファイルを変換しました} other{{done} 件のファイルを変換しました}}",
   "batchCompletedWithFailures": "{done} 件変換、{failed} 件失敗。",
-
   "savedPercent": "{percent}% 削減",
   "grewPercent": "{percent}% 増加",
   "sizeChange": "{from} → {to}",
-
   "appearance": "外観",
   "theme": "テーマ",
   "themeSystem": "システム",
@@ -89,18 +77,14 @@
   "themeDark": "ダーク",
   "language": "言語",
   "languageSystem": "システム",
-
   "privacyTitle": "プライバシー",
   "privacyBody": "Eluna Media は、内蔵の FFmpeg を使ってファイルをすべてこの端末上で変換します。ファイルが端末の外に出ることはなく、アカウントも不要で、テレメトリーもありません。ネットワークを使うのは非パーソナライズ広告バナー 1 つだけで、変換の実行中には読み込まれません。詳しくは「ネットワークとプライバシー」画面をご覧ください。\n\nメタデータの削除は初期設定でオンになっているため、書き出したファイルから EXIF・GPS 座標・タイムスタンプは取り除かれます。",
   "licenseTitle": "ライセンス",
   "licenseBody": "このアプリには x264、x265 などの GPL コンポーネントを含む FFmpeg が同梱されているため、アプリ全体が GNU GPL v3 の下で配布されます。",
-
   "formatUnsupportedForSource": "この形式は選択したコーデックに対応していません。",
   "sourceMissing": "元のファイルが見つかりません。",
   "errorTitle": "変換に失敗しました",
-
   "tabSettings": "設定",
-
   "introTitle": "設計からプライベート",
   "introOfflineTitle": "この端末上で変換",
   "introOfflineBody": "処理はすべて内蔵の FFmpeg が行います。ファイルがスマホの外に出ることはなく、機内モードでも変換できます。",
@@ -110,10 +94,8 @@
   "introMetadataBody": "EXIF・GPS・タイムスタンプは初期設定ですべての出力から取り除かれます。オフにすることもできます。",
   "introAdNote": "無料版に表示されるのは非パーソナライズバナー 1 つだけ。変換中は表示されず、最初の 14 日間はまったく表示されません。",
   "introContinue": "はじめる",
-
   "modeSimple": "シンプル",
   "modeAdvanced": "詳細",
-
   "presetCompressVideoTitle": "動画を圧縮",
   "presetCompressVideoBody": "MP4 を大幅に小さく、品質はそのまま",
   "presetFitToSizeTitle": "サイズに合わせる",
@@ -134,26 +116,21 @@
   "presetEnhancePhotoBody": "ノイズを抑え、くっきり、色鮮やかに",
   "presetImageToWebpTitle": "写真を WebP に",
   "presetImageToWebpBody": "JPEG より小さいモダンな形式",
-
   "sizeTargetTitle": "目標サイズ",
   "sizeTargetMb": "{mb} MB",
   "sizeTargetNamed": "{service} · {mb} MB",
   "sizeTargetCustom": "カスタム…",
   "sizeTargetDialogTitle": "目標サイズ（MB）",
   "sizeTargetTooSmall": "この長さには目標が小さすぎます。可能な範囲で最も近い品質を使用します。",
-
   "estimatePerFile": "1 ファイルあたり ≈ {size}",
   "estimateTotal": "予想出力サイズ: ≈ {size}",
-
   "selectedFiles": "{count, plural, =1{1 件のファイルを選択中} other{{count} 件のファイルを選択中}}",
   "clearSelection": "クリア",
   "presetExpectsVideo": "このプリセットは動画ファイル用です。",
   "presetExpectsImage": "このプリセットは画像用です。",
-
   "promiseOffline": "変換は 100% オフライン",
   "promiseBatchFree": "一括変換も無料",
   "promiseNoWatermark": "ウォーターマークなし",
-
   "sectionTransform": "変形",
   "rotateLabel": "回転",
   "flipLabel": "左右反転",
@@ -167,22 +144,17 @@
   "transformNeedsReencode": "回転・反転・速度変更には再エンコードが必要なため、ストリームコピー中は無効になります。",
   "keepSubtitles": "字幕を保持",
   "keepSubtitlesHint": "字幕トラックを出力に引き継ぎます。テキスト字幕のみ対応です。",
-
   "sectionTrim": "トリミング",
   "trimEnable": "元ファイルをトリミング",
   "trimHint": "長さがわかっているファイルが 1 つだけキューにあるときに使えます。",
   "trimRangeLabel": "{from} – {to}",
-
   "rateControlSize": "目標サイズ",
-
   "lowBatteryTitle": "バッテリー残量が少なくなっています",
   "lowBatteryBody": "変換はプロセッサーに大きな負荷をかけます。先に充電するか、このまま続けることもできます。",
   "lowBatteryContinue": "このまま変換",
   "commonCancel": "キャンセル",
   "commonOk": "OK",
-
   "filesReceived": "{count, plural, =1{1 件のファイルを受け取りました} other{{count} 件のファイルを受け取りました}}",
-
   "saveFile": "保存",
   "savedToGallery": "ギャラリーの「Eluna Media」アルバムに保存しました。",
   "savedToDownloads": "ダウンロードに保存しました。",
@@ -191,12 +163,10 @@
   "finishedClearedUndo": "完了したジョブを消去しました。",
   "undo": "元に戻す",
   "errorDetailsTitle": "エラーの詳細",
-
   "oledDark": "漆黒のダークテーマ",
   "oledDarkHint": "純粋な黒は OLED 画面で電力を節約します。",
   "dynamicColorLabel": "システムカラー (Material You)",
   "dynamicColorHint": "対応端末では壁紙のパレットに合わせます。",
-
   "sectionConversionPrefs": "変換",
   "powerModeLabel": "パワーモード",
   "powerEfficiency": "低発熱・高速",
@@ -204,7 +174,6 @@
   "powerQuality": "最大圧縮",
   "powerModeHint": "動画エンコーダーの頑張り具合です。低発熱・高速にするとファイルはやや大きくなります。それ以外が制限されることは一切ありません。",
   "hapticsLabel": "バイブレーション",
-
   "networkPrivacyTitle": "ネットワークとプライバシー",
   "netAuditIntro": "このアプリでネットワークに触れる可能性があるものの完全なリストです。",
   "netAuditAdTitle": "広告バナー — 唯一のネットワーク利用者",
@@ -213,7 +182,6 @@
   "netAuditConversionBody": "内蔵の FFmpeg によってすべてこの端末上で実行されます。機内モードにして変換してみてください — ちゃんと動きます。",
   "netAuditTelemetryTitle": "テレメトリー",
   "netAuditTelemetryBody": "ありません。アプリはアナリティクスもクラッシュレポートも識別子も収集せず、アカウントの仕組みもありません。",
-
   "sectionSupport": "サポート",
   "removeAdsTitle": "広告を削除",
   "removeAdsSubtitle": "買い切りです。機能はすべて最初から無料です。",
@@ -228,25 +196,20 @@
   "adFreeBadge": "広告なし",
   "rateApp": "アプリを評価",
   "openLicenses": "オープンソースライセンス",
-
   "errorFallbackTitle": "問題が発生しました",
   "errorFallbackBody": "アプリで予期しないエラーが発生しました。キューと設定は無事です。前の画面に戻ってもう一度お試しください。",
-
   "twoPassLabel": "正確なサイズのための 2 パス",
   "twoPassHint": "サイズ指定のジョブを 2 回エンコードし、バイト上限にぐっと正確に収めます。時間とバッテリーはおよそ 2 倍かかります。",
-
   "whatsNewTitle": "新機能",
   "whatsNew1": "実績 — プライベートで、この端末上でのみカウントされます。",
   "whatsNew2": "動画の結合: クリップを 1 つの MP4 に。",
   "whatsNew3": "ハードウェアエンコード — 対応端末ではより速く、発熱も控えめに。",
   "whatsNew4": "1:1 / 9:16 / 16:9 の切り抜き、音量調整、速度 0.25–4×。",
   "whatsNew5": "正確な目標サイズのためのオプションの 2 パスモード。",
-
   "achievementsTitle": "実績",
   "achievementsProgress": "{total} 件中 {done} 件",
   "achievementUnlocked": "実績を解除しました: {title}",
   "achievementsPrivacyNote": "この端末上でのみカウントされます。どこにもアップロードされません。",
-
   "achFirstConversionTitle": "はじめの一歩",
   "achFirstConversionBody": "最初のファイルを変換しましょう。",
   "achTenConversionsTitle": "ウォームアップ",
@@ -283,7 +246,6 @@
   "achNightOwlBody": "深夜 0 時から朝 5 時の間に変換を完了。",
   "achPlatinumTitle": "プラチナ",
   "achPlatinumBody": "他のすべての実績を解除。",
-
   "presetAudioToMp3Title": "音声を変換",
   "presetAudioToMp3Body": "MP3 へ — どこでも再生できます",
   "presetCompressAudioTitle": "音声を圧縮",
@@ -315,7 +277,6 @@
   "openFolder": "フォルダを表示",
   "noAppToOpen": "このファイルを開けるアプリがこの端末にありません。",
   "openFailed": "ファイルを開けませんでした。",
-
   "modeAdvancedHint": "プリセットカードの代わりに、コーデック・ビットレート・変形のすべての設定を表示します。",
   "rateDialogTitle": "Eluna Media はいかがですか？",
   "rateDialogBody": "星をタップしてください。評価はあなたとストアの間だけのものです。",
@@ -336,5 +297,42 @@
   "queueNoFinishedTitle": "完了したものはまだありません",
   "queueNoFinishedBody": "変換したファイルはここに集まります。そのまま開いたり、保存したり、共有したりできます。",
   "capBitrateLabel": "ファイルを大きくしない",
-  "capBitrateHint": "エンコードを元ファイルのビットレート以下に制限します。固定品質にはそれ自体の上限がないため、すでに圧縮済みの動画はこの設定がないと元より大きくなることがあります。"
+  "capBitrateHint": "エンコードを元ファイルのビットレート以下に制限します。固定品質にはそれ自体の上限がないため、すでに圧縮済みの動画はこの設定がないと元より大きくなることがあります。",
+  "storageTitle": "ストレージ",
+  "storageBody": "変換したファイルは保存または共有するまでアプリ内に残り、ファイルマネージャーからは見えません。",
+  "storageEmpty": "保存されたファイルはありません",
+  "storageUsage": "使用中: {size}",
+  "storageClearTitle": "保存中のファイルを削除しますか？",
+  "storageClearBody": "アプリが保持している完了済みの結果をすべて削除します。すでに保存または共有したファイルはそのままです。",
+  "storageClearAction": "削除",
+  "storageCleared": "{size} を解放しました",
+  "autoSaveLabel": "結果を自動的に保存",
+  "autoSaveHint": "完了したファイルをすぐにギャラリー（音声はダウンロード）へ保存します。",
+  "lowSpaceTitle": "空き容量が少なくなっています",
+  "lowSpaceBody": "この一括処理には約 {needed} が必要ですが、空きは {free} しかありません。途中で失敗する可能性があります。",
+  "saveAll": "すべて保存（{count}）",
+  "savedAll": "保存しました: {count}",
+  "savedSome": "{total} 件中 {saved} 件を保存しました",
+  "presetFitPhotoTitle": "写真を指定サイズに",
+  "presetFitPhotoBody": "画像を指定の上限以下に圧縮します（アップロードフォームや申請書類向け）。",
+  "photoFitHint": "収まるまで画質を試します。指定サイズが小さすぎる場合は画像サイズも縮小します。",
+  "sizeTargetKb": "{kb} KB",
+  "sizeTargetDialogTitleKb": "目標サイズ（KB）",
+  "compareAction": "比較",
+  "compareBefore": "変換前",
+  "compareAfter": "変換後",
+  "compareHint": "長押しすると元の画像が表示されます。",
+  "trimStart": "開始",
+  "trimEnd": "終了",
+  "trimTimeHelp": "m:ss 形式、最大 {duration}",
+  "imageScaleLabel": "拡大縮小",
+  "audioChannelsLabel": "チャンネル",
+  "audioMono": "モノラル",
+  "audioStereo": "ステレオ",
+  "sampleRateLabel": "サンプリング周波数",
+  "voiceAudioHint": "22.05 kHz モノラルなら、音声録音は聞こえる劣化なしでおよそ 1/4 になります。音楽では両方とも元のままに。",
+  "moveUp": "上へ",
+  "moveDown": "下へ",
+  "adPrivacyTitle": "広告のプライバシー設定",
+  "adPrivacySubtitle": "広告に関する同意を変更します"
 }

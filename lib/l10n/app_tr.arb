@@ -1,22 +1,17 @@
 {
   "@@locale": "tr",
-
   "appTitle": "Eluna Media",
-
   "tabConvert": "Dönüştür",
   "tabQueue": "Kuyruk",
   "tabAbout": "Hakkında",
-
   "addFiles": "Dosya ekle",
   "emptySelectionTitle": "Henüz dosya yok",
   "emptySelectionBody": "Fotoğraf, video veya ses ekleyin. Her şey bu cihazda işlenir.",
-
   "sectionOutput": "Çıktı",
   "sectionVideo": "Video",
   "sectionAudio": "Ses",
   "sectionImage": "Görüntü",
   "sectionPrivacy": "Gizlilik",
-
   "outputFormat": "Format",
   "videoCodec": "Video kodeği",
   "audioCodec": "Ses kodeği",
@@ -53,7 +48,6 @@
   "enhanceStrong": "Güçlü",
   "stripMetadata": "Meta verileri kaldır",
   "stripMetadataHint": "Çıktıdan EXIF, GPS ve zaman damgalarını siler.",
-
   "startConversion": "{count} dosyayı dönüştür",
   "batchResumed": "Yarıda kalan dönüştürme sürdürüldü.",
   "converting": "Dönüştürülüyor…",
@@ -63,25 +57,19 @@
   "removeJob": "Kaldır",
   "shareFile": "Paylaş",
   "retryJob": "Yeniden dene",
-
   "queueEmptyTitle": "Kuyruk boş",
   "queueEmptyBody": "Dönüştür sekmesinde eklediğiniz dosyalar burada görünür.",
-
   "statusQueued": "Kuyrukta",
   "statusRunning": "Dönüştürülüyor",
   "statusCompleted": "Tamamlandı",
   "statusFailed": "Başarısız",
   "statusCancelled": "İptal edildi",
-
   "batchSummary": "{done} / {total} tamamlandı",
-
   "batchCompleted": "{done, plural, =1{1 dosya dönüştürüldü} other{{done} dosya dönüştürüldü}}",
   "batchCompletedWithFailures": "{done} dönüştürüldü, {failed} başarısız.",
-
   "savedPercent": "%{percent} daha küçük",
   "grewPercent": "%{percent} daha büyük",
   "sizeChange": "{from} → {to}",
-
   "appearance": "Görünüm",
   "theme": "Tema",
   "themeSystem": "Sistem",
@@ -89,18 +77,14 @@
   "themeDark": "Koyu",
   "language": "Dil",
   "languageSystem": "Sistem",
-
   "privacyTitle": "Gizlilik",
   "privacyBody": "Eluna Media, dosyalarınızı yerleşik FFmpeg kopyasıyla tamamen bu cihazda dönüştürür. Dosyalarınız cihazdan asla çıkmaz, hesap gerekmez, telemetri yoktur. Ağı kullanan tek şey, kişiselleştirilmemiş tek bir reklam banner'ıdır ve dönüştürme sürerken asla yüklenmez — tam döküm için Ağ ve gizlilik ekranına bakın.\n\nMeta veri temizleme varsayılan olarak açıktır; dışa aktardığınız dosyalardan EXIF, GPS koordinatları ve zaman damgaları silinir.",
   "licenseTitle": "Lisans",
   "licenseBody": "Bu uygulama, x264, x265 ve diğer GPL bileşenleriyle derlenmiş bir FFmpeg içerir; bu nedenle uygulamanın tamamı GNU GPL v3 ile dağıtılır.",
-
   "formatUnsupportedForSource": "Bu format seçilen kodeği desteklemiyor.",
   "sourceMissing": "Kaynak dosya artık mevcut değil.",
   "errorTitle": "Dönüştürme başarısız",
-
   "tabSettings": "Ayarlar",
-
   "introTitle": "Varsayılan olarak gizli",
   "introOfflineTitle": "Bu cihazda dönüştürür",
   "introOfflineBody": "Tüm işi yerleşik FFmpeg yapar. Dosyalarınız telefondan çıkmaz — dönüştürme uçak modunda bile çalışır.",
@@ -110,10 +94,8 @@
   "introMetadataBody": "EXIF, GPS ve zaman damgaları varsayılan olarak her çıktıdan silinir. İsterseniz kapatabilirsiniz.",
   "introAdNote": "Ücretsiz sürüm tek bir kişiselleştirilmemiş banner gösterir — dönüştürme sırasında asla, ilk 14 gün ise hiç göstermez.",
   "introContinue": "Başla",
-
   "modeSimple": "Basit",
   "modeAdvanced": "Gelişmiş",
-
   "presetCompressVideoTitle": "Videoyu sıkıştır",
   "presetCompressVideoBody": "Çok daha küçük MP4, kalite iyi kalır",
   "presetFitToSizeTitle": "Boyuta sığdır",
@@ -134,26 +116,21 @@
   "presetEnhancePhotoBody": "Daha temiz, daha net, daha iyi renk",
   "presetImageToWebpTitle": "Fotoğraftan WebP",
   "presetImageToWebpBody": "Modern format, JPEG'den küçük",
-
   "sizeTargetTitle": "Hedef boyut",
   "sizeTargetMb": "{mb} MB",
   "sizeTargetNamed": "{service} · {mb} MB",
   "sizeTargetCustom": "Özel…",
   "sizeTargetDialogTitle": "MB cinsinden hedef boyut",
   "sizeTargetTooSmall": "Hedef bu süre için fazla küçük; mümkün olan en yakın kalite kullanılacak.",
-
   "estimatePerFile": "Dosya başına ≈ {size}",
   "estimateTotal": "Tahmini çıktı: ≈ {size}",
-
   "selectedFiles": "{count, plural, =1{1 dosya seçildi} other{{count} dosya seçildi}}",
   "clearSelection": "Temizle",
   "presetExpectsVideo": "Bu ön ayar video dosyaları için.",
   "presetExpectsImage": "Bu ön ayar görüntüler için.",
-
   "promiseOffline": "%100 çevrimdışı dönüştürme",
   "promiseBatchFree": "Toplu işlem ücretsiz",
   "promiseNoWatermark": "Filigran yok",
-
   "sectionTransform": "Dönüşüm",
   "rotateLabel": "Döndür",
   "flipLabel": "Yatay aynala",
@@ -167,22 +144,17 @@
   "transformNeedsReencode": "Döndürme, aynalama ve hız yeniden kodlama gerektirir; bu yüzden akış kopyalanırken kapalıdır.",
   "keepSubtitles": "Altyazıları koru",
   "keepSubtitlesHint": "Altyazı parçalarını çıktıya taşır. Yalnızca metin altyazılar.",
-
   "sectionTrim": "Kesme",
   "trimEnable": "Dosyayı kes",
   "trimHint": "Kuyrukta süresi bilinen tam olarak bir dosya olduğunda kullanılabilir.",
   "trimRangeLabel": "{from} – {to}",
-
   "rateControlSize": "Hedef boyut",
-
   "lowBatteryTitle": "Pil azaldı",
   "lowBatteryBody": "Dönüştürme işlemciyi epey yorar. Önce şarja takabilir ya da yine de devam edebilirsiniz.",
   "lowBatteryContinue": "Yine de dönüştür",
   "commonCancel": "İptal",
   "commonOk": "Tamam",
-
   "filesReceived": "{count, plural, =1{1 dosya alındı} other{{count} dosya alındı}}",
-
   "saveFile": "Kaydet",
   "savedToGallery": "Galeriye, “Eluna Media” albümüne kaydedildi.",
   "savedToDownloads": "İndirilenler'e kaydedildi.",
@@ -191,12 +163,10 @@
   "finishedClearedUndo": "Biten işler temizlendi.",
   "undo": "Geri al",
   "errorDetailsTitle": "Hata ayrıntıları",
-
   "oledDark": "Saf siyah koyu tema",
   "oledDarkHint": "Gerçek siyah, OLED ekranlarda güç tasarrufu sağlar.",
   "dynamicColorLabel": "Sistem renkleri (Material You)",
   "dynamicColorHint": "Destekleniyorsa cihazın duvar kâğıdı paletini izler.",
-
   "sectionConversionPrefs": "Dönüştürme",
   "powerModeLabel": "Güç modu",
   "powerEfficiency": "Serin ve hızlı",
@@ -204,7 +174,6 @@
   "powerQuality": "Maksimum sıkıştırma",
   "powerModeHint": "Video kodlayıcının ne kadar zorlanacağı. Serin ve hızlı, biraz daha büyük dosya demek. Başka hiçbir şey kısıtlanmaz — asla.",
   "hapticsLabel": "Titreşimli geri bildirim",
-
   "networkPrivacyTitle": "Ağ ve gizlilik",
   "netAuditIntro": "Bu uygulamada ağa dokunabilecek her şeyin tam listesi.",
   "netAuditAdTitle": "Reklam banner'ı — ağı kullanan tek şey",
@@ -213,7 +182,6 @@
   "netAuditConversionBody": "Yerleşik FFmpeg ile tamamen bu cihazda çalışır. Uçak modunu açıp dönüştürün — çalışır.",
   "netAuditTelemetryTitle": "Telemetri",
   "netAuditTelemetryBody": "Yok. Uygulama analitik, çökme raporu veya tanımlayıcı toplamaz; hesap sistemi de yoktur.",
-
   "sectionSupport": "Destek",
   "removeAdsTitle": "Reklamları kaldır",
   "removeAdsSubtitle": "Tek seferlik satın alma. Zaten her özellik ücretsiz.",
@@ -228,25 +196,20 @@
   "adFreeBadge": "Reklamsız",
   "rateApp": "Uygulamayı değerlendir",
   "openLicenses": "Açık kaynak lisansları",
-
   "errorFallbackTitle": "Bir şeyler ters gitti",
   "errorFallbackBody": "Uygulama beklenmedik bir hatayla karşılaştı. Kuyruğunuz ve ayarlarınız güvende — geri dönüp tekrar deneyin.",
-
   "twoPassLabel": "Tam boyut için iki geçiş",
   "twoPassHint": "Boyuta sığdırma işleri iki kez kodlanır ve bayt bütçesini belirgin biçimde daha isabetli tutturur — yaklaşık iki kat süre ve pil karşılığında.",
-
   "whatsNewTitle": "Yenilikler",
   "whatsNew1": "Başarımlar — gizli, yalnızca bu cihazda sayılır.",
   "whatsNew2": "Video birleştirme: klipleri tek MP4'te birleştirin.",
   "whatsNew3": "Donanımsal kodlama — destekleyen cihazlarda daha hızlı ve serin.",
   "whatsNew4": "1:1 / 9:16 / 16:9 kırpma, ses düzeyi, 0,25–4× hız.",
   "whatsNew5": "Tam hedef boyutlar için isteğe bağlı iki geçişli mod.",
-
   "achievementsTitle": "Başarımlar",
   "achievementsProgress": "{done} / {total}",
   "achievementUnlocked": "Başarım açıldı: {title}",
   "achievementsPrivacyNote": "Yalnızca bu cihazda sayılır. Hiçbir yere gönderilmez.",
-
   "achFirstConversionTitle": "İlk adımlar",
   "achFirstConversionBody": "İlk dosyanızı dönüştürün.",
   "achTenConversionsTitle": "Isınma turları",
@@ -283,7 +246,6 @@
   "achNightOwlBody": "Gece yarısı ile sabah 5 arasında bir dönüştürme bitirin.",
   "achPlatinumTitle": "Platin",
   "achPlatinumBody": "Diğer tüm başarımları kazanın.",
-
   "presetAudioToMp3Title": "Sesi dönüştür",
   "presetAudioToMp3Body": "MP3'e — her yerde çalar",
   "presetCompressAudioTitle": "Sesi sıkıştır",
@@ -315,7 +277,6 @@
   "openFolder": "Klasörü göster",
   "noAppToOpen": "Bu cihazda o dosyayı açabilecek bir uygulama yok.",
   "openFailed": "Dosya açılamadı.",
-
   "modeAdvancedHint": "Ön ayar kartları yerine tüm codec, bit hızı ve dönüştürme denetimlerini gösterir.",
   "rateDialogTitle": "Eluna Media'yı beğendiniz mi?",
   "rateDialogBody": "Bir yıldıza dokunun. Puanınız sizinle mağaza arasında kalır.",
@@ -336,5 +297,42 @@
   "queueNoFinishedTitle": "Henüz tamamlanan yok",
   "queueNoFinishedBody": "Dönüştürülen dosyalar burada birikir; açabilir, kaydedebilir veya paylaşabilirsiniz.",
   "capBitrateLabel": "Dosya asla büyümesin",
-  "capBitrateHint": "Kodlamayı kaynağın kendi bit hızıyla sınırlar. Sabit kalitenin kendi üst sınırı yoktur; bu yüzden zaten sıkıştırılmış bir video aksi hâlde daha büyük çıkabilir."
+  "capBitrateHint": "Kodlamayı kaynağın kendi bit hızıyla sınırlar. Sabit kalitenin kendi üst sınırı yoktur; bu yüzden zaten sıkıştırılmış bir video aksi hâlde daha büyük çıkabilir.",
+  "storageTitle": "Depolama",
+  "storageBody": "Dönüştürülen dosyalar siz kaydedene veya paylaşana kadar uygulamanın içinde kalır; hiçbir dosya yöneticisi onlara erişemez.",
+  "storageEmpty": "Depoda bir şey yok",
+  "storageUsage": "Kullanılan: {size}",
+  "storageClearTitle": "Saklanan dosyalar silinsin mi?",
+  "storageClearBody": "Uygulamanın hâlâ tuttuğu tüm tamamlanmış sonuçları siler. Daha önce kaydettiğiniz veya paylaştığınız dosyalara dokunulmaz.",
+  "storageClearAction": "Temizle",
+  "storageCleared": "{size} boşaltıldı",
+  "autoSaveLabel": "Sonuçları otomatik kaydet",
+  "autoSaveHint": "Biten her dosyayı hazır olur olmaz galeriye, sesi ise İndirilenler'e koyar.",
+  "lowSpaceTitle": "Yer az kaldı",
+  "lowSpaceBody": "Bu grup yaklaşık {needed} yer istiyor, boşta yalnızca {free} var. Dönüştürme yarıda kesilebilir.",
+  "saveAll": "Tümünü kaydet ({count})",
+  "savedAll": "Kaydedildi: {count}",
+  "savedSome": "{total} dosyadan {saved} tanesi kaydedildi",
+  "presetFitPhotoTitle": "Fotoğrafı boyuta sığdır",
+  "presetFitPhotoBody": "Bir görseli tam bir sınırın altına sıkıştırır — yükleme formları, başvurular.",
+  "photoFitHint": "Uygulama sığan bir kalite bulana kadar dener. Sınır fotoğraf için fazla küçükse kare boyutunu da küçültür.",
+  "sizeTargetKb": "{kb} KB",
+  "sizeTargetDialogTitleKb": "KB cinsinden hedef boyut",
+  "compareAction": "Karşılaştır",
+  "compareBefore": "Önce",
+  "compareAfter": "Sonra",
+  "compareHint": "Orijinali görmek için basılı tutun.",
+  "trimStart": "Başlangıç",
+  "trimEnd": "Bitiş",
+  "trimTimeHelp": "d:ss, en fazla {duration}",
+  "imageScaleLabel": "Ölçek",
+  "audioChannelsLabel": "Kanallar",
+  "audioMono": "Mono",
+  "audioStereo": "Stereo",
+  "sampleRateLabel": "Örnekleme hızı",
+  "voiceAudioHint": "22,05 kHz mono, bir ses kaydını duyulur kayıp olmadan yaklaşık dörtte birine indirir. Müzik için ikisini de orijinal bırakın.",
+  "moveUp": "Yukarı taşı",
+  "moveDown": "Aşağı taşı",
+  "adPrivacyTitle": "Reklam gizliliği ayarları",
+  "adPrivacySubtitle": "Reklam onayınızı değiştirin"
 }

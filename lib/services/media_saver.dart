@@ -4,11 +4,22 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gal/gal.dart';
 
+import '../domain/conversion_job.dart';
 import '../domain/media_format.dart';
 
 /// Where a saved file ended up, so the confirmation can tell the user where
 /// to look — "can't find my file" is a chronic complaint in this category.
 enum SaveDestination { gallery, downloads, unsupported }
+
+extension SaveDestinationX on SaveDestination {
+  /// The durable form recorded on the job. `unsupported` maps to null: the
+  /// share sheet is a hand-off, not a place the file now lives.
+  SavedTo? get savedTo => switch (this) {
+        SaveDestination.gallery => SavedTo.gallery,
+        SaveDestination.downloads => SavedTo.downloads,
+        SaveDestination.unsupported => null,
+      };
+}
 
 /// Puts a finished output somewhere the user can find without a file manager
 /// safari: images and videos go to the system gallery, audio (and everything

@@ -1,22 +1,17 @@
 {
   "@@locale": "zh",
-
   "appTitle": "Eluna Media",
-
   "tabConvert": "转换",
   "tabQueue": "队列",
   "tabAbout": "关于",
-
   "addFiles": "添加文件",
   "emptySelectionTitle": "还没有文件",
   "emptySelectionBody": "添加照片、视频或音频，一切都在本机处理。",
-
   "sectionOutput": "输出",
   "sectionVideo": "视频",
   "sectionAudio": "音频",
   "sectionImage": "图片",
   "sectionPrivacy": "隐私",
-
   "outputFormat": "格式",
   "videoCodec": "视频编码",
   "audioCodec": "音频编码",
@@ -53,7 +48,6 @@
   "enhanceStrong": "强",
   "stripMetadata": "移除元数据",
   "stripMetadataHint": "从输出中去除 EXIF、GPS 和时间戳。",
-
   "startConversion": "转换 {count} 个文件",
   "batchResumed": "已恢复被中断的转换。",
   "converting": "转换中…",
@@ -63,25 +57,19 @@
   "removeJob": "移除",
   "shareFile": "分享",
   "retryJob": "重试",
-
   "queueEmptyTitle": "队列为空",
   "queueEmptyBody": "在“转换”标签页添加的文件会出现在这里。",
-
   "statusQueued": "排队中",
   "statusRunning": "转换中",
   "statusCompleted": "已完成",
   "statusFailed": "失败",
   "statusCancelled": "已取消",
-
   "batchSummary": "已完成 {done}/{total}",
-
   "batchCompleted": "{done, plural, =1{已转换 1 个文件} other{已转换 {done} 个文件}}",
   "batchCompletedWithFailures": "成功 {done} 个，失败 {failed} 个。",
-
   "savedPercent": "缩小 {percent}%",
   "grewPercent": "增大 {percent}%",
   "sizeChange": "{from} → {to}",
-
   "appearance": "外观",
   "theme": "主题",
   "themeSystem": "跟随系统",
@@ -89,18 +77,14 @@
   "themeDark": "深色",
   "language": "语言",
   "languageSystem": "跟随系统",
-
   "privacyTitle": "隐私",
   "privacyBody": "Eluna Media 使用内置的 FFmpeg 完全在本机转换文件。文件绝不离开设备，无需账号，也没有遥测。唯一使用网络的是一条非个性化广告横幅，且转换进行时绝不加载——完整清单见“网络与隐私”页面。\n\n元数据移除默认开启，导出的文件中不会包含 EXIF、GPS 坐标和时间戳。",
   "licenseTitle": "许可",
   "licenseBody": "本应用内置的 FFmpeg 包含 x264、x265 等 GPL 组件，因此整个应用依 GNU GPL v3 分发。",
-
   "formatUnsupportedForSource": "该格式无法容纳所选编码。",
   "sourceMissing": "源文件已不可用。",
   "errorTitle": "转换失败",
-
   "tabSettings": "设置",
-
   "introTitle": "隐私优先的设计",
   "introOfflineTitle": "在本机转换",
   "introOfflineBody": "所有工作由内置的 FFmpeg 完成。文件不会离开手机——开着飞行模式也能转换。",
@@ -110,10 +94,8 @@
   "introMetadataBody": "默认从每个输出中去除 EXIF、GPS 和时间戳。也可以关闭。",
   "introAdNote": "免费版只显示一条非个性化横幅——转换时绝不显示，前 14 天完全没有。",
   "introContinue": "开始使用",
-
   "modeSimple": "简单",
   "modeAdvanced": "高级",
-
   "presetCompressVideoTitle": "压缩视频",
   "presetCompressVideoBody": "MP4 小得多，画质依旧",
   "presetFitToSizeTitle": "压到指定大小",
@@ -134,26 +116,21 @@
   "presetEnhancePhotoBody": "更干净、更清晰、色彩更好",
   "presetImageToWebpTitle": "照片转 WebP",
   "presetImageToWebpBody": "现代格式，比 JPEG 更小",
-
   "sizeTargetTitle": "目标大小",
   "sizeTargetMb": "{mb} MB",
   "sizeTargetNamed": "{service} · {mb} MB",
   "sizeTargetCustom": "自定义…",
   "sizeTargetDialogTitle": "目标大小（MB）",
   "sizeTargetTooSmall": "对这个时长来说目标太小了，将使用尽可能接近的质量。",
-
   "estimatePerFile": "每个文件 ≈ {size}",
   "estimateTotal": "预计输出：≈ {size}",
-
   "selectedFiles": "{count, plural, =1{已选择 1 个文件} other{已选择 {count} 个文件}}",
   "clearSelection": "清除",
   "presetExpectsVideo": "此预设仅适用于视频文件。",
   "presetExpectsImage": "此预设仅适用于图片。",
-
   "promiseOffline": "100% 离线转换",
   "promiseBatchFree": "批量转换免费",
   "promiseNoWatermark": "无水印",
-
   "sectionTransform": "变换",
   "rotateLabel": "旋转",
   "flipLabel": "水平镜像",
@@ -167,22 +144,17 @@
   "transformNeedsReencode": "旋转、镜像和变速需要重新编码，因此在流复制时不可用。",
   "keepSubtitles": "保留字幕",
   "keepSubtitlesHint": "将字幕轨道带入输出。仅支持文本字幕。",
-
   "sectionTrim": "截取",
   "trimEnable": "截取源片段",
   "trimHint": "仅当队列中恰好有一个已知时长的文件时可用。",
   "trimRangeLabel": "{from} – {to}",
-
   "rateControlSize": "目标大小",
-
   "lowBatteryTitle": "电量不足",
   "lowBatteryBody": "转换会让处理器高负荷运转。你可以先接上电源，也可以直接继续。",
   "lowBatteryContinue": "仍要转换",
   "commonCancel": "取消",
   "commonOk": "确定",
-
   "filesReceived": "{count, plural, =1{已接收 1 个文件} other{已接收 {count} 个文件}}",
-
   "saveFile": "保存",
   "savedToGallery": "已保存到相册“Eluna Media”。",
   "savedToDownloads": "已保存到“下载”。",
@@ -191,12 +163,10 @@
   "finishedClearedUndo": "已清除完成的任务。",
   "undo": "撤销",
   "errorDetailsTitle": "错误详情",
-
   "oledDark": "纯黑深色主题",
   "oledDarkHint": "纯黑在 OLED 屏幕上更省电。",
   "dynamicColorLabel": "系统配色 (Material You)",
   "dynamicColorHint": "在支持的设备上跟随壁纸取色。",
-
   "sectionConversionPrefs": "转换",
   "powerModeLabel": "功耗模式",
   "powerEfficiency": "凉快·迅速",
@@ -204,7 +174,6 @@
   "powerQuality": "极致压缩",
   "powerModeHint": "决定视频编码器的用力程度。更凉更快意味着文件略大。除此之外不会限制任何东西——永远不会。",
   "hapticsLabel": "振动反馈",
-
   "networkPrivacyTitle": "网络与隐私",
   "netAuditIntro": "本应用中所有可能访问网络的部分的完整清单。",
   "netAuditAdTitle": "广告横幅——唯一的网络使用者",
@@ -213,7 +182,6 @@
   "netAuditConversionBody": "通过内置 FFmpeg 完全在本机运行。开启飞行模式再转换试试——照样能用。",
   "netAuditTelemetryTitle": "遥测",
   "netAuditTelemetryBody": "没有。应用不收集任何分析数据、崩溃报告或标识符，也没有账号系统。",
-
   "sectionSupport": "支持",
   "removeAdsTitle": "移除广告",
   "removeAdsSubtitle": "一次性购买。所有功能本来就免费。",
@@ -228,25 +196,20 @@
   "adFreeBadge": "无广告",
   "rateApp": "为应用评分",
   "openLicenses": "开源许可",
-
   "errorFallbackTitle": "出了点问题",
   "errorFallbackBody": "应用遇到了意外错误。你的队列和设置都完好——返回后重试即可。",
-
   "twoPassLabel": "两遍编码，精确大小",
   "twoPassHint": "指定大小的任务会编码两遍，明显更精确地贴近字节预算——代价是约两倍的时间和电量。",
-
   "whatsNewTitle": "新功能",
   "whatsNew1": "成就——完全私密，仅在本机统计。",
   "whatsNew2": "合并视频：把片段拼接成一个 MP4。",
   "whatsNew3": "硬件编码——在支持的设备上更快、更凉。",
   "whatsNew4": "1:1 / 9:16 / 16:9 裁剪、音量调节、0.25–4× 变速。",
   "whatsNew5": "可选的两遍编码模式，精确命中目标大小。",
-
   "achievementsTitle": "成就",
   "achievementsProgress": "{done}/{total}",
   "achievementUnlocked": "成就达成：{title}",
   "achievementsPrivacyNote": "仅在本机统计，不会上传到任何地方。",
-
   "achFirstConversionTitle": "第一步",
   "achFirstConversionBody": "转换你的第一个文件。",
   "achTenConversionsTitle": "热身完毕",
@@ -283,7 +246,6 @@
   "achNightOwlBody": "在午夜到凌晨 5 点之间完成一次转换。",
   "achPlatinumTitle": "白金",
   "achPlatinumBody": "解锁其余所有成就。",
-
   "presetAudioToMp3Title": "转换音频",
   "presetAudioToMp3Body": "转成 MP3，哪儿都能放",
   "presetCompressAudioTitle": "压缩音频",
@@ -315,7 +277,6 @@
   "openFolder": "显示文件夹",
   "noAppToOpen": "此设备上没有能打开该文件的应用。",
   "openFailed": "无法打开文件。",
-
   "modeAdvancedHint": "显示全部编解码器、比特率和变换选项，而不是预设卡片。",
   "rateDialogTitle": "喜欢 Eluna Media 吗？",
   "rateDialogBody": "点一颗星。评分只留在你和应用商店之间。",
@@ -336,5 +297,42 @@
   "queueNoFinishedTitle": "还没有完成的文件",
   "queueNoFinishedBody": "转换好的文件会出现在这里，可以直接打开、保存或分享。",
   "capBitrateLabel": "绝不让文件变大",
-  "capBitrateHint": "将编码限制在源文件自身的比特率以内。恒定质量本身没有上限，否则已经压缩过的视频可能会变得更大。"
+  "capBitrateHint": "将编码限制在源文件自身的比特率以内。恒定质量本身没有上限，否则已经压缩过的视频可能会变得更大。",
+  "storageTitle": "存储",
+  "storageBody": "转换后的文件在你保存或分享之前会留在应用内部，文件管理器无法访问。",
+  "storageEmpty": "没有存储内容",
+  "storageUsage": "已占用：{size}",
+  "storageClearTitle": "清除已存储的文件？",
+  "storageClearBody": "删除应用仍保留的所有已完成结果。已保存或已分享的文件不受影响。",
+  "storageClearAction": "清除",
+  "storageCleared": "已释放 {size}",
+  "autoSaveLabel": "自动保存结果",
+  "autoSaveHint": "每个文件转换完成后立即存入相册，音频存入“下载”。",
+  "lowSpaceTitle": "剩余空间不足",
+  "lowSpaceBody": "这批文件大约需要 {needed}，但只剩 {free} 可用。转换可能中途失败。",
+  "saveAll": "全部保存（{count}）",
+  "savedAll": "已保存：{count}",
+  "savedSome": "已保存 {saved}/{total}",
+  "presetFitPhotoTitle": "把照片压到指定大小",
+  "presetFitPhotoBody": "把图片压到精确的上限以内——上传表单、申请材料。",
+  "photoFitHint": "应用会反复尝试画质直到文件达标。如果上限过小，还会一并缩小画面尺寸。",
+  "sizeTargetKb": "{kb} KB",
+  "sizeTargetDialogTitleKb": "目标大小（KB）",
+  "compareAction": "对比",
+  "compareBefore": "转换前",
+  "compareAfter": "转换后",
+  "compareHint": "长按可查看原图。",
+  "trimStart": "起点",
+  "trimEnd": "终点",
+  "trimTimeHelp": "格式 m:ss，最长 {duration}",
+  "imageScaleLabel": "缩放",
+  "audioChannelsLabel": "声道",
+  "audioMono": "单声道",
+  "audioStereo": "立体声",
+  "sampleRateLabel": "采样率",
+  "voiceAudioHint": "22.05 kHz 单声道能把语音录音压到约四分之一，且几乎听不出差别。音乐请两项都保持原始。",
+  "moveUp": "上移",
+  "moveDown": "下移",
+  "adPrivacyTitle": "广告隐私设置",
+  "adPrivacySubtitle": "更改你的广告同意选项"
 }

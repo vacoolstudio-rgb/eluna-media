@@ -122,6 +122,56 @@ enum CropPreset {
   bool get isChanged => this != CropPreset.none;
 }
 
+/// Proportional resize for stills.
+///
+/// [ResolutionPreset] answers "make it 1080p", which is how video is thought
+/// about; a photo is thought about as "half the size". They are not the same
+/// question, and the height presets could not express the second one at all.
+/// Composes with a resolution target rather than competing for the slot: the
+/// percentage is applied to whatever frame the earlier steps produced.
+enum ImageScale {
+  keep(1.0, '100%'),
+  p75(0.75, '75%'),
+  p50(0.5, '50%'),
+  p25(0.25, '25%');
+
+  const ImageScale(this.factor, this.label);
+
+  final double factor;
+  final String label;
+
+  bool get isChanged => this != ImageScale.keep;
+}
+
+/// Output channel layout. Halving a voice recording to mono halves the track,
+/// which no bitrate setting can match for speech.
+enum AudioChannels {
+  keep(null, 'Original'),
+  mono(1, 'Mono'),
+  stereo(2, 'Stereo');
+
+  const AudioChannels(this.count, this.label);
+
+  final int? count;
+  final String label;
+}
+
+/// Output sample rate. Speech carries nothing above ~8 kHz, so a 44.1 kHz voice
+/// note is paying for bandwidth it never uses; music needs every bit of it.
+enum SampleRate {
+  keep(null, 'Original'),
+  hz48000(48000, '48 kHz'),
+  hz44100(44100, '44.1 kHz'),
+  hz32000(32000, '32 kHz'),
+  hz22050(22050, '22.05 kHz'),
+  hz16000(16000, '16 kHz');
+
+  const SampleRate(this.hz, this.label);
+
+  final int? hz;
+  final String label;
+}
+
 /// Strength of a photo-enhancement filter. Four steps rather than a 0–100
 /// slider: the useful range of both `unsharp` and `hqdn3d` is narrow, and a
 /// slider invites the exact overshoot ("more must be better") that turns a
@@ -201,7 +251,19 @@ class ConversionSettings {
     this.volumePercent = 100,
     this.keepSubtitles = false,
     this.capBitrateToSource = true,
+    this.imageScale = ImageScale.keep,
+    this.audioChannels = AudioChannels.keep,
+    this.sampleRate = SampleRate.keep,
   });
+
+  /// Proportional resize for stills, applied on top of [resolution].
+  final ImageScale imageScale;
+
+  /// Output channel layout. Ignored by copied and by already-mono tracks.
+  final AudioChannels audioChannels;
+
+  /// Output sample rate. Ignored on a copied track — a remux cannot resample.
+  final SampleRate sampleRate;
 
   final ContainerFormat container;
   final VideoCodec videoCodec;
@@ -333,8 +395,14 @@ class ConversionSettings {
     int? volumePercent,
     bool? keepSubtitles,
     bool? capBitrateToSource,
+    ImageScale? imageScale,
+    AudioChannels? audioChannels,
+    SampleRate? sampleRate,
   }) {
     return ConversionSettings(
+      imageScale: imageScale ?? this.imageScale,
+      audioChannels: audioChannels ?? this.audioChannels,
+      sampleRate: sampleRate ?? this.sampleRate,
       container: container ?? this.container,
       videoCodec: videoCodec ?? this.videoCodec,
       audioCodec: audioCodec ?? this.audioCodec,
@@ -391,6 +459,9 @@ class ConversionSettings {
         'volumePercent': volumePercent,
         'keepSubtitles': keepSubtitles,
         'capBitrateToSource': capBitrateToSource,
+        'imageScale': imageScale.name,
+        'audioChannels': audioChannels.name,
+        'sampleRate': sampleRate.name,
       };
 
   /// Rebuilds settings from storage, re-validating the codec pair: the rules
@@ -432,6 +503,10 @@ class ConversionSettings {
       volumePercent: json['volumePercent'] as int? ?? 100,
       keepSubtitles: json['keepSubtitles'] as bool? ?? false,
       capBitrateToSource: json['capBitrateToSource'] as bool? ?? true,
+      imageScale: enumByName(ImageScale.values, json['imageScale'], ImageScale.keep),
+      audioChannels:
+          enumByName(AudioChannels.values, json['audioChannels'], AudioChannels.keep),
+      sampleRate: enumByName(SampleRate.values, json['sampleRate'], SampleRate.keep),
     );
   }
 

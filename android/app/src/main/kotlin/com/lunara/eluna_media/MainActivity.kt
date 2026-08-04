@@ -30,7 +30,10 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, SERVICE_CHANNEL)
+        val channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, SERVICE_CHANNEL)
+        ownServiceChannel = channel
+        serviceChannel = channel
+        channel
             .setMethodCallHandler { call, result ->
                 when (call.method) {
                     // `start` and `update` are one operation: re-posting the
@@ -49,6 +52,10 @@ class MainActivity : FlutterActivity() {
                                 ConversionForegroundService.EXTRA_PROGRESS,
                                 call.argument<Int>("progress")
                                     ?: ConversionForegroundService.INDETERMINATE,
+                            )
+                            putExtra(
+                                ConversionForegroundService.EXTRA_CANCEL_LABEL,
+                                call.argument<String>("cancelLabel"),
                             )
                         }
                         ContextCompat.startForegroundService(this, intent)
@@ -97,6 +104,20 @@ class MainActivity : FlutterActivity() {
                             } catch (_: ActivityNotFoundException) {
                                 result.success(false)
                             }
+                        }
+
+                        // Free bytes on the volume the output folder lives on.
+                        // A 4 GB transcode onto 300 MB of headroom used to fail
+                        // at 98% with a raw `No space left on device`; the app
+                        // can now say so before it spends the battery.
+                        "freeSpace" -> {
+                            result.success(
+                                try {
+                                    filesDir.usableSpace
+                                } catch (_: Exception) {
+                                    null
+                                },
+                            )
                         }
 
                         "saveToDownloads" -> {
@@ -301,8 +322,39 @@ class MainActivity : FlutterActivity() {
             ?: "application/octet-stream"
     }
 
-    private companion object {
-        const val SERVICE_CHANNEL = "eluna/foreground_service"
-        const val SHARE_CHANNEL = "eluna/share_intake"
+    /** This instance's channel, so onDestroy can tell it from a successor's. */
+    private var ownServiceChannel: MethodChannel? = null
+
+    override fun onDestroy() {
+        // The channel belongs to an engine that is going away, so a later
+        // cancel request must find null rather than a dead messenger — but only
+        // if the static slot still holds *ours*. A recreated activity installs
+        // its own before the old one is torn down, and clearing unconditionally
+        // would silently disconnect the live one.
+        if (serviceChannel === ownServiceChannel) serviceChannel = null
+        ownServiceChannel = null
+        super.onDestroy()
+    }
+
+    companion object {
+        private const val SERVICE_CHANNEL = "eluna/foreground_service"
+        private const val SHARE_CHANNEL = "eluna/share_intake"
+
+        /**
+         * The live foreground-service channel, held statically so the service —
+         * a separate component in the same process — can reach Dart when the
+         * user presses Cancel in the notification.
+         */
+        private var serviceChannel: MethodChannel? = null
+
+        /** Tells Dart to cancel the running batch. Safe to call from any thread. */
+        fun postCancelRequest() {
+            if (serviceChannel == null) return
+            android.os.Handler(android.os.Looper.getMainLooper()).post {
+                // Re-read rather than capture: the engine may have gone away
+                // between this being queued and it running.
+                serviceChannel?.invokeMethod("cancelRequested", null)
+            }
+        }
     }
 }

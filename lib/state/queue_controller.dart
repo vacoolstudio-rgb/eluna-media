@@ -12,6 +12,7 @@ import '../domain/conversion_settings.dart';
 import '../domain/media_format.dart';
 import '../services/foreground_service.dart';
 import '../services/haptics.dart';
+import '../services/media_saver.dart';
 import '../services/notification_service.dart';
 import 'achievements_controller.dart';
 import 'app_meta_controller.dart';
@@ -35,9 +36,13 @@ class QueueStrings {
     required this.progress,
     required this.completed,
     required this.completedWithFailures,
+    required this.cancelLabel,
   });
 
   final String appTitle;
+
+  /// Label for the Cancel action on the ongoing notification.
+  final String cancelLabel;
 
   /// e.g. "3 of 8 done"
   final String Function(int done, int total) progress;
@@ -118,7 +123,37 @@ class QueueController extends Notifier<QueueState> {
     // but corpses will not restart itself.
     final resumable = jobs.any((j) => j.status == JobStatus.queued);
 
+    // Anything in the output folder that no restored job points at is dead
+    // weight: the file of a job the user removed, or of a batch that died
+    // before its entry was written. Nobody can see or reach these — the folder
+    // is inside the sandbox — so left alone they accumulate until the app is
+    // several gigabytes of "app data". Unawaited: reclaiming space is not
+    // something the first frame should wait on.
+    // ignore: discarded_futures
+    sweepOrphanedOutputs(jobs);
+
     return QueueState(jobs: jobs, autoResume: stored.wasRunning && resumable);
+  }
+
+  /// Deletes outputs no queue entry refers to, and returns the bytes freed.
+  Future<int> sweepOrphanedOutputs([List<ConversionJob>? jobs]) {
+    final keep = <String>{
+      for (final job in jobs ?? state.jobs)
+        if (job.outputPath case final path?) path,
+    };
+    return OutputPaths.deleteOrphans(keep);
+  }
+
+  /// Removes a finished job's output from disk. Called once the user's chance
+  /// to undo the removal has passed — deleting on the spot would leave undo
+  /// restoring a card whose file no longer exists.
+  void purgeOutputs(List<ConversionJob> jobs) {
+    final live = {for (final j in state.jobs) j.id};
+    for (final job in jobs) {
+      // Undo put it back; its file has to stay.
+      if (live.contains(job.id)) continue;
+      if (job.outputPath case final path?) _deletePartial(path);
+    }
   }
 
   Future<void>? _pendingWrite;
@@ -233,6 +268,36 @@ class QueueController extends Notifier<QueueState> {
         merged,
       ],
     );
+    _persist();
+  }
+
+  /// Moves a pending job one place earlier (-1) or later (+1) among the other
+  /// pending ones.
+  ///
+  /// Merge concatenates in queue order, and the system picker hands files back
+  /// in whatever order it likes — usually by date, never by the order they were
+  /// tapped. Without this, fixing the order of a merge meant emptying the
+  /// queue and adding the clips again one at a time.
+  void movePending(String id, int delta) {
+    final jobs = [...state.jobs];
+    final slots = [
+      for (var i = 0; i < jobs.length; i++)
+        if (jobs[i].status == JobStatus.queued) i,
+    ];
+    final from = slots.indexWhere((i) => jobs[i].id == id);
+    if (from < 0) return;
+    final to = from + delta;
+    if (to < 0 || to >= slots.length) return;
+
+    // Swapping the *slots* rather than the list positions leaves any finished
+    // jobs interleaved between them exactly where they were.
+    final a = slots[from];
+    final b = slots[to];
+    final held = jobs[a];
+    jobs[a] = jobs[b];
+    jobs[b] = held;
+
+    state = state.copyWith(jobs: jobs);
     _persist();
   }
 
@@ -357,11 +422,19 @@ class QueueController extends Notifier<QueueState> {
     final foreground = ref.read(foregroundServiceProvider);
     final converter = ref.read(converterProvider);
 
+    // Transcoding is the longest, hottest thing the phone does, and the person
+    // who wants to stop it is usually not in the app — they are watching the
+    // battery drop from somewhere else. The notification's Cancel action lands
+    // here.
+    foreground.onCancelRequested = cancelBatch;
+    foreground.bindCancelHandler();
+
     // Started while the app is still in the foreground, which is what Android
     // requires for a dataSync service.
     await foreground.start(
       title: strings.appTitle,
       text: strings.progress(state.completedCount, state.jobs.length),
+      cancelLabel: strings.cancelLabel,
       progress: state.overallProgress,
     );
 
@@ -608,9 +681,52 @@ class QueueController extends Notifier<QueueState> {
 
     await _persist();
 
+    // Put the result where the user already looks, unless they asked us not
+    // to. Done per job rather than at the end of the batch so a batch that is
+    // cancelled half-way still leaves its finished files somewhere reachable.
+    if (result.outcome == ConversionOutcome.success &&
+        ref.read(appPrefsProvider).autoSaveResults) {
+      await saveOutput(id);
+      if (!ref.mounted) return;
+    }
+
     // One job finished, so the batch percentage jumped; push it immediately
     // rather than waiting for the next job's first statistics callback.
     await _syncForeground();
+  }
+
+  /// Copies one finished output out of the sandbox and records where it went.
+  ///
+  /// Never throws: null means the copy failed. A save can fail for reasons
+  /// that have nothing to do with the conversion — permission declined, the
+  /// gallery volume full — and none of them should turn a successful encode
+  /// into a failed job. The file stays where it is and the card keeps offering
+  /// the button. [SaveDestination.unsupported] is a different answer: there is
+  /// nowhere on this platform to put it (iOS audio), and the caller offers the
+  /// share sheet instead.
+  Future<SaveDestination?> saveOutput(String id) async {
+    final job = _find(id);
+    if (job == null || job.status != JobStatus.completed) return null;
+    final path = job.outputPath;
+    if (path == null) return null;
+
+    try {
+      final destination = await ref.read(mediaSaverProvider).save(
+            path: path,
+            name: OutputPaths.fileName(path),
+            kind: job.settings.container.kind,
+          );
+      if (!ref.mounted) return destination;
+
+      if (destination.savedTo case final savedTo?) {
+        final current = _find(id);
+        if (current != null) _replace(current.copyWith(savedTo: savedTo));
+        await _persist();
+      }
+      return destination;
+    } catch (_) {
+      return null;
+    }
   }
 
   /// A cancelled or failed encode leaves a truncated, unplayable file behind.

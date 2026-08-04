@@ -46,6 +46,10 @@ import UIKit
           // iOS has no browsable Downloads folder; the Dart side falls back to
           // the share sheet rather than offering a button that does nothing.
           result(false)
+        case "freeSpace":
+          // Room left for the output folder. Dart treats nil as "don't know"
+          // and lets the conversion proceed, so a failure here is never fatal.
+          result(AppDelegate.freeBytes())
         default:
           result(FlutterMethodNotImplemented)
         }
@@ -85,6 +89,23 @@ import UIKit
       }
     }
     return true
+  }
+
+  /// Bytes available to this app. `volumeAvailableCapacityForImportantUsage`
+  /// is the figure iOS itself uses when deciding whether a download may
+  /// proceed: it counts space that can be reclaimed by purging caches, which
+  /// is exactly the space a transcode is allowed to take.
+  private static func freeBytes() -> NSNumber? {
+    guard
+      let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+      let values = try? documents.resourceValues(
+        forKeys: [.volumeAvailableCapacityForImportantUsageKey]
+      ),
+      let capacity = values.volumeAvailableCapacityForImportantUsage
+    else {
+      return nil
+    }
+    return NSNumber(value: capacity)
   }
 
   private func flushPending() {

@@ -185,6 +185,10 @@ abstract final class FFmpegArgs {
   /// file it compressed — CRF has no upper bound, and an already-efficient
   /// source (anything that has been through a messenger) otherwise inflates.
   /// Ignored when the rates are unknown or the user turned the cap off.
+  /// [imageDownscale] shrinks a still by a further factor on top of whatever
+  /// [ConversionSettings.resolution] asks for. Only the fit-to-size search uses
+  /// it: when even the lowest quality overshoots a byte budget, fewer pixels is
+  /// the only remaining lever.
   static List<String> build({
     required String inputPath,
     required String outputPath,
@@ -195,6 +199,7 @@ abstract final class FFmpegArgs {
     String? hwVideoEncoder,
     int? passNumber,
     String? passLogFile,
+    double imageDownscale = 1.0,
   }) {
     final args = <String>['-hide_banner', '-nostdin', '-y'];
 
@@ -213,7 +218,7 @@ abstract final class FFmpegArgs {
 
     switch (settings.container.kind) {
       case MediaKind.image:
-        _appendImageArgs(args, settings);
+        _appendImageArgs(args, settings, imageDownscale);
       case MediaKind.audio:
         _appendAudioOnlyArgs(args, settings, sourceAudioKbps);
       case MediaKind.video:
@@ -261,7 +266,10 @@ abstract final class FFmpegArgs {
   ///     a downscale just throws the added acutance away.
   ///
   /// Public so the tests can assert the chain without running FFmpeg.
-  static List<String> imageFilters(ConversionSettings s) {
+  ///
+  /// [downscale] is the fit-to-size search's last resort, applied in the same
+  /// slot as the resolution target so the two compose rather than fight.
+  static List<String> imageFilters(ConversionSettings s, {double downscale = 1.0}) {
     final filters = <String>[];
 
     // hqdn3d takes luma_spatial:chroma_spatial (the two temporal parameters
@@ -303,6 +311,19 @@ abstract final class FFmpegArgs {
       filters.add('scale=iw*2:ih*2:flags=lanczos');
     }
 
+    // Proportional resize: the user's percentage and the fit-to-size search's
+    // fallback are the same operation, so they multiply into one filter rather
+    // than resampling the picture twice. It rides after any resolution target
+    // because it is a *further* reduction of whatever was asked for, stated as
+    // a fraction of the frame at this point in the chain rather than of the
+    // source. Dimensions are forced even so the JPEG/WebP encoders (and any
+    // later yuv420p path) never see an odd size.
+    final scale = s.imageScale.factor * downscale;
+    if (scale != 1.0) {
+      final k = scale.toStringAsFixed(3);
+      filters.add('scale=2*trunc(iw*$k/2):2*trunc(ih*$k/2):flags=lanczos');
+    }
+
     // Option names are spelled out rather than using unsharp's `lx`/`la`
     // aliases: the aliases are undocumented in the filter's own help text, and
     // a misspelled option here is not a bad picture, it is a failed job.
@@ -330,13 +351,14 @@ abstract final class FFmpegArgs {
     return filters;
   }
 
-  static void _appendImageArgs(List<String> args, ConversionSettings s) {
+  static void _appendImageArgs(List<String> args, ConversionSettings s,
+      [double downscale = 1.0]) {
     if (s.container == ContainerFormat.gif) {
       _appendGifArgs(args, s);
       return;
     }
 
-    final filters = imageFilters(s);
+    final filters = imageFilters(s, downscale: downscale);
     if (filters.isNotEmpty) args.addAll(['-vf', filters.join(',')]);
 
     // A still image is one frame; -update tells the image muxer that
@@ -651,6 +673,20 @@ abstract final class FFmpegArgs {
       return;
     }
     args.addAll(['-c:a', audio.encoder!]);
+
+    // Channel layout and sample rate go before the bitrate for a reason worth
+    // stating: for speech they are the bigger lever. A 44.1 kHz stereo voice
+    // note carries two identical channels of bandwidth nobody's voice reaches,
+    // and mono at 22 kHz is a quarter of the data at no audible cost — which
+    // no `-b:a` setting can match. Both are meaningless on a copied stream,
+    // and this branch never runs for one.
+    if (s.audioChannels.count case final channels?) {
+      args.addAll(['-ac', '$channels']);
+    }
+    if (s.sampleRate.hz case final hz?) {
+      args.addAll(['-ar', '$hz']);
+    }
+
     if (audio.supportsBitrate) {
       // Never spend more on the audio than the source did: re-encoding a
       // 64 kbps voice track at the 128 kbps default doubles it, which is half

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../core/app_version.dart';
+import '../core/output_paths.dart';
 import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
 import '../services/ads/ads_consent.dart';
@@ -10,6 +11,7 @@ import '../services/review_service.dart';
 import '../state/achievements_controller.dart';
 import '../state/app_meta_controller.dart';
 import '../state/settings_controller.dart';
+import '../state/storage_controller.dart';
 import 'achievements_screen.dart';
 import 'network_privacy_screen.dart';
 import 'remove_ads_sheet.dart';
@@ -134,6 +136,8 @@ class SettingsTab extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 16),
+          const _StorageSection(),
+          const SizedBox(height: 16),
           SectionCard(
             title: l10n.privacyTitle,
             icon: Icons.shield_outlined,
@@ -256,6 +260,96 @@ class SettingsTab extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// What the app is holding on to, and the one button that gives it back.
+///
+/// Converted files stay inside the app until they are saved or shared, which
+/// is the right privacy default and was, until this section existed, a leak:
+/// the folder is not reachable from any file manager, so the only way to
+/// reclaim the space was to wipe the app's data entirely.
+class _StorageSection extends ConsumerWidget {
+  const _StorageSection();
+
+  Future<void> _confirmAndClear(BuildContext context, WidgetRef ref) async {
+    final l10n = L10n.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.delete_sweep_outlined),
+        title: Text(l10n.storageClearTitle),
+        content: Text(l10n.storageClearBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(l10n.commonCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(l10n.storageClearAction),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    final freed = await clearStoredOutputs(ref);
+    messenger.showSnackBar(
+      SnackBar(content: Text(l10n.storageCleared(OutputPaths.humanBytes(freed)))),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
+    final theme = Theme.of(context);
+    final usage = ref.watch(storageUsageProvider);
+
+    // While the folder is being measured the row shows the last known answer
+    // rather than a spinner: the number is informational, and a card that
+    // flickers every time Settings is opened reads as instability.
+    final value = usage.value;
+    final isEmpty = value == null || value.files == 0;
+
+    return SectionCard(
+      title: l10n.storageTitle,
+      icon: Icons.folder_outlined,
+      accent: Accents.output,
+      children: [
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(l10n.autoSaveLabel),
+          subtitle: Text(l10n.autoSaveHint),
+          value: ref.watch(appPrefsProvider.select((p) => p.autoSaveResults)),
+          onChanged: ref.read(appPrefsProvider.notifier).setAutoSaveResults,
+        ),
+        const SizedBox(height: 4),
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: const Icon(Icons.save_outlined),
+          title: Text(
+            isEmpty
+                ? l10n.storageEmpty
+                : l10n.storageUsage(OutputPaths.humanBytes(value.bytes)),
+          ),
+          subtitle: Text(l10n.storageBody),
+          isThreeLine: true,
+        ),
+        if (!isEmpty)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: () => _confirmAndClear(context, ref),
+              icon: const Icon(Icons.delete_sweep_outlined, size: 18),
+              label: Text(l10n.storageClearAction),
+              style: TextButton.styleFrom(foregroundColor: theme.colorScheme.error),
+            ),
+          ),
+      ],
     );
   }
 }

@@ -95,19 +95,41 @@ enum ContainerFormat {
     return ContainerFormat.fromExtension(ext)?.kind ?? extraInputs[ext];
   }
 
+  /// True for a source that carries motion inside an image container.
+  ///
+  /// A GIF is a picture by extension and a film by content, and "GIF → MP4" is
+  /// one of the most-asked conversions there is: the same animation as an H.264
+  /// clip is routinely a tenth of the size and plays in places a GIF does not.
+  /// Only `.gif` qualifies — an animated WebP exists, but the extension it
+  /// shares with still WebP cannot tell the two apart, and offering a video
+  /// target for a still photo would be a lie.
+  static bool isAnimatedSource(String fileName) =>
+      fileName.toLowerCase().endsWith('.gif');
+
   /// Which containers a source of [source] may legally be written to.
   ///
   /// A video can become another video, an animated GIF, or — by extraction —
   /// an audio file. A still image can only become another still image, and
   /// audio only other audio. Offering "JPEG" for an MP3 is the kind of
   /// nonsense the old all-formats dropdown allowed.
-  static List<ContainerFormat> outputsFor(MediaKind source) => switch (source) {
+  ///
+  /// [animatedSource] widens the image case to the video containers: the GIF
+  /// keeps its still-image targets (one frame out as a JPEG is a real thing to
+  /// want) and gains the ones its motion deserves.
+  static List<ContainerFormat> outputsFor(
+    MediaKind source, {
+    bool animatedSource = false,
+  }) =>
+      switch (source) {
         MediaKind.video => [
             ...ofKind(MediaKind.video),
             ContainerFormat.gif,
             ...ofKind(MediaKind.audio),
           ],
-        MediaKind.image => ofKind(MediaKind.image),
+        MediaKind.image => [
+            ...ofKind(MediaKind.image),
+            if (animatedSource) ...ofKind(MediaKind.video),
+          ],
         MediaKind.audio => ofKind(MediaKind.audio),
       };
 

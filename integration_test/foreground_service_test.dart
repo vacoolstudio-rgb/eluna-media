@@ -18,7 +18,7 @@ void main() {
 
     final service = ForegroundService();
 
-    await service.start(title: 'Eluna Media', text: '0 of 3', progress: 0);
+    await service.start(title: 'Eluna Media', text: '0 of 3', progress: 0, cancelLabel: 'Stop');
 
     // Long enough to cross Android's 5 s startForeground() deadline: if
     // startForeground() were never called, the system would kill us here.
@@ -33,7 +33,7 @@ void main() {
     await tester.runAsync(() => Future<void>.delayed(const Duration(seconds: 2)));
 
     // A restart after stop must work; the service is not a one-shot.
-    await service.start(title: 'Eluna Media', text: 'again', progress: 0.5);
+    await service.start(title: 'Eluna Media', text: 'again', progress: 0.5, cancelLabel: 'Stop');
     await service.stop();
   }, timeout: const Timeout(Duration(minutes: 2)));
 }

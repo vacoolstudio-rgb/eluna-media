@@ -12,9 +12,11 @@ import '../services/file_opener.dart';
 import '../services/haptics.dart';
 import '../services/media_saver.dart';
 import '../state/queue_controller.dart';
+import 'compare_screen.dart';
 import 'convert_tab.dart' show accentOfKind, iconOfKind;
 import 'queue_strings.dart';
 import 'theme.dart';
+import 'widgets/media_thumbnail.dart';
 import 'widgets/progress_ring.dart';
 import 'widgets/section_card.dart';
 import 'widgets/settings_summary.dart';
@@ -151,26 +153,100 @@ class _QueueTabState extends ConsumerState<QueueTab> with SingleTickerProviderSt
           ],
         ),
       ),
-      floatingActionButton: finishedIds.isEmpty || _tabs.index == 0
-          ? null
-          : FloatingActionButton.extended(
-              onPressed: () {
-                final removed = ref.read(queueProvider).finished;
-                ref.read(queueProvider.notifier).clearFinished();
-                ref.read(hapticsProvider).destructiveTap();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(l10n.finishedClearedUndo),
-                    action: SnackBarAction(
-                      label: l10n.undo,
-                      onPressed: () => ref.read(queueProvider.notifier).restoreJobs(removed),
-                    ),
-                  ),
-                );
-              },
-              icon: const Icon(Icons.cleaning_services_outlined),
-              label: Text(l10n.clearFinished),
+      floatingActionButton:
+          finishedIds.isEmpty || _tabs.index == 0 ? null : const _FinishedActions(),
+    );
+  }
+}
+
+/// The two things anyone does with a finished batch: take the results out of
+/// the app, and then get rid of them.
+///
+/// Saving is the primary action because it is the one that answers "where is
+/// my file". It disappears once nothing is left unsaved — with auto-save on,
+/// that is the usual state, and a button that would do nothing should not be
+/// on screen.
+class _FinishedActions extends ConsumerWidget {
+  const _FinishedActions();
+
+  Future<void> _saveAll(BuildContext context, WidgetRef ref) async {
+    final l10n = L10n.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final queue = ref.read(queueProvider.notifier);
+    final pending = _unsaved(ref.read(queueProvider).jobs);
+
+    var saved = 0;
+    for (final job in pending) {
+      final destination = await queue.saveOutput(job.id);
+      if (destination == SaveDestination.gallery ||
+          destination == SaveDestination.downloads) {
+        saved++;
+      }
+    }
+
+    messenger.showSnackBar(SnackBar(
+      content: Text(
+        saved == pending.length ? l10n.savedAll(saved) : l10n.savedSome(saved, pending.length),
+      ),
+    ));
+  }
+
+  Future<void> _clear(BuildContext context, WidgetRef ref) async {
+    final l10n = L10n.of(context);
+    final removed = ref.read(queueProvider).finished;
+    final queue = ref.read(queueProvider.notifier);
+    queue.clearFinished();
+    ref.read(hapticsProvider).destructiveTap();
+
+    final closed = await ScaffoldMessenger.of(context)
+        .showSnackBar(
+          SnackBar(
+            content: Text(l10n.finishedClearedUndo),
+            action: SnackBarAction(
+              label: l10n.undo,
+              onPressed: () => queue.restoreJobs(removed),
             ),
+          ),
+        )
+        .closed;
+    // The file goes only once undo is off the table. Deleting on the spot
+    // would leave undo restoring a card pointing at nothing; never deleting is
+    // how the output folder grew without bound.
+    if (closed != SnackBarClosedReason.action) queue.purgeOutputs(removed);
+  }
+
+  static List<ConversionJob> _unsaved(List<ConversionJob> jobs) => [
+        for (final job in jobs)
+          if (job.status == JobStatus.completed &&
+              job.savedTo == null &&
+              job.outputPath != null)
+            job,
+      ];
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
+    final unsaved = ref.watch(queueProvider.select((q) => _unsaved(q.jobs).length));
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        FloatingActionButton.small(
+          heroTag: 'queue-clear',
+          onPressed: () => _clear(context, ref),
+          tooltip: l10n.clearFinished,
+          child: const Icon(Icons.cleaning_services_outlined),
+        ),
+        const SizedBox(height: 10),
+        if (unsaved > 0)
+          FloatingActionButton.extended(
+            heroTag: 'queue-save-all',
+            onPressed: () => _saveAll(context, ref),
+            icon: const Icon(Icons.download_outlined),
+            label: Text(l10n.saveAll(unsaved)),
+          ),
+      ],
     );
   }
 }
@@ -337,35 +413,32 @@ class _JobCardBody extends ConsumerWidget {
     final path = job.outputPath;
     if (path == null) return;
 
-    try {
-      final destination = await ref.read(mediaSaverProvider).save(
-            path: path,
-            name: OutputPaths.fileName(path),
-            kind: job.settings.container.kind,
-          );
-      switch (destination) {
-        case SaveDestination.gallery:
-          messenger.showSnackBar(SnackBar(
-            content: Text(l10n.savedToGallery),
-            action: SnackBarAction(
-              label: l10n.openFile,
-              onPressed: () => opener.openFile(path),
-            ),
-          ));
-        case SaveDestination.downloads:
-          messenger.showSnackBar(SnackBar(
-            content: Text(l10n.savedToDownloads),
-            action: SnackBarAction(
-              label: l10n.openFolder,
-              onPressed: opener.openDownloads,
-            ),
-          ));
-        case SaveDestination.unsupported:
-          // iOS audio: the share sheet is how files leave the sandbox.
-          if (context.mounted) await _share(context);
-      }
-    } catch (_) {
-      messenger.showSnackBar(SnackBar(content: Text(l10n.saveFailed)));
+    // Routed through the queue rather than straight at the saver, so the job
+    // records where it went and the card stops offering a save that already
+    // happened.
+    final destination = await ref.read(queueProvider.notifier).saveOutput(job.id);
+    switch (destination) {
+      case SaveDestination.gallery:
+        messenger.showSnackBar(SnackBar(
+          content: Text(l10n.savedToGallery),
+          action: SnackBarAction(
+            label: l10n.openFile,
+            onPressed: () => opener.openFile(path),
+          ),
+        ));
+      case SaveDestination.downloads:
+        messenger.showSnackBar(SnackBar(
+          content: Text(l10n.savedToDownloads),
+          action: SnackBarAction(
+            label: l10n.openFolder,
+            onPressed: opener.openDownloads,
+          ),
+        ));
+      case SaveDestination.unsupported:
+        // iOS audio: the share sheet is how files leave the sandbox.
+        if (context.mounted) await _share(context);
+      case null:
+        messenger.showSnackBar(SnackBar(content: Text(l10n.saveFailed)));
     }
   }
 
@@ -495,7 +568,12 @@ class _JobCardBody extends ConsumerWidget {
                     indeterminate: job.sourceDurationMs == null,
                   )
                 else
-                  SectionIcon(icon: iconOfKind(kind), accent: accent, size: 46),
+                  MediaThumbnail(
+                    path: job.inputPath,
+                    bytes: job.inputBytes,
+                    icon: iconOfKind(kind),
+                    accent: accent,
+                  ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -536,6 +614,25 @@ class _JobCardBody extends ConsumerWidget {
             if (job.status == JobStatus.completed) ...[
               const SizedBox(height: 10),
               _SizeSummary(job: job),
+              // Answers "where is my file" before it is asked. Without this the
+              // only honest answer was "inside the app, where you cannot get
+              // to it".
+              if (job.savedTo case final savedTo?) ...[
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    Icon(Icons.check_circle_outline, size: 14, color: AppTheme.success),
+                    const SizedBox(width: 5),
+                    Text(
+                      switch (savedTo) {
+                        SavedTo.gallery => l10n.savedToGallery,
+                        SavedTo.downloads => l10n.savedToDownloads,
+                      },
+                      style: theme.textTheme.labelSmall?.copyWith(color: AppTheme.success),
+                    ),
+                  ],
+                ),
+              ],
             ],
             if (job.status == JobStatus.failed && failureText != null) ...[
               const SizedBox(height: 8),
@@ -558,6 +655,27 @@ class _JobCardBody extends ConsumerWidget {
                   label: Text(l10n.jobDetails),
                 ),
                 if (job.status == JobStatus.completed) ...[
+                  // Stills only. A converted photo is otherwise invisible until
+                  // it is opened somewhere else, by which point nobody is
+                  // comparing it to anything.
+                  if (job.settings.container.kind == MediaKind.image &&
+                      !job.settings.container.isAnimatedImage &&
+                      !job.isMerge)
+                    TextButton.icon(
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => CompareScreen(
+                            title: job.inputName,
+                            beforePath: job.inputPath,
+                            afterPath: job.outputPath!,
+                            beforeBytes: job.inputBytes,
+                            afterBytes: job.outputBytes,
+                          ),
+                        ),
+                      ),
+                      icon: const Icon(Icons.compare_outlined, size: 17),
+                      label: Text(l10n.compareAction),
+                    ),
                   TextButton.icon(
                     onPressed: () => _open(context, ref),
                     icon: const Icon(Icons.play_circle_outline, size: 17),
@@ -597,19 +715,22 @@ class _JobCardBody extends ConsumerWidget {
                   ),
                 if (job.status.isTerminal)
                   TextButton.icon(
-                    onPressed: () {
-                      ref.read(queueProvider.notifier).removeJob(job.id);
+                    onPressed: () async {
+                      final queue = ref.read(queueProvider.notifier);
+                      queue.removeJob(job.id);
                       ref.read(hapticsProvider).destructiveTap();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(l10n.jobRemovedUndo),
-                          action: SnackBarAction(
-                            label: l10n.undo,
-                            onPressed: () =>
-                                ref.read(queueProvider.notifier).restoreJobs([job]),
-                          ),
-                        ),
-                      );
+                      final closed = await ScaffoldMessenger.of(context)
+                          .showSnackBar(
+                            SnackBar(
+                              content: Text(l10n.jobRemovedUndo),
+                              action: SnackBarAction(
+                                label: l10n.undo,
+                                onPressed: () => queue.restoreJobs([job]),
+                              ),
+                            ),
+                          )
+                          .closed;
+                      if (closed != SnackBarClosedReason.action) queue.purgeOutputs([job]);
                     },
                     icon: const Icon(Icons.delete_outline, size: 17),
                     label: Text(l10n.removeJob),

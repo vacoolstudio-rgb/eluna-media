@@ -1052,4 +1052,131 @@ class L10nRu extends L10n {
 
   @override
   String get achPlatinumBody => 'Откройте все остальные достижения.';
+
+  @override
+  String get storageTitle => 'Хранилище';
+
+  @override
+  String get storageBody =>
+      'Конвертированные файлы остаются внутри приложения, пока вы их не сохраните или не отправите, — файловый менеджер их не видит.';
+
+  @override
+  String get storageEmpty => 'Ничего не хранится';
+
+  @override
+  String storageUsage(String size) {
+    return 'Занято: $size';
+  }
+
+  @override
+  String get storageClearTitle => 'Очистить хранилище?';
+
+  @override
+  String get storageClearBody =>
+      'Удалит все готовые результаты, которые ещё лежат в приложении. Уже сохранённые и отправленные файлы не затрагиваются.';
+
+  @override
+  String get storageClearAction => 'Очистить';
+
+  @override
+  String storageCleared(String size) {
+    return 'Освобождено $size';
+  }
+
+  @override
+  String get autoSaveLabel => 'Сохранять результат автоматически';
+
+  @override
+  String get autoSaveHint =>
+      'Каждый готовый файл сразу попадает в галерею, аудио — в «Загрузки».';
+
+  @override
+  String get lowSpaceTitle => 'Мало свободного места';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return 'Этой партии нужно около $needed, а свободно только $free. Конвертация может оборваться на середине.';
+  }
+
+  @override
+  String saveAll(int count) {
+    return 'Сохранить все ($count)';
+  }
+
+  @override
+  String savedAll(int count) {
+    return 'Сохранено: $count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return 'Сохранено $saved из $total';
+  }
+
+  @override
+  String get presetFitPhotoTitle => 'Фото под нужный размер';
+
+  @override
+  String get presetFitPhotoBody =>
+      'Ужать снимок под точный лимит — формы загрузки, анкеты.';
+
+  @override
+  String get photoFitHint =>
+      'Приложение подбирает качество, пока файл не уложится в лимит. Если лимит слишком мал для снимка, оно ещё и уменьшит кадр.';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb КБ';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => 'Целевой размер в КБ';
+
+  @override
+  String get compareAction => 'Сравнить';
+
+  @override
+  String get compareBefore => 'До';
+
+  @override
+  String get compareAfter => 'После';
+
+  @override
+  String get compareHint => 'Нажмите и удерживайте, чтобы увидеть оригинал.';
+
+  @override
+  String get trimStart => 'Начало';
+
+  @override
+  String get trimEnd => 'Конец';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return 'м:сс, не больше $duration';
+  }
+
+  @override
+  String get imageScaleLabel => 'Масштаб';
+
+  @override
+  String get audioChannelsLabel => 'Каналы';
+
+  @override
+  String get audioMono => 'Моно';
+
+  @override
+  String get audioStereo => 'Стерео';
+
+  @override
+  String get sampleRateLabel => 'Частота дискретизации';
+
+  @override
+  String get voiceAudioHint =>
+      'Моно на 22,05 кГц уменьшает голосовую запись примерно вчетверо без слышимых потерь. Для музыки оставьте оба параметра исходными.';
+
+  @override
+  String get moveUp => 'Выше';
+
+  @override
+  String get moveDown => 'Ниже';
 }

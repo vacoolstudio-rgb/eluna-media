@@ -624,10 +624,10 @@ class L10nZh extends L10n {
   String get hapticsLabel => '振动反馈';
 
   @override
-  String get adPrivacyTitle => 'Ad privacy settings';
+  String get adPrivacyTitle => '广告隐私设置';
 
   @override
-  String get adPrivacySubtitle => 'Change your consent for advertising';
+  String get adPrivacySubtitle => '更改你的广告同意选项';
 
   @override
   String get networkPrivacyTitle => '网络与隐私';
@@ -997,4 +997,126 @@ class L10nZh extends L10n {
 
   @override
   String get achPlatinumBody => '解锁其余所有成就。';
+
+  @override
+  String get storageTitle => '存储';
+
+  @override
+  String get storageBody => '转换后的文件在你保存或分享之前会留在应用内部，文件管理器无法访问。';
+
+  @override
+  String get storageEmpty => '没有存储内容';
+
+  @override
+  String storageUsage(String size) {
+    return '已占用：$size';
+  }
+
+  @override
+  String get storageClearTitle => '清除已存储的文件？';
+
+  @override
+  String get storageClearBody => '删除应用仍保留的所有已完成结果。已保存或已分享的文件不受影响。';
+
+  @override
+  String get storageClearAction => '清除';
+
+  @override
+  String storageCleared(String size) {
+    return '已释放 $size';
+  }
+
+  @override
+  String get autoSaveLabel => '自动保存结果';
+
+  @override
+  String get autoSaveHint => '每个文件转换完成后立即存入相册，音频存入“下载”。';
+
+  @override
+  String get lowSpaceTitle => '剩余空间不足';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return '这批文件大约需要 $needed，但只剩 $free 可用。转换可能中途失败。';
+  }
+
+  @override
+  String saveAll(int count) {
+    return '全部保存（$count）';
+  }
+
+  @override
+  String savedAll(int count) {
+    return '已保存：$count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return '已保存 $saved/$total';
+  }
+
+  @override
+  String get presetFitPhotoTitle => '把照片压到指定大小';
+
+  @override
+  String get presetFitPhotoBody => '把图片压到精确的上限以内——上传表单、申请材料。';
+
+  @override
+  String get photoFitHint => '应用会反复尝试画质直到文件达标。如果上限过小，还会一并缩小画面尺寸。';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb KB';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => '目标大小（KB）';
+
+  @override
+  String get compareAction => '对比';
+
+  @override
+  String get compareBefore => '转换前';
+
+  @override
+  String get compareAfter => '转换后';
+
+  @override
+  String get compareHint => '长按可查看原图。';
+
+  @override
+  String get trimStart => '起点';
+
+  @override
+  String get trimEnd => '终点';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return '格式 m:ss，最长 $duration';
+  }
+
+  @override
+  String get imageScaleLabel => '缩放';
+
+  @override
+  String get audioChannelsLabel => '声道';
+
+  @override
+  String get audioMono => '单声道';
+
+  @override
+  String get audioStereo => '立体声';
+
+  @override
+  String get sampleRateLabel => '采样率';
+
+  @override
+  String get voiceAudioHint =>
+      '22.05 kHz 单声道能把语音录音压到约四分之一，且几乎听不出差别。音乐请两项都保持原始。';
+
+  @override
+  String get moveUp => '上移';
+
+  @override
+  String get moveDown => '下移';
 }

@@ -1,22 +1,17 @@
 {
   "@@locale": "en",
-
   "appTitle": "Eluna Media",
-
   "tabConvert": "Convert",
   "tabQueue": "Queue",
   "tabAbout": "About",
-
   "addFiles": "Add files",
   "emptySelectionTitle": "No files yet",
   "emptySelectionBody": "Add photos, videos or audio. Everything is processed on this device.",
-
   "sectionOutput": "Output",
   "sectionVideo": "Video",
   "sectionAudio": "Audio",
   "sectionImage": "Image",
   "sectionPrivacy": "Privacy",
-
   "outputFormat": "Format",
   "videoCodec": "Video codec",
   "audioCodec": "Audio codec",
@@ -24,19 +19,43 @@
   "rateControlQuality": "Constant quality (CRF)",
   "rateControlBitrate": "Target bitrate",
   "crfLabel": "Quality (CRF {value})",
-  "@crfLabel": { "placeholders": { "value": { "type": "int" } } },
+  "@crfLabel": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "crfHint": "Lower is better quality and a larger file.",
   "videoBitrate": "Video bitrate: {value} kbps",
-  "@videoBitrate": { "placeholders": { "value": { "type": "int" } } },
+  "@videoBitrate": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "audioBitrate": "Audio bitrate: {value} kbps",
-  "@audioBitrate": { "placeholders": { "value": { "type": "int" } } },
+  "@audioBitrate": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "encodingPreset": "Encoder preset",
   "encodingPresetHint": "Slower presets compress better but heat the device more.",
   "presetOriginal": "Original",
   "resolution": "Resolution",
   "frameRate": "Frame rate",
   "imageQuality": "Quality: {value}",
-  "@imageQuality": { "placeholders": { "value": { "type": "int" } } },
+  "@imageQuality": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "lossless": "Lossless",
   "losslessHint": "Larger files, pixel-perfect output.",
   "sectionEnhance": "Enhancement",
@@ -57,9 +76,14 @@
   "enhanceStrong": "Strong",
   "stripMetadata": "Remove metadata",
   "stripMetadataHint": "Strips EXIF, GPS and timestamps from the output.",
-
   "startConversion": "Convert {count} files",
-  "@startConversion": { "placeholders": { "count": { "type": "int" } } },
+  "@startConversion": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "batchResumed": "Resumed the interrupted conversion.",
   "converting": "Converting…",
   "cancelBatch": "Stop",
@@ -68,39 +92,90 @@
   "removeJob": "Remove",
   "shareFile": "Share",
   "retryJob": "Retry",
-
   "queueEmptyTitle": "The queue is empty",
   "queueEmptyBody": "Files you add on the Convert tab appear here.",
   "queueActiveTab": "Active · {count}",
-  "@queueActiveTab": { "placeholders": { "count": { "type": "int" } } },
+  "@queueActiveTab": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "queueFinishedTab": "Finished · {count}",
-  "@queueFinishedTab": { "placeholders": { "count": { "type": "int" } } },
+  "@queueFinishedTab": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "queueNoActiveTitle": "Nothing in progress",
   "queueNoActiveBody": "Files waiting or converting show up here.",
   "queueNoFinishedTitle": "Nothing finished yet",
   "queueNoFinishedBody": "Converted files land here, ready to open, save or share.",
-
   "statusQueued": "Queued",
   "statusRunning": "Converting",
   "statusCompleted": "Done",
   "statusFailed": "Failed",
   "statusCancelled": "Cancelled",
-
   "batchSummary": "{done} of {total} done",
-  "@batchSummary": { "placeholders": { "done": { "type": "int" }, "total": { "type": "int" } } },
-
+  "@batchSummary": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "batchCompleted": "{done, plural, =1{Converted 1 file} other{Converted {done} files}}",
-  "@batchCompleted": { "placeholders": { "done": { "type": "int" } } },
+  "@batchCompleted": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      }
+    }
+  },
   "batchCompletedWithFailures": "Converted {done}, failed {failed}.",
-  "@batchCompletedWithFailures": { "placeholders": { "done": { "type": "int" }, "failed": { "type": "int" } } },
-
+  "@batchCompletedWithFailures": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "failed": {
+        "type": "int"
+      }
+    }
+  },
   "savedPercent": "{percent}% smaller",
-  "@savedPercent": { "placeholders": { "percent": { "type": "int" } } },
+  "@savedPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "grewPercent": "{percent}% larger",
-  "@grewPercent": { "placeholders": { "percent": { "type": "int" } } },
+  "@grewPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "sizeChange": "{from} → {to}",
-  "@sizeChange": { "placeholders": { "from": { "type": "String" }, "to": { "type": "String" } } },
-
+  "@sizeChange": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
   "appearance": "Appearance",
   "theme": "Theme",
   "themeSystem": "System",
@@ -108,18 +183,14 @@
   "themeDark": "Dark",
   "language": "Language",
   "languageSystem": "System",
-
   "privacyTitle": "Privacy",
   "privacyBody": "Eluna Media converts your files entirely on this device using a bundled copy of FFmpeg. Your files never leave the device, no account is required, and there is no telemetry. The only thing that uses the network is a single non-personalized ad banner, and it never loads while a conversion is running — see the Network & privacy screen for the full audit.\n\nMetadata removal is on by default, so EXIF, GPS coordinates and timestamps are dropped from the files you export.",
   "licenseTitle": "Licensing",
   "licenseBody": "This app bundles FFmpeg built with x264, x265 and other GPL components, so the application as a whole is distributed under the GNU GPL v3.",
-
   "formatUnsupportedForSource": "This format cannot hold the selected codec.",
   "sourceMissing": "The source file is no longer available.",
   "errorTitle": "Conversion failed",
-
   "tabSettings": "Settings",
-
   "introTitle": "Private by design",
   "introOfflineTitle": "Converts on this device",
   "introOfflineBody": "A bundled copy of FFmpeg does all the work. Your files never leave the phone — conversion works in airplane mode.",
@@ -129,11 +200,9 @@
   "introMetadataBody": "EXIF, GPS and timestamps are stripped from every output by default. You can turn that off.",
   "introAdNote": "The free version shows a single non-personalized banner — never while converting, and not at all for your first 14 days.",
   "introContinue": "Get started",
-
   "modeSimple": "Simple",
   "modeAdvanced": "Advanced",
   "modeAdvancedHint": "Show every codec, bitrate and transform control instead of the preset cards.",
-
   "presetCompressVideoTitle": "Compress video",
   "presetCompressVideoBody": "Much smaller MP4, quality stays good",
   "presetFitToSizeTitle": "Fit to size",
@@ -148,38 +217,72 @@
   "presetMergeBody": "Stitch clips into one MP4, in order",
   "mergeNeedsTwo": "Select at least two videos to merge.",
   "mergedVideoName": "Merged video ({count} clips).mp4",
-  "@mergedVideoName": { "placeholders": { "count": { "type": "int" } } },
+  "@mergedVideoName": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "presetCompressImageTitle": "Compress photo",
   "presetCompressImageBody": "Smaller JPEG, hardly visible loss",
   "presetEnhancePhotoTitle": "Enhance photo",
   "presetEnhancePhotoBody": "Cleaner, crisper, better colour",
   "presetImageToWebpTitle": "Photo to WebP",
   "presetImageToWebpBody": "Modern format, smaller than JPEG",
-
   "sizeTargetTitle": "Target size",
   "sizeTargetMb": "{mb} MB",
-  "@sizeTargetMb": { "placeholders": { "mb": { "type": "int" } } },
+  "@sizeTargetMb": {
+    "placeholders": {
+      "mb": {
+        "type": "int"
+      }
+    }
+  },
   "sizeTargetNamed": "{service} · {mb} MB",
-  "@sizeTargetNamed": { "placeholders": { "service": { "type": "String" }, "mb": { "type": "int" } } },
+  "@sizeTargetNamed": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      },
+      "mb": {
+        "type": "int"
+      }
+    }
+  },
   "sizeTargetCustom": "Custom…",
   "sizeTargetDialogTitle": "Target size in MB",
   "sizeTargetTooSmall": "The target is too small for this duration; the closest possible quality will be used.",
-
   "estimatePerFile": "≈ {size} per file",
-  "@estimatePerFile": { "placeholders": { "size": { "type": "String" } } },
+  "@estimatePerFile": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "estimateTotal": "Estimated output: ≈ {size}",
-  "@estimateTotal": { "placeholders": { "size": { "type": "String" } } },
-
+  "@estimateTotal": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "selectedFiles": "{count, plural, =1{1 file selected} other{{count} files selected}}",
-  "@selectedFiles": { "placeholders": { "count": { "type": "int" } } },
+  "@selectedFiles": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "clearSelection": "Clear",
   "presetExpectsVideo": "This preset expects video files.",
   "presetExpectsImage": "This preset expects images.",
-
   "promiseOffline": "100% offline conversion",
   "promiseBatchFree": "Batch is free",
   "promiseNoWatermark": "No watermark",
-
   "sectionTransform": "Transform",
   "rotateLabel": "Rotate",
   "flipLabel": "Mirror horizontally",
@@ -187,7 +290,13 @@
   "cropLabel": "Crop",
   "cropHint": "Centre crop to the chosen aspect ratio — square for feeds, 9:16 for stories.",
   "volumeLabel": "Volume: {percent}%",
-  "@volumeLabel": { "placeholders": { "percent": { "type": "int" } } },
+  "@volumeLabel": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "addAudioFiles": "Audio & other files",
   "hwEncoderLabel": "Hardware encoding",
   "hwEncoderHint": "Uses the device's video chip in bitrate and fit-to-size modes — much faster and cooler. Quality (CRF) mode always uses the precise software encoder, and a failed hardware job retries on software automatically.",
@@ -196,24 +305,34 @@
   "capBitrateHint": "Caps the encode at the source's own bitrate. Constant quality has no ceiling of its own, so an already-compressed video can otherwise come out larger.",
   "keepSubtitles": "Keep subtitles",
   "keepSubtitlesHint": "Carries subtitle tracks into the output. Text subtitles only.",
-
   "sectionTrim": "Trim",
   "trimEnable": "Trim the source",
   "trimHint": "Available when exactly one file with a known duration is queued.",
   "trimRangeLabel": "{from} – {to}",
-  "@trimRangeLabel": { "placeholders": { "from": { "type": "String" }, "to": { "type": "String" } } },
-
+  "@trimRangeLabel": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
   "rateControlSize": "Target size",
-
   "lowBatteryTitle": "Battery is low",
   "lowBatteryBody": "Converting works the processor hard. You can plug in first, or continue anyway.",
   "lowBatteryContinue": "Convert anyway",
   "commonCancel": "Cancel",
   "commonOk": "OK",
-
   "filesReceived": "{count, plural, =1{Received 1 file} other{Received {count} files}}",
-  "@filesReceived": { "placeholders": { "count": { "type": "int" } } },
-
+  "@filesReceived": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "saveFile": "Save",
   "savedToGallery": "Saved to the gallery, album “Eluna Media”.",
   "savedToDownloads": "Saved to Downloads.",
@@ -222,12 +341,10 @@
   "finishedClearedUndo": "Finished jobs cleared.",
   "undo": "Undo",
   "errorDetailsTitle": "Error details",
-
   "oledDark": "Pure black dark theme",
   "oledDarkHint": "True black saves power on OLED screens.",
   "dynamicColorLabel": "System colors (Material You)",
   "dynamicColorHint": "Follow the device wallpaper palette where supported.",
-
   "sectionConversionPrefs": "Conversion",
   "powerModeLabel": "Power mode",
   "powerEfficiency": "Cool & fast",
@@ -235,7 +352,6 @@
   "powerQuality": "Max compression",
   "powerModeHint": "How hard the video encoder works. Cooler and faster means somewhat larger files. Nothing else is throttled — ever.",
   "hapticsLabel": "Vibration feedback",
-
   "adPrivacyTitle": "Ad privacy settings",
   "adPrivacySubtitle": "Change your consent for advertising",
   "networkPrivacyTitle": "Network & privacy",
@@ -246,7 +362,6 @@
   "netAuditConversionBody": "Runs entirely on this device through a bundled FFmpeg. Turn on airplane mode and convert — it works.",
   "netAuditTelemetryTitle": "Telemetry",
   "netAuditTelemetryBody": "There is none. The app collects no analytics, no crash reports, no identifiers, and has no account system.",
-
   "sectionSupport": "Support",
   "removeAdsTitle": "Remove ads",
   "removeAdsSubtitle": "One-time purchase. Every feature is already free.",
@@ -254,7 +369,13 @@
   "removeAdsBullet2": "One payment — no subscription",
   "removeAdsBullet3": "All features stay free for everyone",
   "buyFor": "Buy · {price}",
-  "@buyFor": { "placeholders": { "price": { "type": "String" } } },
+  "@buyFor": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "restorePurchase": "Restore purchase",
   "purchaseSuccess": "Ads removed. Thank you for supporting development!",
   "purchaseUnavailable": "The store is not available right now. Try again later.",
@@ -262,19 +383,15 @@
   "adFreeBadge": "Ad-free",
   "rateApp": "Rate the app",
   "openLicenses": "Open source licenses",
-
   "errorFallbackTitle": "Something went wrong",
   "errorFallbackBody": "The app hit an unexpected error. Your queue and settings are safe — go back and try again.",
-
   "presetAudioToMp3Title": "Convert audio",
   "presetAudioToMp3Body": "To MP3 — plays on anything",
   "presetCompressAudioTitle": "Compress audio",
   "presetCompressAudioBody": "Leaner AAC — voice notes, podcasts",
-
   "convertTo": "Convert to",
   "formatRecommended": "Recommended",
   "formatSectionHint": "Only formats your files can actually become are listed.",
-
   "sourceVideo": "Video",
   "sourceImage": "Photo",
   "sourceAudio": "Audio",
@@ -284,25 +401,59 @@
   "filesTitle": "Files",
   "removeFile": "Remove",
   "unknownDuration": "—",
-
   "percentDone": "{percent}%",
-  "@percentDone": { "placeholders": { "percent": { "type": "int" } } },
+  "@percentDone": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "timeLeft": "≈ {time} left",
-  "@timeLeft": { "placeholders": { "time": { "type": "String" } } },
+  "@timeLeft": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "jobSettingsTitle": "Conversion settings",
   "jobDetails": "Details",
   "summaryQuality": "CRF {value}",
-  "@summaryQuality": { "placeholders": { "value": { "type": "int" } } },
+  "@summaryQuality": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "summaryBitrate": "{value} kbps",
-  "@summaryBitrate": { "placeholders": { "value": { "type": "int" } } },
+  "@summaryBitrate": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "summaryTargetSize": "≤ {size}",
-  "@summaryTargetSize": { "placeholders": { "size": { "type": "String" } } },
+  "@summaryTargetSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "summaryTwoPass": "Two-pass",
   "summaryEnhanced": "Enhanced",
   "summaryMetadataStripped": "Metadata removed",
   "summaryMerge": "{count} clips merged",
-  "@summaryMerge": { "placeholders": { "count": { "type": "int" } } },
-
+  "@summaryMerge": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "rateDialogTitle": "Enjoying Eluna Media?",
   "rateDialogBody": "Tap a star. Your rating stays between you and the store.",
   "rateDialogLater": "Not now",
@@ -311,36 +462,57 @@
   "rateSendFeedback": "Write feedback",
   "rateThanks": "Thank you!",
   "feedbackSubject": "Eluna Media feedback ({stars}/5)",
-  "@feedbackSubject": { "placeholders": { "stars": { "type": "int" } } },
+  "@feedbackSubject": {
+    "placeholders": {
+      "stars": {
+        "type": "int"
+      }
+    }
+  },
   "noEmailApp": "No email app is set up on this device.",
-
   "shareApp": "Share the app",
   "shareAppText": "Eluna Media — a free, fully offline photo, video and audio converter. No subscriptions, no watermarks, no accounts.",
   "appVersionLabel": "Version {version}",
-  "@appVersionLabel": { "placeholders": { "version": { "type": "String" } } },
-
+  "@appVersionLabel": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
   "openFile": "Open",
   "openFolder": "Show folder",
   "noAppToOpen": "No app on this device can open that file.",
   "openFailed": "Could not open the file.",
-
   "twoPassLabel": "Two-pass for exact size",
   "twoPassHint": "Fit-to-size jobs encode twice and hit the byte budget noticeably more precisely — at roughly double the time and battery.",
-
   "whatsNewTitle": "What's new",
   "whatsNew1": "Achievements — private, counted on this device only.",
   "whatsNew2": "Merge videos: stitch clips into one MP4.",
   "whatsNew3": "Hardware encoding — faster and cooler on supported devices.",
   "whatsNew4": "Crop to 1:1 / 9:16 / 16:9, audio volume, speed 0.25–4×.",
   "whatsNew5": "Optional two-pass mode for exact target sizes.",
-
   "achievementsTitle": "Achievements",
   "achievementsProgress": "{done} of {total}",
-  "@achievementsProgress": { "placeholders": { "done": { "type": "int" }, "total": { "type": "int" } } },
+  "@achievementsProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "achievementUnlocked": "Achievement unlocked: {title}",
-  "@achievementUnlocked": { "placeholders": { "title": { "type": "String" } } },
+  "@achievementUnlocked": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "achievementsPrivacyNote": "Counted on this device only. Nothing is uploaded anywhere.",
-
   "achFirstConversionTitle": "First steps",
   "achFirstConversionBody": "Convert your first file.",
   "achTenConversionsTitle": "Warmed up",
@@ -376,5 +548,102 @@
   "achNightOwlTitle": "Night owl",
   "achNightOwlBody": "Finish a conversion between midnight and 5 AM.",
   "achPlatinumTitle": "Platinum",
-  "achPlatinumBody": "Earn every other achievement."
+  "achPlatinumBody": "Earn every other achievement.",
+  "storageTitle": "Storage",
+  "storageBody": "Converted files stay inside the app until you save or share them, where no file manager can reach them.",
+  "storageEmpty": "Nothing stored",
+  "storageUsage": "Stored: {size}",
+  "@storageUsage": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "storageClearTitle": "Clear stored files?",
+  "storageClearBody": "Deletes every finished result the app is still holding. Files you already saved or shared are untouched.",
+  "storageClearAction": "Clear",
+  "storageCleared": "Freed {size}",
+  "@storageCleared": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "autoSaveLabel": "Save results automatically",
+  "autoSaveHint": "Puts each finished file in the gallery — audio in Downloads — as soon as it is ready.",
+  "lowSpaceTitle": "Not much room left",
+  "lowSpaceBody": "This batch needs about {needed} and only {free} is free. The conversion may stop part-way.",
+  "@lowSpaceBody": {
+    "placeholders": {
+      "needed": {
+        "type": "String"
+      },
+      "free": {
+        "type": "String"
+      }
+    }
+  },
+  "saveAll": "Save all ({count})",
+  "@saveAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "savedAll": "Saved: {count}",
+  "@savedAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "savedSome": "Saved {saved} of {total}",
+  "@savedSome": {
+    "placeholders": {
+      "saved": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "presetFitPhotoTitle": "Fit photo to size",
+  "presetFitPhotoBody": "Squeeze a picture under an exact limit — upload forms, applications.",
+  "photoFitHint": "The app tries qualities until one fits. If the budget is too small for the picture, it reduces the frame size as well.",
+  "sizeTargetKb": "{kb} KB",
+  "@sizeTargetKb": {
+    "placeholders": {
+      "kb": {
+        "type": "int"
+      }
+    }
+  },
+  "sizeTargetDialogTitleKb": "Target size in KB",
+  "compareAction": "Compare",
+  "compareBefore": "Before",
+  "compareAfter": "After",
+  "compareHint": "Press and hold to see the original.",
+  "trimStart": "Start",
+  "trimEnd": "End",
+  "trimTimeHelp": "m:ss, up to {duration}",
+  "@trimTimeHelp": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "imageScaleLabel": "Scale",
+  "audioChannelsLabel": "Channels",
+  "audioMono": "Mono",
+  "audioStereo": "Stereo",
+  "sampleRateLabel": "Sample rate",
+  "voiceAudioHint": "Mono at 22.05 kHz roughly quarters a voice recording with no audible loss. Leave both original for music.",
+  "moveUp": "Move up",
+  "moveDown": "Move down"
 }

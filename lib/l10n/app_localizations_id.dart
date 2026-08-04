@@ -655,10 +655,10 @@ class L10nId extends L10n {
   String get hapticsLabel => 'Umpan balik getaran';
 
   @override
-  String get adPrivacyTitle => 'Ad privacy settings';
+  String get adPrivacyTitle => 'Setelan privasi iklan';
 
   @override
-  String get adPrivacySubtitle => 'Change your consent for advertising';
+  String get adPrivacySubtitle => 'Ubah persetujuan Anda untuk iklan';
 
   @override
   String get networkPrivacyTitle => 'Jaringan & privasi';
@@ -1051,4 +1051,131 @@ class L10nId extends L10n {
 
   @override
   String get achPlatinumBody => 'Raih semua pencapaian lainnya.';
+
+  @override
+  String get storageTitle => 'Penyimpanan';
+
+  @override
+  String get storageBody =>
+      'File hasil konversi tetap di dalam aplikasi sampai Anda menyimpan atau membagikannya; tidak ada pengelola file yang bisa menjangkaunya.';
+
+  @override
+  String get storageEmpty => 'Tidak ada yang tersimpan';
+
+  @override
+  String storageUsage(String size) {
+    return 'Terpakai: $size';
+  }
+
+  @override
+  String get storageClearTitle => 'Hapus file tersimpan?';
+
+  @override
+  String get storageClearBody =>
+      'Menghapus semua hasil selesai yang masih disimpan aplikasi. File yang sudah Anda simpan atau bagikan tidak terpengaruh.';
+
+  @override
+  String get storageClearAction => 'Hapus';
+
+  @override
+  String storageCleared(String size) {
+    return '$size dibebaskan';
+  }
+
+  @override
+  String get autoSaveLabel => 'Simpan hasil otomatis';
+
+  @override
+  String get autoSaveHint =>
+      'Menaruh setiap file selesai di galeri — audio di Unduhan — begitu siap.';
+
+  @override
+  String get lowSpaceTitle => 'Ruang tersisa sedikit';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return 'Kumpulan ini butuh sekitar $needed, sedangkan hanya $free yang bebas. Konversi bisa berhenti di tengah jalan.';
+  }
+
+  @override
+  String saveAll(int count) {
+    return 'Simpan semua ($count)';
+  }
+
+  @override
+  String savedAll(int count) {
+    return 'Tersimpan: $count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return '$saved dari $total tersimpan';
+  }
+
+  @override
+  String get presetFitPhotoTitle => 'Sesuaikan ukuran foto';
+
+  @override
+  String get presetFitPhotoBody =>
+      'Memampatkan gambar di bawah batas tepat — formulir unggah, lamaran.';
+
+  @override
+  String get photoFitHint =>
+      'Aplikasi mencoba beberapa tingkat kualitas sampai muat. Jika batasnya terlalu kecil, ukuran gambarnya juga dikecilkan.';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb KB';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => 'Ukuran target dalam KB';
+
+  @override
+  String get compareAction => 'Bandingkan';
+
+  @override
+  String get compareBefore => 'Sebelum';
+
+  @override
+  String get compareAfter => 'Sesudah';
+
+  @override
+  String get compareHint => 'Tekan dan tahan untuk melihat aslinya.';
+
+  @override
+  String get trimStart => 'Mulai';
+
+  @override
+  String get trimEnd => 'Akhir';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return 'm:dd, maksimal $duration';
+  }
+
+  @override
+  String get imageScaleLabel => 'Skala';
+
+  @override
+  String get audioChannelsLabel => 'Kanal';
+
+  @override
+  String get audioMono => 'Mono';
+
+  @override
+  String get audioStereo => 'Stereo';
+
+  @override
+  String get sampleRateLabel => 'Laju sampel';
+
+  @override
+  String get voiceAudioHint =>
+      'Mono 22,05 kHz memperkecil rekaman suara sekitar seperempat tanpa kehilangan yang terdengar. Untuk musik, biarkan keduanya asli.';
+
+  @override
+  String get moveUp => 'Naikkan';
+
+  @override
+  String get moveDown => 'Turunkan';
 }

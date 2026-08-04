@@ -33,6 +33,16 @@ final isMixedSelectionProvider = Provider<bool>(
   (ref) => ref.watch(pendingKindsProvider).length > 1,
 );
 
+/// True when the queue is a picture selection that actually moves — i.e. GIFs.
+/// It unlocks the video containers as targets, which is how "GIF → MP4" is
+/// reachable at all: by extension a GIF is an image, and images were only ever
+/// offered other image formats.
+final animatedSourceProvider = Provider<bool>((ref) {
+  final pending = ref.watch(queueProvider.select((q) => q.pending));
+  if (pending.isEmpty) return false;
+  return pending.every((job) => ContainerFormat.isAnimatedSource(job.inputName));
+});
+
 /// Which Simple-view preset is active, kept legal for what is actually queued:
 /// adding photos to an empty queue switches the preset to "Compress photo"
 /// rather than leaving "Compress video" selected and failing later.
@@ -83,6 +93,30 @@ class SizeTargetNotifier extends Notifier<int> {
 
 final sizeTargetProvider = NotifierProvider<SizeTargetNotifier, int>(SizeTargetNotifier.new);
 
+/// Size budget for the photo fit-to-size preset, in bytes. Separate from the
+/// video one on purpose: they are different orders of magnitude, and carrying
+/// "10 MB" over from a video job into a photo job would be a budget every
+/// phone photo already fits inside.
+class PhotoSizeTargetNotifier extends Notifier<int> {
+  @override
+  int build() => PhotoSizeTarget.kb500.bytes;
+
+  void set(int bytes) {
+    if (bytes > 0) state = bytes;
+  }
+}
+
+final photoSizeTargetProvider =
+    NotifierProvider<PhotoSizeTargetNotifier, int>(PhotoSizeTargetNotifier.new);
+
+/// The budget the currently selected preset should be handed, if it wants one.
+final activeSizeTargetProvider = Provider<int>((ref) {
+  final preset = ref.watch(selectedPresetProvider);
+  return preset.expectsKind == MediaKind.image
+      ? ref.watch(photoSizeTargetProvider)
+      : ref.watch(sizeTargetProvider);
+});
+
 /// The profile a queued file of this kind will *actually* be converted with,
 /// in whichever mode the user is in. Single source of truth: the queue stamps
 /// it onto every pending job, so the Queue tab shows what will really happen
@@ -96,13 +130,21 @@ final effectiveSettingsProvider = Provider.family<ConversionSettings, MediaKind>
   // The advanced profile is authored against one container. A file of another
   // kind cannot use it — a photo queued while the profile says MP4 is not
   // going to become a video — so it falls back to that kind's own default.
-  // Video → audio is the one legitimate crossing: that is audio extraction.
+  // Two crossings are legitimate: video → audio is extraction, and an animated
+  // image → video is a GIF becoming the clip it always was.
   final targetKind = s.container.kind;
-  final legal = targetKind == kind || (kind == MediaKind.video && targetKind == MediaKind.audio);
+  final legal = targetKind == kind ||
+      (kind == MediaKind.video && targetKind == MediaKind.audio) ||
+      (kind == MediaKind.image &&
+          targetKind == MediaKind.video &&
+          ref.watch(animatedSourceProvider));
   if (!legal) {
     s = s.withContainer(ContainerFormat.defaultOutputFor(kind));
   }
-  if (s.rateControl == RateControl.size) {
+  // The size mode is a video control. Attaching its megabyte-scale budget to a
+  // photo would hand the fit-to-size search a limit the picture is nowhere
+  // near, and make it probe for an answer it already had.
+  if (s.rateControl == RateControl.size && s.container.kind == MediaKind.video) {
     s = s.copyWith(sizeTargetBytes: ref.watch(sizeTargetProvider));
   }
   return s;
@@ -117,7 +159,14 @@ final simpleSettingsProvider = Provider.family<ConversionSettings, MediaKind>((r
   final selected = ref.watch(selectedPresetProvider);
   final preset = selected.expectsKind == kind ? selected : QuickPreset.defaultFor(kind);
 
-  var settings = preset.settings(sizeTargetBytes: ref.watch(sizeTargetProvider));
+  // Each kind draws on its own budget: a photo asked to fit 500 KB and a video
+  // asked to fit 10 MB are the same question at different scales, and mixing
+  // the two answers is how a photo preset would inherit a meaningless target.
+  var settings = preset.settings(
+    sizeTargetBytes: kind == MediaKind.image
+        ? ref.watch(photoSizeTargetProvider)
+        : ref.watch(sizeTargetProvider),
+  );
 
   // The explicit format choice only applies to the kind the user was looking
   // at when they made it.

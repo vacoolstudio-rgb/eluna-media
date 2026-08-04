@@ -658,10 +658,10 @@ class L10nUk extends L10n {
   String get hapticsLabel => 'Вібровідгук';
 
   @override
-  String get adPrivacyTitle => 'Ad privacy settings';
+  String get adPrivacyTitle => 'Налаштування реклами';
 
   @override
-  String get adPrivacySubtitle => 'Change your consent for advertising';
+  String get adPrivacySubtitle => 'Змінити згоду на показ реклами';
 
   @override
   String get networkPrivacyTitle => 'Мережа і приватність';
@@ -1051,4 +1051,131 @@ class L10nUk extends L10n {
 
   @override
   String get achPlatinumBody => 'Відкрийте всі інші досягнення.';
+
+  @override
+  String get storageTitle => 'Сховище';
+
+  @override
+  String get storageBody =>
+      'Конвертовані файли залишаються всередині застосунку, доки ви їх не збережете чи не надішлете, — файловий менеджер їх не бачить.';
+
+  @override
+  String get storageEmpty => 'Нічого не зберігається';
+
+  @override
+  String storageUsage(String size) {
+    return 'Зайнято: $size';
+  }
+
+  @override
+  String get storageClearTitle => 'Очистити сховище?';
+
+  @override
+  String get storageClearBody =>
+      'Видалить усі готові результати, які ще зберігає застосунок. Уже збережені та надіслані файли не зачіпаються.';
+
+  @override
+  String get storageClearAction => 'Очистити';
+
+  @override
+  String storageCleared(String size) {
+    return 'Звільнено $size';
+  }
+
+  @override
+  String get autoSaveLabel => 'Зберігати результат автоматично';
+
+  @override
+  String get autoSaveHint =>
+      'Кожен готовий файл одразу потрапляє до галереї, аудіо — до «Завантажень».';
+
+  @override
+  String get lowSpaceTitle => 'Мало вільного місця';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return 'Цій партії потрібно близько $needed, а вільно лише $free. Конвертація може обірватися на середині.';
+  }
+
+  @override
+  String saveAll(int count) {
+    return 'Зберегти все ($count)';
+  }
+
+  @override
+  String savedAll(int count) {
+    return 'Збережено: $count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return 'Збережено $saved з $total';
+  }
+
+  @override
+  String get presetFitPhotoTitle => 'Фото під потрібний розмір';
+
+  @override
+  String get presetFitPhotoBody =>
+      'Стиснути знімок під точний ліміт — форми завантаження, анкети.';
+
+  @override
+  String get photoFitHint =>
+      'Застосунок добирає якість, доки файл не вкладеться в ліміт. Якщо ліміт замалий, він ще й зменшить кадр.';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb КБ';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => 'Цільовий розмір у КБ';
+
+  @override
+  String get compareAction => 'Порівняти';
+
+  @override
+  String get compareBefore => 'До';
+
+  @override
+  String get compareAfter => 'Після';
+
+  @override
+  String get compareHint => 'Натисніть і утримуйте, щоб побачити оригінал.';
+
+  @override
+  String get trimStart => 'Початок';
+
+  @override
+  String get trimEnd => 'Кінець';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return 'хв:сс, не більше $duration';
+  }
+
+  @override
+  String get imageScaleLabel => 'Масштаб';
+
+  @override
+  String get audioChannelsLabel => 'Канали';
+
+  @override
+  String get audioMono => 'Моно';
+
+  @override
+  String get audioStereo => 'Стерео';
+
+  @override
+  String get sampleRateLabel => 'Частота дискретизації';
+
+  @override
+  String get voiceAudioHint =>
+      'Моно на 22,05 кГц зменшує голосовий запис приблизно вчетверо без чутних втрат. Для музики залиште обидва параметри вихідними.';
+
+  @override
+  String get moveUp => 'Вище';
+
+  @override
+  String get moveDown => 'Нижче';
 }

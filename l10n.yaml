@@ -3,3 +3,9 @@ template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 output-class: L10n
 nullable-getter: false
+# Stated explicitly. Left to its default, `flutter build` and `flutter gen-l10n`
+# disagreed about where the generated Dart belongs: the build wrote its copy
+# elsewhere and swept lib/l10n clean on the way, so every `flutter analyze`
+# after a build failed with a few dozen "Undefined class 'L10n'" until the
+# generator was run again by hand.
+output-dir: lib/l10n

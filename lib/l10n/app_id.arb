@@ -1,22 +1,17 @@
 {
   "@@locale": "id",
-
   "appTitle": "Eluna Media",
-
   "tabConvert": "Konversi",
   "tabQueue": "Antrean",
   "tabAbout": "Tentang",
-
   "addFiles": "Tambah file",
   "emptySelectionTitle": "Belum ada file",
   "emptySelectionBody": "Tambahkan foto, video, atau audio. Semuanya diproses di perangkat ini.",
-
   "sectionOutput": "Output",
   "sectionVideo": "Video",
   "sectionAudio": "Audio",
   "sectionImage": "Gambar",
   "sectionPrivacy": "Privasi",
-
   "outputFormat": "Format",
   "videoCodec": "Codec video",
   "audioCodec": "Codec audio",
@@ -53,7 +48,6 @@
   "enhanceStrong": "Kuat",
   "stripMetadata": "Hapus metadata",
   "stripMetadataHint": "Menghapus EXIF, GPS, dan stempel waktu dari output.",
-
   "startConversion": "Konversi {count} file",
   "batchResumed": "Konversi yang terputus dilanjutkan.",
   "converting": "Mengonversi…",
@@ -63,25 +57,19 @@
   "removeJob": "Hapus",
   "shareFile": "Bagikan",
   "retryJob": "Coba lagi",
-
   "queueEmptyTitle": "Antrean kosong",
   "queueEmptyBody": "File yang ditambahkan di tab Konversi akan muncul di sini.",
-
   "statusQueued": "Dalam antrean",
   "statusRunning": "Mengonversi",
   "statusCompleted": "Selesai",
   "statusFailed": "Gagal",
   "statusCancelled": "Dibatalkan",
-
   "batchSummary": "{done} dari {total} selesai",
-
   "batchCompleted": "{done, plural, =1{1 file dikonversi} other{{done} file dikonversi}}",
   "batchCompletedWithFailures": "{done} dikonversi, {failed} gagal.",
-
   "savedPercent": "{percent}% lebih kecil",
   "grewPercent": "{percent}% lebih besar",
   "sizeChange": "{from} → {to}",
-
   "appearance": "Tampilan",
   "theme": "Tema",
   "themeSystem": "Sistem",
@@ -89,18 +77,14 @@
   "themeDark": "Gelap",
   "language": "Bahasa",
   "languageSystem": "Sistem",
-
   "privacyTitle": "Privasi",
   "privacyBody": "Eluna Media mengonversi file sepenuhnya di perangkat ini menggunakan FFmpeg bawaan. File tidak pernah meninggalkan perangkat, tidak perlu akun, dan tidak ada telemetri. Satu-satunya yang memakai jaringan adalah satu banner iklan non-personalisasi, dan banner itu tidak pernah dimuat saat konversi berjalan — lihat layar Jaringan & privasi untuk audit lengkapnya.\n\nPenghapusan metadata aktif secara default, jadi EXIF, koordinat GPS, dan stempel waktu dibuang dari file yang kamu ekspor.",
   "licenseTitle": "Lisensi",
   "licenseBody": "Aplikasi ini menyertakan FFmpeg yang dibangun dengan x264, x265, dan komponen GPL lainnya, sehingga aplikasi secara keseluruhan didistribusikan di bawah GNU GPL v3.",
-
   "formatUnsupportedForSource": "Format ini tidak mendukung codec yang dipilih.",
   "sourceMissing": "File sumber sudah tidak tersedia.",
   "errorTitle": "Konversi gagal",
-
   "tabSettings": "Setelan",
-
   "introTitle": "Privat sejak dirancang",
   "introOfflineTitle": "Konversi di perangkat ini",
   "introOfflineBody": "Semua pekerjaan dilakukan FFmpeg bawaan. File tidak pernah meninggalkan ponsel — konversi tetap jalan di mode pesawat.",
@@ -110,10 +94,8 @@
   "introMetadataBody": "EXIF, GPS, dan stempel waktu dihapus dari setiap output secara default. Kamu bisa mematikannya.",
   "introAdNote": "Versi gratis menampilkan satu banner non-personalisasi — tidak pernah saat konversi, dan tidak sama sekali selama 14 hari pertama.",
   "introContinue": "Mulai",
-
   "modeSimple": "Sederhana",
   "modeAdvanced": "Lanjutan",
-
   "presetCompressVideoTitle": "Kompres video",
   "presetCompressVideoBody": "MP4 jauh lebih kecil, kualitas tetap bagus",
   "presetFitToSizeTitle": "Sesuaikan ukuran",
@@ -134,26 +116,21 @@
   "presetEnhancePhotoBody": "Lebih bersih, lebih tajam, warna lebih hidup",
   "presetImageToWebpTitle": "Foto ke WebP",
   "presetImageToWebpBody": "Format modern, lebih kecil dari JPEG",
-
   "sizeTargetTitle": "Ukuran target",
   "sizeTargetMb": "{mb} MB",
   "sizeTargetNamed": "{service} · {mb} MB",
   "sizeTargetCustom": "Kustom…",
   "sizeTargetDialogTitle": "Ukuran target dalam MB",
   "sizeTargetTooSmall": "Target terlalu kecil untuk durasi ini; kualitas terdekat yang memungkinkan akan digunakan.",
-
   "estimatePerFile": "≈ {size} per file",
   "estimateTotal": "Perkiraan output: ≈ {size}",
-
   "selectedFiles": "{count, plural, =1{1 file dipilih} other{{count} file dipilih}}",
   "clearSelection": "Bersihkan",
   "presetExpectsVideo": "Preset ini untuk file video.",
   "presetExpectsImage": "Preset ini untuk gambar.",
-
   "promiseOffline": "Konversi 100% offline",
   "promiseBatchFree": "Batch gratis",
   "promiseNoWatermark": "Tanpa watermark",
-
   "sectionTransform": "Transformasi",
   "rotateLabel": "Putar",
   "flipLabel": "Cermin horizontal",
@@ -167,22 +144,17 @@
   "transformNeedsReencode": "Putar, cermin, dan kecepatan butuh re-encoding, jadi nonaktif saat stream copy.",
   "keepSubtitles": "Pertahankan subtitle",
   "keepSubtitlesHint": "Membawa trek subtitle ke output. Hanya subtitle teks.",
-
   "sectionTrim": "Trim",
   "trimEnable": "Trim sumber",
   "trimHint": "Tersedia saat antrean berisi tepat satu file dengan durasi yang diketahui.",
   "trimRangeLabel": "{from} – {to}",
-
   "rateControlSize": "Ukuran target",
-
   "lowBatteryTitle": "Baterai lemah",
   "lowBatteryBody": "Konversi membuat prosesor bekerja keras. Kamu bisa mengisi daya dulu, atau lanjut saja.",
   "lowBatteryContinue": "Tetap konversi",
   "commonCancel": "Batal",
   "commonOk": "OK",
-
   "filesReceived": "{count, plural, =1{1 file diterima} other{{count} file diterima}}",
-
   "saveFile": "Simpan",
   "savedToGallery": "Disimpan ke galeri, album “Eluna Media”.",
   "savedToDownloads": "Disimpan ke Unduhan.",
@@ -191,12 +163,10 @@
   "finishedClearedUndo": "Tugas yang selesai dibersihkan.",
   "undo": "Urungkan",
   "errorDetailsTitle": "Detail error",
-
   "oledDark": "Tema gelap hitam pekat",
   "oledDarkHint": "Hitam murni menghemat daya di layar OLED.",
   "dynamicColorLabel": "Warna sistem (Material You)",
   "dynamicColorHint": "Mengikuti palet wallpaper perangkat bila didukung.",
-
   "sectionConversionPrefs": "Konversi",
   "powerModeLabel": "Mode daya",
   "powerEfficiency": "Adem & cepat",
@@ -204,7 +174,6 @@
   "powerQuality": "Kompresi maksimal",
   "powerModeHint": "Seberapa keras encoder video bekerja. Lebih adem dan cepat berarti file sedikit lebih besar. Tidak ada hal lain yang diperlambat — sama sekali.",
   "hapticsLabel": "Umpan balik getaran",
-
   "networkPrivacyTitle": "Jaringan & privasi",
   "netAuditIntro": "Daftar lengkap semua hal di aplikasi ini yang bisa mengakses jaringan.",
   "netAuditAdTitle": "Banner iklan — satu-satunya pengguna jaringan",
@@ -213,7 +182,6 @@
   "netAuditConversionBody": "Berjalan sepenuhnya di perangkat ini lewat FFmpeg bawaan. Nyalakan mode pesawat lalu konversi — tetap jalan.",
   "netAuditTelemetryTitle": "Telemetri",
   "netAuditTelemetryBody": "Tidak ada. Aplikasi tidak mengumpulkan analitik, laporan crash, maupun identifier, dan tidak punya sistem akun.",
-
   "sectionSupport": "Dukungan",
   "removeAdsTitle": "Hapus iklan",
   "removeAdsSubtitle": "Pembelian sekali bayar. Semua fitur sudah gratis.",
@@ -228,25 +196,20 @@
   "adFreeBadge": "Bebas iklan",
   "rateApp": "Beri nilai aplikasi",
   "openLicenses": "Lisensi open source",
-
   "errorFallbackTitle": "Terjadi kesalahan",
   "errorFallbackBody": "Aplikasi mengalami error tak terduga. Antrean dan setelanmu aman — kembali dan coba lagi.",
-
   "twoPassLabel": "Two-pass untuk ukuran presisi",
   "twoPassHint": "Tugas sesuaikan ukuran di-encode dua kali dan jauh lebih tepat mengenai anggaran byte — dengan waktu dan baterai kira-kira dua kali lipat.",
-
   "whatsNewTitle": "Yang baru",
   "whatsNew1": "Pencapaian — privat, dihitung hanya di perangkat ini.",
   "whatsNew2": "Gabung video: satukan klip jadi satu MP4.",
   "whatsNew3": "Encoding hardware — lebih cepat dan adem di perangkat yang mendukung.",
   "whatsNew4": "Pangkas ke 1:1 / 9:16 / 16:9, volume audio, kecepatan 0.25–4×.",
   "whatsNew5": "Mode two-pass opsional untuk ukuran target presisi.",
-
   "achievementsTitle": "Pencapaian",
   "achievementsProgress": "{done} dari {total}",
   "achievementUnlocked": "Pencapaian terbuka: {title}",
   "achievementsPrivacyNote": "Dihitung hanya di perangkat ini. Tidak ada yang diunggah ke mana pun.",
-
   "achFirstConversionTitle": "Langkah pertama",
   "achFirstConversionBody": "Konversi file pertamamu.",
   "achTenConversionsTitle": "Pemanasan",
@@ -283,7 +246,6 @@
   "achNightOwlBody": "Selesaikan konversi antara tengah malam dan jam 5 pagi.",
   "achPlatinumTitle": "Platinum",
   "achPlatinumBody": "Raih semua pencapaian lainnya.",
-
   "presetAudioToMp3Title": "Konversi audio",
   "presetAudioToMp3Body": "Ke MP3 — bisa diputar di mana saja",
   "presetCompressAudioTitle": "Kompres audio",
@@ -315,7 +277,6 @@
   "openFolder": "Tampilkan folder",
   "noAppToOpen": "Tidak ada aplikasi di perangkat ini yang bisa membuka file itu.",
   "openFailed": "Tidak bisa membuka file.",
-
   "modeAdvancedHint": "Tampilkan semua kontrol codec, bitrate, dan transformasi alih-alih kartu preset.",
   "rateDialogTitle": "Suka dengan Eluna Media?",
   "rateDialogBody": "Ketuk salah satu bintang. Penilaianmu hanya antara kamu dan toko aplikasi.",
@@ -336,5 +297,42 @@
   "queueNoFinishedTitle": "Belum ada yang selesai",
   "queueNoFinishedBody": "File hasil konversi mendarat di sini, siap dibuka, disimpan, atau dibagikan.",
   "capBitrateLabel": "Jangan pernah membuat file jadi lebih besar",
-  "capBitrateHint": "Membatasi enkode pada bitrate file sumbernya sendiri. Kualitas konstan tidak punya batas atas, jadi video yang sudah terkompresi bisa saja malah keluar lebih besar."
+  "capBitrateHint": "Membatasi enkode pada bitrate file sumbernya sendiri. Kualitas konstan tidak punya batas atas, jadi video yang sudah terkompresi bisa saja malah keluar lebih besar.",
+  "storageTitle": "Penyimpanan",
+  "storageBody": "File hasil konversi tetap di dalam aplikasi sampai Anda menyimpan atau membagikannya; tidak ada pengelola file yang bisa menjangkaunya.",
+  "storageEmpty": "Tidak ada yang tersimpan",
+  "storageUsage": "Terpakai: {size}",
+  "storageClearTitle": "Hapus file tersimpan?",
+  "storageClearBody": "Menghapus semua hasil selesai yang masih disimpan aplikasi. File yang sudah Anda simpan atau bagikan tidak terpengaruh.",
+  "storageClearAction": "Hapus",
+  "storageCleared": "{size} dibebaskan",
+  "autoSaveLabel": "Simpan hasil otomatis",
+  "autoSaveHint": "Menaruh setiap file selesai di galeri — audio di Unduhan — begitu siap.",
+  "lowSpaceTitle": "Ruang tersisa sedikit",
+  "lowSpaceBody": "Kumpulan ini butuh sekitar {needed}, sedangkan hanya {free} yang bebas. Konversi bisa berhenti di tengah jalan.",
+  "saveAll": "Simpan semua ({count})",
+  "savedAll": "Tersimpan: {count}",
+  "savedSome": "{saved} dari {total} tersimpan",
+  "presetFitPhotoTitle": "Sesuaikan ukuran foto",
+  "presetFitPhotoBody": "Memampatkan gambar di bawah batas tepat — formulir unggah, lamaran.",
+  "photoFitHint": "Aplikasi mencoba beberapa tingkat kualitas sampai muat. Jika batasnya terlalu kecil, ukuran gambarnya juga dikecilkan.",
+  "sizeTargetKb": "{kb} KB",
+  "sizeTargetDialogTitleKb": "Ukuran target dalam KB",
+  "compareAction": "Bandingkan",
+  "compareBefore": "Sebelum",
+  "compareAfter": "Sesudah",
+  "compareHint": "Tekan dan tahan untuk melihat aslinya.",
+  "trimStart": "Mulai",
+  "trimEnd": "Akhir",
+  "trimTimeHelp": "m:dd, maksimal {duration}",
+  "imageScaleLabel": "Skala",
+  "audioChannelsLabel": "Kanal",
+  "audioMono": "Mono",
+  "audioStereo": "Stereo",
+  "sampleRateLabel": "Laju sampel",
+  "voiceAudioHint": "Mono 22,05 kHz memperkecil rekaman suara sekitar seperempat tanpa kehilangan yang terdengar. Untuk musik, biarkan keduanya asli.",
+  "moveUp": "Naikkan",
+  "moveDown": "Turunkan",
+  "adPrivacyTitle": "Setelan privasi iklan",
+  "adPrivacySubtitle": "Ubah persetujuan Anda untuk iklan"
 }

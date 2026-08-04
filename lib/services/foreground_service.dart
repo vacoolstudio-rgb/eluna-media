@@ -30,11 +30,35 @@ class ForegroundService {
   int _lastPercent = -2;
   String _lastText = '';
 
-  Future<void> start({required String title, required String text, double? progress}) async {
+  /// Label for the notification's Cancel action, in the user's language. Held
+  /// because every progress update re-posts the whole notification, and a
+  /// re-post without the label would drop the button mid-batch.
+  String _cancelLabel = '';
+
+  /// Invoked when the user presses Cancel in the notification. Set once, by
+  /// the queue.
+  void Function()? onCancelRequested;
+
+  /// Installs the handler for requests coming *from* the platform. Idempotent.
+  void bindCancelHandler() {
+    if (!_supported) return;
+    _channel.setMethodCallHandler((call) async {
+      if (call.method == 'cancelRequested') onCancelRequested?.call();
+      return null;
+    });
+  }
+
+  Future<void> start({
+    required String title,
+    required String text,
+    required String cancelLabel,
+    double? progress,
+  }) async {
     if (!_supported) return;
     _running = true;
     _lastPercent = -2;
     _lastText = '';
+    _cancelLabel = cancelLabel;
     await _post('start', title: title, text: text, progress: progress);
   }
 
@@ -73,6 +97,7 @@ class ForegroundService {
         'title': title,
         'text': text,
         'progress': percent,
+        'cancelLabel': _cancelLabel,
       });
     } on PlatformException {
       // Losing the notification must not abort the conversion itself.

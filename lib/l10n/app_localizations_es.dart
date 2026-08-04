@@ -655,10 +655,10 @@ class L10nEs extends L10n {
   String get hapticsLabel => 'Respuesta háptica';
 
   @override
-  String get adPrivacyTitle => 'Ad privacy settings';
+  String get adPrivacyTitle => 'Privacidad de los anuncios';
 
   @override
-  String get adPrivacySubtitle => 'Change your consent for advertising';
+  String get adPrivacySubtitle => 'Cambia tu consentimiento para la publicidad';
 
   @override
   String get networkPrivacyTitle => 'Red y privacidad';
@@ -1053,4 +1053,131 @@ class L10nEs extends L10n {
 
   @override
   String get achPlatinumBody => 'Consigue todos los demás logros.';
+
+  @override
+  String get storageTitle => 'Almacenamiento';
+
+  @override
+  String get storageBody =>
+      'Los archivos convertidos permanecen dentro de la app hasta que los guardes o compartas; ningún gestor de archivos puede verlos.';
+
+  @override
+  String get storageEmpty => 'Nada almacenado';
+
+  @override
+  String storageUsage(String size) {
+    return 'Ocupado: $size';
+  }
+
+  @override
+  String get storageClearTitle => '¿Borrar los archivos guardados?';
+
+  @override
+  String get storageClearBody =>
+      'Elimina todos los resultados terminados que la app aún conserva. Los archivos que ya guardaste o compartiste no se tocan.';
+
+  @override
+  String get storageClearAction => 'Borrar';
+
+  @override
+  String storageCleared(String size) {
+    return 'Se liberaron $size';
+  }
+
+  @override
+  String get autoSaveLabel => 'Guardar los resultados automáticamente';
+
+  @override
+  String get autoSaveHint =>
+      'Coloca cada archivo terminado en la galería —el audio en Descargas— en cuanto está listo.';
+
+  @override
+  String get lowSpaceTitle => 'Queda poco espacio';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return 'Este lote necesita unos $needed y solo hay $free libres. La conversión puede detenerse a medias.';
+  }
+
+  @override
+  String saveAll(int count) {
+    return 'Guardar todo ($count)';
+  }
+
+  @override
+  String savedAll(int count) {
+    return 'Guardados: $count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return 'Se guardaron $saved de $total';
+  }
+
+  @override
+  String get presetFitPhotoTitle => 'Ajustar la foto a un tamaño';
+
+  @override
+  String get presetFitPhotoBody =>
+      'Comprime una imagen por debajo de un límite exacto: formularios de subida, solicitudes.';
+
+  @override
+  String get photoFitHint =>
+      'La app prueba calidades hasta que una entre. Si el límite es demasiado pequeño, también reduce el tamaño de la imagen.';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb KB';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => 'Tamaño objetivo en KB';
+
+  @override
+  String get compareAction => 'Comparar';
+
+  @override
+  String get compareBefore => 'Antes';
+
+  @override
+  String get compareAfter => 'Después';
+
+  @override
+  String get compareHint => 'Mantén pulsado para ver el original.';
+
+  @override
+  String get trimStart => 'Inicio';
+
+  @override
+  String get trimEnd => 'Fin';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return 'm:ss, hasta $duration';
+  }
+
+  @override
+  String get imageScaleLabel => 'Escala';
+
+  @override
+  String get audioChannelsLabel => 'Canales';
+
+  @override
+  String get audioMono => 'Mono';
+
+  @override
+  String get audioStereo => 'Estéreo';
+
+  @override
+  String get sampleRateLabel => 'Frecuencia de muestreo';
+
+  @override
+  String get voiceAudioHint =>
+      'Mono a 22,05 kHz reduce una grabación de voz a la cuarta parte sin pérdida audible. Para música, deja ambos como el original.';
+
+  @override
+  String get moveUp => 'Subir';
+
+  @override
+  String get moveDown => 'Bajar';
 }

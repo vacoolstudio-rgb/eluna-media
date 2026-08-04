@@ -1,22 +1,17 @@
 {
   "@@locale": "uk",
-
   "appTitle": "Eluna Media",
-
   "tabConvert": "Конвертація",
   "tabQueue": "Черга",
   "tabAbout": "Про застосунок",
-
   "addFiles": "Додати файли",
   "emptySelectionTitle": "Файлів поки немає",
   "emptySelectionBody": "Додайте фото, відео чи аудіо. Усе обробляється на цьому пристрої.",
-
   "sectionOutput": "Результат",
   "sectionVideo": "Відео",
   "sectionAudio": "Аудіо",
   "sectionImage": "Зображення",
   "sectionPrivacy": "Приватність",
-
   "outputFormat": "Формат",
   "videoCodec": "Відеокодек",
   "audioCodec": "Аудіокодек",
@@ -53,7 +48,6 @@
   "enhanceStrong": "Сильне",
   "stripMetadata": "Видаляти метадані",
   "stripMetadataHint": "Прибирає EXIF, GPS і часові мітки з результату.",
-
   "startConversion": "Конвертувати: {count}",
   "batchResumed": "Перервану конвертацію відновлено.",
   "converting": "Конвертація…",
@@ -63,25 +57,19 @@
   "removeJob": "Видалити",
   "shareFile": "Поділитися",
   "retryJob": "Повторити",
-
   "queueEmptyTitle": "Черга порожня",
   "queueEmptyBody": "Файли, додані на вкладці «Конвертація», з'являться тут.",
-
   "statusQueued": "У черзі",
   "statusRunning": "Конвертується",
   "statusCompleted": "Готово",
   "statusFailed": "Помилка",
   "statusCancelled": "Скасовано",
-
   "batchSummary": "Готово {done} з {total}",
-
   "batchCompleted": "{done, plural, =1{Конвертовано 1 файл} few{Конвертовано {done} файли} many{Конвертовано {done} файлів} other{Конвертовано {done} файлу}}",
   "batchCompletedWithFailures": "Готово: {done}, помилок: {failed}.",
-
   "savedPercent": "на {percent}% менше",
   "grewPercent": "на {percent}% більше",
   "sizeChange": "{from} → {to}",
-
   "appearance": "Оформлення",
   "theme": "Тема",
   "themeSystem": "Системна",
@@ -89,18 +77,14 @@
   "themeDark": "Темна",
   "language": "Мова",
   "languageSystem": "Системна",
-
   "privacyTitle": "Приватність",
   "privacyBody": "Eluna Media конвертує файли повністю на цьому пристрої за допомогою вбудованої збірки FFmpeg. Файли ніколи не залишають пристрій, обліковий запис не потрібен, телеметрії немає. Єдине, що використовує мережу, — один неперсоналізований рекламний банер; під час конвертації він не завантажується. Повний аудит — на екрані «Мережа і приватність».\n\nВидалення метаданих увімкнено за замовчуванням, тому EXIF, координати GPS і часові мітки не потрапляють до експортованих файлів.",
   "licenseTitle": "Ліцензія",
   "licenseBody": "Застосунок містить збірку FFmpeg із x264, x265 та іншими GPL-компонентами, тому повністю розповсюджується за ліцензією GNU GPL v3.",
-
   "formatUnsupportedForSource": "Цей формат не підтримує вибраний кодек.",
   "sourceMissing": "Вихідний файл більше недоступний.",
   "errorTitle": "Помилка конвертації",
-
   "tabSettings": "Налаштування",
-
   "introTitle": "Приватність за замовчуванням",
   "introOfflineTitle": "Конвертація на пристрої",
   "introOfflineBody": "Усю роботу виконує вбудований FFmpeg. Файли не залишають телефон — конвертація працює навіть у режимі польоту.",
@@ -110,10 +94,8 @@
   "introMetadataBody": "EXIF, GPS і часові мітки за замовчуванням видаляються з кожного результату. Це можна вимкнути.",
   "introAdNote": "У безкоштовній версії один неперсоналізований банер — ніколи під час конвертації, а перші 14 днів реклами немає взагалі.",
   "introContinue": "Почати",
-
   "modeSimple": "Просто",
   "modeAdvanced": "Детально",
-
   "presetCompressVideoTitle": "Стиснути відео",
   "presetCompressVideoBody": "MP4 набагато менший, якість зберігається",
   "presetFitToSizeTitle": "Вкластися в розмір",
@@ -134,26 +116,21 @@
   "presetEnhancePhotoBody": "Чистіше, чіткіше, живіші кольори",
   "presetImageToWebpTitle": "Фото у WebP",
   "presetImageToWebpBody": "Сучасний формат, менший за JPEG",
-
   "sizeTargetTitle": "Цільовий розмір",
   "sizeTargetMb": "{mb} МБ",
   "sizeTargetNamed": "{service} · {mb} МБ",
   "sizeTargetCustom": "Свій…",
   "sizeTargetDialogTitle": "Цільовий розмір у МБ",
   "sizeTargetTooSmall": "Ціль замала для такої тривалості; буде використано максимально близьку якість.",
-
   "estimatePerFile": "≈ {size} на файл",
   "estimateTotal": "Очікуваний розмір: ≈ {size}",
-
   "selectedFiles": "{count, plural, =1{Вибрано 1 файл} few{Вибрано {count} файли} many{Вибрано {count} файлів} other{Вибрано {count} файлу}}",
   "clearSelection": "Очистити",
   "presetExpectsVideo": "Цей пресет розрахований на відеофайли.",
   "presetExpectsImage": "Цей пресет розрахований на зображення.",
-
   "promiseOffline": "Конвертація 100% офлайн",
   "promiseBatchFree": "Пакетна обробка безкоштовна",
   "promiseNoWatermark": "Без водяних знаків",
-
   "sectionTransform": "Трансформація",
   "rotateLabel": "Поворот",
   "flipLabel": "Віддзеркалити по горизонталі",
@@ -167,22 +144,17 @@
   "transformNeedsReencode": "Поворот, дзеркало та швидкість потребують перекодування, тому під час копіювання потоку недоступні.",
   "keepSubtitles": "Зберігати субтитри",
   "keepSubtitlesHint": "Переносить доріжки субтитрів у результат. Лише текстові субтитри.",
-
   "sectionTrim": "Обрізання",
   "trimEnable": "Обрізати за часом",
   "trimHint": "Доступно, коли в черзі рівно один файл із відомою тривалістю.",
   "trimRangeLabel": "{from} – {to}",
-
   "rateControlSize": "Цільовий розмір",
-
   "lowBatteryTitle": "Заряд закінчується",
   "lowBatteryBody": "Конвертація сильно навантажує процесор. Можна спочатку підключити зарядку — або продовжити.",
   "lowBatteryContinue": "Все одно конвертувати",
   "commonCancel": "Скасувати",
   "commonOk": "OK",
-
   "filesReceived": "{count, plural, =1{Отримано 1 файл} few{Отримано {count} файли} many{Отримано {count} файлів} other{Отримано {count} файлу}}",
-
   "saveFile": "Зберегти",
   "savedToGallery": "Збережено в галерею, альбом «Eluna Media».",
   "savedToDownloads": "Збережено в «Завантаження».",
@@ -191,12 +163,10 @@
   "finishedClearedUndo": "Завершені завдання очищено.",
   "undo": "Повернути",
   "errorDetailsTitle": "Деталі помилки",
-
   "oledDark": "Суцільно чорна темна тема",
   "oledDarkHint": "Справжній чорний заощаджує енергію на OLED-екранах.",
   "dynamicColorLabel": "Системні кольори (Material You)",
   "dynamicColorHint": "Палітра шпалер пристрою там, де це підтримується.",
-
   "sectionConversionPrefs": "Конвертація",
   "powerModeLabel": "Режим живлення",
   "powerEfficiency": "Холодний і швидкий",
@@ -204,7 +174,6 @@
   "powerQuality": "Максимальне стиснення",
   "powerModeHint": "Наскільки старанно працює відеокодувальник. Холодніше і швидше — файли трохи більші. Більше ніщо не сповільнюється — ніколи.",
   "hapticsLabel": "Вібровідгук",
-
   "networkPrivacyTitle": "Мережа і приватність",
   "netAuditIntro": "Повний список усього в цьому застосунку, що може звертатися до мережі.",
   "netAuditAdTitle": "Рекламний банер — єдиний споживач мережі",
@@ -213,7 +182,6 @@
   "netAuditConversionBody": "Виконується повністю на пристрої через вбудований FFmpeg. Увімкніть режим польоту і спробуйте — працює.",
   "netAuditTelemetryTitle": "Телеметрія",
   "netAuditTelemetryBody": "Її немає. Застосунок не збирає ні аналітики, ні звітів про збої, ні ідентифікаторів, і не має системи облікових записів.",
-
   "sectionSupport": "Підтримка",
   "removeAdsTitle": "Прибрати рекламу",
   "removeAdsSubtitle": "Разова покупка. Усі функції і так безкоштовні.",
@@ -228,25 +196,20 @@
   "adFreeBadge": "Без реклами",
   "rateApp": "Оцінити застосунок",
   "openLicenses": "Ліцензії відкритого коду",
-
   "errorFallbackTitle": "Щось пішло не так",
   "errorFallbackBody": "Застосунок зіткнувся з неочікуваною помилкою. Черга і налаштування цілі — поверніться назад і спробуйте ще раз.",
-
   "twoPassLabel": "Два проходи для точного розміру",
   "twoPassHint": "Завдання «в розмір» кодуються двічі і влучають у бюджет помітно точніше — ціною приблизно подвійного часу та заряду.",
-
   "whatsNewTitle": "Що нового",
   "whatsNew1": "Досягнення — приватні, рахуються лише на пристрої.",
   "whatsNew2": "Склеювання відео: кілька роликів в один MP4.",
   "whatsNew3": "Апаратне кодування — швидше й холодніше на підтримуваних пристроях.",
   "whatsNew4": "Кадрування 1:1 / 9:16 / 16:9, гучність, швидкість 0,25–4×.",
   "whatsNew5": "Опційний двопрохідний режим для точного розміру.",
-
   "achievementsTitle": "Досягнення",
   "achievementsProgress": "{done} з {total}",
   "achievementUnlocked": "Відкрито досягнення: {title}",
   "achievementsPrivacyNote": "Рахується лише на цьому пристрої. Нікуди не надсилається.",
-
   "achFirstConversionTitle": "Перші кроки",
   "achFirstConversionBody": "Сконвертуйте перший файл.",
   "achTenConversionsTitle": "Розігрів",
@@ -283,7 +246,6 @@
   "achNightOwlBody": "Завершіть конвертацію між північчю і 5 ранку.",
   "achPlatinumTitle": "Платина",
   "achPlatinumBody": "Відкрийте всі інші досягнення.",
-
   "presetAudioToMp3Title": "Конвертувати аудіо",
   "presetAudioToMp3Body": "У MP3 — звучить будь-де",
   "presetCompressAudioTitle": "Стиснути аудіо",
@@ -315,7 +277,6 @@
   "openFolder": "Показати теку",
   "noAppToOpen": "На цьому пристрої немає застосунку, який відкриє цей файл.",
   "openFailed": "Не вдалося відкрити файл.",
-
   "modeAdvancedHint": "Показувати всі налаштування кодеків, бітрейта і трансформацій замість карток-пресетів.",
   "rateDialogTitle": "Подобається Eluna Media?",
   "rateDialogBody": "Торкніться зірки. Оцінка залишиться між вами і магазином.",
@@ -336,5 +297,42 @@
   "queueNoFinishedTitle": "Поки нічого не завершено",
   "queueNoFinishedBody": "Готові файли з'являться тут — їх можна відкрити, зберегти або надіслати.",
   "capBitrateLabel": "Ніколи не збільшувати файл",
-  "capBitrateHint": "Обмежує кодування бітрейтом оригіналу. У постійної якості немає власної верхньої межі, тому вже стиснене відео інакше може стати більшим."
+  "capBitrateHint": "Обмежує кодування бітрейтом оригіналу. У постійної якості немає власної верхньої межі, тому вже стиснене відео інакше може стати більшим.",
+  "storageTitle": "Сховище",
+  "storageBody": "Конвертовані файли залишаються всередині застосунку, доки ви їх не збережете чи не надішлете, — файловий менеджер їх не бачить.",
+  "storageEmpty": "Нічого не зберігається",
+  "storageUsage": "Зайнято: {size}",
+  "storageClearTitle": "Очистити сховище?",
+  "storageClearBody": "Видалить усі готові результати, які ще зберігає застосунок. Уже збережені та надіслані файли не зачіпаються.",
+  "storageClearAction": "Очистити",
+  "storageCleared": "Звільнено {size}",
+  "autoSaveLabel": "Зберігати результат автоматично",
+  "autoSaveHint": "Кожен готовий файл одразу потрапляє до галереї, аудіо — до «Завантажень».",
+  "lowSpaceTitle": "Мало вільного місця",
+  "lowSpaceBody": "Цій партії потрібно близько {needed}, а вільно лише {free}. Конвертація може обірватися на середині.",
+  "saveAll": "Зберегти все ({count})",
+  "savedAll": "Збережено: {count}",
+  "savedSome": "Збережено {saved} з {total}",
+  "presetFitPhotoTitle": "Фото під потрібний розмір",
+  "presetFitPhotoBody": "Стиснути знімок під точний ліміт — форми завантаження, анкети.",
+  "photoFitHint": "Застосунок добирає якість, доки файл не вкладеться в ліміт. Якщо ліміт замалий, він ще й зменшить кадр.",
+  "sizeTargetKb": "{kb} КБ",
+  "sizeTargetDialogTitleKb": "Цільовий розмір у КБ",
+  "compareAction": "Порівняти",
+  "compareBefore": "До",
+  "compareAfter": "Після",
+  "compareHint": "Натисніть і утримуйте, щоб побачити оригінал.",
+  "trimStart": "Початок",
+  "trimEnd": "Кінець",
+  "trimTimeHelp": "хв:сс, не більше {duration}",
+  "imageScaleLabel": "Масштаб",
+  "audioChannelsLabel": "Канали",
+  "audioMono": "Моно",
+  "audioStereo": "Стерео",
+  "sampleRateLabel": "Частота дискретизації",
+  "voiceAudioHint": "Моно на 22,05 кГц зменшує голосовий запис приблизно вчетверо без чутних втрат. Для музики залиште обидва параметри вихідними.",
+  "moveUp": "Вище",
+  "moveDown": "Нижче",
+  "adPrivacyTitle": "Налаштування реклами",
+  "adPrivacySubtitle": "Змінити згоду на показ реклами"
 }

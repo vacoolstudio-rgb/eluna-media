@@ -74,6 +74,70 @@ abstract final class OutputPaths {
     return i < 0 ? path : path.substring(i + 1);
   }
 
+  /// What the output folder currently costs the user.
+  ///
+  /// Everything the app converts lands here and, until this existed, stayed
+  /// here forever: the folder is inside the app's own sandbox, so it shows up
+  /// as "app data" and no file manager will ever let anyone find it. An app
+  /// that quietly grows to several gigabytes is a worse bug than any missing
+  /// feature, which is why the size is now something the app can state and the
+  /// user can act on.
+  ///
+  /// Catches everything: this is housekeeping, and on a host VM (tests) it
+  /// cannot even reach the platform channel that names the directory. Nothing
+  /// here is worth failing anything else over.
+  static Future<({int files, int bytes})> usage() async {
+    try {
+      final dir = await outputDirectory();
+      var files = 0;
+      var bytes = 0;
+      await for (final entity in dir.list()) {
+        if (entity is! File) continue;
+        files++;
+        try {
+          bytes += entity.lengthSync();
+        } on FileSystemException {
+          // Vanished between listing and measuring; it costs nothing now.
+        }
+      }
+      return (files: files, bytes: bytes);
+    } catch (_) {
+      return (files: 0, bytes: 0);
+    }
+  }
+
+  /// Deletes every output the app is no longer tracking, and returns the bytes
+  /// reclaimed.
+  ///
+  /// [keep] holds the paths still referenced by a queue entry. Anything else in
+  /// the folder is an orphan: the file of a job the user removed, or of a batch
+  /// that process death interrupted before its entry was ever written. Running
+  /// this at launch is what stops the folder growing without bound across
+  /// versions, including for people upgrading from a build that never cleaned
+  /// up at all.
+  /// Runs unawaited at launch, so like [usage] it swallows everything: a host
+  /// VM has no path_provider, and a sweep that throws into the void would take
+  /// the zone's error handler with it.
+  static Future<int> deleteOrphans(Set<String> keep) async {
+    var freed = 0;
+    try {
+      final dir = await outputDirectory();
+      await for (final entity in dir.list()) {
+        if (entity is! File || keep.contains(entity.path)) continue;
+        try {
+          final size = entity.lengthSync();
+          entity.deleteSync();
+          freed += size;
+        } on FileSystemException {
+          // Locked or already gone; the next sweep will get it.
+        }
+      }
+    } catch (_) {
+      return freed;
+    }
+    return freed;
+  }
+
   static String humanBytes(int bytes) {
     if (bytes <= 0) return '0 B';
     const units = ['B', 'KB', 'MB', 'GB'];

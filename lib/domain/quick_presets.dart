@@ -26,6 +26,9 @@ enum QuickPreset {
   /// Smaller JPEG out of any picture.
   compressImage,
 
+  /// Hit an exact size budget for a photo — upload limits, forms, e-mail.
+  fitPhotoToSize,
+
   /// Cleaner, punchier, apparently sharper JPEG out of any picture.
   enhancePhoto,
 
@@ -49,11 +52,13 @@ enum QuickPreset {
         videoToGif ||
         mergeVideos =>
           MediaKind.video,
-        compressImage || enhancePhoto || imageToWebp => MediaKind.image,
+        compressImage || fitPhotoToSize || enhancePhoto || imageToWebp =>
+          MediaKind.image,
         audioToMp3 || compressAudio => MediaKind.audio,
       };
 
-  bool get needsSizeTarget => this == QuickPreset.fitToSize;
+  bool get needsSizeTarget =>
+      this == QuickPreset.fitToSize || this == QuickPreset.fitPhotoToSize;
 
   /// Merge collapses the whole pending selection into one output.
   bool get isMerge => this == QuickPreset.mergeVideos;
@@ -124,6 +129,14 @@ enum QuickPreset {
             container: ContainerFormat.jpg,
             imageQuality: 80,
           ),
+        fitPhotoToSize => ConversionSettings(
+            container: ContainerFormat.jpg,
+            // The starting point only; the converter searches the quality
+            // scale for the largest version that fits, and drops the frame
+            // size if coarsening alone cannot get there.
+            imageQuality: 85,
+            sizeTargetBytes: sizeTargetBytes ?? PhotoSizeTarget.kb500.bytes,
+          ),
         enhancePhoto => const ConversionSettings(
             container: ContainerFormat.jpg,
             // The one preset that deliberately spends bits: re-compressing an
@@ -173,4 +186,24 @@ enum SizeTarget {
   final String? service;
 
   int get bytes => megabytes * 1000 * 1000;
+}
+
+/// Size budgets for [QuickPreset.fitPhotoToSize].
+///
+/// Photos live two orders of magnitude below video, and the numbers people
+/// actually meet are upload caps on forms and job applications ("under 500 KB",
+/// "max 2 MB"), not messenger limits. Offering Discord's 10 MB here would be
+/// offering a budget every phone photo already fits inside.
+enum PhotoSizeTarget {
+  kb100(100),
+  kb300(300),
+  kb500(500),
+  mb1(1000),
+  mb2(2000);
+
+  const PhotoSizeTarget(this.kilobytes);
+
+  final int kilobytes;
+
+  int get bytes => kilobytes * 1000;
 }

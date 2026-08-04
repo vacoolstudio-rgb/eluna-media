@@ -1,3 +1,5 @@
+// CupertinoPageTransitionsBuilder lives in the cupertino library, not material.
+import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:flutter/material.dart';
 
 /// The Eluna visual language, shared with the other apps in the family.

@@ -1,22 +1,17 @@
 {
   "@@locale": "ru",
-
   "appTitle": "Eluna Media",
-
   "tabConvert": "Конвертация",
   "tabQueue": "Очередь",
   "tabAbout": "О программе",
-
   "addFiles": "Добавить файлы",
   "emptySelectionTitle": "Файлов пока нет",
   "emptySelectionBody": "Добавьте фото, видео или аудио. Всё обрабатывается на этом устройстве.",
-
   "sectionOutput": "Результат",
   "sectionVideo": "Видео",
   "sectionAudio": "Аудио",
   "sectionImage": "Изображение",
   "sectionPrivacy": "Приватность",
-
   "outputFormat": "Формат",
   "videoCodec": "Видеокодек",
   "audioCodec": "Аудиокодек",
@@ -24,19 +19,43 @@
   "rateControlQuality": "Постоянное качество (CRF)",
   "rateControlBitrate": "Целевой битрейт",
   "crfLabel": "Качество (CRF {value})",
-  "@crfLabel": { "placeholders": { "value": { "type": "int" } } },
+  "@crfLabel": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "crfHint": "Меньше значение — выше качество и больше файл.",
   "videoBitrate": "Битрейт видео: {value} кбит/с",
-  "@videoBitrate": { "placeholders": { "value": { "type": "int" } } },
+  "@videoBitrate": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "audioBitrate": "Битрейт аудио: {value} кбит/с",
-  "@audioBitrate": { "placeholders": { "value": { "type": "int" } } },
+  "@audioBitrate": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "encodingPreset": "Пресет кодировщика",
   "encodingPresetHint": "Медленные пресеты сжимают лучше, но сильнее греют устройство.",
   "presetOriginal": "Исходное",
   "resolution": "Разрешение",
   "frameRate": "Частота кадров",
   "imageQuality": "Качество: {value}",
-  "@imageQuality": { "placeholders": { "value": { "type": "int" } } },
+  "@imageQuality": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "lossless": "Без потерь",
   "losslessHint": "Файлы больше, качество попиксельно точное.",
   "sectionEnhance": "Улучшение",
@@ -57,9 +76,14 @@
   "enhanceStrong": "Сильное",
   "stripMetadata": "Удалять метаданные",
   "stripMetadataHint": "Убирает EXIF, GPS и отметки времени из результата.",
-
   "startConversion": "Конвертировать: {count}",
-  "@startConversion": { "placeholders": { "count": { "type": "int" } } },
+  "@startConversion": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "batchResumed": "Прерванная конвертация возобновлена.",
   "converting": "Конвертация…",
   "cancelBatch": "Остановить",
@@ -68,39 +92,90 @@
   "removeJob": "Удалить",
   "shareFile": "Поделиться",
   "retryJob": "Повторить",
-
   "queueEmptyTitle": "Очередь пуста",
   "queueEmptyBody": "Файлы, добавленные на вкладке «Конвертация», появятся здесь.",
   "queueActiveTab": "Активные · {count}",
-  "@queueActiveTab": { "placeholders": { "count": { "type": "int" } } },
+  "@queueActiveTab": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "queueFinishedTab": "Завершённые · {count}",
-  "@queueFinishedTab": { "placeholders": { "count": { "type": "int" } } },
+  "@queueFinishedTab": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "queueNoActiveTitle": "Ничего не выполняется",
   "queueNoActiveBody": "Файлы в ожидании и в работе появятся здесь.",
   "queueNoFinishedTitle": "Пока ничего не завершено",
   "queueNoFinishedBody": "Готовые файлы появятся здесь — можно открыть, сохранить или поделиться.",
-
   "statusQueued": "В очереди",
   "statusRunning": "Конвертируется",
   "statusCompleted": "Готово",
   "statusFailed": "Ошибка",
   "statusCancelled": "Отменено",
-
   "batchSummary": "Готово {done} из {total}",
-  "@batchSummary": { "placeholders": { "done": { "type": "int" }, "total": { "type": "int" } } },
-
+  "@batchSummary": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "batchCompleted": "{done, plural, =1{Конвертирован 1 файл} few{Конвертировано {done} файла} many{Конвертировано {done} файлов} other{Конвертировано {done} файла}}",
-  "@batchCompleted": { "placeholders": { "done": { "type": "int" } } },
+  "@batchCompleted": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      }
+    }
+  },
   "batchCompletedWithFailures": "Готово: {done}, ошибок: {failed}.",
-  "@batchCompletedWithFailures": { "placeholders": { "done": { "type": "int" }, "failed": { "type": "int" } } },
-
+  "@batchCompletedWithFailures": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "failed": {
+        "type": "int"
+      }
+    }
+  },
   "savedPercent": "на {percent}% меньше",
-  "@savedPercent": { "placeholders": { "percent": { "type": "int" } } },
+  "@savedPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "grewPercent": "на {percent}% больше",
-  "@grewPercent": { "placeholders": { "percent": { "type": "int" } } },
+  "@grewPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "sizeChange": "{from} → {to}",
-  "@sizeChange": { "placeholders": { "from": { "type": "String" }, "to": { "type": "String" } } },
-
+  "@sizeChange": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
   "appearance": "Оформление",
   "theme": "Тема",
   "themeSystem": "Системная",
@@ -108,18 +183,14 @@
   "themeDark": "Тёмная",
   "language": "Язык",
   "languageSystem": "Системный",
-
   "privacyTitle": "Приватность",
   "privacyBody": "Eluna Media конвертирует файлы целиком на этом устройстве с помощью встроенной сборки FFmpeg. Файлы никогда не покидают устройство, учётная запись не нужна, телеметрии нет. Единственное, что использует сеть, — один неперсонализированный рекламный баннер; во время конвертации он не загружается. Подробности — на экране «Сеть и приватность».\n\nУдаление метаданных включено по умолчанию, поэтому EXIF, координаты GPS и отметки времени не попадают в экспортируемые файлы.",
   "licenseTitle": "Лицензия",
   "licenseBody": "Приложение включает сборку FFmpeg с x264, x265 и другими GPL-компонентами, поэтому распространяется целиком под GNU GPL v3.",
-
   "formatUnsupportedForSource": "Этот формат не поддерживает выбранный кодек.",
   "sourceMissing": "Исходный файл больше недоступен.",
   "errorTitle": "Ошибка конвертации",
-
   "tabSettings": "Настройки",
-
   "introTitle": "Приватность по умолчанию",
   "introOfflineTitle": "Конвертация на устройстве",
   "introOfflineBody": "Всю работу делает встроенный FFmpeg. Файлы не покидают телефон — конвертация работает даже в авиарежиме.",
@@ -129,11 +200,9 @@
   "introMetadataBody": "EXIF, GPS и отметки времени по умолчанию удаляются из каждого результата. Это можно отключить.",
   "introAdNote": "В бесплатной версии один неперсонализированный баннер — никогда во время конвертации, а первые 14 дней рекламы нет вовсе.",
   "introContinue": "Начать",
-
   "modeSimple": "Просто",
   "modeAdvanced": "Детально",
   "modeAdvancedHint": "Показывать все настройки кодеков, битрейта и трансформаций вместо карточек-пресетов.",
-
   "presetCompressVideoTitle": "Сжать видео",
   "presetCompressVideoBody": "MP4 намного меньше, качество остаётся",
   "presetFitToSizeTitle": "Уложиться в размер",
@@ -148,38 +217,72 @@
   "presetMergeBody": "Несколько роликов в один MP4, по порядку",
   "mergeNeedsTwo": "Выберите минимум два видео для склейки.",
   "mergedVideoName": "Склеенное видео ({count} роликов).mp4",
-  "@mergedVideoName": { "placeholders": { "count": { "type": "int" } } },
+  "@mergedVideoName": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "presetCompressImageTitle": "Сжать фото",
   "presetCompressImageBody": "JPEG меньше, потери почти не видны",
   "presetEnhancePhotoTitle": "Улучшить фото",
   "presetEnhancePhotoBody": "Чище, чётче, живее цвета",
   "presetImageToWebpTitle": "Фото в WebP",
   "presetImageToWebpBody": "Современный формат, меньше JPEG",
-
   "sizeTargetTitle": "Целевой размер",
   "sizeTargetMb": "{mb} МБ",
-  "@sizeTargetMb": { "placeholders": { "mb": { "type": "int" } } },
+  "@sizeTargetMb": {
+    "placeholders": {
+      "mb": {
+        "type": "int"
+      }
+    }
+  },
   "sizeTargetNamed": "{service} · {mb} МБ",
-  "@sizeTargetNamed": { "placeholders": { "service": { "type": "String" }, "mb": { "type": "int" } } },
+  "@sizeTargetNamed": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      },
+      "mb": {
+        "type": "int"
+      }
+    }
+  },
   "sizeTargetCustom": "Свой…",
   "sizeTargetDialogTitle": "Целевой размер в МБ",
   "sizeTargetTooSmall": "Цель слишком мала для такой длительности; будет использовано максимально близкое качество.",
-
   "estimatePerFile": "≈ {size} на файл",
-  "@estimatePerFile": { "placeholders": { "size": { "type": "String" } } },
+  "@estimatePerFile": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "estimateTotal": "Ожидаемый размер: ≈ {size}",
-  "@estimateTotal": { "placeholders": { "size": { "type": "String" } } },
-
+  "@estimateTotal": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "selectedFiles": "{count, plural, =1{Выбран 1 файл} few{Выбрано {count} файла} many{Выбрано {count} файлов} other{Выбрано {count} файла}}",
-  "@selectedFiles": { "placeholders": { "count": { "type": "int" } } },
+  "@selectedFiles": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "clearSelection": "Очистить",
   "presetExpectsVideo": "Этот пресет рассчитан на видеофайлы.",
   "presetExpectsImage": "Этот пресет рассчитан на изображения.",
-
   "promiseOffline": "Конвертация 100% офлайн",
   "promiseBatchFree": "Пакетная обработка бесплатна",
   "promiseNoWatermark": "Без вотермарок",
-
   "sectionTransform": "Трансформация",
   "rotateLabel": "Поворот",
   "flipLabel": "Отразить по горизонтали",
@@ -187,7 +290,13 @@
   "cropLabel": "Кадрирование",
   "cropHint": "Центрированная обрезка под выбранное соотношение — квадрат для ленты, 9:16 для сторис.",
   "volumeLabel": "Громкость: {percent}%",
-  "@volumeLabel": { "placeholders": { "percent": { "type": "int" } } },
+  "@volumeLabel": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "addAudioFiles": "Аудио и другие файлы",
   "hwEncoderLabel": "Аппаратное кодирование",
   "hwEncoderHint": "Использует видеочип устройства в режимах битрейта и целевого размера — заметно быстрее и холоднее. Режим качества (CRF) всегда использует точный программный кодировщик, а неудачная аппаратная задача автоматически повторяется программно.",
@@ -196,24 +305,34 @@
   "capBitrateHint": "Ограничивает кодирование битрейтом исходника. У постоянного качества нет верхнего предела, поэтому уже сжатое видео иначе может стать больше.",
   "keepSubtitles": "Сохранять субтитры",
   "keepSubtitlesHint": "Переносит дорожки субтитров в результат. Только текстовые субтитры.",
-
   "sectionTrim": "Обрезка",
   "trimEnable": "Обрезать по времени",
   "trimHint": "Доступно, когда в очереди ровно один файл с известной длительностью.",
   "trimRangeLabel": "{from} – {to}",
-  "@trimRangeLabel": { "placeholders": { "from": { "type": "String" }, "to": { "type": "String" } } },
-
+  "@trimRangeLabel": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
   "rateControlSize": "Целевой размер",
-
   "lowBatteryTitle": "Заряд на исходе",
   "lowBatteryBody": "Конвертация сильно нагружает процессор. Можно сначала подключить зарядку — или продолжить.",
   "lowBatteryContinue": "Всё равно конвертировать",
   "commonCancel": "Отмена",
   "commonOk": "ОК",
-
   "filesReceived": "{count, plural, =1{Получен 1 файл} few{Получено {count} файла} many{Получено {count} файлов} other{Получено {count} файла}}",
-  "@filesReceived": { "placeholders": { "count": { "type": "int" } } },
-
+  "@filesReceived": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "saveFile": "Сохранить",
   "savedToGallery": "Сохранено в галерею, альбом «Eluna Media».",
   "savedToDownloads": "Сохранено в «Загрузки».",
@@ -222,12 +341,10 @@
   "finishedClearedUndo": "Завершённые задания очищены.",
   "undo": "Отменить",
   "errorDetailsTitle": "Подробности ошибки",
-
   "oledDark": "Чисто чёрная тёмная тема",
   "oledDarkHint": "Настоящий чёрный экономит энергию на OLED-экранах.",
   "dynamicColorLabel": "Системные цвета (Material You)",
   "dynamicColorHint": "Палитра обоев устройства там, где это поддерживается.",
-
   "sectionConversionPrefs": "Конвертация",
   "powerModeLabel": "Режим энергопотребления",
   "powerEfficiency": "Холодный и быстрый",
@@ -235,7 +352,6 @@
   "powerQuality": "Максимальное сжатие",
   "powerModeHint": "Насколько усердно работает видеокодировщик. Холоднее и быстрее — файлы чуть больше. Больше ничего не замедляется — никогда.",
   "hapticsLabel": "Виброотклик",
-
   "adPrivacyTitle": "Настройки рекламы",
   "adPrivacySubtitle": "Изменить согласие на показ рекламы",
   "networkPrivacyTitle": "Сеть и приватность",
@@ -246,7 +362,6 @@
   "netAuditConversionBody": "Выполняется целиком на устройстве через встроенный FFmpeg. Включите авиарежим и попробуйте — работает.",
   "netAuditTelemetryTitle": "Телеметрия",
   "netAuditTelemetryBody": "Её нет. Приложение не собирает ни аналитику, ни отчёты о сбоях, ни идентификаторы, и не имеет системы аккаунтов.",
-
   "sectionSupport": "Поддержка",
   "removeAdsTitle": "Убрать рекламу",
   "removeAdsSubtitle": "Разовая покупка. Все функции и так бесплатны.",
@@ -254,7 +369,13 @@
   "removeAdsBullet2": "Один платёж — никакой подписки",
   "removeAdsBullet3": "Все функции остаются бесплатными для всех",
   "buyFor": "Купить · {price}",
-  "@buyFor": { "placeholders": { "price": { "type": "String" } } },
+  "@buyFor": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "restorePurchase": "Восстановить покупку",
   "purchaseSuccess": "Реклама убрана. Спасибо за поддержку разработки!",
   "purchaseUnavailable": "Магазин сейчас недоступен. Попробуйте позже.",
@@ -262,19 +383,15 @@
   "adFreeBadge": "Без рекламы",
   "rateApp": "Оценить приложение",
   "openLicenses": "Лицензии открытого кода",
-
   "errorFallbackTitle": "Что-то пошло не так",
   "errorFallbackBody": "Приложение столкнулось с неожиданной ошибкой. Очередь и настройки целы — вернитесь назад и попробуйте ещё раз.",
-
   "presetAudioToMp3Title": "Конвертировать аудио",
   "presetAudioToMp3Body": "В MP3 — играет везде",
   "presetCompressAudioTitle": "Сжать аудио",
   "presetCompressAudioBody": "Лёгкий AAC — голосовые, подкасты",
-
   "convertTo": "Конвертировать в",
   "formatRecommended": "Рекомендуется",
   "formatSectionHint": "Показаны только форматы, в которые ваши файлы действительно можно превратить.",
-
   "sourceVideo": "Видео",
   "sourceImage": "Фото",
   "sourceAudio": "Аудио",
@@ -284,25 +401,59 @@
   "filesTitle": "Файлы",
   "removeFile": "Убрать",
   "unknownDuration": "—",
-
   "percentDone": "{percent}%",
-  "@percentDone": { "placeholders": { "percent": { "type": "int" } } },
+  "@percentDone": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "timeLeft": "≈ {time} осталось",
-  "@timeLeft": { "placeholders": { "time": { "type": "String" } } },
+  "@timeLeft": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "jobSettingsTitle": "Настройки конвертации",
   "jobDetails": "Подробнее",
   "summaryQuality": "CRF {value}",
-  "@summaryQuality": { "placeholders": { "value": { "type": "int" } } },
+  "@summaryQuality": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "summaryBitrate": "{value} кбит/с",
-  "@summaryBitrate": { "placeholders": { "value": { "type": "int" } } },
+  "@summaryBitrate": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "summaryTargetSize": "≤ {size}",
-  "@summaryTargetSize": { "placeholders": { "size": { "type": "String" } } },
+  "@summaryTargetSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "summaryTwoPass": "Два прохода",
   "summaryEnhanced": "Улучшено",
   "summaryMetadataStripped": "Метаданные удалены",
   "summaryMerge": "Склейка {count} роликов",
-  "@summaryMerge": { "placeholders": { "count": { "type": "int" } } },
-
+  "@summaryMerge": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "rateDialogTitle": "Нравится Eluna Media?",
   "rateDialogBody": "Нажмите на звезду. Оценка останется между вами и магазином.",
   "rateDialogLater": "Не сейчас",
@@ -311,36 +462,57 @@
   "rateSendFeedback": "Написать отзыв",
   "rateThanks": "Спасибо!",
   "feedbackSubject": "Отзыв о Eluna Media ({stars}/5)",
-  "@feedbackSubject": { "placeholders": { "stars": { "type": "int" } } },
+  "@feedbackSubject": {
+    "placeholders": {
+      "stars": {
+        "type": "int"
+      }
+    }
+  },
   "noEmailApp": "На устройстве не настроено почтовое приложение.",
-
   "shareApp": "Поделиться приложением",
   "shareAppText": "Eluna Media — бесплатный конвертер фото, видео и аудио, полностью офлайн. Без подписок, без вотермарок, без аккаунтов.",
   "appVersionLabel": "Версия {version}",
-  "@appVersionLabel": { "placeholders": { "version": { "type": "String" } } },
-
+  "@appVersionLabel": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
   "openFile": "Открыть",
   "openFolder": "Показать папку",
   "noAppToOpen": "На устройстве нет приложения, которое откроет этот файл.",
   "openFailed": "Не удалось открыть файл.",
-
   "twoPassLabel": "Два прохода для точного размера",
   "twoPassHint": "Задания «в размер» кодируются дважды и попадают в бюджет заметно точнее — ценой примерно двойного времени и заряда.",
-
   "whatsNewTitle": "Что нового",
   "whatsNew1": "Достижения — приватные, считаются только на устройстве.",
   "whatsNew2": "Склейка видео: несколько роликов в один MP4.",
   "whatsNew3": "Аппаратное кодирование — быстрее и холоднее на поддерживаемых устройствах.",
   "whatsNew4": "Кадрирование 1:1 / 9:16 / 16:9, громкость, скорость 0.25–4×.",
   "whatsNew5": "Опциональный двухпроходный режим для точного размера.",
-
   "achievementsTitle": "Достижения",
   "achievementsProgress": "{done} из {total}",
-  "@achievementsProgress": { "placeholders": { "done": { "type": "int" }, "total": { "type": "int" } } },
+  "@achievementsProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "achievementUnlocked": "Достижение открыто: {title}",
-  "@achievementUnlocked": { "placeholders": { "title": { "type": "String" } } },
+  "@achievementUnlocked": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "achievementsPrivacyNote": "Считается только на этом устройстве. Никуда не отправляется.",
-
   "achFirstConversionTitle": "Первые шаги",
   "achFirstConversionBody": "Сконвертируйте первый файл.",
   "achTenConversionsTitle": "Разогрев",
@@ -376,5 +548,40 @@
   "achNightOwlTitle": "Сова",
   "achNightOwlBody": "Завершите конвертацию между полуночью и 5 утра.",
   "achPlatinumTitle": "Платина",
-  "achPlatinumBody": "Откройте все остальные достижения."
+  "achPlatinumBody": "Откройте все остальные достижения.",
+  "storageTitle": "Хранилище",
+  "storageBody": "Конвертированные файлы остаются внутри приложения, пока вы их не сохраните или не отправите, — файловый менеджер их не видит.",
+  "storageEmpty": "Ничего не хранится",
+  "storageUsage": "Занято: {size}",
+  "storageClearTitle": "Очистить хранилище?",
+  "storageClearBody": "Удалит все готовые результаты, которые ещё лежат в приложении. Уже сохранённые и отправленные файлы не затрагиваются.",
+  "storageClearAction": "Очистить",
+  "storageCleared": "Освобождено {size}",
+  "autoSaveLabel": "Сохранять результат автоматически",
+  "autoSaveHint": "Каждый готовый файл сразу попадает в галерею, аудио — в «Загрузки».",
+  "lowSpaceTitle": "Мало свободного места",
+  "lowSpaceBody": "Этой партии нужно около {needed}, а свободно только {free}. Конвертация может оборваться на середине.",
+  "saveAll": "Сохранить все ({count})",
+  "savedAll": "Сохранено: {count}",
+  "savedSome": "Сохранено {saved} из {total}",
+  "presetFitPhotoTitle": "Фото под нужный размер",
+  "presetFitPhotoBody": "Ужать снимок под точный лимит — формы загрузки, анкеты.",
+  "photoFitHint": "Приложение подбирает качество, пока файл не уложится в лимит. Если лимит слишком мал для снимка, оно ещё и уменьшит кадр.",
+  "sizeTargetKb": "{kb} КБ",
+  "sizeTargetDialogTitleKb": "Целевой размер в КБ",
+  "compareAction": "Сравнить",
+  "compareBefore": "До",
+  "compareAfter": "После",
+  "compareHint": "Нажмите и удерживайте, чтобы увидеть оригинал.",
+  "trimStart": "Начало",
+  "trimEnd": "Конец",
+  "trimTimeHelp": "м:сс, не больше {duration}",
+  "imageScaleLabel": "Масштаб",
+  "audioChannelsLabel": "Каналы",
+  "audioMono": "Моно",
+  "audioStereo": "Стерео",
+  "sampleRateLabel": "Частота дискретизации",
+  "voiceAudioHint": "Моно на 22,05 кГц уменьшает голосовую запись примерно вчетверо без слышимых потерь. Для музыки оставьте оба параметра исходными.",
+  "moveUp": "Выше",
+  "moveDown": "Ниже"
 }

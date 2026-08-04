@@ -1922,6 +1922,216 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Earn every other achievement.'**
   String get achPlatinumBody;
+
+  /// No description provided for @storageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage'**
+  String get storageTitle;
+
+  /// No description provided for @storageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Converted files stay inside the app until you save or share them, where no file manager can reach them.'**
+  String get storageBody;
+
+  /// No description provided for @storageEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing stored'**
+  String get storageEmpty;
+
+  /// No description provided for @storageUsage.
+  ///
+  /// In en, this message translates to:
+  /// **'Stored: {size}'**
+  String storageUsage(String size);
+
+  /// No description provided for @storageClearTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear stored files?'**
+  String get storageClearTitle;
+
+  /// No description provided for @storageClearBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Deletes every finished result the app is still holding. Files you already saved or shared are untouched.'**
+  String get storageClearBody;
+
+  /// No description provided for @storageClearAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get storageClearAction;
+
+  /// No description provided for @storageCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'Freed {size}'**
+  String storageCleared(String size);
+
+  /// No description provided for @autoSaveLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Save results automatically'**
+  String get autoSaveLabel;
+
+  /// No description provided for @autoSaveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Puts each finished file in the gallery — audio in Downloads — as soon as it is ready.'**
+  String get autoSaveHint;
+
+  /// No description provided for @lowSpaceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Not much room left'**
+  String get lowSpaceTitle;
+
+  /// No description provided for @lowSpaceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This batch needs about {needed} and only {free} is free. The conversion may stop part-way.'**
+  String lowSpaceBody(String needed, String free);
+
+  /// No description provided for @saveAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Save all ({count})'**
+  String saveAll(int count);
+
+  /// No description provided for @savedAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved: {count}'**
+  String savedAll(int count);
+
+  /// No description provided for @savedSome.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved {saved} of {total}'**
+  String savedSome(int saved, int total);
+
+  /// No description provided for @presetFitPhotoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fit photo to size'**
+  String get presetFitPhotoTitle;
+
+  /// No description provided for @presetFitPhotoBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Squeeze a picture under an exact limit — upload forms, applications.'**
+  String get presetFitPhotoBody;
+
+  /// No description provided for @photoFitHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The app tries qualities until one fits. If the budget is too small for the picture, it reduces the frame size as well.'**
+  String get photoFitHint;
+
+  /// No description provided for @sizeTargetKb.
+  ///
+  /// In en, this message translates to:
+  /// **'{kb} KB'**
+  String sizeTargetKb(int kb);
+
+  /// No description provided for @sizeTargetDialogTitleKb.
+  ///
+  /// In en, this message translates to:
+  /// **'Target size in KB'**
+  String get sizeTargetDialogTitleKb;
+
+  /// No description provided for @compareAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare'**
+  String get compareAction;
+
+  /// No description provided for @compareBefore.
+  ///
+  /// In en, this message translates to:
+  /// **'Before'**
+  String get compareBefore;
+
+  /// No description provided for @compareAfter.
+  ///
+  /// In en, this message translates to:
+  /// **'After'**
+  String get compareAfter;
+
+  /// No description provided for @compareHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Press and hold to see the original.'**
+  String get compareHint;
+
+  /// No description provided for @trimStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get trimStart;
+
+  /// No description provided for @trimEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'End'**
+  String get trimEnd;
+
+  /// No description provided for @trimTimeHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'m:ss, up to {duration}'**
+  String trimTimeHelp(String duration);
+
+  /// No description provided for @imageScaleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Scale'**
+  String get imageScaleLabel;
+
+  /// No description provided for @audioChannelsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Channels'**
+  String get audioChannelsLabel;
+
+  /// No description provided for @audioMono.
+  ///
+  /// In en, this message translates to:
+  /// **'Mono'**
+  String get audioMono;
+
+  /// No description provided for @audioStereo.
+  ///
+  /// In en, this message translates to:
+  /// **'Stereo'**
+  String get audioStereo;
+
+  /// No description provided for @sampleRateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample rate'**
+  String get sampleRateLabel;
+
+  /// No description provided for @voiceAudioHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Mono at 22.05 kHz roughly quarters a voice recording with no audible loss. Leave both original for music.'**
+  String get voiceAudioHint;
+
+  /// No description provided for @moveUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Move up'**
+  String get moveUp;
+
+  /// No description provided for @moveDown.
+  ///
+  /// In en, this message translates to:
+  /// **'Move down'**
+  String get moveDown;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -653,10 +653,10 @@ class L10nTr extends L10n {
   String get hapticsLabel => 'Titreşimli geri bildirim';
 
   @override
-  String get adPrivacyTitle => 'Ad privacy settings';
+  String get adPrivacyTitle => 'Reklam gizliliği ayarları';
 
   @override
-  String get adPrivacySubtitle => 'Change your consent for advertising';
+  String get adPrivacySubtitle => 'Reklam onayınızı değiştirin';
 
   @override
   String get networkPrivacyTitle => 'Ağ ve gizlilik';
@@ -1048,4 +1048,131 @@ class L10nTr extends L10n {
 
   @override
   String get achPlatinumBody => 'Diğer tüm başarımları kazanın.';
+
+  @override
+  String get storageTitle => 'Depolama';
+
+  @override
+  String get storageBody =>
+      'Dönüştürülen dosyalar siz kaydedene veya paylaşana kadar uygulamanın içinde kalır; hiçbir dosya yöneticisi onlara erişemez.';
+
+  @override
+  String get storageEmpty => 'Depoda bir şey yok';
+
+  @override
+  String storageUsage(String size) {
+    return 'Kullanılan: $size';
+  }
+
+  @override
+  String get storageClearTitle => 'Saklanan dosyalar silinsin mi?';
+
+  @override
+  String get storageClearBody =>
+      'Uygulamanın hâlâ tuttuğu tüm tamamlanmış sonuçları siler. Daha önce kaydettiğiniz veya paylaştığınız dosyalara dokunulmaz.';
+
+  @override
+  String get storageClearAction => 'Temizle';
+
+  @override
+  String storageCleared(String size) {
+    return '$size boşaltıldı';
+  }
+
+  @override
+  String get autoSaveLabel => 'Sonuçları otomatik kaydet';
+
+  @override
+  String get autoSaveHint =>
+      'Biten her dosyayı hazır olur olmaz galeriye, sesi ise İndirilenler\'e koyar.';
+
+  @override
+  String get lowSpaceTitle => 'Yer az kaldı';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return 'Bu grup yaklaşık $needed yer istiyor, boşta yalnızca $free var. Dönüştürme yarıda kesilebilir.';
+  }
+
+  @override
+  String saveAll(int count) {
+    return 'Tümünü kaydet ($count)';
+  }
+
+  @override
+  String savedAll(int count) {
+    return 'Kaydedildi: $count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return '$total dosyadan $saved tanesi kaydedildi';
+  }
+
+  @override
+  String get presetFitPhotoTitle => 'Fotoğrafı boyuta sığdır';
+
+  @override
+  String get presetFitPhotoBody =>
+      'Bir görseli tam bir sınırın altına sıkıştırır — yükleme formları, başvurular.';
+
+  @override
+  String get photoFitHint =>
+      'Uygulama sığan bir kalite bulana kadar dener. Sınır fotoğraf için fazla küçükse kare boyutunu da küçültür.';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb KB';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => 'KB cinsinden hedef boyut';
+
+  @override
+  String get compareAction => 'Karşılaştır';
+
+  @override
+  String get compareBefore => 'Önce';
+
+  @override
+  String get compareAfter => 'Sonra';
+
+  @override
+  String get compareHint => 'Orijinali görmek için basılı tutun.';
+
+  @override
+  String get trimStart => 'Başlangıç';
+
+  @override
+  String get trimEnd => 'Bitiş';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return 'd:ss, en fazla $duration';
+  }
+
+  @override
+  String get imageScaleLabel => 'Ölçek';
+
+  @override
+  String get audioChannelsLabel => 'Kanallar';
+
+  @override
+  String get audioMono => 'Mono';
+
+  @override
+  String get audioStereo => 'Stereo';
+
+  @override
+  String get sampleRateLabel => 'Örnekleme hızı';
+
+  @override
+  String get voiceAudioHint =>
+      '22,05 kHz mono, bir ses kaydını duyulur kayıp olmadan yaklaşık dörtte birine indirir. Müzik için ikisini de orijinal bırakın.';
+
+  @override
+  String get moveUp => 'Yukarı taşı';
+
+  @override
+  String get moveDown => 'Aşağı taşı';
 }

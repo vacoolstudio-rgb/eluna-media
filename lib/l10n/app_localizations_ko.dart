@@ -634,10 +634,10 @@ class L10nKo extends L10n {
   String get hapticsLabel => '진동 피드백';
 
   @override
-  String get adPrivacyTitle => 'Ad privacy settings';
+  String get adPrivacyTitle => '광고 개인정보 설정';
 
   @override
-  String get adPrivacySubtitle => 'Change your consent for advertising';
+  String get adPrivacySubtitle => '광고 동의를 변경합니다';
 
   @override
   String get networkPrivacyTitle => '네트워크 및 개인정보 보호';
@@ -1013,4 +1013,128 @@ class L10nKo extends L10n {
 
   @override
   String get achPlatinumBody => '다른 모든 업적을 달성하세요.';
+
+  @override
+  String get storageTitle => '저장 공간';
+
+  @override
+  String get storageBody =>
+      '변환된 파일은 저장하거나 공유하기 전까지 앱 안에 남아 있으며, 파일 관리자에서는 보이지 않습니다.';
+
+  @override
+  String get storageEmpty => '저장된 파일 없음';
+
+  @override
+  String storageUsage(String size) {
+    return '사용 중: $size';
+  }
+
+  @override
+  String get storageClearTitle => '저장된 파일을 지울까요?';
+
+  @override
+  String get storageClearBody =>
+      '앱이 아직 갖고 있는 완료된 결과를 모두 삭제합니다. 이미 저장하거나 공유한 파일은 그대로입니다.';
+
+  @override
+  String get storageClearAction => '지우기';
+
+  @override
+  String storageCleared(String size) {
+    return '$size 확보함';
+  }
+
+  @override
+  String get autoSaveLabel => '결과 자동 저장';
+
+  @override
+  String get autoSaveHint => '완료된 파일을 바로 갤러리에(오디오는 다운로드에) 저장합니다.';
+
+  @override
+  String get lowSpaceTitle => '저장 공간이 부족합니다';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return '이 묶음에는 약 $needed가 필요하지만 남은 공간은 $free뿐입니다. 변환이 도중에 멈출 수 있습니다.';
+  }
+
+  @override
+  String saveAll(int count) {
+    return '모두 저장 ($count)';
+  }
+
+  @override
+  String savedAll(int count) {
+    return '저장됨: $count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return '$total개 중 $saved개 저장됨';
+  }
+
+  @override
+  String get presetFitPhotoTitle => '사진을 지정 용량에 맞추기';
+
+  @override
+  String get presetFitPhotoBody => '정확한 용량 제한 아래로 사진을 압축합니다 — 업로드 양식, 지원서.';
+
+  @override
+  String get photoFitHint => '맞을 때까지 품질을 조정합니다. 지정 용량이 너무 작으면 이미지 크기도 줄입니다.';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb KB';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => '목표 크기 (KB)';
+
+  @override
+  String get compareAction => '비교';
+
+  @override
+  String get compareBefore => '변환 전';
+
+  @override
+  String get compareAfter => '변환 후';
+
+  @override
+  String get compareHint => '길게 누르면 원본이 보입니다.';
+
+  @override
+  String get trimStart => '시작';
+
+  @override
+  String get trimEnd => '끝';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return 'm:ss 형식, 최대 $duration';
+  }
+
+  @override
+  String get imageScaleLabel => '크기 비율';
+
+  @override
+  String get audioChannelsLabel => '채널';
+
+  @override
+  String get audioMono => '모노';
+
+  @override
+  String get audioStereo => '스테레오';
+
+  @override
+  String get sampleRateLabel => '샘플링 레이트';
+
+  @override
+  String get voiceAudioHint =>
+      '22.05 kHz 모노는 음성 녹음을 들리는 손실 없이 약 1/4로 줄입니다. 음악은 둘 다 원본으로 두세요.';
+
+  @override
+  String get moveUp => '위로';
+
+  @override
+  String get moveDown => '아래로';
 }

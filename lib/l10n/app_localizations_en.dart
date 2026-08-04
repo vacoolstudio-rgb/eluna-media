@@ -1041,4 +1041,131 @@ class L10nEn extends L10n {
 
   @override
   String get achPlatinumBody => 'Earn every other achievement.';
+
+  @override
+  String get storageTitle => 'Storage';
+
+  @override
+  String get storageBody =>
+      'Converted files stay inside the app until you save or share them, where no file manager can reach them.';
+
+  @override
+  String get storageEmpty => 'Nothing stored';
+
+  @override
+  String storageUsage(String size) {
+    return 'Stored: $size';
+  }
+
+  @override
+  String get storageClearTitle => 'Clear stored files?';
+
+  @override
+  String get storageClearBody =>
+      'Deletes every finished result the app is still holding. Files you already saved or shared are untouched.';
+
+  @override
+  String get storageClearAction => 'Clear';
+
+  @override
+  String storageCleared(String size) {
+    return 'Freed $size';
+  }
+
+  @override
+  String get autoSaveLabel => 'Save results automatically';
+
+  @override
+  String get autoSaveHint =>
+      'Puts each finished file in the gallery — audio in Downloads — as soon as it is ready.';
+
+  @override
+  String get lowSpaceTitle => 'Not much room left';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return 'This batch needs about $needed and only $free is free. The conversion may stop part-way.';
+  }
+
+  @override
+  String saveAll(int count) {
+    return 'Save all ($count)';
+  }
+
+  @override
+  String savedAll(int count) {
+    return 'Saved: $count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return 'Saved $saved of $total';
+  }
+
+  @override
+  String get presetFitPhotoTitle => 'Fit photo to size';
+
+  @override
+  String get presetFitPhotoBody =>
+      'Squeeze a picture under an exact limit — upload forms, applications.';
+
+  @override
+  String get photoFitHint =>
+      'The app tries qualities until one fits. If the budget is too small for the picture, it reduces the frame size as well.';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb KB';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => 'Target size in KB';
+
+  @override
+  String get compareAction => 'Compare';
+
+  @override
+  String get compareBefore => 'Before';
+
+  @override
+  String get compareAfter => 'After';
+
+  @override
+  String get compareHint => 'Press and hold to see the original.';
+
+  @override
+  String get trimStart => 'Start';
+
+  @override
+  String get trimEnd => 'End';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return 'm:ss, up to $duration';
+  }
+
+  @override
+  String get imageScaleLabel => 'Scale';
+
+  @override
+  String get audioChannelsLabel => 'Channels';
+
+  @override
+  String get audioMono => 'Mono';
+
+  @override
+  String get audioStereo => 'Stereo';
+
+  @override
+  String get sampleRateLabel => 'Sample rate';
+
+  @override
+  String get voiceAudioHint =>
+      'Mono at 22.05 kHz roughly quarters a voice recording with no audible loss. Leave both original for music.';
+
+  @override
+  String get moveUp => 'Move up';
+
+  @override
+  String get moveDown => 'Move down';
 }
