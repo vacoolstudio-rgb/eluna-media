@@ -126,6 +126,23 @@ void main() {
       expect(ContainerFormat.isAnimatedSource('sticker.webp'), isFalse);
     });
 
+    test('only formats the bundled FFmpeg can decode are claimed', () {
+      // The extra-inputs table means "the app can read this". SVG was in it and
+      // could not be read by any build we ship — rasterising it needs librsvg,
+      // which drags in cairo and pango. A promise that ends in an FFmpeg error
+      // is worse than admitting the file is unknown.
+      expect(ContainerFormat.kindOfFile('drawing.svg'), isNull);
+      // The rest of the exotic inputs stay claimed; docs/FFMPEG_BUILD.md lists
+      // them as the decoder set any slimmer build has to keep.
+      for (final name in [
+        'a.heic', 'a.heif', 'a.avif', 'a.jfif', 'a.ico',
+        'a.3gp', 'a.m4v', 'a.mpg', 'a.ts', 'a.wmv', 'a.flv', 'a.m2ts',
+        'a.wma', 'a.aiff', 'a.amr', 'a.ape',
+      ]) {
+        expect(ContainerFormat.kindOfFile(name), isNotNull, reason: name);
+      }
+    });
+
     test('the video containers open up only for an animated source', () {
       final still = ContainerFormat.outputsFor(MediaKind.image);
       expect(still, isNot(contains(ContainerFormat.mp4)));

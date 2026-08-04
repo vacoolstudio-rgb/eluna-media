@@ -76,7 +76,11 @@ enum ContainerFormat {
       'avif': MediaKind.image,
       'jfif': MediaKind.image,
       'ico': MediaKind.image,
-      'svg': MediaKind.image,
+      // SVG is deliberately absent. Claiming it here made the app offer a
+      // conversion it cannot perform: rasterising SVG needs librsvg, which is
+      // not in the bundled FFmpeg (nor in any build we intend to ship — it
+      // drags in the whole of cairo and pango). An unknown kind is an honest
+      // answer; a promise that ends in an FFmpeg error is not.
       '3gp': MediaKind.video,
       'm4v': MediaKind.video,
       'mpg': MediaKind.video,
