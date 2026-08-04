@@ -876,19 +876,20 @@ class L10nKo extends L10n {
   String get whatsNewTitle => '새로운 기능';
 
   @override
-  String get whatsNew1 => '업적 — 프라이빗하게, 이 기기에서만 집계돼요.';
+  String get whatsNew1 => '완료된 파일이 바로 갤러리에 저장되고, “모두 저장”으로 한 묶음을 한 번에 가져갑니다.';
 
   @override
-  String get whatsNew2 => '동영상 이어 붙이기: 클립을 하나의 MP4로.';
+  String get whatsNew2 => '사진을 정확한 용량에 맞춥니다 — 100 KB부터 2 MB까지, 직접 입력도 가능합니다.';
 
   @override
-  String get whatsNew3 => '하드웨어 인코딩 — 지원 기기에서 더 빠르고 발열도 적어요.';
+  String get whatsNew3 => '앱이 더 이상 기가바이트를 쌓아두지 않습니다. 설정에서 사용량을 보고 지울 수 있습니다.';
 
   @override
-  String get whatsNew4 => '1:1 / 9:16 / 16:9 자르기, 오디오 볼륨, 속도 0.25–4×.';
+  String get whatsNew4 => '알림에서 바로 변환을 중지할 수 있고, 저장 공간이 부족하면 미리 알려줍니다.';
 
   @override
-  String get whatsNew5 => '정확한 목표 크기를 위한 선택형 2패스 모드.';
+  String get whatsNew5 =>
+      '썸네일, 변환 전후 비교, GIF → MP4, 정확한 자르기 시간 — 사진은 이제 여러 장이 동시에 처리됩니다.';
 
   @override
   String get achievementsTitle => '업적';

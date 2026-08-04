@@ -912,22 +912,23 @@ class L10nPl extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Osiągnięcia — prywatne, liczone tylko na tym urządzeniu.';
+      'Gotowe pliki trafiają teraz prosto do galerii, a „Zapisz wszystko” zabiera całą partię naraz.';
 
   @override
-  String get whatsNew2 => 'Sklejanie filmów: połącz klipy w jeden MP4.';
+  String get whatsNew2 =>
+      'Dopasuj zdjęcie do dokładnego rozmiaru — od 100 KB do 2 MB albo własna wartość.';
 
   @override
   String get whatsNew3 =>
-      'Kodowanie sprzętowe — szybciej i chłodniej na obsługiwanych urządzeniach.';
+      'Aplikacja nie gromadzi już gigabajtów: ustawienia pokazują zajęte miejsce i pozwalają je zwolnić.';
 
   @override
   String get whatsNew4 =>
-      'Kadrowanie 1:1 / 9:16 / 16:9, głośność, prędkość 0,25–4×.';
+      'Zatrzymaj konwersję prosto z powiadomienia i dostań ostrzeżenie, zanim zabraknie miejsca.';
 
   @override
   String get whatsNew5 =>
-      'Opcjonalny tryb dwuprzebiegowy dla dokładnych rozmiarów.';
+      'Miniatury, porównanie przed/po, GIF → MP4, dokładne czasy przycięcia — a zdjęcia przetwarzane są po kilka naraz.';
 
   @override
   String get achievementsTitle => 'Osiągnięcia';

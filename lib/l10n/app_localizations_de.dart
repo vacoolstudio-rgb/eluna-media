@@ -904,21 +904,24 @@ class L10nDe extends L10n {
   String get whatsNewTitle => 'Neuigkeiten';
 
   @override
-  String get whatsNew1 => 'Erfolge — privat, nur auf diesem Gerät gezählt.';
+  String get whatsNew1 =>
+      'Fertige Dateien landen jetzt direkt in der Galerie — und „Alle speichern“ nimmt den ganzen Stapel auf einmal.';
 
   @override
-  String get whatsNew2 => 'Videos zusammenfügen: Clips zu einem MP4 verbinden.';
+  String get whatsNew2 =>
+      'Ein Foto auf eine exakte Größe bringen — 100 KB bis 2 MB oder ein eigener Wert.';
 
   @override
   String get whatsNew3 =>
-      'Hardware-Encoding — schneller und kühler auf unterstützten Geräten.';
+      'Die App hortet keine Gigabyte mehr: Die Einstellungen zeigen den belegten Platz und geben ihn frei.';
 
   @override
   String get whatsNew4 =>
-      'Zuschnitt auf 1:1 / 9:16 / 16:9, Lautstärke, Geschwindigkeit 0,25–4×.';
+      'Eine Konvertierung lässt sich direkt aus der Benachrichtigung stoppen, und vor knappem Speicher wird gewarnt.';
 
   @override
-  String get whatsNew5 => 'Optionaler Zwei-Pass-Modus für exakte Zielgrößen.';
+  String get whatsNew5 =>
+      'Miniaturbilder, Vorher/Nachher-Vergleich, GIF → MP4, exakte Schnittzeiten — und Fotostapel laufen mehrfach parallel.';
 
   @override
   String get achievementsTitle => 'Erfolge';

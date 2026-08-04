@@ -860,19 +860,19 @@ class L10nZh extends L10n {
   String get whatsNewTitle => '新功能';
 
   @override
-  String get whatsNew1 => '成就——完全私密，仅在本机统计。';
+  String get whatsNew1 => '转换完成的文件直接进入相册，“全部保存”可一次取走整批。';
 
   @override
-  String get whatsNew2 => '合并视频：把片段拼接成一个 MP4。';
+  String get whatsNew2 => '把照片压到精确大小——100 KB 到 2 MB，也可以自己填数值。';
 
   @override
-  String get whatsNew3 => '硬件编码——在支持的设备上更快、更凉。';
+  String get whatsNew3 => '应用不再悄悄占用几个 GB：设置里能看到占用并一键清理。';
 
   @override
-  String get whatsNew4 => '1:1 / 9:16 / 16:9 裁剪、音量调节、0.25–4× 变速。';
+  String get whatsNew4 => '可以直接在通知里停止转换，空间不足时也会提前提醒。';
 
   @override
-  String get whatsNew5 => '可选的两遍编码模式，精确命中目标大小。';
+  String get whatsNew5 => '缩略图、转换前后对比、GIF → MP4、精确的剪辑时间——照片现在还能并行处理。';
 
   @override
   String get achievementsTitle => '成就';

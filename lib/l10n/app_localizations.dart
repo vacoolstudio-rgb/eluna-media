@@ -1656,31 +1656,31 @@ abstract class L10n {
   /// No description provided for @whatsNew1.
   ///
   /// In en, this message translates to:
-  /// **'Achievements — private, counted on this device only.'**
+  /// **'Finished files now go straight to your gallery — and \"Save all\" takes a whole batch at once.'**
   String get whatsNew1;
 
   /// No description provided for @whatsNew2.
   ///
   /// In en, this message translates to:
-  /// **'Merge videos: stitch clips into one MP4.'**
+  /// **'Fit a photo to an exact size — 100 KB to 2 MB, or a number you type.'**
   String get whatsNew2;
 
   /// No description provided for @whatsNew3.
   ///
   /// In en, this message translates to:
-  /// **'Hardware encoding — faster and cooler on supported devices.'**
+  /// **'The app no longer hoards gigabytes: Settings shows what it is holding and clears it.'**
   String get whatsNew3;
 
   /// No description provided for @whatsNew4.
   ///
   /// In en, this message translates to:
-  /// **'Crop to 1:1 / 9:16 / 16:9, audio volume, speed 0.25–4×.'**
+  /// **'Stop a conversion from the notification, and get a warning before the disk runs out.'**
   String get whatsNew4;
 
   /// No description provided for @whatsNew5.
   ///
   /// In en, this message translates to:
-  /// **'Optional two-pass mode for exact target sizes.'**
+  /// **'Thumbnails, before/after comparison, GIF → MP4, exact trim times — and photo batches run several at once.'**
   String get whatsNew5;
 
   /// No description provided for @achievementsTitle.

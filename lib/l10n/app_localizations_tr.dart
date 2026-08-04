@@ -902,22 +902,24 @@ class L10nTr extends L10n {
   String get whatsNewTitle => 'Yenilikler';
 
   @override
-  String get whatsNew1 => 'Başarımlar — gizli, yalnızca bu cihazda sayılır.';
+  String get whatsNew1 =>
+      'Biten dosyalar artık doğrudan galeriye gidiyor; “Tümünü kaydet” ise bütün grubu tek seferde alıyor.';
 
   @override
   String get whatsNew2 =>
-      'Video birleştirme: klipleri tek MP4\'te birleştirin.';
+      'Bir fotoğrafı tam boyuta sığdırın — 100 KB ile 2 MB arası ya da kendi yazdığınız değer.';
 
   @override
   String get whatsNew3 =>
-      'Donanımsal kodlama — destekleyen cihazlarda daha hızlı ve serin.';
+      'Uygulama artık gigabaytlarca yer biriktirmiyor: ayarlarda kullanılan alanı görüp temizleyebilirsiniz.';
 
   @override
-  String get whatsNew4 => '1:1 / 9:16 / 16:9 kırpma, ses düzeyi, 0,25–4× hız.';
+  String get whatsNew4 =>
+      'Dönüştürmeyi bildirimden durdurun; yer bitmeden önce uyarı alın.';
 
   @override
   String get whatsNew5 =>
-      'Tam hedef boyutlar için isteğe bağlı iki geçişli mod.';
+      'Küçük resimler, önce/sonra karşılaştırması, GIF → MP4, tam kesme süreleri — ve fotoğraflar artık birkaçı aynı anda işleniyor.';
 
   @override
   String get achievementsTitle => 'Başarımlar';

@@ -909,22 +909,23 @@ class L10nPt extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Conquistas — privadas, contadas só neste dispositivo.';
+      'Os arquivos prontos vão direto para a galeria, e “Salvar tudo” leva o lote inteiro de uma vez.';
 
   @override
-  String get whatsNew2 => 'Juntar vídeos: una clipes em um só MP4.';
+  String get whatsNew2 =>
+      'Ajuste a foto a um tamanho exato — de 100 KB a 2 MB, ou o número que você digitar.';
 
   @override
   String get whatsNew3 =>
-      'Codificação por hardware — mais rápida e fria em dispositivos compatíveis.';
+      'O app não acumula mais gigabytes: os ajustes mostram o espaço ocupado e o liberam.';
 
   @override
   String get whatsNew4 =>
-      'Recorte em 1:1 / 9:16 / 16:9, volume do áudio, velocidade 0,25–4×.';
+      'Pare uma conversão pela notificação e receba um aviso antes de o espaço acabar.';
 
   @override
   String get whatsNew5 =>
-      'Modo opcional de duas passagens para tamanhos exatos.';
+      'Miniaturas, comparação antes/depois, GIF → MP4, tempos de corte exatos — e as fotos são processadas várias de cada vez.';
 
   @override
   String get achievementsTitle => 'Conquistas';

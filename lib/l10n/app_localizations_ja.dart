@@ -876,19 +876,19 @@ class L10nJa extends L10n {
   String get whatsNewTitle => '新機能';
 
   @override
-  String get whatsNew1 => '実績 — プライベートで、この端末上でのみカウントされます。';
+  String get whatsNew1 => '変換が終わったファイルはそのままギャラリーへ。「すべて保存」で一括して取り出せます。';
 
   @override
-  String get whatsNew2 => '動画の結合: クリップを 1 つの MP4 に。';
+  String get whatsNew2 => '写真を指定サイズちょうどに圧縮できます（100 KB〜2 MB、任意の値も可）。';
 
   @override
-  String get whatsNew3 => 'ハードウェアエンコード — 対応端末ではより速く、発熱も控えめに。';
+  String get whatsNew3 => 'アプリがギガバイト単位で溜め込むことはなくなりました。設定で使用量を確認して消せます。';
 
   @override
-  String get whatsNew4 => '1:1 / 9:16 / 16:9 の切り抜き、音量調整、速度 0.25–4×。';
+  String get whatsNew4 => '通知から変換を中止できます。空き容量が足りないときは事前に警告します。';
 
   @override
-  String get whatsNew5 => '正確な目標サイズのためのオプションの 2 パスモード。';
+  String get whatsNew5 => 'サムネイル、変換前後の比較、GIF → MP4、正確なトリム時刻。写真は複数同時に処理されます。';
 
   @override
   String get achievementsTitle => '実績';

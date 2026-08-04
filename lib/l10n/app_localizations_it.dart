@@ -909,22 +909,23 @@ class L10nIt extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Obiettivi — privati, contati solo su questo dispositivo.';
+      'I file completati finiscono subito nella galleria e «Salva tutto» prende l’intero lotto in una volta.';
 
   @override
-  String get whatsNew2 => 'Unione video: unisci le clip in un unico MP4.';
+  String get whatsNew2 =>
+      'Porta una foto a una dimensione esatta: da 100 KB a 2 MB, o il valore che scrivi.';
 
   @override
   String get whatsNew3 =>
-      'Codifica hardware — più veloce e fresca sui dispositivi supportati.';
+      'L’app non accumula più gigabyte: le impostazioni mostrano lo spazio occupato e lo liberano.';
 
   @override
   String get whatsNew4 =>
-      'Ritaglio 1:1 / 9:16 / 16:9, volume audio, velocità 0,25–4×.';
+      'Ferma una conversione dalla notifica e ricevi un avviso prima che lo spazio finisca.';
 
   @override
   String get whatsNew5 =>
-      'Modalità opzionale a due passaggi per dimensioni esatte.';
+      'Miniature, confronto prima/dopo, GIF → MP4, tempi di taglio esatti — e le foto vengono elaborate più di una alla volta.';
 
   @override
   String get achievementsTitle => 'Obiettivi';

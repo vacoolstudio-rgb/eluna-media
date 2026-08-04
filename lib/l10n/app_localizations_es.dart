@@ -910,21 +910,23 @@ class L10nEs extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Logros — privados, contados solo en este dispositivo.';
+      'Los archivos terminados van directos a la galería, y «Guardar todo» se lleva el lote entero de una vez.';
 
   @override
-  String get whatsNew2 => 'Unir vídeos: junta clips en un solo MP4.';
+  String get whatsNew2 =>
+      'Ajusta una foto a un tamaño exacto: de 100 KB a 2 MB, o el número que escribas.';
 
   @override
   String get whatsNew3 =>
-      'Codificación por hardware — más rápida y fría en dispositivos compatibles.';
+      'La app ya no acumula gigabytes: los ajustes muestran lo que ocupa y lo liberan.';
 
   @override
   String get whatsNew4 =>
-      'Recorte a 1:1 / 9:16 / 16:9, volumen de audio, velocidad 0,25–4×.';
+      'Detén una conversión desde la notificación y recibe un aviso antes de quedarte sin espacio.';
 
   @override
-  String get whatsNew5 => 'Modo opcional de dos pasadas para tamaños exactos.';
+  String get whatsNew5 =>
+      'Miniaturas, comparación antes/después, GIF → MP4, tiempos de corte exactos y lotes de fotos que se procesan de varias en varias.';
 
   @override
   String get achievementsTitle => 'Logros';

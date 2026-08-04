@@ -914,23 +914,23 @@ class L10nFr extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Succès — privés, comptés uniquement sur cet appareil.';
+      'Les fichiers terminés vont directement dans la galerie, et « Tout enregistrer » prend le lot entier d’un coup.';
 
   @override
   String get whatsNew2 =>
-      'Fusion de vidéos : assemblez des clips en un seul MP4.';
+      'Ajustez une photo à une taille exacte : de 100 Ko à 2 Mo, ou la valeur de votre choix.';
 
   @override
   String get whatsNew3 =>
-      'Encodage matériel — plus rapide et moins de chauffe sur les appareils compatibles.';
+      'L’application n’accumule plus des gigaoctets : les réglages affichent l’espace occupé et le libèrent.';
 
   @override
   String get whatsNew4 =>
-      'Recadrage 1:1 / 9:16 / 16:9, volume audio, vitesse 0,25–4×.';
+      'Arrêtez une conversion depuis la notification, et soyez prévenu avant de manquer d’espace.';
 
   @override
   String get whatsNew5 =>
-      'Mode deux passes optionnel pour des tailles exactes.';
+      'Vignettes, comparaison avant/après, GIF → MP4, temps de coupe exacts — et les photos se traitent plusieurs à la fois.';
 
   @override
   String get achievementsTitle => 'Succès';

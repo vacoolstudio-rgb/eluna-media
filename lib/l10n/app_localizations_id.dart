@@ -907,21 +907,23 @@ class L10nId extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Pencapaian — privat, dihitung hanya di perangkat ini.';
+      'File yang selesai kini langsung masuk ke galeri, dan “Simpan semua” mengambil seluruh kumpulan sekaligus.';
 
   @override
-  String get whatsNew2 => 'Gabung video: satukan klip jadi satu MP4.';
+  String get whatsNew2 =>
+      'Sesuaikan foto ke ukuran tepat — 100 KB hingga 2 MB, atau angka yang Anda tulis.';
 
   @override
   String get whatsNew3 =>
-      'Encoding hardware — lebih cepat dan adem di perangkat yang mendukung.';
+      'Aplikasi tak lagi menimbun gigabyte: setelan menampilkan ruang terpakai dan membersihkannya.';
 
   @override
   String get whatsNew4 =>
-      'Pangkas ke 1:1 / 9:16 / 16:9, volume audio, kecepatan 0.25–4×.';
+      'Hentikan konversi dari notifikasi, dan dapat peringatan sebelum ruang habis.';
 
   @override
-  String get whatsNew5 => 'Mode two-pass opsional untuk ukuran target presisi.';
+  String get whatsNew5 =>
+      'Gambar mini, perbandingan sebelum/sesudah, GIF → MP4, waktu potong yang tepat — dan foto kini diproses beberapa sekaligus.';
 
   @override
   String get achievementsTitle => 'Pencapaian';

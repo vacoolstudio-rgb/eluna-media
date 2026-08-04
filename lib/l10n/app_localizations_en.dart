@@ -898,21 +898,23 @@ class L10nEn extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Achievements — private, counted on this device only.';
+      'Finished files now go straight to your gallery — and \"Save all\" takes a whole batch at once.';
 
   @override
-  String get whatsNew2 => 'Merge videos: stitch clips into one MP4.';
+  String get whatsNew2 =>
+      'Fit a photo to an exact size — 100 KB to 2 MB, or a number you type.';
 
   @override
   String get whatsNew3 =>
-      'Hardware encoding — faster and cooler on supported devices.';
+      'The app no longer hoards gigabytes: Settings shows what it is holding and clears it.';
 
   @override
   String get whatsNew4 =>
-      'Crop to 1:1 / 9:16 / 16:9, audio volume, speed 0.25–4×.';
+      'Stop a conversion from the notification, and get a warning before the disk runs out.';
 
   @override
-  String get whatsNew5 => 'Optional two-pass mode for exact target sizes.';
+  String get whatsNew5 =>
+      'Thumbnails, before/after comparison, GIF → MP4, exact trim times — and photo batches run several at once.';
 
   @override
   String get achievementsTitle => 'Achievements';

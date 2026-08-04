@@ -55,16 +55,24 @@ abstract final class OutputPaths {
     throw StateError('Could not find a free filename for $baseName.$extension');
   }
 
+  /// [reserved] holds paths that have been handed out but not yet written.
+  ///
+  /// Uniqueness used to come entirely from the file system, which is enough
+  /// only while jobs run one at a time: the first encode creates its file
+  /// before the second one asks for a name. Once stills run concurrently, two
+  /// same-named sources resolve before either has written anything, both get
+  /// the identical path, and the second output silently overwrites the first.
   static Future<String> resolve({
     required String inputFileName,
     required String extension,
+    Set<String> reserved = const {},
   }) async {
     final dir = await outputDirectory();
     return uniquePath(
       directory: dir.path,
       baseName: sanitiseBaseName(inputFileName),
       extension: extension,
-      exists: (p) => File(p).existsSync(),
+      exists: (p) => reserved.contains(p) || File(p).existsSync(),
     );
   }
 

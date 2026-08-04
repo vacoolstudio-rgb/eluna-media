@@ -108,6 +108,48 @@ class QueueController extends Notifier<QueueState> {
   var _cancelBatch = false;
   QueueStrings? _strings;
 
+  /// Output paths handed to jobs that have not written their file yet. Only
+  /// meaningful while stills run concurrently; see [OutputPaths.resolve].
+  final _reservedOutputs = <String>{};
+
+  /// Saves are funnelled through this so two finished stills cannot ask the
+  /// platform for gallery access at the same moment — on the Androids that
+  /// still prompt, that is two dialogs racing each other.
+  Future<void> _saveGate = Future<void>.value();
+
+  /// How many stills may encode at once.
+  ///
+  /// Three is deliberate rather than "as many as there are cores": the point is
+  /// to hide process start-up and I/O latency, which two or three in flight
+  /// already does, while leaving the phone enough headroom that a photo batch
+  /// never becomes the thermal event a video batch is. A single-core host runs
+  /// them serially, which is what the tests see.
+  static int get _stillConcurrency {
+    final cores = Platform.numberOfProcessors;
+    return cores < 2 ? 1 : (cores < 4 ? 2 : 3);
+  }
+
+  /// The run of pending stills at the head of the queue, up to the concurrency
+  /// limit. Stops at the first job that is not one, so queue order is still
+  /// what the user sees happen.
+  List<ConversionJob> _nextStillBatch() {
+    final batch = <ConversionJob>[];
+    for (final job in state.pending) {
+      if (!_isStill(job)) break;
+      batch.add(job);
+      if (batch.length >= _stillConcurrency) break;
+    }
+    return batch;
+  }
+
+  /// A single frame in, a single frame out. An animated GIF target goes down
+  /// the palette pipeline, which is a real encode over a whole timeline, and a
+  /// merge is never a still no matter what it is writing.
+  static bool _isStill(ConversionJob job) =>
+      job.settings.container.kind == MediaKind.image &&
+      !job.settings.container.isAnimatedImage &&
+      !job.isMerge;
+
   @override
   QueueState build() {
     final stored = QueueStorage.decode(ref.read(sharedPreferencesProvider).getString(_storageKey));
@@ -442,9 +484,26 @@ class QueueController extends Notifier<QueueState> {
       while (!_cancelBatch) {
         final next = state.pending.firstOrNull;
         if (next == null) break;
-        await _runJob(next.id, converter);
+
+        // Stills are the exception to the one-at-a-time rule. A transcode
+        // already saturates every core it can reach, so running two costs heat
+        // and buys nothing — but a JPEG encode is milliseconds of work that
+        // leaves the CPU mostly idle, and a batch of two hundred photos spent
+        // most of its wall-clock waiting for FFmpeg to start up again. Video
+        // and audio still go strictly in order.
+        final stills = _nextStillBatch();
+        if (stills.length > 1) {
+          await Future.wait([
+            for (final job in stills) _runJob(job.id, converter),
+          ]);
+        } else {
+          await _runJob(next.id, converter);
+        }
       }
     } finally {
+      // Reservations only guard concurrent name resolution inside one batch;
+      // afterwards the files themselves are on disk and speak for themselves.
+      _reservedOutputs.clear();
       // The service must come down even if a job threw, or the notification
       // sticks around forever and the process stays pinned.
       await foreground.stop();
@@ -495,7 +554,12 @@ class QueueController extends Notifier<QueueState> {
     final outputPath = await OutputPaths.resolve(
       inputFileName: job.inputName,
       extension: job.settings.container.extension,
+      reserved: _reservedOutputs,
     );
+    // Claimed before the first await that follows, so a sibling still resolving
+    // the same source name in parallel is handed " (1)" rather than the same
+    // path and a silent overwrite.
+    _reservedOutputs.add(outputPath);
 
     // Stills have no timeline, so FFmpeg's `time=` statistic cannot drive a
     // percentage; the UI shows an indeterminate bar for them instead. A merge
@@ -686,7 +750,9 @@ class QueueController extends Notifier<QueueState> {
     // cancelled half-way still leaves its finished files somewhere reachable.
     if (result.outcome == ConversionOutcome.success &&
         ref.read(appPrefsProvider).autoSaveResults) {
-      await saveOutput(id);
+      final turn = _saveGate.then((_) => saveOutput(id));
+      _saveGate = turn.then((_) {}, onError: (_) {});
+      await turn;
       if (!ref.mounted) return;
     }
 
