@@ -156,8 +156,16 @@ the 8.0 build. Trading that for ~8 MB is not a trade worth making.
 
 **So the route is to ask, not to build**: the maintainer already publishes eight
 package variants from an automated pipeline, and a converter-shaped ninth is a
-configuration change on their side. Measured sizes of what exists today, whole
-AAR, all four ABIs:
+configuration change on their side.
+
+That request is filed as
+[sk3llo/ffmpeg_kit_flutter#166](https://github.com/sk3llo/ffmpeg_kit_flutter/issues/166)
+(2026-08-04) — it carries the measurements below and the exact library list.
+**Everything in this document is on hold behind it.** If it lands, swap the
+dependency and run the verification pass; if it is declined, the size question
+is closed and 32 MB stands.
+
+Measured sizes of what exists today, whole AAR, all four ABIs:
 
 | variant | version | AAR |
 |---|---|---|
