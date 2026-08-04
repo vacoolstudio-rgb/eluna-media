@@ -23,8 +23,12 @@ Measured cost of the current build, per architecture:
 | | arm64-v8a |
 |---|---|
 | APK (split per ABI) | 64.4 MB |
-| of which FFmpeg `.so` | 45.9 MB |
+| of which FFmpeg + `libc++_shared` | 41.7 MB on disk, 20.4 MB compressed |
 | Play download | ~32 MB |
+
+("Compressed" is what a Play delivery actually costs: the native libraries are
+stored uncompressed in the APK — `extractNativeLibs=false` — so the APK figure
+and the download figure are legitimately different numbers.)
 
 ## What the app actually needs
 
@@ -105,11 +109,70 @@ Two judgement calls worth revisiting if quality regressions appear:
 
 ### Expected saving
 
-Not measured — this is an estimate from the dropped libraries' usual sizes, and
-the only honest number will come from the first build. Order of magnitude:
-tesseract, aom and the libass stack alone should account for well over 10 MB of
-the 45.9 MB of FFmpeg `.so`. A landing zone of ~25–30 MB per architecture would
-put the app level with its FFmpeg-based peers.
+Measured against the published `min-gpl` package, which is exactly `min` plus
+the GPL encoders — `libx264 libx265 libxvid libvidstab` — and nothing else.
+Both figures are arm64, same set of libraries, like for like:
+
+| | on disk | compressed |
+|---|---|---|
+| `full-gpl` (what we ship) | 41.7 MB | 20.4 MB |
+| `min-gpl` | 19.1 MB | 9.2 MB |
+| **difference** | **22.6 MB** | **11.2 MB** |
+
+The headline result: **x264 and x265 are cheap.** Everything the app actually
+encodes video with costs 9.2 MB of download; the other thirty-odd libraries
+cost 11.2 MB more, and it calls six of them.
+
+A build limited to the keep-list lands between the two — `min-gpl` plus lame,
+opus, vorbis, vpx, webp and dav1d, which are a subset of that 11.2 MB. Estimate
+**12–14 MB compressed per architecture**, so a Play download of roughly
+**24–26 MB against today's 32 MB**.
+
+Worth saying plainly: that is a real saving but a moderate one, and it is not
+worth taking any functional risk for. 32 MB is already unremarkable for an
+offline converter and is nowhere near a threshold that costs installs.
+
+## Why this cannot be built yet
+
+The app depends on `com.antonkarpenko:ffmpeg-kit-full-gpl`, and **the sources
+for that artifact are not public**. The Flutter plugin
+([sk3llo/ffmpeg_kit_flutter](https://github.com/sk3llo/ffmpeg_kit_flutter)) is
+open, but it only binds to the AAR; the repository that produces the AAR does
+not exist publicly, and the POM's `url` points at a deleted one. The
+maintainer's own publish workflow says why:
+
+> Relay a **locally-built**, signed Maven Central bundle to the Central Portal.
+
+The native build happens on the maintainer's machine; only the signed bundle is
+published. A GitHub-wide code search for `com.antonkarpenko.ffmpegkit` returns
+consumers of the plugin and nothing else.
+
+The one public alternative, `arthenica/ffmpeg-kit`, is archived and builds
+**FFmpeg 6.0**. Ours is **FFmpeg 8.0** (`libavcodec 62.11.100`, read out of the
+shipped `libavutil.so`). Rebuilding on it would mean going back two major
+versions, and HEIF/HEIC support in the mov demuxer is a 7.x-era addition — the
+extension list `avif,heic,heif` that makes iPhone photos openable comes from
+the 8.0 build. Trading that for ~8 MB is not a trade worth making.
+
+**So the route is to ask, not to build**: the maintainer already publishes eight
+package variants from an automated pipeline, and a converter-shaped ninth is a
+configuration change on their side. Measured sizes of what exists today, whole
+AAR, all four ABIs:
+
+| variant | version | AAR |
+|---|---|---|
+| min | 2.2.2 | 37.1 MB |
+| min-gpl | 2.2.2 | 46.4 MB |
+| https | 2.2.1 | 48.3 MB |
+| audio | 2.2.2 | 48.9 MB |
+| https-gpl | 2.2.1 | 57.6 MB |
+| video | 2.2.1 | 57.6 MB |
+| full | 2.2.1 | 66.6 MB |
+| full-gpl | 2.2.1 | 103.8 MB |
+
+None of them fits: `min-gpl` and `https-gpl` have no MP3, Opus, Vorbis, VP9 or
+WebP encoder and no AV1 decoder; `video` and `full` have no x264 or x265 at all,
+because those are the GPL ones.
 
 ## Verification before shipping the new binary
 
