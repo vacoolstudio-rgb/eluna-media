@@ -13,7 +13,13 @@ class AppMeta {
     this.lastRatePromptEpochDay = -1,
     this.hasSeenIntro = false,
     this.lastSeenVersion,
+    this.reclaimedBytes = 0,
   });
+
+  /// Bytes of source media the user has had the app delete, over the app's
+  /// life. The point of compressing is usually space, and until the number is
+  /// stated the user only ever sees the app's folder growing.
+  final int reclaimedBytes;
 
   /// Wall-clock of the very first launch, stamped on first read.
   final int firstLaunchAtMs;
@@ -40,6 +46,7 @@ class AppMeta {
     int? lastRatePromptEpochDay,
     bool? hasSeenIntro,
     String? lastSeenVersion,
+    int? reclaimedBytes,
   }) =>
       AppMeta(
         firstLaunchAtMs: firstLaunchAtMs,
@@ -48,6 +55,7 @@ class AppMeta {
         lastRatePromptEpochDay: lastRatePromptEpochDay ?? this.lastRatePromptEpochDay,
         hasSeenIntro: hasSeenIntro ?? this.hasSeenIntro,
         lastSeenVersion: lastSeenVersion ?? this.lastSeenVersion,
+        reclaimedBytes: reclaimedBytes ?? this.reclaimedBytes,
       );
 }
 
@@ -58,6 +66,7 @@ class AppMetaController extends Notifier<AppMeta> {
   static const _kLastPromptDay = 'meta.lastRatePromptDay';
   static const _kSeenIntro = 'meta.hasSeenIntro';
   static const _kSeenVersion = 'meta.lastSeenVersion';
+  static const _kReclaimed = 'meta.reclaimedBytes';
 
   @override
   AppMeta build() {
@@ -77,6 +86,7 @@ class AppMetaController extends Notifier<AppMeta> {
       lastRatePromptEpochDay: p.getInt(_kLastPromptDay) ?? -1,
       hasSeenIntro: p.getBool(_kSeenIntro) ?? false,
       lastSeenVersion: p.getString(_kSeenVersion),
+      reclaimedBytes: p.getInt(_kReclaimed) ?? 0,
     );
   }
 
@@ -99,6 +109,12 @@ class AppMetaController extends Notifier<AppMeta> {
   void markIntroSeen() {
     state = state.copyWith(hasSeenIntro: true);
     ref.read(sharedPreferencesProvider).setBool(_kSeenIntro, true);
+  }
+
+  void addReclaimedBytes(int bytes) {
+    if (bytes <= 0) return;
+    state = state.copyWith(reclaimedBytes: state.reclaimedBytes + bytes);
+    ref.read(sharedPreferencesProvider).setInt(_kReclaimed, state.reclaimedBytes);
   }
 
   void markVersionSeen(String version) {

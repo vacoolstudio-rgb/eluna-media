@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/converter.dart';
@@ -14,6 +15,7 @@ import '../services/foreground_service.dart';
 import '../services/haptics.dart';
 import '../services/media_saver.dart';
 import '../services/notification_service.dart';
+import '../services/original_media.dart';
 import 'achievements_controller.dart';
 import 'app_meta_controller.dart';
 import 'settings_controller.dart';
@@ -75,6 +77,31 @@ class QueueState {
   int get failedCount => jobs.where((j) => j.status == JobStatus.failed).length;
 
   bool get hasPending => pending.isNotEmpty;
+
+  /// Jobs whose source file it is safe to offer for deletion.
+  ///
+  /// Three conditions, and all of them are about not stranding the user:
+  ///
+  /// * The job completed, so a result exists at all.
+  /// * The result was saved out of the sandbox ([ConversionJob.savedTo]). The
+  ///   app's own folder is unreachable from any file manager, so deleting the
+  ///   original while the only copy lives there would hand the user a file they
+  ///   cannot open and take away the one they could.
+  /// * The source has not already been deleted.
+  ///
+  /// Merges are excluded. Their [ConversionJob.inputName] is a display name for
+  /// N sources rather than any real file, and the media library is looked up by
+  /// name — offering to delete "3 clips" while only being able to name one of
+  /// them is exactly the kind of guess this feature must never make.
+  List<ConversionJob> get reclaimable => [
+        for (final j in jobs)
+          if (j.status == JobStatus.completed &&
+              j.savedTo != null &&
+              !j.originalDeleted &&
+              !j.isMerge &&
+              j.inputBytes > 0)
+            j,
+      ];
 
   /// Batch progress: finished jobs count as whole units, the running one
   /// contributes its fraction.
@@ -285,6 +312,65 @@ class QueueController extends Notifier<QueueState> {
     if (state.isRunning) return;
     state = const QueueState();
     _persist();
+  }
+
+  /// Names the result of a still-queued job.
+  ///
+  /// Queued only, on purpose. Once the encode has run, the file exists — and
+  /// with auto-save on, a copy of it is already in the gallery under the old
+  /// name. Renaming then would either lie about the saved copy or start a
+  /// second export, and neither is what "rename" means to anyone.
+  ///
+  /// A blank name restores the default (name the output after the source).
+  void renameOutput(String id, String name) {
+    final job = _find(id);
+    if (job == null || job.status != JobStatus.queued) return;
+
+    final trimmed = name.trim();
+    if (trimmed.isEmpty) {
+      _replace(job.copyWith(clearOutputName: true));
+    } else {
+      // The same sanitiser the output path uses, applied here so the queue card
+      // shows the name that will really be on disk rather than the one that was
+      // typed. It also strips a typed extension, which is why "clip.mp4" comes
+      // out as "clip" and still lands as clip.mp4.
+      _replace(job.copyWith(outputName: OutputPaths.sanitiseBaseName(trimmed)));
+    }
+    _persist();
+  }
+
+  /// Hands the sources of [jobIds] to the operating system's delete flow and
+  /// records what actually went.
+  ///
+  /// The app deletes nothing itself: Android raises `createDeleteRequest` and
+  /// iOS raises `PHPhotoLibrary`, both of which show the user the real items
+  /// and wait for approval. Whatever comes back as deleted is marked so the
+  /// offer is not repeated, and the reclaimed bytes are added to the lifetime
+  /// counter — the number that makes "compress to free space" visible.
+  Future<ReclaimOutcome> reclaimOriginals(List<String> jobIds) async {
+    final wanted = jobIds.toSet();
+    final items = [
+      for (final job in state.reclaimable)
+        if (wanted.contains(job.id))
+          OriginalRef(jobId: job.id, name: job.inputName, bytes: job.inputBytes),
+    ];
+    if (items.isEmpty) return const ReclaimOutcome();
+
+    final outcome = await ref.read(originalMediaProvider).delete(items);
+    // The dialog is a whole trip through another process; the provider can be
+    // gone by the time it comes back.
+    if (!ref.mounted || outcome.deletedJobIds.isEmpty) return outcome;
+
+    state = state.copyWith(jobs: [
+      for (final job in state.jobs)
+        if (outcome.deletedJobIds.contains(job.id))
+          job.copyWith(originalDeleted: true)
+        else
+          job,
+    ]);
+    ref.read(appMetaProvider.notifier).addReclaimedBytes(outcome.freedBytes);
+    await _persist();
+    return outcome;
   }
 
   /// Collapses all pending jobs into one merge job that concatenates them in
@@ -534,6 +620,32 @@ class QueueController extends Notifier<QueueState> {
     }
 
     await _notifyBatchDone(notifications, strings);
+
+    if (ref.read(appPrefsProvider).deleteOriginalsAfterConversion) {
+      await _offerToDeleteOriginals(batchJobs);
+    }
+  }
+
+  /// The automatic half of "delete originals": ask, once, for the sources this
+  /// batch just converted.
+  ///
+  /// Only while the app is actually on screen. The confirmation belongs to the
+  /// system, and Android will not let a backgrounded app raise it anyway — but
+  /// even where it would work, a phone that throws up a delete dialog while its
+  /// owner is in another app has earned every bit of the panic that follows.
+  /// A batch finished in the background simply leaves the button on the
+  /// Finished tab, which is where the manual path already lives.
+  Future<void> _offerToDeleteOriginals(List<ConversionJob> batchJobs) async {
+    if (WidgetsBinding.instance.lifecycleState != AppLifecycleState.resumed) {
+      return;
+    }
+    final ids = {for (final j in batchJobs) j.id};
+    final eligible = [
+      for (final job in state.reclaimable)
+        if (ids.contains(job.id)) job.id,
+    ];
+    if (eligible.isEmpty) return;
+    await reclaimOriginals(eligible);
   }
 
   /// Mirrors batch progress into the foreground notification.
@@ -552,7 +664,7 @@ class QueueController extends Notifier<QueueState> {
     if (job == null) return;
 
     final outputPath = await OutputPaths.resolve(
-      inputFileName: job.inputName,
+      inputFileName: job.outputName ?? job.inputName,
       extension: job.settings.container.extension,
       reserved: _reservedOutputs,
     );

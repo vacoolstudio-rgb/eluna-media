@@ -1128,4 +1128,40 @@ class L10nHi extends L10n {
 
   @override
   String get moveDown => 'नीचे ले जाएँ';
+
+  @override
+  String get renameOutput => 'नतीजे का नाम बदलें';
+
+  @override
+  String get renameOutputHint => 'नया नाम';
+
+  @override
+  String get renameOutputHelp =>
+      'एक्सटेंशन आउटपुट फ़ॉर्मैट से तय होता है। खाली छोड़ें तो नतीजे का नाम स्रोत फ़ाइल जैसा रहेगा।';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return 'मूल फ़ाइलें हटाएँ ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => 'कन्वर्ज़न के बाद मूल फ़ाइलें हटाएँ';
+
+  @override
+  String get deleteOriginalsHint =>
+      'नतीजा सेव हो जाने के बाद सिस्टम से स्रोत फ़ाइलें हटाने को कहता है। सिस्टम हमेशा दिखाता है कि क्या हटेगा और आपकी पुष्टि का इंतज़ार करता है।';
+
+  @override
+  String originalsDeleted(String size) {
+    return 'मूल फ़ाइलें हटा दी गईं — $size खाली हुआ';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      'कुछ नहीं हटाया गया। सिर्फ़ वही फ़ाइलें मिल पाती हैं जो गैलरी में उनके मूल नाम से मौजूद हैं।';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'इस ऐप से खाली हुआ: $size';
+  }
 }

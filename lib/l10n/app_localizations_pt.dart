@@ -1136,4 +1136,40 @@ class L10nPt extends L10n {
 
   @override
   String get moveDown => 'Mover para baixo';
+
+  @override
+  String get renameOutput => 'Renomear resultado';
+
+  @override
+  String get renameOutputHint => 'Novo nome';
+
+  @override
+  String get renameOutputHelp =>
+      'A extensão vem do formato de saída. Deixe em branco para o resultado herdar o nome do arquivo original.';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return 'Excluir originais ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => 'Excluir os originais depois de converter';
+
+  @override
+  String get deleteOriginalsHint =>
+      'Pede ao sistema para remover os arquivos de origem depois que o resultado for salvo. O sistema sempre mostra o que vai sumir e espera sua confirmação.';
+
+  @override
+  String originalsDeleted(String size) {
+    return 'Originais excluídos — $size liberados';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      'Nada foi excluído. Só dá para encontrar os arquivos que a galeria ainda guarda com o nome original.';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'Liberado com este app: $size';
+  }
 }

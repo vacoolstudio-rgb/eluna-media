@@ -1142,4 +1142,41 @@ class L10nFr extends L10n {
 
   @override
   String get moveDown => 'Descendre';
+
+  @override
+  String get renameOutput => 'Renommer le résultat';
+
+  @override
+  String get renameOutputHint => 'Nouveau nom';
+
+  @override
+  String get renameOutputHelp =>
+      'L\'extension vient du format de sortie. Laissez vide pour reprendre le nom du fichier source.';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return 'Supprimer les originaux ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto =>
+      'Supprimer les originaux après la conversion';
+
+  @override
+  String get deleteOriginalsHint =>
+      'Demande au système de supprimer les fichiers source une fois le résultat enregistré. Le système montre toujours ce qui va disparaître et attend votre confirmation.';
+
+  @override
+  String originalsDeleted(String size) {
+    return 'Originaux supprimés — $size libérés';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      'Rien n\'a été supprimé. Seuls les fichiers que la galerie conserve sous leur nom d\'origine peuvent être retrouvés.';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'Libéré avec cette application : $size';
+  }
 }

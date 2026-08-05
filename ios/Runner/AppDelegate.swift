@@ -1,4 +1,5 @@
 import Flutter
+import Photos
 import UIKit
 
 /// Receives files other apps hand over ("Open with Eluna Media" from Files,
@@ -50,6 +51,15 @@ import UIKit
           // Room left for the output folder. Dart treats nil as "don't know"
           // and lets the conversion proceed, so a failure here is never fatal.
           result(AppDelegate.freeBytes())
+        case "deleteOriginals":
+          guard
+            let args = call.arguments as? [String: Any],
+            let items = args["items"] as? [[String: Any]]
+          else {
+            result(FlutterError(code: "args", message: "items are required", details: nil))
+            return
+          }
+          AppDelegate.deleteOriginals(items: items, result: result)
         default:
           result(FlutterMethodNotImplemented)
         }
@@ -106,6 +116,101 @@ import UIKit
       return nil
     }
     return NSNumber(value: capacity)
+  }
+
+  // ---------------------------------------------------------------------------
+  // Delete the originals the user just converted
+  // ---------------------------------------------------------------------------
+
+  /// Removes source items from the photo library, through the system.
+  ///
+  /// `PHAssetChangeRequest.deleteAssets` never deletes silently: iOS puts up its
+  /// own confirmation sheet showing the actual photos and videos, and the
+  /// completion handler reports false if the user declines. The app has no way
+  /// to bypass that, which is exactly the property this feature needs.
+  ///
+  /// Matching is by original filename, and only when it is unique in the
+  /// library. The path Dart holds is a copy in the app's cache — the picker
+  /// never hands over the asset itself — so the library has to be searched by
+  /// metadata. File size is deliberately not part of the match: PHAsset does not
+  /// publish it, and the only ways to read it are private API. An ambiguous or
+  /// missing name is skipped; deleting the wrong item cannot be undone, while
+  /// leaving one behind costs the user nothing but a tap in Photos.
+  ///
+  /// Anything picked from Files rather than Photos is simply not in the library
+  /// and is skipped for the same reason.
+  ///
+  /// Not yet exercised on a device — this project has no Mac — so it is written
+  /// to fail closed: every path that is not a confirmed deletion reports zero.
+  private static func deleteOriginals(items: [[String: Any]], result: @escaping FlutterResult) {
+    let wanted: [(index: Int, name: String)] = items.enumerated().compactMap { index, item in
+      guard let name = item["name"] as? String, !name.isEmpty else { return nil }
+      return (index, name)
+    }
+    guard !wanted.isEmpty else {
+      result(["deleted": [Int](), "cancelled": false])
+      return
+    }
+
+    requestPhotoAccess { granted in
+      guard granted else {
+        // Refusing access is refusing the deletion, not a failure to report.
+        result(["deleted": [Int](), "cancelled": true])
+        return
+      }
+
+      // Enumerating the library is proportional to its size; keep it off the
+      // main thread even though the fetch itself is lazy.
+      DispatchQueue.global(qos: .userInitiated).async {
+        var byName: [String: [PHAsset]] = [:]
+        PHAsset.fetchAssets(with: nil).enumerateObjects { asset, _, _ in
+          guard
+            let filename = PHAssetResource.assetResources(for: asset).first?.originalFilename
+          else { return }
+          byName[filename, default: []].append(asset)
+        }
+
+        var indices: [Int] = []
+        var assets: [PHAsset] = []
+        for item in wanted {
+          guard let candidates = byName[item.name], candidates.count == 1 else { continue }
+          indices.append(item.index)
+          assets.append(candidates[0])
+        }
+
+        guard !assets.isEmpty else {
+          DispatchQueue.main.async { result(["deleted": [Int](), "cancelled": false]) }
+          return
+        }
+
+        PHPhotoLibrary.shared().performChanges {
+          PHAssetChangeRequest.deleteAssets(assets as NSArray)
+        } completionHandler: { success, _ in
+          DispatchQueue.main.async {
+            // The sheet is all-or-nothing, so success means every listed item
+            // is gone and anything else means none of them are.
+            result(["deleted": success ? indices : [Int](), "cancelled": !success])
+          }
+        }
+      }
+    }
+  }
+
+  /// Read-write access, because deleting is a write. Limited access still works
+  /// for the items the user included in their selection, which is the honest
+  /// behaviour: the app can only remove what it was shown.
+  private static func requestPhotoAccess(_ completion: @escaping (Bool) -> Void) {
+    let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+    switch status {
+    case .authorized, .limited:
+      completion(true)
+    case .notDetermined:
+      PHPhotoLibrary.requestAuthorization(for: .readWrite) { granted in
+        completion(granted == .authorized || granted == .limited)
+      }
+    default:
+      completion(false)
+    }
   }
 
   private func flushPending() {

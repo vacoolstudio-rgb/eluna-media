@@ -321,5 +321,14 @@
   "sampleRateLabel": "采样率",
   "voiceAudioHint": "22.05 kHz 单声道能把语音录音压到约四分之一，且几乎听不出差别。音乐请两项都保持原始。",
   "moveUp": "上移",
-  "moveDown": "下移"
+  "moveDown": "下移",
+  "renameOutput": "重命名结果",
+  "renameOutputHint": "新名称",
+  "renameOutputHelp": "扩展名由输出格式决定。留空则沿用源文件的名称。",
+  "deleteOriginalsAction": "删除原文件（{count}）",
+  "deleteOriginalsAuto": "转换后删除原文件",
+  "deleteOriginalsHint": "在结果保存之后，请求系统删除源文件。系统始终会显示将要删除的内容并等待你确认。",
+  "originalsDeleted": "已删除原文件——释放 {size}",
+  "originalsNoneDeleted": "没有删除任何内容。只能找到仍以原名保存在相册中的文件。",
+  "reclaimedTotal": "通过本应用释放：{size}"
 }

@@ -321,5 +321,14 @@
   "sampleRateLabel": "Frecuencia de muestreo",
   "voiceAudioHint": "Mono a 22,05 kHz reduce una grabación de voz a la cuarta parte sin pérdida audible. Para música, deja ambos como el original.",
   "moveUp": "Subir",
-  "moveDown": "Bajar"
+  "moveDown": "Bajar",
+  "renameOutput": "Renombrar resultado",
+  "renameOutputHint": "Nombre nuevo",
+  "renameOutputHelp": "La extensión la marca el formato de salida. Déjalo vacío y el resultado tomará el nombre del original.",
+  "deleteOriginalsAction": "Eliminar originales ({count})",
+  "deleteOriginalsAuto": "Eliminar los originales tras convertir",
+  "deleteOriginalsHint": "Pide al sistema que borre los archivos de origen una vez guardado el resultado. El sistema siempre muestra qué se va a borrar y espera tu confirmación.",
+  "originalsDeleted": "Originales eliminados: {size} liberados",
+  "originalsNoneDeleted": "No se eliminó nada. Solo se encuentran los archivos que la galería conserva con su nombre original.",
+  "reclaimedTotal": "Liberado con esta app: {size}"
 }

@@ -52,6 +52,8 @@ class ConversionJob {
     this.extraInputPaths = const [],
     this.startedAtMs,
     this.savedTo,
+    this.outputName,
+    this.originalDeleted = false,
   });
 
   /// Set once the output has been copied out of the app's sandbox, so the card
@@ -62,6 +64,20 @@ class ConversionJob {
   final String id;
   final String inputPath;
   final String inputName;
+
+  /// What the user renamed the result to, without an extension. Null means
+  /// "name it after the source", which is the default and stays correct for
+  /// the overwhelming majority of jobs.
+  ///
+  /// Settable only while the job is still queued: once the file exists, its
+  /// name is the file system's business, and — with auto-save on — a copy of
+  /// it is already sitting in the gallery under the old name.
+  final String? outputName;
+
+  /// The source has been removed from the device's media library at the user's
+  /// request. Kept so the offer is not made twice for the same file and the
+  /// reclaimed bytes are not counted twice.
+  final bool originalDeleted;
   final ConversionSettings settings;
 
   /// Additional sources concatenated after [inputPath]. Non-empty makes this
@@ -135,8 +151,11 @@ class ConversionJob {
     ConversionSettings? settings,
     int? startedAtMs,
     SavedTo? savedTo,
+    String? outputName,
+    bool? originalDeleted,
     bool clearError = false,
     bool clearSession = false,
+    bool clearOutputName = false,
   }) {
     return ConversionJob(
       savedTo: savedTo ?? this.savedTo,
@@ -155,6 +174,8 @@ class ConversionJob {
       sourceDurationMs: sourceDurationMs ?? this.sourceDurationMs,
       extraInputPaths: extraInputPaths,
       startedAtMs: startedAtMs ?? this.startedAtMs,
+      outputName: clearOutputName ? null : (outputName ?? this.outputName),
+      originalDeleted: originalDeleted ?? this.originalDeleted,
     );
   }
 
@@ -174,6 +195,8 @@ class ConversionJob {
         if (sourceDurationMs != null) 'sourceDurationMs': sourceDurationMs,
         if (extraInputPaths.isNotEmpty) 'extraInputs': extraInputPaths,
         if (savedTo != null) 'savedTo': savedTo!.name,
+        if (outputName != null) 'outputName': outputName,
+        if (originalDeleted) 'originalDeleted': true,
       };
 
   /// Returns null when the entry is too malformed to be worth resurrecting.
@@ -220,6 +243,8 @@ class ConversionJob {
       savedTo: json['savedTo'] == null
           ? null
           : enumByName(SavedTo.values, json['savedTo'], SavedTo.gallery),
+      outputName: json['outputName'] as String?,
+      originalDeleted: json['originalDeleted'] == true,
     );
   }
 }

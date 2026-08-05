@@ -321,5 +321,14 @@
   "sampleRateLabel": "Częstotliwość próbkowania",
   "voiceAudioHint": "Mono 22,05 kHz zmniejsza nagranie głosu mniej więcej czterokrotnie bez słyszalnej straty. Przy muzyce zostaw oba oryginalne.",
   "moveUp": "W górę",
-  "moveDown": "W dół"
+  "moveDown": "W dół",
+  "renameOutput": "Zmień nazwę wyniku",
+  "renameOutputHint": "Nowa nazwa",
+  "renameOutputHelp": "Rozszerzenie wynika z formatu wyjściowego. Puste pole oznacza nazwę taką jak plik źródłowy.",
+  "deleteOriginalsAction": "Usuń oryginały ({count})",
+  "deleteOriginalsAuto": "Usuwaj oryginały po konwersji",
+  "deleteOriginalsHint": "Prosi system o usunięcie plików źródłowych po zapisaniu wyniku. System zawsze pokazuje, co zniknie, i czeka na Twoje potwierdzenie.",
+  "originalsDeleted": "Oryginały usunięte — zwolniono {size}",
+  "originalsNoneDeleted": "Nic nie zostało usunięte. Odnaleźć można tylko pliki, które galeria trzyma pod pierwotną nazwą.",
+  "reclaimedTotal": "Zwolnione dzięki tej aplikacji: {size}"
 }

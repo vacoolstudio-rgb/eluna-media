@@ -321,5 +321,14 @@
   "sampleRateLabel": "샘플링 레이트",
   "voiceAudioHint": "22.05 kHz 모노는 음성 녹음을 들리는 손실 없이 약 1/4로 줄입니다. 음악은 둘 다 원본으로 두세요.",
   "moveUp": "위로",
-  "moveDown": "아래로"
+  "moveDown": "아래로",
+  "renameOutput": "결과 이름 바꾸기",
+  "renameOutputHint": "새 이름",
+  "renameOutputHelp": "확장자는 출력 형식이 정해요. 비워 두면 원본 파일 이름을 그대로 써요.",
+  "deleteOriginalsAction": "원본 삭제 ({count})",
+  "deleteOriginalsAuto": "변환 후 원본 삭제",
+  "deleteOriginalsHint": "결과를 저장한 뒤 원본 파일을 지워 달라고 시스템에 요청해요. 무엇이 사라지는지는 항상 시스템이 보여 주고 확인을 기다려요.",
+  "originalsDeleted": "원본을 삭제했어요 — {size} 확보",
+  "originalsNoneDeleted": "아무것도 삭제하지 않았어요. 갤러리에 원래 이름으로 남아 있는 파일만 찾을 수 있어요.",
+  "reclaimedTotal": "이 앱으로 확보한 용량: {size}"
 }

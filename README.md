@@ -77,6 +77,18 @@ competitor/review analysis from July 2026.
   it where people look (gallery album "Eluna Media" via `gal`; audio into
   public Downloads via MediaStore) and the confirmation offers to open the
   file or the folder.
+- **Rename the result** before it is encoded. The extension is not editable —
+  it follows the output format — and a blank name goes back to naming the
+  result after the source. Queued jobs only: once the file exists, and with
+  auto-save on a copy of it is already in the gallery, "rename" would either
+  lie about the saved copy or start a second export.
+- **Delete the originals** once the results are saved — the other half of
+  "compress to free space", which otherwise leaves the user paying for both
+  copies. The app unlinks nothing itself: Android raises
+  `MediaStore.createDeleteRequest` and iOS raises `PHPhotoLibrary`, both of
+  which show the real items and wait for approval. Offered as a button on the
+  Finished tab, or automatically after a batch if the setting is on (off by
+  default). Settings keeps a running total of the space it has freed.
 - Undo snackbars for "remove job" and "clear finished".
 
 ### Product surface
@@ -170,6 +182,7 @@ lib/
               queue_controller.dart      serial batch runner
   services/   review_service.dart    milestone logic (pure) + native prompt
               media_saver.dart       gallery/Downloads export
+              original_media.dart    system-confirmed source deletion
               share_intake.dart      inbound share channel
               haptics.dart           foreground_service.dart  notification_service.dart
   ui/         convert_tab (simple/advanced), queue_tab, settings_tab,
@@ -273,6 +286,13 @@ plain: GPL v3 in, GPL v3 out, F-Droid included, nothing to argue.
   verify it on a Mac.
 - **Background execution on iOS** — the OS gives no equivalent of a foreground
   service; `ForegroundService` is a deliberate no-op there.
+- **Deleting originals on iOS has not been run on a device** — no Mac here.
+  The Swift side is written against `PHPhotoLibrary` and fails closed: every
+  path that is not a confirmed deletion reports zero deleted, so the worst
+  outcome is the button doing nothing. Android is the tested path. Note also
+  that iOS matches library items by original filename alone (`PHAsset` does
+  not publish file size, and the ways to read it are private API), where
+  Android matches on name *and* exact byte count.
 - **AV1 output** (decoder only in the bundle) and **HEIC** (needs `libheif`,
   not bundled). Both need a custom FFmpeg build.
 - **Reverse playback** — FFmpeg's `reverse` buffers the whole clip in RAM,

@@ -321,5 +321,14 @@
   "sampleRateLabel": "Fréquence d'échantillonnage",
   "voiceAudioHint": "Mono à 22,05 kHz divise environ par quatre un enregistrement vocal sans perte audible. Pour la musique, laissez les deux sur l'original.",
   "moveUp": "Monter",
-  "moveDown": "Descendre"
+  "moveDown": "Descendre",
+  "renameOutput": "Renommer le résultat",
+  "renameOutputHint": "Nouveau nom",
+  "renameOutputHelp": "L'extension vient du format de sortie. Laissez vide pour reprendre le nom du fichier source.",
+  "deleteOriginalsAction": "Supprimer les originaux ({count})",
+  "deleteOriginalsAuto": "Supprimer les originaux après la conversion",
+  "deleteOriginalsHint": "Demande au système de supprimer les fichiers source une fois le résultat enregistré. Le système montre toujours ce qui va disparaître et attend votre confirmation.",
+  "originalsDeleted": "Originaux supprimés — {size} libérés",
+  "originalsNoneDeleted": "Rien n'a été supprimé. Seuls les fichiers que la galerie conserve sous leur nom d'origine peuvent être retrouvés.",
+  "reclaimedTotal": "Libéré avec cette application : {size}"
 }

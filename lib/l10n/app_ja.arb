@@ -321,5 +321,14 @@
   "sampleRateLabel": "サンプリング周波数",
   "voiceAudioHint": "22.05 kHz モノラルなら、音声録音は聞こえる劣化なしでおよそ 1/4 になります。音楽では両方とも元のままに。",
   "moveUp": "上へ",
-  "moveDown": "下へ"
+  "moveDown": "下へ",
+  "renameOutput": "変換結果の名前を変更",
+  "renameOutputHint": "新しい名前",
+  "renameOutputHelp": "拡張子は出力形式で決まります。空欄にすると元のファイル名が使われます。",
+  "deleteOriginalsAction": "元のファイルを削除 ({count})",
+  "deleteOriginalsAuto": "変換後に元のファイルを削除する",
+  "deleteOriginalsHint": "変換結果を保存したあと、元のファイルの削除をシステムに依頼します。何が消えるかは必ずシステムが表示し、確認を待ちます。",
+  "originalsDeleted": "元のファイルを削除しました（{size} の空き）",
+  "originalsNoneDeleted": "何も削除されませんでした。元の名前のままギャラリーに残っているファイルだけが見つかります。",
+  "reclaimedTotal": "このアプリで空けた容量: {size}"
 }

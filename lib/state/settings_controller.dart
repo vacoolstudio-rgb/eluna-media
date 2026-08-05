@@ -193,7 +193,19 @@ class AppPrefs {
     this.twoPassFitToSize = false,
     this.simpleMode = true,
     this.autoSaveResults = true,
+    this.deleteOriginalsAfterConversion = false,
   });
+
+  /// After a batch, offer the sources it converted to the system's delete
+  /// dialog instead of waiting to be asked.
+  ///
+  /// Off by default, and it stays off unless the user goes looking: the whole
+  /// point of compressing is often to free space, but nobody's originals get
+  /// touched because an app assumed that. Even switched on, the operating
+  /// system still shows what is about to go and asks for approval — this
+  /// controls whether the question is asked automatically, not whether it is
+  /// asked at all.
+  final bool deleteOriginalsAfterConversion;
 
   /// Copy every finished output into the gallery (or Downloads, for audio) as
   /// soon as it is done.
@@ -251,6 +263,7 @@ class AppPrefs {
     bool? twoPassFitToSize,
     bool? simpleMode,
     bool? autoSaveResults,
+    bool? deleteOriginalsAfterConversion,
   }) =>
       AppPrefs(
         themeMode: themeMode ?? this.themeMode,
@@ -263,6 +276,8 @@ class AppPrefs {
         twoPassFitToSize: twoPassFitToSize ?? this.twoPassFitToSize,
         simpleMode: simpleMode ?? this.simpleMode,
         autoSaveResults: autoSaveResults ?? this.autoSaveResults,
+        deleteOriginalsAfterConversion:
+            deleteOriginalsAfterConversion ?? this.deleteOriginalsAfterConversion,
       );
 }
 
@@ -277,6 +292,7 @@ class AppPrefsController extends Notifier<AppPrefs> {
   static const _kTwoPass = 'app.twoPassFitToSize';
   static const _kSimpleMode = 'app.simpleMode';
   static const _kAutoSave = 'app.autoSaveResults';
+  static const _kDeleteOriginals = 'app.deleteOriginalsAfterConversion';
 
   SharedPreferences get _prefs => ref.read(sharedPreferencesProvider);
 
@@ -294,6 +310,7 @@ class AppPrefsController extends Notifier<AppPrefs> {
       twoPassFitToSize: p.getBool(_kTwoPass) ?? false,
       simpleMode: p.getBool(_kSimpleMode) ?? true,
       autoSaveResults: p.getBool(_kAutoSave) ?? true,
+      deleteOriginalsAfterConversion: p.getBool(_kDeleteOriginals) ?? false,
     );
   }
 
@@ -349,6 +366,11 @@ class AppPrefsController extends Notifier<AppPrefs> {
   void setAutoSaveResults(bool v) {
     state = state.copyWith(autoSaveResults: v);
     _prefs.setBool(_kAutoSave, v);
+  }
+
+  void setDeleteOriginalsAfterConversion(bool v) {
+    state = state.copyWith(deleteOriginalsAfterConversion: v);
+    _prefs.setBool(_kDeleteOriginals, v);
   }
 }
 

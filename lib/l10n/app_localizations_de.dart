@@ -1136,4 +1136,40 @@ class L10nDe extends L10n {
 
   @override
   String get moveDown => 'Nach unten';
+
+  @override
+  String get renameOutput => 'Ergebnis umbenennen';
+
+  @override
+  String get renameOutputHint => 'Neuer Name';
+
+  @override
+  String get renameOutputHelp =>
+      'Die Endung ergibt sich aus dem Ausgabeformat. Leer lassen, dann heißt das Ergebnis wie die Quelle.';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return 'Originale löschen ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => 'Originale nach dem Konvertieren löschen';
+
+  @override
+  String get deleteOriginalsHint =>
+      'Bittet das System, die Quelldateien zu entfernen, sobald das Ergebnis gesichert ist. Das System zeigt immer, was verschwindet, und wartet auf deine Bestätigung.';
+
+  @override
+  String originalsDeleted(String size) {
+    return 'Originale gelöscht — $size frei geworden';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      'Es wurde nichts gelöscht. Gefunden werden nur Dateien, die die Galerie noch unter ihrem ursprünglichen Namen führt.';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'Mit dieser App frei geworden: $size';
+  }
 }

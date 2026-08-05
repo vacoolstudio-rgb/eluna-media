@@ -1136,4 +1136,40 @@ class L10nId extends L10n {
 
   @override
   String get moveDown => 'Turunkan';
+
+  @override
+  String get renameOutput => 'Ganti nama hasil';
+
+  @override
+  String get renameOutputHint => 'Nama baru';
+
+  @override
+  String get renameOutputHelp =>
+      'Ekstensi ditentukan oleh format keluaran. Kosongkan agar hasil memakai nama file sumber.';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return 'Hapus file asli ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => 'Hapus file asli setelah konversi';
+
+  @override
+  String get deleteOriginalsHint =>
+      'Meminta sistem menghapus file sumber setelah hasilnya tersimpan. Sistem selalu menampilkan apa yang akan hilang dan menunggu konfirmasimu.';
+
+  @override
+  String originalsDeleted(String size) {
+    return 'File asli dihapus — $size dibebaskan';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      'Tidak ada yang dihapus. Hanya file yang masih tersimpan di galeri dengan nama aslinya yang bisa ditemukan.';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'Dibebaskan lewat aplikasi ini: $size';
+  }
 }

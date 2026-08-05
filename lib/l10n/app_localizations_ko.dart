@@ -1097,4 +1097,39 @@ class L10nKo extends L10n {
 
   @override
   String get moveDown => '아래로';
+
+  @override
+  String get renameOutput => '결과 이름 바꾸기';
+
+  @override
+  String get renameOutputHint => '새 이름';
+
+  @override
+  String get renameOutputHelp => '확장자는 출력 형식이 정해요. 비워 두면 원본 파일 이름을 그대로 써요.';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return '원본 삭제 ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => '변환 후 원본 삭제';
+
+  @override
+  String get deleteOriginalsHint =>
+      '결과를 저장한 뒤 원본 파일을 지워 달라고 시스템에 요청해요. 무엇이 사라지는지는 항상 시스템이 보여 주고 확인을 기다려요.';
+
+  @override
+  String originalsDeleted(String size) {
+    return '원본을 삭제했어요 — $size 확보';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      '아무것도 삭제하지 않았어요. 갤러리에 원래 이름으로 남아 있는 파일만 찾을 수 있어요.';
+
+  @override
+  String reclaimedTotal(String size) {
+    return '이 앱으로 확보한 용량: $size';
+  }
 }

@@ -321,5 +321,14 @@
   "sampleRateLabel": "Örnekleme hızı",
   "voiceAudioHint": "22,05 kHz mono, bir ses kaydını duyulur kayıp olmadan yaklaşık dörtte birine indirir. Müzik için ikisini de orijinal bırakın.",
   "moveUp": "Yukarı taşı",
-  "moveDown": "Aşağı taşı"
+  "moveDown": "Aşağı taşı",
+  "renameOutput": "Sonucu yeniden adlandır",
+  "renameOutputHint": "Yeni ad",
+  "renameOutputHelp": "Uzantıyı çıkış biçimi belirler. Boş bırakırsanız sonuç kaynak dosyanın adını alır.",
+  "deleteOriginalsAction": "Orijinalleri sil ({count})",
+  "deleteOriginalsAuto": "Dönüştürmeden sonra orijinalleri sil",
+  "deleteOriginalsHint": "Sonuç kaydedildikten sonra kaynak dosyaları kaldırmasını sistemden ister. Sistem neyin gideceğini her zaman gösterir ve onayınızı bekler.",
+  "originalsDeleted": "Orijinaller silindi — {size} yer açıldı",
+  "originalsNoneDeleted": "Hiçbir şey silinmedi. Yalnızca galerinin özgün adıyla tuttuğu dosyalar bulunabiliyor.",
+  "reclaimedTotal": "Bu uygulamayla açılan yer: {size}"
 }

@@ -2054,6 +2054,60 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Move down'**
   String get moveDown;
+
+  /// No description provided for @renameOutput.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename result'**
+  String get renameOutput;
+
+  /// No description provided for @renameOutputHint.
+  ///
+  /// In en, this message translates to:
+  /// **'New name'**
+  String get renameOutputHint;
+
+  /// No description provided for @renameOutputHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'The extension comes from the output format. Leave it empty to name the result after the source.'**
+  String get renameOutputHelp;
+
+  /// No description provided for @deleteOriginalsAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete originals ({count})'**
+  String deleteOriginalsAction(int count);
+
+  /// No description provided for @deleteOriginalsAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete originals after converting'**
+  String get deleteOriginalsAuto;
+
+  /// No description provided for @deleteOriginalsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Asks the system to remove the source files once the result has been saved. The system always shows what will go and waits for your confirmation.'**
+  String get deleteOriginalsHint;
+
+  /// No description provided for @originalsDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Originals deleted — {size} freed'**
+  String originalsDeleted(String size);
+
+  /// No description provided for @originalsNoneDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing was deleted. Only files the gallery still holds under their original name can be found.'**
+  String get originalsNoneDeleted;
+
+  /// No description provided for @reclaimedTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Freed with this app: {size}'**
+  String reclaimedTotal(String size);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

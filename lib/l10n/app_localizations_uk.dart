@@ -1136,4 +1136,40 @@ class L10nUk extends L10n {
 
   @override
   String get moveDown => 'Нижче';
+
+  @override
+  String get renameOutput => 'Перейменувати результат';
+
+  @override
+  String get renameOutputHint => 'Нова назва';
+
+  @override
+  String get renameOutputHelp =>
+      'Розширення задає обраний формат. Залиште порожнім — результат назветься за вихідним файлом.';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return 'Видалити оригінали ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => 'Видаляти оригінали після конвертації';
+
+  @override
+  String get deleteOriginalsHint =>
+      'Просить систему видалити вихідні файли після того, як результат збережено. Система завжди показує, що саме зникне, і чекає на ваше підтвердження.';
+
+  @override
+  String originalsDeleted(String size) {
+    return 'Оригінали видалено — звільнено $size';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      'Нічого не видалено. Знайти можна лише файли, які галерея зберігає під первісною назвою.';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'Звільнено цим застосунком: $size';
+  }
 }

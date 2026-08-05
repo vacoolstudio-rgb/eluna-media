@@ -1094,4 +1094,39 @@ class L10nJa extends L10n {
 
   @override
   String get moveDown => '下へ';
+
+  @override
+  String get renameOutput => '変換結果の名前を変更';
+
+  @override
+  String get renameOutputHint => '新しい名前';
+
+  @override
+  String get renameOutputHelp => '拡張子は出力形式で決まります。空欄にすると元のファイル名が使われます。';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return '元のファイルを削除 ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => '変換後に元のファイルを削除する';
+
+  @override
+  String get deleteOriginalsHint =>
+      '変換結果を保存したあと、元のファイルの削除をシステムに依頼します。何が消えるかは必ずシステムが表示し、確認を待ちます。';
+
+  @override
+  String originalsDeleted(String size) {
+    return '元のファイルを削除しました（$size の空き）';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      '何も削除されませんでした。元の名前のままギャラリーに残っているファイルだけが見つかります。';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'このアプリで空けた容量: $size';
+  }
 }

@@ -215,6 +215,31 @@ class _FinishedActions extends ConsumerWidget {
     if (closed != SnackBarClosedReason.action) queue.purgeOutputs(removed);
   }
 
+  /// Offers the sources of everything saved so far to the system's delete flow.
+  ///
+  /// The confirmation belongs to the platform, so there is deliberately no
+  /// second one here: two dialogs asking the same question train people to
+  /// dismiss both. The app's job is to report honestly afterwards — including
+  /// the case where a file could not be matched in the gallery at all, which
+  /// looks identical to "nothing happened" unless it is said out loud.
+  Future<void> _deleteOriginals(BuildContext context, WidgetRef ref) async {
+    final l10n = L10n.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final ids = [for (final job in ref.read(queueProvider).reclaimable) job.id];
+
+    final outcome = await ref.read(queueProvider.notifier).reclaimOriginals(ids);
+    if (outcome.cancelled || outcome.unsupported) return;
+
+    ref.read(hapticsProvider).destructiveTap();
+    messenger.showSnackBar(SnackBar(
+      content: Text(
+        outcome.deletedCount == 0
+            ? l10n.originalsNoneDeleted
+            : l10n.originalsDeleted(OutputPaths.humanBytes(outcome.freedBytes)),
+      ),
+    ));
+  }
+
   static List<ConversionJob> _unsaved(List<ConversionJob> jobs) => [
         for (final job in jobs)
           if (job.status == JobStatus.completed &&
@@ -227,6 +252,7 @@ class _FinishedActions extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
     final unsaved = ref.watch(queueProvider.select((q) => _unsaved(q.jobs).length));
+    final reclaimable = ref.watch(queueProvider.select((q) => q.reclaimable.length));
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -239,6 +265,15 @@ class _FinishedActions extends ConsumerWidget {
           child: const Icon(Icons.cleaning_services_outlined),
         ),
         const SizedBox(height: 10),
+        // Only once the results are safely out of the sandbox — the reclaimable
+        // set requires it. Saving is the first offer, freeing space the second.
+        if (unsaved == 0 && reclaimable > 0)
+          FloatingActionButton.extended(
+            heroTag: 'queue-delete-originals',
+            onPressed: () => _deleteOriginals(context, ref),
+            icon: const Icon(Icons.delete_sweep_outlined),
+            label: Text(l10n.deleteOriginalsAction(reclaimable)),
+          ),
         if (unsaved > 0)
           FloatingActionButton.extended(
             heroTag: 'queue-save-all',
@@ -374,6 +409,57 @@ class _JobCardBody extends ConsumerWidget {
   const _JobCardBody({required this.job});
 
   final ConversionJob job;
+
+  /// Asks for the output's base name, without an extension.
+  ///
+  /// The extension is not editable because it is not the user's to choose: it
+  /// follows the output format, and a name ending in the wrong one would make
+  /// the system open the file with the wrong app. Anything typed after a dot is
+  /// dropped by the same sanitiser the output path uses.
+  Future<void> _rename(BuildContext context, WidgetRef ref) async {
+    final l10n = L10n.of(context);
+    final controller = TextEditingController(
+      text: job.outputName ?? OutputPaths.sanitiseBaseName(job.inputName),
+    );
+
+    final name = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.renameOutput),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              controller: controller,
+              autofocus: true,
+              textInputAction: TextInputAction.done,
+              decoration: InputDecoration(
+                labelText: l10n.renameOutputHint,
+                suffixText: '.${job.settings.container.extension}',
+              ),
+              onSubmitted: (value) => Navigator.of(context).pop(value),
+            ),
+            const SizedBox(height: 10),
+            Text(l10n.renameOutputHelp, style: Theme.of(context).textTheme.bodySmall),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(l10n.commonCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(controller.text),
+            child: Text(l10n.commonOk),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (name == null) return;
+    ref.read(queueProvider.notifier).renameOutput(job.id, name);
+  }
 
   Future<void> _share(BuildContext context) async {
     final path = job.outputPath;
@@ -585,6 +671,19 @@ class _JobCardBody extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.titleSmall,
                       ),
+                      // A rename is invisible until the file lands, which is
+                      // far too late to notice a typo.
+                      if (job.outputName case final renamed?) ...[
+                        const SizedBox(height: 2),
+                        Text(
+                          '→ $renamed.${job.settings.container.extension}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: scheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
                       const SizedBox(height: 6),
                       Wrap(
                         spacing: 6,
@@ -706,6 +805,14 @@ class _JobCardBody extends ConsumerWidget {
                     },
                     icon: const Icon(Icons.refresh, size: 17),
                     label: Text(l10n.retryJob),
+                  ),
+                // Queued only: see QueueController.renameOutput. Once the file
+                // exists there is nothing honest left for this button to do.
+                if (job.status == JobStatus.queued)
+                  TextButton.icon(
+                    onPressed: () => _rename(context, ref),
+                    icon: const Icon(Icons.drive_file_rename_outline, size: 17),
+                    label: Text(l10n.renameOutput),
                   ),
                 if (job.status == JobStatus.running || job.status == JobStatus.queued)
                   TextButton.icon(

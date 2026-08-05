@@ -1126,4 +1126,40 @@ class L10nEn extends L10n {
 
   @override
   String get moveDown => 'Move down';
+
+  @override
+  String get renameOutput => 'Rename result';
+
+  @override
+  String get renameOutputHint => 'New name';
+
+  @override
+  String get renameOutputHelp =>
+      'The extension comes from the output format. Leave it empty to name the result after the source.';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return 'Delete originals ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => 'Delete originals after converting';
+
+  @override
+  String get deleteOriginalsHint =>
+      'Asks the system to remove the source files once the result has been saved. The system always shows what will go and waits for your confirmation.';
+
+  @override
+  String originalsDeleted(String size) {
+    return 'Originals deleted — $size freed';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      'Nothing was deleted. Only files the gallery still holds under their original name can be found.';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'Freed with this app: $size';
+  }
 }

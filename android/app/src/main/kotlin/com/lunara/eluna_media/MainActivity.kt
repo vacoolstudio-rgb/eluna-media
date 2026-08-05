@@ -1,15 +1,19 @@
 package com.lunara.eluna_media
 
+import android.app.Activity
 import android.app.DownloadManager
 import android.content.ActivityNotFoundException
+import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.webkit.MimeTypeMap
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -136,6 +140,19 @@ class MainActivity : FlutterActivity() {
                                         }
                                     }
                                 }.start()
+                            }
+                        }
+
+                        // Hand the user's original files to the system's own
+                        // delete dialog. See deleteOriginals below for why the
+                        // lookup is by name and size.
+                        "deleteOriginals" -> {
+                            @Suppress("UNCHECKED_CAST")
+                            val items = call.argument<List<Map<String, Any?>>>("items")
+                            if (items == null) {
+                                result.error("args", "items are required", null)
+                            } else {
+                                deleteOriginals(items, result)
                             }
                         }
 
@@ -322,6 +339,207 @@ class MainActivity : FlutterActivity() {
             ?: "application/octet-stream"
     }
 
+    // -------------------------------------------------------------------------
+    // Delete the originals the user just converted
+    // -------------------------------------------------------------------------
+
+    /** The Dart call waiting for the delete dialog to come back. */
+    private var deleteResult: MethodChannel.Result? = null
+
+    /** Requested (name, size) pairs, in the order Dart sent them. */
+    private var deleteItems: List<Pair<String, Long>> = emptyList()
+
+    /** Indices of [deleteItems] the dialog is currently asking about. */
+    private var deleteIndices: List<Int> = emptyList()
+
+    /**
+     * Removes source files from the shared media collections.
+     *
+     * The app never unlinks anything itself. On API 30+ the URIs go to
+     * [MediaStore.createDeleteRequest], which shows the user the actual items —
+     * with thumbnails — and deletes only what they approve; below that the app
+     * still holds WRITE_EXTERNAL_STORAGE and deletes directly, which is the only
+     * mechanism those versions have.
+     *
+     * Lookup is by display name *and* exact byte size because the path Dart
+     * holds is not the original: both the photo picker and the document picker
+     * hand back a cached copy, so the real item can only be found by matching
+     * its metadata. A name that matches two rows, or none, is skipped rather
+     * than guessed at — the wrong file deleted is unrecoverable, and one file
+     * left behind costs nothing.
+     */
+    private fun deleteOriginals(items: List<Map<String, Any?>>, result: MethodChannel.Result) {
+        // A second dialog cannot be raised over the first, and the first still
+        // owns the pending result.
+        if (deleteResult != null) {
+            result.success(mapOf("deleted" to emptyList<Int>(), "cancelled" to true))
+            return
+        }
+
+        deleteItems = items.map { item ->
+            (item["name"] as? String ?: "") to ((item["size"] as? Number)?.toLong() ?: -1L)
+        }
+        deleteResult = result
+
+        if (!hasMediaReadPermission()) {
+            requestMediaReadPermission()
+            return
+        }
+        startDeleteRequest()
+    }
+
+    private fun mediaReadPermissions(): Array<String> =
+        if (Build.VERSION.SDK_INT >= 33) {
+            arrayOf(
+                android.Manifest.permission.READ_MEDIA_IMAGES,
+                android.Manifest.permission.READ_MEDIA_VIDEO,
+                android.Manifest.permission.READ_MEDIA_AUDIO,
+            )
+        } else {
+            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+
+    /**
+     * Any one of the media permissions is enough to be worth trying: a user who
+     * granted photos but not video should still get their photos deleted, and
+     * the query simply returns nothing for the rest.
+     */
+    private fun hasMediaReadPermission(): Boolean = mediaReadPermissions().any {
+        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestMediaReadPermission() {
+        ActivityCompat.requestPermissions(this, mediaReadPermissions(), REQUEST_MEDIA_READ)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray,
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode != REQUEST_MEDIA_READ) return
+        if (deleteResult == null) return
+        if (hasMediaReadPermission()) {
+            startDeleteRequest()
+        } else {
+            // Declining to grant access is the user declining the deletion.
+            finishDelete(emptyList(), cancelled = true)
+        }
+    }
+
+    private fun startDeleteRequest() {
+        // Querying the media store touches disk; the intent must be raised from
+        // the main thread afterwards.
+        Thread {
+            val matches = findMediaUris(deleteItems)
+            runOnUiThread {
+                if (deleteResult == null) return@runOnUiThread
+                if (matches.isEmpty()) {
+                    finishDelete(emptyList(), cancelled = false)
+                    return@runOnUiThread
+                }
+                deleteIndices = matches.map { it.first }
+                if (Build.VERSION.SDK_INT >= 30) {
+                    try {
+                        val request = MediaStore.createDeleteRequest(
+                            contentResolver,
+                            matches.map { it.second },
+                        )
+                        startIntentSenderForResult(
+                            request.intentSender,
+                            REQUEST_DELETE_ORIGINALS,
+                            null,
+                            0,
+                            0,
+                            0,
+                        )
+                    } catch (_: Exception) {
+                        // Backgrounded activity, or a ROM without the dialog.
+                        finishDelete(emptyList(), cancelled = true)
+                    }
+                } else {
+                    val deleted = mutableListOf<Int>()
+                    for ((index, uri) in matches) {
+                        try {
+                            if (contentResolver.delete(uri, null, null) > 0) deleted.add(index)
+                        } catch (_: Exception) {
+                            // Not ours to delete on this version; skip it.
+                        }
+                    }
+                    finishDelete(deleted, cancelled = false)
+                }
+            }
+        }.start()
+    }
+
+    private fun findMediaUris(items: List<Pair<String, Long>>): List<Pair<Int, Uri>> {
+        val found = mutableListOf<Pair<Int, Uri>>()
+        // The Files collection spans images, video and audio in one query, and
+        // MEDIA_TYPE says which per-collection URI the delete request needs.
+        val collection = MediaStore.Files.getContentUri("external")
+        val projection = arrayOf(
+            MediaStore.Files.FileColumns._ID,
+            MediaStore.Files.FileColumns.MEDIA_TYPE,
+        )
+        val selection =
+            "${MediaStore.Files.FileColumns.DISPLAY_NAME} = ? AND " +
+                "${MediaStore.Files.FileColumns.SIZE} = ?"
+
+        items.forEachIndexed { index, (name, size) ->
+            if (name.isEmpty() || size <= 0) return@forEachIndexed
+            try {
+                contentResolver.query(
+                    collection,
+                    projection,
+                    selection,
+                    arrayOf(name, size.toString()),
+                    null,
+                )?.use { cursor ->
+                    // Exactly one, or nothing: two files sharing a name and a
+                    // byte count are indistinguishable from here, and picking
+                    // either would be a coin toss with the user's data.
+                    if (cursor.count != 1 || !cursor.moveToFirst()) return@use
+                    val id = cursor.getLong(0)
+                    val base = when (cursor.getInt(1)) {
+                        MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE ->
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                        MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO ->
+                            MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                        MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO ->
+                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                        else -> null
+                    } ?: return@use
+                    found.add(index to ContentUris.withAppendedId(base, id))
+                }
+            } catch (_: Exception) {
+                // No read access, or a provider that dislikes the selection.
+            }
+        }
+        return found
+    }
+
+    @Deprecated("Activity result callbacks; the plugin APIs still route through them")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        @Suppress("DEPRECATION")
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != REQUEST_DELETE_ORIGINALS) return
+        if (resultCode == Activity.RESULT_OK) {
+            // The dialog is all-or-nothing: OK means every item it listed is gone.
+            finishDelete(deleteIndices, cancelled = false)
+        } else {
+            finishDelete(emptyList(), cancelled = true)
+        }
+    }
+
+    private fun finishDelete(deleted: List<Int>, cancelled: Boolean) {
+        val result = deleteResult ?: return
+        deleteResult = null
+        deleteItems = emptyList()
+        deleteIndices = emptyList()
+        result.success(mapOf("deleted" to deleted, "cancelled" to cancelled))
+    }
+
     /** This instance's channel, so onDestroy can tell it from a successor's. */
     private var ownServiceChannel: MethodChannel? = null
 
@@ -339,6 +557,12 @@ class MainActivity : FlutterActivity() {
     companion object {
         private const val SERVICE_CHANNEL = "eluna/foreground_service"
         private const val SHARE_CHANNEL = "eluna/share_intake"
+
+        /** Activity-result code for the system's delete-confirmation dialog. */
+        private const val REQUEST_DELETE_ORIGINALS = 8021
+
+        /** Permission-request code for the media read access the lookup needs. */
+        private const val REQUEST_MEDIA_READ = 8022
 
         /**
          * The live foreground-service channel, held statically so the service —

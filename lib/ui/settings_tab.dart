@@ -8,6 +8,7 @@ import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
 import '../services/review_service.dart';
 import '../state/achievements_controller.dart';
+import '../state/app_meta_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/storage_controller.dart';
 import 'achievements_screen.dart';
@@ -303,6 +304,28 @@ class _StorageSection extends ConsumerWidget {
           value: ref.watch(appPrefsProvider.select((p) => p.autoSaveResults)),
           onChanged: ref.read(appPrefsProvider.notifier).setAutoSaveResults,
         ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(l10n.deleteOriginalsAuto),
+          subtitle: Text(l10n.deleteOriginalsHint),
+          value: ref.watch(
+            appPrefsProvider.select((p) => p.deleteOriginalsAfterConversion),
+          ),
+          onChanged:
+              ref.read(appPrefsProvider.notifier).setDeleteOriginalsAfterConversion,
+        ),
+        // The payoff of compressing, stated. Hidden at zero: a counter that
+        // starts at "0 B freed" advertises a feature the user has not used
+        // rather than reporting anything.
+        if (ref.watch(appMetaProvider.select((m) => m.reclaimedBytes)) case final freed
+            when freed > 0) ...[
+          const SizedBox(height: 4),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Icons.cleaning_services_outlined),
+            title: Text(l10n.reclaimedTotal(OutputPaths.humanBytes(freed))),
+          ),
+        ],
         const SizedBox(height: 4),
         ListTile(
           contentPadding: EdgeInsets.zero,

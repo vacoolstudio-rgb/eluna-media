@@ -625,5 +625,35 @@
   "sampleRateLabel": "Sample rate",
   "voiceAudioHint": "Mono at 22.05 kHz roughly quarters a voice recording with no audible loss. Leave both original for music.",
   "moveUp": "Move up",
-  "moveDown": "Move down"
+  "moveDown": "Move down",
+  "renameOutput": "Rename result",
+  "renameOutputHint": "New name",
+  "renameOutputHelp": "The extension comes from the output format. Leave it empty to name the result after the source.",
+  "deleteOriginalsAction": "Delete originals ({count})",
+  "@deleteOriginalsAction": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "deleteOriginalsAuto": "Delete originals after converting",
+  "deleteOriginalsHint": "Asks the system to remove the source files once the result has been saved. The system always shows what will go and waits for your confirmation.",
+  "originalsDeleted": "Originals deleted — {size} freed",
+  "@originalsDeleted": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "originalsNoneDeleted": "Nothing was deleted. Only files the gallery still holds under their original name can be found.",
+  "reclaimedTotal": "Freed with this app: {size}",
+  "@reclaimedTotal": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  }
 }

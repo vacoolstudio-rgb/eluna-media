@@ -321,5 +321,14 @@
   "sampleRateLabel": "Taxa de amostragem",
   "voiceAudioHint": "Mono a 22,05 kHz reduz uma gravação de voz a cerca de um quarto sem perda audível. Para música, deixe ambos no original.",
   "moveUp": "Mover para cima",
-  "moveDown": "Mover para baixo"
+  "moveDown": "Mover para baixo",
+  "renameOutput": "Renomear resultado",
+  "renameOutputHint": "Novo nome",
+  "renameOutputHelp": "A extensão vem do formato de saída. Deixe em branco para o resultado herdar o nome do arquivo original.",
+  "deleteOriginalsAction": "Excluir originais ({count})",
+  "deleteOriginalsAuto": "Excluir os originais depois de converter",
+  "deleteOriginalsHint": "Pede ao sistema para remover os arquivos de origem depois que o resultado for salvo. O sistema sempre mostra o que vai sumir e espera sua confirmação.",
+  "originalsDeleted": "Originais excluídos — {size} liberados",
+  "originalsNoneDeleted": "Nada foi excluído. Só dá para encontrar os arquivos que a galeria ainda guarda com o nome original.",
+  "reclaimedTotal": "Liberado com este app: {size}"
 }

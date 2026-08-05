@@ -1133,4 +1133,40 @@ class L10nTr extends L10n {
 
   @override
   String get moveDown => 'Aşağı taşı';
+
+  @override
+  String get renameOutput => 'Sonucu yeniden adlandır';
+
+  @override
+  String get renameOutputHint => 'Yeni ad';
+
+  @override
+  String get renameOutputHelp =>
+      'Uzantıyı çıkış biçimi belirler. Boş bırakırsanız sonuç kaynak dosyanın adını alır.';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return 'Orijinalleri sil ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => 'Dönüştürmeden sonra orijinalleri sil';
+
+  @override
+  String get deleteOriginalsHint =>
+      'Sonuç kaydedildikten sonra kaynak dosyaları kaldırmasını sistemden ister. Sistem neyin gideceğini her zaman gösterir ve onayınızı bekler.';
+
+  @override
+  String originalsDeleted(String size) {
+    return 'Orijinaller silindi — $size yer açıldı';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      'Hiçbir şey silinmedi. Yalnızca galerinin özgün adıyla tuttuğu dosyalar bulunabiliyor.';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'Bu uygulamayla açılan yer: $size';
+  }
 }

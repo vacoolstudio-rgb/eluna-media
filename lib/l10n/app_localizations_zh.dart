@@ -1078,4 +1078,37 @@ class L10nZh extends L10n {
 
   @override
   String get moveDown => '下移';
+
+  @override
+  String get renameOutput => '重命名结果';
+
+  @override
+  String get renameOutputHint => '新名称';
+
+  @override
+  String get renameOutputHelp => '扩展名由输出格式决定。留空则沿用源文件的名称。';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return '删除原文件（$count）';
+  }
+
+  @override
+  String get deleteOriginalsAuto => '转换后删除原文件';
+
+  @override
+  String get deleteOriginalsHint => '在结果保存之后，请求系统删除源文件。系统始终会显示将要删除的内容并等待你确认。';
+
+  @override
+  String originalsDeleted(String size) {
+    return '已删除原文件——释放 $size';
+  }
+
+  @override
+  String get originalsNoneDeleted => '没有删除任何内容。只能找到仍以原名保存在相册中的文件。';
+
+  @override
+  String reclaimedTotal(String size) {
+    return '通过本应用释放：$size';
+  }
 }

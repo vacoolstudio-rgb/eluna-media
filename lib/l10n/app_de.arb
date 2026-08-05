@@ -321,5 +321,14 @@
   "sampleRateLabel": "Abtastrate",
   "voiceAudioHint": "Mono mit 22,05 kHz viertelt eine Sprachaufnahme etwa, ohne hörbaren Verlust. Für Musik beides im Original lassen.",
   "moveUp": "Nach oben",
-  "moveDown": "Nach unten"
+  "moveDown": "Nach unten",
+  "renameOutput": "Ergebnis umbenennen",
+  "renameOutputHint": "Neuer Name",
+  "renameOutputHelp": "Die Endung ergibt sich aus dem Ausgabeformat. Leer lassen, dann heißt das Ergebnis wie die Quelle.",
+  "deleteOriginalsAction": "Originale löschen ({count})",
+  "deleteOriginalsAuto": "Originale nach dem Konvertieren löschen",
+  "deleteOriginalsHint": "Bittet das System, die Quelldateien zu entfernen, sobald das Ergebnis gesichert ist. Das System zeigt immer, was verschwindet, und wartet auf deine Bestätigung.",
+  "originalsDeleted": "Originale gelöscht — {size} frei geworden",
+  "originalsNoneDeleted": "Es wurde nichts gelöscht. Gefunden werden nur Dateien, die die Galerie noch unter ihrem ursprünglichen Namen führt.",
+  "reclaimedTotal": "Mit dieser App frei geworden: {size}"
 }

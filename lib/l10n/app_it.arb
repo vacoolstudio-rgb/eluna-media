@@ -321,5 +321,14 @@
   "sampleRateLabel": "Frequenza di campionamento",
   "voiceAudioHint": "Mono a 22,05 kHz riduce di circa quattro volte una registrazione vocale senza perdite udibili. Per la musica lascia entrambi come l'originale.",
   "moveUp": "Sposta su",
-  "moveDown": "Sposta giù"
+  "moveDown": "Sposta giù",
+  "renameOutput": "Rinomina risultato",
+  "renameOutputHint": "Nuovo nome",
+  "renameOutputHelp": "L'estensione dipende dal formato di uscita. Lascia vuoto per dare al risultato il nome dell'originale.",
+  "deleteOriginalsAction": "Elimina originali ({count})",
+  "deleteOriginalsAuto": "Elimina gli originali dopo la conversione",
+  "deleteOriginalsHint": "Chiede al sistema di rimuovere i file di origine una volta salvato il risultato. Il sistema mostra sempre cosa sparirà e attende la tua conferma.",
+  "originalsDeleted": "Originali eliminati — {size} liberati",
+  "originalsNoneDeleted": "Non è stato eliminato nulla. Si trovano solo i file che la galleria conserva con il nome originale.",
+  "reclaimedTotal": "Liberato con questa app: {size}"
 }

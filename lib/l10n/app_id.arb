@@ -321,5 +321,14 @@
   "sampleRateLabel": "Laju sampel",
   "voiceAudioHint": "Mono 22,05 kHz memperkecil rekaman suara sekitar seperempat tanpa kehilangan yang terdengar. Untuk musik, biarkan keduanya asli.",
   "moveUp": "Naikkan",
-  "moveDown": "Turunkan"
+  "moveDown": "Turunkan",
+  "renameOutput": "Ganti nama hasil",
+  "renameOutputHint": "Nama baru",
+  "renameOutputHelp": "Ekstensi ditentukan oleh format keluaran. Kosongkan agar hasil memakai nama file sumber.",
+  "deleteOriginalsAction": "Hapus file asli ({count})",
+  "deleteOriginalsAuto": "Hapus file asli setelah konversi",
+  "deleteOriginalsHint": "Meminta sistem menghapus file sumber setelah hasilnya tersimpan. Sistem selalu menampilkan apa yang akan hilang dan menunggu konfirmasimu.",
+  "originalsDeleted": "File asli dihapus — {size} dibebaskan",
+  "originalsNoneDeleted": "Tidak ada yang dihapus. Hanya file yang masih tersimpan di galeri dengan nama aslinya yang bisa ditemukan.",
+  "reclaimedTotal": "Dibebaskan lewat aplikasi ini: {size}"
 }

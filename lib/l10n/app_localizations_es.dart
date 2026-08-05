@@ -1136,4 +1136,40 @@ class L10nEs extends L10n {
 
   @override
   String get moveDown => 'Bajar';
+
+  @override
+  String get renameOutput => 'Renombrar resultado';
+
+  @override
+  String get renameOutputHint => 'Nombre nuevo';
+
+  @override
+  String get renameOutputHelp =>
+      'La extensión la marca el formato de salida. Déjalo vacío y el resultado tomará el nombre del original.';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return 'Eliminar originales ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => 'Eliminar los originales tras convertir';
+
+  @override
+  String get deleteOriginalsHint =>
+      'Pide al sistema que borre los archivos de origen una vez guardado el resultado. El sistema siempre muestra qué se va a borrar y espera tu confirmación.';
+
+  @override
+  String originalsDeleted(String size) {
+    return 'Originales eliminados: $size liberados';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      'No se eliminó nada. Solo se encuentran los archivos que la galería conserva con su nombre original.';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'Liberado con esta app: $size';
+  }
 }

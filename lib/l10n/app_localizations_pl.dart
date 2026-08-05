@@ -1138,4 +1138,40 @@ class L10nPl extends L10n {
 
   @override
   String get moveDown => 'W dół';
+
+  @override
+  String get renameOutput => 'Zmień nazwę wyniku';
+
+  @override
+  String get renameOutputHint => 'Nowa nazwa';
+
+  @override
+  String get renameOutputHelp =>
+      'Rozszerzenie wynika z formatu wyjściowego. Puste pole oznacza nazwę taką jak plik źródłowy.';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return 'Usuń oryginały ($count)';
+  }
+
+  @override
+  String get deleteOriginalsAuto => 'Usuwaj oryginały po konwersji';
+
+  @override
+  String get deleteOriginalsHint =>
+      'Prosi system o usunięcie plików źródłowych po zapisaniu wyniku. System zawsze pokazuje, co zniknie, i czeka na Twoje potwierdzenie.';
+
+  @override
+  String originalsDeleted(String size) {
+    return 'Oryginały usunięte — zwolniono $size';
+  }
+
+  @override
+  String get originalsNoneDeleted =>
+      'Nic nie zostało usunięte. Odnaleźć można tylko pliki, które galeria trzyma pod pierwotną nazwą.';
+
+  @override
+  String reclaimedTotal(String size) {
+    return 'Zwolnione dzięki tej aplikacji: $size';
+  }
 }
