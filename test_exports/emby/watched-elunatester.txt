@@ -1,5 +1,0 @@
-episode|breaking bad|2008|1|1
-episode|breaking bad|2008|1|2
-episode|chernobyl|2019|1|1
-movie|oppenheimer|2023
-movie|the matrix|1999

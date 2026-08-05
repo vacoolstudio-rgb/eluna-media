@@ -1,6 +1,0 @@
-list_id,list_name,item_type,tvdb_id,uuid,name,custom_order
-a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,81189,,Breaking Bad,0
-a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,360893,,Chernobyl,1
-a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,movie,649,,Pulp Fiction,2
-b7482ee0-f761-4991-bc9d-845e3d8df448,Movie night,movie,631,,Inception,0
-b7482ee0-f761-4991-bc9d-845e3d8df448,Movie night,movie,145830,,Oppenheimer,1

@@ -1,6 +1,0 @@
-user_id,tv_show_id,notification_type,notification_offset,created_at,updated_at,active,diffusion,folder_id,archived,tv_show_name
-0,81189,2,1440,2026-05-28 18:00:11,2026-06-05 23:59:59,1,original,,0,Breaking Bad
-0,360893,2,1440,2026-05-25 09:30:00,2026-06-02 22:14:55,1,original,,0,Chernobyl
-0,275274,2,1440,2026-06-12 08:45:30,2026-06-15 23:02:41,1,original,,0,Rick and Morty
-0,362696,2,1440,2026-05-03 08:30:15,2026-05-03 08:30:15,1,original,,0,The Witcher
-0,371028,2,1440,2026-06-01 19:55:02,2026-06-01 19:55:02,1,original,,0,Arcane
