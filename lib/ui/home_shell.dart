@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../core/app_version.dart';
 import '../domain/achievements.dart';
 import '../domain/conversion_job.dart';
 import '../l10n/app_localizations.dart';
@@ -15,6 +16,7 @@ import 'convert_tab.dart';
 import 'queue_strings.dart';
 import 'queue_tab.dart';
 import 'settings_tab.dart';
+import 'support_screen.dart';
 
 /// Switches between a bottom navigation bar and a side rail so the app is
 /// usable on a phone and on a tablet without a second layout.
@@ -37,21 +39,80 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     // queue needs its localised strings before it can run headless.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _resumeInterruptedBatch();
-      _maybeShowWhatsNew();
+      unawaited(_maybeShowStartupPrompts());
     });
+  }
+
+  /// Разговоры первого кадра, по одному за раз и в порядке важности: сначала
+  /// «в прошлый раз приложение закрылось с ошибкой», и только если краша не
+  /// было — «что нового».
+  Future<void> _maybeShowStartupPrompts() async {
+    if (await _maybeOfferCrashReport()) return;
+    await _maybeShowWhatsNew();
+  }
+
+  /// Баннер о падении прошлого запуска. Возвращает true, если показан.
+  ///
+  /// Единственное место, откуда отчёт вообще может куда-то уйти, — и уходит он
+  /// только после того, как пользователь увидел его целиком на следующем
+  /// экране. Отказ удаляет файл: телефон не хранит запись, которой ему сказали
+  /// «нет».
+  Future<bool> _maybeOfferCrashReport() async {
+    final crash = await CrashLog.pending();
+    if (crash == null || !mounted) return false;
+
+    // Строки общие: тот же баннер теми же словами показывают Screen и Subs, и
+    // переводы к нему пакет уже возит — своих ARB-ключей на это не заведено.
+    final l = ElunaL10n.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.showMaterialBanner(
+      MaterialBanner(
+        content: Text(l.crashPrompt),
+        actions: [
+          TextButton(
+            onPressed: () {
+              messenger.hideCurrentMaterialBanner();
+              unawaited(CrashLog.clear());
+            },
+            child: Text(l.crashDismiss),
+          ),
+          TextButton(
+            onPressed: () {
+              messenger.hideCurrentMaterialBanner();
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => SupportScreen(crashReport: crash),
+                ),
+              );
+            },
+            child: Text(l.crashSend),
+          ),
+        ],
+      ),
+    );
+    return true;
   }
 
   /// Once per version, and only for people who actually used the previous
   /// one — a fresh install (or a pre-dialog install with zero conversions)
   /// gets a silent stamp, not a popup on their first minute in the app.
-  void _maybeShowWhatsNew() {
+  Future<void> _maybeShowWhatsNew() async {
+    // Версию теперь называет бандл, а не константа рядом с pubspec, которую
+    // забывали двигать. `name()`, а НЕ `full()`: с номером сборки («0.4.0 (2)»)
+    // окно вылезало бы заново на каждой пересборке той же версии, а у всех, кто
+    // обновляется, в meta.lastSeenVersion лежит ровно «0.4.0».
+    //
+    // Чтение идёт через канал платформы, поэтому await — и он здесь безопасен:
+    // это колбэк ПОСЛЕ первого кадра, задерживать нечего.
+    final version = await ElunaVersion.name();
     if (!mounted) return;
-    final meta = ref.read(appMetaProvider);
-    if (meta.lastSeenVersion == kAppVersion) return;
 
-    final isExistingUser = meta.successfulConversions > 0;
-    ref.read(appMetaProvider.notifier).markVersionSeen(kAppVersion);
-    if (meta.lastSeenVersion == null && !isExistingUser) return;
+    final meta = ref.read(appMetaProvider);
+    final show = WhatsNewGate.shouldShow(meta, version);
+    if (WhatsNewGate.shouldMark(meta, version)) {
+      ref.read(appMetaProvider.notifier).markVersionSeen(version);
+    }
+    if (!show) return;
 
     final l10n = L10n.of(context);
     showDialog<void>(

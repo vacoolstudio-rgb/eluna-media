@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../core/app_version.dart';
 import '../core/output_paths.dart';
 import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
@@ -14,6 +13,7 @@ import '../state/settings_controller.dart';
 import '../state/storage_controller.dart';
 import 'achievements_screen.dart';
 import 'network_privacy_screen.dart';
+import 'support_screen.dart';
 import 'widgets/section_card.dart';
 
 /// Один блок настроек: общая карточка пакета плюс её же шапка.
@@ -272,11 +272,35 @@ class SettingsTab extends ConsumerWidget {
                   },
                 ),
               ),
+              // Обратная связь и отчёт о падении — общий экран пакета. Письмо
+              // собирается на устройстве и уходит почтовым клиентом
+              // пользователя: у релизной сборки нет разрешения INTERNET, и
+              // отправить что-либо самостоятельно приложение не может.
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.info_outline),
-                title: Text(l10n.appVersionLabel(kAppVersion)),
-                subtitle: Text(l10n.appTitle),
+                leading: const Icon(Icons.bug_report_outlined),
+                title: Text(ElunaL10n.of(context).supportTitle),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(builder: (_) => const SupportScreen()),
+                ),
+              ),
+              // Версия приходит с платформы (канал), поэтому FutureBuilder, а не
+              // константа: строка появляется кадром позже, зато она всегда та,
+              // что реально установлена. `full()` — с номером сборки: именно в
+              // такой форме её нужно называть в отчёте об ошибке. Пока ответ
+              // едет, показываем уже прочитанное значение — «что нового» на
+              // первом кадре обычно успевает его запросить, и мигания нет.
+              FutureBuilder<String>(
+                future: ElunaVersion.full(),
+                builder: (context, snapshot) => ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.info_outline),
+                  title: Text(
+                    l10n.appVersionLabel(snapshot.data ?? ElunaVersion.cached),
+                  ),
+                  subtitle: Text(l10n.appTitle),
+                ),
               ),
             ],
           ),
@@ -357,6 +381,27 @@ class _StorageSection extends ConsumerWidget {
     );
   }
 
+  /// «Удалить все данные» — шит из пакета поверх [ElunaDataWipe].
+  ///
+  /// Он стирает ВСЁ, что приложение зарегистрировало в `main`, в фиксированном
+  /// порядке и говорит, что именно стёрлось. Обещание «удалить все мои данные»
+  /// перестаёт зависеть от того, вспомнил ли кто-то про хранилище, добавленное
+  /// в прошлом месяце: новое хранилище регистрирует себя само.
+  ///
+  /// `onDeleteCloud` не передаётся — и это не пропуск: у Media нет ни облачного
+  /// бэкенда, ни вольта. Без него шит не показывает галочку про облачную копию,
+  /// то есть не предлагает удалить то, чего никогда не существовало.
+  Future<void> _deleteAllData(BuildContext context, WidgetRef ref) async {
+    await showDeleteAllDataSheet(
+      context,
+      onFinished: () async => resetAfterDataWipe(ref),
+      // По той же причине не трогаем ключ вольта: Media его никогда не
+      // записывала. Стирать его — поднять Keystore ради ничего, а при ошибке
+      // назвать в отчёте хранилище, о котором пользователь не слышал.
+      alsoClearVaultKey: false,
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
@@ -425,6 +470,25 @@ class _StorageSection extends ConsumerWidget {
               style: TextButton.styleFrom(foregroundColor: theme.colorScheme.error),
             ),
           ),
+        // Внизу «Хранилища» и в цвете ошибки — потому что это не соседний по
+        // силе пункт, а другой порядок величины: кнопка выше освобождает место,
+        // эта стирает приложение до состояния свежей установки. Разделитель
+        // нужен ровно затем, чтобы их нельзя было перепутать взглядом.
+        const Divider(height: 28),
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: Icon(Icons.delete_forever_outlined, color: theme.colorScheme.error),
+          title: Text(
+            l10n.deleteAllData,
+            style: TextStyle(
+              color: theme.colorScheme.error,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          subtitle: Text(l10n.deleteAllDataHint),
+          isThreeLine: true,
+          onTap: () => _deleteAllData(context, ref),
+        ),
       ],
     );
   }

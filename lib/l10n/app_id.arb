@@ -321,5 +321,7 @@
   "deleteOriginalsHint": "Meminta sistem menghapus file sumber setelah hasilnya tersimpan. Sistem selalu menampilkan apa yang akan hilang dan menunggu konfirmasimu.",
   "originalsDeleted": "File asli dihapus — {size} dibebaskan",
   "originalsNoneDeleted": "Tidak ada yang dihapus. Hanya file yang masih tersimpan di galeri dengan nama aslinya yang bisa ditemukan.",
-  "reclaimedTotal": "Dibebaskan lewat aplikasi ini: {size}"
+  "reclaimedTotal": "Dibebaskan lewat aplikasi ini: {size}",
+  "deleteAllData": "Hapus semua data",
+  "deleteAllDataHint": "Menghapus semua yang disimpan aplikasi di perangkat ini: antrean, berkas hasil konversi, pratinjau, pencapaian, dan pengaturan. Berkas yang sudah Anda simpan ke galeri tidak disentuh."
 }

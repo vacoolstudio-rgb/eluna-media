@@ -2054,6 +2054,18 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Freed with this app: {size}'**
   String reclaimedTotal(String size);
+
+  /// No description provided for @deleteAllData.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all data'**
+  String get deleteAllData;
+
+  /// No description provided for @deleteAllDataHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Erases everything the app keeps on this device: the queue, converted files, previews, achievements and settings. Files you have already saved to your gallery are left alone.'**
+  String get deleteAllDataHint;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

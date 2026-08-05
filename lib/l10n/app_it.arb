@@ -321,5 +321,7 @@
   "deleteOriginalsHint": "Chiede al sistema di rimuovere i file di origine una volta salvato il risultato. Il sistema mostra sempre cosa sparirà e attende la tua conferma.",
   "originalsDeleted": "Originali eliminati — {size} liberati",
   "originalsNoneDeleted": "Non è stato eliminato nulla. Si trovano solo i file che la galleria conserva con il nome originale.",
-  "reclaimedTotal": "Liberato con questa app: {size}"
+  "reclaimedTotal": "Liberato con questa app: {size}",
+  "deleteAllData": "Elimina tutti i dati",
+  "deleteAllDataHint": "Cancella tutto ciò che l'app conserva su questo dispositivo: la coda, i file convertiti, le anteprime, gli obiettivi e le impostazioni. I file già salvati nella galleria non vengono toccati."
 }

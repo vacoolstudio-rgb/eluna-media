@@ -1141,4 +1141,11 @@ class L10nUk extends L10n {
   String reclaimedTotal(String size) {
     return 'Звільнено цим застосунком: $size';
   }
+
+  @override
+  String get deleteAllData => 'Видалити всі дані';
+
+  @override
+  String get deleteAllDataHint =>
+      'Стирає все, що застосунок зберігає на пристрої: чергу, конвертовані файли, мініатюри, досягнення та налаштування. Файли, уже збережені в галерею, не чіпає.';
 }

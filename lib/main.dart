@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/logging/error_handlers.dart';
 import 'core/platform/eluna_adapters.dart';
 import 'services/notification_service.dart';
 import 'services/share_intake.dart';
+import 'state/data_erasers.dart';
 import 'state/queue_controller.dart';
 import 'state/settings_controller.dart';
 import 'ui/app.dart';
@@ -29,6 +31,10 @@ Future<void> main() async {
     FlutterError.onError = (details) {
       FlutterError.presentError(details);
     };
+    // Ошибки фреймворка — в кольцевой лог и в краш-файл на устройстве. Никуда
+    // не отправляется: на следующем запуске пользователь сам решает, показать
+    // ли отчёт и отправить ли его своим почтовым клиентом.
+    installFlutterErrorHandler();
 
     // Кто это приложение — для всех общих компонентов eluna_shared. Должно
     // выполниться до того, как построится хоть один общий экран: адрес
@@ -107,9 +113,23 @@ Future<void> main() async {
       ],
     );
 
+    // «Удалить все мои данные» стирает то, что здесь зарегистрировано, и делает
+    // это в фиксированном порядке: ключи, потом содержимое, настройки
+    // последними (см. ElunaDataWipe). Регистрация — способ хранилища заявить о
+    // себе; альтернатива, где одна функция знает про все хранилища приложения,
+    // ровно так и перестаёт покрывать то, что добавили в прошлом месяце.
+    //
+    // Сам список — в `mediaDataErasers`, вместе с объяснением, чего в нём нет.
+    ElunaDataWipe.registerAll(mediaDataErasers(
+      container: container,
+      notifications: notifications,
+    ));
+
     // Announce readiness to the native side; files shared while the app was
     // dead flush through right after this.
-    unawaited(container.read(shareIntakeProvider).start());
+    unawaited(container.read(shareIntakeProvider).start().catchError((Object e) {
+      AppLogger.instance.w('share', 'intake channel unavailable', e);
+    }));
 
     runApp(
       UncontrolledProviderScope(
@@ -119,6 +139,15 @@ Future<void> main() async {
     );
   }, (error, stack) {
     // Local-only by principle: no telemetry, no upload.
+    //
+    // Media оборачивает весь запуск в эту зону, поэтому сюда приходит всё, что
+    // не поймали, включая исключения непроавайченных Future. Кольцевой лог
+    // живёт в памяти и умирает вместе с процессом — краш-файл переживает его и
+    // на следующем запуске предлагается пользователю.
+    AppLogger.instance.e('uncaught', error.toString(), shortStack(stack));
+    CrashLog.record(error, stack, context: 'uncaught');
+    // Остаётся последним рубежом: если сломался сам логгер, печать в консоль —
+    // единственное, что ещё может сказать хоть что-то.
     debugPrint('Uncaught: $error\n$stack');
   });
 }

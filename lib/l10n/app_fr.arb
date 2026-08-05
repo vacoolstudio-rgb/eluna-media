@@ -321,5 +321,7 @@
   "deleteOriginalsHint": "Demande au système de supprimer les fichiers source une fois le résultat enregistré. Le système montre toujours ce qui va disparaître et attend votre confirmation.",
   "originalsDeleted": "Originaux supprimés — {size} libérés",
   "originalsNoneDeleted": "Rien n'a été supprimé. Seuls les fichiers que la galerie conserve sous leur nom d'origine peuvent être retrouvés.",
-  "reclaimedTotal": "Libéré avec cette application : {size}"
+  "reclaimedTotal": "Libéré avec cette application : {size}",
+  "deleteAllData": "Supprimer toutes les données",
+  "deleteAllDataHint": "Efface tout ce que l'application conserve sur cet appareil : la file d'attente, les fichiers convertis, les miniatures, les succès et les réglages. Les fichiers déjà enregistrés dans votre galerie ne sont pas touchés."
 }

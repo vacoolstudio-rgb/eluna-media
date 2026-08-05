@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:eluna_shared/core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../state/queue_controller.dart';
 import '../state/settings_controller.dart';
@@ -56,6 +58,23 @@ class ShareIntake {
     } on MissingPluginException {
       // Host tests and platforms without the native side.
     }
+  }
+
+  /// Удаляет копии файлов, которые нативная сторона сложила в кэш.
+  ///
+  /// Это не служебный мусор, а куски пользовательских медиа: и MainActivity.kt,
+  /// и AppDelegate.swift копируют присланный файл в `<cache>/shared` и живут там
+  /// до тех пор, пока система не решит почистить кэш — то есть неопределённо
+  /// долго. «Удалить все мои данные», оставляющее их лежать, — неправда.
+  ///
+  /// Каталог берётся у `getApplicationCacheDirectory`, а не у
+  /// `getTemporaryDirectory`: на Android это один и тот же `cacheDir`, но на iOS
+  /// временный каталог — `tmp`, а нативная сторона пишет в `Caches`.
+  static Future<void> clearCachedCopies() async {
+    final base = await getApplicationCacheDirectory();
+    await ElunaDataWipe.emptyDirectory(
+      Directory('${base.path}${Platform.pathSeparator}shared'),
+    );
   }
 }
 

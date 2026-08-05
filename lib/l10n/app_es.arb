@@ -321,5 +321,7 @@
   "deleteOriginalsHint": "Pide al sistema que borre los archivos de origen una vez guardado el resultado. El sistema siempre muestra qué se va a borrar y espera tu confirmación.",
   "originalsDeleted": "Originales eliminados: {size} liberados",
   "originalsNoneDeleted": "No se eliminó nada. Solo se encuentran los archivos que la galería conserva con su nombre original.",
-  "reclaimedTotal": "Liberado con esta app: {size}"
+  "reclaimedTotal": "Liberado con esta app: {size}",
+  "deleteAllData": "Eliminar todos los datos",
+  "deleteAllDataHint": "Borra todo lo que la aplicación guarda en este dispositivo: la cola, los archivos convertidos, las miniaturas, los logros y los ajustes. Los archivos que ya guardaste en la galería no se tocan."
 }

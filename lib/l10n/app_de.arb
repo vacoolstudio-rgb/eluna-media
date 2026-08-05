@@ -321,5 +321,7 @@
   "deleteOriginalsHint": "Bittet das System, die Quelldateien zu entfernen, sobald das Ergebnis gesichert ist. Das System zeigt immer, was verschwindet, und wartet auf deine Bestätigung.",
   "originalsDeleted": "Originale gelöscht — {size} frei geworden",
   "originalsNoneDeleted": "Es wurde nichts gelöscht. Gefunden werden nur Dateien, die die Galerie noch unter ihrem ursprünglichen Namen führt.",
-  "reclaimedTotal": "Mit dieser App frei geworden: {size}"
+  "reclaimedTotal": "Mit dieser App frei geworden: {size}",
+  "deleteAllData": "Alle Daten löschen",
+  "deleteAllDataHint": "Löscht alles, was die App auf diesem Gerät speichert: die Warteschlange, konvertierte Dateien, Vorschaubilder, Erfolge und Einstellungen. Bereits in der Galerie gespeicherte Dateien bleiben unberührt."
 }

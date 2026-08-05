@@ -1102,4 +1102,11 @@ class L10nKo extends L10n {
   String reclaimedTotal(String size) {
     return '이 앱으로 확보한 용량: $size';
   }
+
+  @override
+  String get deleteAllData => '모든 데이터 삭제';
+
+  @override
+  String get deleteAllDataHint =>
+      '앱이 이 기기에 저장한 모든 것을 지웁니다. 대기열, 변환된 파일, 미리보기, 업적, 설정이 대상입니다. 이미 갤러리에 저장한 파일은 그대로 남습니다.';
 }

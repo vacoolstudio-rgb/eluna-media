@@ -639,5 +639,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "deleteAllData": "Delete all data",
+  "deleteAllDataHint": "Erases everything the app keeps on this device: the queue, converted files, previews, achievements and settings. Files you have already saved to your gallery are left alone."
 }

@@ -1133,4 +1133,11 @@ class L10nHi extends L10n {
   String reclaimedTotal(String size) {
     return 'इस ऐप से खाली हुआ: $size';
   }
+
+  @override
+  String get deleteAllData => 'सारा डेटा हटाएँ';
+
+  @override
+  String get deleteAllDataHint =>
+      'ऐप इस डिवाइस पर जो कुछ भी रखता है, वह सब मिटा देता है: कतार, बदली गई फ़ाइलें, प्रीव्यू, उपलब्धियाँ और सेटिंग्स। जो फ़ाइलें आप पहले ही गैलरी में सहेज चुके हैं, उन्हें छुआ नहीं जाता।';
 }

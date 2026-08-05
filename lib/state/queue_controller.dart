@@ -314,6 +314,19 @@ class QueueController extends Notifier<QueueState> {
     _persist();
   }
 
+  /// Стирает очередь целиком — часть «удалить все мои данные».
+  ///
+  /// Отдельный метод, а не [clearAll]: тот намеренно ничего не делает во время
+  /// пакета, потому что вычистить список из-под работающего FFmpeg — это
+  /// осиротевшие сессии и файлы, которые уже никто не удалит. Здесь пакет
+  /// сначала отменяется, и только потом список исчезает. Сами файлы удаляет
+  /// свой стиратель (папка вывода), поэтому здесь только список.
+  Future<void> eraseAll() async {
+    if (state.isRunning) await cancelBatch();
+    state = const QueueState();
+    await _persist();
+  }
+
   /// Names the result of a still-queued job.
   ///
   /// Queued only, on purpose. Once the encode has run, the file exists — and

@@ -321,5 +321,7 @@
   "deleteOriginalsHint": "Prosi system o usunięcie plików źródłowych po zapisaniu wyniku. System zawsze pokazuje, co zniknie, i czeka na Twoje potwierdzenie.",
   "originalsDeleted": "Oryginały usunięte — zwolniono {size}",
   "originalsNoneDeleted": "Nic nie zostało usunięte. Odnaleźć można tylko pliki, które galeria trzyma pod pierwotną nazwą.",
-  "reclaimedTotal": "Zwolnione dzięki tej aplikacji: {size}"
+  "reclaimedTotal": "Zwolnione dzięki tej aplikacji: {size}",
+  "deleteAllData": "Usuń wszystkie dane",
+  "deleteAllDataHint": "Kasuje wszystko, co aplikacja przechowuje na tym urządzeniu: kolejkę, przekonwertowane pliki, miniatury, osiągnięcia i ustawienia. Pliki zapisane już w galerii pozostają nietknięte."
 }

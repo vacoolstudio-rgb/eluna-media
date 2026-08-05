@@ -321,5 +321,7 @@
   "deleteOriginalsHint": "在结果保存之后，请求系统删除源文件。系统始终会显示将要删除的内容并等待你确认。",
   "originalsDeleted": "已删除原文件——释放 {size}",
   "originalsNoneDeleted": "没有删除任何内容。只能找到仍以原名保存在相册中的文件。",
-  "reclaimedTotal": "通过本应用释放：{size}"
+  "reclaimedTotal": "通过本应用释放：{size}",
+  "deleteAllData": "删除所有数据",
+  "deleteAllDataHint": "清除应用保存在本机上的一切：队列、已转换的文件、预览图、成就和设置。已保存到相册的文件不受影响。"
 }

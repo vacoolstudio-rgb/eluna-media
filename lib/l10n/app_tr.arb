@@ -321,5 +321,7 @@
   "deleteOriginalsHint": "Sonuç kaydedildikten sonra kaynak dosyaları kaldırmasını sistemden ister. Sistem neyin gideceğini her zaman gösterir ve onayınızı bekler.",
   "originalsDeleted": "Orijinaller silindi — {size} yer açıldı",
   "originalsNoneDeleted": "Hiçbir şey silinmedi. Yalnızca galerinin özgün adıyla tuttuğu dosyalar bulunabiliyor.",
-  "reclaimedTotal": "Bu uygulamayla açılan yer: {size}"
+  "reclaimedTotal": "Bu uygulamayla açılan yer: {size}",
+  "deleteAllData": "Tüm verileri sil",
+  "deleteAllDataHint": "Uygulamanın bu cihazda sakladığı her şeyi siler: kuyruğu, dönüştürülen dosyaları, önizlemeleri, başarımları ve ayarları. Galeriye zaten kaydettiğiniz dosyalara dokunulmaz."
 }

@@ -106,3 +106,38 @@ class AppMetaController extends Notifier<AppMeta> {
 }
 
 final appMetaProvider = NotifierProvider<AppMetaController, AppMeta>(AppMetaController.new);
+
+/// Правило показа «что нового», вынесенное из виджета.
+///
+/// Раньше оно жило четырьмя `return` внутри `HomeShell._maybeShowWhatsNew` и
+/// проверить его можно было только запуском приложения. Теперь версия приходит
+/// с платформы (`ElunaVersion.name()`), то есть сравнение стало ещё и
+/// асинхронным — тем более незачем держать его в колбэке первого кадра.
+abstract final class WhatsNewGate {
+  /// Показывать ли окно новинок.
+  ///
+  /// [version] — строго `ElunaVersion.name()`, без номера сборки: `full()` дал
+  /// бы «0.4.0 (2)», и та же версия, пересобранная с другим номером, показала
+  /// бы окно заново. У всех, кто обновляется, в `meta.lastSeenVersion` лежит
+  /// «0.4.0», записанное прежней константой, — `name()` возвращает ровно эту
+  /// строку, поэтому повторного показа не будет ни у кого.
+  static bool shouldShow(AppMeta meta, String version) {
+    // Платформа не назвала версию (тестовый хост, сборка без метаданных).
+    // Сравнивать не с чем — и записывать пустую строку в «уже видел» нельзя,
+    // иначе окно не покажется уже никогда.
+    if (version.isEmpty) return false;
+    if (meta.lastSeenVersion == version) return false;
+    // Свежая установка: человеку, который ещё ничего не конвертировал,
+    // рассказывать «что нового» не о чем — для него всё новое.
+    if (meta.lastSeenVersion == null && meta.successfulConversions == 0) {
+      return false;
+    }
+    return true;
+  }
+
+  /// Помечать ли версию просмотренной. Шире, чем [shouldShow], намеренно: тот,
+  /// кому окно не показали (свежая установка), тоже не должен увидеть его при
+  /// следующем запуске той же версии.
+  static bool shouldMark(AppMeta meta, String version) =>
+      version.isNotEmpty && meta.lastSeenVersion != version;
+}

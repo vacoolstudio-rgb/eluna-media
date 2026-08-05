@@ -321,5 +321,7 @@
   "deleteOriginalsHint": "Pede ao sistema para remover os arquivos de origem depois que o resultado for salvo. O sistema sempre mostra o que vai sumir e espera sua confirmação.",
   "originalsDeleted": "Originais excluídos — {size} liberados",
   "originalsNoneDeleted": "Nada foi excluído. Só dá para encontrar os arquivos que a galeria ainda guarda com o nome original.",
-  "reclaimedTotal": "Liberado com este app: {size}"
+  "reclaimedTotal": "Liberado com este app: {size}",
+  "deleteAllData": "Apagar todos os dados",
+  "deleteAllDataHint": "Apaga tudo o que o app guarda neste dispositivo: a fila, os arquivos convertidos, as miniaturas, as conquistas e as configurações. Os arquivos que você já salvou na galeria não são tocados."
 }

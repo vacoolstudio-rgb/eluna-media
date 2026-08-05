@@ -22,7 +22,7 @@ dependencies:
   eluna_shared:
     git:
       url: https://github.com/vacoolstudio-rgb/eluna-shared.git
-      ref: v0.13.0
+      ref: v0.15.0
   # Прямая зависимость: дизайн-система пакета (SectionIcon, SectionHeader,
   # EmptyState) принимает HugeIconData, а не Material IconData — значит имена
   # иконок называет само приложение. Версия та же, на которой стоит пакет.

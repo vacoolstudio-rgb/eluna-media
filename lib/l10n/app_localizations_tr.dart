@@ -1138,4 +1138,11 @@ class L10nTr extends L10n {
   String reclaimedTotal(String size) {
     return 'Bu uygulamayla açılan yer: $size';
   }
+
+  @override
+  String get deleteAllData => 'Tüm verileri sil';
+
+  @override
+  String get deleteAllDataHint =>
+      'Uygulamanın bu cihazda sakladığı her şeyi siler: kuyruğu, dönüştürülen dosyaları, önizlemeleri, başarımları ve ayarları. Galeriye zaten kaydettiğiniz dosyalara dokunulmaz.';
 }

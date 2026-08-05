@@ -1131,4 +1131,11 @@ class L10nEn extends L10n {
   String reclaimedTotal(String size) {
     return 'Freed with this app: $size';
   }
+
+  @override
+  String get deleteAllData => 'Delete all data';
+
+  @override
+  String get deleteAllDataHint =>
+      'Erases everything the app keeps on this device: the queue, converted files, previews, achievements and settings. Files you have already saved to your gallery are left alone.';
 }

@@ -1140,4 +1140,11 @@ class L10nId extends L10n {
   String reclaimedTotal(String size) {
     return 'Dibebaskan lewat aplikasi ini: $size';
   }
+
+  @override
+  String get deleteAllData => 'Hapus semua data';
+
+  @override
+  String get deleteAllDataHint =>
+      'Menghapus semua yang disimpan aplikasi di perangkat ini: antrean, berkas hasil konversi, pratinjau, pencapaian, dan pengaturan. Berkas yang sudah Anda simpan ke galeri tidak disentuh.';
 }

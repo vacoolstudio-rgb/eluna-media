@@ -1142,4 +1142,11 @@ class L10nPl extends L10n {
   String reclaimedTotal(String size) {
     return 'Zwolnione dzięki tej aplikacji: $size';
   }
+
+  @override
+  String get deleteAllData => 'Usuń wszystkie dane';
+
+  @override
+  String get deleteAllDataHint =>
+      'Kasuje wszystko, co aplikacja przechowuje na tym urządzeniu: kolejkę, przekonwertowane pliki, miniatury, osiągnięcia i ustawienia. Pliki zapisane już w galerii pozostają nietknięte.';
 }

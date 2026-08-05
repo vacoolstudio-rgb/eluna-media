@@ -1147,4 +1147,11 @@ class L10nFr extends L10n {
   String reclaimedTotal(String size) {
     return 'Libéré avec cette application : $size';
   }
+
+  @override
+  String get deleteAllData => 'Supprimer toutes les données';
+
+  @override
+  String get deleteAllDataHint =>
+      'Efface tout ce que l\'application conserve sur cet appareil : la file d\'attente, les fichiers convertis, les miniatures, les succès et les réglages. Les fichiers déjà enregistrés dans votre galerie ne sont pas touchés.';
 }

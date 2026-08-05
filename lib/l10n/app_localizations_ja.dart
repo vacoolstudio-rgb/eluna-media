@@ -1099,4 +1099,11 @@ class L10nJa extends L10n {
   String reclaimedTotal(String size) {
     return 'このアプリで空けた容量: $size';
   }
+
+  @override
+  String get deleteAllData => 'すべてのデータを削除';
+
+  @override
+  String get deleteAllDataHint =>
+      'このアプリが端末に保存しているものをすべて消去します。キュー、変換したファイル、プレビュー、実績、設定が対象です。すでにギャラリーに保存したファイルはそのまま残ります。';
 }

@@ -1140,4 +1140,11 @@ class L10nDe extends L10n {
   String reclaimedTotal(String size) {
     return 'Mit dieser App frei geworden: $size';
   }
+
+  @override
+  String get deleteAllData => 'Alle Daten löschen';
+
+  @override
+  String get deleteAllDataHint =>
+      'Löscht alles, was die App auf diesem Gerät speichert: die Warteschlange, konvertierte Dateien, Vorschaubilder, Erfolge und Einstellungen. Bereits in der Galerie gespeicherte Dateien bleiben unberührt.';
 }

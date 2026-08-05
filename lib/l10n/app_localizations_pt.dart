@@ -1140,4 +1140,11 @@ class L10nPt extends L10n {
   String reclaimedTotal(String size) {
     return 'Liberado com este app: $size';
   }
+
+  @override
+  String get deleteAllData => 'Apagar todos os dados';
+
+  @override
+  String get deleteAllDataHint =>
+      'Apaga tudo o que o app guarda neste dispositivo: a fila, os arquivos convertidos, as miniaturas, as conquistas e as configurações. Os arquivos que você já salvou na galeria não são tocados.';
 }

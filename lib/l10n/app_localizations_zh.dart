@@ -1082,4 +1082,11 @@ class L10nZh extends L10n {
   String reclaimedTotal(String size) {
     return '通过本应用释放：$size';
   }
+
+  @override
+  String get deleteAllData => '删除所有数据';
+
+  @override
+  String get deleteAllDataHint =>
+      '清除应用保存在本机上的一切：队列、已转换的文件、预览图、成就和设置。已保存到相册的文件不受影响。';
 }

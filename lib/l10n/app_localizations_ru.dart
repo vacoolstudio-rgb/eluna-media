@@ -1140,4 +1140,11 @@ class L10nRu extends L10n {
   String reclaimedTotal(String size) {
     return 'Освобождено этим приложением: $size';
   }
+
+  @override
+  String get deleteAllData => 'Удалить все данные';
+
+  @override
+  String get deleteAllDataHint =>
+      'Стирает всё, что приложение хранит на устройстве: очередь, сконвертированные файлы, миниатюры, достижения и настройки. Файлы, уже сохранённые в галерею, не трогает.';
 }
