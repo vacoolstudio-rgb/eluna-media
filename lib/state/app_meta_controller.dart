@@ -3,14 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'settings_controller.dart';
 
 /// Long-lived facts about this install: when it appeared and what the user has
-/// done with it. These drive the review milestones and the what's-new dialog,
-/// so they are stamped once and never recomputed.
+/// done with it. These drive the what's-new dialog and the achievements, so
+/// they are stamped once and never recomputed.
+///
+/// Состояние оценки здесь больше не живёт: и «уже оценил», и «спрашивали
+/// сегодня» держит `RatingService` из пакета, в своих ключах `rate_*`. Две
+/// копии одного факта — это ровно та расходимость, ради которой пакет и есть.
 class AppMeta {
   const AppMeta({
     required this.firstLaunchAtMs,
     this.successfulConversions = 0,
-    this.hasRated = false,
-    this.lastRatePromptEpochDay = -1,
     this.hasSeenIntro = false,
     this.lastSeenVersion,
     this.reclaimedBytes = 0,
@@ -22,16 +24,14 @@ class AppMeta {
   final int reclaimedBytes;
 
   /// Wall-clock of the very first launch, stamped on first read.
+  ///
+  /// «День 0» теперь считает `RatingService.installedAt()`; этот штамп остался
+  /// затем, что под его ключом он лежит у всех, кто поставил Media до переезда,
+  /// и `main` переносит его в пакет. Новый код должен спрашивать пакет.
   final int firstLaunchAtMs;
 
   /// Completed (not failed, not cancelled) conversions over the app's life.
   final int successfulConversions;
-
-  /// The user went through the rating flow once; never ask again.
-  final bool hasRated;
-
-  /// Day (epoch ms ~/ day) of the last review prompt — at most one per day.
-  final int lastRatePromptEpochDay;
 
   /// The first-run privacy intro was acknowledged.
   final bool hasSeenIntro;
@@ -42,8 +42,6 @@ class AppMeta {
 
   AppMeta copyWith({
     int? successfulConversions,
-    bool? hasRated,
-    int? lastRatePromptEpochDay,
     bool? hasSeenIntro,
     String? lastSeenVersion,
     int? reclaimedBytes,
@@ -51,8 +49,6 @@ class AppMeta {
       AppMeta(
         firstLaunchAtMs: firstLaunchAtMs,
         successfulConversions: successfulConversions ?? this.successfulConversions,
-        hasRated: hasRated ?? this.hasRated,
-        lastRatePromptEpochDay: lastRatePromptEpochDay ?? this.lastRatePromptEpochDay,
         hasSeenIntro: hasSeenIntro ?? this.hasSeenIntro,
         lastSeenVersion: lastSeenVersion ?? this.lastSeenVersion,
         reclaimedBytes: reclaimedBytes ?? this.reclaimedBytes,
@@ -62,8 +58,6 @@ class AppMeta {
 class AppMetaController extends Notifier<AppMeta> {
   static const _kFirstLaunch = 'meta.firstLaunchAtMs';
   static const _kConversions = 'meta.successfulConversions';
-  static const _kHasRated = 'meta.hasRated';
-  static const _kLastPromptDay = 'meta.lastRatePromptDay';
   static const _kSeenIntro = 'meta.hasSeenIntro';
   static const _kSeenVersion = 'meta.lastSeenVersion';
   static const _kReclaimed = 'meta.reclaimedBytes';
@@ -82,8 +76,6 @@ class AppMetaController extends Notifier<AppMeta> {
     return AppMeta(
       firstLaunchAtMs: firstLaunch,
       successfulConversions: p.getInt(_kConversions) ?? 0,
-      hasRated: p.getBool(_kHasRated) ?? false,
-      lastRatePromptEpochDay: p.getInt(_kLastPromptDay) ?? -1,
       hasSeenIntro: p.getBool(_kSeenIntro) ?? false,
       lastSeenVersion: p.getString(_kSeenVersion),
       reclaimedBytes: p.getInt(_kReclaimed) ?? 0,
@@ -94,16 +86,6 @@ class AppMetaController extends Notifier<AppMeta> {
     if (count <= 0) return;
     state = state.copyWith(successfulConversions: state.successfulConversions + count);
     ref.read(sharedPreferencesProvider).setInt(_kConversions, state.successfulConversions);
-  }
-
-  void markRated() {
-    state = state.copyWith(hasRated: true);
-    ref.read(sharedPreferencesProvider).setBool(_kHasRated, true);
-  }
-
-  void markRatePromptShown(int epochDay) {
-    state = state.copyWith(lastRatePromptEpochDay: epochDay);
-    ref.read(sharedPreferencesProvider).setInt(_kLastPromptDay, epochDay);
   }
 
   void markIntroSeen() {

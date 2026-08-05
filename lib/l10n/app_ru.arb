@@ -434,22 +434,6 @@
       }
     }
   },
-  "rateDialogTitle": "Нравится Eluna Media?",
-  "rateDialogBody": "Нажмите на звезду. Оценка останется между вами и магазином.",
-  "rateDialogLater": "Не сейчас",
-  "rateFeedbackTitle": "Что улучшить?",
-  "rateFeedbackBody": "Напишите, что пошло не так, — исправим. Ни аккаунта, ни трекинга: просто письмо, которое вы пишете сами.",
-  "rateSendFeedback": "Написать отзыв",
-  "rateThanks": "Спасибо!",
-  "feedbackSubject": "Отзыв о Eluna Media ({stars}/5)",
-  "@feedbackSubject": {
-    "placeholders": {
-      "stars": {
-        "type": "int"
-      }
-    }
-  },
-  "noEmailApp": "На устройстве не настроено почтовое приложение.",
   "shareApp": "Поделиться приложением",
   "shareAppText": "Eluna Media — бесплатный конвертер фото, видео и аудио, полностью офлайн. Без подписок, без вотермарок, без аккаунтов.",
   "appVersionLabel": "Версия {version}",

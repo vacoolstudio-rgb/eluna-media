@@ -796,38 +796,6 @@ class L10nIt extends L10n {
   }
 
   @override
-  String get rateDialogTitle => 'Ti piace Eluna Media?';
-
-  @override
-  String get rateDialogBody =>
-      'Tocca una stella. La tua valutazione resta tra te e lo store.';
-
-  @override
-  String get rateDialogLater => 'Non ora';
-
-  @override
-  String get rateFeedbackTitle => 'Cosa possiamo migliorare?';
-
-  @override
-  String get rateFeedbackBody =>
-      'Raccontaci cosa non ha funzionato e lo sistemiamo. Nessun account, nessun tracciamento: solo un\'email che scrivi tu.';
-
-  @override
-  String get rateSendFeedback => 'Scrivi un feedback';
-
-  @override
-  String get rateThanks => 'Grazie!';
-
-  @override
-  String feedbackSubject(int stars) {
-    return 'Feedback su Eluna Media ($stars/5)';
-  }
-
-  @override
-  String get noEmailApp =>
-      'Su questo dispositivo non è configurata nessuna app di posta.';
-
-  @override
   String get shareApp => 'Condividi l\'app';
 
   @override

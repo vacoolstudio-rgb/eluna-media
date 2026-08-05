@@ -795,38 +795,6 @@ class L10nId extends L10n {
   }
 
   @override
-  String get rateDialogTitle => 'Suka dengan Eluna Media?';
-
-  @override
-  String get rateDialogBody =>
-      'Ketuk salah satu bintang. Penilaianmu hanya antara kamu dan toko aplikasi.';
-
-  @override
-  String get rateDialogLater => 'Nanti saja';
-
-  @override
-  String get rateFeedbackTitle => 'Apa yang bisa dibuat lebih baik?';
-
-  @override
-  String get rateFeedbackBody =>
-      'Ceritakan apa yang salah dan akan kami perbaiki. Tanpa akun, tanpa pelacakan — cuma email yang kamu tulis sendiri.';
-
-  @override
-  String get rateSendFeedback => 'Tulis masukan';
-
-  @override
-  String get rateThanks => 'Terima kasih!';
-
-  @override
-  String feedbackSubject(int stars) {
-    return 'Masukan Eluna Media ($stars/5)';
-  }
-
-  @override
-  String get noEmailApp =>
-      'Tidak ada aplikasi email yang tersiapkan di perangkat ini.';
-
-  @override
   String get shareApp => 'Bagikan aplikasi';
 
   @override

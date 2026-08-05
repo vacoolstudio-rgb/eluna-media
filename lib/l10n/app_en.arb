@@ -434,22 +434,6 @@
       }
     }
   },
-  "rateDialogTitle": "Enjoying Eluna Media?",
-  "rateDialogBody": "Tap a star. Your rating stays between you and the store.",
-  "rateDialogLater": "Not now",
-  "rateFeedbackTitle": "What would make it better?",
-  "rateFeedbackBody": "Tell us what went wrong and we'll fix it. No account, no tracking — just an email you write yourself.",
-  "rateSendFeedback": "Write feedback",
-  "rateThanks": "Thank you!",
-  "feedbackSubject": "Eluna Media feedback ({stars}/5)",
-  "@feedbackSubject": {
-    "placeholders": {
-      "stars": {
-        "type": "int"
-      }
-    }
-  },
-  "noEmailApp": "No email app is set up on this device.",
   "shareApp": "Share the app",
   "shareAppText": "Eluna Media — a free, fully offline photo, video and audio converter. No subscriptions, no watermarks, no accounts.",
   "appVersionLabel": "Version {version}",

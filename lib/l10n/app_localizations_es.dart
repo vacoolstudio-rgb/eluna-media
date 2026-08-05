@@ -796,38 +796,6 @@ class L10nEs extends L10n {
   }
 
   @override
-  String get rateDialogTitle => '¿Te gusta Eluna Media?';
-
-  @override
-  String get rateDialogBody =>
-      'Toca una estrella. Tu valoración queda entre tú y la tienda.';
-
-  @override
-  String get rateDialogLater => 'Ahora no';
-
-  @override
-  String get rateFeedbackTitle => '¿Qué podríamos mejorar?';
-
-  @override
-  String get rateFeedbackBody =>
-      'Cuéntanos qué ha fallado y lo arreglamos. Sin cuenta, sin rastreo: solo un correo que escribes tú mismo.';
-
-  @override
-  String get rateSendFeedback => 'Escribir comentarios';
-
-  @override
-  String get rateThanks => '¡Gracias!';
-
-  @override
-  String feedbackSubject(int stars) {
-    return 'Comentarios sobre Eluna Media ($stars/5)';
-  }
-
-  @override
-  String get noEmailApp =>
-      'No hay ninguna app de correo configurada en este dispositivo.';
-
-  @override
   String get shareApp => 'Compartir la app';
 
   @override

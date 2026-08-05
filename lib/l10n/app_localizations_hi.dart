@@ -788,37 +788,6 @@ class L10nHi extends L10n {
   }
 
   @override
-  String get rateDialogTitle => 'Eluna Media पसंद आ रहा है?';
-
-  @override
-  String get rateDialogBody =>
-      'किसी स्टार पर टैप करें। आपकी रेटिंग आपके और स्टोर के बीच ही रहती है।';
-
-  @override
-  String get rateDialogLater => 'अभी नहीं';
-
-  @override
-  String get rateFeedbackTitle => 'इसे बेहतर कैसे बनाएँ?';
-
-  @override
-  String get rateFeedbackBody =>
-      'बताइए क्या गड़बड़ हुई, हम ठीक कर देंगे। न अकाउंट, न ट्रैकिंग — बस एक ईमेल, जो आप खुद लिखते हैं।';
-
-  @override
-  String get rateSendFeedback => 'फ़ीडबैक लिखें';
-
-  @override
-  String get rateThanks => 'धन्यवाद!';
-
-  @override
-  String feedbackSubject(int stars) {
-    return 'Eluna Media फ़ीडबैक ($stars/5)';
-  }
-
-  @override
-  String get noEmailApp => 'इस डिवाइस पर कोई ईमेल ऐप सेट अप नहीं है।';
-
-  @override
   String get shareApp => 'ऐप शेयर करें';
 
   @override

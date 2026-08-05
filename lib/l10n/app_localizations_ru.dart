@@ -795,37 +795,6 @@ class L10nRu extends L10n {
   }
 
   @override
-  String get rateDialogTitle => 'Нравится Eluna Media?';
-
-  @override
-  String get rateDialogBody =>
-      'Нажмите на звезду. Оценка останется между вами и магазином.';
-
-  @override
-  String get rateDialogLater => 'Не сейчас';
-
-  @override
-  String get rateFeedbackTitle => 'Что улучшить?';
-
-  @override
-  String get rateFeedbackBody =>
-      'Напишите, что пошло не так, — исправим. Ни аккаунта, ни трекинга: просто письмо, которое вы пишете сами.';
-
-  @override
-  String get rateSendFeedback => 'Написать отзыв';
-
-  @override
-  String get rateThanks => 'Спасибо!';
-
-  @override
-  String feedbackSubject(int stars) {
-    return 'Отзыв о Eluna Media ($stars/5)';
-  }
-
-  @override
-  String get noEmailApp => 'На устройстве не настроено почтовое приложение.';
-
-  @override
   String get shareApp => 'Поделиться приложением';
 
   @override

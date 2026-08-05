@@ -9,7 +9,6 @@ import '../l10n/app_localizations.dart';
 import '../state/achievements_controller.dart';
 import '../state/app_meta_controller.dart';
 import 'achievements_screen.dart';
-import '../services/review_service.dart';
 import '../services/share_intake.dart';
 import '../state/queue_controller.dart';
 import 'convert_tab.dart';
@@ -116,6 +115,25 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     );
   }
 
+  /// Просьба оценить приложение — после удачного пакета, если общий сервис
+  /// разрешает: вехи 7–8 и 14–15 дней от установки, не чаще раза в день и
+  /// никогда после того, как оценку уже поставили.
+  ///
+  /// Условие про две удачные конвертации — своё, не пакетное, и остаётся:
+  /// назойливые окна с оценкой — одна из главных претензий к конкурентам, и
+  /// просить у того, кому приложение ещё ничего не сделало, здесь не готовы.
+  /// Порог — про конвертацию, то есть про то, о чём Media, и по контракту
+  /// пакета живёт в приложении.
+  Future<void> _maybeAskForRating() async {
+    if (ref.read(appMetaProvider).successfulConversions < 2) return;
+
+    final rating = RatingService();
+    if (!await rating.shouldPrompt()) return;
+    await rating.markPromptedToday();
+    if (!mounted) return;
+    await showElunaRateAppModal(context);
+  }
+
   /// Files arriving over the share channel land in the queue; the UI's part
   /// is to surface that instead of importing invisibly.
   void _onFilesReceived(int previous, int current) {
@@ -136,7 +154,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     // the moment right after a success is the honest time to ask.
     ref.listen<bool>(queueProvider.select((q) => q.isRunning), (was, is_) {
       if (was == true && is_ == false && mounted) {
-        ref.read(reviewServiceProvider).maybePrompt(context);
+        _maybeAskForRating();
       }
     });
     // One toast per batch even when it unlocked several things: the first

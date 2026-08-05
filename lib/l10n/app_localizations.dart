@@ -1461,60 +1461,6 @@ abstract class L10n {
   /// **'{count} clips merged'**
   String summaryMerge(int count);
 
-  /// No description provided for @rateDialogTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Enjoying Eluna Media?'**
-  String get rateDialogTitle;
-
-  /// No description provided for @rateDialogBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Tap a star. Your rating stays between you and the store.'**
-  String get rateDialogBody;
-
-  /// No description provided for @rateDialogLater.
-  ///
-  /// In en, this message translates to:
-  /// **'Not now'**
-  String get rateDialogLater;
-
-  /// No description provided for @rateFeedbackTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'What would make it better?'**
-  String get rateFeedbackTitle;
-
-  /// No description provided for @rateFeedbackBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Tell us what went wrong and we\'ll fix it. No account, no tracking — just an email you write yourself.'**
-  String get rateFeedbackBody;
-
-  /// No description provided for @rateSendFeedback.
-  ///
-  /// In en, this message translates to:
-  /// **'Write feedback'**
-  String get rateSendFeedback;
-
-  /// No description provided for @rateThanks.
-  ///
-  /// In en, this message translates to:
-  /// **'Thank you!'**
-  String get rateThanks;
-
-  /// No description provided for @feedbackSubject.
-  ///
-  /// In en, this message translates to:
-  /// **'Eluna Media feedback ({stars}/5)'**
-  String feedbackSubject(int stars);
-
-  /// No description provided for @noEmailApp.
-  ///
-  /// In en, this message translates to:
-  /// **'No email app is set up on this device.'**
-  String get noEmailApp;
-
   /// No description provided for @shareApp.
   ///
   /// In en, this message translates to:

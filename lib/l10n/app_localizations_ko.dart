@@ -771,36 +771,6 @@ class L10nKo extends L10n {
   }
 
   @override
-  String get rateDialogTitle => 'Eluna Media 마음에 드나요?';
-
-  @override
-  String get rateDialogBody => '별을 탭해 주세요. 평가는 당신과 스토어 사이에만 남아요.';
-
-  @override
-  String get rateDialogLater => '나중에';
-
-  @override
-  String get rateFeedbackTitle => '무엇을 개선하면 좋을까요?';
-
-  @override
-  String get rateFeedbackBody =>
-      '무엇이 잘못됐는지 알려주시면 고칠게요. 계정도, 추적도 없어요. 직접 쓰는 메일 한 통이면 돼요.';
-
-  @override
-  String get rateSendFeedback => '피드백 쓰기';
-
-  @override
-  String get rateThanks => '감사합니다!';
-
-  @override
-  String feedbackSubject(int stars) {
-    return 'Eluna Media 피드백 ($stars/5)';
-  }
-
-  @override
-  String get noEmailApp => '이 기기에 설정된 메일 앱이 없어요.';
-
-  @override
   String get shareApp => '앱 공유하기';
 
   @override

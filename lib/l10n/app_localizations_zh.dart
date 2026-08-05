@@ -757,35 +757,6 @@ class L10nZh extends L10n {
   }
 
   @override
-  String get rateDialogTitle => '喜欢 Eluna Media 吗？';
-
-  @override
-  String get rateDialogBody => '点一颗星。评分只留在你和应用商店之间。';
-
-  @override
-  String get rateDialogLater => '暂不';
-
-  @override
-  String get rateFeedbackTitle => '哪里可以做得更好？';
-
-  @override
-  String get rateFeedbackBody => '告诉我们哪里出了问题，我们来修。没有账号，没有追踪——只有一封你自己写的邮件。';
-
-  @override
-  String get rateSendFeedback => '写反馈';
-
-  @override
-  String get rateThanks => '谢谢！';
-
-  @override
-  String feedbackSubject(int stars) {
-    return 'Eluna Media 反馈 ($stars/5)';
-  }
-
-  @override
-  String get noEmailApp => '此设备上没有设置邮件应用。';
-
-  @override
   String get shareApp => '分享应用';
 
   @override

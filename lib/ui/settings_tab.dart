@@ -8,7 +8,6 @@ import '../core/app_version.dart';
 import '../core/output_paths.dart';
 import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
-import '../services/review_service.dart';
 import '../state/achievements_controller.dart';
 import '../state/app_meta_controller.dart';
 import '../state/settings_controller.dart';
@@ -104,16 +103,36 @@ class SettingsTab extends ConsumerWidget {
                 onChanged: controller.setDynamicColor,
               ),
               const SizedBox(height: 8),
-              LabelledDropdown<String>(
-                label: l10n.language,
-                // The dropdown needs a non-null value, so "follow the system"
-                // is represented by a sentinel rather than null.
-                value: prefs.localeCode ?? _systemSentinel,
-                items: const [_systemSentinel, ..._localeAutonyms],
-                labelOf: (code) =>
-                    code == _systemSentinel ? l10n.languageSystem : _autonymOf(code),
-                onChanged: (code) =>
-                    controller.setLocale(code == _systemSentinel ? null : code),
+              // Выбор языка — общий экран пакета: список с поиском по родному
+              // названию, английскому и коду. Автонимы больше не переписаны
+              // здесь от руки — их знает `kAppLanguages`, и пятнадцатая копия
+              // такого списка в семье была пятнадцатым местом, где опечатка
+              // живёт до жалобы.
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.translate),
+                title: Text(l10n.language),
+                subtitle: Text(
+                  languageByCode(prefs.localeCode)?.nativeName ?? l10n.languageSystem,
+                ),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => ElunaLanguageScreen(
+                      currentCode: prefs.localeCode,
+                      onSelected: (code) async => controller.setLocale(code),
+                      // Только те языки, на которых у Media есть строки: пакет
+                      // возит 59, а выбрать из них можно было бы такой, для
+                      // которого приложение молча откатится на английский.
+                      languages: _mediaLanguages,
+                      // Дорога обратно к языку системы. В прежнем выпадающем
+                      // списке это был обычный пункт, и без него выбравший
+                      // язык однажды остался бы с ним навсегда.
+                      systemLabel: l10n.languageSystem,
+                      onSystemSelected: () async => controller.setLocale(null),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -224,11 +243,17 @@ class SettingsTab extends ConsumerWidget {
                   MaterialPageRoute<void>(builder: (_) => const AchievementsScreen()),
                 ),
               ),
+              // Модалка оценки — общая, как в Screen и Subs. Свой лист Media
+              // уводил всё, что ниже пяти звёзд, в письмо вместо стора: это
+              // фильтрация отзывов, Apple отклоняет её по Guideline 1.1.7, а
+              // Play запрещает выбирать, кого спрашивать. Заодно с листом ушёл
+              // и адрес `support@eluna.app` — у семьи он один и живёт в
+              // `Eluna.configure`.
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(Icons.star_outline),
                 title: Text(l10n.rateApp),
-                onTap: () => ref.read(reviewServiceProvider).promptNow(context),
+                onTap: () => showElunaRateAppModal(context),
               ),
               Builder(
                 builder: (context) => ListTile(
@@ -263,14 +288,23 @@ class SettingsTab extends ConsumerWidget {
             icon: HugeIcons.strokeRoundedLegalDocument01,
             accent: SectionAccents.teal,
             children: [
+              // ЭТОТ АБЗАЦ НЕ ПЕРЕЕЗЖАЕТ В ОБЩИЙ ЭКРАН И НЕ УДАЛЯЕТСЯ.
+              //
+              // Media везёт сборку FFmpeg с GPL-компонентами, из-за чего под
+              // GPL v3 оказывается всё приложение целиком (см. LICENSE и
+              // NOTICE.md) — больше ни у кого в семье такого обязательства нет.
+              // Общий `ElunaLicensesScreen` перечисляет лицензии пакетов из
+              // LicenseRegistry и принять вводный текст не умеет, поэтому
+              // обязательство остаётся здесь, над кнопкой, — там же, где было.
               Text(l10n.licenseBody, style: theme.textTheme.bodyMedium),
               const SizedBox(height: 12),
               Align(
                 alignment: Alignment.centerLeft,
                 child: TextButton(
-                  onPressed: () => showLicensePage(
-                    context: context,
-                    applicationName: l10n.appTitle,
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const ElunaLicensesScreen(),
+                    ),
                   ),
                   child: Text(l10n.openLicenses),
                 ),
@@ -396,30 +430,17 @@ class _StorageSection extends ConsumerWidget {
   }
 }
 
-const _systemSentinel = '__system__';
-
-/// Locale codes in display order. Every language names itself — nobody
-/// should have to know English to find their own tongue in a list.
-const _localeAutonyms = [
-  'en', 'ru', 'de', 'es', 'fr', 'it', 'pt', 'tr', 'pl', 'uk',
-  'hi', 'id', 'ja', 'ko', 'zh',
-];
-
-String _autonymOf(String code) => switch (code) {
-      'en' => 'English',
-      'ru' => 'Русский',
-      'de' => 'Deutsch',
-      'es' => 'Español',
-      'fr' => 'Français',
-      'it' => 'Italiano',
-      'pt' => 'Português',
-      'tr' => 'Türkçe',
-      'pl' => 'Polski',
-      'uk' => 'Українська',
-      'hi' => 'हिन्दी',
-      'id' => 'Bahasa Indonesia',
-      'ja' => '日本語',
-      'ko' => '한국어',
-      'zh' => '中文',
-      _ => code,
-    };
+/// Языки, которые показывает общий экран выбора, — пересечение семейного
+/// каталога с теми локалями, для которых у Media реально сгенерированы строки.
+///
+/// Считается из `L10n.supportedLocales`, а не выписывается списком: добавление
+/// нового ARB-файла тогда доходит до списка само, а не через год, когда кто-то
+/// заметит, что перевод есть, а выбрать его нельзя. Порядок берётся из
+/// `kAppLanguages` (по охвату), а не из алфавита сгенерированного списка.
+final _mediaLanguages = () {
+  final own = {for (final locale in L10n.supportedLocales) locale.languageCode};
+  return [
+    for (final language in kAppLanguages)
+      if (own.contains(language.code)) language,
+  ];
+}();

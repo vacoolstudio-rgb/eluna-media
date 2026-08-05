@@ -793,37 +793,6 @@ class L10nTr extends L10n {
   }
 
   @override
-  String get rateDialogTitle => 'Eluna Media\'yı beğendiniz mi?';
-
-  @override
-  String get rateDialogBody =>
-      'Bir yıldıza dokunun. Puanınız sizinle mağaza arasında kalır.';
-
-  @override
-  String get rateDialogLater => 'Şimdi değil';
-
-  @override
-  String get rateFeedbackTitle => 'Neyi daha iyi yapabiliriz?';
-
-  @override
-  String get rateFeedbackBody =>
-      'Neyin ters gittiğini yazın, düzeltelim. Hesap yok, takip yok — yalnızca kendi yazdığınız bir e-posta.';
-
-  @override
-  String get rateSendFeedback => 'Geri bildirim yaz';
-
-  @override
-  String get rateThanks => 'Teşekkürler!';
-
-  @override
-  String feedbackSubject(int stars) {
-    return 'Eluna Media geri bildirimi ($stars/5)';
-  }
-
-  @override
-  String get noEmailApp => 'Bu cihazda kurulu bir e-posta uygulaması yok.';
-
-  @override
   String get shareApp => 'Uygulamayı paylaş';
 
   @override

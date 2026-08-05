@@ -797,37 +797,6 @@ class L10nUk extends L10n {
   }
 
   @override
-  String get rateDialogTitle => 'Подобається Eluna Media?';
-
-  @override
-  String get rateDialogBody =>
-      'Торкніться зірки. Оцінка залишиться між вами і магазином.';
-
-  @override
-  String get rateDialogLater => 'Не зараз';
-
-  @override
-  String get rateFeedbackTitle => 'Що покращити?';
-
-  @override
-  String get rateFeedbackBody =>
-      'Напишіть, що пішло не так, — виправимо. Ні облікового запису, ні трекінгу: просто лист, який ви пишете самі.';
-
-  @override
-  String get rateSendFeedback => 'Написати відгук';
-
-  @override
-  String get rateThanks => 'Дякуємо!';
-
-  @override
-  String feedbackSubject(int stars) {
-    return 'Відгук про Eluna Media ($stars/5)';
-  }
-
-  @override
-  String get noEmailApp => 'На пристрої не налаштовано поштовий застосунок.';
-
-  @override
   String get shareApp => 'Поділитися застосунком';
 
   @override

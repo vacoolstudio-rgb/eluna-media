@@ -788,37 +788,6 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get rateDialogTitle => 'Enjoying Eluna Media?';
-
-  @override
-  String get rateDialogBody =>
-      'Tap a star. Your rating stays between you and the store.';
-
-  @override
-  String get rateDialogLater => 'Not now';
-
-  @override
-  String get rateFeedbackTitle => 'What would make it better?';
-
-  @override
-  String get rateFeedbackBody =>
-      'Tell us what went wrong and we\'ll fix it. No account, no tracking — just an email you write yourself.';
-
-  @override
-  String get rateSendFeedback => 'Write feedback';
-
-  @override
-  String get rateThanks => 'Thank you!';
-
-  @override
-  String feedbackSubject(int stars) {
-    return 'Eluna Media feedback ($stars/5)';
-  }
-
-  @override
-  String get noEmailApp => 'No email app is set up on this device.';
-
-  @override
   String get shareApp => 'Share the app';
 
   @override
