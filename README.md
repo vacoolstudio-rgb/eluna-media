@@ -18,10 +18,10 @@ competitor/review analysis from July 2026.
 - **Audio** — MP3, M4A/AAC, WAV, FLAC, OGG Vorbis, Opus. Extracts from video.
 - **Images** — JPEG, PNG, WebP (lossy and lossless), BMP, TIFF, and animated
   GIF built with a `palettegen`/`paletteuse` graph.
-- **Fit to size** — pick a byte budget (Discord 10 MB, Email 25 MB, 50/100 MB,
-  or custom) and the bitrate is computed from the source duration with a 7%
-  safety margin plus `maxrate`/`bufsize` pinning, so the output actually lands
-  *under* the limit. Falls back to CRF when duration is unknown or the target
+- **Fit to size** — pick a byte budget (Discord 10 MB, WhatsApp 16 MB, Email
+  25 MB, 50/100 MB, or custom) and the bitrate is computed from the source
+  duration with a 7% safety margin plus `maxrate`/`bufsize` pinning, so the
+  output actually lands *under* the limit. Falls back to CRF when duration is unknown or the target
   is physically unreachable (and says so in the UI).
 - **A conversion never inflates the file.** Constant quality has no ceiling of
   its own, so an already-efficient source (anything that has been through a

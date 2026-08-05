@@ -85,6 +85,16 @@ void main() {
       }
     });
 
+    test('the named size budgets are distinct and ordered', () {
+      final bytes = [for (final t in SizeTarget.values) t.bytes];
+      // The chip row marks its selection by comparing byte counts, so two
+      // budgets sharing a number would light up two chips at once.
+      expect(bytes.toSet(), hasLength(bytes.length));
+      // The chips read left to right in enum order; a smaller budget appearing
+      // after a bigger one reads as a mistake even when it works.
+      expect(bytes, orderedEquals(([...bytes]..sort())));
+    });
+
     test('fit-to-size carries the chosen budget', () {
       final s = QuickPreset.fitToSize.settings(sizeTargetBytes: 25 * 1000 * 1000);
       expect(s.sizeTargetBytes, 25 * 1000 * 1000);

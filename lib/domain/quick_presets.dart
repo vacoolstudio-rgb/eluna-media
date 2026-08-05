@@ -176,6 +176,14 @@ enum QuickPreset {
 /// limits.
 enum SizeTarget {
   discord(10, 'Discord'),
+
+  /// WhatsApp's ceiling for a video sent *as a video*. Above it the file is
+  /// refused; at or below it WhatsApp still re-encodes, but it is no longer
+  /// forcing a big file through its harshest profile. (Sending the same clip as
+  /// a *document* skips the cap entirely — 2 GB, no re-encode — but that is a
+  /// choice made in WhatsApp, not here.)
+  whatsapp(16, 'WhatsApp'),
+
   email(25, 'Email'),
   fiftyMb(50, null),
   hundredMb(100, null);
