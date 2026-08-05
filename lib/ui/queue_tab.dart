@@ -17,7 +17,6 @@ import '../state/queue_controller.dart';
 import 'compare_screen.dart';
 import 'convert_tab.dart' show accentOfKind, iconOfKind;
 import 'queue_strings.dart';
-import 'theme.dart';
 import 'widgets/media_thumbnail.dart';
 import 'widgets/progress_ring.dart';
 import 'widgets/settings_summary.dart';
@@ -114,11 +113,11 @@ class _QueueTabState extends ConsumerState<QueueTab> with SingleTickerProviderSt
                 dividerColor: Colors.transparent,
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(
-                  gradient: AppTheme.brandGradient,
+                  gradient: context.elunaColors.gradient,
                   borderRadius: BorderRadius.circular(14),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.primary.withValues(alpha: 0.32),
+                      color: context.elunaColors.primary.withValues(alpha: 0.32),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -339,7 +338,7 @@ class _BatchHeader extends ConsumerWidget {
     final eta = running.estimatedRemaining();
 
     return SectionCard(
-      accent: AppTheme.primary,
+      accent: context.elunaColors.primary,
       // Отступы задаёт список очереди, поэтому поле карточки обнулено.
       margin: EdgeInsets.zero,
       child: Column(
@@ -347,7 +346,7 @@ class _BatchHeader extends ConsumerWidget {
         children: [
           SectionHeader(
             icon: HugeIcons.strokeRoundedFlash,
-            accent: AppTheme.primary,
+            accent: context.elunaColors.primary,
             title: l10n.converting,
           ),
           Padding(
@@ -612,12 +611,13 @@ class _JobCardBody extends ConsumerWidget {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
+    final colors = context.elunaColors;
 
     final kind = ContainerFormat.kindOfFile(job.inputName) ?? job.settings.container.kind;
     final accent = switch (job.status) {
-      JobStatus.completed => AppTheme.success,
-      JobStatus.failed => AppTheme.danger,
-      JobStatus.running => AppTheme.primary,
+      JobStatus.completed => colors.success,
+      JobStatus.failed => colors.danger,
+      JobStatus.running => colors.primary,
       _ => accentOfKind(kind),
     };
 
@@ -733,14 +733,14 @@ class _JobCardBody extends ConsumerWidget {
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    Icon(Icons.check_circle_outline, size: 14, color: AppTheme.success),
+                    Icon(Icons.check_circle_outline, size: 14, color: colors.success),
                     const SizedBox(width: 5),
                     Text(
                       switch (savedTo) {
                         SavedTo.gallery => l10n.savedToGallery,
                         SavedTo.downloads => l10n.savedToDownloads,
                       },
-                      style: theme.textTheme.labelSmall?.copyWith(color: AppTheme.success),
+                      style: theme.textTheme.labelSmall?.copyWith(color: colors.success),
                     ),
                   ],
                 ),
@@ -886,7 +886,7 @@ class _SizeSummary extends StatelessWidget {
       final percent = (ratio.abs() * 100).round();
       if (percent >= 1) {
         delta = ratio > 0 ? l10n.savedPercent(percent) : l10n.grewPercent(percent);
-        deltaColor = ratio > 0 ? AppTheme.success : theme.colorScheme.error;
+        deltaColor = ratio > 0 ? context.elunaColors.success : theme.colorScheme.error;
       }
     }
 
@@ -926,12 +926,13 @@ class _StatusChip extends StatelessWidget {
     final l10n = L10n.of(context);
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
+    final colors = context.elunaColors;
 
     final (String label, Color color) = switch (status) {
       JobStatus.queued => (l10n.statusQueued, scheme.onSurfaceVariant),
-      JobStatus.running => (l10n.statusRunning, AppTheme.primary),
-      JobStatus.completed => (l10n.statusCompleted, AppTheme.success),
-      JobStatus.failed => (l10n.statusFailed, AppTheme.danger),
+      JobStatus.running => (l10n.statusRunning, colors.primary),
+      JobStatus.completed => (l10n.statusCompleted, colors.success),
+      JobStatus.failed => (l10n.statusFailed, colors.danger),
       JobStatus.cancelled => (l10n.statusCancelled, scheme.onSurfaceVariant),
     };
 

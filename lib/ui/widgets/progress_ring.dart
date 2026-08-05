@@ -1,11 +1,10 @@
 import 'dart:math' as math;
 
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
 
-import '../theme.dart';
-
 /// A circular progress dial with the percentage in the middle, sweeping the
-/// brand gradient and turning green when the job is done.
+/// chosen theme's accent gradient and turning green when the job is done.
 ///
 /// Used on the queue's running job, where a plain bar answered "is it moving?"
 /// but not "how far along is it?".
@@ -36,6 +35,7 @@ class ProgressRing extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
+    final colors = context.elunaColors;
 
     if (indeterminate) {
       return SizedBox(
@@ -65,14 +65,14 @@ class ProgressRing extends StatelessWidget {
             track: scheme.surfaceContainerHighest,
             colors: done
                 ? const [Color(0xFF16A34A), Color(0xFF4ADE80)]
-                : const [AppTheme.primary, AppTheme.secondary],
+                : [colors.primary, colors.secondary],
           ),
           child: Center(
             child: Text(
               label ?? '${(animated * 100).round()}%',
               style: theme.textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.w800,
-                color: done ? AppTheme.success : scheme.onSurface,
+                color: done ? colors.success : scheme.onSurface,
               ),
             ),
           ),

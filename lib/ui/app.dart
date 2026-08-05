@@ -1,6 +1,6 @@
 import 'package:eluna_shared/eluna_shared.dart';
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
@@ -8,28 +8,47 @@ import '../state/app_meta_controller.dart';
 import '../state/settings_controller.dart';
 import 'home_shell.dart';
 import 'privacy_intro_screen.dart';
-import 'theme.dart';
 
 class ElunaApp extends ConsumerWidget {
-  const ElunaApp({super.key});
+  /// Акцент обоев, снятый один раз в `main`, или null там, где платформа его не
+  /// отдаёт — Android до 12 и iOS.
+  ///
+  /// Снимается независимо от того, включён ли Material You: тогда включение
+  /// переключателя перекрашивает приложение сразу. Смена обоев на живом
+  /// приложении подхватится при перезапуске — за подпиской на неё пришлось бы
+  /// держать `DynamicColorBuilder` вокруг всего дерева, а он перестраивает его
+  /// целиком на каждое изменение настроек.
+  final Color? wallpaperAccent;
+
+  const ElunaApp({super.key, this.wallpaperAccent});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final prefs = ref.watch(appPrefsProvider);
     final hasSeenIntro = ref.watch(appMetaProvider.select((m) => m.hasSeenIntro));
 
-    return DynamicColorBuilder(
-      builder: (lightDynamic, darkDynamic) {
-        final useDynamic = prefs.dynamicColor;
+    // Оформление живёт в общем контроллере, язык — по-прежнему в настройках
+    // приложения: строк у Media свои 15 языков, и общий список из 59 к ним
+    // отношения не имеет.
+    //
+    // ListenableBuilder, а не провайдер: riverpod 3 больше не умеет
+    // ChangeNotifierProvider, а контроллер — синглтон и в провайдере не
+    // нуждается.
+    return ListenableBuilder(
+      listenable: ElunaThemeController.instance,
+      builder: (context, _) {
+        final appearance = ElunaThemeController.instance;
+        final preset = appearance.presetFor(wallpaperAccent);
+
         return MaterialApp(
           onGenerateTitle: (context) => L10n.of(context).appTitle,
           debugShowCheckedModeBanner: false,
-          theme: AppTheme.light(dynamicScheme: useDynamic ? lightDynamic : null),
-          darkTheme: AppTheme.dark(
-            dynamicScheme: useDynamic ? darkDynamic : null,
-            oled: prefs.oledDark,
+          theme: ElunaTheme.light(preset: preset),
+          darkTheme: ElunaTheme.dark(
+            preset: preset,
+            pureBlack: appearance.pureBlack,
           ),
-          themeMode: prefs.themeMode,
+          themeMode: appearance.mode,
           locale: prefs.locale,
           localizationsDelegates: [
             ...L10n.localizationsDelegates,
@@ -47,11 +66,18 @@ class ElunaApp extends ConsumerWidget {
           // navigation while still scaling the content people read.
           builder: (context, child) {
             final mq = MediaQuery.of(context);
-            return MediaQuery(
-              data: mq.copyWith(
-                textScaler: mq.textScaler.clamp(minScaleFactor: 0.9, maxScaleFactor: 1.25),
+            return AnnotatedRegion<SystemUiOverlayStyle>(
+              // Экраны без AppBar иначе донашивают стиль системных панелей от
+              // темы запуска: после смены темы там оказываются тёмные иконки на
+              // тёмном фоне.
+              value: ElunaTheme.overlayStyle(Theme.of(context).brightness),
+              child: MediaQuery(
+                data: mq.copyWith(
+                  textScaler: mq.textScaler
+                      .clamp(minScaleFactor: 0.9, maxScaleFactor: 1.25),
+                ),
+                child: AmbientBackground(emphasized: true, child: child!),
               ),
-              child: AmbientBackground(emphasized: true, child: child!),
             );
           },
           // The privacy intro is the app's front door exactly once.

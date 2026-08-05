@@ -7,7 +7,6 @@ import 'package:hugeicons/hugeicons.dart';
 
 import '../l10n/app_localizations.dart';
 import '../state/app_meta_controller.dart';
-import 'theme.dart';
 
 /// The first-run gate: three promises and one line on what the app costs
 /// (nothing). Shown exactly once; acknowledging it stamps `hasSeenIntro`.
@@ -38,11 +37,11 @@ class PrivacyIntroScreen extends ConsumerWidget {
                         height: 76,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          gradient: AppTheme.brandGradient,
+                          gradient: context.elunaColors.gradient,
                           borderRadius: BorderRadius.circular(24),
                           boxShadow: [
                             BoxShadow(
-                              color: AppTheme.primary.withValues(alpha: 0.4),
+                              color: context.elunaColors.primary.withValues(alpha: 0.4),
                               blurRadius: 28,
                               offset: const Offset(0, 12),
                             ),
@@ -60,7 +59,7 @@ class PrivacyIntroScreen extends ConsumerWidget {
                     const SizedBox(height: 24),
                     _Promise(
                       icon: HugeIcons.strokeRoundedCloudOff,
-                      accent: AppTheme.primary,
+                      accent: context.elunaColors.primary,
                       title: l10n.introOfflineTitle,
                       body: l10n.introOfflineBody,
                     ),

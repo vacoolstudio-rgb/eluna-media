@@ -9,7 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../core/app_version.dart';
 import '../l10n/app_localizations.dart';
 import '../state/app_meta_controller.dart';
-import 'theme.dart';
 
 /// Where a low rating goes instead of the store.
 const _feedbackEmail = 'support@eluna.app';
@@ -94,11 +93,11 @@ class _RateAppSheetState extends ConsumerState<_RateAppSheet> {
                 height: 60,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  gradient: AppTheme.brandGradient,
+                  gradient: context.elunaColors.gradient,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.primary.withValues(alpha: 0.35),
+                      color: context.elunaColors.primary.withValues(alpha: 0.35),
                       blurRadius: 20,
                       offset: const Offset(0, 8),
                     ),

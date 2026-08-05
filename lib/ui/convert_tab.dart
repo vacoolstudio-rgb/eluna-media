@@ -18,7 +18,6 @@ import '../state/queue_controller.dart';
 import '../state/selection_controller.dart';
 import '../state/settings_controller.dart';
 import 'queue_strings.dart';
-import 'theme.dart';
 import 'widgets/media_thumbnail.dart';
 import 'widgets/section_card.dart';
 
@@ -271,6 +270,7 @@ class _EmptyPicker extends ConsumerWidget {
     final l10n = L10n.of(context);
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final colors = context.elunaColors;
 
     return PressableScale(
       onTap: onPick,
@@ -282,16 +282,16 @@ class _EmptyPicker extends ConsumerWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              AppTheme.primary.withValues(alpha: isDark ? 0.22 : 0.14),
-              AppTheme.secondary.withValues(alpha: isDark ? 0.10 : 0.06),
+              colors.primary.withValues(alpha: isDark ? 0.22 : 0.14),
+              colors.secondary.withValues(alpha: isDark ? 0.10 : 0.06),
             ],
           ),
           border: Border.all(
-            color: AppTheme.primary.withValues(alpha: isDark ? 0.35 : 0.25),
+            color: colors.primary.withValues(alpha: isDark ? 0.35 : 0.25),
           ),
           boxShadow: [
             BoxShadow(
-              color: AppTheme.primary.withValues(alpha: isDark ? 0.0 : 0.12),
+              color: colors.primary.withValues(alpha: isDark ? 0.0 : 0.12),
               blurRadius: 24,
               offset: const Offset(0, 12),
             ),
@@ -304,11 +304,11 @@ class _EmptyPicker extends ConsumerWidget {
               height: 56,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                gradient: AppTheme.brandGradient,
+                gradient: colors.gradient,
                 borderRadius: BorderRadius.circular(18),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.primary.withValues(alpha: 0.4),
+                    color: colors.primary.withValues(alpha: 0.4),
                     blurRadius: 18,
                     offset: const Offset(0, 8),
                   ),
@@ -692,6 +692,7 @@ class _FormatChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
+    final colors = context.elunaColors;
 
     return PressableScale(
       onTap: onTap,
@@ -700,7 +701,7 @@ class _FormatChip extends StatelessWidget {
         curve: Curves.easeOut,
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
         decoration: BoxDecoration(
-          gradient: selected ? AppTheme.brandGradient : null,
+          gradient: selected ? colors.gradient : null,
           color: selected ? null : scheme.surfaceContainerHigh.withValues(alpha: 0.7),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
@@ -709,7 +710,7 @@ class _FormatChip extends StatelessWidget {
           boxShadow: selected
               ? [
                   BoxShadow(
-                    color: AppTheme.primary.withValues(alpha: 0.35),
+                    color: colors.primary.withValues(alpha: 0.35),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
@@ -732,7 +733,7 @@ class _FormatChip extends StatelessWidget {
               Icon(
                 Icons.star_rounded,
                 size: 14,
-                color: selected ? Colors.white : AppTheme.warning,
+                color: selected ? Colors.white : colors.warning,
               ),
             ],
           ],
@@ -752,23 +753,24 @@ class _PromiseChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final success = context.elunaColors.success;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: AppTheme.success.withValues(alpha: isDark ? 0.16 : 0.12),
+        color: success.withValues(alpha: isDark ? 0.16 : 0.12),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppTheme.success.withValues(alpha: 0.3)),
+        border: Border.all(color: success.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: AppTheme.success),
+          Icon(icon, size: 14, color: success),
           const SizedBox(width: 5),
           Flexible(
             child: Text(
               label,
               style: theme.textTheme.labelSmall?.copyWith(
-                color: AppTheme.success,
+                color: success,
                 fontWeight: FontWeight.w700,
               ),
             ),

@@ -6,7 +6,6 @@ import 'package:hugeicons/hugeicons.dart';
 import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
 import '../state/achievements_controller.dart';
-import 'theme.dart';
 
 (String, String) achievementTexts(L10n l10n, Achievement a) => switch (a) {
       Achievement.firstConversion => (l10n.achFirstConversionTitle, l10n.achFirstConversionBody),
@@ -36,11 +35,14 @@ HugeIconData _tierIcon(Achievement a) => switch (a) {
       _ => HugeIcons.strokeRoundedChampion,
     };
 
-Color _tierColor(AchievementTier tier) => switch (tier) {
+/// Бронза, серебро и золото — цвета самих металлов, они одинаковы в любой теме.
+/// Платина — акцент приложения, поэтому он приходит параметром: функция чистая,
+/// BuildContext'а у неё нет, и выдумывать его ради одного цвета не нужно.
+Color _tierColor(AchievementTier tier, Color accent) => switch (tier) {
       AchievementTier.bronze => const Color(0xFFB07A45),
       AchievementTier.silver => const Color(0xFF9BA4B0),
       AchievementTier.gold => const Color(0xFFD4A017),
-      AchievementTier.platinum => AppTheme.primary,
+      AchievementTier.platinum => accent,
     };
 
 class AchievementsScreen extends ConsumerWidget {
@@ -124,7 +126,7 @@ class _AchievementTile extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final (title, body) = achievementTexts(l10n, achievement);
-    final tier = _tierColor(achievement.tier);
+    final tier = _tierColor(achievement.tier, context.elunaColors.primary);
     final accent = unlocked ? tier : theme.colorScheme.outline;
     final base = isDark ? theme.colorScheme.surfaceContainer : Colors.white;
 

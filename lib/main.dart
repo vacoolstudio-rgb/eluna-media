@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/platform/eluna_adapters.dart';
 import 'services/notification_service.dart';
 import 'services/share_intake.dart';
 import 'state/queue_controller.dart';
@@ -58,6 +59,31 @@ Future<void> main() async {
     // their `build()`.
     final prefs = await SharedPreferences.getInstance();
 
+    // Оформление переезжает в общий контроллер. Прежние значения передаются
+    // семенами и читаются РОВНО ОДИН РАЗ — пока в `eluna.theme.*` пусто; дальше
+    // источник истины только там.
+    //
+    // Это и есть опасное место переезда: не передай сюда сохранённое — и у
+    // каждого пользователя оформление молча сбросится на обновлении, а семена
+    // читаются единожды, поэтому неправильный первый запуск уже не исправить.
+    final prefsThemeMode = switch (prefs.getString('app.themeMode')) {
+      'light' => ThemeMode.light,
+      'dark' => ThemeMode.dark,
+      'system' => ThemeMode.system,
+      _ => null,
+    };
+    await ElunaThemeController.instance.load(
+      seedMode: prefsThemeMode,
+      seedPureBlack: prefs.getBool('app.oledDark'),
+      seedDynamicColor: prefs.getBool('app.dynamicColor'),
+    );
+
+    // Цвет обоев снимаем до первого кадра и независимо от переключателя:
+    // включение Material You тогда перекрашивает приложение сразу, а не со
+    // следующего запуска. Ошибку адаптер гасит сам и возвращает null.
+    final wallpaperAccent =
+        await const MediaDynamicColorAdapter().wallpaperAccent();
+
     final notifications = NotificationService.create();
     await notifications.init();
 
@@ -75,7 +101,7 @@ Future<void> main() async {
     runApp(
       UncontrolledProviderScope(
         container: container,
-        child: const ElunaApp(),
+        child: ElunaApp(wallpaperAccent: wallpaperAccent),
       ),
     );
   }, (error, stack) {

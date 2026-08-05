@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
 
 import '../core/output_paths.dart';
 import '../l10n/app_localizations.dart';
-import 'theme.dart';
 
 /// The result, and the original underneath it.
 ///
@@ -102,7 +102,7 @@ class _CompareScreenState extends State<CompareScreen> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                         decoration: BoxDecoration(
-                          color: (_showingBefore ? Colors.white24 : AppTheme.success)
+                          color: (_showingBefore ? Colors.white24 : context.elunaColors.success)
                               .withValues(alpha: _showingBefore ? 0.25 : 0.22),
                           borderRadius: BorderRadius.circular(20),
                         ),
