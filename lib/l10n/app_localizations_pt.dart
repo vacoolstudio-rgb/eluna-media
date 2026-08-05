@@ -306,7 +306,7 @@ class L10nPt extends L10n {
 
   @override
   String get privacyBody =>
-      'O Eluna Media converte seus arquivos inteiramente neste dispositivo, usando uma cópia embutida do FFmpeg. Seus arquivos nunca saem do dispositivo, nenhuma conta é necessária e não há telemetria. A única coisa que usa a rede é um único banner de anúncio não personalizado — e ele nunca carrega enquanto uma conversão está em andamento; veja a auditoria completa na tela Rede e privacidade.\n\nA remoção de metadados vem ativada por padrão, então EXIF, coordenadas de GPS e datas ficam de fora dos arquivos que você exporta.';
+      'O Eluna Media converte seus arquivos inteiramente neste dispositivo, usando uma cópia embutida do FFmpeg. Seus arquivos nunca saem do dispositivo, nenhuma conta é necessária e não há telemetria. Nada no app usa a rede — ele nem sequer tem a permissão de internet.\n\nA remoção de metadados vem ativada por padrão, então EXIF, coordenadas de GPS e datas ficam de fora dos arquivos que você exporta.';
 
   @override
   String get licenseTitle => 'Licença';
@@ -353,8 +353,8 @@ class L10nPt extends L10n {
       'EXIF, GPS e datas são removidos de todos os resultados por padrão. Você pode desativar isso.';
 
   @override
-  String get introAdNote =>
-      'A versão gratuita mostra um único banner não personalizado — nunca durante a conversão e, nos primeiros 14 dias, nenhum anúncio.';
+  String get introFreeNote =>
+      'Gratuito: sem anúncios, sem assinaturas e sem compras no app. Todos os recursos, incluindo conversão em lote, já estão aqui.';
 
   @override
   String get introContinue => 'Começar';
@@ -655,12 +655,6 @@ class L10nPt extends L10n {
   String get hapticsLabel => 'Vibração';
 
   @override
-  String get adPrivacyTitle => 'Privacidade dos anúncios';
-
-  @override
-  String get adPrivacySubtitle => 'Altere seu consentimento para publicidade';
-
-  @override
   String get networkPrivacyTitle => 'Rede e privacidade';
 
   @override
@@ -668,11 +662,11 @@ class L10nPt extends L10n {
       'Uma lista completa de tudo neste app que pode acessar a rede.';
 
   @override
-  String get netAuditAdTitle => 'O banner de anúncio — o único que usa a rede';
+  String get netAuditNoneTitle => 'Nenhum acesso à rede';
 
   @override
-  String get netAuditAdBody =>
-      'Um banner, apenas solicitações não personalizadas — a permissão do ID de publicidade foi totalmente removida do app. Ele nunca carrega durante uma conversão e desaparece com Remover anúncios. Além dele, o único outro contato com a rede é o diálogo da própria loja quando você toca em Avaliar o app.';
+  String get netAuditNoneBody =>
+      'O app não pede a permissão de internet, então não consegue alcançar a rede nem se quisesse — dá para conferir nas informações do sistema. Sem anúncios, sem análises, sem verificação de atualizações. “Avaliar o app” passa a bola para a loja, que se conecta sozinha.';
 
   @override
   String get netAuditConversionTitle => 'Conversão';
@@ -690,45 +684,6 @@ class L10nPt extends L10n {
 
   @override
   String get sectionSupport => 'Apoio';
-
-  @override
-  String get removeAdsTitle => 'Remover anúncios';
-
-  @override
-  String get removeAdsSubtitle =>
-      'Compra única. Todos os recursos já são gratuitos.';
-
-  @override
-  String get removeAdsBullet1 => 'O banner desaparece para sempre';
-
-  @override
-  String get removeAdsBullet2 => 'Um pagamento — sem assinatura';
-
-  @override
-  String get removeAdsBullet3 =>
-      'Todos os recursos continuam gratuitos para todos';
-
-  @override
-  String buyFor(String price) {
-    return 'Comprar · $price';
-  }
-
-  @override
-  String get restorePurchase => 'Restaurar compra';
-
-  @override
-  String get purchaseSuccess =>
-      'Anúncios removidos. Obrigado por apoiar o desenvolvimento!';
-
-  @override
-  String get purchaseUnavailable =>
-      'A loja não está disponível agora. Tente de novo mais tarde.';
-
-  @override
-  String get purchaseFailed => 'A compra não foi concluída.';
-
-  @override
-  String get adFreeBadge => 'Sem anúncios';
 
   @override
   String get rateApp => 'Avaliar o app';

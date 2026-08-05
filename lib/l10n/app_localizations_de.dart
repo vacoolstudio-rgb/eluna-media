@@ -306,7 +306,7 @@ class L10nDe extends L10n {
 
   @override
   String get privacyBody =>
-      'Eluna Media konvertiert deine Dateien vollständig auf diesem Gerät mit einer mitgelieferten FFmpeg-Version. Deine Dateien verlassen das Gerät nie, ein Konto ist nicht nötig, und es gibt keine Telemetrie. Das Einzige, was das Netz nutzt, ist ein einzelnes nicht-personalisiertes Werbebanner — und das lädt nie, während eine Konvertierung läuft. Die vollständige Übersicht findest du unter „Netzwerk & Privatsphäre“.\n\nDas Entfernen von Metadaten ist standardmäßig aktiv, sodass EXIF, GPS-Koordinaten und Zeitstempel aus exportierten Dateien entfernt werden.';
+      'Eluna Media konvertiert deine Dateien vollständig auf diesem Gerät mit einer mitgelieferten FFmpeg-Version. Deine Dateien verlassen das Gerät nie, ein Konto ist nicht nötig, und es gibt keine Telemetrie. Nichts in der App nutzt das Netz — sie besitzt nicht einmal die Internet-Berechtigung.\n\nDas Entfernen von Metadaten ist standardmäßig aktiv, sodass EXIF, GPS-Koordinaten und Zeitstempel aus exportierten Dateien entfernt werden.';
 
   @override
   String get licenseTitle => 'Lizenz';
@@ -353,8 +353,8 @@ class L10nDe extends L10n {
       'EXIF, GPS und Zeitstempel werden standardmäßig aus jeder Ausgabe entfernt. Das lässt sich abschalten.';
 
   @override
-  String get introAdNote =>
-      'Die Gratisversion zeigt ein einzelnes nicht-personalisiertes Banner — nie während einer Konvertierung, und in den ersten 14 Tagen gar nicht.';
+  String get introFreeNote =>
+      'Kostenlos — ohne Werbung, ohne Abo, ohne In-App-Käufe. Alle Funktionen inklusive Stapelverarbeitung sind dabei.';
 
   @override
   String get introContinue => 'Los geht\'s';
@@ -653,12 +653,6 @@ class L10nDe extends L10n {
   String get hapticsLabel => 'Vibrations-Feedback';
 
   @override
-  String get adPrivacyTitle => 'Datenschutzeinstellungen für Werbung';
-
-  @override
-  String get adPrivacySubtitle => 'Ihre Einwilligung in Werbung ändern';
-
-  @override
   String get networkPrivacyTitle => 'Netzwerk & Privatsphäre';
 
   @override
@@ -666,11 +660,11 @@ class L10nDe extends L10n {
       'Eine vollständige Liste von allem in dieser App, das aufs Netz zugreifen kann.';
 
   @override
-  String get netAuditAdTitle => 'Das Werbebanner — der einzige Netznutzer';
+  String get netAuditNoneTitle => 'Überhaupt kein Netzzugriff';
 
   @override
-  String get netAuditAdBody =>
-      'Ein Banner, ausschließlich nicht-personalisierte Anfragen — die Berechtigung für die Werbe-ID ist komplett aus der App entfernt. Es lädt nie, während eine Konvertierung läuft, und verschwindet mit „Werbung entfernen“. Darüber hinaus ist der einzige weitere Netzwerkkontakt der Dialog des Stores selbst, wenn du auf „App bewerten“ tippst.';
+  String get netAuditNoneBody =>
+      'Die App fordert die Internet-Berechtigung nicht an und kommt damit gar nicht erst ins Netz — nachzusehen in den System-Infos zur App. Keine Werbung, keine Analyse, keine Update-Prüfung. „App bewerten“ übergibt an die Store-App, die das selbst erledigt.';
 
   @override
   String get netAuditConversionTitle => 'Konvertierung';
@@ -688,44 +682,6 @@ class L10nDe extends L10n {
 
   @override
   String get sectionSupport => 'Unterstützung';
-
-  @override
-  String get removeAdsTitle => 'Werbung entfernen';
-
-  @override
-  String get removeAdsSubtitle =>
-      'Einmaliger Kauf. Alle Funktionen sind ohnehin gratis.';
-
-  @override
-  String get removeAdsBullet1 => 'Das Banner verschwindet für immer';
-
-  @override
-  String get removeAdsBullet2 => 'Eine Zahlung — kein Abo';
-
-  @override
-  String get removeAdsBullet3 => 'Alle Funktionen bleiben für alle gratis';
-
-  @override
-  String buyFor(String price) {
-    return 'Kaufen · $price';
-  }
-
-  @override
-  String get restorePurchase => 'Kauf wiederherstellen';
-
-  @override
-  String get purchaseSuccess =>
-      'Werbung entfernt. Danke für die Unterstützung der Entwicklung!';
-
-  @override
-  String get purchaseUnavailable =>
-      'Der Store ist gerade nicht erreichbar. Versuch es später noch einmal.';
-
-  @override
-  String get purchaseFailed => 'Der Kauf hat nicht geklappt.';
-
-  @override
-  String get adFreeBadge => 'Werbefrei';
 
   @override
   String get rateApp => 'App bewerten';

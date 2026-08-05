@@ -304,7 +304,7 @@ class L10nEn extends L10n {
 
   @override
   String get privacyBody =>
-      'Eluna Media converts your files entirely on this device using a bundled copy of FFmpeg. Your files never leave the device, no account is required, and there is no telemetry. The only thing that uses the network is a single non-personalized ad banner, and it never loads while a conversion is running — see the Network & privacy screen for the full audit.\n\nMetadata removal is on by default, so EXIF, GPS coordinates and timestamps are dropped from the files you export.';
+      'Eluna Media converts your files entirely on this device using a bundled copy of FFmpeg. Your files never leave the device, no account is required, and there is no telemetry. Nothing in the app uses the network at all — it does not even hold the internet permission.\n\nMetadata removal is on by default, so EXIF, GPS coordinates and timestamps are dropped from the files you export.';
 
   @override
   String get licenseTitle => 'Licensing';
@@ -351,8 +351,8 @@ class L10nEn extends L10n {
       'EXIF, GPS and timestamps are stripped from every output by default. You can turn that off.';
 
   @override
-  String get introAdNote =>
-      'The free version shows a single non-personalized banner — never while converting, and not at all for your first 14 days.';
+  String get introFreeNote =>
+      'Free, with no ads, no subscriptions and no in-app purchases. Every feature, batch conversion included, is yours.';
 
   @override
   String get introContinue => 'Get started';
@@ -649,12 +649,6 @@ class L10nEn extends L10n {
   String get hapticsLabel => 'Vibration feedback';
 
   @override
-  String get adPrivacyTitle => 'Ad privacy settings';
-
-  @override
-  String get adPrivacySubtitle => 'Change your consent for advertising';
-
-  @override
   String get networkPrivacyTitle => 'Network & privacy';
 
   @override
@@ -662,11 +656,11 @@ class L10nEn extends L10n {
       'A complete list of everything in this app that can touch the network.';
 
   @override
-  String get netAuditAdTitle => 'The ad banner — the only network user';
+  String get netAuditNoneTitle => 'No network access at all';
 
   @override
-  String get netAuditAdBody =>
-      'One banner, non-personalized requests only — the advertising-ID permission is stripped from the app entirely. It never loads while a conversion is running, and it disappears with Remove ads. Beyond it, the only other network touch is the store\'s own dialog when you tap “Rate the app”.';
+  String get netAuditNoneBody =>
+      'The app does not request the internet permission, so it cannot reach the network even if it tried — you can verify that in the system app info. No ads, no analytics, no update checks. “Rate the app” hands over to the store app, which does its own talking.';
 
   @override
   String get netAuditConversionTitle => 'Conversion';
@@ -684,44 +678,6 @@ class L10nEn extends L10n {
 
   @override
   String get sectionSupport => 'Support';
-
-  @override
-  String get removeAdsTitle => 'Remove ads';
-
-  @override
-  String get removeAdsSubtitle =>
-      'One-time purchase. Every feature is already free.';
-
-  @override
-  String get removeAdsBullet1 => 'The banner disappears forever';
-
-  @override
-  String get removeAdsBullet2 => 'One payment — no subscription';
-
-  @override
-  String get removeAdsBullet3 => 'All features stay free for everyone';
-
-  @override
-  String buyFor(String price) {
-    return 'Buy · $price';
-  }
-
-  @override
-  String get restorePurchase => 'Restore purchase';
-
-  @override
-  String get purchaseSuccess =>
-      'Ads removed. Thank you for supporting development!';
-
-  @override
-  String get purchaseUnavailable =>
-      'The store is not available right now. Try again later.';
-
-  @override
-  String get purchaseFailed => 'The purchase did not go through.';
-
-  @override
-  String get adFreeBadge => 'Ad-free';
 
   @override
   String get rateApp => 'Rate the app';

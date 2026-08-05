@@ -298,7 +298,7 @@ class L10nJa extends L10n {
 
   @override
   String get privacyBody =>
-      'Eluna Media は、内蔵の FFmpeg を使ってファイルをすべてこの端末上で変換します。ファイルが端末の外に出ることはなく、アカウントも不要で、テレメトリーもありません。ネットワークを使うのは非パーソナライズ広告バナー 1 つだけで、変換の実行中には読み込まれません。詳しくは「ネットワークとプライバシー」画面をご覧ください。\n\nメタデータの削除は初期設定でオンになっているため、書き出したファイルから EXIF・GPS 座標・タイムスタンプは取り除かれます。';
+      'Eluna Media は、内蔵の FFmpeg を使ってファイルをすべてこの端末上で変換します。ファイルが端末の外に出ることはなく、アカウントも不要で、テレメトリーもありません。ネットワークを使う機能は一つもなく、インターネット権限すら持っていません。\n\nメタデータの削除は初期設定でオンになっているため、書き出したファイルから EXIF・GPS 座標・タイムスタンプは取り除かれます。';
 
   @override
   String get licenseTitle => 'ライセンス';
@@ -344,8 +344,7 @@ class L10nJa extends L10n {
       'EXIF・GPS・タイムスタンプは初期設定ですべての出力から取り除かれます。オフにすることもできます。';
 
   @override
-  String get introAdNote =>
-      '無料版に表示されるのは非パーソナライズバナー 1 つだけ。変換中は表示されず、最初の 14 日間はまったく表示されません。';
+  String get introFreeNote => '無料です。広告なし、サブスクなし、アプリ内課金なし。一括変換を含むすべての機能が使えます。';
 
   @override
   String get introContinue => 'はじめる';
@@ -634,23 +633,17 @@ class L10nJa extends L10n {
   String get hapticsLabel => 'バイブレーション';
 
   @override
-  String get adPrivacyTitle => '広告のプライバシー設定';
-
-  @override
-  String get adPrivacySubtitle => '広告に関する同意を変更します';
-
-  @override
   String get networkPrivacyTitle => 'ネットワークとプライバシー';
 
   @override
   String get netAuditIntro => 'このアプリでネットワークに触れる可能性があるものの完全なリストです。';
 
   @override
-  String get netAuditAdTitle => '広告バナー — 唯一のネットワーク利用者';
+  String get netAuditNoneTitle => 'ネットワークには一切つながりません';
 
   @override
-  String get netAuditAdBody =>
-      'バナーは 1 つだけで、リクエストは非パーソナライズのみ。広告 ID の権限はアプリから完全に取り除かれています。変換の実行中は読み込まれず、「広告を削除」で消えます。それ以外でネットワークに触れるのは、「アプリを評価」をタップしたときに表示されるストア自体のダイアログだけです。';
+  String get netAuditNoneBody =>
+      'このアプリはインターネット権限を要求していないため、つなごうとしてもつながりません。端末の「アプリ情報」で確認できます。広告も、解析も、更新確認もありません。「アプリを評価」はストアアプリに引き継ぐだけで、通信するのはストア側です。';
 
   @override
   String get netAuditConversionTitle => '変換';
@@ -668,41 +661,6 @@ class L10nJa extends L10n {
 
   @override
   String get sectionSupport => 'サポート';
-
-  @override
-  String get removeAdsTitle => '広告を削除';
-
-  @override
-  String get removeAdsSubtitle => '買い切りです。機能はすべて最初から無料です。';
-
-  @override
-  String get removeAdsBullet1 => 'バナーが永久に消えます';
-
-  @override
-  String get removeAdsBullet2 => '支払いは 1 回だけ — サブスクなし';
-
-  @override
-  String get removeAdsBullet3 => 'すべての機能は誰でもずっと無料';
-
-  @override
-  String buyFor(String price) {
-    return '購入 · $price';
-  }
-
-  @override
-  String get restorePurchase => '購入を復元';
-
-  @override
-  String get purchaseSuccess => '広告を削除しました。開発を支援していただきありがとうございます！';
-
-  @override
-  String get purchaseUnavailable => 'ストアに現在アクセスできません。あとでもう一度お試しください。';
-
-  @override
-  String get purchaseFailed => '購入が完了しませんでした。';
-
-  @override
-  String get adFreeBadge => '広告なし';
 
   @override
   String get rateApp => 'アプリを評価';

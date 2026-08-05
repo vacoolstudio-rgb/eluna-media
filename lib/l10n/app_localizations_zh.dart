@@ -294,7 +294,7 @@ class L10nZh extends L10n {
 
   @override
   String get privacyBody =>
-      'Eluna Media 使用内置的 FFmpeg 完全在本机转换文件。文件绝不离开设备，无需账号，也没有遥测。唯一使用网络的是一条非个性化广告横幅，且转换进行时绝不加载——完整清单见“网络与隐私”页面。\n\n元数据移除默认开启，导出的文件中不会包含 EXIF、GPS 坐标和时间戳。';
+      'Eluna Media 使用内置的 FFmpeg 完全在本机转换文件。文件绝不离开设备，无需账号，也没有遥测。应用没有任何功能使用网络——它连联网权限都没有申请。\n\n元数据移除默认开启，导出的文件中不会包含 EXIF、GPS 坐标和时间戳。';
 
   @override
   String get licenseTitle => '许可';
@@ -337,7 +337,7 @@ class L10nZh extends L10n {
   String get introMetadataBody => '默认从每个输出中去除 EXIF、GPS 和时间戳。也可以关闭。';
 
   @override
-  String get introAdNote => '免费版只显示一条非个性化横幅——转换时绝不显示，前 14 天完全没有。';
+  String get introFreeNote => '完全免费：没有广告、没有订阅、没有内购。包括批量转换在内的所有功能都可直接使用。';
 
   @override
   String get introContinue => '开始使用';
@@ -624,23 +624,17 @@ class L10nZh extends L10n {
   String get hapticsLabel => '振动反馈';
 
   @override
-  String get adPrivacyTitle => '广告隐私设置';
-
-  @override
-  String get adPrivacySubtitle => '更改你的广告同意选项';
-
-  @override
   String get networkPrivacyTitle => '网络与隐私';
 
   @override
   String get netAuditIntro => '本应用中所有可能访问网络的部分的完整清单。';
 
   @override
-  String get netAuditAdTitle => '广告横幅——唯一的网络使用者';
+  String get netAuditNoneTitle => '完全不联网';
 
   @override
-  String get netAuditAdBody =>
-      '只有一条横幅，且仅发送非个性化请求——广告 ID 权限已从应用中彻底移除。转换进行时绝不加载，购买“移除广告”后即会消失。除此之外，唯一会触及网络的只有点按“为应用评分”时商店自带的对话框。';
+  String get netAuditNoneBody =>
+      '应用没有申请联网权限，就算想联网也做不到——你可以在系统的应用信息里核实。没有广告、没有统计、没有更新检查。点击“给应用评分”只是交给商店应用，联网的是它。';
 
   @override
   String get netAuditConversionTitle => '转换';
@@ -656,41 +650,6 @@ class L10nZh extends L10n {
 
   @override
   String get sectionSupport => '支持';
-
-  @override
-  String get removeAdsTitle => '移除广告';
-
-  @override
-  String get removeAdsSubtitle => '一次性购买。所有功能本来就免费。';
-
-  @override
-  String get removeAdsBullet1 => '横幅永久消失';
-
-  @override
-  String get removeAdsBullet2 => '一次付款——没有订阅';
-
-  @override
-  String get removeAdsBullet3 => '所有功能对所有人保持免费';
-
-  @override
-  String buyFor(String price) {
-    return '购买 · $price';
-  }
-
-  @override
-  String get restorePurchase => '恢复购买';
-
-  @override
-  String get purchaseSuccess => '广告已移除。感谢你支持开发！';
-
-  @override
-  String get purchaseUnavailable => '商店暂时不可用，请稍后再试。';
-
-  @override
-  String get purchaseFailed => '购买未完成。';
-
-  @override
-  String get adFreeBadge => '无广告';
 
   @override
   String get rateApp => '为应用评分';

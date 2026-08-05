@@ -305,7 +305,7 @@ class L10nHi extends L10n {
 
   @override
   String get privacyBody =>
-      'Eluna Media आपकी फ़ाइलें पूरी तरह इसी डिवाइस पर, FFmpeg की बंडल्ड कॉपी से कन्वर्ट करता है। फ़ाइलें कभी डिवाइस से बाहर नहीं जातीं, अकाउंट की ज़रूरत नहीं और कोई टेलीमेट्री नहीं। नेटवर्क सिर्फ़ एक नॉन-पर्सनलाइज़्ड विज्ञापन बैनर इस्तेमाल करता है, और कन्वर्ज़न चलते समय वह कभी लोड नहीं होता — पूरा ऑडिट “नेटवर्क और प्राइवेसी” स्क्रीन पर देखें।\n\nमेटाडेटा हटाना डिफ़ॉल्ट रूप से चालू है, इसलिए एक्सपोर्ट की गई फ़ाइलों से EXIF, GPS निर्देशांक और टाइमस्टैम्प हट जाते हैं।';
+      'Eluna Media आपकी फ़ाइलें पूरी तरह इसी डिवाइस पर, FFmpeg की बंडल्ड कॉपी से कन्वर्ट करता है। फ़ाइलें कभी डिवाइस से बाहर नहीं जातीं, अकाउंट की ज़रूरत नहीं और कोई टेलीमेट्री नहीं। ऐप में कुछ भी नेटवर्क इस्तेमाल नहीं करता — इसके पास इंटरनेट की अनुमति तक नहीं है।\n\nमेटाडेटा हटाना डिफ़ॉल्ट रूप से चालू है, इसलिए एक्सपोर्ट की गई फ़ाइलों से EXIF, GPS निर्देशांक और टाइमस्टैम्प हट जाते हैं।';
 
   @override
   String get licenseTitle => 'लाइसेंस';
@@ -352,8 +352,8 @@ class L10nHi extends L10n {
       'हर आउटपुट से EXIF, GPS और टाइमस्टैम्प डिफ़ॉल्ट रूप से हटा दिए जाते हैं। चाहें तो इसे बंद कर सकते हैं।';
 
   @override
-  String get introAdNote =>
-      'मुफ़्त वर्ज़न में सिर्फ़ एक नॉन-पर्सनलाइज़्ड बैनर दिखता है — कन्वर्ज़न के दौरान कभी नहीं, और पहले 14 दिन बिल्कुल नहीं।';
+  String get introFreeNote =>
+      'मुफ़्त — कोई विज्ञापन नहीं, कोई सब्सक्रिप्शन नहीं, कोई इन-ऐप ख़रीद नहीं। बैच कन्वर्ज़न समेत सभी सुविधाएँ शामिल हैं।';
 
   @override
   String get introContinue => 'शुरू करें';
@@ -649,12 +649,6 @@ class L10nHi extends L10n {
   String get hapticsLabel => 'वाइब्रेशन फ़ीडबैक';
 
   @override
-  String get adPrivacyTitle => 'विज्ञापन गोपनीयता सेटिंग';
-
-  @override
-  String get adPrivacySubtitle => 'विज्ञापन के लिए अपनी सहमति बदलें';
-
-  @override
   String get networkPrivacyTitle => 'नेटवर्क और प्राइवेसी';
 
   @override
@@ -662,11 +656,11 @@ class L10nHi extends L10n {
       'इस ऐप में नेटवर्क छू सकने वाली हर चीज़ की पूरी सूची।';
 
   @override
-  String get netAuditAdTitle => 'विज्ञापन बैनर — नेटवर्क का इकलौता उपयोगकर्ता';
+  String get netAuditNoneTitle => 'नेटवर्क का कोई इस्तेमाल नहीं';
 
   @override
-  String get netAuditAdBody =>
-      'एक बैनर, सिर्फ़ नॉन-पर्सनलाइज़्ड अनुरोध — विज्ञापन-ID की अनुमति ऐप से पूरी तरह हटा दी गई है। कन्वर्ज़न चलते समय यह कभी लोड नहीं होता, और “विज्ञापन हटाएँ” के साथ गायब हो जाता है। इसके अलावा नेटवर्क को छूने वाली इकलौती चीज़ स्टोर का अपना डायलॉग है, जो “ऐप को रेट करें” पर टैप करने पर खुलता है।';
+  String get netAuditNoneBody =>
+      'ऐप इंटरनेट की अनुमति माँगता ही नहीं, इसलिए चाहकर भी नेटवर्क तक नहीं पहुँच सकता — सिस्टम की ऐप जानकारी में ख़ुद देख लें। न विज्ञापन, न एनालिटिक्स, न अपडेट जाँच। “ऐप को रेट करें” आपको स्टोर ऐप को सौंप देता है; कनेक्शन वही बनाता है।';
 
   @override
   String get netAuditConversionTitle => 'कन्वर्ज़न';
@@ -684,44 +678,6 @@ class L10nHi extends L10n {
 
   @override
   String get sectionSupport => 'सहयोग';
-
-  @override
-  String get removeAdsTitle => 'विज्ञापन हटाएँ';
-
-  @override
-  String get removeAdsSubtitle =>
-      'एक बार की ख़रीद। हर फ़ीचर पहले से ही मुफ़्त है।';
-
-  @override
-  String get removeAdsBullet1 => 'बैनर हमेशा के लिए गायब';
-
-  @override
-  String get removeAdsBullet2 => 'एक भुगतान — कोई सब्सक्रिप्शन नहीं';
-
-  @override
-  String get removeAdsBullet3 => 'सभी फ़ीचर सबके लिए मुफ़्त रहते हैं';
-
-  @override
-  String buyFor(String price) {
-    return 'ख़रीदें · $price';
-  }
-
-  @override
-  String get restorePurchase => 'ख़रीद रीस्टोर करें';
-
-  @override
-  String get purchaseSuccess =>
-      'विज्ञापन हट गए। डेवलपमेंट को सपोर्ट करने के लिए धन्यवाद!';
-
-  @override
-  String get purchaseUnavailable =>
-      'स्टोर अभी उपलब्ध नहीं है। बाद में कोशिश करें।';
-
-  @override
-  String get purchaseFailed => 'ख़रीद पूरी नहीं हो सकी।';
-
-  @override
-  String get adFreeBadge => 'विज्ञापन-मुक्त';
 
   @override
   String get rateApp => 'ऐप को रेट करें';

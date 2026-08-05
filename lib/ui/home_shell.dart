@@ -7,7 +7,6 @@ import '../core/app_version.dart';
 import '../domain/achievements.dart';
 import '../domain/conversion_job.dart';
 import '../l10n/app_localizations.dart';
-import '../services/ads/banner_slot.dart';
 import '../state/achievements_controller.dart';
 import '../state/app_meta_controller.dart';
 import 'achievements_screen.dart';
@@ -32,12 +31,6 @@ class _HomeShellState extends ConsumerState<HomeShell> {
   int _index = 0;
 
   static const _railBreakpoint = 720.0;
-
-  /// One key shared by both layout branches, so crossing the breakpoint
-  /// (foldable unfold, window resize) reparents the banner instead of
-  /// destroying it — a destroyed slot disposes its loaded ad and immediately
-  /// buys a new one.
-  static final _bannerKey = GlobalKey(debugLabel: 'banner-slot');
 
   @override
   void initState() {
@@ -213,9 +206,6 @@ class _HomeShellState extends ConsumerState<HomeShell> {
                 Expanded(child: pages[_index]),
               ],
             ),
-            // On tablets the banner spans the content column, still one per
-            // screen and still absent while converting.
-            bottomNavigationBar: BannerSlot(key: _bannerKey),
           );
         }
 
@@ -224,39 +214,33 @@ class _HomeShellState extends ConsumerState<HomeShell> {
           body: pages[_index],
           // Frosted glass over the ambient canvas: the content scrolls under
           // the bar instead of stopping dead at an opaque slab.
-          bottomNavigationBar: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              BannerSlot(key: _bannerKey),
-              ClipRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: isDark
-                          ? const Color(0xFF121620).withValues(alpha: 0.78)
-                          : Colors.white.withValues(alpha: 0.66),
-                      border: Border(
-                        top: BorderSide(
-                          color: isDark ? const Color(0x14FFFFFF) : const Color(0x0D111827),
-                        ),
-                      ),
-                    ),
-                    child: NavigationBar(
-                      selectedIndex: _index,
-                      onDestinationSelected: (i) => setState(() => _index = i),
-                      destinations: [
-                        for (final d in destinations)
-                          NavigationDestination(
-                            icon: _Badged(count: d.badge, child: Icon(d.icon)),
-                            label: d.label,
-                          ),
-                      ],
+          bottomNavigationBar: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? const Color(0xFF121620).withValues(alpha: 0.78)
+                      : Colors.white.withValues(alpha: 0.66),
+                  border: Border(
+                    top: BorderSide(
+                      color: isDark ? const Color(0x14FFFFFF) : const Color(0x0D111827),
                     ),
                   ),
                 ),
+                child: NavigationBar(
+                  selectedIndex: _index,
+                  onDestinationSelected: (i) => setState(() => _index = i),
+                  destinations: [
+                    for (final d in destinations)
+                      NavigationDestination(
+                        icon: _Badged(count: d.badge, child: Icon(d.icon)),
+                        label: d.label,
+                      ),
+                  ],
+                ),
               ),
-            ],
+            ),
           ),
         );
       },

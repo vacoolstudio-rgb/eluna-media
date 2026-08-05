@@ -6,15 +6,12 @@ import '../core/app_version.dart';
 import '../core/output_paths.dart';
 import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
-import '../services/ads/ads_consent.dart';
 import '../services/review_service.dart';
 import '../state/achievements_controller.dart';
-import '../state/app_meta_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/storage_controller.dart';
 import 'achievements_screen.dart';
 import 'network_privacy_screen.dart';
-import 'remove_ads_sheet.dart';
 import 'theme.dart';
 import 'widgets/section_card.dart';
 
@@ -27,7 +24,6 @@ class SettingsTab extends ConsumerWidget {
     final theme = Theme.of(context);
     final prefs = ref.watch(appPrefsProvider);
     final controller = ref.read(appPrefsProvider.notifier);
-    final meta = ref.watch(appMetaProvider);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -165,15 +161,6 @@ class SettingsTab extends ConsumerWidget {
                   MaterialPageRoute<void>(builder: (_) => const NetworkPrivacyScreen()),
                 ),
               ),
-              // Only for users who were asked for consent in the first place —
-              // i.e. the EEA, the UK and Switzerland. Google's own API decides
-              // that, not us. Everyone else never sees this row, because for
-              // them it would open a form with nothing to say: they were never
-              // asked, and there is nothing to withdraw.
-              //
-              // Shown when it *is* required, though, and not as a courtesy: a
-              // consent you cannot revisit is not a consent.
-              const _AdPrivacyRow(),
             ],
           ),
           const SizedBox(height: 16),
@@ -182,17 +169,6 @@ class SettingsTab extends ConsumerWidget {
             icon: Icons.favorite_outline_rounded,
             accent: Accents.support,
             children: [
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: Icon(
-                  meta.isPro ? Icons.verified : Icons.workspace_premium_outlined,
-                  color: meta.isPro ? theme.colorScheme.primary : null,
-                ),
-                title: Text(meta.isPro ? l10n.adFreeBadge : l10n.removeAdsTitle),
-                subtitle: meta.isPro ? null : Text(l10n.removeAdsSubtitle),
-                trailing: meta.isPro ? null : const Icon(Icons.chevron_right),
-                onTap: meta.isPro ? null : () => showRemoveAdsSheet(context),
-              ),
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(Icons.emoji_events_outlined),
@@ -381,49 +357,3 @@ String _autonymOf(String code) => switch (code) {
       'zh' => '中文',
       _ => code,
     };
-
-
-/// "Ad privacy settings" — the row that lets a user take their consent back.
-///
-/// It renders **nothing** unless Google says a privacy-options form is required
-/// for this user, which is true only where a consent form was required in the
-/// first place: the EEA, the UK, Switzerland. Everyone else never sees the row,
-/// because for them it would open a dialog about a choice they were never asked
-/// to make.
-///
-/// The check is asynchronous and the answer is "no" for most of the world, so the
-/// row simply is not there while the question is in flight. There is nothing to
-/// flicker: the common case renders empty and stays empty.
-class _AdPrivacyRow extends StatefulWidget {
-  const _AdPrivacyRow();
-
-  @override
-  State<_AdPrivacyRow> createState() => _AdPrivacyRowState();
-}
-
-class _AdPrivacyRowState extends State<_AdPrivacyRow> {
-  bool _required = false;
-
-  @override
-  void initState() {
-    super.initState();
-    AdsConsent.privacyOptionsRequired().then((value) {
-      if (mounted && value) setState(() => _required = true);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (!_required) return const SizedBox.shrink();
-    final l10n = L10n.of(context);
-
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: const Icon(Icons.ads_click_outlined),
-      title: Text(l10n.adPrivacyTitle),
-      subtitle: Text(l10n.adPrivacySubtitle),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: AdsConsent.showPrivacyOptions,
-    );
-  }
-}

@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Android 13+ gates the "batch finished" notice behind a runtime prompt. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
@@ -10,11 +9,13 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROCESSING"/>
 
-    <!-- INTERNET exists for exactly one consumer: the single non-personalized
-         ad banner. Conversion itself never touches the network — the in-app
-         "Network & privacy" screen documents this, and the banner is not even
-         loaded while a batch is running. -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- There is deliberately no INTERNET permission here. The shipped build
+         has no network access at all: conversion is local, and there are no
+         ads, no analytics and no update checks. src/release/AndroidManifest.xml
+         additionally strips it with tools:node="remove" so no dependency can
+         merge it back in and quietly falsify the in-app network audit; the
+         marker lives there and not here because the debug and profile
+         manifests legitimately add the permission for hot reload. -->
 
     <!-- Saving into the gallery / public Downloads needs this only on old
          Androids; from API 29 on, MediaStore inserts are permission-free
@@ -23,32 +24,11 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="29"/>
 
-    <!-- The ads plugin's manifest would merge this in. Every request the app
-         makes is non-personalized, so the advertising id is never needed —
-         removing the permission keeps the in-app privacy audit literally
-         true: no identifiers, period. -->
-    <uses-permission
-        android:name="com.google.android.gms.permission.AD_ID"
-        tools:node="remove"/>
-
     <application
         android:label="Eluna Media"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
-
-        <!-- Google's published TEST application id. Replace with the real one
-             (and the banner unit id in lib/services/ads/ad_config.dart) before
-             a store release. -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
-        <meta-data
-            android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION"
-            android:value="true"/>
-        <meta-data
-            android:name="com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING"
-            android:value="true"/>
 
         <activity
             android:name=".MainActivity"

@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- The release build ships with no network access whatsoever, which is
+         what the in-app "Network & privacy" screen promises. Omitting the
+         permission from the main manifest is not enough on its own: any
+         dependency that declares INTERNET would merge it straight back in, so
+         the release manifest — the highest-priority one — removes it outright
+         and a build fails loudly rather than shipping a quiet regression.
+
+         Only the release variant. Debug and profile keep the permission
+         (src/debug, src/profile): the Flutter tool needs it for hot reload. -->
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        tools:node="remove"/>
+</manifest>

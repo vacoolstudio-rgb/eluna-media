@@ -307,7 +307,7 @@ class L10nId extends L10n {
 
   @override
   String get privacyBody =>
-      'Eluna Media mengonversi file sepenuhnya di perangkat ini menggunakan FFmpeg bawaan. File tidak pernah meninggalkan perangkat, tidak perlu akun, dan tidak ada telemetri. Satu-satunya yang memakai jaringan adalah satu banner iklan non-personalisasi, dan banner itu tidak pernah dimuat saat konversi berjalan — lihat layar Jaringan & privasi untuk audit lengkapnya.\n\nPenghapusan metadata aktif secara default, jadi EXIF, koordinat GPS, dan stempel waktu dibuang dari file yang kamu ekspor.';
+      'Eluna Media mengonversi file sepenuhnya di perangkat ini menggunakan FFmpeg bawaan. File tidak pernah meninggalkan perangkat, tidak perlu akun, dan tidak ada telemetri. Tidak ada bagian aplikasi yang memakai jaringan — izin internet pun tidak diminta.\n\nPenghapusan metadata aktif secara default, jadi EXIF, koordinat GPS, dan stempel waktu dibuang dari file yang kamu ekspor.';
 
   @override
   String get licenseTitle => 'Lisensi';
@@ -354,8 +354,8 @@ class L10nId extends L10n {
       'EXIF, GPS, dan stempel waktu dihapus dari setiap output secara default. Kamu bisa mematikannya.';
 
   @override
-  String get introAdNote =>
-      'Versi gratis menampilkan satu banner non-personalisasi — tidak pernah saat konversi, dan tidak sama sekali selama 14 hari pertama.';
+  String get introFreeNote =>
+      'Gratis: tanpa iklan, tanpa langganan, tanpa pembelian dalam aplikasi. Semua fitur, termasuk konversi massal, sudah termasuk.';
 
   @override
   String get introContinue => 'Mulai';
@@ -655,12 +655,6 @@ class L10nId extends L10n {
   String get hapticsLabel => 'Umpan balik getaran';
 
   @override
-  String get adPrivacyTitle => 'Setelan privasi iklan';
-
-  @override
-  String get adPrivacySubtitle => 'Ubah persetujuan Anda untuk iklan';
-
-  @override
   String get networkPrivacyTitle => 'Jaringan & privasi';
 
   @override
@@ -668,11 +662,11 @@ class L10nId extends L10n {
       'Daftar lengkap semua hal di aplikasi ini yang bisa mengakses jaringan.';
 
   @override
-  String get netAuditAdTitle => 'Banner iklan — satu-satunya pengguna jaringan';
+  String get netAuditNoneTitle => 'Tidak ada akses jaringan sama sekali';
 
   @override
-  String get netAuditAdBody =>
-      'Satu banner, hanya permintaan non-personalisasi — izin ID iklan dihapus sepenuhnya dari aplikasi. Banner ini tidak pernah dimuat saat konversi berjalan, dan hilang dengan Hapus iklan. Selain itu, satu-satunya sentuhan jaringan lain adalah dialog milik toko sendiri saat kamu mengetuk Beri nilai aplikasi.';
+  String get netAuditNoneBody =>
+      'Aplikasi tidak meminta izin internet, jadi tidak bisa menjangkau jaringan sekalipun ingin — kamu bisa memeriksanya di info aplikasi pada sistem. Tanpa iklan, tanpa analitik, tanpa pengecekan pembaruan. “Beri rating” menyerahkannya ke aplikasi toko, dan toko itulah yang terhubung.';
 
   @override
   String get netAuditConversionTitle => 'Konversi';
@@ -690,44 +684,6 @@ class L10nId extends L10n {
 
   @override
   String get sectionSupport => 'Dukungan';
-
-  @override
-  String get removeAdsTitle => 'Hapus iklan';
-
-  @override
-  String get removeAdsSubtitle =>
-      'Pembelian sekali bayar. Semua fitur sudah gratis.';
-
-  @override
-  String get removeAdsBullet1 => 'Banner hilang selamanya';
-
-  @override
-  String get removeAdsBullet2 => 'Sekali bayar — tanpa langganan';
-
-  @override
-  String get removeAdsBullet3 => 'Semua fitur tetap gratis untuk semua orang';
-
-  @override
-  String buyFor(String price) {
-    return 'Beli · $price';
-  }
-
-  @override
-  String get restorePurchase => 'Pulihkan pembelian';
-
-  @override
-  String get purchaseSuccess =>
-      'Iklan dihapus. Terima kasih sudah mendukung pengembangan!';
-
-  @override
-  String get purchaseUnavailable =>
-      'Toko sedang tidak tersedia. Coba lagi nanti.';
-
-  @override
-  String get purchaseFailed => 'Pembelian tidak berhasil.';
-
-  @override
-  String get adFreeBadge => 'Bebas iklan';
 
   @override
   String get rateApp => 'Beri nilai aplikasi';

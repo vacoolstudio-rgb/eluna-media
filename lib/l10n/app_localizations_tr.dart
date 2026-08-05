@@ -306,7 +306,7 @@ class L10nTr extends L10n {
 
   @override
   String get privacyBody =>
-      'Eluna Media, dosyalarınızı yerleşik FFmpeg kopyasıyla tamamen bu cihazda dönüştürür. Dosyalarınız cihazdan asla çıkmaz, hesap gerekmez, telemetri yoktur. Ağı kullanan tek şey, kişiselleştirilmemiş tek bir reklam banner\'ıdır ve dönüştürme sürerken asla yüklenmez — tam döküm için Ağ ve gizlilik ekranına bakın.\n\nMeta veri temizleme varsayılan olarak açıktır; dışa aktardığınız dosyalardan EXIF, GPS koordinatları ve zaman damgaları silinir.';
+      'Eluna Media, dosyalarınızı yerleşik FFmpeg kopyasıyla tamamen bu cihazda dönüştürür. Dosyalarınız cihazdan asla çıkmaz, hesap gerekmez, telemetri yoktur. Uygulamada ağı kullanan hiçbir şey yok — internet izni bile istenmiyor.\n\nMeta veri temizleme varsayılan olarak açıktır; dışa aktardığınız dosyalardan EXIF, GPS koordinatları ve zaman damgaları silinir.';
 
   @override
   String get licenseTitle => 'Lisans';
@@ -353,8 +353,8 @@ class L10nTr extends L10n {
       'EXIF, GPS ve zaman damgaları varsayılan olarak her çıktıdan silinir. İsterseniz kapatabilirsiniz.';
 
   @override
-  String get introAdNote =>
-      'Ücretsiz sürüm tek bir kişiselleştirilmemiş banner gösterir — dönüştürme sırasında asla, ilk 14 gün ise hiç göstermez.';
+  String get introFreeNote =>
+      'Ücretsiz: reklam yok, abonelik yok, uygulama içi satın alma yok. Toplu dönüştürme dahil bütün özellikler içinde.';
 
   @override
   String get introContinue => 'Başla';
@@ -653,12 +653,6 @@ class L10nTr extends L10n {
   String get hapticsLabel => 'Titreşimli geri bildirim';
 
   @override
-  String get adPrivacyTitle => 'Reklam gizliliği ayarları';
-
-  @override
-  String get adPrivacySubtitle => 'Reklam onayınızı değiştirin';
-
-  @override
   String get networkPrivacyTitle => 'Ağ ve gizlilik';
 
   @override
@@ -666,11 +660,11 @@ class L10nTr extends L10n {
       'Bu uygulamada ağa dokunabilecek her şeyin tam listesi.';
 
   @override
-  String get netAuditAdTitle => 'Reklam banner\'ı — ağı kullanan tek şey';
+  String get netAuditNoneTitle => 'Hiç ağ erişimi yok';
 
   @override
-  String get netAuditAdBody =>
-      'Tek bir banner, yalnızca kişiselleştirilmemiş istekler — reklam kimliği izni uygulamadan tamamen çıkarılmıştır. Dönüştürme sürerken asla yüklenmez ve Reklamları kaldır ile kaybolur. Bunun dışında ağa dokunan tek şey, Uygulamayı değerlendir\'e dokunduğunuzda açılan mağazanın kendi iletişim kutusudur.';
+  String get netAuditNoneBody =>
+      'Uygulama internet iznini istemiyor; istese bile ağa çıkamaz — sistemdeki uygulama bilgilerinden doğrulayabilirsiniz. Reklam yok, analitik yok, güncelleme denetimi yok. “Uygulamayı değerlendir” sizi mağaza uygulamasına devreder; bağlantıyı o kurar.';
 
   @override
   String get netAuditConversionTitle => 'Dönüştürme';
@@ -688,44 +682,6 @@ class L10nTr extends L10n {
 
   @override
   String get sectionSupport => 'Destek';
-
-  @override
-  String get removeAdsTitle => 'Reklamları kaldır';
-
-  @override
-  String get removeAdsSubtitle =>
-      'Tek seferlik satın alma. Zaten her özellik ücretsiz.';
-
-  @override
-  String get removeAdsBullet1 => 'Banner sonsuza dek kaybolur';
-
-  @override
-  String get removeAdsBullet2 => 'Tek ödeme — abonelik yok';
-
-  @override
-  String get removeAdsBullet3 => 'Tüm özellikler herkes için ücretsiz kalır';
-
-  @override
-  String buyFor(String price) {
-    return 'Satın al · $price';
-  }
-
-  @override
-  String get restorePurchase => 'Satın almayı geri yükle';
-
-  @override
-  String get purchaseSuccess =>
-      'Reklamlar kaldırıldı. Geliştirmeyi desteklediğiniz için teşekkürler!';
-
-  @override
-  String get purchaseUnavailable =>
-      'Mağaza şu anda kullanılamıyor. Daha sonra tekrar deneyin.';
-
-  @override
-  String get purchaseFailed => 'Satın alma tamamlanamadı.';
-
-  @override
-  String get adFreeBadge => 'Reklamsız';
 
   @override
   String get rateApp => 'Uygulamayı değerlendir';

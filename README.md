@@ -2,9 +2,9 @@
 
 Offline photo / video / audio converter for Android and iOS, built with
 Flutter. Every conversion runs on the device through a bundled FFmpeg build;
-files never leave the phone. The only thing in the app that touches the
-network is a single non-personalized ad banner — and it never loads while a
-conversion is running.
+files never leave the phone. Nothing in the app touches the network — the
+release build does not even hold the `INTERNET` permission. Free, with no
+ads, no subscriptions and no in-app purchases.
 
 Product docs: `docs/REQUIREMENTS.md` (что и почему) and
 `docs/IMPLEMENTATION_PLAN.md` (как, по этапам). Both are grounded in a
@@ -103,9 +103,10 @@ competitor/review analysis from July 2026.
   the main thread and buffer it across a cold start, then hand it to the same
   method channel. (The iOS *share sheet* would additionally need a share
   extension target — that is the one piece still missing.)
-- First-run **privacy intro** (three promises, one honest sentence about the
-  banner) and a **Network & privacy audit screen** in Settings listing every
-  network channel — for this app, exactly one.
+- First-run **privacy intro** (three promises, one line on what the app costs)
+  and a **Network & privacy audit screen** in Settings listing every network
+  channel — for this app, none at all, which the system's own permission list
+  will confirm.
 - **Power mode** (Settings): Cool & fast / Balanced / Max compression — maps
   1:1 onto the x264/x265 `-preset` flag (`ultrafast`/`veryfast`/`medium`).
   Nothing else is throttled, ever. A low-battery confirmation dialog appears
@@ -138,20 +139,18 @@ competitor/review analysis from July 2026.
 - Release builds render a calm bilingual fallback instead of the grey error
   rectangle; errors are logged locally only.
 
-### Monetization (test mode)
-- **One anchored adaptive AdMob banner.** Google's published *test* ids are
-  wired in (`AndroidManifest.xml`, `Info.plist`, `lib/services/ads/ad_config.dart`);
-  swap them for real ones at release. Requests are
-  `nonPersonalizedAds: true`, so no consent wall is needed.
-- The banner is gated by pure logic (`ad_gate.dart`, host-tested): hidden for
-  Pro, hidden for the first **14 days** after install, hidden while the queue
-  runs, collapsed (zero height) when a load fails, refreshed at most every
-  2 minutes and only on foreground. The SDK is not even initialized until the
-  first allowed load.
-- **"Remove ads"** is a one-time purchase behind `PurchaseService` — currently
-  a stub that succeeds in debug builds; wire `in_app_purchase` at release by
-  swapping one provider. No subscriptions, no feature paywalls, no watermarks,
-  batch is free: family principles, non-negotiable.
+### Monetization
+There is none, by decision. No ads, no subscriptions, no in-app purchases, no
+feature paywalls, no watermarks; batch conversion is free like everything else.
+
+The app shipped an AdMob banner and a one-time "remove ads" purchase through
+v0.4.0. Both were removed outright: the banner was the last thing in the
+process that needed the network *and* the last closed-source binary sitting
+next to GPL code (see `NOTICE.md`). What is left is an app that cannot phone
+home even if it wanted to — `android/app/src/release/AndroidManifest.xml`
+strips the `INTERNET` permission with `tools:node="remove"`, so a dependency
+cannot merge it back in unnoticed. Debug and profile builds keep it; the
+Flutter tool needs it for hot reload.
 
 ## Architecture
 
@@ -167,17 +166,15 @@ lib/
               output_paths.dart      collision-free output naming
               queue_storage.dart
   state/      settings_controller.dart   conversion profile + app prefs
-              app_meta_controller.dart   install date, successes, pro, intro
+              app_meta_controller.dart   install date, successes, intro
               queue_controller.dart      serial batch runner
-  services/   ads/                   ad_config, ad_gate (pure), banner_slot
-              purchases/             PurchaseService interface + stub
-              review_service.dart    milestone logic (pure) + native prompt
+  services/   review_service.dart    milestone logic (pure) + native prompt
               media_saver.dart       gallery/Downloads export
               share_intake.dart      inbound share channel
               haptics.dart           foreground_service.dart  notification_service.dart
   ui/         convert_tab (simple/advanced), queue_tab, settings_tab,
               home_shell, privacy_intro_screen, network_privacy_screen,
-              remove_ads_sheet, error_screen, theme
+              error_screen, theme
   l10n/       app_en.arb, app_ru.arb
 ```
 
@@ -202,10 +199,6 @@ the *encoded* duration (trim and speed change it), hands 93% of it to the
 encoders, and refuses targets below 100 kbps of video — a refusal shown in
 the UI up front rather than a smeared output delivered late.
 
-**Ads are governed by one pure function.** `shouldShowBanner` is the single
-authority; the widget only renders what the gate allows. The gate's rules are
-unit-tested next to the review-prompt rules in `monetization_rules_test.dart`.
-
 **Progress is throttled at the source, and cards repaint alone.** FFmpeg
 reports statistics several times a second; `FFmpegConverter` publishes only a
 ≥1% move (or a half-second of silence), and the queue list watches an id list
@@ -223,7 +216,7 @@ container matrix, output paths, foreground service, queue storage/restore,
 auto-resume, 320dp layouts in both locales) plus the fit-to-size maths, the
 new argument features (target size, transforms, crop, volume, atempo
 chaining, hardware-encoder branch selection, subtitles, JSON migration),
-preset legality against `ContainerRules`, the ad gate, the review milestone
+preset legality against `ContainerRules`, the review milestone
 rules, the achievements catalogue (thresholds, platinum), concat-graph
 construction, the merge job model, and both two-pass argument sets.
 
@@ -239,9 +232,9 @@ all. Host tests could not have found that.
 
 Manual checks worth repeating on device: share a video from the gallery into
 the app (cold and warm), convert with a 10 MB target and verify the output is
-under 10 MB, save a video to the gallery and an MP3 to Downloads, and watch
-the banner disappear the moment a batch starts (test ids show Google's sample
-banner).
+under 10 MB, save a video to the gallery and an MP3 to Downloads, and open the
+system app info to confirm the release build lists no permissions beyond
+notifications, the foreground service and legacy storage — no internet.
 
 ## Building
 
@@ -254,40 +247,25 @@ flutter build apk --release --split-per-abi
 Requirements: Android `minSdk` 24, NDK 27, core library desugaring; iOS
 deployment target 14.0.
 
-**Before a store release** (deliberately not done in test mode):
-1. Replace the AdMob application ids in `AndroidManifest.xml` / `Info.plist`
-   and the banner unit ids in `lib/services/ads/ad_config.dart`.
-2. Swap `StubPurchaseService` for an `in_app_purchase` implementation and
-   register the one-time "remove ads" product in both stores.
-3. Add release signing.
+**Before a store release**: add release signing. That is the whole list —
+there are no ad ids to swap and no billing to wire, because there is neither.
 
 ## Licensing
 
-Full text in `LICENSE`; the component table and the open question below are in
-`NOTICE.md`.
+Full text in `LICENSE`; the component table is in `NOTICE.md`.
 
 `ffmpeg_kit_flutter_new` bundles the **full-gpl** FFmpeg build (x264, x265),
 so the application as a whole is **GPL v3**: shipping it means publishing its
 source. This trade-off is forced by H.264/H.265 encoding being the core
-feature. All other dependencies are free, open-source, and paid-license-free
-(a family principle — hence no RevenueCat; billing goes through the free
-`in_app_purchase` when wired).
+feature. Every other dependency is free, open-source and paid-license-free.
 
-**Open decision before release — GPL vs. the ads SDK.** The `google_mobile_ads`
-*plugin* is Apache-2.0, but it links Google's closed-source Mobile Ads SDK
-into the same process as GPL code (x264/x265), which GPL v3 does not permit
-for distribution, and nobody can grant an exception on x264's behalf. The
-audited options: ship the store build as-is and accept the (industry-common)
-compliance risk; or publish an **ad-free FOSS flavor** (F-Droid) where GPL is
-clean and keep the banner only in the store flavor — the practical middle
-ground; or drop ads entirely. This is the owner's call at release time; the
-code isolates ads behind `services/ads/` either way, so a no-ads flavor is a
-one-provider change.
+The one real GPL conflict was the Google Mobile Ads SDK — a closed-source
+binary linked into the same process as x264/x265, which GPL v3 does not permit
+distributing. It is gone (see "Monetization"), so the licence position is now
+plain: GPL v3 in, GPL v3 out, F-Droid included, nothing to argue.
 
 ## Not in this build
 
-- **Real ad unit ids and real billing** — test ids and a stub on purpose; see
-  "Before a store release".
 - **The iOS share sheet** as a *destination* ("Share → Eluna Media" from
   Photos). It needs a share-extension target, which cannot be added or built
   on a Windows host. iOS "Open with" works (document types + AppDelegate), and

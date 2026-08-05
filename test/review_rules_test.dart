@@ -1,60 +1,10 @@
 import 'package:eluna_media/domain/conversion_settings.dart';
 import 'package:eluna_media/domain/media_format.dart';
 import 'package:eluna_media/domain/quick_presets.dart';
-import 'package:eluna_media/services/ads/ad_gate.dart';
 import 'package:eluna_media/services/review_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('shouldShowBanner', () {
-    final installed = DateTime(2026, 1, 1);
-
-    test('grace period: silent for 14 days, live on day 15', () {
-      expect(
-        shouldShowBanner(
-          isPro: false,
-          firstLaunchAt: installed,
-          now: installed.add(const Duration(days: 13)),
-          isQueueRunning: false,
-        ),
-        isFalse,
-      );
-      expect(
-        shouldShowBanner(
-          isPro: false,
-          firstLaunchAt: installed,
-          now: installed.add(const Duration(days: 15)),
-          isQueueRunning: false,
-        ),
-        isTrue,
-      );
-    });
-
-    test('never for Pro users', () {
-      expect(
-        shouldShowBanner(
-          isPro: true,
-          firstLaunchAt: installed,
-          now: installed.add(const Duration(days: 365)),
-          isQueueRunning: false,
-        ),
-        isFalse,
-      );
-    });
-
-    test('never while a batch is converting', () {
-      expect(
-        shouldShowBanner(
-          isPro: false,
-          firstLaunchAt: installed,
-          now: installed.add(const Duration(days: 365)),
-          isQueueRunning: true,
-        ),
-        isFalse,
-      );
-    });
-  });
-
   group('shouldPromptReview', () {
     final installed = DateTime(2026, 1, 1);
     final day8 = installed.add(const Duration(days: 8));

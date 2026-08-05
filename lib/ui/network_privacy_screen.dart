@@ -6,8 +6,9 @@ import 'widgets/ambient_background.dart';
 import 'widgets/section_card.dart';
 
 /// The full network audit, as a designed trust feature: every channel that
-/// can touch the network, stated as fact. For this app the list has exactly
-/// one entry — the ad banner — and two prominent "nothing here" sections.
+/// can touch the network, stated as fact. For this app the list is empty —
+/// the app does not even hold the INTERNET permission — so the screen is
+/// three "nothing here" sections, and each one is literally checkable.
 class NetworkPrivacyScreen extends StatelessWidget {
   const NetworkPrivacyScreen({super.key});
 
@@ -27,10 +28,10 @@ class NetworkPrivacyScreen extends StatelessWidget {
               Text(l10n.netAuditIntro, style: theme.textTheme.bodyMedium),
               const SizedBox(height: 16),
               SectionCard(
-                title: l10n.netAuditAdTitle,
-                icon: Icons.ad_units_outlined,
-                accent: AppTheme.warning,
-                children: [Text(l10n.netAuditAdBody, style: theme.textTheme.bodyMedium)],
+                title: l10n.netAuditNoneTitle,
+                icon: Icons.wifi_off_outlined,
+                accent: Accents.privacy,
+                children: [Text(l10n.netAuditNoneBody, style: theme.textTheme.bodyMedium)],
               ),
               const SizedBox(height: 12),
               SectionCard(

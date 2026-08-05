@@ -630,7 +630,7 @@ abstract class L10n {
   /// No description provided for @privacyBody.
   ///
   /// In en, this message translates to:
-  /// **'Eluna Media converts your files entirely on this device using a bundled copy of FFmpeg. Your files never leave the device, no account is required, and there is no telemetry. The only thing that uses the network is a single non-personalized ad banner, and it never loads while a conversion is running — see the Network & privacy screen for the full audit.\n\nMetadata removal is on by default, so EXIF, GPS coordinates and timestamps are dropped from the files you export.'**
+  /// **'Eluna Media converts your files entirely on this device using a bundled copy of FFmpeg. Your files never leave the device, no account is required, and there is no telemetry. Nothing in the app uses the network at all — it does not even hold the internet permission.\n\nMetadata removal is on by default, so EXIF, GPS coordinates and timestamps are dropped from the files you export.'**
   String get privacyBody;
 
   /// No description provided for @licenseTitle.
@@ -711,11 +711,11 @@ abstract class L10n {
   /// **'EXIF, GPS and timestamps are stripped from every output by default. You can turn that off.'**
   String get introMetadataBody;
 
-  /// No description provided for @introAdNote.
+  /// No description provided for @introFreeNote.
   ///
   /// In en, this message translates to:
-  /// **'The free version shows a single non-personalized banner — never while converting, and not at all for your first 14 days.'**
-  String get introAdNote;
+  /// **'Free, with no ads, no subscriptions and no in-app purchases. Every feature, batch conversion included, is yours.'**
+  String get introFreeNote;
 
   /// No description provided for @introContinue.
   ///
@@ -1221,18 +1221,6 @@ abstract class L10n {
   /// **'Vibration feedback'**
   String get hapticsLabel;
 
-  /// No description provided for @adPrivacyTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Ad privacy settings'**
-  String get adPrivacyTitle;
-
-  /// No description provided for @adPrivacySubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Change your consent for advertising'**
-  String get adPrivacySubtitle;
-
   /// No description provided for @networkPrivacyTitle.
   ///
   /// In en, this message translates to:
@@ -1245,17 +1233,17 @@ abstract class L10n {
   /// **'A complete list of everything in this app that can touch the network.'**
   String get netAuditIntro;
 
-  /// No description provided for @netAuditAdTitle.
+  /// No description provided for @netAuditNoneTitle.
   ///
   /// In en, this message translates to:
-  /// **'The ad banner — the only network user'**
-  String get netAuditAdTitle;
+  /// **'No network access at all'**
+  String get netAuditNoneTitle;
 
-  /// No description provided for @netAuditAdBody.
+  /// No description provided for @netAuditNoneBody.
   ///
   /// In en, this message translates to:
-  /// **'One banner, non-personalized requests only — the advertising-ID permission is stripped from the app entirely. It never loads while a conversion is running, and it disappears with Remove ads. Beyond it, the only other network touch is the store\'s own dialog when you tap “Rate the app”.'**
-  String get netAuditAdBody;
+  /// **'The app does not request the internet permission, so it cannot reach the network even if it tried — you can verify that in the system app info. No ads, no analytics, no update checks. “Rate the app” hands over to the store app, which does its own talking.'**
+  String get netAuditNoneBody;
 
   /// No description provided for @netAuditConversionTitle.
   ///
@@ -1286,72 +1274,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Support'**
   String get sectionSupport;
-
-  /// No description provided for @removeAdsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Remove ads'**
-  String get removeAdsTitle;
-
-  /// No description provided for @removeAdsSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'One-time purchase. Every feature is already free.'**
-  String get removeAdsSubtitle;
-
-  /// No description provided for @removeAdsBullet1.
-  ///
-  /// In en, this message translates to:
-  /// **'The banner disappears forever'**
-  String get removeAdsBullet1;
-
-  /// No description provided for @removeAdsBullet2.
-  ///
-  /// In en, this message translates to:
-  /// **'One payment — no subscription'**
-  String get removeAdsBullet2;
-
-  /// No description provided for @removeAdsBullet3.
-  ///
-  /// In en, this message translates to:
-  /// **'All features stay free for everyone'**
-  String get removeAdsBullet3;
-
-  /// No description provided for @buyFor.
-  ///
-  /// In en, this message translates to:
-  /// **'Buy · {price}'**
-  String buyFor(String price);
-
-  /// No description provided for @restorePurchase.
-  ///
-  /// In en, this message translates to:
-  /// **'Restore purchase'**
-  String get restorePurchase;
-
-  /// No description provided for @purchaseSuccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Ads removed. Thank you for supporting development!'**
-  String get purchaseSuccess;
-
-  /// No description provided for @purchaseUnavailable.
-  ///
-  /// In en, this message translates to:
-  /// **'The store is not available right now. Try again later.'**
-  String get purchaseUnavailable;
-
-  /// No description provided for @purchaseFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'The purchase did not go through.'**
-  String get purchaseFailed;
-
-  /// No description provided for @adFreeBadge.
-  ///
-  /// In en, this message translates to:
-  /// **'Ad-free'**
-  String get adFreeBadge;
 
   /// No description provided for @rateApp.
   ///

@@ -7,8 +7,8 @@ import 'theme.dart';
 import 'widgets/gradient_button.dart';
 import 'widgets/section_card.dart';
 
-/// The first-run gate: three promises and one honest sentence about the
-/// banner. Shown exactly once; acknowledging it stamps `hasSeenIntro`.
+/// The first-run gate: three promises and one line on what the app costs
+/// (nothing). Shown exactly once; acknowledging it stamps `hasSeenIntro`.
 /// Trust is this app's differentiator, so it leads with it.
 class PrivacyIntroScreen extends ConsumerWidget {
   const PrivacyIntroScreen({super.key});
@@ -76,7 +76,7 @@ class PrivacyIntroScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 18),
                     Text(
-                      l10n.introAdNote,
+                      l10n.introFreeNote,
                       textAlign: TextAlign.center,
                       style: theme.textTheme.bodySmall,
                     ),

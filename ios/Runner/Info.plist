@@ -87,10 +87,6 @@
 			</array>
 		</dict>
 	</array>
-	<!-- Google's published TEST application id; swap for the real one before a
-	     store release. The single banner requests non-personalized ads only. -->
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Saves converted photos and videos to your photo library when you tap Save.</string>
 	<!-- Saving into the named "Eluna Media" album needs read access to find or

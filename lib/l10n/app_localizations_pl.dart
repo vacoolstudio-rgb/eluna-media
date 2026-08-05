@@ -307,7 +307,7 @@ class L10nPl extends L10n {
 
   @override
   String get privacyBody =>
-      'Eluna Media konwertuje pliki w całości na tym urządzeniu, korzystając z wbudowanej kopii FFmpeg. Pliki nigdy nie opuszczają urządzenia, konto nie jest potrzebne, a telemetrii nie ma. Jedyną rzeczą korzystającą z sieci jest pojedynczy niespersonalizowany baner reklamowy — nigdy nie ładuje się podczas konwersji; pełny audyt znajdziesz na ekranie „Sieć i prywatność”.\n\nUsuwanie metadanych jest domyślnie włączone, więc EXIF, współrzędne GPS i znaczniki czasu nie trafiają do eksportowanych plików.';
+      'Eluna Media konwertuje pliki w całości na tym urządzeniu, korzystając z wbudowanej kopii FFmpeg. Pliki nigdy nie opuszczają urządzenia, konto nie jest potrzebne, a telemetrii nie ma. Nic w aplikacji nie korzysta z sieci — nie ma ona nawet uprawnienia do internetu.\n\nUsuwanie metadanych jest domyślnie włączone, więc EXIF, współrzędne GPS i znaczniki czasu nie trafiają do eksportowanych plików.';
 
   @override
   String get licenseTitle => 'Licencja';
@@ -354,8 +354,8 @@ class L10nPl extends L10n {
       'EXIF, GPS i znaczniki czasu są domyślnie usuwane z każdego wyniku. Można to wyłączyć.';
 
   @override
-  String get introAdNote =>
-      'Wersja bezpłatna pokazuje jeden niespersonalizowany baner — nigdy podczas konwersji, a przez pierwsze 14 dni wcale.';
+  String get introFreeNote =>
+      'Bezpłatnie: bez reklam, bez subskrypcji i bez zakupów w aplikacji. Wszystkie funkcje, łącznie z konwersją wsadową, są w komplecie.';
 
   @override
   String get introContinue => 'Zaczynamy';
@@ -659,12 +659,6 @@ class L10nPl extends L10n {
   String get hapticsLabel => 'Wibracje';
 
   @override
-  String get adPrivacyTitle => 'Ustawienia prywatności reklam';
-
-  @override
-  String get adPrivacySubtitle => 'Zmień zgodę na reklamy';
-
-  @override
   String get networkPrivacyTitle => 'Sieć i prywatność';
 
   @override
@@ -672,11 +666,11 @@ class L10nPl extends L10n {
       'Pełna lista wszystkiego w tej aplikacji, co może korzystać z sieci.';
 
   @override
-  String get netAuditAdTitle => 'Baner reklamowy — jedyny użytkownik sieci';
+  String get netAuditNoneTitle => 'Zero dostępu do sieci';
 
   @override
-  String get netAuditAdBody =>
-      'Jeden baner, wyłącznie niespersonalizowane żądania — uprawnienie do identyfikatora reklamowego jest całkowicie usunięte z aplikacji. Nigdy nie ładuje się podczas konwersji i znika po opcji „Usuń reklamy”. Poza nim jedynym innym kontaktem z siecią jest okno dialogowe samego sklepu, gdy dotkniesz „Oceń aplikację”.';
+  String get netAuditNoneBody =>
+      'Aplikacja nie prosi o uprawnienie do internetu, więc nie wyjdzie do sieci, nawet gdyby chciała — sprawdzisz to w systemowych informacjach o aplikacji. Bez reklam, bez analityki, bez sprawdzania aktualizacji. „Oceń aplikację” przekazuje sprawę sklepowi, to on się łączy.';
 
   @override
   String get netAuditConversionTitle => 'Konwersja';
@@ -694,45 +688,6 @@ class L10nPl extends L10n {
 
   @override
   String get sectionSupport => 'Wsparcie';
-
-  @override
-  String get removeAdsTitle => 'Usuń reklamy';
-
-  @override
-  String get removeAdsSubtitle =>
-      'Jednorazowy zakup. Wszystkie funkcje i tak są darmowe.';
-
-  @override
-  String get removeAdsBullet1 => 'Baner znika na zawsze';
-
-  @override
-  String get removeAdsBullet2 => 'Jedna płatność — bez subskrypcji';
-
-  @override
-  String get removeAdsBullet3 =>
-      'Wszystkie funkcje pozostają darmowe dla wszystkich';
-
-  @override
-  String buyFor(String price) {
-    return 'Kup · $price';
-  }
-
-  @override
-  String get restorePurchase => 'Przywróć zakup';
-
-  @override
-  String get purchaseSuccess =>
-      'Reklamy usunięte. Dziękujemy za wsparcie rozwoju!';
-
-  @override
-  String get purchaseUnavailable =>
-      'Sklep jest teraz niedostępny. Spróbuj później.';
-
-  @override
-  String get purchaseFailed => 'Zakup nie powiódł się.';
-
-  @override
-  String get adFreeBadge => 'Bez reklam';
 
   @override
   String get rateApp => 'Oceń aplikację';
