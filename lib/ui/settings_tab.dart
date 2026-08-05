@@ -1,5 +1,7 @@
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../core/app_version.dart';
@@ -13,8 +15,47 @@ import '../state/settings_controller.dart';
 import '../state/storage_controller.dart';
 import 'achievements_screen.dart';
 import 'network_privacy_screen.dart';
-import 'theme.dart';
 import 'widgets/section_card.dart';
+
+/// Один блок настроек: общая карточка пакета плюс её же шапка.
+///
+/// Собран здесь один раз, потому что на этом экране шесть одинаковых по форме
+/// секций, и шесть развёрнутых копий композиции читались бы как шум.
+class _Section extends StatelessWidget {
+  const _Section({
+    required this.icon,
+    required this.accent,
+    required this.title,
+    required this.children,
+  });
+
+  final HugeIconData icon;
+  final Color accent;
+  final String title;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return SectionCard(
+      accent: accent,
+      // Поля даёт сам список экрана, у карточки они обнулены.
+      margin: EdgeInsets.zero,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SectionHeader(icon: icon, accent: accent, title: title),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: children,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class SettingsTab extends ConsumerWidget {
   const SettingsTab({super.key});
@@ -32,10 +73,10 @@ class SettingsTab extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-          SectionCard(
+          _Section(
             title: l10n.appearance,
-            icon: Icons.palette_outlined,
-            accent: Accents.support,
+            icon: HugeIcons.strokeRoundedPaintBoard,
+            accent: SectionAccents.purple,
             children: [
               LabelledDropdown<ThemeMode>(
                 label: l10n.theme,
@@ -77,10 +118,10 @@ class SettingsTab extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 16),
-          SectionCard(
+          _Section(
             title: l10n.sectionConversionPrefs,
-            icon: Icons.speed_rounded,
-            accent: Accents.video,
+            icon: HugeIcons.strokeRoundedDashboardSpeed01,
+            accent: SectionAccents.violet,
             children: [
               // The mode also lives on the Convert tab, where it is used; it
               // is here too because that is where people look for it.
@@ -135,10 +176,10 @@ class SettingsTab extends ConsumerWidget {
           const SizedBox(height: 16),
           const _StorageSection(),
           const SizedBox(height: 16),
-          SectionCard(
+          _Section(
             title: l10n.privacyTitle,
-            icon: Icons.shield_outlined,
-            accent: Accents.privacy,
+            icon: HugeIcons.strokeRoundedShield01,
+            accent: SectionAccents.green,
             children: [
               // The same switch as on the Convert tab, bound to the same
               // setting — this is the screen people go to when they want to
@@ -165,10 +206,10 @@ class SettingsTab extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 16),
-          SectionCard(
+          _Section(
             title: l10n.sectionSupport,
-            icon: Icons.favorite_outline_rounded,
-            accent: Accents.support,
+            icon: HugeIcons.strokeRoundedFavourite,
+            accent: SectionAccents.purple,
             children: [
               ListTile(
                 contentPadding: EdgeInsets.zero,
@@ -215,10 +256,12 @@ class SettingsTab extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 16),
-          SectionCard(
+          _Section(
             title: l10n.licenseTitle,
-            icon: Icons.gavel_rounded,
-            accent: Accents.output,
+            // Молотка судьи в hugeicons нет; «правовой документ» ближе к тому,
+            // что кнопка открывает, чем весы правосудия.
+            icon: HugeIcons.strokeRoundedLegalDocument01,
+            accent: SectionAccents.teal,
             children: [
               Text(l10n.licenseBody, style: theme.textTheme.bodyMedium),
               const SizedBox(height: 12),
@@ -292,10 +335,10 @@ class _StorageSection extends ConsumerWidget {
     final value = usage.value;
     final isEmpty = value == null || value.files == 0;
 
-    return SectionCard(
+    return _Section(
       title: l10n.storageTitle,
-      icon: Icons.folder_outlined,
-      accent: Accents.output,
+      icon: HugeIcons.strokeRoundedFolder01,
+      accent: SectionAccents.teal,
       children: [
         SwitchListTile(
           contentPadding: EdgeInsets.zero,

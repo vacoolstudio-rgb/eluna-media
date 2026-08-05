@@ -1,9 +1,8 @@
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../l10n/app_localizations.dart';
-import 'theme.dart';
-import 'widgets/ambient_background.dart';
-import 'widgets/section_card.dart';
 
 /// The full network audit, as a designed trust feature: every channel that
 /// can touch the network, stated as fact. For this app the list is empty —
@@ -27,33 +26,62 @@ class NetworkPrivacyScreen extends StatelessWidget {
             children: [
               Text(l10n.netAuditIntro, style: theme.textTheme.bodyMedium),
               const SizedBox(height: 16),
-              SectionCard(
+              _AuditSection(
+                icon: HugeIcons.strokeRoundedWifiDisconnected01,
                 title: l10n.netAuditNoneTitle,
-                icon: Icons.wifi_off_outlined,
-                accent: Accents.privacy,
-                children: [Text(l10n.netAuditNoneBody, style: theme.textTheme.bodyMedium)],
+                body: l10n.netAuditNoneBody,
               ),
               const SizedBox(height: 12),
-              SectionCard(
+              _AuditSection(
+                icon: HugeIcons.strokeRoundedCloudOff,
                 title: l10n.netAuditConversionTitle,
-                icon: Icons.cloud_off,
-                accent: Accents.privacy,
-                children: [
-                  Text(l10n.netAuditConversionBody, style: theme.textTheme.bodyMedium),
-                ],
+                body: l10n.netAuditConversionBody,
               ),
               const SizedBox(height: 12),
-              SectionCard(
+              _AuditSection(
+                icon: HugeIcons.strokeRoundedViewOffSlash,
                 title: l10n.netAuditTelemetryTitle,
-                icon: Icons.visibility_off_outlined,
-                accent: Accents.privacy,
-                children: [
-                  Text(l10n.netAuditTelemetryBody, style: theme.textTheme.bodyMedium),
-                ],
+                body: l10n.netAuditTelemetryBody,
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Одна строка аудита: заголовок канала и абзац о том, почему он молчит.
+///
+/// Три секции этого экрана отличаются только словами, поэтому композиция
+/// общих SectionCard + SectionHeader собрана здесь один раз, а не трижды.
+class _AuditSection extends StatelessWidget {
+  const _AuditSection({
+    required this.icon,
+    required this.title,
+    required this.body,
+  });
+
+  final HugeIconData icon;
+  final String title;
+  final String body;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SectionCard(
+      accent: SectionAccents.green,
+      // Отступы уже даёт ListView экрана, поэтому поле карточки обнулено.
+      margin: EdgeInsets.zero,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SectionHeader(icon: icon, accent: SectionAccents.green, title: title),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+            child: Text(body, style: theme.textTheme.bodyMedium),
+          ),
+        ],
       ),
     );
   }

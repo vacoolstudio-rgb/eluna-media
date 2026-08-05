@@ -1,13 +1,12 @@
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
 import '../state/achievements_controller.dart';
 import 'theme.dart';
-import 'widgets/ambient_background.dart';
-import 'widgets/pressable.dart';
-import 'widgets/section_card.dart';
 
 (String, String) achievementTexts(L10n l10n, Achievement a) => switch (a) {
       Achievement.firstConversion => (l10n.achFirstConversionTitle, l10n.achFirstConversionBody),
@@ -32,9 +31,9 @@ import 'widgets/section_card.dart';
       Achievement.platinum => (l10n.achPlatinumTitle, l10n.achPlatinumBody),
     };
 
-IconData _tierIcon(Achievement a) => switch (a) {
-      Achievement.platinum => Icons.workspace_premium_rounded,
-      _ => Icons.emoji_events_rounded,
+HugeIconData _tierIcon(Achievement a) => switch (a) {
+      Achievement.platinum => HugeIcons.strokeRoundedMedal01,
+      _ => HugeIcons.strokeRoundedChampion,
     };
 
 Color _tierColor(AchievementTier tier) => switch (tier) {
@@ -64,25 +63,43 @@ class AchievementsScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             children: [
               SectionCard(
-                title: l10n.achievementsProgress(done, total),
-                icon: Icons.emoji_events_rounded,
+                // Золото трофея — не из палитры секций: у этой карточки цвет
+                // значит «золотая ступень», а не «такой-то блок настроек».
                 accent: const Color(0xFFD4A017),
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: TweenAnimationBuilder<double>(
-                      tween: Tween(begin: 0, end: total == 0 ? 0 : done / total),
-                      duration: const Duration(milliseconds: 700),
-                      curve: Curves.easeOutCubic,
-                      builder: (context, value, _) => LinearProgressIndicator(
-                        value: value,
-                        minHeight: 10,
+                margin: EdgeInsets.zero,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SectionHeader(
+                      icon: HugeIcons.strokeRoundedChampion,
+                      accent: const Color(0xFFD4A017),
+                      title: l10n.achievementsProgress(done, total),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: TweenAnimationBuilder<double>(
+                              tween: Tween(begin: 0, end: total == 0 ? 0 : done / total),
+                              duration: const Duration(milliseconds: 700),
+                              curve: Curves.easeOutCubic,
+                              builder: (context, value, _) => LinearProgressIndicator(
+                                value: value,
+                                minHeight: 10,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(l10n.achievementsPrivacyNote,
+                              style: theme.textTheme.bodySmall),
+                        ],
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(l10n.achievementsPrivacyNote, style: theme.textTheme.bodySmall),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(height: 16),
               for (final a in Achievement.values)

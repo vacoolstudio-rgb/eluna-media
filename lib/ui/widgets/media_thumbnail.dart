@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/thumbnails.dart';
-import 'section_card.dart';
 
 /// A file's own first frame, in the same rounded square the type icon used to
 /// occupy.
@@ -26,7 +26,10 @@ class MediaThumbnail extends ConsumerWidget {
 
   final String path;
   final int bytes;
-  final IconData icon;
+
+  /// Иконка из hugeicons, а не Material: запасной квадрат рисует общий
+  /// SectionIcon, а он принимает только HugeIconData.
+  final HugeIconData icon;
   final Color accent;
   final double size;
 

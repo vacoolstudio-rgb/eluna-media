@@ -1,3 +1,4 @@
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +9,6 @@ import '../state/settings_controller.dart';
 import 'home_shell.dart';
 import 'privacy_intro_screen.dart';
 import 'theme.dart';
-import 'widgets/ambient_background.dart';
 
 class ElunaApp extends ConsumerWidget {
   const ElunaApp({super.key});
@@ -31,7 +31,16 @@ class ElunaApp extends ConsumerWidget {
           ),
           themeMode: prefs.themeMode,
           locale: prefs.locale,
-          localizationsDelegates: L10n.localizationsDelegates,
+          localizationsDelegates: [
+            ...L10n.localizationsDelegates,
+            // Таблица строк общих компонентов — РЯДОМ с таблицей приложения, а
+            // не вместо неё. Без этой строки любой экран из пакета падает на
+            // первом же обращении к ElunaL10n, и падает только в рантайме.
+            ElunaL10n.delegate,
+            // Последними: они отвечают «да» на любой язык и отдают английские
+            // строки Material/Cupertino там, где перевода нет вовсе.
+            ...kFallbackLocalizationsDelegates,
+          ],
           supportedLocales: L10n.supportedLocales,
           // Every screen sits on the ambient canvas, and the chrome is capped
           // at a 1.25 text scale so a huge system font cannot shred the

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -9,7 +10,6 @@ import '../core/app_version.dart';
 import '../l10n/app_localizations.dart';
 import '../state/app_meta_controller.dart';
 import 'theme.dart';
-import 'widgets/pressable.dart';
 
 /// Where a low rating goes instead of the store.
 const _feedbackEmail = 'support@eluna.app';

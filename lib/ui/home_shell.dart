@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -175,7 +174,6 @@ class _HomeShellState extends ConsumerState<HomeShell> {
 
     const pages = [ConvertTab(), QueueTab(), SettingsTab()];
 
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final scheme = Theme.of(context).colorScheme;
 
     return LayoutBuilder(
@@ -213,33 +211,20 @@ class _HomeShellState extends ConsumerState<HomeShell> {
           backgroundColor: Colors.transparent,
           body: pages[_index],
           // Frosted glass over the ambient canvas: the content scrolls under
-          // the bar instead of stopping dead at an opaque slab.
-          bottomNavigationBar: ClipRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: isDark
-                      ? const Color(0xFF121620).withValues(alpha: 0.78)
-                      : Colors.white.withValues(alpha: 0.66),
-                  border: Border(
-                    top: BorderSide(
-                      color: isDark ? const Color(0x14FFFFFF) : const Color(0x0D111827),
-                    ),
+          // the bar instead of stopping dead at an opaque slab. Стекло —
+          // общее: те же тона, кромка и радиус размытия во всех трёх
+          // приложениях семьи, поэтому оно живёт в пакете, а не здесь.
+          bottomNavigationBar: FrostedBar(
+            child: NavigationBar(
+              selectedIndex: _index,
+              onDestinationSelected: (i) => setState(() => _index = i),
+              destinations: [
+                for (final d in destinations)
+                  NavigationDestination(
+                    icon: _Badged(count: d.badge, child: Icon(d.icon)),
+                    label: d.label,
                   ),
-                ),
-                child: NavigationBar(
-                  selectedIndex: _index,
-                  onDestinationSelected: (i) => setState(() => _index = i),
-                  destinations: [
-                    for (final d in destinations)
-                      NavigationDestination(
-                        icon: _Badged(count: d.badge, child: Icon(d.icon)),
-                        label: d.label,
-                      ),
-                  ],
-                ),
-              ),
+              ],
             ),
           ),
         );

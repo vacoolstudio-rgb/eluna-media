@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../core/output_paths.dart';
@@ -18,7 +20,6 @@ import 'queue_strings.dart';
 import 'theme.dart';
 import 'widgets/media_thumbnail.dart';
 import 'widgets/progress_ring.dart';
-import 'widgets/section_card.dart';
 import 'widgets/settings_summary.dart';
 
 /// Formats a remaining duration the way a person would say it: "2:05", or
@@ -338,49 +339,61 @@ class _BatchHeader extends ConsumerWidget {
     final eta = running.estimatedRemaining();
 
     return SectionCard(
-      title: l10n.converting,
-      icon: Icons.bolt_rounded,
       accent: AppTheme.primary,
-      children: [
-        Row(
-          children: [
-            ProgressRing(value: queue.overallProgress, size: 62),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.batchSummary(queue.completedCount, queue.jobs.length),
-                    style: theme.textTheme.titleSmall,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    running.inputName,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  if (eta != null) ...[
-                    const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.schedule_rounded,
-                          size: 13,
-                          color: theme.colorScheme.onSurfaceVariant,
+      // Отступы задаёт список очереди, поэтому поле карточки обнулено.
+      margin: EdgeInsets.zero,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SectionHeader(
+            icon: HugeIcons.strokeRoundedFlash,
+            accent: AppTheme.primary,
+            title: l10n.converting,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+            child: Row(
+              children: [
+                ProgressRing(value: queue.overallProgress, size: 62),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.batchSummary(queue.completedCount, queue.jobs.length),
+                        style: theme.textTheme.titleSmall,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        running.inputName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall,
+                      ),
+                      if (eta != null) ...[
+                        const SizedBox(height: 4),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.schedule_rounded,
+                              size: 13,
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(l10n.timeLeft(formatEta(eta)),
+                                style: theme.textTheme.labelSmall),
+                          ],
                         ),
-                        const SizedBox(width: 4),
-                        Text(l10n.timeLeft(formatEta(eta)), style: theme.textTheme.labelSmall),
                       ],
-                    ),
-                  ],
-                ],
-              ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -940,6 +953,9 @@ class _StatusChip extends StatelessWidget {
   }
 }
 
+/// Пустая очередь. Раскладку — значок, заголовок, пояснение — рисует общий
+/// EmptyState; здесь остаётся только прозрачный Scaffold, чтобы сквозь него
+/// был виден фоновый градиент приложения.
 class _EmptyState extends StatelessWidget {
   const _EmptyState({required this.title, required this.body});
 
@@ -948,27 +964,12 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SectionIcon(
-                icon: Icons.inbox_outlined,
-                accent: theme.colorScheme.primary,
-                size: 64,
-              ),
-              const SizedBox(height: 18),
-              Text(title, style: theme.textTheme.titleMedium),
-              const SizedBox(height: 8),
-              Text(body, textAlign: TextAlign.center, style: theme.textTheme.bodySmall),
-            ],
-          ),
-        ),
+      body: EmptyState(
+        icon: HugeIcons.strokeRoundedInbox,
+        title: title,
+        body: body,
       ),
     );
   }

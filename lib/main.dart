@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,6 +28,31 @@ Future<void> main() async {
     FlutterError.onError = (details) {
       FlutterError.presentError(details);
     };
+
+    // Кто это приложение — для всех общих компонентов eluna_shared. Должно
+    // выполниться до того, как построится хоть один общий экран: адрес
+    // поддержки и ссылки на сторы читаются отсюда, и `Eluna.config` бросает
+    // исключение, а не угадывает.
+    //
+    // Пустые списки — не заглушки, а факты: у Media нет ни страницы в сторе,
+    // ни альтернативных значков, ни покупок. Общие экраны прячут то, чего нет,
+    // поэтому врать им нечем.
+    Eluna.configure(const ElunaAppConfig(
+      appName: 'Eluna Media',
+      // Идентификатор вне семейного шаблона `com.eluna.*` — так оно и есть на
+      // устройствах, а переименование создало бы новое приложение.
+      packageId: 'com.lunara.eluna_media',
+      // Не `support@eluna.app`, зашитый в старом экране оценки: у семьи один
+      // адрес, и письма со второго домена не приходили никуда.
+      supportEmail: 'support@eluna-apps.com',
+      websiteUrl: 'https://eluna-apps.com',
+      appIcons: [],
+      tipProductIds: [],
+      // Монохромной ic_notification в drawable нет, а ненайденный ресурс роняет
+      // инициализацию плагина уведомлений — молча, вместе со всеми
+      // уведомлениями сразу.
+      notificationSmallIcon: '@mipmap/ic_launcher',
+    ));
 
     // Loaded up front so the settings notifiers can read it synchronously in
     // their `build()`.

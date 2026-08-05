@@ -370,16 +370,3 @@ abstract final class AppTheme {
     );
   }
 }
-
-/// Per-domain accents. Each media kind owns a hue, so a video card and a photo
-/// card are distinguishable at a glance and the settings sections do not all
-/// read as one grey wall.
-abstract final class Accents {
-  static const video = Color(0xFF7C3AED);
-  static const audio = Color(0xFF2E90FA);
-  static const image = Color(0xFFF59E0B);
-  static const privacy = Color(0xFF22C55E);
-  static const transform = Color(0xFFEC4899);
-  static const output = Color(0xFF14B8A6);
-  static const support = Color(0xFFA855F7);
-}

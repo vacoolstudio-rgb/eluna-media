@@ -16,6 +16,17 @@ dependencies:
   file_picker: ^11.0.2
   path_provider: ^2.1.5
   share_plus: ^12.0.2
+  # Общий код семьи Eluna: тема, дизайн-система, оценка, лицензии, языки,
+  # логирование и краш-файл. Пинится тегом; pubspec.lock фиксирует коммит.
+  # См. docs/CONTRACT.md в самом пакете о границе между ним и приложением.
+  eluna_shared:
+    git:
+      url: https://github.com/vacoolstudio-rgb/eluna-shared.git
+      ref: v0.11.0
+  # Прямая зависимость: дизайн-система пакета (SectionIcon, SectionHeader,
+  # EmptyState) принимает HugeIconData, а не Material IconData — значит имена
+  # иконок называет само приложение. Версия та же, на которой стоит пакет.
+  hugeicons: ^1.1.7
   shared_preferences: ^2.5.3
   flutter_local_notifications: ^20.1.0
   intl: ^0.20.2

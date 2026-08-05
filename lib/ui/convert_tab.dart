@@ -1,7 +1,9 @@
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../core/output_paths.dart';
 import '../core/rate_calc.dart';
@@ -17,9 +19,7 @@ import '../state/selection_controller.dart';
 import '../state/settings_controller.dart';
 import 'queue_strings.dart';
 import 'theme.dart';
-import 'widgets/gradient_button.dart';
 import 'widgets/media_thumbnail.dart';
-import 'widgets/pressable.dart';
 import 'widgets/section_card.dart';
 
 /// [FileType.media] opens the platform's photo/video picker — thumbnails,
@@ -42,17 +42,19 @@ Future<void> pickFilesIntoQueue(WidgetRef ref, {FileType type = FileType.media})
   syncPendingSettings(ref);
 }
 
+/// Каждый вид носителя держит свой оттенок из палитры пакета: раньше те же
+/// цвета назывались по домену (video/audio/image), теперь — по цвету.
 Color accentOfKind(MediaKind kind) => switch (kind) {
-      MediaKind.video => Accents.video,
-      MediaKind.audio => Accents.audio,
-      MediaKind.image => Accents.image,
+      MediaKind.video => SectionAccents.violet,
+      MediaKind.audio => SectionAccents.blue,
+      MediaKind.image => SectionAccents.amber,
     };
 
-IconData iconOfKind(MediaKind? kind) => switch (kind) {
-      MediaKind.video => Icons.movie_outlined,
-      MediaKind.audio => Icons.audiotrack_outlined,
-      MediaKind.image => Icons.image_outlined,
-      null => Icons.insert_drive_file_outlined,
+HugeIconData iconOfKind(MediaKind? kind) => switch (kind) {
+      MediaKind.video => HugeIcons.strokeRoundedVideo01,
+      MediaKind.audio => HugeIcons.strokeRoundedMusicNote01,
+      MediaKind.image => HugeIcons.strokeRoundedImage01,
+      null => HugeIcons.strokeRoundedFile01,
     };
 
 String labelOfKind(L10n l10n, MediaKind? kind) => switch (kind) {
@@ -61,6 +63,54 @@ String labelOfKind(L10n l10n, MediaKind? kind) => switch (kind) {
       MediaKind.image => l10n.sourceImage,
       null => l10n.sourceUnknown,
     };
+
+/// Блок настроек: общая карточка пакета с её же шапкой над содержимым.
+///
+/// На этой вкладке одиннадцать одинаковых по форме секций, поэтому композиция
+/// SectionCard + SectionHeader собрана один раз, а не переписана в каждой.
+class _Section extends StatelessWidget {
+  const _Section({
+    required this.icon,
+    required this.accent,
+    required this.title,
+    required this.children,
+    this.trailing,
+  });
+
+  final HugeIconData icon;
+  final Color accent;
+  final String title;
+  final List<Widget> children;
+  final Widget? trailing;
+
+  @override
+  Widget build(BuildContext context) {
+    return SectionCard(
+      accent: accent,
+      // Промежутки между секциями расставляет сама вкладка, поэтому поле
+      // карточки обнулено — иначе отступ удвоился бы.
+      margin: EdgeInsets.zero,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SectionHeader(
+            icon: icon,
+            accent: accent,
+            title: title,
+            trailing: trailing,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: children,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class ConvertTab extends ConsumerWidget {
   const ConvertTab({super.key});
@@ -161,7 +211,7 @@ class _SourceCard extends ConsumerWidget {
 
     if (pending.isEmpty) return _EmptyPicker(onPick: () => pickFilesIntoQueue(ref));
 
-    return SectionCard(
+    return _Section(
       title: l10n.filesTitle,
       icon: iconOfKind(kind),
       accent: accentOfKind(kind),
@@ -444,19 +494,22 @@ class _Notice extends StatelessWidget {
 // Simple view: outcome-first presets + an explicit format choice
 // -----------------------------------------------------------------------------
 
-IconData _presetIcon(QuickPreset p) => switch (p) {
-      QuickPreset.compressVideo => Icons.compress,
-      QuickPreset.fitToSize => Icons.straighten,
-      QuickPreset.compatibleMp4 => Icons.smart_display_outlined,
-      QuickPreset.extractAudio => Icons.music_note_outlined,
-      QuickPreset.videoToGif => Icons.gif_box_outlined,
-      QuickPreset.mergeVideos => Icons.merge_type,
-      QuickPreset.compressImage => Icons.photo_size_select_small_outlined,
-      QuickPreset.fitPhotoToSize => Icons.straighten,
-      QuickPreset.enhancePhoto => Icons.auto_awesome_outlined,
-      QuickPreset.imageToWebp => Icons.image_outlined,
-      QuickPreset.audioToMp3 => Icons.library_music_outlined,
-      QuickPreset.compressAudio => Icons.graphic_eq,
+/// Иконки пресетов. Сжатие видео и сжатие фото делят «стрелки внутрь»: в
+/// hugeicons нет отдельного «compress», а в один список эти два пресета не
+/// попадают никогда — набор всегда отфильтрован по виду носителя.
+HugeIconData _presetIcon(QuickPreset p) => switch (p) {
+      QuickPreset.compressVideo => HugeIcons.strokeRoundedArrowShrink02,
+      QuickPreset.fitToSize => HugeIcons.strokeRoundedRuler,
+      QuickPreset.compatibleMp4 => HugeIcons.strokeRoundedMp401,
+      QuickPreset.extractAudio => HugeIcons.strokeRoundedMusicNote01,
+      QuickPreset.videoToGif => HugeIcons.strokeRoundedGif01,
+      QuickPreset.mergeVideos => HugeIcons.strokeRoundedCombine,
+      QuickPreset.compressImage => HugeIcons.strokeRoundedArrowShrink02,
+      QuickPreset.fitPhotoToSize => HugeIcons.strokeRoundedRuler,
+      QuickPreset.enhancePhoto => HugeIcons.strokeRoundedSparkles,
+      QuickPreset.imageToWebp => HugeIcons.strokeRoundedImage01,
+      QuickPreset.audioToMp3 => HugeIcons.strokeRoundedMp301,
+      QuickPreset.compressAudio => HugeIcons.strokeRoundedAudioWave01,
     };
 
 (String, String) _presetTexts(L10n l10n, QuickPreset p) => switch (p) {
@@ -540,9 +593,9 @@ class _SimpleView extends ConsumerWidget {
         _FormatSection(kind: kind, preset: preset, accent: accent),
         if (preset.needsSizeTarget) ...[
           const SizedBox(height: 12),
-          SectionCard(
+          _Section(
             title: l10n.sizeTargetTitle,
-            icon: Icons.straighten,
+            icon: HugeIcons.strokeRoundedRuler,
             accent: accent,
             children: preset.expectsKind == MediaKind.image
                 ? [
@@ -595,10 +648,10 @@ class _FormatSection extends ConsumerWidget {
       animatedSource: ref.watch(animatedSourceProvider),
     );
 
-    return SectionCard(
+    return _Section(
       title: l10n.convertTo,
-      icon: Icons.swap_horiz_rounded,
-      accent: Accents.output,
+      icon: HugeIcons.strokeRoundedArrowDataTransferHorizontal,
+      accent: SectionAccents.teal,
       children: [
         Wrap(
           spacing: 8,
@@ -1045,10 +1098,10 @@ class _AdvancedView extends ConsumerWidget {
             const SizedBox(height: 16),
           ],
         ],
-        SectionCard(
+        _Section(
           title: l10n.sectionPrivacy,
-          icon: Icons.shield_outlined,
-          accent: Accents.privacy,
+          icon: HugeIcons.strokeRoundedShield01,
+          accent: SectionAccents.green,
           children: [
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
@@ -1091,10 +1144,10 @@ class _OutputSection extends StatelessWidget {
         ? settings.container
         : ContainerFormat.defaultOutputFor(sourceKind);
 
-    return SectionCard(
+    return _Section(
       title: l10n.sectionOutput,
-      icon: Icons.swap_horiz_rounded,
-      accent: Accents.output,
+      icon: HugeIcons.strokeRoundedArrowDataTransferHorizontal,
+      accent: SectionAccents.teal,
       children: [
         LabelledDropdown<ContainerFormat>(
           label: l10n.outputFormat,
@@ -1129,10 +1182,10 @@ class _VideoSection extends ConsumerWidget {
         settings.container == ContainerFormat.mov ||
         settings.container == ContainerFormat.mkv;
 
-    return SectionCard(
+    return _Section(
       title: l10n.sectionVideo,
-      icon: Icons.movie_outlined,
-      accent: Accents.video,
+      icon: HugeIcons.strokeRoundedVideo01,
+      accent: SectionAccents.violet,
       children: [
         LabelledDropdown<VideoCodec>(
           label: l10n.videoCodec,
@@ -1294,10 +1347,10 @@ class _AudioSection extends StatelessWidget {
     final choices = ContainerRules.audioCodecsFor(settings.container);
     final codec = settings.audioCodec;
 
-    return SectionCard(
+    return _Section(
       title: l10n.sectionAudio,
-      icon: Icons.audiotrack_outlined,
-      accent: Accents.audio,
+      icon: HugeIcons.strokeRoundedMusicNote01,
+      accent: SectionAccents.blue,
       children: [
         LabelledDropdown<AudioCodec>(
           label: l10n.audioCodec,
@@ -1362,10 +1415,10 @@ class _TransformSection extends StatelessWidget {
         settings.videoCodec != VideoCodec.none &&
         settings.audioCodec != AudioCodec.copy;
 
-    return SectionCard(
+    return _Section(
       title: l10n.sectionTransform,
-      icon: Icons.crop_rotate,
-      accent: Accents.transform,
+      icon: HugeIcons.strokeRoundedRotateCrop,
+      accent: SectionAccents.pink,
       children: [
         LabelledDropdown<RotatePreset>(
           label: l10n.rotateLabel,
@@ -1489,10 +1542,10 @@ class _TrimSection extends ConsumerWidget {
     final trim = settings.trim;
     final enabled = available && trim != null;
 
-    return SectionCard(
+    return _Section(
       title: l10n.sectionTrim,
-      icon: Icons.content_cut,
-      accent: Accents.transform,
+      icon: HugeIcons.strokeRoundedScissor01,
+      accent: SectionAccents.pink,
       children: [
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
@@ -1580,10 +1633,10 @@ class _ImageSection extends StatelessWidget {
         (container == ContainerFormat.webp && !settings.lossless);
     final hasLosslessToggle = container == ContainerFormat.webp;
 
-    return SectionCard(
+    return _Section(
       title: l10n.sectionImage,
-      icon: Icons.image_outlined,
-      accent: Accents.image,
+      icon: HugeIcons.strokeRoundedImage01,
+      accent: SectionAccents.amber,
       children: [
         LabelledDropdown<ResolutionPreset>(
           label: l10n.resolution,
@@ -1657,10 +1710,10 @@ class _EnhanceSection extends StatelessWidget {
     final theme = Theme.of(context);
     final downscaling = settings.resolution != ResolutionPreset.keep;
 
-    return SectionCard(
+    return _Section(
       title: l10n.sectionEnhance,
-      icon: Icons.auto_awesome_outlined,
-      accent: Accents.image,
+      icon: HugeIcons.strokeRoundedSparkles,
+      accent: SectionAccents.amber,
       children: [
         LabelledDropdown<EnhanceLevel>(
           label: l10n.sharpenLabel,
@@ -1836,7 +1889,7 @@ class _StartBar extends ConsumerWidget {
               child: isRunning
                 ? GradientButton(
                     label: l10n.cancelBatch,
-                    icon: Icons.stop_rounded,
+                    icon: HugeIcons.strokeRoundedStop,
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -1846,7 +1899,7 @@ class _StartBar extends ConsumerWidget {
                   )
                 : GradientButton(
                     label: l10n.startConversion(pendingCount),
-                    icon: Icons.bolt_rounded,
+                    icon: HugeIcons.strokeRoundedFlash,
                     onPressed: pendingCount == 0
                         ? null
                         : () async {

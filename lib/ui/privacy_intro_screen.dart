@@ -1,11 +1,13 @@
+// Точечный show: этому экрану нужен только значок секции, а полный импорт
+// пакета столкнул бы его GradientButton с одноимённой кнопкой приложения.
+import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../l10n/app_localizations.dart';
 import '../state/app_meta_controller.dart';
 import 'theme.dart';
-import 'widgets/gradient_button.dart';
-import 'widgets/section_card.dart';
 
 /// The first-run gate: three promises and one line on what the app costs
 /// (nothing). Shown exactly once; acknowledging it stamps `hasSeenIntro`.
@@ -57,20 +59,20 @@ class PrivacyIntroScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 24),
                     _Promise(
-                      icon: Icons.cloud_off,
+                      icon: HugeIcons.strokeRoundedCloudOff,
                       accent: AppTheme.primary,
                       title: l10n.introOfflineTitle,
                       body: l10n.introOfflineBody,
                     ),
                     _Promise(
-                      icon: Icons.visibility_off_outlined,
-                      accent: Accents.audio,
+                      icon: HugeIcons.strokeRoundedViewOffSlash,
+                      accent: SectionAccents.blue,
                       title: l10n.introTelemetryTitle,
                       body: l10n.introTelemetryBody,
                     ),
                     _Promise(
-                      icon: Icons.location_off_outlined,
-                      accent: Accents.privacy,
+                      icon: HugeIcons.strokeRoundedLocationOffline01,
+                      accent: SectionAccents.green,
                       title: l10n.introMetadataTitle,
                       body: l10n.introMetadataBody,
                     ),
@@ -86,7 +88,7 @@ class PrivacyIntroScreen extends ConsumerWidget {
               const SizedBox(height: 16),
               GradientButton(
                 label: l10n.introContinue,
-                icon: Icons.arrow_forward_rounded,
+                icon: HugeIcons.strokeRoundedArrowRight01,
                 onPressed: () => ref.read(appMetaProvider.notifier).markIntroSeen(),
               ),
             ],
@@ -105,7 +107,7 @@ class _Promise extends StatelessWidget {
     required this.accent,
   });
 
-  final IconData icon;
+  final HugeIconData icon;
   final String title;
   final String body;
   final Color accent;
