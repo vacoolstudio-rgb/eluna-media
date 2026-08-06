@@ -143,7 +143,9 @@ competitor/review analysis from July 2026.
   domain — video violet, audio blue, photo amber, privacy green), a frosted
   glass navigation bar, gradient CTAs with a violet glow, press-to-shrink
   feedback on everything tappable, and a swept-gradient progress dial.
-  See `lib/ui/theme.dart` and `lib/ui/widgets/`.
+  None of it lives here any more: the theme, the font and the shared widgets
+  come from the `eluna_shared` package, and `lib/ui/widgets/` keeps only what
+  belongs to the converter itself.
 - Themes: system/light/dark, **OLED true-black** variant, optional
   **Material You** dynamic color. **15 languages** (en, ru, de, es, fr, it,
   pt, tr, pl, uk, hi, id, ja, ko, zh — full key parity, native plural

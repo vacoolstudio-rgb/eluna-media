@@ -18,10 +18,22 @@ Shipping this app therefore means publishing its source.
 | Flutter, `flutter_riverpod`, `file_picker`, `path_provider`, `share_plus`, `shared_preferences`, `flutter_local_notifications`, `intl`, `battery_plus`, `url_launcher` | BSD-3-Clause / MIT |
 | `in_app_review`, `gal`, `open_filex` | MIT / BSD-3-Clause |
 | `dynamic_color` | Apache-2.0 |
-| Manrope typeface (`assets/fonts/`) | SIL Open Font License 1.1 (`assets/fonts/OFL.txt`) |
+| `hugeicons` | MIT |
+| Manrope typeface — bundled inside `eluna_shared`, not in this repo | SIL Open Font License 1.1 (registered by `Eluna.configure()` from the package's own `assets/fonts/OFL.txt`, and listed on the licences screen) |
+| `eluna_shared` — the family's shared code (theme, design system, licences, language picker, rating, logging) | Owned by Eluna (Lunara); see the open question below |
 
-Every dependency is free and open source, and none requires a paid licence or
-a paid service.
+Every third-party dependency is free and open source, and none requires a paid
+licence or a paid service.
+
+## Open: `eluna_shared` and the GPL
+
+`eluna_shared` is the owner's own package, and its `LICENSE` currently reads
+"All rights reserved". This app is GPL v3 by force — FFmpeg with x264/x265
+leaves no choice — and the GPL applies to the *combined* work, so shipping a
+proprietary in-house library inside it is the same shape of problem the ads SDK
+turned out to be, minus the part nobody could fix: the owner owns both sides
+here and can simply license the package under GPL v3 (or dual-license it) for
+this app. It needs to be stated somewhere before release, not assumed.
 
 ## Settled: GPL v3 and the Google Mobile Ads SDK
 

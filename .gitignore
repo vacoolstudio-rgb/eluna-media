@@ -43,3 +43,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Scratch worktrees created for parallel agent runs — never part of a release.
+/.claude/worktrees/

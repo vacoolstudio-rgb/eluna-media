@@ -48,9 +48,9 @@ flutter:
   uses-material-design: true
   generate: true
 
-  fonts:
-    # Manrope, SIL Open Font License (assets/fonts/OFL.txt) — the family the
-    # rest of the Eluna apps are set in.
-    - family: Manrope
-      fonts:
-        - asset: assets/fonts/Manrope-Variable.ttf
+  # Шрифта здесь больше нет. Manrope приезжает внутри eluna_shared под именем
+  # `packages/eluna_shared/Manrope` — этим именем его и просит общая тема, а
+  # локальная копия лежала в сборке вторым файлом на 165 КБ, на который никто не
+  # ссылался. Лицензия OFL при этом не потерялась: её текст регистрирует
+  # `Eluna.configure()` из ассета пакета, и он по-прежнему виден на экране
+  # лицензий.
