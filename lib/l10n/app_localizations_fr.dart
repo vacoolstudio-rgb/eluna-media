@@ -286,18 +286,6 @@ class L10nFr extends L10n {
   String get appearance => 'Apparence';
 
   @override
-  String get theme => 'Thème';
-
-  @override
-  String get themeSystem => 'Système';
-
-  @override
-  String get themeLight => 'Clair';
-
-  @override
-  String get themeDark => 'Sombre';
-
-  @override
   String get language => 'Langue';
 
   @override

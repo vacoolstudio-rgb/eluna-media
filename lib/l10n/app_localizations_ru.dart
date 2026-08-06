@@ -285,18 +285,6 @@ class L10nRu extends L10n {
   String get appearance => 'Оформление';
 
   @override
-  String get theme => 'Тема';
-
-  @override
-  String get themeSystem => 'Системная';
-
-  @override
-  String get themeLight => 'Светлая';
-
-  @override
-  String get themeDark => 'Тёмная';
-
-  @override
   String get language => 'Язык';
 
   @override

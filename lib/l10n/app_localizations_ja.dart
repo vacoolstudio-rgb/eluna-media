@@ -276,18 +276,6 @@ class L10nJa extends L10n {
   String get appearance => '外観';
 
   @override
-  String get theme => 'テーマ';
-
-  @override
-  String get themeSystem => 'システム';
-
-  @override
-  String get themeLight => 'ライト';
-
-  @override
-  String get themeDark => 'ダーク';
-
-  @override
   String get language => '言語';
 
   @override

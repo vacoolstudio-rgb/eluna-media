@@ -10,22 +10,20 @@ import 'home_shell.dart';
 import 'privacy_intro_screen.dart';
 
 class ElunaApp extends ConsumerWidget {
-  /// Акцент обоев, снятый один раз в `main`, или null там, где платформа его не
-  /// отдаёт — Android до 12 и iOS.
-  ///
-  /// Снимается независимо от того, включён ли Material You: тогда включение
-  /// переключателя перекрашивает приложение сразу. Смена обоев на живом
-  /// приложении подхватится при перезапуске — за подпиской на неё пришлось бы
-  /// держать `DynamicColorBuilder` вокруг всего дерева, а он перестраивает его
-  /// целиком на каждое изменение настроек.
-  final Color? wallpaperAccent;
-
-  const ElunaApp({super.key, this.wallpaperAccent});
+  const ElunaApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final prefs = ref.watch(appPrefsProvider);
     final hasSeenIntro = ref.watch(appMetaProvider.select((m) => m.hasSeenIntro));
+
+    // Акцент обоев снят один раз в `main`, до первого кадра, и независимо от
+    // того, включён ли Material You: тогда включение переключателя перекрашивает
+    // приложение сразу. Смена обоев на живом приложении подхватится при
+    // перезапуске — за подпиской на неё пришлось бы держать `DynamicColorBuilder`
+    // вокруг всего дерева, а он перестраивает его целиком на каждое изменение
+    // настроек.
+    final wallpaperAccent = ref.watch(wallpaperAccentProvider);
 
     // Оформление живёт в общем контроллере, язык — по-прежнему в настройках
     // приложения: строк у Media свои 15 языков, и общий список из 59 к ним

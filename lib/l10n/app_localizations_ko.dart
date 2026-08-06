@@ -275,18 +275,6 @@ class L10nKo extends L10n {
   String get appearance => '화면';
 
   @override
-  String get theme => '테마';
-
-  @override
-  String get themeSystem => '시스템';
-
-  @override
-  String get themeLight => '라이트';
-
-  @override
-  String get themeDark => '다크';
-
-  @override
   String get language => '언어';
 
   @override

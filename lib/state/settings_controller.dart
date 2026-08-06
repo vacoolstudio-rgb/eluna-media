@@ -10,6 +10,19 @@ final sharedPreferencesProvider = Provider<SharedPreferences>(
   (ref) => throw UnimplementedError('sharedPreferencesProvider must be overridden'),
 );
 
+/// Акцент обоев, снятый в `main()` до первого кадра, или null там, где
+/// платформа его не отдаёт — Android до 12, iOS, сбой плагина.
+///
+/// Провайдер, а не параметр конструктора у `ElunaApp`: цвет нужен и теме, и
+/// переключателю Material You в настройках, а протаскивать его через дерево
+/// ради второго читателя — это ровно то место, где второй читатель заводит
+/// себе копию и снимает акцент второй раз.
+///
+/// Значение по умолчанию — null, а не исключение: «обоев нет» это законное
+/// состояние половины устройств, и тест, которому цвет не нужен, не должен
+/// объявлять о нём override.
+final wallpaperAccentProvider = Provider<Color?>((ref) => null);
+
 T _enumFromName<T extends Enum>(List<T> values, String? name, T fallback) {
   if (name == null) return fallback;
   for (final v in values) {
@@ -157,7 +170,7 @@ final settingsProvider =
     NotifierProvider<SettingsController, ConversionSettings>(SettingsController.new);
 
 // -----------------------------------------------------------------------------
-// App-level preferences (theme, language)
+// App-level preferences (language, behaviour)
 // -----------------------------------------------------------------------------
 
 /// How hard the video encoders may work. This maps directly onto the x264/
@@ -181,12 +194,17 @@ enum PowerMode {
       };
 }
 
+/// Настройки приложения, кроме оформления.
+///
+/// Тема, чистый чёрный и Material You здесь больше не живут: их держит
+/// `ElunaThemeController` в `eluna.theme.*`, и второй набор тех же полей рядом
+/// — не дублирование, а два источника истины, которые расходятся при первом же
+/// изменении в одном из них. Прежние ключи `app.themeMode`/`app.oledDark`/
+/// `app.dynamicColor` при этом НЕ стираются: `main()` читает их напрямую как
+/// семена для тех, кто обновляется со старой версии.
 class AppPrefs {
   const AppPrefs({
-    this.themeMode = ThemeMode.system,
     this.localeCode,
-    this.oledDark = false,
-    this.dynamicColor = false,
     this.hapticsEnabled = true,
     this.powerMode = PowerMode.balanced,
     this.useHardwareEncoder = true,
@@ -218,16 +236,8 @@ class AppPrefs {
   /// self-inflicted.
   final bool autoSaveResults;
 
-  final ThemeMode themeMode;
-
   /// Null means "follow the system language".
   final String? localeCode;
-
-  /// Pure-black dark surfaces for OLED panels.
-  final bool oledDark;
-
-  /// Material You wallpaper colors where the platform offers them.
-  final bool dynamicColor;
 
   final bool hapticsEnabled;
 
@@ -252,11 +262,8 @@ class AppPrefs {
   Locale? get locale => localeCode == null ? null : Locale(localeCode!);
 
   AppPrefs copyWith({
-    ThemeMode? themeMode,
     String? localeCode,
     bool clearLocale = false,
-    bool? oledDark,
-    bool? dynamicColor,
     bool? hapticsEnabled,
     PowerMode? powerMode,
     bool? useHardwareEncoder,
@@ -266,10 +273,7 @@ class AppPrefs {
     bool? deleteOriginalsAfterConversion,
   }) =>
       AppPrefs(
-        themeMode: themeMode ?? this.themeMode,
         localeCode: clearLocale ? null : (localeCode ?? this.localeCode),
-        oledDark: oledDark ?? this.oledDark,
-        dynamicColor: dynamicColor ?? this.dynamicColor,
         hapticsEnabled: hapticsEnabled ?? this.hapticsEnabled,
         powerMode: powerMode ?? this.powerMode,
         useHardwareEncoder: useHardwareEncoder ?? this.useHardwareEncoder,
@@ -282,10 +286,7 @@ class AppPrefs {
 }
 
 class AppPrefsController extends Notifier<AppPrefs> {
-  static const _kThemeMode = 'app.themeMode';
   static const _kLocale = 'app.locale';
-  static const _kOledDark = 'app.oledDark';
-  static const _kDynamicColor = 'app.dynamicColor';
   static const _kHaptics = 'app.haptics';
   static const _kPowerMode = 'app.powerMode';
   static const _kHwEncoder = 'app.useHardwareEncoder';
@@ -300,10 +301,7 @@ class AppPrefsController extends Notifier<AppPrefs> {
   AppPrefs build() {
     final p = _prefs;
     return AppPrefs(
-      themeMode: _enumFromName(ThemeMode.values, p.getString(_kThemeMode), ThemeMode.system),
       localeCode: p.getString(_kLocale),
-      oledDark: p.getBool(_kOledDark) ?? false,
-      dynamicColor: p.getBool(_kDynamicColor) ?? false,
       hapticsEnabled: p.getBool(_kHaptics) ?? true,
       powerMode: _enumFromName(PowerMode.values, p.getString(_kPowerMode), PowerMode.balanced),
       useHardwareEncoder: p.getBool(_kHwEncoder) ?? true,
@@ -314,11 +312,6 @@ class AppPrefsController extends Notifier<AppPrefs> {
     );
   }
 
-  void setThemeMode(ThemeMode mode) {
-    state = state.copyWith(themeMode: mode);
-    _prefs.setString(_kThemeMode, mode.name);
-  }
-
   void setLocale(String? code) {
     state = state.copyWith(localeCode: code, clearLocale: code == null);
     if (code == null) {
@@ -326,16 +319,6 @@ class AppPrefsController extends Notifier<AppPrefs> {
     } else {
       _prefs.setString(_kLocale, code);
     }
-  }
-
-  void setOledDark(bool v) {
-    state = state.copyWith(oledDark: v);
-    _prefs.setBool(_kOledDark, v);
-  }
-
-  void setDynamicColor(bool v) {
-    state = state.copyWith(dynamicColor: v);
-    _prefs.setBool(_kDynamicColor, v);
   }
 
   void setHapticsEnabled(bool v) {

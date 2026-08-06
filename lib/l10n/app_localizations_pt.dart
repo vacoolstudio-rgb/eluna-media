@@ -284,18 +284,6 @@ class L10nPt extends L10n {
   String get appearance => 'Aparência';
 
   @override
-  String get theme => 'Tema';
-
-  @override
-  String get themeSystem => 'Sistema';
-
-  @override
-  String get themeLight => 'Claro';
-
-  @override
-  String get themeDark => 'Escuro';
-
-  @override
   String get language => 'Idioma';
 
   @override

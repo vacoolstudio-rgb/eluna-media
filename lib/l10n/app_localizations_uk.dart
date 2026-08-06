@@ -286,18 +286,6 @@ class L10nUk extends L10n {
   String get appearance => 'Оформлення';
 
   @override
-  String get theme => 'Тема';
-
-  @override
-  String get themeSystem => 'Системна';
-
-  @override
-  String get themeLight => 'Світла';
-
-  @override
-  String get themeDark => 'Темна';
-
-  @override
   String get language => 'Мова';
 
   @override

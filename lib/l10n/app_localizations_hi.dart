@@ -283,18 +283,6 @@ class L10nHi extends L10n {
   String get appearance => 'दिखावट';
 
   @override
-  String get theme => 'थीम';
-
-  @override
-  String get themeSystem => 'सिस्टम';
-
-  @override
-  String get themeLight => 'लाइट';
-
-  @override
-  String get themeDark => 'डार्क';
-
-  @override
   String get language => 'भाषा';
 
   @override

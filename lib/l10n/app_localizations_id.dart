@@ -285,18 +285,6 @@ class L10nId extends L10n {
   String get appearance => 'Tampilan';
 
   @override
-  String get theme => 'Tema';
-
-  @override
-  String get themeSystem => 'Sistem';
-
-  @override
-  String get themeLight => 'Terang';
-
-  @override
-  String get themeDark => 'Gelap';
-
-  @override
   String get language => 'Bahasa';
 
   @override

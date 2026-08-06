@@ -285,18 +285,6 @@ class L10nEs extends L10n {
   String get appearance => 'Apariencia';
 
   @override
-  String get theme => 'Tema';
-
-  @override
-  String get themeSystem => 'Sistema';
-
-  @override
-  String get themeLight => 'Claro';
-
-  @override
-  String get themeDark => 'Oscuro';
-
-  @override
   String get language => 'Idioma';
 
   @override

@@ -284,18 +284,6 @@ class L10nTr extends L10n {
   String get appearance => 'Görünüm';
 
   @override
-  String get theme => 'Tema';
-
-  @override
-  String get themeSystem => 'Sistem';
-
-  @override
-  String get themeLight => 'Açık';
-
-  @override
-  String get themeDark => 'Koyu';
-
-  @override
   String get language => 'Dil';
 
   @override

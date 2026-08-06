@@ -284,18 +284,6 @@ class L10nDe extends L10n {
   String get appearance => 'Darstellung';
 
   @override
-  String get theme => 'Design';
-
-  @override
-  String get themeSystem => 'System';
-
-  @override
-  String get themeLight => 'Hell';
-
-  @override
-  String get themeDark => 'Dunkel';
-
-  @override
   String get language => 'Sprache';
 
   @override

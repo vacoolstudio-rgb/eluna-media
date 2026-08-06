@@ -110,6 +110,7 @@ Future<void> main() async {
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
         notificationServiceProvider.overrideWithValue(notifications),
+        wallpaperAccentProvider.overrideWithValue(wallpaperAccent),
       ],
     );
 
@@ -134,7 +135,7 @@ Future<void> main() async {
     runApp(
       UncontrolledProviderScope(
         container: container,
-        child: ElunaApp(wallpaperAccent: wallpaperAccent),
+        child: const ElunaApp(),
       ),
     );
   }, (error, stack) {
