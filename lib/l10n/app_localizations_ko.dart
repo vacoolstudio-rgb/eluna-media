@@ -18,9 +18,6 @@ class L10nKo extends L10n {
   String get tabQueue => '대기열';
 
   @override
-  String get tabAbout => '정보';
-
-  @override
   String get addFiles => '파일 추가';
 
   @override
@@ -295,13 +292,7 @@ class L10nKo extends L10n {
       '이 앱에는 x264, x265 등 GPL 구성 요소로 빌드된 FFmpeg가 포함되어 있어서, 앱 전체가 GNU GPL v3에 따라 배포돼요.';
 
   @override
-  String get formatUnsupportedForSource => '이 형식은 선택한 코덱을 담을 수 없어요.';
-
-  @override
   String get sourceMissing => '원본 파일을 더 이상 찾을 수 없어요.';
-
-  @override
-  String get errorTitle => '변환 실패';
 
   @override
   String get tabSettings => '설정';
@@ -450,15 +441,6 @@ class L10nKo extends L10n {
     );
     return '$_temp0';
   }
-
-  @override
-  String get clearSelection => '지우기';
-
-  @override
-  String get presetExpectsVideo => '이 프리셋은 동영상 파일용이에요.';
-
-  @override
-  String get presetExpectsImage => '이 프리셋은 이미지용이에요.';
 
   @override
   String get promiseOffline => '100% 오프라인 변환';
@@ -658,13 +640,6 @@ class L10nKo extends L10n {
   String get openLicenses => '오픈 소스 라이선스';
 
   @override
-  String get errorFallbackTitle => '문제가 발생했어요';
-
-  @override
-  String get errorFallbackBody =>
-      '앱에 예상치 못한 오류가 생겼어요. 대기열과 설정은 안전하니 뒤로 갔다가 다시 시도해 보세요.';
-
-  @override
   String get presetAudioToMp3Title => '오디오 변환';
 
   @override
@@ -678,9 +653,6 @@ class L10nKo extends L10n {
 
   @override
   String get convertTo => '변환 형식';
-
-  @override
-  String get formatRecommended => '추천';
 
   @override
   String get formatSectionHint => '고른 파일이 실제로 바뀔 수 있는 형식만 보여줘요.';
@@ -711,14 +683,6 @@ class L10nKo extends L10n {
   String get removeFile => '제거';
 
   @override
-  String get unknownDuration => '—';
-
-  @override
-  String percentDone(int percent) {
-    return '$percent%';
-  }
-
-  @override
   String timeLeft(String time) {
     return '≈ $time 남음';
   }
@@ -743,9 +707,6 @@ class L10nKo extends L10n {
   String summaryTargetSize(String size) {
     return '≤ $size';
   }
-
-  @override
-  String get summaryTwoPass => '2패스';
 
   @override
   String get summaryEnhanced => '보정됨';

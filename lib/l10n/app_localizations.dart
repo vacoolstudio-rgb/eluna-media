@@ -141,12 +141,6 @@ abstract class L10n {
   /// **'Queue'**
   String get tabQueue;
 
-  /// No description provided for @tabAbout.
-  ///
-  /// In en, this message translates to:
-  /// **'About'**
-  String get tabAbout;
-
   /// No description provided for @addFiles.
   ///
   /// In en, this message translates to:
@@ -621,23 +615,11 @@ abstract class L10n {
   /// **'This app bundles FFmpeg built with x264, x265 and other GPL components, so the application as a whole is distributed under the GNU GPL v3.'**
   String get licenseBody;
 
-  /// No description provided for @formatUnsupportedForSource.
-  ///
-  /// In en, this message translates to:
-  /// **'This format cannot hold the selected codec.'**
-  String get formatUnsupportedForSource;
-
   /// No description provided for @sourceMissing.
   ///
   /// In en, this message translates to:
   /// **'The source file is no longer available.'**
   String get sourceMissing;
-
-  /// No description provided for @errorTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Conversion failed'**
-  String get errorTitle;
 
   /// No description provided for @tabSettings.
   ///
@@ -890,24 +872,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'{count, plural, =1{1 file selected} other{{count} files selected}}'**
   String selectedFiles(int count);
-
-  /// No description provided for @clearSelection.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear'**
-  String get clearSelection;
-
-  /// No description provided for @presetExpectsVideo.
-  ///
-  /// In en, this message translates to:
-  /// **'This preset expects video files.'**
-  String get presetExpectsVideo;
-
-  /// No description provided for @presetExpectsImage.
-  ///
-  /// In en, this message translates to:
-  /// **'This preset expects images.'**
-  String get presetExpectsImage;
 
   /// No description provided for @promiseOffline.
   ///
@@ -1263,18 +1227,6 @@ abstract class L10n {
   /// **'Open source licenses'**
   String get openLicenses;
 
-  /// No description provided for @errorFallbackTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Something went wrong'**
-  String get errorFallbackTitle;
-
-  /// No description provided for @errorFallbackBody.
-  ///
-  /// In en, this message translates to:
-  /// **'The app hit an unexpected error. Your queue and settings are safe — go back and try again.'**
-  String get errorFallbackBody;
-
   /// No description provided for @presetAudioToMp3Title.
   ///
   /// In en, this message translates to:
@@ -1304,12 +1256,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Convert to'**
   String get convertTo;
-
-  /// No description provided for @formatRecommended.
-  ///
-  /// In en, this message translates to:
-  /// **'Recommended'**
-  String get formatRecommended;
 
   /// No description provided for @formatSectionHint.
   ///
@@ -1365,18 +1311,6 @@ abstract class L10n {
   /// **'Remove'**
   String get removeFile;
 
-  /// No description provided for @unknownDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'—'**
-  String get unknownDuration;
-
-  /// No description provided for @percentDone.
-  ///
-  /// In en, this message translates to:
-  /// **'{percent}%'**
-  String percentDone(int percent);
-
   /// No description provided for @timeLeft.
   ///
   /// In en, this message translates to:
@@ -1412,12 +1346,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'≤ {size}'**
   String summaryTargetSize(String size);
-
-  /// No description provided for @summaryTwoPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Two-pass'**
-  String get summaryTwoPass;
 
   /// No description provided for @summaryEnhanced.
   ///

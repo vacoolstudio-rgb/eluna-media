@@ -18,9 +18,6 @@ class L10nZh extends L10n {
   String get tabQueue => '队列';
 
   @override
-  String get tabAbout => '关于';
-
-  @override
   String get addFiles => '添加文件';
 
   @override
@@ -292,13 +289,7 @@ class L10nZh extends L10n {
       '本应用内置的 FFmpeg 包含 x264、x265 等 GPL 组件，因此整个应用依 GNU GPL v3 分发。';
 
   @override
-  String get formatUnsupportedForSource => '该格式无法容纳所选编码。';
-
-  @override
   String get sourceMissing => '源文件已不可用。';
-
-  @override
-  String get errorTitle => '转换失败';
 
   @override
   String get tabSettings => '设置';
@@ -443,15 +434,6 @@ class L10nZh extends L10n {
     );
     return '$_temp0';
   }
-
-  @override
-  String get clearSelection => '清除';
-
-  @override
-  String get presetExpectsVideo => '此预设仅适用于视频文件。';
-
-  @override
-  String get presetExpectsImage => '此预设仅适用于图片。';
 
   @override
   String get promiseOffline => '100% 离线转换';
@@ -646,12 +628,6 @@ class L10nZh extends L10n {
   String get openLicenses => '开源许可';
 
   @override
-  String get errorFallbackTitle => '出了点问题';
-
-  @override
-  String get errorFallbackBody => '应用遇到了意外错误。你的队列和设置都完好——返回后重试即可。';
-
-  @override
   String get presetAudioToMp3Title => '转换音频';
 
   @override
@@ -665,9 +641,6 @@ class L10nZh extends L10n {
 
   @override
   String get convertTo => '转换为';
-
-  @override
-  String get formatRecommended => '推荐';
 
   @override
   String get formatSectionHint => '这里只列出你的文件真正能转成的格式。';
@@ -697,14 +670,6 @@ class L10nZh extends L10n {
   String get removeFile => '移除';
 
   @override
-  String get unknownDuration => '—';
-
-  @override
-  String percentDone(int percent) {
-    return '$percent%';
-  }
-
-  @override
   String timeLeft(String time) {
     return '剩余 ≈ $time';
   }
@@ -729,9 +694,6 @@ class L10nZh extends L10n {
   String summaryTargetSize(String size) {
     return '≤ $size';
   }
-
-  @override
-  String get summaryTwoPass => '两遍编码';
 
   @override
   String get summaryEnhanced => '已增强';

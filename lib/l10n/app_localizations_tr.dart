@@ -18,9 +18,6 @@ class L10nTr extends L10n {
   String get tabQueue => 'Kuyruk';
 
   @override
-  String get tabAbout => 'Hakkında';
-
-  @override
   String get addFiles => 'Dosya ekle';
 
   @override
@@ -304,14 +301,7 @@ class L10nTr extends L10n {
       'Bu uygulama, x264, x265 ve diğer GPL bileşenleriyle derlenmiş bir FFmpeg içerir; bu nedenle uygulamanın tamamı GNU GPL v3 ile dağıtılır.';
 
   @override
-  String get formatUnsupportedForSource =>
-      'Bu format seçilen kodeği desteklemiyor.';
-
-  @override
   String get sourceMissing => 'Kaynak dosya artık mevcut değil.';
-
-  @override
-  String get errorTitle => 'Dönüştürme başarısız';
 
   @override
   String get tabSettings => 'Ayarlar';
@@ -464,15 +454,6 @@ class L10nTr extends L10n {
     );
     return '$_temp0';
   }
-
-  @override
-  String get clearSelection => 'Temizle';
-
-  @override
-  String get presetExpectsVideo => 'Bu ön ayar video dosyaları için.';
-
-  @override
-  String get presetExpectsImage => 'Bu ön ayar görüntüler için.';
 
   @override
   String get promiseOffline => '%100 çevrimdışı dönüştürme';
@@ -678,13 +659,6 @@ class L10nTr extends L10n {
   String get openLicenses => 'Açık kaynak lisansları';
 
   @override
-  String get errorFallbackTitle => 'Bir şeyler ters gitti';
-
-  @override
-  String get errorFallbackBody =>
-      'Uygulama beklenmedik bir hatayla karşılaştı. Kuyruğunuz ve ayarlarınız güvende — geri dönüp tekrar deneyin.';
-
-  @override
   String get presetAudioToMp3Title => 'Sesi dönüştür';
 
   @override
@@ -699,9 +673,6 @@ class L10nTr extends L10n {
 
   @override
   String get convertTo => 'Şuna dönüştür';
-
-  @override
-  String get formatRecommended => 'Önerilen';
 
   @override
   String get formatSectionHint =>
@@ -733,14 +704,6 @@ class L10nTr extends L10n {
   String get removeFile => 'Kaldır';
 
   @override
-  String get unknownDuration => '—';
-
-  @override
-  String percentDone(int percent) {
-    return '%$percent';
-  }
-
-  @override
   String timeLeft(String time) {
     return '≈ $time kaldı';
   }
@@ -765,9 +728,6 @@ class L10nTr extends L10n {
   String summaryTargetSize(String size) {
     return '≤ $size';
   }
-
-  @override
-  String get summaryTwoPass => 'İki geçiş';
 
   @override
   String get summaryEnhanced => 'İyileştirildi';

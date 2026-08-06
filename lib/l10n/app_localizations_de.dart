@@ -18,9 +18,6 @@ class L10nDe extends L10n {
   String get tabQueue => 'Warteschlange';
 
   @override
-  String get tabAbout => 'Info';
-
-  @override
   String get addFiles => 'Dateien hinzufügen';
 
   @override
@@ -304,14 +301,7 @@ class L10nDe extends L10n {
       'Diese App enthält FFmpeg mit x264, x265 und weiteren GPL-Komponenten, daher wird die Anwendung als Ganzes unter der GNU GPL v3 vertrieben.';
 
   @override
-  String get formatUnsupportedForSource =>
-      'Dieses Format unterstützt den gewählten Codec nicht.';
-
-  @override
   String get sourceMissing => 'Die Quelldatei ist nicht mehr verfügbar.';
-
-  @override
-  String get errorTitle => 'Konvertierung fehlgeschlagen';
 
   @override
   String get tabSettings => 'Einstellungen';
@@ -464,15 +454,6 @@ class L10nDe extends L10n {
     );
     return '$_temp0';
   }
-
-  @override
-  String get clearSelection => 'Leeren';
-
-  @override
-  String get presetExpectsVideo => 'Dieses Preset erwartet Videodateien.';
-
-  @override
-  String get presetExpectsImage => 'Dieses Preset erwartet Bilder.';
 
   @override
   String get promiseOffline => '100 % Offline-Konvertierung';
@@ -678,13 +659,6 @@ class L10nDe extends L10n {
   String get openLicenses => 'Open-Source-Lizenzen';
 
   @override
-  String get errorFallbackTitle => 'Etwas ist schiefgelaufen';
-
-  @override
-  String get errorFallbackBody =>
-      'Die App ist auf einen unerwarteten Fehler gestoßen. Warteschlange und Einstellungen sind sicher — geh zurück und versuch es noch einmal.';
-
-  @override
   String get presetAudioToMp3Title => 'Audio konvertieren';
 
   @override
@@ -699,9 +673,6 @@ class L10nDe extends L10n {
 
   @override
   String get convertTo => 'Umwandeln in';
-
-  @override
-  String get formatRecommended => 'Empfohlen';
 
   @override
   String get formatSectionHint =>
@@ -733,14 +704,6 @@ class L10nDe extends L10n {
   String get removeFile => 'Entfernen';
 
   @override
-  String get unknownDuration => '—';
-
-  @override
-  String percentDone(int percent) {
-    return '$percent %';
-  }
-
-  @override
   String timeLeft(String time) {
     return 'noch ≈ $time';
   }
@@ -765,9 +728,6 @@ class L10nDe extends L10n {
   String summaryTargetSize(String size) {
     return '≤ $size';
   }
-
-  @override
-  String get summaryTwoPass => 'Zwei Durchgänge';
 
   @override
   String get summaryEnhanced => 'Verbessert';

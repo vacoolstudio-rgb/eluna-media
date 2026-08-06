@@ -18,9 +18,6 @@ class L10nHi extends L10n {
   String get tabQueue => 'कतार';
 
   @override
-  String get tabAbout => 'जानकारी';
-
-  @override
   String get addFiles => 'फ़ाइलें जोड़ें';
 
   @override
@@ -303,14 +300,7 @@ class L10nHi extends L10n {
       'इस ऐप में x264, x265 और अन्य GPL कॉम्पोनेन्ट के साथ बनी FFmpeg बंडल है, इसलिए पूरा ऐप्लिकेशन GNU GPL v3 के तहत वितरित होता है।';
 
   @override
-  String get formatUnsupportedForSource =>
-      'यह फ़ॉर्मैट चुने गए कोडेक को सपोर्ट नहीं करता।';
-
-  @override
   String get sourceMissing => 'स्रोत फ़ाइल अब उपलब्ध नहीं है।';
-
-  @override
-  String get errorTitle => 'कन्वर्ज़न विफल';
 
   @override
   String get tabSettings => 'सेटिंग्स';
@@ -461,15 +451,6 @@ class L10nHi extends L10n {
     );
     return '$_temp0';
   }
-
-  @override
-  String get clearSelection => 'साफ़ करें';
-
-  @override
-  String get presetExpectsVideo => 'यह प्रीसेट वीडियो फ़ाइलों के लिए है।';
-
-  @override
-  String get presetExpectsImage => 'यह प्रीसेट इमेज के लिए है।';
 
   @override
   String get promiseOffline => '100% ऑफ़लाइन कन्वर्ज़न';
@@ -674,13 +655,6 @@ class L10nHi extends L10n {
   String get openLicenses => 'ओपन सोर्स लाइसेंस';
 
   @override
-  String get errorFallbackTitle => 'कुछ गड़बड़ हो गई';
-
-  @override
-  String get errorFallbackBody =>
-      'ऐप में अनपेक्षित त्रुटि आई। आपकी कतार और सेटिंग्स सुरक्षित हैं — पीछे जाकर फिर कोशिश करें।';
-
-  @override
   String get presetAudioToMp3Title => 'ऑडियो कन्वर्ट करें';
 
   @override
@@ -694,9 +668,6 @@ class L10nHi extends L10n {
 
   @override
   String get convertTo => 'इसमें कन्वर्ट करें';
-
-  @override
-  String get formatRecommended => 'सुझाया गया';
 
   @override
   String get formatSectionHint =>
@@ -728,14 +699,6 @@ class L10nHi extends L10n {
   String get removeFile => 'हटाएँ';
 
   @override
-  String get unknownDuration => '—';
-
-  @override
-  String percentDone(int percent) {
-    return '$percent%';
-  }
-
-  @override
   String timeLeft(String time) {
     return '≈ $time बाकी';
   }
@@ -760,9 +723,6 @@ class L10nHi extends L10n {
   String summaryTargetSize(String size) {
     return '≤ $size';
   }
-
-  @override
-  String get summaryTwoPass => 'टू-पास';
 
   @override
   String get summaryEnhanced => 'बेहतर बनाया गया';

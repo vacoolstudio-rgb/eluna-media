@@ -18,9 +18,6 @@ class L10nEs extends L10n {
   String get tabQueue => 'Cola';
 
   @override
-  String get tabAbout => 'Acerca de';
-
-  @override
   String get addFiles => 'Añadir archivos';
 
   @override
@@ -305,14 +302,7 @@ class L10nEs extends L10n {
       'Esta app incluye FFmpeg compilado con x264, x265 y otros componentes GPL, por lo que la aplicación en su conjunto se distribuye bajo la GNU GPL v3.';
 
   @override
-  String get formatUnsupportedForSource =>
-      'Este formato no admite el códec seleccionado.';
-
-  @override
   String get sourceMissing => 'El archivo de origen ya no está disponible.';
-
-  @override
-  String get errorTitle => 'Error en la conversión';
 
   @override
   String get tabSettings => 'Ajustes';
@@ -467,15 +457,6 @@ class L10nEs extends L10n {
     );
     return '$_temp0';
   }
-
-  @override
-  String get clearSelection => 'Limpiar';
-
-  @override
-  String get presetExpectsVideo => 'Este preset espera archivos de vídeo.';
-
-  @override
-  String get presetExpectsImage => 'Este preset espera imágenes.';
 
   @override
   String get promiseOffline => 'Conversión 100% sin conexión';
@@ -680,13 +661,6 @@ class L10nEs extends L10n {
   String get openLicenses => 'Licencias de código abierto';
 
   @override
-  String get errorFallbackTitle => 'Algo salió mal';
-
-  @override
-  String get errorFallbackBody =>
-      'La app encontró un error inesperado. Tu cola y tus ajustes están a salvo — vuelve atrás e inténtalo de nuevo.';
-
-  @override
   String get presetAudioToMp3Title => 'Convertir audio';
 
   @override
@@ -701,9 +675,6 @@ class L10nEs extends L10n {
 
   @override
   String get convertTo => 'Convertir a';
-
-  @override
-  String get formatRecommended => 'Recomendado';
 
   @override
   String get formatSectionHint =>
@@ -736,14 +707,6 @@ class L10nEs extends L10n {
   String get removeFile => 'Quitar';
 
   @override
-  String get unknownDuration => '—';
-
-  @override
-  String percentDone(int percent) {
-    return '$percent%';
-  }
-
-  @override
   String timeLeft(String time) {
     return '≈ $time restantes';
   }
@@ -768,9 +731,6 @@ class L10nEs extends L10n {
   String summaryTargetSize(String size) {
     return '≤ $size';
   }
-
-  @override
-  String get summaryTwoPass => 'Dos pasadas';
 
   @override
   String get summaryEnhanced => 'Mejorada';

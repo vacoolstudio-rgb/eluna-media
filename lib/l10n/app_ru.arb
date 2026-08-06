@@ -3,7 +3,6 @@
   "appTitle": "Eluna Media",
   "tabConvert": "Конвертация",
   "tabQueue": "Очередь",
-  "tabAbout": "О программе",
   "addFiles": "Добавить файлы",
   "emptySelectionTitle": "Файлов пока нет",
   "emptySelectionBody": "Добавьте фото, видео или аудио. Всё обрабатывается на этом устройстве.",
@@ -183,9 +182,7 @@
   "privacyBody": "Eluna Media конвертирует файлы целиком на этом устройстве с помощью встроенной сборки FFmpeg. Файлы никогда не покидают устройство, учётная запись не нужна, телеметрии нет. Сеть не используется вообще — у приложения нет даже разрешения на доступ в интернет.\n\nУдаление метаданных включено по умолчанию, поэтому EXIF, координаты GPS и отметки времени не попадают в экспортируемые файлы.",
   "licenseTitle": "Лицензия",
   "licenseBody": "Приложение включает сборку FFmpeg с x264, x265 и другими GPL-компонентами, поэтому распространяется целиком под GNU GPL v3.",
-  "formatUnsupportedForSource": "Этот формат не поддерживает выбранный кодек.",
   "sourceMissing": "Исходный файл больше недоступен.",
-  "errorTitle": "Ошибка конвертации",
   "tabSettings": "Настройки",
   "introTitle": "Приватность по умолчанию",
   "introOfflineTitle": "Конвертация на устройстве",
@@ -273,9 +270,6 @@
       }
     }
   },
-  "clearSelection": "Очистить",
-  "presetExpectsVideo": "Этот пресет рассчитан на видеофайлы.",
-  "presetExpectsImage": "Этот пресет рассчитан на изображения.",
   "promiseOffline": "Конвертация 100% офлайн",
   "promiseBatchFree": "Пакетная обработка бесплатна",
   "promiseNoWatermark": "Без вотермарок",
@@ -359,14 +353,11 @@
   "sectionSupport": "Поддержка",
   "rateApp": "Оценить приложение",
   "openLicenses": "Лицензии открытого кода",
-  "errorFallbackTitle": "Что-то пошло не так",
-  "errorFallbackBody": "Приложение столкнулось с неожиданной ошибкой. Очередь и настройки целы — вернитесь назад и попробуйте ещё раз.",
   "presetAudioToMp3Title": "Конвертировать аудио",
   "presetAudioToMp3Body": "В MP3 — играет везде",
   "presetCompressAudioTitle": "Сжать аудио",
   "presetCompressAudioBody": "Лёгкий AAC — голосовые, подкасты",
   "convertTo": "Конвертировать в",
-  "formatRecommended": "Рекомендуется",
   "formatSectionHint": "Показаны только форматы, в которые ваши файлы действительно можно превратить.",
   "sourceVideo": "Видео",
   "sourceImage": "Фото",
@@ -376,15 +367,6 @@
   "mixedSelectionBody": "Каждый файл будет сконвертирован лучшим пресетом для своего типа. Для полного контроля добавляйте по одному типу за раз.",
   "filesTitle": "Файлы",
   "removeFile": "Убрать",
-  "unknownDuration": "—",
-  "percentDone": "{percent}%",
-  "@percentDone": {
-    "placeholders": {
-      "percent": {
-        "type": "int"
-      }
-    }
-  },
   "timeLeft": "≈ {time} осталось",
   "@timeLeft": {
     "placeholders": {
@@ -419,7 +401,6 @@
       }
     }
   },
-  "summaryTwoPass": "Два прохода",
   "summaryEnhanced": "Улучшено",
   "summaryMetadataStripped": "Метаданные удалены",
   "summaryMerge": "Склейка {count} роликов",

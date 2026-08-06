@@ -18,9 +18,6 @@ class L10nPt extends L10n {
   String get tabQueue => 'Fila';
 
   @override
-  String get tabAbout => 'Sobre';
-
-  @override
   String get addFiles => 'Adicionar arquivos';
 
   @override
@@ -304,14 +301,7 @@ class L10nPt extends L10n {
       'Este app inclui o FFmpeg compilado com x264, x265 e outros componentes GPL, por isso o aplicativo como um todo é distribuído sob a GNU GPL v3.';
 
   @override
-  String get formatUnsupportedForSource =>
-      'Este formato não comporta o codec selecionado.';
-
-  @override
   String get sourceMissing => 'O arquivo de origem não está mais disponível.';
-
-  @override
-  String get errorTitle => 'Falha na conversão';
 
   @override
   String get tabSettings => 'Configurações';
@@ -466,15 +456,6 @@ class L10nPt extends L10n {
     );
     return '$_temp0';
   }
-
-  @override
-  String get clearSelection => 'Limpar';
-
-  @override
-  String get presetExpectsVideo => 'Este preset espera arquivos de vídeo.';
-
-  @override
-  String get presetExpectsImage => 'Este preset espera imagens.';
 
   @override
   String get promiseOffline => 'Conversão 100% offline';
@@ -680,13 +661,6 @@ class L10nPt extends L10n {
   String get openLicenses => 'Licenças de código aberto';
 
   @override
-  String get errorFallbackTitle => 'Algo deu errado';
-
-  @override
-  String get errorFallbackBody =>
-      'O app encontrou um erro inesperado. Sua fila e suas configurações estão a salvo — volte e tente de novo.';
-
-  @override
   String get presetAudioToMp3Title => 'Converter áudio';
 
   @override
@@ -701,9 +675,6 @@ class L10nPt extends L10n {
 
   @override
   String get convertTo => 'Converter para';
-
-  @override
-  String get formatRecommended => 'Recomendado';
 
   @override
   String get formatSectionHint =>
@@ -736,14 +707,6 @@ class L10nPt extends L10n {
   String get removeFile => 'Remover';
 
   @override
-  String get unknownDuration => '—';
-
-  @override
-  String percentDone(int percent) {
-    return '$percent%';
-  }
-
-  @override
   String timeLeft(String time) {
     return '≈ $time restantes';
   }
@@ -768,9 +731,6 @@ class L10nPt extends L10n {
   String summaryTargetSize(String size) {
     return '≤ $size';
   }
-
-  @override
-  String get summaryTwoPass => 'Duas passagens';
 
   @override
   String get summaryEnhanced => 'Melhorada';

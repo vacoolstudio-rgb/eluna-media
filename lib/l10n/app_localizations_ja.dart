@@ -18,9 +18,6 @@ class L10nJa extends L10n {
   String get tabQueue => 'キュー';
 
   @override
-  String get tabAbout => 'アプリについて';
-
-  @override
   String get addFiles => 'ファイルを追加';
 
   @override
@@ -296,13 +293,7 @@ class L10nJa extends L10n {
       'このアプリには x264、x265 などの GPL コンポーネントを含む FFmpeg が同梱されているため、アプリ全体が GNU GPL v3 の下で配布されます。';
 
   @override
-  String get formatUnsupportedForSource => 'この形式は選択したコーデックに対応していません。';
-
-  @override
   String get sourceMissing => '元のファイルが見つかりません。';
-
-  @override
-  String get errorTitle => '変換に失敗しました';
 
   @override
   String get tabSettings => '設定';
@@ -450,15 +441,6 @@ class L10nJa extends L10n {
     );
     return '$_temp0';
   }
-
-  @override
-  String get clearSelection => 'クリア';
-
-  @override
-  String get presetExpectsVideo => 'このプリセットは動画ファイル用です。';
-
-  @override
-  String get presetExpectsImage => 'このプリセットは画像用です。';
 
   @override
   String get promiseOffline => '変換は 100% オフライン';
@@ -657,13 +639,6 @@ class L10nJa extends L10n {
   String get openLicenses => 'オープンソースライセンス';
 
   @override
-  String get errorFallbackTitle => '問題が発生しました';
-
-  @override
-  String get errorFallbackBody =>
-      'アプリで予期しないエラーが発生しました。キューと設定は無事です。前の画面に戻ってもう一度お試しください。';
-
-  @override
   String get presetAudioToMp3Title => '音声を変換';
 
   @override
@@ -677,9 +652,6 @@ class L10nJa extends L10n {
 
   @override
   String get convertTo => '変換先';
-
-  @override
-  String get formatRecommended => 'おすすめ';
 
   @override
   String get formatSectionHint => '選んだファイルが実際に変換できる形式だけを表示しています。';
@@ -710,14 +682,6 @@ class L10nJa extends L10n {
   String get removeFile => '削除';
 
   @override
-  String get unknownDuration => '—';
-
-  @override
-  String percentDone(int percent) {
-    return '$percent%';
-  }
-
-  @override
   String timeLeft(String time) {
     return '残り ≈ $time';
   }
@@ -742,9 +706,6 @@ class L10nJa extends L10n {
   String summaryTargetSize(String size) {
     return '≤ $size';
   }
-
-  @override
-  String get summaryTwoPass => '2 パス';
 
   @override
   String get summaryEnhanced => '補正済み';

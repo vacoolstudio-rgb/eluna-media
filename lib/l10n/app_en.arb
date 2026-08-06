@@ -3,7 +3,6 @@
   "appTitle": "Eluna Media",
   "tabConvert": "Convert",
   "tabQueue": "Queue",
-  "tabAbout": "About",
   "addFiles": "Add files",
   "emptySelectionTitle": "No files yet",
   "emptySelectionBody": "Add photos, videos or audio. Everything is processed on this device.",
@@ -183,9 +182,7 @@
   "privacyBody": "Eluna Media converts your files entirely on this device using a bundled copy of FFmpeg. Your files never leave the device, no account is required, and there is no telemetry. Nothing in the app uses the network at all — it does not even hold the internet permission.\n\nMetadata removal is on by default, so EXIF, GPS coordinates and timestamps are dropped from the files you export.",
   "licenseTitle": "Licensing",
   "licenseBody": "This app bundles FFmpeg built with x264, x265 and other GPL components, so the application as a whole is distributed under the GNU GPL v3.",
-  "formatUnsupportedForSource": "This format cannot hold the selected codec.",
   "sourceMissing": "The source file is no longer available.",
-  "errorTitle": "Conversion failed",
   "tabSettings": "Settings",
   "introTitle": "Private by design",
   "introOfflineTitle": "Converts on this device",
@@ -273,9 +270,6 @@
       }
     }
   },
-  "clearSelection": "Clear",
-  "presetExpectsVideo": "This preset expects video files.",
-  "presetExpectsImage": "This preset expects images.",
   "promiseOffline": "100% offline conversion",
   "promiseBatchFree": "Batch is free",
   "promiseNoWatermark": "No watermark",
@@ -359,14 +353,11 @@
   "sectionSupport": "Support",
   "rateApp": "Rate the app",
   "openLicenses": "Open source licenses",
-  "errorFallbackTitle": "Something went wrong",
-  "errorFallbackBody": "The app hit an unexpected error. Your queue and settings are safe — go back and try again.",
   "presetAudioToMp3Title": "Convert audio",
   "presetAudioToMp3Body": "To MP3 — plays on anything",
   "presetCompressAudioTitle": "Compress audio",
   "presetCompressAudioBody": "Leaner AAC — voice notes, podcasts",
   "convertTo": "Convert to",
-  "formatRecommended": "Recommended",
   "formatSectionHint": "Only formats your files can actually become are listed.",
   "sourceVideo": "Video",
   "sourceImage": "Photo",
@@ -376,15 +367,6 @@
   "mixedSelectionBody": "Each file is converted with the best preset for its own type. Add one kind at a time for full control.",
   "filesTitle": "Files",
   "removeFile": "Remove",
-  "unknownDuration": "—",
-  "percentDone": "{percent}%",
-  "@percentDone": {
-    "placeholders": {
-      "percent": {
-        "type": "int"
-      }
-    }
-  },
   "timeLeft": "≈ {time} left",
   "@timeLeft": {
     "placeholders": {
@@ -419,7 +401,6 @@
       }
     }
   },
-  "summaryTwoPass": "Two-pass",
   "summaryEnhanced": "Enhanced",
   "summaryMetadataStripped": "Metadata removed",
   "summaryMerge": "{count} clips merged",

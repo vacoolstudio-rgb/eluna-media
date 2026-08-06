@@ -18,9 +18,6 @@ class L10nUk extends L10n {
   String get tabQueue => 'Черга';
 
   @override
-  String get tabAbout => 'Про застосунок';
-
-  @override
   String get addFiles => 'Додати файли';
 
   @override
@@ -306,14 +303,7 @@ class L10nUk extends L10n {
       'Застосунок містить збірку FFmpeg із x264, x265 та іншими GPL-компонентами, тому повністю розповсюджується за ліцензією GNU GPL v3.';
 
   @override
-  String get formatUnsupportedForSource =>
-      'Цей формат не підтримує вибраний кодек.';
-
-  @override
   String get sourceMissing => 'Вихідний файл більше недоступний.';
-
-  @override
-  String get errorTitle => 'Помилка конвертації';
 
   @override
   String get tabSettings => 'Налаштування';
@@ -467,15 +457,6 @@ class L10nUk extends L10n {
     );
     return '$_temp0';
   }
-
-  @override
-  String get clearSelection => 'Очистити';
-
-  @override
-  String get presetExpectsVideo => 'Цей пресет розрахований на відеофайли.';
-
-  @override
-  String get presetExpectsImage => 'Цей пресет розрахований на зображення.';
 
   @override
   String get promiseOffline => 'Конвертація 100% офлайн';
@@ -683,13 +664,6 @@ class L10nUk extends L10n {
   String get openLicenses => 'Ліцензії відкритого коду';
 
   @override
-  String get errorFallbackTitle => 'Щось пішло не так';
-
-  @override
-  String get errorFallbackBody =>
-      'Застосунок зіткнувся з неочікуваною помилкою. Черга і налаштування цілі — поверніться назад і спробуйте ще раз.';
-
-  @override
   String get presetAudioToMp3Title => 'Конвертувати аудіо';
 
   @override
@@ -703,9 +677,6 @@ class L10nUk extends L10n {
 
   @override
   String get convertTo => 'Конвертувати у';
-
-  @override
-  String get formatRecommended => 'Рекомендовано';
 
   @override
   String get formatSectionHint =>
@@ -737,14 +708,6 @@ class L10nUk extends L10n {
   String get removeFile => 'Прибрати';
 
   @override
-  String get unknownDuration => '—';
-
-  @override
-  String percentDone(int percent) {
-    return '$percent%';
-  }
-
-  @override
   String timeLeft(String time) {
     return '≈ $time лишилося';
   }
@@ -769,9 +732,6 @@ class L10nUk extends L10n {
   String summaryTargetSize(String size) {
     return '≤ $size';
   }
-
-  @override
-  String get summaryTwoPass => 'Два проходи';
 
   @override
   String get summaryEnhanced => 'Покращено';
