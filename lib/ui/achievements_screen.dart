@@ -7,7 +7,11 @@ import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
 import '../state/achievements_controller.dart';
 
-(String, String) achievementTexts(L10n l10n, Achievement a) => switch (a) {
+/// Названия достижений — единственное, что осталось у приложения: они живут в
+/// ARB Media, а не в общей таблице, потому что «Мемодел» осмысленно только там,
+/// где вообще делают гифки.
+(String, String) achievementTexts(L10n l10n, AchievementDef<ConversionStats> def) =>
+    switch (Achievement.values.byName(def.id)) {
       Achievement.firstConversion => (l10n.achFirstConversionTitle, l10n.achFirstConversionBody),
       Achievement.tenConversions => (l10n.achTenConversionsTitle, l10n.achTenConversionsBody),
       Achievement.fiftyConversions => (l10n.achFiftyConversionsTitle, l10n.achFiftyConversionsBody),
@@ -30,21 +34,6 @@ import '../state/achievements_controller.dart';
       Achievement.platinum => (l10n.achPlatinumTitle, l10n.achPlatinumBody),
     };
 
-HugeIconData _tierIcon(Achievement a) => switch (a) {
-      Achievement.platinum => HugeIcons.strokeRoundedMedal01,
-      _ => HugeIcons.strokeRoundedChampion,
-    };
-
-/// Бронза, серебро и золото — цвета самих металлов, они одинаковы в любой теме.
-/// Платина — акцент приложения, поэтому он приходит параметром: функция чистая,
-/// BuildContext'а у неё нет, и выдумывать его ради одного цвета не нужно.
-Color _tierColor(AchievementTier tier, Color accent) => switch (tier) {
-      AchievementTier.bronze => const Color(0xFFB07A45),
-      AchievementTier.silver => const Color(0xFF9BA4B0),
-      AchievementTier.gold => const Color(0xFFD4A017),
-      AchievementTier.platinum => accent,
-    };
-
 class AchievementsScreen extends ConsumerWidget {
   const AchievementsScreen({super.key});
 
@@ -52,9 +41,12 @@ class AchievementsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
     final theme = Theme.of(context);
-    final state = ref.watch(achievementsProvider);
-    final total = Achievement.values.length;
-    final done = state.unlocked.length;
+    final snapshot = ref.watch(achievementsProvider);
+    final total = snapshot.total;
+    final done = snapshot.unlockedCount;
+    // Цвет шапки — общий «легендарный» янтарь, а не местный хекс: медали внизу
+    // покрашены им же, и трофей должен быть одного золота с ними.
+    final trophy = rarityColor(AchRarity.legendary);
 
     return AmbientBackground(
       child: Scaffold(
@@ -65,16 +57,14 @@ class AchievementsScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             children: [
               SectionCard(
-                // Золото трофея — не из палитры секций: у этой карточки цвет
-                // значит «золотая ступень», а не «такой-то блок настроек».
-                accent: const Color(0xFFD4A017),
+                accent: trophy,
                 margin: EdgeInsets.zero,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SectionHeader(
                       icon: HugeIcons.strokeRoundedChampion,
-                      accent: const Color(0xFFD4A017),
+                      accent: trophy,
                       title: l10n.achievementsProgress(done, total),
                     ),
                     Padding(
@@ -104,8 +94,7 @@ class AchievementsScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              for (final a in Achievement.values)
-                _AchievementTile(achievement: a, unlocked: state.unlocked.contains(a)),
+              for (final entry in snapshot.entries) _AchievementTile(entry: entry),
             ],
           ),
         ),
@@ -114,20 +103,37 @@ class AchievementsScreen extends ConsumerWidget {
   }
 }
 
-class _AchievementTile extends StatelessWidget {
-  const _AchievementTile({required this.achievement, required this.unlocked});
+/// Прогресс словами. Считает его общий `AchievementState`; здесь решается
+/// только, что показывать.
+///
+/// Байтовые цели («сохранено 100 МБ») в штуках не читаются — «34000000 из
+/// 100000000» это не число, а шум, — поэтому у них остаётся один процент.
+/// Счётные получают общую подпись «12 из 50».
+String _progressLabel(AchievementState<ConversionStats> entry, ElunaL10n shared) {
+  final target = entry.def.target;
+  final pct = (entry.progress * 100).round();
+  if (target >= 1000 * 1000) return '$pct%';
+  return shared.achievementProgressLabel(entry.current.clamp(0, target), target, pct);
+}
 
-  final Achievement achievement;
-  final bool unlocked;
+class _AchievementTile extends StatelessWidget {
+  const _AchievementTile({required this.entry});
+
+  final AchievementState<ConversionStats> entry;
 
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
+    // Слово «Легендарное» и подпись «12 из 50» приходят из ОБЩЕЙ таблицы: это
+    // те строки, которые во всех приложениях Eluna обязаны значить одно и то
+    // же, поэтому переводить их у себя — значит разъехаться с роднёй.
+    final shared = ElunaL10n.of(context);
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final (title, body) = achievementTexts(l10n, achievement);
-    final tier = _tierColor(achievement.tier, context.elunaColors.primary);
-    final accent = unlocked ? tier : theme.colorScheme.outline;
+    final (title, body) = achievementTexts(l10n, entry.def);
+    final unlocked = entry.unlocked;
+    final rarity = rarityColor(entry.def.rarity);
+    final accent = unlocked ? rarity : theme.colorScheme.outline;
     final base = isDark ? theme.colorScheme.surfaceContainer : Colors.white;
 
     Color tint(double amount, double alpha) =>
@@ -163,11 +169,9 @@ class _AchievementTile extends StatelessWidget {
           child: Row(
             children: [
               // A locked trophy is dimmed, not hidden: the point is to show
-              // what is still out there.
-              Opacity(
-                opacity: unlocked ? 1 : 0.45,
-                child: SectionIcon(icon: _tierIcon(achievement), accent: accent, size: 42),
-              ),
+              // what is still out there. Гасит его теперь сама медаль — у
+              // запертой редкость не проступает.
+              AchievementMedal<ConversionStats>(state: entry, size: 46),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -181,13 +185,39 @@ class _AchievementTile extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(body, style: theme.textTheme.bodySmall),
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        Text(
+                          rarityLabel(entry.def.rarity, shared).toUpperCase(),
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: accent,
+                            letterSpacing: 0.6,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        // Цифра прогресса нужна только пока цель не взята:
+                        // у взятой она всегда «50 из 50» и не сообщает ничего.
+                        if (!unlocked) ...[
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              _progressLabel(entry, shared),
+                              style: theme.textTheme.labelSmall
+                                  ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
                   ],
                 ),
               ),
               const SizedBox(width: 8),
               Icon(
                 unlocked ? Icons.check_circle_rounded : Icons.lock_outline_rounded,
-                color: unlocked ? tier : theme.colorScheme.outlineVariant,
+                color: unlocked ? rarity : theme.colorScheme.outlineVariant,
                 size: 20,
               ),
             ],

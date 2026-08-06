@@ -14,20 +14,36 @@ String? valueOf(List<String> args, String flag) {
 
 void main() {
   group('achievements', () {
+    // Пороги считает общий каталог, поэтому и тест спрашивает его, а не
+    // выпиленный `earnedBy`: проверяем, что формы Media сложены правильно.
+    Set<Achievement> unlockedBy(ConversionStats stats) => {
+          for (final e in mediaAchievements.evaluate(stats, unlockedAt: const {}))
+            if (e.unlocked) Achievement.values.byName(e.def.id),
+        };
+
     test('thresholds unlock at their exact counts', () {
-      expect(Achievement.firstConversion.earnedBy(const ConversionStats()), isFalse);
+      expect(unlockedBy(const ConversionStats()), isNot(contains(Achievement.firstConversion)));
       expect(
-        Achievement.firstConversion.earnedBy(const ConversionStats(conversions: 1)),
-        isTrue,
+        unlockedBy(const ConversionStats(conversions: 1)),
+        contains(Achievement.firstConversion),
       );
       expect(
-        Achievement.tenConversions.earnedBy(const ConversionStats(conversions: 9)),
-        isFalse,
+        unlockedBy(const ConversionStats(conversions: 9)),
+        isNot(contains(Achievement.tenConversions)),
       );
       expect(
-        Achievement.saved1Gb.earnedBy(const ConversionStats(bytesSaved: 1000 * 1000 * 1000)),
-        isTrue,
+        unlockedBy(const ConversionStats(bytesSaved: 1000 * 1000 * 1000)),
+        contains(Achievement.saved1Gb),
       );
+    });
+
+    test('progress is reported on the way to the target', () {
+      final ten = mediaAchievements
+          .evaluate(const ConversionStats(conversions: 4), unlockedAt: const {})
+          .firstWhere((e) => e.def.id == Achievement.tenConversions.name);
+      expect(ten.unlocked, isFalse);
+      expect(ten.current, 4);
+      expect(ten.progress, closeTo(0.4, 0.001));
     });
 
     test('platinum requires the whole catalogue', () {
@@ -45,10 +61,19 @@ void main() {
         convertedImage: true,
         nightConversion: true,
       );
-      expect(Achievement.evaluate(everything), containsAll(Achievement.values));
+      expect(unlockedBy(everything), containsAll(Achievement.values));
 
-      final short = Achievement.evaluate(const ConversionStats(conversions: 1000));
+      final short = unlockedBy(const ConversionStats(conversions: 1000));
       expect(short, isNot(contains(Achievement.platinum)));
+    });
+
+    test('ids stay the SharedPreferences keys they always were', () {
+      // Разблокировки лежат в `ach.unlocked` по имени значения enum'а ещё с
+      // 1.0 — если id разъедутся с именами, у людей обнулится весь шкаф.
+      expect(
+        mediaAchievements.all.map((d) => d.id),
+        Achievement.values.map((a) => a.name),
+      );
     });
   });
 

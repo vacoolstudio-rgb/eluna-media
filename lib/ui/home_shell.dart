@@ -220,16 +220,19 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     });
     // One toast per batch even when it unlocked several things: the first
     // (lowest-index) achievement headlines and the count says "and more".
-    ref.listen<List<Achievement>>(freshUnlocksProvider, (_, unlocks) {
+    ref.listen<List<AchievementState<ConversionStats>>>(freshUnlocksProvider, (_, unlocks) {
       if (unlocks.isEmpty || !mounted) return;
       final l10n = L10n.of(context);
-      final (title, _) = achievementTexts(l10n, unlocks.first);
+      final first = unlocks.first;
+      final (title, _) = achievementTexts(l10n, first.def);
       final suffix = unlocks.length > 1 ? '  (+${unlocks.length - 1})' : '';
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Row(
             children: [
-              const Icon(Icons.emoji_events, color: Color(0xFFD4A017)),
+              // Цвет кубка — редкость самой награды, из общей палитры: тост и
+              // медаль на экране достижений обязаны быть одного цвета.
+              Icon(Icons.emoji_events, color: rarityColor(first.def.rarity)),
               const SizedBox(width: 10),
               Expanded(child: Text('${l10n.achievementUnlocked(title)}$suffix')),
             ],

@@ -1,12 +1,20 @@
 /// The achievements catalogue: local, private gamification in the Reader-app
 /// tradition. Everything is computed from on-device counters; nothing about
 /// them ever leaves the phone.
+///
+/// Формы переехали в пакет: редкость, медаль, математика прогресса и правило
+/// платины теперь общие (`AchievementDef` / `AchievementCatalog` из
+/// `eluna_shared`). Здесь остаётся ровно то, что у Media своё, — какие
+/// достижения существуют, из каких счётчиков они считаются и как называются.
 library;
 
-enum AchievementTier { bronze, silver, gold, platinum }
+import 'package:eluna_shared/core.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 /// Lifetime, monotonically-growing usage counters. Only ever incremented —
 /// an achievement once earned can never be silently lost.
+///
+/// Это и есть тип «входов» `I` общего каталога: всё, что Media умеет мерить.
 class ConversionStats {
   const ConversionStats({
     this.conversions = 0,
@@ -77,65 +85,191 @@ class ConversionStats {
 const _mb = 1000 * 1000;
 const _gb = 1000 * _mb;
 
-/// The catalogue. Order is display order; [Achievement.platinum] must stay
-/// last — it unlocks when everything above it has.
+/// Стабильные имена каталога. Order is display order; [Achievement.platinum]
+/// must stay last — it unlocks when everything above it has.
+///
+/// Имя значения — это одновременно `AchievementDef.id` и ключ, под которым
+/// разблокировка лежит в SharedPreferences. Переименовать его значит отобрать
+/// достижение у всех, у кого оно уже открыто; enum держится именно ради того,
+/// чтобы такой ключ нельзя было опечатать, а `switch` по каталогу оставался
+/// исчерпывающим.
 enum Achievement {
-  firstConversion(AchievementTier.bronze),
-  tenConversions(AchievementTier.bronze),
-  fiftyConversions(AchievementTier.silver),
-  twoHundredConversions(AchievementTier.gold),
-  thousandConversions(AchievementTier.gold),
-  saved100Mb(AchievementTier.bronze),
-  saved1Gb(AchievementTier.silver),
-  saved10Gb(AchievementTier.gold),
-  batchOfFive(AchievementTier.bronze),
-  batchOfTwenty(AchievementTier.silver),
-  sniper(AchievementTier.bronze),
-  memeSmith(AchievementTier.bronze),
-  soundHunter(AchievementTier.bronze),
-  subtitleKeeper(AchievementTier.silver),
-  director(AchievementTier.bronze),
-  allRounder(AchievementTier.silver),
-  nightOwl(AchievementTier.bronze),
-  platinum(AchievementTier.platinum);
-
-  const Achievement(this.tier);
-
-  final AchievementTier tier;
-
-  /// Whether [stats] earn this achievement. Platinum is special-cased by the
-  /// evaluator because it depends on the rest of the catalogue, not on stats.
-  bool earnedBy(ConversionStats stats) => switch (this) {
-        firstConversion => stats.conversions >= 1,
-        tenConversions => stats.conversions >= 10,
-        fiftyConversions => stats.conversions >= 50,
-        twoHundredConversions => stats.conversions >= 200,
-        thousandConversions => stats.conversions >= 1000,
-        saved100Mb => stats.bytesSaved >= 100 * _mb,
-        saved1Gb => stats.bytesSaved >= 1 * _gb,
-        saved10Gb => stats.bytesSaved >= 10 * _gb,
-        batchOfFive => stats.maxBatch >= 5,
-        batchOfTwenty => stats.maxBatch >= 20,
-        sniper => stats.usedFitToSize,
-        memeSmith => stats.madeGif,
-        soundHunter => stats.extractedAudio,
-        subtitleKeeper => stats.keptSubtitles,
-        director => stats.usedTransform,
-        allRounder => stats.convertedVideo && stats.convertedAudio && stats.convertedImage,
-        nightOwl => stats.nightConversion,
-        platinum => false,
-      };
-
-  /// The full set earned by [stats], platinum included when everything else
-  /// is there.
-  static Set<Achievement> evaluate(ConversionStats stats) {
-    final earned = <Achievement>{
-      for (final a in Achievement.values)
-        if (a != Achievement.platinum && a.earnedBy(stats)) a,
-    };
-    if (earned.length == Achievement.values.length - 1) {
-      earned.add(Achievement.platinum);
-    }
-    return earned;
-  }
+  firstConversion,
+  tenConversions,
+  fiftyConversions,
+  twoHundredConversions,
+  thousandConversions,
+  saved100Mb,
+  saved1Gb,
+  saved10Gb,
+  batchOfFive,
+  batchOfTwenty,
+  sniper,
+  memeSmith,
+  soundHunter,
+  subtitleKeeper,
+  director,
+  allRounder,
+  nightOwl,
+  platinum,
 }
+
+int _flag(bool on) => on ? 1 : 0;
+
+/// Форма одного достижения: иконка медали, редкость, цель и то, чем к ней
+/// меряется приближение. Порог больше не булев `earnedBy` — общий код сам
+/// сравнивает прогресс с целью, и заодно из этого получается «12 из 50» на
+/// экране, которого у Media раньше не было.
+AchievementDef<ConversionStats> _def(Achievement a) => switch (a) {
+      Achievement.firstConversion => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedRocket01,
+          AchRarity.common,
+          1,
+          (s) => s.conversions,
+        ),
+      Achievement.tenConversions => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedFiles01,
+          AchRarity.common,
+          10,
+          (s) => s.conversions,
+        ),
+      Achievement.fiftyConversions => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedAward01,
+          AchRarity.rare,
+          50,
+          (s) => s.conversions,
+        ),
+      Achievement.twoHundredConversions => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedChampion,
+          AchRarity.epic,
+          200,
+          (s) => s.conversions,
+        ),
+      Achievement.thousandConversions => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedCrown,
+          AchRarity.legendary,
+          1000,
+          (s) => s.conversions,
+        ),
+      Achievement.saved100Mb => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedSaveEnergy01,
+          AchRarity.common,
+          100 * _mb,
+          (s) => s.bytesSaved,
+        ),
+      Achievement.saved1Gb => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedHardDrive,
+          AchRarity.rare,
+          1 * _gb,
+          (s) => s.bytesSaved,
+        ),
+      Achievement.saved10Gb => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedDatabase01,
+          AchRarity.legendary,
+          10 * _gb,
+          (s) => s.bytesSaved,
+        ),
+      Achievement.batchOfFive => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedLayers01,
+          AchRarity.common,
+          5,
+          (s) => s.maxBatch,
+        ),
+      Achievement.batchOfTwenty => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedPackage,
+          AchRarity.rare,
+          20,
+          (s) => s.maxBatch,
+        ),
+      Achievement.sniper => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedTarget01,
+          AchRarity.common,
+          1,
+          (s) => _flag(s.usedFitToSize),
+        ),
+      Achievement.memeSmith => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedFilm01,
+          AchRarity.common,
+          1,
+          (s) => _flag(s.madeGif),
+        ),
+      Achievement.soundHunter => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedMusicNote01,
+          AchRarity.common,
+          1,
+          (s) => _flag(s.extractedAudio),
+        ),
+      Achievement.subtitleKeeper => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedClosedCaption,
+          AchRarity.rare,
+          1,
+          (s) => _flag(s.keptSubtitles),
+        ),
+      Achievement.director => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedCrop,
+          AchRarity.common,
+          1,
+          (s) => _flag(s.usedTransform),
+        ),
+      // Единственное составное: три вида медиа, поэтому цель — 3, и кольцо
+      // честно показывает, сколько из них уже пройдено.
+      Achievement.allRounder => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedSparkles,
+          AchRarity.rare,
+          3,
+          (s) =>
+              _flag(s.convertedVideo) +
+              _flag(s.convertedAudio) +
+              _flag(s.convertedImage),
+        ),
+      Achievement.nightOwl => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedMoon02,
+          AchRarity.common,
+          1,
+          (s) => _flag(s.nightConversion),
+        ),
+      // Платину общий каталог считает сам: её прогресс — это «сколько из
+      // остальных уже открыто», поэтому цель равна размеру каталога без неё,
+      // а функция прогресса не вызывается вообще.
+      Achievement.platinum => AchievementDef(
+          a.name,
+          HugeIcons.strokeRoundedMedal01,
+          AchRarity.platinum,
+          Achievement.values.length - 1,
+          (_) => 0,
+        ),
+    };
+
+/// Каталог Media.
+///
+/// `titleFor`/`descriptionFor` общий код зовёт только со своих экранов
+/// достижений — в пакете их пока нет, а экран Media берёт строки сам через
+/// `achievementTexts`, потому что ARB-таблица приложения читается только через
+/// BuildContext, а каталог нужен и контроллеру, у которого контекста нет.
+/// Поэтому здесь возвращается id: подставить сюда перевод всё равно нечем.
+final mediaAchievements = AchievementCatalog<ConversionStats>(
+  defs: [
+    for (final a in Achievement.values)
+      if (a != Achievement.platinum) _def(a),
+  ],
+  platinum: _def(Achievement.platinum),
+  titleFor: (id) => id,
+  descriptionFor: (id) => id,
+);

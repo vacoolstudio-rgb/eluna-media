@@ -307,8 +307,8 @@ class SettingsTab extends ConsumerWidget {
                 leading: const Icon(Icons.emoji_events_outlined),
                 title: Text(l10n.achievementsTitle),
                 subtitle: Text(l10n.achievementsProgress(
-                  ref.watch(achievementsProvider.select((s) => s.unlocked.length)),
-                  Achievement.values.length,
+                  ref.watch(achievementsProvider.select((s) => s.unlockedCount)),
+                  mediaAchievements.all.length,
                 )),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => Navigator.of(context).push(
