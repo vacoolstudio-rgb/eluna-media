@@ -133,7 +133,9 @@ competitor/review analysis from July 2026.
 - **Achievements** — 18 of them, bronze to a platinum capstone, counted
   entirely on-device (the screen says so): conversion counts, storage saved,
   batch sizes, first GIF, first exact-size hit, night owl. One quiet snackbar
-  per batch, never a popup. `Achievement.evaluate` is pure and unit-tested.
+  per batch, never a popup. Which ones exist and what they are called is
+  Media's; the rarity, the medal and the progress maths come from
+  `eluna_shared`, and the catalogue is unit-tested against it.
 - **What's-new dialog** once per version — shown only to people who actually
   used the previous version, never on a fresh install's first minute.
 - **The Eluna design language**, shared with the other apps in the family:
@@ -182,16 +184,25 @@ lib/
   state/      settings_controller.dart   conversion profile + app prefs
               app_meta_controller.dart   install date, successes, intro
               queue_controller.dart      serial batch runner
-  services/   review_service.dart    milestone logic (pure) + native prompt
-              media_saver.dart       gallery/Downloads export
+              logging/               error handlers over the package's logger
+              platform/              adapters the package cannot implement
+  services/   media_saver.dart       gallery/Downloads export
               original_media.dart    system-confirmed source deletion
               share_intake.dart      inbound share channel
+              thumbnails.dart        device_storage.dart      file_opener.dart
               haptics.dart           foreground_service.dart  notification_service.dart
   ui/         convert_tab (simple/advanced), queue_tab, settings_tab,
               home_shell, privacy_intro_screen, network_privacy_screen,
-              error_screen, theme
-  l10n/       app_en.arb, app_ru.arb
+              achievements_screen, compare_screen, support_screen,
+              error_screen, widgets/ (converter-specific only)
+  l10n/       app_en.arb + 14 more
 ```
+
+What is *not* in this tree is the point of the last few releases: the theme,
+the design system, the font, the licences and language screens, the rating
+prompt, the crash log and "delete all my data" all come from `eluna_shared`.
+`services/review_service.dart` and `ui/theme.dart` used to be here and are
+gone, not moved.
 
 Decisions worth knowing about (the older ones are unchanged and still true):
 
