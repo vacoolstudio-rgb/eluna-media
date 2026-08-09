@@ -1,7 +1,7 @@
 # Building a slimmer FFmpeg for Eluna Media
 
-The app currently ships `ffmpeg-kit` **full-gpl 6.0.LTS**, whose configuration
-was read straight out of the shipped `libavutil.so`:
+The app currently ships `ffmpeg-kit` **full-gpl 2.2.1** (FFmpeg 8.1.2), whose
+configuration was read straight out of the shipped `libavutil.so`:
 
 ```
 --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-gmp
@@ -148,11 +148,12 @@ published. A GitHub-wide code search for `com.antonkarpenko.ffmpegkit` returns
 consumers of the plugin and nothing else.
 
 The one public alternative, `arthenica/ffmpeg-kit`, is archived and builds
-**FFmpeg 6.0**. Ours is **FFmpeg 8.0** (`libavcodec 62.11.100`, read out of the
-shipped `libavutil.so`). Rebuilding on it would mean going back two major
-versions, and HEIF/HEIC support in the mov demuxer is a 7.x-era addition — the
-extension list `avif,heic,heif` that makes iPhone photos openable comes from
-the 8.0 build. Trading that for ~8 MB is not a trade worth making.
+**FFmpeg 6.0**. Ours is **FFmpeg 8.1.2** (`com.antonkarpenko:ffmpeg-kit-full-gpl:2.2.1`
+on Android, the matching `8.1.2` frameworks on iOS). Rebuilding on it would mean
+going back two major versions, and HEIF/HEIC support in the mov demuxer is a
+7.x-era addition — the extension list `avif,heic,heif` that makes iPhone photos
+openable comes from the 8.x build. Trading that for ~8 MB is not a trade worth
+making.
 
 **So the route is to ask, not to build**: the maintainer already publishes eight
 package variants from an automated pipeline, and a converter-shaped ninth is a
