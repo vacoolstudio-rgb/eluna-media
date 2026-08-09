@@ -52,6 +52,25 @@ enum EncodingPreset {
   veryslow;
 
   String get flag => name;
+
+  /// The same tradeoff expressed for libaom, whose knob is `-cpu-used` (0 =
+  /// slowest and best, 8 = fastest) rather than a named preset.
+  ///
+  /// The scale is deliberately shifted towards the fast end rather than mapped
+  /// proportionally. libaom at its own default speed encodes far slower than
+  /// real time on desktop hardware, and a phone is not desktop hardware: a
+  /// literal reading of "veryslow" would mean a battery-flattening job that
+  /// never finishes. Even the slowest option here stays at 3, and the middle of
+  /// the range — where the power modes sit — stays at 6, which is roughly where
+  /// libaom stops being unusable on an ARM core.
+  int get aomCpuUsed => switch (this) {
+        ultrafast || superfast => 8,
+        veryfast || faster => 7,
+        fast || medium => 6,
+        slow => 5,
+        slower => 4,
+        veryslow => 3,
+      };
 }
 
 /// How the video encoder decides its bit allocation.

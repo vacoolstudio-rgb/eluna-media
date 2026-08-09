@@ -13,9 +13,24 @@ enum ContainerFormat {
   jpg(MediaKind.image, 'JPEG'),
   png(MediaKind.image, 'PNG'),
   webp(MediaKind.image, 'WebP'),
+
+  /// AV1 stills in a HEIF container: roughly half a JPEG at the same quality.
+  /// Shares its encoder with [VideoCodec.av1], so it is offered on the same
+  /// runtime confirmation.
+  avif(MediaKind.image, 'AVIF'),
+
   bmp(MediaKind.image, 'BMP'),
   tiff(MediaKind.image, 'TIFF'),
   gif(MediaKind.image, 'GIF'),
+
+  /// Animated WebP — the same moving picture as a GIF at a fraction of the
+  /// bytes, because it is a real video codec instead of a palette per frame.
+  ///
+  /// A separate entry rather than a flag on [webp] because the two are
+  /// different encoders (`libwebp_anim` vs `libwebp`) producing different
+  /// files, and the choice cannot be inferred from the target extension —
+  /// which is `.webp` for both, hence the explicit [extension] override.
+  webpAnimated(MediaKind.image, 'WebP (animated)', extension: 'webp'),
 
   // ---- video ----
   mp4(MediaKind.video, 'MP4'),
@@ -32,16 +47,29 @@ enum ContainerFormat {
   ogg(MediaKind.audio, 'OGG Vorbis'),
   opus(MediaKind.audio, 'Opus');
 
-  const ContainerFormat(this.kind, this.label);
+  const ContainerFormat(this.kind, this.label, {String? extension})
+      : _extension = extension;
 
   final MediaKind kind;
   final String label;
 
-  String get extension => name;
+  /// Normally the enum name, which is also the file extension. Overridden only
+  /// where two entries share one extension.
+  final String? _extension;
 
-  /// GIF is the one image container that can hold motion, so a video input is
-  /// meaningful for it.
-  bool get isAnimatedImage => this == ContainerFormat.gif;
+  String get extension => _extension ?? name;
+
+  /// Image containers that can hold motion, so a video input is meaningful for
+  /// them. The rest of the app reads this as "the output moves": it is what
+  /// keeps such jobs out of the parallel-stills lane, off the fit-to-size
+  /// quality search, and away from the before/after comparison.
+  bool get isAnimatedImage =>
+      this == ContainerFormat.gif || this == ContainerFormat.webpAnimated;
+
+  /// True for a container that only makes sense when the source moves. A GIF
+  /// is not one of these — a single-frame GIF out of a photo is a real thing
+  /// to want — but an animated WebP of a still picture is just a worse WebP.
+  bool get needsMovingSource => this == ContainerFormat.webpAnimated;
 
   static ContainerFormat? fromExtension(String ext) {
     final normalised = ext.toLowerCase().replaceFirst('.', '');
@@ -73,7 +101,8 @@ enum ContainerFormat {
     const extraInputs = <String, MediaKind>{
       'heic': MediaKind.image,
       'heif': MediaKind.image,
-      'avif': MediaKind.image,
+      // AVIF is no longer listed here: it is a ContainerFormat now, so
+      // fromExtension resolves it before this map is consulted.
       'jfif': MediaKind.image,
       'ico': MediaKind.image,
       // SVG is deliberately absent. Claiming it here made the app offer a
@@ -128,10 +157,12 @@ enum ContainerFormat {
         MediaKind.video => [
             ...ofKind(MediaKind.video),
             ContainerFormat.gif,
+            ContainerFormat.webpAnimated,
             ...ofKind(MediaKind.audio),
           ],
         MediaKind.image => [
-            ...ofKind(MediaKind.image),
+            for (final f in ofKind(MediaKind.image))
+              if (!f.needsMovingSource || animatedSource) f,
             if (animatedSource) ...ofKind(MediaKind.video),
           ],
         MediaKind.audio => ofKind(MediaKind.audio),
@@ -148,12 +179,17 @@ enum ContainerFormat {
 
 /// Video encoders available in the bundled `full-gpl` FFmpeg build.
 ///
-/// Note: the build ships `dav1d`, which is an AV1 *decoder*. There is no AV1
-/// encoder, so AV1 output is not offered.
+/// The build ships `dav1d` for AV1 *decoding* and `libaom` for AV1 *encoding*;
+/// the latter went unused for a long time on the mistaken belief that only the
+/// decoder was there. Whether `libaom-av1` is really registered is still
+/// confirmed at runtime before the UI offers it — see `EncoderCatalog` — for
+/// the same reason the hardware encoders are: a codec that is advertised but
+/// missing fails every job it touches.
 enum VideoCodec {
   copy('Copy (remux)', null),
   h264('H.264 / AVC', 'libx264'),
   h265('H.265 / HEVC', 'libx265'),
+  av1('AV1', 'libaom-av1'),
   vp9('VP9', 'libvpx-vp9'),
   mpeg4('MPEG-4 Part 2', 'mpeg4'),
   none('No video', null);
@@ -163,15 +199,29 @@ enum VideoCodec {
   final String label;
   final String? encoder;
 
-  /// CRF is only meaningful for the rate-controlled x264/x265/VP9 encoders.
+  /// CRF is only meaningful for the rate-controlled x264/x265/VP9/AV1 encoders.
   bool get supportsCrf =>
-      this == VideoCodec.h264 || this == VideoCodec.h265 || this == VideoCodec.vp9;
+      this == VideoCodec.h264 ||
+      this == VideoCodec.h265 ||
+      this == VideoCodec.vp9 ||
+      this == VideoCodec.av1;
 
-  /// x264/x265 accept `-preset`; VP9 and mpeg4 do not.
+  /// x264/x265 accept `-preset`; VP9, AV1 and mpeg4 do not.
   bool get supportsPreset => this == VideoCodec.h264 || this == VideoCodec.h265;
 
-  /// VP9's CRF scale runs to 63; x264/x265 stop at 51.
-  int get maxCrf => this == VideoCodec.vp9 ? 63 : 51;
+  /// libvpx and libaom read `-crf` only when the target bitrate is pinned to
+  /// zero; left out, both quietly switch to constrained quality and ignore the
+  /// number entirely.
+  bool get crfNeedsZeroBitrate => this == VideoCodec.vp9 || this == VideoCodec.av1;
+
+  /// libaom's speed knob is `-cpu-used`, not `-preset`. It is not an optional
+  /// nicety on a phone: the encoder's own default sits at the slow end of a
+  /// scale whose slow end is measured in hours per minute of footage.
+  bool get usesCpuUsed => this == VideoCodec.av1;
+
+  /// VP9 and AV1 run a 0–63 CRF scale; x264/x265 stop at 51.
+  int get maxCrf =>
+      (this == VideoCodec.vp9 || this == VideoCodec.av1) ? 63 : 51;
 }
 
 enum AudioCodec {
@@ -203,12 +253,18 @@ enum AudioCodec {
 /// FFmpeg fail at runtime (e.g. Vorbis inside MP4).
 abstract final class ContainerRules {
   static const Map<ContainerFormat, List<VideoCodec>> _video = {
+    // First entry is the default, so H.264 keeps the top slot everywhere it is
+    // legal: AV1 is the better codec and the worse default, because it encodes
+    // an order of magnitude slower and older players cannot read it.
     ContainerFormat.mp4: [
       VideoCodec.h264,
       VideoCodec.h265,
+      VideoCodec.av1,
       VideoCodec.mpeg4,
       VideoCodec.copy,
     ],
+    // MOV is Apple's container and QuickTime does not read AV1 in it, so the
+    // codec is deliberately absent here even though the muxer would accept it.
     ContainerFormat.mov: [
       VideoCodec.h264,
       VideoCodec.h265,
@@ -218,11 +274,12 @@ abstract final class ContainerRules {
     ContainerFormat.mkv: [
       VideoCodec.h264,
       VideoCodec.h265,
+      VideoCodec.av1,
       VideoCodec.vp9,
       VideoCodec.mpeg4,
       VideoCodec.copy,
     ],
-    ContainerFormat.webm: [VideoCodec.vp9, VideoCodec.copy],
+    ContainerFormat.webm: [VideoCodec.vp9, VideoCodec.av1, VideoCodec.copy],
     ContainerFormat.avi: [VideoCodec.mpeg4, VideoCodec.h264, VideoCodec.copy],
   };
 

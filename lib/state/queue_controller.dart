@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/converter.dart';
 import '../core/ffmpeg_args.dart';
-import '../core/hw_encoders.dart';
+import '../core/encoders.dart';
 import '../core/output_paths.dart';
 import '../core/queue_storage.dart';
 import '../domain/conversion_job.dart';
@@ -771,7 +771,7 @@ class QueueController extends Notifier<QueueState> {
     String? hwEncoder;
     if (!twoPass && prefs.useHardwareEncoder) {
       hwEncoder =
-          await ref.read(hwEncoderCatalogProvider).encoderFor(job.settings.videoCodec);
+          await ref.read(encoderCatalogProvider).hardwareEncoderFor(job.settings.videoCodec);
       if (!ref.mounted) return;
     }
 

@@ -27,6 +27,17 @@ abstract final class FFmpegArgs {
     return (31 - ((clamped - 1) * 29 / 99)).round().clamp(2, 31);
   }
 
+  /// The same slider onto libaom's inverted 0..63 CRF scale, for AVIF stills.
+  ///
+  /// The floor is 1, not 0: CRF 0 is libaom's lossless mode, whose output can
+  /// exceed the JPEG it was asked to shrink. "Quality 100" should mean the best
+  /// lossy setting, exactly as it does for JPEG, where the same reasoning stops
+  /// the qscale at 2.
+  static int avifCrf(int quality) {
+    final clamped = quality.clamp(1, 100);
+    return (63 - ((clamped - 1) * 62 / 99)).round().clamp(1, 63);
+  }
+
   /// Splits a speed factor into `atempo` stages, each inside the filter's
   /// 0.5–2.0 legal range: 0.25 → [0.5, 0.5], 4.0 → [2.0, 2.0].
   static List<double> atempoChain(double factor) {
@@ -357,6 +368,14 @@ abstract final class FFmpegArgs {
       _appendGifArgs(args, s);
       return;
     }
+    if (s.container == ContainerFormat.webpAnimated) {
+      _appendAnimatedWebpArgs(args, s);
+      return;
+    }
+    if (s.container == ContainerFormat.avif) {
+      _appendAvifArgs(args, s, downscale);
+      return;
+    }
 
     final filters = imageFilters(s, downscale: downscale);
     if (filters.isNotEmpty) args.addAll(['-vf', filters.join(',')]);
@@ -384,6 +403,57 @@ abstract final class FFmpegArgs {
         break;
       default:
         break;
+    }
+  }
+
+  /// A still AVIF: one AV1 frame in a HEIF container.
+  ///
+  /// It shares the whole enhancement/resize chain with the other stills and
+  /// differs only in the encoder, so the picture the user tuned is the picture
+  /// they get. What it does *not* share is `-update`, which belongs to the
+  /// image2 muxer; the AVIF muxer does not have that option and FFmpeg treats
+  /// an unknown private option as a fatal error rather than a warning.
+  static void _appendAvifArgs(List<String> args, ConversionSettings s, double downscale) {
+    final filters = imageFilters(s, downscale: downscale);
+    if (filters.isNotEmpty) args.addAll(['-vf', filters.join(',')]);
+
+    args.addAll([
+      '-frames:v', '1',
+      '-c:v', 'libaom-av1',
+      // Tells libaom it is coding one picture rather than the first frame of a
+      // sequence, which is what the AVIF still profile actually asks for.
+      '-still-picture', '1',
+      '-crf', avifCrf(s.imageQuality).toString(),
+      // Same rule as AV1 video: without a zero bitrate the CRF is ignored.
+      '-b:v', '0',
+      '-cpu-used', '${s.preset.aomCpuUsed}',
+      '-row-mt', '1',
+    ]);
+  }
+
+  /// An animated WebP — the replacement for GIF rather than a variant of it.
+  ///
+  /// No palette pipeline here, and that is the whole point: GIF needs
+  /// `palettegen`/`paletteuse` because it can only hold 256 colours per frame,
+  /// while WebP carries a real video bitstream. The same animation therefore
+  /// arrives in a fraction of the bytes and without the dithering.
+  static void _appendAnimatedWebpArgs(List<String> args, ConversionSettings s) {
+    final chain = <String>['fps=${s.fps.value ?? 15}'];
+    final height = s.resolution.height;
+    // -2 rather than the GIF path's -1: libwebp encodes to yuv420p, whose
+    // chroma planes are half-sized, so an odd width is rejected outright.
+    if (height != null) chain.add('scale=-2:$height:flags=lanczos');
+
+    args.addAll([
+      '-vf', chain.join(','),
+      '-c:v', 'libwebp_anim',
+      '-loop', '0',
+      '-an',
+    ]);
+    if (s.lossless) {
+      args.addAll(['-lossless', '1', '-compression_level', '6']);
+    } else {
+      args.addAll(['-quality', s.imageQuality.clamp(1, 100).toString()]);
     }
   }
 
@@ -492,7 +562,9 @@ abstract final class FFmpegArgs {
       final usesBitrate = targetKbps != null ||
           s.rateControl == RateControl.bitrate ||
           !codec.supportsCrf;
-      final hwCapable = codec == VideoCodec.h264 || codec == VideoCodec.h265;
+      final hwCapable = codec == VideoCodec.h264 ||
+          codec == VideoCodec.h265 ||
+          codec == VideoCodec.av1;
       final hw = usesBitrate && hwCapable ? hwVideoEncoder : null;
 
       args.addAll(['-c:v', hw ?? codec.encoder!]);
@@ -512,8 +584,10 @@ abstract final class FFmpegArgs {
         ]);
       } else if (!usesBitrate) {
         args.addAll(['-crf', s.crf.clamp(0, codec.maxCrf).toString()]);
-        // VP9 only honours -crf when the target bitrate is pinned to zero.
-        if (codec == VideoCodec.vp9) args.addAll(['-b:v', '0']);
+        // libvpx and libaom only honour -crf when the target bitrate is
+        // pinned to zero; without it they silently switch to constrained
+        // quality and the number does nothing.
+        if (codec.crfNeedsZeroBitrate) args.addAll(['-b:v', '0']);
 
         // CRF has no ceiling, so a source that is already efficiently encoded
         // comes out *larger* — "compress" that inflates the file is the worst
@@ -533,6 +607,19 @@ abstract final class FFmpegArgs {
 
       if (hw == null && codec.supportsPreset) {
         args.addAll(['-preset', s.preset.flag]);
+      }
+
+      // libaom's equivalent of a preset, plus row-based multithreading. Both
+      // matter more here than the preset does for x264: left alone, libaom
+      // runs single-threaded at a speed setting chosen for offline desktop
+      // encoding, and a two-minute clip outlives the user's patience and the
+      // battery. `-row-mt` is what lets the tiles spread across the phone's
+      // cores at all.
+      if (hw == null && codec.usesCpuUsed) {
+        args.addAll([
+          '-cpu-used', '${s.preset.aomCpuUsed}',
+          '-row-mt', '1',
+        ]);
       }
 
       // Apple players will not decode HEVC in MP4/MOV tagged as `hev1`.

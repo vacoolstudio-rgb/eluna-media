@@ -99,6 +99,74 @@ void main() {
       expect(args, isNot(contains('-preset')));
     });
 
+    test('AV1 pins -b:v to 0 and steers libaom with -cpu-used, not -preset', () {
+      final args = build(const ConversionSettings(
+        container: ContainerFormat.mp4,
+        videoCodec: VideoCodec.av1,
+        audioCodec: AudioCodec.aac,
+        rateControl: RateControl.quality,
+        crf: 35,
+        preset: EncodingPreset.veryfast,
+      ));
+      expect(valueOf(args, '-crf'), '35');
+      expect(valueOf(args, '-b:v'), '0');
+      // libaom rejects -preset outright; its knob is -cpu-used, and without
+      // row threading it encodes on one core.
+      expect(args, isNot(contains('-preset')));
+      expect(valueOf(args, '-cpu-used'), '7');
+      expect(valueOf(args, '-row-mt'), '1');
+    });
+
+    test('AV1 on the bitrate path takes -b:v and still gets -cpu-used', () {
+      final args = build(const ConversionSettings(
+        container: ContainerFormat.webm,
+        videoCodec: VideoCodec.av1,
+        audioCodec: AudioCodec.opus,
+        rateControl: RateControl.bitrate,
+        videoBitrateKbps: 1200,
+        preset: EncodingPreset.medium,
+      ));
+      expect(valueOf(args, '-b:v'), '1200k');
+      expect(args, isNot(contains('-crf')));
+      expect(valueOf(args, '-cpu-used'), '6');
+    });
+
+    test('a hardware AV1 encoder replaces libaom and drops its knobs', () {
+      final args = FFmpegArgs.build(
+        inputPath: '/in.mp4',
+        outputPath: '/out',
+        settings: const ConversionSettings(
+          container: ContainerFormat.mp4,
+          videoCodec: VideoCodec.av1,
+          audioCodec: AudioCodec.aac,
+          rateControl: RateControl.bitrate,
+          videoBitrateKbps: 2000,
+        ),
+        hwVideoEncoder: 'av1_mediacodec',
+      );
+      expect(valueOf(args, '-c:v'), 'av1_mediacodec');
+      // -cpu-used and -row-mt are libaom options; MediaCodec errors on them.
+      expect(args, isNot(contains('-cpu-used')));
+      expect(args, isNot(contains('-row-mt')));
+    });
+
+    test('constant-quality AV1 stays on software even when hardware is offered', () {
+      final args = FFmpegArgs.build(
+        inputPath: '/in.mp4',
+        outputPath: '/out',
+        settings: const ConversionSettings(
+          container: ContainerFormat.mp4,
+          videoCodec: VideoCodec.av1,
+          audioCodec: AudioCodec.aac,
+          rateControl: RateControl.quality,
+          crf: 30,
+        ),
+        hwVideoEncoder: 'av1_mediacodec',
+      );
+      expect(valueOf(args, '-c:v'), 'libaom-av1');
+      expect(valueOf(args, '-crf'), '30');
+    });
+
     test('CRF is clamped to the codec range', () {
       final vp9 = build(const ConversionSettings(
         container: ContainerFormat.webm,
@@ -291,6 +359,78 @@ void main() {
       expect(args, contains('-an'));
       // A GIF is a sequence: it must not be truncated to one frame.
       expect(args, isNot(contains('-frames:v')));
+    });
+
+    test('avif encodes one AV1 still and never sends -update', () {
+      final args = build(const ConversionSettings(
+        container: ContainerFormat.avif,
+        imageQuality: 80,
+        preset: EncodingPreset.medium,
+      ));
+      expect(valueOf(args, '-c:v'), 'libaom-av1');
+      expect(valueOf(args, '-frames:v'), '1');
+      expect(valueOf(args, '-still-picture'), '1');
+      expect(valueOf(args, '-b:v'), '0');
+      expect(valueOf(args, '-cpu-used'), '6');
+      expect(valueOf(args, '-crf'), FFmpegArgs.avifCrf(80).toString());
+      // -update belongs to the image2 muxer; the AVIF muxer has no such
+      // option and FFmpeg treats an unknown private option as fatal.
+      expect(args, isNot(contains('-update')));
+    });
+
+    test('avif quality maps onto an inverted CRF scale that stops short of lossless', () {
+      expect(FFmpegArgs.avifCrf(100), 1);
+      expect(FFmpegArgs.avifCrf(1), 63);
+      expect(FFmpegArgs.avifCrf(100), lessThan(FFmpegArgs.avifCrf(50)));
+      expect(FFmpegArgs.avifCrf(50), lessThan(FFmpegArgs.avifCrf(10)));
+      // Clamped rather than extrapolated.
+      expect(FFmpegArgs.avifCrf(0), 63);
+      expect(FFmpegArgs.avifCrf(999), 1);
+    });
+
+    test('avif keeps the shared still-image enhancement chain', () {
+      final args = build(const ConversionSettings(
+        container: ContainerFormat.avif,
+        imageQuality: 80,
+        sharpen: EnhanceLevel.medium,
+        autoColor: true,
+      ));
+      final vf = valueOf(args, '-vf');
+      expect(vf, isNotNull);
+      expect(vf, contains('normalize='));
+      expect(vf, contains('unsharp='));
+    });
+
+    test('animated webp uses libwebp_anim and loops, without a palette graph', () {
+      final args = build(const ConversionSettings(
+        container: ContainerFormat.webpAnimated,
+        fps: FpsPreset.fps15,
+        resolution: ResolutionPreset.p480,
+        imageQuality: 75,
+      ));
+      expect(valueOf(args, '-c:v'), 'libwebp_anim');
+      expect(valueOf(args, '-loop'), '0');
+      expect(valueOf(args, '-quality'), '75');
+      expect(args, contains('-an'));
+      // It is a sequence, like GIF.
+      expect(args, isNot(contains('-frames:v')));
+      // WebP carries a real bitstream, so none of GIF's palette machinery.
+      expect(args, isNot(contains('-filter_complex')));
+
+      final vf = valueOf(args, '-vf');
+      expect(vf, contains('fps=15'));
+      // -2, not -1: libwebp encodes yuv420p and rejects an odd width.
+      expect(vf, contains('scale=-2:480:flags=lanczos'));
+    });
+
+    test('lossless animated webp swaps quality for the lossless flag', () {
+      final args = build(const ConversionSettings(
+        container: ContainerFormat.webpAnimated,
+        lossless: true,
+        imageQuality: 75,
+      ));
+      expect(valueOf(args, '-lossless'), '1');
+      expect(args, isNot(contains('-quality')));
     });
   });
 

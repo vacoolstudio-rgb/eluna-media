@@ -97,6 +97,56 @@ void main() {
     });
   });
 
+  group('animated WebP and AVIF', () {
+    test('animated WebP writes a .webp file, like the still one', () {
+      expect(ContainerFormat.webpAnimated.extension, 'webp');
+      expect(ContainerFormat.webp.extension, 'webp');
+      // The extension is shared, the identity is not.
+      expect(ContainerFormat.webpAnimated, isNot(ContainerFormat.webp));
+    });
+
+    test('a .webp input resolves to the still format, never the animated one', () {
+      expect(ContainerFormat.fromExtension('webp'), ContainerFormat.webp);
+      expect(ContainerFormat.fromExtension('.WEBP'), ContainerFormat.webp);
+    });
+
+    test('animated WebP counts as a moving output, AVIF does not', () {
+      expect(ContainerFormat.webpAnimated.isAnimatedImage, isTrue);
+      expect(ContainerFormat.gif.isAnimatedImage, isTrue);
+      expect(ContainerFormat.avif.isAnimatedImage, isFalse);
+      expect(ContainerFormat.webp.isAnimatedImage, isFalse);
+    });
+
+    test('a still source is not offered animated WebP, a GIF source is', () {
+      final still = ContainerFormat.outputsFor(MediaKind.image);
+      expect(still, isNot(contains(ContainerFormat.webpAnimated)));
+      // A one-frame GIF out of a photo is a real thing to want, so GIF stays.
+      expect(still, contains(ContainerFormat.gif));
+      expect(still, contains(ContainerFormat.avif));
+
+      final animated =
+          ContainerFormat.outputsFor(MediaKind.image, animatedSource: true);
+      expect(animated, contains(ContainerFormat.webpAnimated));
+    });
+
+    test('a video source is offered animated WebP alongside GIF', () {
+      final outputs = ContainerFormat.outputsFor(MediaKind.video);
+      expect(outputs, contains(ContainerFormat.webpAnimated));
+      expect(outputs, contains(ContainerFormat.gif));
+    });
+
+    test('audio is offered neither', () {
+      final outputs = ContainerFormat.outputsFor(MediaKind.audio);
+      expect(outputs, isNot(contains(ContainerFormat.webpAnimated)));
+      expect(outputs, isNot(contains(ContainerFormat.avif)));
+    });
+
+    test('AVIF is a known image input, as it was before it became a container', () {
+      expect(ContainerFormat.kindOfFile('photo.avif'), MediaKind.image);
+      expect(ContainerFormat.kindOfFile('photo.heic'), MediaKind.image);
+    });
+  });
+
   group('TrimRange', () {
     test('validates ordering', () {
       expect(const TrimRange(startMs: 0, endMs: 1).isValid, isTrue);

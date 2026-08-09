@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../core/encoders.dart';
 import '../core/output_paths.dart';
 import '../core/rate_calc.dart';
 import '../core/time_input.dart';
@@ -643,10 +644,17 @@ class _FormatSection extends ConsumerWidget {
 
     final recommended = preset.settings().container;
     final selected = ref.watch(formatOverrideProvider) ?? recommended;
-    final options = ContainerFormat.outputsFor(
-      kind,
-      animatedSource: ref.watch(animatedSourceProvider),
-    );
+    // A format whose encoder this build could not confirm is dropped, unless
+    // it is the one already chosen — removing the selection under the user is
+    // worse than showing a chip that may fail.
+    final unavailable = ref.watch(unavailableContainersProvider);
+    final options = [
+      for (final f in ContainerFormat.outputsFor(
+        kind,
+        animatedSource: ref.watch(animatedSourceProvider),
+      ))
+        if (!unavailable.contains(f) || f == selected) f,
+    ];
 
     return _Section(
       title: l10n.convertTo,
@@ -1119,7 +1127,7 @@ class _AdvancedView extends ConsumerWidget {
   }
 }
 
-class _OutputSection extends StatelessWidget {
+class _OutputSection extends ConsumerWidget {
   const _OutputSection({
     required this.settings,
     required this.controller,
@@ -1135,13 +1143,20 @@ class _OutputSection extends StatelessWidget {
   final bool animatedSource;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
     final theme = Theme.of(context);
 
     // Only the containers this source can legally become. The old dropdown
-    // listed all seventeen, so an MP3 could be told to become a JPEG.
-    final options = ContainerFormat.outputsFor(sourceKind, animatedSource: animatedSource);
+    // listed all seventeen, so an MP3 could be told to become a JPEG. Formats
+    // whose encoder the build could not confirm come out too — except the one
+    // currently selected, which must stay or the dropdown throws on a value
+    // that is not among its items.
+    final unavailable = ref.watch(unavailableContainersProvider);
+    final options = [
+      for (final f in ContainerFormat.outputsFor(sourceKind, animatedSource: animatedSource))
+        if (!unavailable.contains(f) || f == settings.container) f,
+    ];
     final value = options.contains(settings.container)
         ? settings.container
         : ContainerFormat.defaultOutputFor(sourceKind);
@@ -1175,6 +1190,7 @@ class _VideoSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
     final codec = settings.videoCodec;
+    final av1Available = ref.watch(av1AvailableProvider).value ?? false;
 
     final isReencoding = codec != VideoCodec.copy && codec != VideoCodec.none;
     final useCrf = settings.rateControl == RateControl.quality && codec.supportsCrf;
@@ -1192,7 +1208,14 @@ class _VideoSection extends ConsumerWidget {
         LabelledDropdown<VideoCodec>(
           label: l10n.videoCodec,
           value: codec,
-          items: ContainerRules.videoCodecsFor(settings.container),
+          // AV1 is dropped until the binary has confirmed it can encode it.
+          // The currently selected codec always stays in the list: a dropdown
+          // whose value is not among its items throws, and a stored job can
+          // carry AV1 from a build or device where the probe said yes.
+          items: [
+            for (final c in ContainerRules.videoCodecsFor(settings.container))
+              if (c != VideoCodec.av1 || c == codec || av1Available) c,
+          ],
           labelOf: (c) => c.label,
           onChanged: controller.setVideoCodec,
         ),
@@ -1631,9 +1654,14 @@ class _ImageSection extends StatelessWidget {
     final l10n = L10n.of(context);
     final container = settings.container;
 
+    // AVIF reads the same slider through libaom's CRF scale; animated WebP
+    // reads it as libwebp's -quality, exactly as the still one does.
+    final losslessCapable = container == ContainerFormat.webp ||
+        container == ContainerFormat.webpAnimated;
     final hasQuality = container == ContainerFormat.jpg ||
-        (container == ContainerFormat.webp && !settings.lossless);
-    final hasLosslessToggle = container == ContainerFormat.webp;
+        container == ContainerFormat.avif ||
+        (losslessCapable && !settings.lossless);
+    final hasLosslessToggle = losslessCapable;
 
     return _Section(
       title: l10n.sectionImage,
