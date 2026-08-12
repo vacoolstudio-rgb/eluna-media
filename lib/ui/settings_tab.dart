@@ -56,19 +56,21 @@ class _Section extends StatelessWidget {
   }
 }
 
-/// Оформление: строка перехода на общий экран темы и две ручки, которых у того
-/// экрана пока нет.
+/// Оформление: одна строка, ведущая на общий экран темы.
 ///
-/// Источник истины один — `ElunaThemeController`; здесь только показ и запись в
-/// него. Своих полей под тему у настроек приложения больше нет, поэтому подписка
-/// на контроллер, а не на провайдер: без неё галки перерисовывались бы лишь
-/// побочно, через смену `ThemeData`, — а «чисто чёрный» в светлой теме её не
-/// меняет вовсе, и переключатель залипал бы в прежнем положении.
+/// Своих ручек здесь больше нет. До v0.18 «чисто чёрный» и Material You жили
+/// тут, потому что общий экран их не предлагал; теперь предлагает — вместе с
+/// рядом акцентов, которого у Media не было вовсе, — и держать вторую пару
+/// переключателей над тем же контроллером значит однажды разойтись с ним в
+/// показаниях. Ровно так это устроено в Eluna Screen.
 ///
-/// Заголовок и режим для строки темы берутся из таблицы пакета, а не из ARB
-/// приложения: те же слова там переведены на 59 языков вместо пятнадцати и ровно
-/// так, как подпишет себя сам экран. Подписи двух переключателей — свои: в общей
-/// таблице их нет, потому что и ручек у общего экрана нет.
+/// Подписка на контроллер, а не на провайдер: подзаголовок называет и OLED, и
+/// Material You, а «чисто чёрный» в светлой теме `ThemeData` не меняет вовсе —
+/// без подписки строка залипала бы в прежнем виде.
+///
+/// Слова берутся из таблицы пакета: те же самые там переведены на 59 языков
+/// вместо пятнадцати и ровно так, как подпишет себя сам экран. Исключение —
+/// «Системная»: в общей таблице её нет, и она приходит из ARB приложения.
 class _AppearanceControls extends ConsumerWidget {
   const _AppearanceControls();
 
@@ -76,69 +78,43 @@ class _AppearanceControls extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
     final l = ElunaL10n.of(context);
-    final wallpaperAccent = ref.watch(wallpaperAccentProvider);
 
     return ListenableBuilder(
       listenable: ElunaThemeController.instance,
       builder: (context, _) {
         final appearance = ElunaThemeController.instance;
 
-        // `system` называем тем, чем он сейчас является. Строки «Системная» в
-        // общей таблице нет, и это не пробел: сам экран выбора подсвечивает не
-        // режим, а текущую яркость, — подзаголовок обязан говорить то же самое,
-        // иначе список и экран расходятся в показаниях.
-        final dark = switch (appearance.mode) {
-          ThemeMode.system =>
-            MediaQuery.platformBrightnessOf(context) == Brightness.dark,
-          ThemeMode.dark => true,
-          ThemeMode.light => false,
-        };
+        // Что включено, то и перечислено. OLED и Material You называют себя
+        // самими собой: как и имена пресетов, это имена собственные, и ни в
+        // одном приложении семьи они не переводятся.
+        final parts = <String>[
+          // Имя пресета — только когда их больше одного. Пока в семье одна
+          // тема, экран прячет свою сетку, и «Violet» в подзаголовке называл бы
+          // выбор, которого не предлагали.
+          if (kElunaThemes.length > 1) appearance.preset.name,
+          switch (appearance.mode) {
+            ThemeMode.system => l10n.themeSystem,
+            ThemeMode.dark => l.themeDark,
+            ThemeMode.light => l.themeLight,
+          },
+          // Только там, где ему есть что делать. Сама настройка переезжает
+          // между устройствами, поэтому телефон без цвета обоев (iOS, Android
+          // до 12) вполне может держать её включённой — и назвать её здесь
+          // значило бы описать цвет, которого на этом экране нет.
+          if (appearance.dynamicColor && appearance.wallpaperAvailable)
+            'Material You',
+          if (appearance.pureBlack) 'OLED',
+        ];
 
-        // Material You без цвета обоев — переключатель, который ничего не
-        // делает: Android до 12 и iOS его не отдают, и включение оставит тему
-        // ровно той же. Гасим — но только пока он выключен: снятие акцента
-        // может не удаться и разово (адаптер гасит ошибку и возвращает null), а
-        // ручка, запертая во включённом положении, хуже бесполезной.
-        final wallpaperUsable = wallpaperAccent != null || appearance.dynamicColor;
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.palette_outlined),
-              title: Text(l.theme),
-              subtitle: Text([
-                dark ? l.themeDark : l.themeLight,
-                // Имя пресета — только когда их больше одного. Пока в семье одна
-                // тема, экран прячет свою сетку, и «Violet» в подзаголовке
-                // называл бы выбор, которого не предлагали.
-                if (kElunaThemes.length > 1) appearance.preset.name,
-              ].join(' · ')),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute<void>(builder: (_) => const ElunaThemeScreen()),
-              ),
-            ),
-            SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text(l10n.oledDark),
-              subtitle: Text(l10n.oledDarkHint),
-              value: appearance.pureBlack,
-              onChanged: (v) => appearance.setPureBlack(v),
-            ),
-            SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text(l10n.dynamicColorLabel),
-              // Подсказка уже говорит «там, где это поддерживается» — на
-              // погашенном переключателе она и есть объяснение, почему он
-              // погашен. Отдельной строки про это заводить не нужно.
-              subtitle: Text(l10n.dynamicColorHint),
-              value: appearance.dynamicColor,
-              onChanged:
-                  wallpaperUsable ? (v) => appearance.setDynamicColor(v) : null,
-            ),
-          ],
+        return ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: const Icon(Icons.palette_outlined),
+          title: Text(l.theme),
+          subtitle: Text(parts.join(' · ')),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const ElunaThemeScreen()),
+          ),
         );
       },
     );
@@ -166,14 +142,9 @@ class SettingsTab extends ConsumerWidget {
             icon: HugeIcons.strokeRoundedPaintBoard,
             accent: SectionAccents.purple,
             children: [
-              // Выбор темы — общий экран пакета; чисто чёрный и Material You
-              // остаются здесь, потому что общий экран их пока не предлагает, а
-              // молча отнять у людей две работающие настройки нельзя.
-              //
-              // Все три писали в `app.themeMode` и соседние ключи, которые пакет
-              // читает один раз семенами, — то есть с переездом темы перестали
-              // менять что-либо и сразу, и после перезапуска. Теперь читают и
-              // пишут сам контроллер.
+              // Оформление целиком — общий экран пакета: яркость, ряд акцентов,
+              // «чисто чёрный» и Material You. Здесь остаётся строка, которая
+              // туда ведёт и называет выбранное.
               const _AppearanceControls(),
               // Выбор языка — общий экран пакета: список с поиском по родному
               // названию, английскому и коду. Автонимы больше не переписаны
@@ -357,23 +328,6 @@ class SettingsTab extends ConsumerWidget {
                   MaterialPageRoute<void>(builder: (_) => const SupportScreen()),
                 ),
               ),
-              // Версия приходит с платформы (канал), поэтому FutureBuilder, а не
-              // константа: строка появляется кадром позже, зато она всегда та,
-              // что реально установлена. `full()` — с номером сборки: именно в
-              // такой форме её нужно называть в отчёте об ошибке. Пока ответ
-              // едет, показываем уже прочитанное значение — «что нового» на
-              // первом кадре обычно успевает его запросить, и мигания нет.
-              FutureBuilder<String>(
-                future: ElunaVersion.full(),
-                builder: (context, snapshot) => ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.info_outline),
-                  title: Text(
-                    l10n.appVersionLabel(snapshot.data ?? ElunaVersion.cached),
-                  ),
-                  subtitle: Text(l10n.appTitle),
-                ),
-              ),
             ],
           ),
           const SizedBox(height: 16),
@@ -407,8 +361,38 @@ class SettingsTab extends ConsumerWidget {
               ),
             ],
           ),
+          const SizedBox(height: 8),
+          // Версия — подписью под всем списком, как в Eluna Screen. Строкой «О
+          // приложении» она была пунктом, который выглядит нажимаемым и никуда
+          // не ведёт; внизу это выходные данные, куда и приходят посмотреть.
+          const Center(child: _VersionCaption()),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// «Версия 0.5.0 (3)» мелким шрифтом в самом низу настроек.
+///
+/// Версия приходит с платформы (канал), поэтому FutureBuilder, а не константа:
+/// строка появляется кадром позже, зато она всегда та, что реально установлена.
+/// `full()` — с номером сборки: именно в такой форме её нужно называть в отчёте
+/// об ошибке. Пока ответ едет, показываем уже прочитанное значение — «что
+/// нового» на первом кадре обычно успевает его запросить, и мигания нет.
+class _VersionCaption extends StatelessWidget {
+  const _VersionCaption();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    final theme = Theme.of(context);
+    return FutureBuilder<String>(
+      future: ElunaVersion.full(),
+      builder: (context, snapshot) => Text(
+        l10n.appVersionLabel(snapshot.data ?? ElunaVersion.cached),
+        style: theme.textTheme.labelSmall
+            ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
       ),
     );
   }

@@ -14,10 +14,24 @@ competitor/review analysis from July 2026.
 
 ### Converting
 - **Video** — MP4, MKV, MOV, WebM, AVI. Encoders: H.264, H.265 (tagged `hvc1`
-  for Apple players), VP9, MPEG-4, or stream copy (remux without re-encoding).
-- **Audio** — MP3, M4A/AAC, WAV, FLAC, OGG Vorbis, Opus. Extracts from video.
-- **Images** — JPEG, PNG, WebP (lossy and lossless), BMP, TIFF, and animated
-  GIF built with a `palettegen`/`paletteuse` graph.
+  for Apple players), AV1 (`libaom`, driven by `-cpu-used` rather than
+  `-preset`), VP9, MPEG-4, or stream copy (remux without re-encoding). AV1 is
+  offered but never the default: it is the better codec and the worse default —
+  an order of magnitude slower, and older players cannot open it. It is absent
+  from MOV on purpose, because QuickTime will not read it there.
+- **Audio** — MP3, M4A (AAC, or ALAC for lossless), WAV, FLAC, OGG Vorbis,
+  Opus. Extracts from video.
+- **Images** — JPEG, PNG, WebP (lossy and lossless), AVIF (AV1 stills, roughly
+  half a JPEG at the same quality), BMP, TIFF, animated GIF built with a
+  `palettegen`/`paletteuse` graph, and animated WebP — the same motion as a GIF
+  at a fraction of the bytes, because it is a real video codec instead of a
+  palette per frame.
+- **Every codec the bundle's contents are not obvious about is confirmed at
+  runtime.** `EncoderCatalog` asks the binary (`ffmpeg -encoders`) once and
+  caches the answer; AV1, AVIF and animated WebP stay out of the pickers until
+  it comes back. The app spent its first year believing this build had no AV1
+  encoder while `libaom` sat in `libavcodec.so` the whole time — a probe cannot
+  make that mistake twice.
 - **Fit to size** — pick a byte budget (Discord 10 MB, WhatsApp 16 MB, Email
   25 MB, 50/100 MB, or custom) and the bitrate is computed from the source
   duration with a 7% safety margin plus `maxrate`/`bufsize` pinning, so the
@@ -130,12 +144,19 @@ competitor/review analysis from July 2026.
   the Play review and anything less opens an e-mail the user writes themselves.
   Nothing is transmitted by the app either way.
 - Haptic feedback on batch start/success/failure (toggleable).
-- **Achievements** — 18 of them, bronze to a platinum capstone, counted
+- **Achievements** — 18 of them, common to a platinum capstone, counted
   entirely on-device (the screen says so): conversion counts, storage saved,
-  batch sizes, first GIF, first exact-size hit, night owl. One quiet snackbar
-  per batch, never a popup. Which ones exist and what they are called is
-  Media's; the rarity, the medal and the progress maths come from
-  `eluna_shared`, and the catalogue is unit-tested against it.
+  batch sizes, first GIF, first exact-size hit, night owl. The shelf has three
+  tabs (all / unlocked / locked), a progress header broken down by rarity, and
+  a hex medal per card whose finish is the rarity. Tapping any card — earned or
+  not — opens a detail sheet that shares it as a picture; an unfinished one
+  shares its progress, which is the only reason the sheet is worth having on
+  day one. Earning one is celebrated with confetti and a single haptic thump
+  (through the app's own haptics switch), where it used to be a snackbar in the
+  same voice the app says "file saved" in. Which achievements exist and what
+  they are called is Media's; the rarity, the medal, the progress maths and
+  every word on the screen but their names come from `eluna_shared`, so the
+  shelf reads identically in Eluna Screen.
 - **What's-new dialog** once per version — shown only to people who actually
   used the previous version, never on a fresh install's first minute.
 - **The Eluna design language**, shared with the other apps in the family:
@@ -148,8 +169,12 @@ competitor/review analysis from July 2026.
   None of it lives here any more: the theme, the font and the shared widgets
   come from the `eluna_shared` package, and `lib/ui/widgets/` keeps only what
   belongs to the converter itself.
-- Themes: system/light/dark, **OLED true-black** variant, optional
-  **Material You** dynamic color. **15 languages** (en, ru, de, es, fr, it,
+- Themes: system/light/dark, an **accent row**, an **OLED true-black** variant
+  and optional **Material You** — all of it on the package's own appearance
+  screen, which Settings links to with a row that names what is on. The app
+  keeps no theme switches of its own: it hands the wallpaper accent to
+  `ElunaThemeController` at startup and reads the result back. **15 languages**
+  (en, ru, de, es, fr, it,
   pt, tr, pl, uk, hi, id, ja, ko, zh — full key parity, native plural
   rules), phone and tablet layouts, checked at 320dp and 1.5× text scale.
 - Release builds render a calm bilingual fallback instead of the grey error
@@ -306,8 +331,10 @@ plain: GPL v3 in, GPL v3 out, F-Droid included, nothing to argue.
   that iOS matches library items by original filename alone (`PHAsset` does
   not publish file size, and the ways to read it are private API), where
   Android matches on name *and* exact byte count.
-- **AV1 output** (decoder only in the bundle) and **HEIC** (needs `libheif`,
-  not bundled). Both need a custom FFmpeg build.
+- **HEIC output** — needs `libheif`, which this build genuinely does not carry,
+  so it would take a custom FFmpeg. Reading HEIC/HEIF works. (AV1 output used to
+  be listed here on the same grounds and the grounds were wrong: `libaom` was in
+  the bundle all along, and AV1, AVIF and animated WebP shipped in 0.5.0.)
 - **Reverse playback** — FFmpeg's `reverse` buffers the whole clip in RAM,
   which on phones means OOM crashes on real-world videos; crashes on large
   files are the category's #6 complaint, so the feature is omitted rather

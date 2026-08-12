@@ -280,6 +280,9 @@ class L10nHi extends L10n {
   String get appearance => 'दिखावट';
 
   @override
+  String get themeSystem => 'सिस्टम जैसा';
+
+  @override
   String get language => 'भाषा';
 
   @override
@@ -583,19 +586,6 @@ class L10nHi extends L10n {
   String get errorDetailsTitle => 'त्रुटि का विवरण';
 
   @override
-  String get oledDark => 'प्योर ब्लैक डार्क थीम';
-
-  @override
-  String get oledDarkHint => 'असली काला OLED स्क्रीन पर बैटरी बचाता है।';
-
-  @override
-  String get dynamicColorLabel => 'सिस्टम रंग (Material You)';
-
-  @override
-  String get dynamicColorHint =>
-      'जहाँ सपोर्ट हो, डिवाइस वॉलपेपर का पैलेट अपनाता है।';
-
-  @override
   String get sectionConversionPrefs => 'कन्वर्ज़न';
 
   @override
@@ -772,23 +762,23 @@ class L10nHi extends L10n {
 
   @override
   String get whatsNew1 =>
-      'तैयार फ़ाइलें अब सीधे गैलरी में जाती हैं, और “सभी सहेजें” पूरा बैच एक बार में ले लेता है।';
+      'वीडियो अब AV1 में भी बन सकता है: फ़ाइलें काफ़ी छोटी, अगर इंतज़ार कर सकें।';
 
   @override
   String get whatsNew2 =>
-      'फ़ोटो को सटीक आकार में लाएँ — 100 KB से 2 MB तक, या आपका अपना अंक।';
+      'तस्वीरों के लिए नया: AVIF, JPEG से लगभग आधा, और GIF की जगह एनिमेटेड WebP।';
 
   @override
   String get whatsNew3 =>
-      'ऐप अब गीगाबाइट जमा नहीं करता: सेटिंग में उपयोग की गई जगह दिखती है और उसे हटाया जा सकता है।';
+      'M4A अब बिना नुक़सान के भी: AAC के साथ अब ALAC भी है।';
 
   @override
   String get whatsNew4 =>
-      'कन्वर्ज़न को सूचना से ही रोकें, और जगह खत्म होने से पहले चेतावनी पाएँ।';
+      'दिखावट अब एक ही स्क्रीन पर: चमक, एक्सेंट रंग, पूरा काला OLED और Material You।';
 
   @override
   String get whatsNew5 =>
-      'थंबनेल, पहले/बाद की तुलना, GIF → MP4, सटीक ट्रिम समय — और फ़ोटो अब एक साथ कई प्रोसेस होते हैं।';
+      'उपलब्धियों में मेडल, तीन टैब और प्रगति — जिसे तस्वीर बनाकर साझा किया जा सकता है।';
 
   @override
   String get achievementsTitle => 'अचीवमेंट्स';
@@ -796,11 +786,6 @@ class L10nHi extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$total में से $done';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return 'अचीवमेंट अनलॉक: $title';
   }
 
   @override

@@ -283,6 +283,9 @@ class L10nUk extends L10n {
   String get appearance => 'Оформлення';
 
   @override
+  String get themeSystem => 'Як у системі';
+
+  @override
   String get language => 'Мова';
 
   @override
@@ -591,20 +594,6 @@ class L10nUk extends L10n {
   String get errorDetailsTitle => 'Деталі помилки';
 
   @override
-  String get oledDark => 'Суцільно чорна темна тема';
-
-  @override
-  String get oledDarkHint =>
-      'Справжній чорний заощаджує енергію на OLED-екранах.';
-
-  @override
-  String get dynamicColorLabel => 'Системні кольори (Material You)';
-
-  @override
-  String get dynamicColorHint =>
-      'Палітра шпалер пристрою там, де це підтримується.';
-
-  @override
   String get sectionConversionPrefs => 'Конвертація';
 
   @override
@@ -781,23 +770,23 @@ class L10nUk extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Готові файли тепер одразу потрапляють до галереї, а «Зберегти все» забирає всю партію разом.';
+      'Відео тепер можна кодувати в AV1: файли помітно менші, якщо є час зачекати.';
 
   @override
   String get whatsNew2 =>
-      'Фото можна стиснути до точного розміру — від 100 КБ до 2 МБ або власне число.';
+      'Для зображень з\'явилися AVIF — приблизно вдвічі легший за JPEG — і анімований WebP замість GIF.';
 
   @override
   String get whatsNew3 =>
-      'Застосунок більше не накопичує гігабайти: у налаштуваннях видно зайняте місце і є кнопка очищення.';
+      'M4A тепер буває без втрат: поруч із AAC з\'явився ALAC.';
 
   @override
   String get whatsNew4 =>
-      'Конвертацію можна зупинити просто з сповіщення, а про брак місця застосунок попередить заздалегідь.';
+      'Оформлення зібране на одному екрані: яскравість, колір акценту, чорний OLED і Material You.';
 
   @override
   String get whatsNew5 =>
-      'Мініатюри, порівняння до/після, GIF → MP4, точний час обрізки — і фото тепер обробляються по кілька одночасно.';
+      'У досягнень з\'явилися медалі, три вкладки та прогрес, яким можна поділитися картинкою.';
 
   @override
   String get achievementsTitle => 'Досягнення';
@@ -805,11 +794,6 @@ class L10nUk extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$done з $total';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return 'Відкрито досягнення: $title';
   }
 
   @override

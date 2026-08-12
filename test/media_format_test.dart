@@ -35,11 +35,27 @@ void main() {
       expect(ContainerRules.allowsAudio(ContainerFormat.mp4, AudioCodec.vorbis), isFalse);
     });
 
-    test('audio containers advertise exactly one codec', () {
+    test('audio containers carry audio and nothing else', () {
       for (final c in ContainerFormat.ofKind(MediaKind.audio)) {
-        expect(ContainerRules.audioCodecsFor(c), hasLength(1), reason: c.name);
+        expect(ContainerRules.audioCodecsFor(c), isNotEmpty, reason: c.name);
         expect(ContainerRules.videoCodecsFor(c), isEmpty, reason: c.name);
       }
+    });
+
+    test('M4A is the only audio container offering a choice, and AAC leads it', () {
+      expect(ContainerRules.defaultAudioCodec(ContainerFormat.m4a), AudioCodec.aac);
+      expect(ContainerRules.allowsAudio(ContainerFormat.m4a, AudioCodec.alac), isTrue);
+      // The rest name their codec in their own name — "FLAC" is not a box that
+      // could hold something else — so a second entry there would be a mistake.
+      for (final c in ContainerFormat.ofKind(MediaKind.audio)) {
+        if (c == ContainerFormat.m4a) continue;
+        expect(ContainerRules.audioCodecsFor(c), hasLength(1), reason: c.name);
+      }
+    });
+
+    test('ALAC is lossless, so it takes no bitrate', () {
+      expect(AudioCodec.alac.supportsBitrate, isFalse);
+      expect(AudioCodec.alac.encoder, 'alac');
     });
 
     test('every default codec pair is itself legal', () {

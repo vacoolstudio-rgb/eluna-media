@@ -282,6 +282,9 @@ class L10nId extends L10n {
   String get appearance => 'Tampilan';
 
   @override
+  String get themeSystem => 'Ikuti sistem';
+
+  @override
   String get language => 'Bahasa';
 
   @override
@@ -589,19 +592,6 @@ class L10nId extends L10n {
   String get errorDetailsTitle => 'Detail error';
 
   @override
-  String get oledDark => 'Tema gelap hitam pekat';
-
-  @override
-  String get oledDarkHint => 'Hitam murni menghemat daya di layar OLED.';
-
-  @override
-  String get dynamicColorLabel => 'Warna sistem (Material You)';
-
-  @override
-  String get dynamicColorHint =>
-      'Mengikuti palet wallpaper perangkat bila didukung.';
-
-  @override
   String get sectionConversionPrefs => 'Konversi';
 
   @override
@@ -779,23 +769,22 @@ class L10nId extends L10n {
 
   @override
   String get whatsNew1 =>
-      'File yang selesai kini langsung masuk ke galeri, dan “Simpan semua” mengambil seluruh kumpulan sekaligus.';
+      'Video kini bisa AV1: ukurannya jauh lebih kecil, kalau kamu sanggup menunggu.';
 
   @override
   String get whatsNew2 =>
-      'Sesuaikan foto ke ukuran tepat — 100 KB hingga 2 MB, atau angka yang Anda tulis.';
+      'Baru untuk gambar: AVIF, sekitar setengah ukuran JPEG, dan WebP animasi sebagai pengganti GIF.';
 
   @override
-  String get whatsNew3 =>
-      'Aplikasi tak lagi menimbun gigabyte: setelan menampilkan ruang terpakai dan membersihkannya.';
+  String get whatsNew3 => 'M4A kini bisa lossless: ALAC hadir di samping AAC.';
 
   @override
   String get whatsNew4 =>
-      'Hentikan konversi dari notifikasi, dan dapat peringatan sebelum ruang habis.';
+      'Tampilan dalam satu layar: kecerahan, warna aksen, hitam pekat OLED, dan Material You.';
 
   @override
   String get whatsNew5 =>
-      'Gambar mini, perbandingan sebelum/sesudah, GIF → MP4, waktu potong yang tepat — dan foto kini diproses beberapa sekaligus.';
+      'Pencapaian punya medali, tiga tab, dan progres yang bisa dibagikan sebagai gambar.';
 
   @override
   String get achievementsTitle => 'Pencapaian';
@@ -803,11 +792,6 @@ class L10nId extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$done dari $total';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return 'Pencapaian terbuka: $title';
   }
 
   @override

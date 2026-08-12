@@ -84,6 +84,18 @@ Future<void> main() async {
       seedDynamicColor: prefs.getBool('app.dynamicColor'),
     );
 
+    // Цвет обоев снимаем до первого кадра и независимо от переключателя:
+    // включение Material You тогда перекрашивает приложение сразу, а не со
+    // следующего запуска. Ошибку адаптер гасит сам и возвращает null.
+    //
+    // Отдаётся контроллеру, а не провайдеру: с v0.18 общий экран темы сам
+    // предлагает и Material You, и «чисто чёрный», и ряд акцентов, — а
+    // показать переключатель он может только зная, есть ли цвет вообще.
+    // Приложению после этого не нужно протаскивать `Color?` ни в тему, ни в
+    // настройки: `presetFor()` без аргумента берёт то, что здесь отдали.
+    ElunaThemeController.instance
+        .attachWallpaper(await const MediaDynamicColorAdapter().wallpaperAccent());
+
     // Второй переезд того же рода: якорь «дня 0» у Media лежал числом
     // миллисекунд под `meta.firstLaunchAtMs`, а общий сервис хранит его строкой
     // ISO под `rate_installed_at`. Без переноса день 0 сбросился бы на
@@ -97,12 +109,6 @@ Future<void> main() async {
       await RatingService().markRated();
     }
 
-    // Цвет обоев снимаем до первого кадра и независимо от переключателя:
-    // включение Material You тогда перекрашивает приложение сразу, а не со
-    // следующего запуска. Ошибку адаптер гасит сам и возвращает null.
-    final wallpaperAccent =
-        await const MediaDynamicColorAdapter().wallpaperAccent();
-
     final notifications = NotificationService.create();
     await notifications.init();
 
@@ -110,7 +116,6 @@ Future<void> main() async {
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
         notificationServiceProvider.overrideWithValue(notifications),
-        wallpaperAccentProvider.overrideWithValue(wallpaperAccent),
       ],
     );
 

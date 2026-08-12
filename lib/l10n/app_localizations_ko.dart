@@ -272,6 +272,9 @@ class L10nKo extends L10n {
   String get appearance => '화면';
 
   @override
+  String get themeSystem => '시스템';
+
+  @override
   String get language => '언어';
 
   @override
@@ -570,18 +573,6 @@ class L10nKo extends L10n {
   String get errorDetailsTitle => '오류 상세 정보';
 
   @override
-  String get oledDark => '완전한 검정 다크 테마';
-
-  @override
-  String get oledDarkHint => '진짜 검정은 OLED 화면에서 배터리를 아껴 줘요.';
-
-  @override
-  String get dynamicColorLabel => '시스템 색상 (Material You)';
-
-  @override
-  String get dynamicColorHint => '지원되는 기기에서 배경화면 팔레트를 따라가요.';
-
-  @override
   String get sectionConversionPrefs => '변환';
 
   @override
@@ -754,20 +745,21 @@ class L10nKo extends L10n {
   String get whatsNewTitle => '새로운 기능';
 
   @override
-  String get whatsNew1 => '완료된 파일이 바로 갤러리에 저장되고, “모두 저장”으로 한 묶음을 한 번에 가져갑니다.';
+  String get whatsNew1 => '이제 동영상을 AV1으로 만들 수 있습니다. 기다릴 수 있다면 파일이 훨씬 작아집니다.';
 
   @override
-  String get whatsNew2 => '사진을 정확한 용량에 맞춥니다 — 100 KB부터 2 MB까지, 직접 입력도 가능합니다.';
+  String get whatsNew2 =>
+      '이미지에 새 형식이 생겼습니다. JPEG의 약 절반인 AVIF, 그리고 GIF 대신 쓰는 움직이는 WebP.';
 
   @override
-  String get whatsNew3 => '앱이 더 이상 기가바이트를 쌓아두지 않습니다. 설정에서 사용량을 보고 지울 수 있습니다.';
+  String get whatsNew3 => 'M4A를 무손실로 저장할 수 있습니다. AAC 옆에 ALAC이 생겼습니다.';
 
   @override
-  String get whatsNew4 => '알림에서 바로 변환을 중지할 수 있고, 저장 공간이 부족하면 미리 알려줍니다.';
+  String get whatsNew4 =>
+      '테마가 한 화면에 모였습니다. 밝기, 강조 색, 완전한 검정 OLED, Material You.';
 
   @override
-  String get whatsNew5 =>
-      '썸네일, 변환 전후 비교, GIF → MP4, 정확한 자르기 시간 — 사진은 이제 여러 장이 동시에 처리됩니다.';
+  String get whatsNew5 => '업적에 메달과 세 개의 탭이 생기고, 진행 상황을 이미지로 공유할 수 있습니다.';
 
   @override
   String get achievementsTitle => '업적';
@@ -775,11 +767,6 @@ class L10nKo extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$total개 중 $done개';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return '업적 달성: $title';
   }
 
   @override

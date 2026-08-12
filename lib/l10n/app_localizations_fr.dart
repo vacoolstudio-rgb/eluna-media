@@ -283,6 +283,9 @@ class L10nFr extends L10n {
   String get appearance => 'Apparence';
 
   @override
+  String get themeSystem => 'Système';
+
+  @override
   String get language => 'Langue';
 
   @override
@@ -593,20 +596,6 @@ class L10nFr extends L10n {
   String get errorDetailsTitle => 'Détails de l\'erreur';
 
   @override
-  String get oledDark => 'Thème sombre noir pur';
-
-  @override
-  String get oledDarkHint =>
-      'Le vrai noir économise la batterie sur les écrans OLED.';
-
-  @override
-  String get dynamicColorLabel => 'Couleurs du système (Material You)';
-
-  @override
-  String get dynamicColorHint =>
-      'Suit la palette du fond d\'écran là où c\'est pris en charge.';
-
-  @override
   String get sectionConversionPrefs => 'Conversion';
 
   @override
@@ -784,23 +773,22 @@ class L10nFr extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Les fichiers terminés vont directement dans la galerie, et « Tout enregistrer » prend le lot entier d’un coup.';
+      'La vidéo peut désormais être en AV1 : des fichiers bien plus légers, si vous avez le temps.';
 
   @override
   String get whatsNew2 =>
-      'Ajustez une photo à une taille exacte : de 100 Ko à 2 Mo, ou la valeur de votre choix.';
+      'Nouveautés côté images : AVIF, environ deux fois plus léger qu\'un JPEG, et le WebP animé à la place du GIF.';
 
   @override
-  String get whatsNew3 =>
-      'L’application n’accumule plus des gigaoctets : les réglages affichent l’espace occupé et le libèrent.';
+  String get whatsNew3 => 'Le M4A peut être sans perte : ALAC rejoint AAC.';
 
   @override
   String get whatsNew4 =>
-      'Arrêtez une conversion depuis la notification, et soyez prévenu avant de manquer d’espace.';
+      'Un seul écran pour l\'apparence : luminosité, couleur d\'accent, noir absolu OLED et Material You.';
 
   @override
   String get whatsNew5 =>
-      'Vignettes, comparaison avant/après, GIF → MP4, temps de coupe exacts — et les photos se traitent plusieurs à la fois.';
+      'Les succès ont des médailles, trois onglets et une progression à partager en image.';
 
   @override
   String get achievementsTitle => 'Succès';
@@ -808,11 +796,6 @@ class L10nFr extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$done sur $total';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return 'Succès débloqué : $title';
   }
 
   @override

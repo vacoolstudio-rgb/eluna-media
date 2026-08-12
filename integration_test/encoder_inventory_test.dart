@@ -198,6 +198,44 @@ void main() {
     }, timeout: const Timeout(Duration(minutes: 10)));
   });
 
+  group('ALAC', () {
+    test('the encoder is registered', () async {
+      final out = await capabilities('-encoders');
+      expect(out.contains('alac'), isTrue,
+          reason: 'alac is not in `ffmpeg -encoders`; the M4A lossless option cannot work');
+    });
+
+    test('extracts a lossless M4A, larger than the AAC one and still readable',
+        () async {
+      Future<int> encode(AudioCodec codec, String name) async {
+        final out = '${work.path}/$name';
+        final result = await converter.convert(
+          inputPath: videoSrc,
+          outputPath: out,
+          settings: ConversionSettings(
+            container: ContainerFormat.m4a,
+            audioCodec: codec,
+          ),
+          totalDurationMs: await converter.probeDurationMs(videoSrc),
+        );
+        expect(result.isSuccess, isTrue,
+            reason: '$name failed, FFmpeg said: ${result.message}');
+        // Readable back, not merely written: an `ipod` muxer that accepted the
+        // stream but wrote an unplayable one would still exit zero.
+        expect(await converter.probeDurationMs(out), isNotNull);
+        return File(out).lengthSync();
+      }
+
+      final alac = await encode(AudioCodec.alac, 'lossless.m4a');
+      final aac = await encode(AudioCodec.aac, 'lossy.m4a');
+      expect(alac, greaterThan(0));
+      // The only claim ALAC makes. If it ever came out at AAC's size, FFmpeg
+      // would have quietly encoded something other than what was asked for.
+      expect(alac, greaterThan(aac),
+          reason: 'ALAC ($alac B) cannot be smaller than AAC ($aac B) — that is not lossless');
+    }, timeout: const Timeout(Duration(minutes: 5)));
+  });
+
   group('animated WebP', () {
     test('the encoder is registered under its own name', () async {
       final out = await capabilities('-encoders');

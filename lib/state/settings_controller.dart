@@ -10,18 +10,10 @@ final sharedPreferencesProvider = Provider<SharedPreferences>(
   (ref) => throw UnimplementedError('sharedPreferencesProvider must be overridden'),
 );
 
-/// Акцент обоев, снятый в `main()` до первого кадра, или null там, где
-/// платформа его не отдаёт — Android до 12, iOS, сбой плагина.
-///
-/// Провайдер, а не параметр конструктора у `ElunaApp`: цвет нужен и теме, и
-/// переключателю Material You в настройках, а протаскивать его через дерево
-/// ради второго читателя — это ровно то место, где второй читатель заводит
-/// себе копию и снимает акцент второй раз.
-///
-/// Значение по умолчанию — null, а не исключение: «обоев нет» это законное
-/// состояние половины устройств, и тест, которому цвет не нужен, не должен
-/// объявлять о нём override.
-final wallpaperAccentProvider = Provider<Color?>((ref) => null);
+// Провайдера с акцентом обоев здесь больше нет. Цвет снимается в `main()` и
+// отдаётся `ElunaThemeController.attachWallpaper`: с v0.18 общий экран темы сам
+// показывает Material You, и держать второй адрес того же значения — значит
+// однажды разойтись с ним в показаниях.
 
 T _enumFromName<T extends Enum>(List<T> values, String? name, T fallback) {
   if (name == null) return fallback;

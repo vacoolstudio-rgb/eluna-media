@@ -17,14 +17,6 @@ class ElunaApp extends ConsumerWidget {
     final prefs = ref.watch(appPrefsProvider);
     final hasSeenIntro = ref.watch(appMetaProvider.select((m) => m.hasSeenIntro));
 
-    // Акцент обоев снят один раз в `main`, до первого кадра, и независимо от
-    // того, включён ли Material You: тогда включение переключателя перекрашивает
-    // приложение сразу. Смена обоев на живом приложении подхватится при
-    // перезапуске — за подпиской на неё пришлось бы держать `DynamicColorBuilder`
-    // вокруг всего дерева, а он перестраивает его целиком на каждое изменение
-    // настроек.
-    final wallpaperAccent = ref.watch(wallpaperAccentProvider);
-
     // Оформление живёт в общем контроллере, язык — по-прежнему в настройках
     // приложения: строк у Media свои 15 языков, и общий список из 59 к ним
     // отношения не имеет.
@@ -36,7 +28,13 @@ class ElunaApp extends ConsumerWidget {
       listenable: ElunaThemeController.instance,
       builder: (context, _) {
         final appearance = ElunaThemeController.instance;
-        final preset = appearance.presetFor(wallpaperAccent);
+        // `presetFor()`, а не `preset`: именно он подмешивает Material You.
+        // Акцент обоев снят один раз в `main`, до первого кадра, и отдан
+        // контроллеру — поэтому аргумент не нужен. Смена обоев на живом
+        // приложении подхватится при перезапуске: за подпиской на неё пришлось
+        // бы держать `DynamicColorBuilder` вокруг всего дерева, а он
+        // перестраивает его целиком на каждое изменение настроек.
+        final preset = appearance.presetFor();
 
         return MaterialApp(
           onGenerateTitle: (context) => L10n.of(context).appTitle,

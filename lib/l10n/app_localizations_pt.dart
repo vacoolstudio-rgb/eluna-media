@@ -281,6 +281,9 @@ class L10nPt extends L10n {
   String get appearance => 'Aparência';
 
   @override
+  String get themeSystem => 'Do sistema';
+
+  @override
   String get language => 'Idioma';
 
   @override
@@ -588,20 +591,6 @@ class L10nPt extends L10n {
   String get errorDetailsTitle => 'Detalhes do erro';
 
   @override
-  String get oledDark => 'Tema escuro preto puro';
-
-  @override
-  String get oledDarkHint =>
-      'O preto verdadeiro economiza energia em telas OLED.';
-
-  @override
-  String get dynamicColorLabel => 'Cores do sistema (Material You)';
-
-  @override
-  String get dynamicColorHint =>
-      'Segue a paleta do papel de parede onde houver suporte.';
-
-  @override
   String get sectionConversionPrefs => 'Conversão';
 
   @override
@@ -780,23 +769,23 @@ class L10nPt extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Os arquivos prontos vão direto para a galeria, e “Salvar tudo” leva o lote inteiro de uma vez.';
+      'O vídeo agora pode ser AV1: arquivos bem menores, se você puder esperar.';
 
   @override
   String get whatsNew2 =>
-      'Ajuste a foto a um tamanho exato — de 100 KB a 2 MB, ou o número que você digitar.';
+      'Novidades para imagens: AVIF, cerca de metade de um JPEG, e WebP animado no lugar do GIF.';
 
   @override
   String get whatsNew3 =>
-      'O app não acumula mais gigabytes: os ajustes mostram o espaço ocupado e o liberam.';
+      'O M4A pode ser sem perdas: agora o ALAC fica ao lado do AAC.';
 
   @override
   String get whatsNew4 =>
-      'Pare uma conversão pela notificação e receba um aviso antes de o espaço acabar.';
+      'Uma única tela de aparência: brilho, cor de destaque, preto puro OLED e Material You.';
 
   @override
   String get whatsNew5 =>
-      'Miniaturas, comparação antes/depois, GIF → MP4, tempos de corte exatos — e as fotos são processadas várias de cada vez.';
+      'As conquistas ganharam medalhas, três abas e um progresso que dá para compartilhar como imagem.';
 
   @override
   String get achievementsTitle => 'Conquistas';
@@ -804,11 +793,6 @@ class L10nPt extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$done de $total';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return 'Conquista desbloqueada: $title';
   }
 
   @override

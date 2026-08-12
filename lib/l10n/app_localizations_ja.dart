@@ -273,6 +273,9 @@ class L10nJa extends L10n {
   String get appearance => '外観';
 
   @override
+  String get themeSystem => 'システムに合わせる';
+
+  @override
   String get language => '言語';
 
   @override
@@ -569,18 +572,6 @@ class L10nJa extends L10n {
   String get errorDetailsTitle => 'エラーの詳細';
 
   @override
-  String get oledDark => '漆黒のダークテーマ';
-
-  @override
-  String get oledDarkHint => '純粋な黒は OLED 画面で電力を節約します。';
-
-  @override
-  String get dynamicColorLabel => 'システムカラー (Material You)';
-
-  @override
-  String get dynamicColorHint => '対応端末では壁紙のパレットに合わせます。';
-
-  @override
   String get sectionConversionPrefs => '変換';
 
   @override
@@ -753,19 +744,19 @@ class L10nJa extends L10n {
   String get whatsNewTitle => '新機能';
 
   @override
-  String get whatsNew1 => '変換が終わったファイルはそのままギャラリーへ。「すべて保存」で一括して取り出せます。';
+  String get whatsNew1 => '動画をAV1で書き出せるようになりました。時間はかかりますが、ファイルはかなり小さくなります。';
 
   @override
-  String get whatsNew2 => '写真を指定サイズちょうどに圧縮できます（100 KB〜2 MB、任意の値も可）。';
+  String get whatsNew2 => '画像に新顔。JPEGの約半分になるAVIFと、GIFの代わりになるアニメーションWebPです。';
 
   @override
-  String get whatsNew3 => 'アプリがギガバイト単位で溜め込むことはなくなりました。設定で使用量を確認して消せます。';
+  String get whatsNew3 => 'M4Aをロスレスにできます。AACの隣にALACが並びました。';
 
   @override
-  String get whatsNew4 => '通知から変換を中止できます。空き容量が足りないときは事前に警告します。';
+  String get whatsNew4 => '外観は1画面にまとまりました。明るさ、アクセント色、真っ黒なOLED、Material You。';
 
   @override
-  String get whatsNew5 => 'サムネイル、変換前後の比較、GIF → MP4、正確なトリム時刻。写真は複数同時に処理されます。';
+  String get whatsNew5 => '実績にメダルと3つのタブが付き、進み具合を画像で共有できます。';
 
   @override
   String get achievementsTitle => '実績';
@@ -773,11 +764,6 @@ class L10nJa extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$total 件中 $done 件';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return '実績を解除しました: $title';
   }
 
   @override

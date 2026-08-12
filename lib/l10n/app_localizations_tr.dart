@@ -281,6 +281,9 @@ class L10nTr extends L10n {
   String get appearance => 'Görünüm';
 
   @override
+  String get themeSystem => 'Sistem';
+
+  @override
   String get language => 'Dil';
 
   @override
@@ -586,20 +589,6 @@ class L10nTr extends L10n {
   String get errorDetailsTitle => 'Hata ayrıntıları';
 
   @override
-  String get oledDark => 'Saf siyah koyu tema';
-
-  @override
-  String get oledDarkHint =>
-      'Gerçek siyah, OLED ekranlarda güç tasarrufu sağlar.';
-
-  @override
-  String get dynamicColorLabel => 'Sistem renkleri (Material You)';
-
-  @override
-  String get dynamicColorHint =>
-      'Destekleniyorsa cihazın duvar kâğıdı paletini izler.';
-
-  @override
   String get sectionConversionPrefs => 'Dönüştürme';
 
   @override
@@ -776,23 +765,23 @@ class L10nTr extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Biten dosyalar artık doğrudan galeriye gidiyor; “Tümünü kaydet” ise bütün grubu tek seferde alıyor.';
+      'Video artık AV1 olabiliyor: beklemeye vaktin varsa dosyalar belirgin şekilde küçülüyor.';
 
   @override
   String get whatsNew2 =>
-      'Bir fotoğrafı tam boyuta sığdırın — 100 KB ile 2 MB arası ya da kendi yazdığınız değer.';
+      'Görseller için yenilik: JPEG\'in yaklaşık yarısı kadar AVIF ve GIF yerine hareketli WebP.';
 
   @override
   String get whatsNew3 =>
-      'Uygulama artık gigabaytlarca yer biriktirmiyor: ayarlarda kullanılan alanı görüp temizleyebilirsiniz.';
+      'M4A artık kayıpsız olabiliyor: AAC\'nin yanına ALAC geldi.';
 
   @override
   String get whatsNew4 =>
-      'Dönüştürmeyi bildirimden durdurun; yer bitmeden önce uyarı alın.';
+      'Görünüm tek ekranda: parlaklık, vurgu rengi, saf siyah OLED ve Material You.';
 
   @override
   String get whatsNew5 =>
-      'Küçük resimler, önce/sonra karşılaştırması, GIF → MP4, tam kesme süreleri — ve fotoğraflar artık birkaçı aynı anda işleniyor.';
+      'Başarımlarda madalyalar, üç sekme ve görsel olarak paylaşılabilen ilerleme var.';
 
   @override
   String get achievementsTitle => 'Başarımlar';
@@ -800,11 +789,6 @@ class L10nTr extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$done / $total';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return 'Başarım açıldı: $title';
   }
 
   @override

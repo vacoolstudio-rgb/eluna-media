@@ -25,6 +25,11 @@ class EncoderCatalog {
     'h264_mediacodec',
     'hevc_mediacodec',
     'av1_mediacodec',
+    // VP9 has had a MediaCodec encoder for years, and a phone that exposes one
+    // encodes WebM at a fraction of the battery libvpx spends. Nothing else is
+    // needed for it: the probe decides whether it exists, and the argument
+    // builder already refuses hardware on constant-quality jobs.
+    'vp9_mediacodec',
     'h264_videotoolbox',
     'hevc_videotoolbox',
     // Apple ships no AV1 encoding block today — recent silicon decodes AV1 but
@@ -64,6 +69,9 @@ class EncoderCatalog {
       // The VideoToolbox entry is speculative — see [_candidates]. Today it
       // never matches and iOS falls through to libaom.
       VideoCodec.av1 => const ['av1_mediacodec', 'av1_videotoolbox'],
+      // Android only: VideoToolbox has never encoded VP9, and Apple is not
+      // going to start.
+      VideoCodec.vp9 => const ['vp9_mediacodec'],
       _ => const <String>[],
     };
     if (wanted.isEmpty) return null;

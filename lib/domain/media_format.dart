@@ -231,6 +231,11 @@ enum AudioCodec {
   opus('Opus', 'libopus'),
   vorbis('Vorbis', 'libvorbis'),
   flac('FLAC (lossless)', 'flac'),
+
+  /// Apple Lossless. The same job FLAC does, in the format Apple's own players
+  /// treat as a first-class citizen — which FLAC still is not, a decade after
+  /// they started decoding it.
+  alac('ALAC (lossless)', 'alac'),
   pcm16('PCM 16-bit (lossless)', 'pcm_s16le'),
   none('No audio', null);
 
@@ -300,7 +305,10 @@ abstract final class ContainerRules {
     ContainerFormat.avi: [AudioCodec.mp3, AudioCodec.pcm16, AudioCodec.copy, AudioCodec.none],
     // Audio-only containers.
     ContainerFormat.mp3: [AudioCodec.mp3],
-    ContainerFormat.m4a: [AudioCodec.aac],
+    // AAC keeps the first slot, so the default of "M4A" stays the lossy file
+    // people mean when they ask for one. ALAC is the deliberate second choice:
+    // same container, no loss, several times the bytes.
+    ContainerFormat.m4a: [AudioCodec.aac, AudioCodec.alac],
     ContainerFormat.wav: [AudioCodec.pcm16],
     ContainerFormat.flac: [AudioCodec.flac],
     ContainerFormat.ogg: [AudioCodec.vorbis],

@@ -735,6 +735,11 @@ abstract final class FFmpegArgs {
       AudioCodec.copy => null,
       AudioCodec.pcm16 => 1536, // 48 kHz × 16 bit × stereo
       AudioCodec.flac => 900, // conservative upper bound for stereo FLAC
+      // ALAC compresses about as well as FLAC, so it budgets the same. No
+      // container currently pairs it with video, but a lossless codec that fell
+      // through to `-b:a` below would budget a lossy rate for a track that
+      // ignores it, and the whole point of this mode is not to overshoot.
+      AudioCodec.alac => 900,
       _ => s.audioBitrateKbps,
     };
     if (audioKbps == null) return null;

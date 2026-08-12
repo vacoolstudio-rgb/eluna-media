@@ -579,6 +579,12 @@ abstract class L10n {
   /// **'Appearance'**
   String get appearance;
 
+  /// No description provided for @themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
   /// No description provided for @language.
   ///
   /// In en, this message translates to:
@@ -1095,30 +1101,6 @@ abstract class L10n {
   /// **'Error details'**
   String get errorDetailsTitle;
 
-  /// No description provided for @oledDark.
-  ///
-  /// In en, this message translates to:
-  /// **'Pure black dark theme'**
-  String get oledDark;
-
-  /// No description provided for @oledDarkHint.
-  ///
-  /// In en, this message translates to:
-  /// **'True black saves power on OLED screens.'**
-  String get oledDarkHint;
-
-  /// No description provided for @dynamicColorLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'System colors (Material You)'**
-  String get dynamicColorLabel;
-
-  /// No description provided for @dynamicColorHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Follow the device wallpaper palette where supported.'**
-  String get dynamicColorHint;
-
   /// No description provided for @sectionConversionPrefs.
   ///
   /// In en, this message translates to:
@@ -1428,31 +1410,31 @@ abstract class L10n {
   /// No description provided for @whatsNew1.
   ///
   /// In en, this message translates to:
-  /// **'Finished files now go straight to your gallery — and \"Save all\" takes a whole batch at once.'**
+  /// **'Video can be AV1 now: markedly smaller files, if you can wait for them.'**
   String get whatsNew1;
 
   /// No description provided for @whatsNew2.
   ///
   /// In en, this message translates to:
-  /// **'Fit a photo to an exact size — 100 KB to 2 MB, or a number you type.'**
+  /// **'New for pictures: AVIF, about half a JPEG, and animated WebP instead of a GIF.'**
   String get whatsNew2;
 
   /// No description provided for @whatsNew3.
   ///
   /// In en, this message translates to:
-  /// **'The app no longer hoards gigabytes: Settings shows what it is holding and clears it.'**
+  /// **'M4A can be lossless — ALAC now sits beside AAC.'**
   String get whatsNew3;
 
   /// No description provided for @whatsNew4.
   ///
   /// In en, this message translates to:
-  /// **'Stop a conversion from the notification, and get a warning before the disk runs out.'**
+  /// **'One screen for the look: brightness, accent colour, pure-black OLED and Material You.'**
   String get whatsNew4;
 
   /// No description provided for @whatsNew5.
   ///
   /// In en, this message translates to:
-  /// **'Thumbnails, before/after comparison, GIF → MP4, exact trim times — and photo batches run several at once.'**
+  /// **'Achievements have medals, three tabs, and progress you can share as a picture.'**
   String get whatsNew5;
 
   /// No description provided for @achievementsTitle.
@@ -1466,12 +1448,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'{done} of {total}'**
   String achievementsProgress(int done, int total);
-
-  /// No description provided for @achievementUnlocked.
-  ///
-  /// In en, this message translates to:
-  /// **'Achievement unlocked: {title}'**
-  String achievementUnlocked(String title);
 
   /// No description provided for @achievementsPrivacyNote.
   ///

@@ -279,6 +279,9 @@ class L10nEn extends L10n {
   String get appearance => 'Appearance';
 
   @override
+  String get themeSystem => 'System';
+
+  @override
   String get language => 'Language';
 
   @override
@@ -583,19 +586,6 @@ class L10nEn extends L10n {
   String get errorDetailsTitle => 'Error details';
 
   @override
-  String get oledDark => 'Pure black dark theme';
-
-  @override
-  String get oledDarkHint => 'True black saves power on OLED screens.';
-
-  @override
-  String get dynamicColorLabel => 'System colors (Material You)';
-
-  @override
-  String get dynamicColorHint =>
-      'Follow the device wallpaper palette where supported.';
-
-  @override
   String get sectionConversionPrefs => 'Conversion';
 
   @override
@@ -771,23 +761,22 @@ class L10nEn extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Finished files now go straight to your gallery — and \"Save all\" takes a whole batch at once.';
+      'Video can be AV1 now: markedly smaller files, if you can wait for them.';
 
   @override
   String get whatsNew2 =>
-      'Fit a photo to an exact size — 100 KB to 2 MB, or a number you type.';
+      'New for pictures: AVIF, about half a JPEG, and animated WebP instead of a GIF.';
 
   @override
-  String get whatsNew3 =>
-      'The app no longer hoards gigabytes: Settings shows what it is holding and clears it.';
+  String get whatsNew3 => 'M4A can be lossless — ALAC now sits beside AAC.';
 
   @override
   String get whatsNew4 =>
-      'Stop a conversion from the notification, and get a warning before the disk runs out.';
+      'One screen for the look: brightness, accent colour, pure-black OLED and Material You.';
 
   @override
   String get whatsNew5 =>
-      'Thumbnails, before/after comparison, GIF → MP4, exact trim times — and photo batches run several at once.';
+      'Achievements have medals, three tabs, and progress you can share as a picture.';
 
   @override
   String get achievementsTitle => 'Achievements';
@@ -795,11 +784,6 @@ class L10nEn extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$done of $total';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return 'Achievement unlocked: $title';
   }
 
   @override

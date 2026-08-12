@@ -269,6 +269,9 @@ class L10nZh extends L10n {
   String get appearance => '外观';
 
   @override
+  String get themeSystem => '跟随系统';
+
+  @override
   String get language => '语言';
 
   @override
@@ -561,18 +564,6 @@ class L10nZh extends L10n {
   String get errorDetailsTitle => '错误详情';
 
   @override
-  String get oledDark => '纯黑深色主题';
-
-  @override
-  String get oledDarkHint => '纯黑在 OLED 屏幕上更省电。';
-
-  @override
-  String get dynamicColorLabel => '系统配色 (Material You)';
-
-  @override
-  String get dynamicColorHint => '在支持的设备上跟随壁纸取色。';
-
-  @override
   String get sectionConversionPrefs => '转换';
 
   @override
@@ -740,19 +731,19 @@ class L10nZh extends L10n {
   String get whatsNewTitle => '新功能';
 
   @override
-  String get whatsNew1 => '转换完成的文件直接进入相册，“全部保存”可一次取走整批。';
+  String get whatsNew1 => '视频可以用 AV1 编码了：只要等得起，文件会小很多。';
 
   @override
-  String get whatsNew2 => '把照片压到精确大小——100 KB 到 2 MB，也可以自己填数值。';
+  String get whatsNew2 => '图片新增 AVIF（约为 JPEG 的一半）和动态 WebP（用来代替 GIF）。';
 
   @override
-  String get whatsNew3 => '应用不再悄悄占用几个 GB：设置里能看到占用并一键清理。';
+  String get whatsNew3 => 'M4A 也能无损了：AAC 旁边多了 ALAC。';
 
   @override
-  String get whatsNew4 => '可以直接在通知里停止转换，空间不足时也会提前提醒。';
+  String get whatsNew4 => '外观集中到一个页面：亮度、强调色、纯黑 OLED 和 Material You。';
 
   @override
-  String get whatsNew5 => '缩略图、转换前后对比、GIF → MP4、精确的剪辑时间——照片现在还能并行处理。';
+  String get whatsNew5 => '成就有了奖章和三个标签页，进度还能做成图片分享。';
 
   @override
   String get achievementsTitle => '成就';
@@ -760,11 +751,6 @@ class L10nZh extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$done/$total';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return '成就达成：$title';
   }
 
   @override

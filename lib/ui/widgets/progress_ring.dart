@@ -17,6 +17,7 @@ class ProgressRing extends StatelessWidget {
     this.done = false,
     this.indeterminate = false,
     this.label,
+    this.center,
   });
 
   /// 0..1. Ignored when [indeterminate].
@@ -30,6 +31,11 @@ class ProgressRing extends StatelessWidget {
 
   /// Centre text. Defaults to the rounded percentage.
   final String? label;
+
+  /// Anything richer than a line of text in the middle — the achievements
+  /// screen puts a medal and a count there. Wins over [label] when both are
+  /// given, and is what makes this a dial rather than a percentage badge.
+  final Widget? center;
 
   @override
   Widget build(BuildContext context) {
@@ -68,13 +74,14 @@ class ProgressRing extends StatelessWidget {
                 : [colors.primary, colors.secondary],
           ),
           child: Center(
-            child: Text(
-              label ?? '${(animated * 100).round()}%',
-              style: theme.textTheme.labelMedium?.copyWith(
-                fontWeight: FontWeight.w800,
-                color: done ? colors.success : scheme.onSurface,
-              ),
-            ),
+            child: center ??
+                Text(
+                  label ?? '${(animated * 100).round()}%',
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color: done ? colors.success : scheme.onSurface,
+                  ),
+                ),
           ),
         ),
       ),

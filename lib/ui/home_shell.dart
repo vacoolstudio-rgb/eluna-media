@@ -9,7 +9,8 @@ import '../domain/conversion_job.dart';
 import '../l10n/app_localizations.dart';
 import '../state/achievements_controller.dart';
 import '../state/app_meta_controller.dart';
-import 'achievements_screen.dart';
+import '../services/haptics.dart';
+import 'achievement_celebration.dart';
 import '../services/share_intake.dart';
 import '../state/queue_controller.dart';
 import 'convert_tab.dart';
@@ -218,28 +219,23 @@ class _HomeShellState extends ConsumerState<HomeShell> {
         _maybeAskForRating();
       }
     });
-    // One toast per batch even when it unlocked several things: the first
-    // (lowest-index) achievement headlines and the count says "and more".
+    // Одно празднование на батч, даже если он открыл несколько наград: первая
+    // (с наименьшим индексом) выходит на сцену, остальные ждут на своём экране.
+    //
+    // Празднование, а не снекбар: снекбаром приложение сообщает, что файл
+    // сохранён, — а медаль здесь одна на несколько дней работы, и говорить о
+    // ней тем же голосом значит не сказать ничего. Так же это устроено в
+    // Eluna Screen.
     ref.listen<List<AchievementState<ConversionStats>>>(freshUnlocksProvider, (_, unlocks) {
       if (unlocks.isEmpty || !mounted) return;
-      final l10n = L10n.of(context);
       final first = unlocks.first;
-      final (title, _) = achievementTexts(l10n, first.def);
-      final suffix = unlocks.length > 1 ? '  (+${unlocks.length - 1})' : '';
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Row(
-            children: [
-              // Цвет кубка — редкость самой награды, из общей палитры: тост и
-              // медаль на экране достижений обязаны быть одного цвета.
-              Icon(Icons.emoji_events, color: rarityColor(first.def.rarity)),
-              const SizedBox(width: 10),
-              Expanded(child: Text('${l10n.achievementUnlocked(title)}$suffix')),
-            ],
-          ),
-          duration: const Duration(seconds: 5),
-        ),
-      );
+      final haptics = ref.read(hapticsProvider);
+      // Диалог не открывается из колбэка провайдера напрямую: тот срабатывает
+      // посреди сборки кадра, а `showDialog` в этот момент — исключение.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        showAchievementCelebration(context, first, haptics: haptics);
+      });
       ref.read(freshUnlocksProvider.notifier).consume();
     });
 

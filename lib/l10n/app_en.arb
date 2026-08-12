@@ -176,6 +176,7 @@
     }
   },
   "appearance": "Appearance",
+  "themeSystem": "System",
   "language": "Language",
   "languageSystem": "System",
   "privacyTitle": "Privacy",
@@ -331,10 +332,6 @@
   "finishedClearedUndo": "Finished jobs cleared.",
   "undo": "Undo",
   "errorDetailsTitle": "Error details",
-  "oledDark": "Pure black dark theme",
-  "oledDarkHint": "True black saves power on OLED screens.",
-  "dynamicColorLabel": "System colors (Material You)",
-  "dynamicColorHint": "Follow the device wallpaper palette where supported.",
   "sectionConversionPrefs": "Conversion",
   "powerModeLabel": "Power mode",
   "powerEfficiency": "Cool & fast",
@@ -428,11 +425,11 @@
   "twoPassLabel": "Two-pass for exact size",
   "twoPassHint": "Fit-to-size jobs encode twice and hit the byte budget noticeably more precisely — at roughly double the time and battery.",
   "whatsNewTitle": "What's new",
-  "whatsNew1": "Finished files now go straight to your gallery — and \"Save all\" takes a whole batch at once.",
-  "whatsNew2": "Fit a photo to an exact size — 100 KB to 2 MB, or a number you type.",
-  "whatsNew3": "The app no longer hoards gigabytes: Settings shows what it is holding and clears it.",
-  "whatsNew4": "Stop a conversion from the notification, and get a warning before the disk runs out.",
-  "whatsNew5": "Thumbnails, before/after comparison, GIF → MP4, exact trim times — and photo batches run several at once.",
+  "whatsNew1": "Video can be AV1 now: markedly smaller files, if you can wait for them.",
+  "whatsNew2": "New for pictures: AVIF, about half a JPEG, and animated WebP instead of a GIF.",
+  "whatsNew3": "M4A can be lossless — ALAC now sits beside AAC.",
+  "whatsNew4": "One screen for the look: brightness, accent colour, pure-black OLED and Material You.",
+  "whatsNew5": "Achievements have medals, three tabs, and progress you can share as a picture.",
   "achievementsTitle": "Achievements",
   "achievementsProgress": "{done} of {total}",
   "@achievementsProgress": {
@@ -442,14 +439,6 @@
       },
       "total": {
         "type": "int"
-      }
-    }
-  },
-  "achievementUnlocked": "Achievement unlocked: {title}",
-  "@achievementUnlocked": {
-    "placeholders": {
-      "title": {
-        "type": "String"
       }
     }
   },

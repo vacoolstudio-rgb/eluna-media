@@ -25,6 +25,13 @@ class Haptics {
   void destructiveTap() {
     if (_enabled) HapticFeedback.selectionClick();
   }
+
+  /// The thump under the confetti. Goes through the same switch as everything
+  /// else: a celebration is still the app buzzing the phone, and someone who
+  /// turned that off did not make an exception for good news.
+  void achievementUnlocked() {
+    if (_enabled) HapticFeedback.heavyImpact();
+  }
 }
 
 final hapticsProvider = Provider<Haptics>((ref) {

@@ -282,6 +282,9 @@ class L10nRu extends L10n {
   String get appearance => 'Оформление';
 
   @override
+  String get themeSystem => 'Как в системе';
+
+  @override
   String get language => 'Язык';
 
   @override
@@ -589,20 +592,6 @@ class L10nRu extends L10n {
   String get errorDetailsTitle => 'Подробности ошибки';
 
   @override
-  String get oledDark => 'Чисто чёрная тёмная тема';
-
-  @override
-  String get oledDarkHint =>
-      'Настоящий чёрный экономит энергию на OLED-экранах.';
-
-  @override
-  String get dynamicColorLabel => 'Системные цвета (Material You)';
-
-  @override
-  String get dynamicColorHint =>
-      'Палитра обоев устройства там, где это поддерживается.';
-
-  @override
   String get sectionConversionPrefs => 'Конвертация';
 
   @override
@@ -779,23 +768,23 @@ class L10nRu extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Готовые файлы теперь сразу попадают в галерею, а «Сохранить все» забирает всю партию разом.';
+      'Видео теперь можно кодировать в AV1: файлы заметно меньше, если готовы подождать.';
 
   @override
   String get whatsNew2 =>
-      'Фото можно ужать до точного размера — от 100 КБ до 2 МБ или своё число.';
+      'Для картинок появились AVIF — примерно вдвое легче JPEG — и анимированный WebP вместо GIF.';
 
   @override
   String get whatsNew3 =>
-      'Приложение больше не копит гигабайты: в настройках видно занятое место и есть кнопка очистки.';
+      'M4A теперь бывает без потерь: рядом с AAC появился ALAC.';
 
   @override
   String get whatsNew4 =>
-      'Конвертацию можно остановить прямо из уведомления, а о нехватке места приложение предупредит заранее.';
+      'Оформление собрано на одном экране: яркость, цвет акцента, чёрный OLED и Material You.';
 
   @override
   String get whatsNew5 =>
-      'Миниатюры, сравнение до/после, GIF → MP4, точное время обрезки — и фото теперь обрабатываются по несколько сразу.';
+      'У достижений появились медали, три вкладки и прогресс, которым можно поделиться картинкой.';
 
   @override
   String get achievementsTitle => 'Достижения';
@@ -803,11 +792,6 @@ class L10nRu extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$done из $total';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return 'Достижение открыто: $title';
   }
 
   @override

@@ -281,6 +281,9 @@ class L10nDe extends L10n {
   String get appearance => 'Darstellung';
 
   @override
+  String get themeSystem => 'System';
+
+  @override
   String get language => 'Sprache';
 
   @override
@@ -587,19 +590,6 @@ class L10nDe extends L10n {
   String get errorDetailsTitle => 'Fehlerdetails';
 
   @override
-  String get oledDark => 'Tiefschwarzes dunkles Design';
-
-  @override
-  String get oledDarkHint => 'Echtes Schwarz spart Energie auf OLED-Displays.';
-
-  @override
-  String get dynamicColorLabel => 'Systemfarben (Material You)';
-
-  @override
-  String get dynamicColorHint =>
-      'Folgt der Hintergrundbild-Palette des Geräts, wo unterstützt.';
-
-  @override
   String get sectionConversionPrefs => 'Konvertierung';
 
   @override
@@ -777,23 +767,23 @@ class L10nDe extends L10n {
 
   @override
   String get whatsNew1 =>
-      'Fertige Dateien landen jetzt direkt in der Galerie — und „Alle speichern“ nimmt den ganzen Stapel auf einmal.';
+      'Video geht jetzt auch in AV1: deutlich kleinere Dateien, wenn du die Zeit hast.';
 
   @override
   String get whatsNew2 =>
-      'Ein Foto auf eine exakte Größe bringen — 100 KB bis 2 MB oder ein eigener Wert.';
+      'Neu für Bilder: AVIF mit etwa der halben Größe eines JPEG und animiertes WebP statt GIF.';
 
   @override
   String get whatsNew3 =>
-      'Die App hortet keine Gigabyte mehr: Die Einstellungen zeigen den belegten Platz und geben ihn frei.';
+      'M4A kann verlustfrei sein — ALAC steht jetzt neben AAC.';
 
   @override
   String get whatsNew4 =>
-      'Eine Konvertierung lässt sich direkt aus der Benachrichtigung stoppen, und vor knappem Speicher wird gewarnt.';
+      'Ein Bildschirm fürs Aussehen: Helligkeit, Akzentfarbe, tiefschwarzes OLED und Material You.';
 
   @override
   String get whatsNew5 =>
-      'Miniaturbilder, Vorher/Nachher-Vergleich, GIF → MP4, exakte Schnittzeiten — und Fotostapel laufen mehrfach parallel.';
+      'Erfolge haben Medaillen, drei Tabs und einen Fortschritt, den du als Bild teilen kannst.';
 
   @override
   String get achievementsTitle => 'Erfolge';
@@ -801,11 +791,6 @@ class L10nDe extends L10n {
   @override
   String achievementsProgress(int done, int total) {
     return '$done von $total';
-  }
-
-  @override
-  String achievementUnlocked(String title) {
-    return 'Erfolg freigeschaltet: $title';
   }
 
   @override
