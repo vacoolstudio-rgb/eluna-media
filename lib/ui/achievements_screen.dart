@@ -6,6 +6,7 @@ import 'package:hugeicons/hugeicons.dart';
 import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
 import '../state/achievements_controller.dart';
+import '../state/app_lock_controller.dart';
 import 'achievement_detail_sheet.dart';
 import 'achievement_texts.dart';
 import 'widgets/progress_ring.dart';
@@ -109,16 +110,16 @@ class _AchievementList extends StatelessWidget {
 ///
 /// Карточка обёрнута в [RepaintBoundary] — уходит ровно то, что человек видит,
 /// а не собранное отдельно изображение, которое однажды разойдётся с UI.
-class _SummaryCard extends StatefulWidget {
+class _SummaryCard extends ConsumerStatefulWidget {
   const _SummaryCard({required this.entries});
 
   final List<AchievementState<ConversionStats>> entries;
 
   @override
-  State<_SummaryCard> createState() => _SummaryCardState();
+  ConsumerState<_SummaryCard> createState() => _SummaryCardState();
 }
 
-class _SummaryCardState extends State<_SummaryCard> {
+class _SummaryCardState extends ConsumerState<_SummaryCard> {
   final _cardKey = GlobalKey();
   bool _sharing = false;
 
@@ -138,11 +139,14 @@ class _SummaryCardState extends State<_SummaryCard> {
 
     final origin = shareOrigin(context);
     try {
-      await shareBoundaryAsImage(
-        boundaryKey: _cardKey,
-        message: message,
-        origin: origin,
-        fileName: 'eluna_achievements_progress',
+      await awayInSystemUi(
+        ref.read(appLockStateProvider.notifier),
+        () => shareBoundaryAsImage(
+          boundaryKey: _cardKey,
+          message: message,
+          origin: origin,
+          fileName: 'eluna_achievements_progress',
+        ),
       );
     } finally {
       if (mounted) setState(() => _sharing = false);

@@ -319,7 +319,8 @@ class L10nZh extends L10n {
   String get introMetadataBody => '默认从每个输出中去除 EXIF、GPS 和时间戳。也可以关闭。';
 
   @override
-  String get introFreeNote => '完全免费：没有广告、没有订阅、没有内购。包括批量转换在内的所有功能都可直接使用。';
+  String get introFreeNote =>
+      '免费：没有广告，没有订阅。包括批量转换在内的所有功能一开始就可用；唯一能买的是打赏，而它不会解锁任何东西。';
 
   @override
   String get introContinue => '开始使用';

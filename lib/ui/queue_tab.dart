@@ -7,6 +7,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../core/output_paths.dart';
+import '../state/app_lock_controller.dart';
 import '../domain/conversion_job.dart';
 import '../domain/media_format.dart';
 import '../l10n/app_localizations.dart';
@@ -175,9 +176,12 @@ class _FinishedActions extends ConsumerWidget {
     final queue = ref.read(queueProvider.notifier);
     final pending = _unsaved(ref.read(queueProvider).jobs);
 
+    // Сохранение может поднять системный запрос разрешения — для замка это
+    // такая же отлучка, как пикер.
+    final gate = ref.read(appLockStateProvider.notifier);
     var saved = 0;
     for (final job in pending) {
-      final destination = await queue.saveOutput(job.id);
+      final destination = await awayInSystemUi(gate, () => queue.saveOutput(job.id));
       if (destination == SaveDestination.gallery ||
           destination == SaveDestination.downloads) {
         saved++;
@@ -227,7 +231,11 @@ class _FinishedActions extends ConsumerWidget {
     final messenger = ScaffoldMessenger.of(context);
     final ids = [for (final job in ref.read(queueProvider).reclaimable) job.id];
 
-    final outcome = await ref.read(queueProvider.notifier).reclaimOriginals(ids);
+    // Подтверждение показывает система — это её диалог поверх нашего экрана.
+    final outcome = await awayInSystemUi(
+      ref.read(appLockStateProvider.notifier),
+      () => ref.read(queueProvider.notifier).reclaimOriginals(ids),
+    );
     if (outcome.cancelled || outcome.unsupported) return;
 
     ref.read(hapticsProvider).destructiveTap();
@@ -473,16 +481,20 @@ class _JobCardBody extends ConsumerWidget {
     ref.read(queueProvider.notifier).renameOutput(job.id, name);
   }
 
-  Future<void> _share(BuildContext context) async {
+  Future<void> _share(BuildContext context, WidgetRef ref) async {
     final path = job.outputPath;
     if (path == null) return;
     // iPads present the share sheet as a popover, which crashes without a
     // source rect; anchor it to the widget that was tapped.
     final box = context.findRenderObject() as RenderBox?;
-    await SharePlus.instance.share(ShareParams(
-      files: [XFile(path)],
-      sharePositionOrigin: box == null ? null : box.localToGlobal(Offset.zero) & box.size,
-    ));
+    await awayInSystemUi(
+      ref.read(appLockStateProvider.notifier),
+      () => SharePlus.instance.share(ShareParams(
+        files: [XFile(path)],
+        sharePositionOrigin:
+            box == null ? null : box.localToGlobal(Offset.zero) & box.size,
+      )),
+    );
   }
 
   Future<void> _open(BuildContext context, WidgetRef ref) async {
@@ -491,7 +503,10 @@ class _JobCardBody extends ConsumerWidget {
     final path = job.outputPath;
     if (path == null) return;
 
-    final outcome = await ref.read(fileOpenerProvider).openFile(path);
+    final outcome = await awayInSystemUi(
+      ref.read(appLockStateProvider.notifier),
+      () => ref.read(fileOpenerProvider).openFile(path),
+    );
     switch (outcome) {
       case OpenOutcome.opened:
         return;
@@ -514,7 +529,10 @@ class _JobCardBody extends ConsumerWidget {
     // Routed through the queue rather than straight at the saver, so the job
     // records where it went and the card stops offering a save that already
     // happened.
-    final destination = await ref.read(queueProvider.notifier).saveOutput(job.id);
+    final destination = await awayInSystemUi(
+      ref.read(appLockStateProvider.notifier),
+      () => ref.read(queueProvider.notifier).saveOutput(job.id),
+    );
     switch (destination) {
       case SaveDestination.gallery:
         messenger.showSnackBar(SnackBar(
@@ -534,7 +552,7 @@ class _JobCardBody extends ConsumerWidget {
         ));
       case SaveDestination.unsupported:
         // iOS audio: the share sheet is how files leave the sandbox.
-        if (context.mounted) await _share(context);
+        if (context.mounted) await _share(context, ref);
       case null:
         messenger.showSnackBar(SnackBar(content: Text(l10n.saveFailed)));
     }
@@ -800,7 +818,7 @@ class _JobCardBody extends ConsumerWidget {
                   ),
                   Builder(
                     builder: (context) => TextButton.icon(
-                      onPressed: () => _share(context),
+                      onPressed: () => _share(context, ref),
                       icon: const Icon(Icons.ios_share, size: 17),
                       label: Text(l10n.shareFile),
                     ),

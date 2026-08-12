@@ -17,6 +17,7 @@ import '../l10n/app_localizations.dart';
 import '../services/device_storage.dart';
 import '../state/queue_controller.dart';
 import '../state/selection_controller.dart';
+import '../state/app_lock_controller.dart';
 import '../state/settings_controller.dart';
 import 'queue_strings.dart';
 import 'widgets/media_thumbnail.dart';
@@ -26,7 +27,14 @@ import 'widgets/section_card.dart';
 /// newest first — which is what people expect for media. Audio and anything
 /// exotic go through the generic document picker via the secondary button.
 Future<void> pickFilesIntoQueue(WidgetRef ref, {FileType type = FileType.media}) async {
-  final result = await FilePicker.pickFiles(allowMultiple: true, type: type);
+  // Пикер — чужая Activity, и для замка это неотличимо от сворачивания.
+  // Предупреждаем его заранее, иначе выбор файла, занявший больше минуты (а он
+  // столько и занимает: открыть папку, переключить фильтр, найти нужное),
+  // встречает человека запросом кода.
+  final result = await awayInSystemUi(
+    ref.read(appLockStateProvider.notifier),
+    () => FilePicker.pickFiles(allowMultiple: true, type: type),
+  );
   if (result == null) return;
 
   final files = <({String path, String name})>[

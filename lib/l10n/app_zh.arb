@@ -86,7 +86,7 @@
   "introTelemetryBody": "没有账号、没有分析、没有崩溃上报。应用不知道你是谁。",
   "introMetadataTitle": "元数据尽在掌控",
   "introMetadataBody": "默认从每个输出中去除 EXIF、GPS 和时间戳。也可以关闭。",
-  "introFreeNote": "完全免费：没有广告、没有订阅、没有内购。包括批量转换在内的所有功能都可直接使用。",
+  "introFreeNote": "免费：没有广告，没有订阅。包括批量转换在内的所有功能一开始就可用；唯一能买的是打赏，而它不会解锁任何东西。",
   "introContinue": "开始使用",
   "modeSimple": "简单",
   "modeAdvanced": "高级",

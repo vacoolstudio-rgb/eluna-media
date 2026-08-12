@@ -1,9 +1,11 @@
 import 'package:eluna_shared/eluna_shared.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
+import '../state/app_lock_controller.dart';
 import 'achievement_texts.dart';
 import 'widgets/progress_ring.dart';
 import 'widgets/share_capture.dart';
@@ -49,7 +51,7 @@ String achievementShareMessage(
   );
 }
 
-class _AchievementDetailSheet extends StatefulWidget {
+class _AchievementDetailSheet extends ConsumerStatefulWidget {
   const _AchievementDetailSheet({required this.state, this.summary});
 
   final AchievementState<ConversionStats> state;
@@ -58,10 +60,11 @@ class _AchievementDetailSheet extends StatefulWidget {
   final String? summary;
 
   @override
-  State<_AchievementDetailSheet> createState() => _AchievementDetailSheetState();
+  ConsumerState<_AchievementDetailSheet> createState() =>
+      _AchievementDetailSheetState();
 }
 
-class _AchievementDetailSheetState extends State<_AchievementDetailSheet> {
+class _AchievementDetailSheetState extends ConsumerState<_AchievementDetailSheet> {
   final _cardKey = GlobalKey();
   bool _sharing = false;
 
@@ -72,11 +75,14 @@ class _AchievementDetailSheetState extends State<_AchievementDetailSheet> {
         achievementShareMessage(L10n.of(context), ElunaL10n.of(context), widget.state);
     final origin = shareOrigin(context);
     try {
-      await shareBoundaryAsImage(
-        boundaryKey: _cardKey,
-        message: message,
-        origin: origin,
-        fileName: 'eluna_achievement_${widget.state.def.id}',
+      await awayInSystemUi(
+        ref.read(appLockStateProvider.notifier),
+        () => shareBoundaryAsImage(
+          boundaryKey: _cardKey,
+          message: message,
+          origin: origin,
+          fileName: 'eluna_achievement_${widget.state.def.id}',
+        ),
       );
     } finally {
       if (mounted) setState(() => _sharing = false);

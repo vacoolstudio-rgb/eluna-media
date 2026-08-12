@@ -86,7 +86,7 @@
   "introTelemetryBody": "Pas de compte, pas d'analytique, pas de rapports de plantage. L'application ne sait pas qui vous êtes.",
   "introMetadataTitle": "Métadonnées sous contrôle",
   "introMetadataBody": "Les EXIF, le GPS et les horodatages sont retirés de chaque sortie par défaut. Vous pouvez désactiver cela.",
-  "introFreeNote": "Gratuit : sans publicité, sans abonnement et sans achat intégré. Toutes les fonctions, y compris la conversion par lots, sont incluses.",
+  "introFreeNote": "Gratuit, sans publicité ni abonnement. Toutes les fonctions, y compris la conversion par lots, sont là dès le départ — la seule chose à acheter est un pourboire, et il ne débloque rien.",
   "introContinue": "Commencer",
   "modeSimple": "Simple",
   "modeAdvanced": "Avancé",

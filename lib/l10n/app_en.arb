@@ -192,7 +192,7 @@
   "introTelemetryBody": "No account, no analytics, no crash reporting. The app does not know who you are.",
   "introMetadataTitle": "Metadata under control",
   "introMetadataBody": "EXIF, GPS and timestamps are stripped from every output by default. You can turn that off.",
-  "introFreeNote": "Free, with no ads, no subscriptions and no in-app purchases. Every feature, batch conversion included, is yours.",
+  "introFreeNote": "Free, with no ads and no subscriptions. Every feature, batch conversion included, is yours from the start — the only thing that can be bought is a tip, and it unlocks nothing.",
   "introContinue": "Get started",
   "modeSimple": "Simple",
   "modeAdvanced": "Advanced",

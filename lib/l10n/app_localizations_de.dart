@@ -335,7 +335,7 @@ class L10nDe extends L10n {
 
   @override
   String get introFreeNote =>
-      'Kostenlos — ohne Werbung, ohne Abo, ohne In-App-Käufe. Alle Funktionen inklusive Stapelverarbeitung sind dabei.';
+      'Kostenlos, ohne Werbung und ohne Abos. Alle Funktionen, auch die Stapelverarbeitung, sind von Anfang an da — kaufen lässt sich nur ein Trinkgeld, und das schaltet nichts frei.';
 
   @override
   String get introContinue => 'Los geht\'s';

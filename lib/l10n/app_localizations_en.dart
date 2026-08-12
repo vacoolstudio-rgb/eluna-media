@@ -333,7 +333,7 @@ class L10nEn extends L10n {
 
   @override
   String get introFreeNote =>
-      'Free, with no ads, no subscriptions and no in-app purchases. Every feature, batch conversion included, is yours.';
+      'Free, with no ads and no subscriptions. Every feature, batch conversion included, is yours from the start — the only thing that can be bought is a tip, and it unlocks nothing.';
 
   @override
   String get introContinue => 'Get started';

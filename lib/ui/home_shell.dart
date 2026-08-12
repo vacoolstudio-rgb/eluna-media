@@ -10,6 +10,7 @@ import '../l10n/app_localizations.dart';
 import '../state/achievements_controller.dart';
 import '../state/app_meta_controller.dart';
 import '../services/haptics.dart';
+import '../state/app_lock_controller.dart';
 import 'achievement_celebration.dart';
 import '../services/share_intake.dart';
 import '../state/queue_controller.dart';
@@ -230,11 +231,12 @@ class _HomeShellState extends ConsumerState<HomeShell> {
       if (unlocks.isEmpty || !mounted) return;
       final first = unlocks.first;
       final haptics = ref.read(hapticsProvider);
+      final lock = ref.read(appLockStateProvider.notifier);
       // Диалог не открывается из колбэка провайдера напрямую: тот срабатывает
       // посреди сборки кадра, а `showDialog` в этот момент — исключение.
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;
-        showAchievementCelebration(context, first, haptics: haptics);
+        showAchievementCelebration(context, first, haptics: haptics, lock: lock);
       });
       ref.read(freshUnlocksProvider.notifier).consume();
     });

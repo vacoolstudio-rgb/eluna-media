@@ -325,7 +325,7 @@ class L10nKo extends L10n {
 
   @override
   String get introFreeNote =>
-      '무료예요. 광고도, 구독도, 인앱 결제도 없어요. 일괄 변환을 포함한 모든 기능을 그대로 쓸 수 있어요.';
+      '무료입니다. 광고도 구독도 없습니다. 일괄 변환을 포함한 모든 기능이 처음부터 열려 있고, 살 수 있는 것은 후원뿐이며 그것으로 잠기는 기능이 열리지는 않습니다.';
 
   @override
   String get introContinue => '시작하기';

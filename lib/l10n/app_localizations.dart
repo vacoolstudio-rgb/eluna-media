@@ -678,7 +678,7 @@ abstract class L10n {
   /// No description provided for @introFreeNote.
   ///
   /// In en, this message translates to:
-  /// **'Free, with no ads, no subscriptions and no in-app purchases. Every feature, batch conversion included, is yours.'**
+  /// **'Free, with no ads and no subscriptions. Every feature, batch conversion included, is yours from the start — the only thing that can be bought is a tip, and it unlocks nothing.'**
   String get introFreeNote;
 
   /// No description provided for @introContinue.

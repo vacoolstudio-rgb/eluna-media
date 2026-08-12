@@ -335,7 +335,7 @@ class L10nPt extends L10n {
 
   @override
   String get introFreeNote =>
-      'Gratuito: sem anúncios, sem assinaturas e sem compras no app. Todos os recursos, incluindo conversão em lote, já estão aqui.';
+      'Grátis, sem anúncios e sem assinaturas. Todos os recursos, inclusive a conversão em lote, estão disponíveis desde o início — a única coisa que dá para comprar é uma gorjeta, e ela não libera nada.';
 
   @override
   String get introContinue => 'Começar';

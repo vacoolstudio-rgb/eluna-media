@@ -336,7 +336,7 @@ class L10nId extends L10n {
 
   @override
   String get introFreeNote =>
-      'Gratis: tanpa iklan, tanpa langganan, tanpa pembelian dalam aplikasi. Semua fitur, termasuk konversi massal, sudah termasuk.';
+      'Gratis, tanpa iklan dan tanpa langganan. Semua fitur, termasuk konversi massal, tersedia sejak awal — yang bisa dibeli hanyalah tip, dan itu tidak membuka apa pun.';
 
   @override
   String get introContinue => 'Mulai';

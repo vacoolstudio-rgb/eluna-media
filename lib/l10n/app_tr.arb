@@ -86,7 +86,7 @@
   "introTelemetryBody": "Hesap yok, analitik yok, çökme raporu yok. Uygulama kim olduğunuzu bilmez.",
   "introMetadataTitle": "Meta veriler kontrol altında",
   "introMetadataBody": "EXIF, GPS ve zaman damgaları varsayılan olarak her çıktıdan silinir. İsterseniz kapatabilirsiniz.",
-  "introFreeNote": "Ücretsiz: reklam yok, abonelik yok, uygulama içi satın alma yok. Toplu dönüştürme dahil bütün özellikler içinde.",
+  "introFreeNote": "Ücretsiz: reklam yok, abonelik yok. Toplu dönüştürme dahil tüm özellikler en baştan açık — satın alınabilecek tek şey bir bahşiş ve o da hiçbir şeyin kilidini açmıyor.",
   "introContinue": "Başla",
   "modeSimple": "Basit",
   "modeAdvanced": "Gelişmiş",

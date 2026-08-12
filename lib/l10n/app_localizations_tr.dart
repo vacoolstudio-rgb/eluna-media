@@ -335,7 +335,7 @@ class L10nTr extends L10n {
 
   @override
   String get introFreeNote =>
-      'Ücretsiz: reklam yok, abonelik yok, uygulama içi satın alma yok. Toplu dönüştürme dahil bütün özellikler içinde.';
+      'Ücretsiz: reklam yok, abonelik yok. Toplu dönüştürme dahil tüm özellikler en baştan açık — satın alınabilecek tek şey bir bahşiş ve o da hiçbir şeyin kilidini açmıyor.';
 
   @override
   String get introContinue => 'Başla';

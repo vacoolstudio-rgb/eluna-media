@@ -300,7 +300,11 @@ class SettingsTab extends ConsumerWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(Icons.star_outline),
                 title: Text(l10n.rateApp),
-                onTap: () => showElunaRateAppModal(context),
+                // Пятизвёздочная оценка уводит в магазин — тоже отлучка.
+                onTap: () => awayInSystemUi(
+                  ref.read(appLockStateProvider.notifier),
+                  () => showElunaRateAppModal(context),
+                ),
               ),
               // Чаевые. Ничего не открывают и ничего не обещают: приложение
               // целиком бесплатно, и эта строка — единственное место, где о
@@ -334,11 +338,15 @@ class SettingsTab extends ConsumerWidget {
                     // iPads present the share sheet as a popover and crash
                     // without a source rect; anchor it to this tile.
                     final box = context.findRenderObject() as RenderBox?;
-                    SharePlus.instance.share(ShareParams(
-                      text: l10n.shareAppText,
-                      sharePositionOrigin:
-                          box == null ? null : box.localToGlobal(Offset.zero) & box.size,
-                    ));
+                    awayInSystemUi(
+                      ref.read(appLockStateProvider.notifier),
+                      () => SharePlus.instance.share(ShareParams(
+                        text: l10n.shareAppText,
+                        sharePositionOrigin: box == null
+                            ? null
+                            : box.localToGlobal(Offset.zero) & box.size,
+                      )),
+                    );
                   },
                 ),
               ),

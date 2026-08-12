@@ -8,6 +8,7 @@ import 'package:share_plus/share_plus.dart';
 import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
 import '../services/haptics.dart';
+import '../state/app_lock_controller.dart';
 import 'achievement_texts.dart';
 
 /// Полноэкранное празднование только что взятой награды: залп конфетти,
@@ -20,19 +21,24 @@ Future<void> showAchievementCelebration(
   BuildContext context,
   AchievementState<ConversionStats> state, {
   required Haptics haptics,
+  required AppLockGate lock,
 }) async {
   haptics.achievementUnlocked();
   await showDialog<void>(
     context: context,
     barrierColor: Colors.black87,
-    builder: (_) => _CelebrationDialog(state: state),
+    builder: (_) => _CelebrationDialog(state: state, lock: lock),
   );
 }
 
 class _CelebrationDialog extends StatefulWidget {
-  const _CelebrationDialog({required this.state});
+  const _CelebrationDialog({required this.state, required this.lock});
 
   final AchievementState<ConversionStats> state;
+
+  /// Лист «Поделиться» — чужая Activity; без предупреждения замок встретил бы
+  /// человека кодом сразу после того, как он похвастался медалью.
+  final AppLockGate lock;
 
   @override
   State<_CelebrationDialog> createState() => _CelebrationDialogState();
@@ -166,13 +172,16 @@ class _CelebrationDialogState extends State<_CelebrationDialog>
                       // iPad показывает лист поделиться поповером и падает без
                       // исходного прямоугольника — привязываем к самой кнопке.
                       final box = context.findRenderObject() as RenderBox?;
-                      SharePlus.instance.share(ShareParams(
-                        text: shared.achievementShareText(
-                            title, Eluna.config.appName),
-                        sharePositionOrigin: box == null
-                            ? null
-                            : box.localToGlobal(Offset.zero) & box.size,
-                      ));
+                      awayInSystemUi(
+                        widget.lock,
+                        () => SharePlus.instance.share(ShareParams(
+                          text: shared.achievementShareText(
+                              title, Eluna.config.appName),
+                          sharePositionOrigin: box == null
+                              ? null
+                              : box.localToGlobal(Offset.zero) & box.size,
+                        )),
+                      );
                     },
                     icon: const HugeIcon(icon: HugeIcons.strokeRoundedShare08),
                     label: Text(shared.achievementShare),

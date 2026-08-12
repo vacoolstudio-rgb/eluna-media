@@ -336,7 +336,7 @@ class L10nEs extends L10n {
 
   @override
   String get introFreeNote =>
-      'Gratis: sin anuncios, sin suscripciones y sin compras dentro de la app. Todas las funciones, incluida la conversión por lotes, están incluidas.';
+      'Gratis, sin anuncios ni suscripciones. Todas las funciones, incluida la conversión por lotes, están desde el principio; lo único que se puede comprar es una propina, y no desbloquea nada.';
 
   @override
   String get introContinue => 'Empezar';

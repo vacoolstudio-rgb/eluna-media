@@ -337,7 +337,7 @@ class L10nFr extends L10n {
 
   @override
   String get introFreeNote =>
-      'Gratuit : sans publicité, sans abonnement et sans achat intégré. Toutes les fonctions, y compris la conversion par lots, sont incluses.';
+      'Gratuit, sans publicité ni abonnement. Toutes les fonctions, y compris la conversion par lots, sont là dès le départ — la seule chose à acheter est un pourboire, et il ne débloque rien.';
 
   @override
   String get introContinue => 'Commencer';

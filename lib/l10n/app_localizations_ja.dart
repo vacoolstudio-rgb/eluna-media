@@ -326,7 +326,8 @@ class L10nJa extends L10n {
       'EXIF・GPS・タイムスタンプは初期設定ですべての出力から取り除かれます。オフにすることもできます。';
 
   @override
-  String get introFreeNote => '無料です。広告なし、サブスクなし、アプリ内課金なし。一括変換を含むすべての機能が使えます。';
+  String get introFreeNote =>
+      '無料です。広告もサブスクもありません。一括変換を含むすべての機能が最初から使えます。購入できるのはチップだけで、それで何かが解放されることはありません。';
 
   @override
   String get introContinue => 'はじめる';

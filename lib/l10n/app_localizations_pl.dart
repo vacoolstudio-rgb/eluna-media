@@ -336,7 +336,7 @@ class L10nPl extends L10n {
 
   @override
   String get introFreeNote =>
-      'Bezpłatnie: bez reklam, bez subskrypcji i bez zakupów w aplikacji. Wszystkie funkcje, łącznie z konwersją wsadową, są w komplecie.';
+      'Bezpłatnie, bez reklam i bez subskrypcji. Wszystkie funkcje, łącznie z przetwarzaniem wsadowym, są od razu — kupić można tylko napiwek, a on niczego nie odblokowuje.';
 
   @override
   String get introContinue => 'Zaczynamy';

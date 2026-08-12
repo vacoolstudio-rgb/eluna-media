@@ -68,6 +68,33 @@ void main() {
         reason: 'настоящая отлучка обязана спросить код');
   });
 
+  test('своя отлучка в системный интерфейс кода не требует, сколько бы ни длилась',
+      () async {
+    await service.setPin('1234');
+    await service.isLockConfigured();
+
+    final container = boot();
+    final gate = container.read(appLockStateProvider.notifier);
+    gate.resolve(configured: true);
+    gate.unlock();
+
+    // Устройство поймало это на живом человеке: выбор файла в системном пикере
+    // занял 75 секунд — больше паузы, — и приложение потребовало код у того,
+    // кто из него никуда не уходил.
+    final opened = DateTime(2026, 8, 13, 12);
+    gate.expectSystemUi(now: opened);
+    gate.paused(now: opened);
+    gate.resumed(now: opened.add(const Duration(minutes: 3)));
+    expect(container.read(appLockStateProvider), AppLockState.unlocked);
+
+    // И тут же следующее сворачивание — уже настоящее: отметка одноразовая.
+    final left = opened.add(const Duration(minutes: 4));
+    gate.paused(now: left);
+    gate.resumed(now: left.add(const Duration(minutes: 1)));
+    expect(container.read(appLockStateProvider), AppLockState.locked,
+        reason: 'одна отлучка — одна поблажка, иначе она открывает замок навсегда');
+  });
+
   test('возврат после холодного старта код всё равно спрашивает', () async {
     await service.setPin('1234');
     await service.isLockConfigured();

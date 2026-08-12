@@ -9,8 +9,10 @@ android {
     namespace = "com.lunara.eluna_media"
     compileSdk = flutter.compileSdkVersion
     // Highest NDK required by any plugin (ffmpeg-kit and friends); NDK releases
-    // are backward compatible.
-    ndkVersion = "27.0.12077973"
+    // are backward compatible. Raised to 28.2 for `integration_test`, which
+    // warned on every device run — the tests still built, but a warning printed
+    // on every run is a warning nobody reads by the third time.
+    ndkVersion = "28.2.13676358"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
