@@ -610,6 +610,13 @@ class L10nZh extends L10n {
   String get netAuditTelemetryBody => '没有。应用不收集任何分析数据、崩溃报告或标识符，也没有账号系统。';
 
   @override
+  String get netAuditTipsTitle => '打赏';
+
+  @override
+  String get netAuditTipsBody =>
+      '打赏由 Play 商店应用完成，而不是本应用——它依然没有联网权限。内购会给权限列表添加两项：“应用内购买”和“查看网络连接”，后者只能读取是否有连接，无法使用它。不会自动扣费，打赏也不会解锁任何功能：这里的一切都是免费的。';
+
+  @override
   String get sectionSupport => '支持';
 
   @override

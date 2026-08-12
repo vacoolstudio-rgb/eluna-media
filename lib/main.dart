@@ -10,9 +10,11 @@ import 'core/logging/error_handlers.dart';
 import 'core/platform/eluna_adapters.dart';
 import 'services/notification_service.dart';
 import 'services/share_intake.dart';
+import 'state/app_lock_controller.dart';
 import 'state/data_erasers.dart';
 import 'state/queue_controller.dart';
 import 'state/settings_controller.dart';
+import 'state/tips_controller.dart';
 import 'ui/app.dart';
 import 'ui/error_screen.dart';
 
@@ -41,9 +43,10 @@ Future<void> main() async {
     // поддержки и ссылки на сторы читаются отсюда, и `Eluna.config` бросает
     // исключение, а не угадывает.
     //
-    // Пустые списки — не заглушки, а факты: у Media нет ни страницы в сторе,
-    // ни альтернативных значков, ни покупок. Общие экраны прячут то, чего нет,
-    // поэтому врать им нечем.
+    // Пустой список значков — не заглушка, а факт: альтернативных иконок у
+    // Media нет, и общий экран прячет то, чего нет. Идентификаторы чаевых, в
+    // отличие от него, теперь настоящие: пока таких товаров нет в Play Console,
+    // магазин вернёт пустой список, и экран честно покажет, что покупать нечего.
     Eluna.configure(const ElunaAppConfig(
       appName: 'Eluna Media',
       // Идентификатор вне семейного шаблона `com.eluna.*` — так оно и есть на
@@ -54,7 +57,7 @@ Future<void> main() async {
       supportEmail: 'support@eluna-apps.com',
       websiteUrl: 'https://eluna-apps.com',
       appIcons: [],
-      tipProductIds: [],
+      tipProductIds: kTipProductIds,
       // Монохромной ic_notification в drawable нет, а ненайденный ресурс роняет
       // инициализацию плагина уведомлений — молча, вместе со всеми
       // уведомлениями сразу.
@@ -130,6 +133,13 @@ Future<void> main() async {
       container: container,
       notifications: notifications,
     ));
+
+    // Замок — до первого кадра, иначе очередь с именами файлов успевает
+    // мелькнуть под шторкой. Ответ заодно прогревает синхронный кэш сервиса,
+    // из которого потом читает обработчик паузы: ему ждать нельзя.
+    container.read(appLockStateProvider.notifier).resolve(
+          configured: await container.read(appLockServiceProvider).isLockConfigured(),
+        );
 
     // Announce readiness to the native side; files shared while the app was
     // dead flush through right after this.

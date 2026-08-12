@@ -8,12 +8,14 @@ import '../core/output_paths.dart';
 import '../domain/achievements.dart';
 import '../l10n/app_localizations.dart';
 import '../state/achievements_controller.dart';
+import '../state/app_lock_controller.dart';
 import '../state/app_meta_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/storage_controller.dart';
 import 'achievements_screen.dart';
 import 'network_privacy_screen.dart';
 import 'support_screen.dart';
+import 'tip_screen.dart';
 import 'widgets/section_card.dart';
 
 /// Один блок настроек: общая карточка пакета плюс её же шапка.
@@ -268,6 +270,8 @@ class SettingsTab extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 16),
+          const _SecuritySection(),
+          const SizedBox(height: 16),
           _Section(
             title: l10n.sectionSupport,
             icon: HugeIcons.strokeRoundedFavourite,
@@ -297,6 +301,29 @@ class SettingsTab extends ConsumerWidget {
                 leading: const Icon(Icons.star_outline),
                 title: Text(l10n.rateApp),
                 onTap: () => showElunaRateAppModal(context),
+              ),
+              // Чаевые. Ничего не открывают и ничего не обещают: приложение
+              // целиком бесплатно, и эта строка — единственное место, где о
+              // деньгах вообще заходит речь.
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.coffee_outlined),
+                title: Text(ElunaL10n.of(context).tipTitle),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(builder: (_) => const TipScreen()),
+                ),
+              ),
+              // Остальные приложения семьи. Каталог, тексты и ссылки на сторы
+              // знает пакет; сама Media в списке не появится, пока не выйдет —
+              // `showElunaOurAppsSheet` вычёркивает приложение, из которого его
+              // открыли, а в `kElunaFamily` её ещё нет.
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.apps_rounded),
+                title: Text(ElunaL10n.of(context).settingsOurApps),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => showElunaOurAppsSheet(context),
               ),
               Builder(
                 builder: (context) => ListTile(
@@ -373,13 +400,133 @@ class SettingsTab extends ConsumerWidget {
   }
 }
 
-/// «Версия 0.5.0 (3)» мелким шрифтом в самом низу настроек.
+/// Пин-код и биометрия — как в Eluna Screen и Eluna Cycle.
 ///
-/// Версия приходит с платформы (канал), поэтому FutureBuilder, а не константа:
-/// строка появляется кадром позже, зато она всегда та, что реально установлена.
-/// `full()` — с номером сборки: именно в такой форме её нужно называть в отчёте
-/// об ошибке. Пока ответ едет, показываем уже прочитанное значение — «что
-/// нового» на первом кадре обычно успевает его запросить, и мигания нет.
+/// Замок закрывает интерфейс, а не данные: файлы очереди лежат в песочнице
+/// приложения, и настоящей границей всегда была она. Пин хранится хешем
+/// (PBKDF2) с нарастающей паузой после неверных попыток — всё это в пакете, тут
+/// только строки и переходы.
+///
+/// Своя карточка, а не строка в «Приватности»: она перерисовывается, когда
+/// приходит ответ о настроенном замке, и незачем перерисовывать вместе с ней
+/// весь экран.
+class _SecuritySection extends ConsumerWidget {
+  const _SecuritySection();
+
+  Future<void> _setup(
+      BuildContext context, WidgetRef ref, ElunaPinSetupMode mode) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute<bool>(
+        builder: (_) => ElunaPinSetupScreen(
+          mode: mode,
+          lock: ref.read(appLockServiceProvider),
+        ),
+      ),
+    );
+    ref.invalidate(appLockStatusProvider);
+  }
+
+  Future<void> _pinTap(BuildContext context, WidgetRef ref, bool hasPin) async {
+    if (!hasPin) return _setup(context, ref, ElunaPinSetupMode.create);
+    final l = ElunaL10n.of(context);
+    await showAdaptiveModal<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (sheetContext) => SheetScroller(
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.edit_outlined),
+                title: Text(l.lockChangeCode),
+                onTap: () {
+                  Navigator.pop(sheetContext);
+                  _setup(context, ref, ElunaPinSetupMode.change);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.delete_outline),
+                title: Text(l.lockRemoveCode),
+                onTap: () {
+                  Navigator.pop(sheetContext);
+                  _setup(context, ref, ElunaPinSetupMode.disable);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _toggleBiometrics(
+      BuildContext context, WidgetRef ref, bool enable) async {
+    final service = ref.read(appLockServiceProvider);
+    if (!enable) {
+      await service.setBiometricEnabled(false);
+      ref.invalidate(appLockStatusProvider);
+      return;
+    }
+    // Сначала доказать, что датчик работает, и только потом доверять ему ключ:
+    // включённая биометрия, которая не срабатывает, оставляет человека набирать
+    // код — при том что переключатель обещал обратное.
+    final reason = ElunaL10n.of(context).lockBiometricPrompt(Eluna.config.appName);
+    if (await BiometricGate().authenticate(reason)) {
+      await service.setBiometricEnabled(true);
+    }
+    ref.invalidate(appLockStatusProvider);
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = ElunaL10n.of(context);
+    final status = ref.watch(appLockStatusProvider).value;
+    final hasPin = status?.pin ?? false;
+
+    return _Section(
+      title: l.lockSectionTitle,
+      icon: HugeIcons.strokeRoundedSquareLock02,
+      accent: SectionAccents.teal,
+      children: [
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: const Icon(Icons.lock_outline),
+          title: Text(l.lockPinTitle),
+          subtitle: Text(hasPin ? l.lockEnabled : l.lockPinSubtitleOff),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => _pinTap(context, ref, hasPin),
+        ),
+        // Независимо от пин-кода, намеренно: биометрия сама по себе — законный
+        // замок, у системного запроса есть собственный запасной вход по коду
+        // устройства.
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          secondary: const Icon(Icons.fingerprint),
+          title: Text(l.lockBiometricTitle),
+          subtitle: Text(l.lockBiometricSubtitle),
+          value: status?.bio ?? false,
+          onChanged: (v) => _toggleBiometrics(context, ref, v),
+        ),
+      ],
+    );
+  }
+}
+
+/// «Версия 1.0.0» мелким шрифтом в самом низу настроек.
+///
+/// Версия приходит из бандла (канал платформы), поэтому FutureBuilder, а не
+/// константа: строка появляется кадром позже, зато она всегда та, что реально
+/// установлена, и её не забудут подвинуть. Пока ответ едет, показываем уже
+/// прочитанное значение — «что нового» на первом кадре обычно успевает его
+/// запросить, и мигания нет.
+///
+/// `name()`, а НЕ `full()`: номер сборки здесь читался как часть версии
+/// («0.5.0 (2003)») и вызывал ровно тот вопрос, на который отвечать нечем.
+/// Само число при этом не выдумано: `--split-per-abi` прибавляет к номеру
+/// сборки 2000 за arm64 — это правило Flutter, а не наше. В отчёте об ошибке
+/// номер сборки по-прежнему есть, там он и нужен.
 class _VersionCaption extends StatelessWidget {
   const _VersionCaption();
 
@@ -388,9 +535,9 @@ class _VersionCaption extends StatelessWidget {
     final l10n = L10n.of(context);
     final theme = Theme.of(context);
     return FutureBuilder<String>(
-      future: ElunaVersion.full(),
+      future: ElunaVersion.name(),
       builder: (context, snapshot) => Text(
-        l10n.appVersionLabel(snapshot.data ?? ElunaVersion.cached),
+        l10n.appVersionLabel(snapshot.data ?? ElunaVersion.cachedName),
         style: theme.textTheme.labelSmall
             ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
       ),

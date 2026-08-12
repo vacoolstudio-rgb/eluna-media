@@ -644,6 +644,13 @@ class L10nPl extends L10n {
       'Nie ma jej. Aplikacja nie zbiera analityki, raportów o awariach ani identyfikatorów i nie ma systemu kont.';
 
   @override
+  String get netAuditTipsTitle => 'Napiwki';
+
+  @override
+  String get netAuditTipsBody =>
+      'Napiwek realizuje aplikacja Play Store, a nie ta — ta nadal nie ma uprawnienia do internetu. Wraz z zakupami na liście uprawnień pojawiają się dwie pozycje: „zakupy w aplikacji” i „wyświetlanie połączeń sieciowych”; druga tylko sprawdza, czy połączenie istnieje, i nie potrafi z niego skorzystać. Nic nie kupuje się samo, a napiwek niczego nie odblokowuje: wszystko tutaj jest bezpłatne.';
+
+  @override
   String get sectionSupport => 'Wsparcie';
 
   @override

@@ -3,8 +3,9 @@
 Offline photo / video / audio converter for Android and iOS, built with
 Flutter. Every conversion runs on the device through a bundled FFmpeg build;
 files never leave the phone. Nothing in the app touches the network — the
-release build does not even hold the `INTERNET` permission. Free, with no
-ads, no subscriptions and no in-app purchases.
+release build does not even hold the `INTERNET` permission. Free, with no ads
+and no subscriptions; the one in-app purchase is a **tip**, which unlocks
+nothing and is carried out by the Play Store app rather than by this one.
 
 Product docs: `docs/REQUIREMENTS.md` (что и почему) and
 `docs/IMPLEMENTATION_PLAN.md` (как, по этапам). Both are grounded in a
@@ -132,7 +133,16 @@ competitor/review analysis from July 2026.
 - First-run **privacy intro** (three promises, one line on what the app costs)
   and a **Network & privacy audit screen** in Settings listing every network
   channel — for this app, none at all, which the system's own permission list
-  will confirm.
+  will confirm, plus the two permissions the tip jar brings and what they can
+  and cannot do.
+- **App lock** — a PIN (PBKDF2 hash with an escalating lockout, never the code
+  itself) and/or biometrics, either one valid alone. The shade goes up when the
+  app is paused, so the recents snapshot shows it instead of the queue, and it
+  comes down by itself if the app was away for less than 30 seconds. That grace
+  is deliberate: the system file picker, the share sheet and the delete-originals
+  dialog are all other people's activities, and a converter visits them a dozen
+  times a session — without it the PIN would be asked after every file pick.
+- **More from us** — the family catalogue, with the app you are in filtered out.
 - **Power mode** (Settings): Cool & fast / Balanced / Max compression — maps
   1:1 onto the x264/x265 `-preset` flag (`ultrafast`/`veryfast`/`medium`).
   Nothing else is throttled, ever. A low-battery confirmation dialog appears
@@ -181,8 +191,11 @@ competitor/review analysis from July 2026.
   rectangle; errors are logged locally only.
 
 ### Monetization
-There is none, by decision. No ads, no subscriptions, no in-app purchases, no
-feature paywalls, no watermarks; batch conversion is free like everything else.
+Nothing is sold. No ads, no subscriptions, no feature paywalls, no watermarks;
+batch conversion is free like everything else. The single purchase in the app
+is a **tip** — consumable, repeatable, and it unlocks nothing. There is no
+entitlement, no "owned" state and no restore, because restoring a thank-you is
+not a coherent idea.
 
 The app shipped an AdMob banner and a one-time "remove ads" purchase through
 v0.4.0. Both were removed outright: the banner was the last thing in the
@@ -192,6 +205,23 @@ home even if it wanted to — `android/app/src/release/AndroidManifest.xml`
 strips the `INTERNET` permission with `tools:node="remove"`, so a dependency
 cannot merge it back in unnoticed. Debug and profile builds keep it; the
 Flutter tool needs it for hot reload.
+
+The tip jar (1.0.0) does not undo that, and the merged release manifest is the
+proof: **no `INTERNET`**. Play Billing talks to the Play Store app over IPC and
+that app does the networking. It does add `com.android.vending.BILLING` and
+`ACCESS_NETWORK_STATE`, and the in-app network audit screen names both rather
+than letting a curious user find them in the system's permission list first.
+
+Two things about it are open questions for the owner rather than settled facts:
+
+1. **Play Billing is a closed-source library inside a GPL-v3 app.** That is the
+   same objection that removed AdMob — the GPL comes from the bundled `full-gpl`
+   FFmpeg and covers the whole binary. It is a smaller surface (no ad SDK, no
+   identifiers, no network in-process) but it is the same class of problem, and
+   `NOTICE.md` records the reasoning either way.
+2. **The products must exist in the Play Console** (`tip_coffee`, `tip_snack`,
+   `tip_generous`, all *consumable*). Until they do, the store returns an empty
+   list and the screen honestly shows nothing to buy.
 
 ## Architecture
 
@@ -285,7 +315,24 @@ Manual checks worth repeating on device: share a video from the gallery into
 the app (cold and warm), convert with a 10 MB target and verify the output is
 under 10 MB, save a video to the gallery and an MP3 to Downloads, and open the
 system app info to confirm the release build lists no permissions beyond
-notifications, the foreground service and legacy storage — no internet.
+notifications, the foreground service, legacy storage, biometrics and the two
+that billing brings — no internet.
+
+**Check the merged release manifest after touching dependencies**, not the
+source one:
+
+```
+flutter build apk --release --split-per-abi
+grep uses-permission build/app/intermediates/merged_manifest/release/*/AndroidManifest.xml
+```
+
+`INTERNET` appearing there means a dependency merged it back in and the app's
+central promise is broken; that is a release blocker, not a note. The list as of
+1.0.0: notifications, foreground service (+ data sync, media processing),
+read/write external storage, read media images/video/audio, vibrate, biometrics
+(`USE_BIOMETRIC`, `USE_FINGERPRINT`, from the app lock), `com.android.vending.BILLING`
+and `ACCESS_NETWORK_STATE` (both from Play Billing — the latter only reads
+whether a connection exists; it does not grant one).
 
 ## Building
 

@@ -642,6 +642,13 @@ class L10nId extends L10n {
       'Tidak ada. Aplikasi tidak mengumpulkan analitik, laporan crash, maupun identifier, dan tidak punya sistem akun.';
 
   @override
+  String get netAuditTipsTitle => 'Tip';
+
+  @override
+  String get netAuditTipsBody =>
+      'Tip diproses oleh aplikasi Play Store, bukan aplikasi ini — yang tetap tidak punya izin internet. Pembelian menambahkan dua baris ke daftar izin: “pembelian dalam aplikasi” dan “melihat koneksi jaringan”; yang kedua hanya membaca apakah ada koneksi dan tidak bisa memakainya. Tidak ada yang dibeli otomatis, dan tip tidak membuka apa pun: semua di sini gratis.';
+
+  @override
   String get sectionSupport => 'Dukungan';
 
   @override

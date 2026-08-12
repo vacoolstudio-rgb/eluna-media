@@ -642,6 +642,13 @@ class L10nEs extends L10n {
       'No hay. La app no recopila analíticas, ni informes de fallos, ni identificadores, y no tiene sistema de cuentas.';
 
   @override
+  String get netAuditTipsTitle => 'Propinas';
+
+  @override
+  String get netAuditTipsBody =>
+      'La propina la gestiona la app de Play Store, no esta, que sigue sin permiso de internet. Con las compras aparecen dos líneas en la lista de permisos: «compras dentro de la app» y «ver conexiones de red»; la segunda solo consulta si hay conexión, no puede usarla. Nunca se compra nada automáticamente y una propina no desbloquea nada: todo aquí es gratis.';
+
+  @override
   String get sectionSupport => 'Apoyo';
 
   @override

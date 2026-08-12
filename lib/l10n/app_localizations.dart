@@ -1191,6 +1191,18 @@ abstract class L10n {
   /// **'There is none. The app collects no analytics, no crash reports, no identifiers, and has no account system.'**
   String get netAuditTelemetryBody;
 
+  /// No description provided for @netAuditTipsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tips'**
+  String get netAuditTipsTitle;
+
+  /// No description provided for @netAuditTipsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A tip is carried out by the Play Store app, not by this one — which still holds no internet permission. Billing does add two lines to the permission list: “in-app purchases”, and “view network connections”, which only reads whether a connection exists and cannot use one. Nothing is ever bought automatically, and a tip unlocks nothing: every feature here is free.'**
+  String get netAuditTipsBody;
+
   /// No description provided for @sectionSupport.
   ///
   /// In en, this message translates to:

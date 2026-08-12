@@ -169,6 +169,8 @@
   "netAuditConversionBody": "Roda inteiramente neste dispositivo com um FFmpeg embutido. Ative o modo avião e converta — funciona.",
   "netAuditTelemetryTitle": "Telemetria",
   "netAuditTelemetryBody": "Não existe. O app não coleta análises, nem relatórios de falhas, nem identificadores, e não tem sistema de contas.",
+  "netAuditTipsTitle": "Gorjetas",
+  "netAuditTipsBody": "A gorjeta é feita pelo app da Play Store, não por este, que continua sem permissão de internet. As compras acrescentam duas linhas à lista de permissões: «compras no app» e «ver conexões de rede»; a segunda apenas verifica se existe conexão e não consegue usá-la. Nada é comprado automaticamente, e uma gorjeta não libera nada: tudo aqui é gratuito.",
   "sectionSupport": "Apoio",
   "rateApp": "Avaliar o app",
   "openLicenses": "Licenças de código aberto",

@@ -43,6 +43,17 @@ class NetworkPrivacyScreen extends StatelessWidget {
                 title: l10n.netAuditTelemetryTitle,
                 body: l10n.netAuditTelemetryBody,
               ),
+              const SizedBox(height: 12),
+              // Единственное место, где список перестал быть пустым. Чаевые не
+              // выводят приложение в сеть — платит приложение магазина, — но в
+              // системных сведениях появляются две строки от библиотеки покупок,
+              // и экран, обещающий «полный список», обязан назвать их первым.
+              // Умолчать здесь значило бы, что аудит проверяет сам себя.
+              _AuditSection(
+                icon: HugeIcons.strokeRoundedCoffee02,
+                title: l10n.netAuditTipsTitle,
+                body: l10n.netAuditTipsBody,
+              ),
             ],
           ),
         ),

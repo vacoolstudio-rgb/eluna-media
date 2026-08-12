@@ -169,6 +169,8 @@
   "netAuditConversionBody": "Avviene interamente su questo dispositivo tramite un FFmpeg integrato. Attiva la modalità aereo e converti — funziona.",
   "netAuditTelemetryTitle": "Telemetria",
   "netAuditTelemetryBody": "Non c'è. L'app non raccoglie analisi, né report dei crash, né identificatori, e non ha alcun sistema di account.",
+  "netAuditTipsTitle": "Mance",
+  "netAuditTipsBody": "La mancia la gestisce l\u0027app Play Store, non questa, che continua a non avere il permesso di accesso a internet. Con gli acquisti compaiono due voci nell\u0027elenco dei permessi: «acquisti in-app» e «visualizzare le connessioni di rete»; la seconda legge soltanto se una connessione esiste e non può usarla. Non viene mai acquistato nulla automaticamente e una mancia non sblocca niente: qui è tutto gratuito.",
   "sectionSupport": "Sostegno",
   "rateApp": "Valuta l'app",
   "openLicenses": "Licenze open source",

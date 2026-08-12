@@ -169,6 +169,8 @@
   "netAuditConversionBody": "Berjalan sepenuhnya di perangkat ini lewat FFmpeg bawaan. Nyalakan mode pesawat lalu konversi — tetap jalan.",
   "netAuditTelemetryTitle": "Telemetri",
   "netAuditTelemetryBody": "Tidak ada. Aplikasi tidak mengumpulkan analitik, laporan crash, maupun identifier, dan tidak punya sistem akun.",
+  "netAuditTipsTitle": "Tip",
+  "netAuditTipsBody": "Tip diproses oleh aplikasi Play Store, bukan aplikasi ini — yang tetap tidak punya izin internet. Pembelian menambahkan dua baris ke daftar izin: “pembelian dalam aplikasi” dan “melihat koneksi jaringan”; yang kedua hanya membaca apakah ada koneksi dan tidak bisa memakainya. Tidak ada yang dibeli otomatis, dan tip tidak membuka apa pun: semua di sini gratis.",
   "sectionSupport": "Dukungan",
   "rateApp": "Beri nilai aplikasi",
   "openLicenses": "Lisensi open source",

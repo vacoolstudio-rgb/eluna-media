@@ -640,6 +640,13 @@ class L10nDe extends L10n {
       'Gibt es nicht. Die App sammelt keine Analytics, keine Absturzberichte, keine Kennungen und hat kein Kontosystem.';
 
   @override
+  String get netAuditTipsTitle => 'Trinkgeld';
+
+  @override
+  String get netAuditTipsBody =>
+      'Ein Trinkgeld wickelt die Play-Store-App ab, nicht diese — sie hat weiterhin keine Internet-Berechtigung. Mit den Käufen kommen zwei Zeilen in die Berechtigungsliste: „In-App-Käufe“ und „Netzwerkverbindungen abrufen“; Letztere liest nur, ob eine Verbindung besteht, und kann sie nicht nutzen. Es wird nie automatisch etwas gekauft, und ein Trinkgeld schaltet nichts frei: Alles hier ist kostenlos.';
+
+  @override
   String get sectionSupport => 'Unterstützung';
 
   @override

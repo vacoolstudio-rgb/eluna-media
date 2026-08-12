@@ -5,6 +5,7 @@ import '../core/output_paths.dart';
 import '../services/notification_service.dart';
 import '../services/share_intake.dart';
 import '../services/thumbnails.dart';
+import 'app_lock_controller.dart';
 import 'queue_controller.dart';
 
 /// Всё, что Media хранит на устройстве, — списком, который стирает
@@ -61,4 +62,15 @@ List<ElunaEraser> mediaDataErasers({
       // Показанное уведомление переживает стирание и продолжает рассказывать,
       // сколько файлов было сконвертировано.
       ElunaEraser('notifications', notifications.cancelAll),
+      // Пин-код и признак биометрии. Формально они лежат в SharedPreferences,
+      // которую пакет чистит сам, — но список выше обещает, что стирается ВСЁ,
+      // а замок переживший стирание запер бы человека в приложении без данных.
+      // Отдельным стирателем ещё и потому, что после него надо освежить
+      // прочитанное состояние: иначе настройки продолжат показывать «включён».
+      ElunaEraser('app lock', () async {
+        final lock = container.read(appLockServiceProvider);
+        await lock.setPin(null);
+        await lock.setBiometricEnabled(false);
+        container.invalidate(appLockStatusProvider);
+      }),
     ];

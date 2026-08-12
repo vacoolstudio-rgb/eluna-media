@@ -169,6 +169,8 @@
   "netAuditConversionBody": "S'exécute entièrement sur cet appareil via un FFmpeg intégré. Activez le mode avion et convertissez — ça marche.",
   "netAuditTelemetryTitle": "Télémétrie",
   "netAuditTelemetryBody": "Il n'y en a pas. L'application ne collecte aucune analytique, aucun rapport de plantage, aucun identifiant, et n'a aucun système de compte.",
+  "netAuditTipsTitle": "Pourboires",
+  "netAuditTipsBody": "Le pourboire est traité par l\u0027application Play Store, pas par celle-ci, qui n\u0027a toujours pas la permission d\u0027accès à Internet. Les achats ajoutent deux lignes à la liste des permissions : « achats dans l\u0027application » et « voir les connexions réseau » ; la seconde se contente de lire s\u0027il existe une connexion, sans pouvoir l\u0027utiliser. Rien n\u0027est jamais acheté automatiquement, et un pourboire ne débloque rien : tout est gratuit ici.",
   "sectionSupport": "Soutien",
   "rateApp": "Noter l'application",
   "openLicenses": "Licences open source",

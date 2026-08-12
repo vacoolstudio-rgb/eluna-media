@@ -636,6 +636,13 @@ class L10nEn extends L10n {
       'There is none. The app collects no analytics, no crash reports, no identifiers, and has no account system.';
 
   @override
+  String get netAuditTipsTitle => 'Tips';
+
+  @override
+  String get netAuditTipsBody =>
+      'A tip is carried out by the Play Store app, not by this one — which still holds no internet permission. Billing does add two lines to the permission list: “in-app purchases”, and “view network connections”, which only reads whether a connection exists and cannot use one. Nothing is ever bought automatically, and a tip unlocks nothing: every feature here is free.';
+
+  @override
   String get sectionSupport => 'Support';
 
   @override

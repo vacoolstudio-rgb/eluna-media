@@ -355,12 +355,17 @@ class _AchievementTile extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final (title, body) = achievementTexts(l10n, entry.def);
     final unlocked = entry.unlocked;
+    // Цвет редкости стоит на карточке ВСЕГДА — и у взятой, и у запертой. Это
+    // метка уровня, а не награда за него: пока он гас у запертых, вся полка
+    // читалась одним серым списком, при том что шапка над ней тут же
+    // показывала разбивку по цветам. Разницу между «взято» и «не взято» несут
+    // медаль (у неё редкость не проступает), насыщенность заливки и замок
+    // справа — три признака, из которых цвет был лишним четвёртым.
     final rarity = rarityColor(entry.def.rarity);
-    final accent = unlocked ? rarity : theme.colorScheme.outline;
     final base = isDark ? theme.colorScheme.surfaceContainer : Colors.white;
 
     Color tint(double amount, double alpha) =>
-        Color.alphaBlend(accent.withValues(alpha: amount), base).withValues(alpha: alpha);
+        Color.alphaBlend(rarity.withValues(alpha: amount), base).withValues(alpha: alpha);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -374,18 +379,21 @@ class _AchievementTile extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
+              // Запертая карточка — тот же цвет, вполсилы: заметно тусклее
+              // взятой, но по-прежнему своего уровня.
               colors: unlocked
                   ? (isDark
                       ? [tint(0.18, 0.62), tint(0.05, 0.44)]
                       : [tint(0.14, 0.8), tint(0.03, 0.55)])
-                  : [
-                      base.withValues(alpha: isDark ? 0.35 : 0.5),
-                      base.withValues(alpha: isDark ? 0.25 : 0.4),
-                    ],
+                  : (isDark
+                      ? [tint(0.08, 0.38), tint(0.02, 0.28)]
+                      : [tint(0.06, 0.55), tint(0.015, 0.42)]),
             ),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: accent.withValues(alpha: unlocked ? (isDark ? 0.35 : 0.25) : 0.12),
+              color: rarity.withValues(
+                alpha: unlocked ? (isDark ? 0.35 : 0.25) : (isDark ? 0.2 : 0.15),
+              ),
             ),
             boxShadow: unlocked
                 ? [
@@ -429,7 +437,7 @@ class _AchievementTile extends StatelessWidget {
                         Text(
                           rarityLabel(entry.def.rarity, shared).toUpperCase(),
                           style: theme.textTheme.labelSmall?.copyWith(
-                            color: accent,
+                            color: rarity,
                             letterSpacing: 0.6,
                             fontWeight: FontWeight.w700,
                           ),

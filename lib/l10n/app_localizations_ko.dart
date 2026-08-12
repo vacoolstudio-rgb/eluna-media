@@ -622,6 +622,13 @@ class L10nKo extends L10n {
       '없어요. 앱은 분석도, 오류 보고도, 식별자도 수집하지 않고, 계정 시스템도 없어요.';
 
   @override
+  String get netAuditTipsTitle => '후원';
+
+  @override
+  String get netAuditTipsBody =>
+      '후원 결제는 이 앱이 아니라 Play 스토어 앱이 처리합니다. 이 앱에는 여전히 인터넷 권한이 없습니다. 결제 기능 때문에 권한 목록에 두 줄이 추가됩니다. ‘인앱 구매’와 ‘네트워크 연결 보기’인데, 뒤엣것은 연결이 있는지만 확인할 뿐 사용할 수는 없습니다. 자동으로 결제되는 일은 없고, 후원해도 잠금이 풀리는 기능은 없습니다. 여기 있는 모든 것은 무료입니다.';
+
+  @override
   String get sectionSupport => '후원';
 
   @override

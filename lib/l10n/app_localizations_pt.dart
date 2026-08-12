@@ -641,6 +641,13 @@ class L10nPt extends L10n {
       'Não existe. O app não coleta análises, nem relatórios de falhas, nem identificadores, e não tem sistema de contas.';
 
   @override
+  String get netAuditTipsTitle => 'Gorjetas';
+
+  @override
+  String get netAuditTipsBody =>
+      'A gorjeta é feita pelo app da Play Store, não por este, que continua sem permissão de internet. As compras acrescentam duas linhas à lista de permissões: «compras no app» e «ver conexões de rede»; a segunda apenas verifica se existe conexão e não consegue usá-la. Nada é comprado automaticamente, e uma gorjeta não libera nada: tudo aqui é gratuito.';
+
+  @override
   String get sectionSupport => 'Apoio';
 
   @override

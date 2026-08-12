@@ -646,6 +646,13 @@ class L10nFr extends L10n {
       'Il n\'y en a pas. L\'application ne collecte aucune analytique, aucun rapport de plantage, aucun identifiant, et n\'a aucun système de compte.';
 
   @override
+  String get netAuditTipsTitle => 'Pourboires';
+
+  @override
+  String get netAuditTipsBody =>
+      'Le pourboire est traité par l\'application Play Store, pas par celle-ci, qui n\'a toujours pas la permission d\'accès à Internet. Les achats ajoutent deux lignes à la liste des permissions : « achats dans l\'application » et « voir les connexions réseau » ; la seconde se contente de lire s\'il existe une connexion, sans pouvoir l\'utiliser. Rien n\'est jamais acheté automatiquement, et un pourboire ne débloque rien : tout est gratuit ici.';
+
+  @override
   String get sectionSupport => 'Soutien';
 
   @override

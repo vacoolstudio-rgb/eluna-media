@@ -4,16 +4,56 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
+import '../state/app_lock_controller.dart';
 import '../state/app_meta_controller.dart';
 import '../state/settings_controller.dart';
 import 'home_shell.dart';
+import 'lock_screen.dart';
 import 'privacy_intro_screen.dart';
 
-class ElunaApp extends ConsumerWidget {
+class ElunaApp extends ConsumerStatefulWidget {
   const ElunaApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ElunaApp> createState() => _ElunaAppState();
+}
+
+class _ElunaAppState extends ConsumerState<ElunaApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState lifecycle) {
+    // Шторка поднимается НА паузе, а не на возврате: тогда в снимок для списка
+    // недавних задач попадает она, а не очередь с именами файлов. Снимается она
+    // либо кодом, либо сама — если отлучка была короче паузы из
+    // `AppLockGate.graceOnReturn` (системный пикер, лист «Поделиться», диалог
+    // удаления оригиналов — это чужие Activity, и уход в них неотличим от
+    // сворачивания).
+    final gate = ref.read(appLockStateProvider.notifier);
+    switch (lifecycle) {
+      case AppLifecycleState.paused:
+        gate.paused();
+      case AppLifecycleState.resumed:
+        gate.resumed();
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.hidden:
+      case AppLifecycleState.detached:
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final prefs = ref.watch(appPrefsProvider);
     final hasSeenIntro = ref.watch(appMetaProvider.select((m) => m.hasSeenIntro));
 
@@ -72,7 +112,32 @@ class ElunaApp extends ConsumerWidget {
                   textScaler: mq.textScaler
                       .clamp(minScaleFactor: 0.9, maxScaleFactor: 1.25),
                 ),
-                child: AmbientBackground(emphasized: true, child: child!),
+                child: AmbientBackground(
+                  emphasized: true,
+                  // Замок — слой над всем деревом, включая открытые диалоги и
+                  // шторки. Маршрутом он был бы снимаемым: `pop`, системная
+                  // кнопка «назад» или восстановление состояния провели бы мимо
+                  // него.
+                  child: Stack(
+                    children: [
+                      child!,
+                      Consumer(
+                        builder: (context, ref, _) =>
+                            switch (ref.watch(appLockStateProvider)) {
+                          AppLockState.unlocked => const SizedBox.shrink(),
+                          AppLockState.locked => const LockScreen(),
+                          // Пока ответ не пришёл — непрозрачный фон без
+                          // клавиатуры: ни очередь, ни призрачный запрос кода
+                          // показывать нельзя.
+                          AppLockState.checking => const AmbientBackground(
+                              emphasized: true,
+                              child: SizedBox.expand(),
+                            ),
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
             );
           },

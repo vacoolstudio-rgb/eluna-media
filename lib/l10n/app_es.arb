@@ -169,6 +169,8 @@
   "netAuditConversionBody": "Se ejecuta por completo en este dispositivo con un FFmpeg integrado. Activa el modo avión y convierte — funciona.",
   "netAuditTelemetryTitle": "Telemetría",
   "netAuditTelemetryBody": "No hay. La app no recopila analíticas, ni informes de fallos, ni identificadores, y no tiene sistema de cuentas.",
+  "netAuditTipsTitle": "Propinas",
+  "netAuditTipsBody": "La propina la gestiona la app de Play Store, no esta, que sigue sin permiso de internet. Con las compras aparecen dos líneas en la lista de permisos: «compras dentro de la app» y «ver conexiones de red»; la segunda solo consulta si hay conexión, no puede usarla. Nunca se compra nada automáticamente y una propina no desbloquea nada: todo aquí es gratis.",
   "sectionSupport": "Apoyo",
   "rateApp": "Valorar la app",
   "openLicenses": "Licencias de código abierto",

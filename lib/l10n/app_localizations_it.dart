@@ -642,6 +642,13 @@ class L10nIt extends L10n {
       'Non c\'è. L\'app non raccoglie analisi, né report dei crash, né identificatori, e non ha alcun sistema di account.';
 
   @override
+  String get netAuditTipsTitle => 'Mance';
+
+  @override
+  String get netAuditTipsBody =>
+      'La mancia la gestisce l\'app Play Store, non questa, che continua a non avere il permesso di accesso a internet. Con gli acquisti compaiono due voci nell\'elenco dei permessi: «acquisti in-app» e «visualizzare le connessioni di rete»; la seconda legge soltanto se una connessione esiste e non può usarla. Non viene mai acquistato nulla automaticamente e una mancia non sblocca niente: qui è tutto gratuito.';
+
+  @override
   String get sectionSupport => 'Sostegno';
 
   @override

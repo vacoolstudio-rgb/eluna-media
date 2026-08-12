@@ -621,6 +621,13 @@ class L10nJa extends L10n {
       'ありません。アプリはアナリティクスもクラッシュレポートも識別子も収集せず、アカウントの仕組みもありません。';
 
   @override
+  String get netAuditTipsTitle => 'チップ';
+
+  @override
+  String get netAuditTipsBody =>
+      'チップの決済を行うのはPlayストアアプリで、このアプリではありません。このアプリには今もインターネット権限がありません。購入機能によって権限一覧に2行が加わります。「アプリ内購入」と「ネットワーク接続の表示」で、後者は接続があるかどうかを読むだけで、使うことはできません。勝手に購入されることはなく、チップで何かが解放されることもありません。ここにあるものはすべて無料です。';
+
+  @override
   String get sectionSupport => 'サポート';
 
   @override

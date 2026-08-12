@@ -639,6 +639,13 @@ class L10nTr extends L10n {
       'Yok. Uygulama analitik, çökme raporu veya tanımlayıcı toplamaz; hesap sistemi de yoktur.';
 
   @override
+  String get netAuditTipsTitle => 'Bahşiş';
+
+  @override
+  String get netAuditTipsBody =>
+      'Bahşişi bu uygulama değil, Play Store uygulaması yürütür; bu uygulamanın hâlâ internet izni yok. Satın almalarla birlikte izin listesine iki satır ekleniyor: “uygulama içi satın alma” ve “ağ bağlantılarını görüntüleme”. İkincisi yalnızca bağlantının var olup olmadığını okur, kullanamaz. Hiçbir şey kendiliğinden satın alınmaz ve bahşiş hiçbir şeyin kilidini açmaz: buradaki her şey ücretsiz.';
+
+  @override
   String get sectionSupport => 'Destek';
 
   @override
