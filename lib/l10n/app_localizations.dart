@@ -495,7 +495,7 @@ abstract class L10n {
   /// No description provided for @startConversion.
   ///
   /// In en, this message translates to:
-  /// **'Convert {count} files'**
+  /// **'Convert files ({count})'**
   String startConversion(int count);
 
   /// No description provided for @batchResumed.
@@ -633,7 +633,7 @@ abstract class L10n {
   /// No description provided for @batchCompleted.
   ///
   /// In en, this message translates to:
-  /// **'{done, plural, =1{Converted 1 file} other{Converted {done} files}}'**
+  /// **'Converted files: {done}'**
   String batchCompleted(int done);
 
   /// No description provided for @batchCompletedWithFailures.
@@ -873,7 +873,7 @@ abstract class L10n {
   /// No description provided for @mergedVideoName.
   ///
   /// In en, this message translates to:
-  /// **'Merged video ({count} clips).mp4'**
+  /// **'Merged video ({count}).mp4'**
   String mergedVideoName(int count);
 
   /// No description provided for @presetCompressImageTitle.
@@ -963,7 +963,7 @@ abstract class L10n {
   /// No description provided for @selectedFiles.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{1 file selected} other{{count} files selected}}'**
+  /// **'Selected files: {count}'**
   String selectedFiles(int count);
 
   /// No description provided for @promiseOffline.
@@ -1137,7 +1137,7 @@ abstract class L10n {
   /// No description provided for @filesReceived.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{Received 1 file} other{Received {count} files}}'**
+  /// **'Received files: {count}'**
   String filesReceived(int count);
 
   /// No description provided for @saveFile.
@@ -1443,7 +1443,7 @@ abstract class L10n {
   /// No description provided for @summaryMerge.
   ///
   /// In en, this message translates to:
-  /// **'{count} clips merged'**
+  /// **'Clips merged: {count}'**
   String summaryMerge(int count);
 
   /// No description provided for @shareApp.

@@ -169,7 +169,7 @@ class L10nTa extends L10n {
 
   @override
   String startConversion(int count) {
-    return '$count கோப்புகளை மாற்று';
+    return 'கோப்புகளை மாற்று ($count)';
   }
 
   @override
@@ -249,13 +249,7 @@ class L10nTa extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '$done கோப்புகள் மாற்றப்பட்டன',
-      one: '1 கோப்பு மாற்றப்பட்டது',
-    );
-    return '$_temp0';
+    return 'மாற்றிய கோப்புகள்: $done';
   }
 
   @override
@@ -395,7 +389,7 @@ class L10nTa extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'இணைக்கப்பட்ட வீடியோ ($count காட்சிகள்).mp4';
+    return 'இணைக்கப்பட்ட வீடியோ ($count).mp4';
   }
 
   @override
@@ -453,13 +447,7 @@ class L10nTa extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count கோப்புகள் தேர்ந்தெடுக்கப்பட்டன',
-      one: '1 கோப்பு தேர்ந்தெடுக்கப்பட்டது',
-    );
-    return '$_temp0';
+    return 'தேர்ந்தெடுத்த கோப்புகள்: $count';
   }
 
   @override
@@ -559,13 +547,7 @@ class L10nTa extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count கோப்புகள் பெறப்பட்டன',
-      one: '1 கோப்பு பெறப்பட்டது',
-    );
-    return '$_temp0';
+    return 'பெறப்பட்ட கோப்புகள்: $count';
   }
 
   @override
@@ -739,7 +721,7 @@ class L10nTa extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count காட்சிகள் இணைக்கப்பட்டன';
+    return 'இணைத்த காட்சிகள்: $count';
   }
 
   @override

@@ -169,7 +169,7 @@ class L10nCa extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'Converteix $count fitxers';
+    return 'Converteix fitxers ($count)';
   }
 
   @override
@@ -249,13 +249,7 @@ class L10nCa extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'S\'han convertit $done fitxers',
-      one: 'S\'ha convertit 1 fitxer',
-    );
-    return '$_temp0';
+    return 'Fitxers convertits: $done';
   }
 
   @override
@@ -395,7 +389,7 @@ class L10nCa extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Vídeo unit ($count clips).mp4';
+    return 'Vídeo unit ($count).mp4';
   }
 
   @override
@@ -452,13 +446,7 @@ class L10nCa extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count fitxers seleccionats',
-      one: '1 fitxer seleccionat',
-    );
-    return '$_temp0';
+    return 'Fitxers seleccionats: $count';
   }
 
   @override
@@ -558,13 +546,7 @@ class L10nCa extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'S\'han rebut $count fitxers',
-      one: 'S\'ha rebut 1 fitxer',
-    );
-    return '$_temp0';
+    return 'Fitxers rebuts: $count';
   }
 
   @override
@@ -737,7 +719,7 @@ class L10nCa extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count clips units';
+    return 'Clips units: $count';
   }
 
   @override

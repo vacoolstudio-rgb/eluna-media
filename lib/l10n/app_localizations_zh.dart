@@ -159,7 +159,7 @@ class L10nZh extends L10n {
 
   @override
   String startConversion(int count) {
-    return '转换 $count 个文件';
+    return '转换文件（$count）';
   }
 
   @override
@@ -236,13 +236,7 @@ class L10nZh extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '已转换 $done 个文件',
-      one: '已转换 1 个文件',
-    );
-    return '$_temp0';
+    return '已转换文件：$done';
   }
 
   @override
@@ -375,7 +369,7 @@ class L10nZh extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return '合并视频（$count 个片段）.mp4';
+    return '合并视频（$count）.mp4';
   }
 
   @override
@@ -430,13 +424,7 @@ class L10nZh extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '已选择 $count 个文件',
-      one: '已选择 1 个文件',
-    );
-    return '$_temp0';
+    return '已选择文件：$count';
   }
 
   @override
@@ -531,13 +519,7 @@ class L10nZh extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '已接收 $count 个文件',
-      one: '已接收 1 个文件',
-    );
-    return '$_temp0';
+    return '已接收文件：$count';
   }
 
   @override
@@ -702,7 +684,7 @@ class L10nZh extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '已合并 $count 个片段';
+    return '已合并片段：$count';
   }
 
   @override
@@ -1218,7 +1200,7 @@ class L10nZhTw extends L10nZh {
 
   @override
   String startConversion(int count) {
-    return '轉換 $count 個檔案';
+    return '轉換檔案（$count）';
   }
 
   @override
@@ -1295,12 +1277,7 @@ class L10nZhTw extends L10nZh {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '已轉換 $done 個檔案',
-    );
-    return '$_temp0';
+    return '已轉換檔案：$done';
   }
 
   @override
@@ -1433,7 +1410,7 @@ class L10nZhTw extends L10nZh {
 
   @override
   String mergedVideoName(int count) {
-    return '合併影片（$count 個片段）.mp4';
+    return '合併影片（$count）.mp4';
   }
 
   @override
@@ -1488,12 +1465,7 @@ class L10nZhTw extends L10nZh {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '已選擇 $count 個檔案',
-    );
-    return '$_temp0';
+    return '已選擇檔案：$count';
   }
 
   @override
@@ -1587,12 +1559,7 @@ class L10nZhTw extends L10nZh {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '已接收 $count 個檔案',
-    );
-    return '$_temp0';
+    return '已接收檔案：$count';
   }
 
   @override
@@ -1757,7 +1724,7 @@ class L10nZhTw extends L10nZh {
 
   @override
   String summaryMerge(int count) {
-    return '已合併 $count 個片段';
+    return '已合併片段：$count';
   }
 
   @override

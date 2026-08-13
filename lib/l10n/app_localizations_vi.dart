@@ -168,7 +168,7 @@ class L10nVi extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'Chuyển đổi $count tệp';
+    return 'Chuyển đổi tệp ($count)';
   }
 
   @override
@@ -248,12 +248,7 @@ class L10nVi extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'Đã chuyển đổi $done tệp',
-    );
-    return '$_temp0';
+    return 'Tệp đã chuyển đổi: $done';
   }
 
   @override
@@ -391,7 +386,7 @@ class L10nVi extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Video đã ghép ($count đoạn).mp4';
+    return 'Video đã ghép ($count).mp4';
   }
 
   @override
@@ -448,12 +443,7 @@ class L10nVi extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Đã chọn $count tệp',
-    );
-    return '$_temp0';
+    return 'Tệp đã chọn: $count';
   }
 
   @override
@@ -553,12 +543,7 @@ class L10nVi extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Đã nhận $count tệp',
-    );
-    return '$_temp0';
+    return 'Tệp đã nhận: $count';
   }
 
   @override
@@ -730,7 +715,7 @@ class L10nVi extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return 'Đã ghép $count đoạn';
+    return 'Đoạn đã ghép: $count';
   }
 
   @override

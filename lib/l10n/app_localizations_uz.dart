@@ -170,7 +170,7 @@ class L10nUz extends L10n {
 
   @override
   String startConversion(int count) {
-    return '$count ta faylni konvertatsiya qilish';
+    return 'Fayllarni konvertatsiya qilish ($count)';
   }
 
   @override
@@ -250,13 +250,7 @@ class L10nUz extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '$done ta fayl konvertatsiya qilindi',
-      one: '1 ta fayl konvertatsiya qilindi',
-    );
-    return '$_temp0';
+    return 'Konvertatsiya qilingan fayllar: $done';
   }
 
   @override
@@ -396,7 +390,7 @@ class L10nUz extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Birlashtirilgan video ($count ta lavha).mp4';
+    return 'Birlashtirilgan video ($count).mp4';
   }
 
   @override
@@ -453,13 +447,7 @@ class L10nUz extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count ta fayl tanlandi',
-      one: '1 ta fayl tanlandi',
-    );
-    return '$_temp0';
+    return 'Tanlangan fayllar: $count';
   }
 
   @override
@@ -559,13 +547,7 @@ class L10nUz extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count ta fayl qabul qilindi',
-      one: '1 ta fayl qabul qilindi',
-    );
-    return '$_temp0';
+    return 'Qabul qilingan fayllar: $count';
   }
 
   @override
@@ -737,7 +719,7 @@ class L10nUz extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count ta lavha birlashtirildi';
+    return 'Birlashtirilgan lavhalar: $count';
   }
 
   @override

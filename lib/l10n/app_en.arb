@@ -75,7 +75,7 @@
   "enhanceStrong": "Strong",
   "stripMetadata": "Remove metadata",
   "stripMetadataHint": "Strips EXIF, GPS and timestamps from the output.",
-  "startConversion": "Convert {count} files",
+  "startConversion": "Convert files ({count})",
   "@startConversion": {
     "placeholders": {
       "count": {
@@ -129,14 +129,7 @@
       }
     }
   },
-  "batchCompleted": "{done, plural, =1{Converted 1 file} other{Converted {done} files}}",
-  "@batchCompleted": {
-    "placeholders": {
-      "done": {
-        "type": "int"
-      }
-    }
-  },
+  "batchCompleted": "Converted files: {done}",
   "batchCompletedWithFailures": "Converted {done}, failed {failed}.",
   "@batchCompletedWithFailures": {
     "placeholders": {
@@ -210,7 +203,7 @@
   "presetMergeTitle": "Merge videos",
   "presetMergeBody": "Stitch clips into one MP4, in order",
   "mergeNeedsTwo": "Select at least two videos to merge.",
-  "mergedVideoName": "Merged video ({count} clips).mp4",
+  "mergedVideoName": "Merged video ({count}).mp4",
   "@mergedVideoName": {
     "placeholders": {
       "count": {
@@ -263,14 +256,7 @@
       }
     }
   },
-  "selectedFiles": "{count, plural, =1{1 file selected} other{{count} files selected}}",
-  "@selectedFiles": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
+  "selectedFiles": "Selected files: {count}",
   "promiseOffline": "100% offline conversion",
   "promiseBatchFree": "Batch is free",
   "promiseNoWatermark": "No watermark",
@@ -316,14 +302,7 @@
   "lowBatteryContinue": "Convert anyway",
   "commonCancel": "Cancel",
   "commonOk": "OK",
-  "filesReceived": "{count, plural, =1{Received 1 file} other{Received {count} files}}",
-  "@filesReceived": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
+  "filesReceived": "Received files: {count}",
   "saveFile": "Save",
   "savedToGallery": "Saved to the gallery, album “Eluna Media”.",
   "savedToDownloads": "Saved to Downloads.",
@@ -402,7 +381,7 @@
   },
   "summaryEnhanced": "Enhanced",
   "summaryMetadataStripped": "Metadata removed",
-  "summaryMerge": "{count} clips merged",
+  "summaryMerge": "Clips merged: {count}",
   "@summaryMerge": {
     "placeholders": {
       "count": {
@@ -635,5 +614,26 @@
     }
   },
   "sizeTargetEmail": "Email",
-  "trimTimeHint": "m:ss"
+  "trimTimeHint": "m:ss",
+  "@batchCompleted": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      }
+    }
+  },
+  "@selectedFiles": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@filesReceived": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

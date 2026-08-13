@@ -167,7 +167,7 @@ class L10nPl extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'Konwertuj: $count';
+    return 'Konwertuj pliki ($count)';
   }
 
   @override
@@ -247,15 +247,7 @@ class L10nPl extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'Skonwertowano $done pliku',
-      many: 'Skonwertowano $done plików',
-      few: 'Skonwertowano $done pliki',
-      one: 'Skonwertowano 1 plik',
-    );
-    return '$_temp0';
+    return 'Przekonwertowane pliki: $done';
   }
 
   @override
@@ -393,7 +385,7 @@ class L10nPl extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Sklejone wideo ($count klipów).mp4';
+    return 'Sklejone wideo ($count).mp4';
   }
 
   @override
@@ -450,15 +442,7 @@ class L10nPl extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Wybrano $count pliku',
-      many: 'Wybrano $count plików',
-      few: 'Wybrano $count pliki',
-      one: 'Wybrano 1 plik',
-    );
-    return '$_temp0';
+    return 'Wybrane pliki: $count';
   }
 
   @override
@@ -558,15 +542,7 @@ class L10nPl extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Odebrano $count pliku',
-      many: 'Odebrano $count plików',
-      few: 'Odebrano $count pliki',
-      one: 'Odebrano 1 plik',
-    );
-    return '$_temp0';
+    return 'Odebrane pliki: $count';
   }
 
   @override
@@ -738,7 +714,7 @@ class L10nPl extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return 'Sklejono $count klipów';
+    return 'Sklejone klipy: $count';
   }
 
   @override

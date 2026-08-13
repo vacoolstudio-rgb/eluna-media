@@ -18,43 +18,15 @@
   "rateControlQuality": "Постоянное качество (CRF)",
   "rateControlBitrate": "Целевой битрейт",
   "crfLabel": "Качество (CRF {value})",
-  "@crfLabel": {
-    "placeholders": {
-      "value": {
-        "type": "int"
-      }
-    }
-  },
   "crfHint": "Меньше значение — выше качество и больше файл.",
   "videoBitrate": "Битрейт видео: {value} кбит/с",
-  "@videoBitrate": {
-    "placeholders": {
-      "value": {
-        "type": "int"
-      }
-    }
-  },
   "audioBitrate": "Битрейт аудио: {value} кбит/с",
-  "@audioBitrate": {
-    "placeholders": {
-      "value": {
-        "type": "int"
-      }
-    }
-  },
   "encodingPreset": "Пресет кодировщика",
   "encodingPresetHint": "Медленные пресеты сжимают лучше, но сильнее греют устройство.",
   "presetOriginal": "Исходное",
   "resolution": "Разрешение",
   "frameRate": "Частота кадров",
   "imageQuality": "Качество: {value}",
-  "@imageQuality": {
-    "placeholders": {
-      "value": {
-        "type": "int"
-      }
-    }
-  },
   "lossless": "Без потерь",
   "losslessHint": "Файлы больше, качество попиксельно точное.",
   "sectionEnhance": "Улучшение",
@@ -75,14 +47,7 @@
   "enhanceStrong": "Сильное",
   "stripMetadata": "Удалять метаданные",
   "stripMetadataHint": "Убирает EXIF, GPS и отметки времени из результата.",
-  "startConversion": "Конвертировать: {count}",
-  "@startConversion": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
+  "startConversion": "Конвертировать файлы ({count})",
   "batchResumed": "Прерванная конвертация возобновлена.",
   "converting": "Конвертация…",
   "cancelBatch": "Остановить",
@@ -94,21 +59,7 @@
   "queueEmptyTitle": "Очередь пуста",
   "queueEmptyBody": "Файлы, добавленные на вкладке «Конвертация», появятся здесь.",
   "queueActiveTab": "Активные · {count}",
-  "@queueActiveTab": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "queueFinishedTab": "Завершённые · {count}",
-  "@queueFinishedTab": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "queueNoActiveTitle": "Ничего не выполняется",
   "queueNoActiveBody": "Файлы в ожидании и в работе появятся здесь.",
   "queueNoFinishedTitle": "Пока ничего не завершено",
@@ -119,62 +70,11 @@
   "statusFailed": "Ошибка",
   "statusCancelled": "Отменено",
   "batchSummary": "Готово {done} из {total}",
-  "@batchSummary": {
-    "placeholders": {
-      "done": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      }
-    }
-  },
-  "batchCompleted": "{done, plural, one{Конвертирован {done} файл} few{Конвертировано {done} файла} many{Конвертировано {done} файлов} other{Конвертировано {done} файла}}",
-  "@batchCompleted": {
-    "placeholders": {
-      "done": {
-        "type": "int"
-      }
-    }
-  },
+  "batchCompleted": "Конвертировано файлов: {done}",
   "batchCompletedWithFailures": "Готово: {done}, ошибок: {failed}.",
-  "@batchCompletedWithFailures": {
-    "placeholders": {
-      "done": {
-        "type": "int"
-      },
-      "failed": {
-        "type": "int"
-      }
-    }
-  },
   "savedPercent": "на {percent}% меньше",
-  "@savedPercent": {
-    "placeholders": {
-      "percent": {
-        "type": "int"
-      }
-    }
-  },
   "grewPercent": "на {percent}% больше",
-  "@grewPercent": {
-    "placeholders": {
-      "percent": {
-        "type": "int"
-      }
-    }
-  },
   "sizeChange": "{from} → {to}",
-  "@sizeChange": {
-    "placeholders": {
-      "from": {
-        "type": "String"
-      },
-      "to": {
-        "type": "String"
-      }
-    }
-  },
   "appearance": "Оформление",
   "themeSystem": "Как в системе",
   "language": "Язык",
@@ -210,14 +110,7 @@
   "presetMergeTitle": "Склеить видео",
   "presetMergeBody": "Несколько роликов в один MP4, по порядку",
   "mergeNeedsTwo": "Выберите минимум два видео для склейки.",
-  "mergedVideoName": "Склеенное видео ({count} роликов).mp4",
-  "@mergedVideoName": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
+  "mergedVideoName": "Склеенное видео ({count}).mp4",
   "presetCompressImageTitle": "Сжать фото",
   "presetCompressImageBody": "JPEG меньше, потери почти не видны",
   "presetEnhancePhotoTitle": "Улучшить фото",
@@ -226,51 +119,13 @@
   "presetImageToWebpBody": "Современный формат, меньше JPEG",
   "sizeTargetTitle": "Целевой размер",
   "sizeTargetMb": "{mb} МБ",
-  "@sizeTargetMb": {
-    "placeholders": {
-      "mb": {
-        "type": "int"
-      }
-    }
-  },
   "sizeTargetNamed": "{service} · {mb} МБ",
-  "@sizeTargetNamed": {
-    "placeholders": {
-      "service": {
-        "type": "String"
-      },
-      "mb": {
-        "type": "int"
-      }
-    }
-  },
   "sizeTargetCustom": "Свой…",
   "sizeTargetDialogTitle": "Целевой размер в МБ",
   "sizeTargetTooSmall": "Цель слишком мала для такой длительности; будет использовано максимально близкое качество.",
   "estimatePerFile": "≈ {size} на файл",
-  "@estimatePerFile": {
-    "placeholders": {
-      "size": {
-        "type": "String"
-      }
-    }
-  },
   "estimateTotal": "Ожидаемый размер: ≈ {size}",
-  "@estimateTotal": {
-    "placeholders": {
-      "size": {
-        "type": "String"
-      }
-    }
-  },
-  "selectedFiles": "{count, plural, one{Выбран {count} файл} few{Выбрано {count} файла} many{Выбрано {count} файлов} other{Выбрано {count} файла}}",
-  "@selectedFiles": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
+  "selectedFiles": "Выбрано файлов: {count}",
   "promiseOffline": "Конвертация 100% офлайн",
   "promiseBatchFree": "Пакетная обработка бесплатна",
   "promiseNoWatermark": "Без вотермарок",
@@ -281,13 +136,6 @@
   "cropLabel": "Кадрирование",
   "cropHint": "Центрированная обрезка под выбранное соотношение — квадрат для ленты, 9:16 для сторис.",
   "volumeLabel": "Громкость: {percent}%",
-  "@volumeLabel": {
-    "placeholders": {
-      "percent": {
-        "type": "int"
-      }
-    }
-  },
   "addAudioFiles": "Аудио и другие файлы",
   "hwEncoderLabel": "Аппаратное кодирование",
   "hwEncoderHint": "Использует видеочип устройства в режимах битрейта и целевого размера — заметно быстрее и холоднее. Режим качества (CRF) всегда использует точный программный кодировщик, а неудачная аппаратная задача автоматически повторяется программно.",
@@ -300,30 +148,13 @@
   "trimEnable": "Обрезать по времени",
   "trimHint": "Доступно, когда в очереди ровно один файл с известной длительностью.",
   "trimRangeLabel": "{from} – {to}",
-  "@trimRangeLabel": {
-    "placeholders": {
-      "from": {
-        "type": "String"
-      },
-      "to": {
-        "type": "String"
-      }
-    }
-  },
   "rateControlSize": "Целевой размер",
   "lowBatteryTitle": "Заряд на исходе",
   "lowBatteryBody": "Конвертация сильно нагружает процессор. Можно сначала подключить зарядку — или продолжить.",
   "lowBatteryContinue": "Всё равно конвертировать",
   "commonCancel": "Отмена",
   "commonOk": "ОК",
-  "filesReceived": "{count, plural, one{Получен {count} файл} few{Получено {count} файла} many{Получено {count} файлов} other{Получено {count} файла}}",
-  "@filesReceived": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
+  "filesReceived": "Получено файлов: {count}",
   "saveFile": "Сохранить",
   "savedToGallery": "Сохранено в галерею, альбом «Eluna Media».",
   "savedToDownloads": "Сохранено в «Загрузки».",
@@ -367,59 +198,17 @@
   "filesTitle": "Файлы",
   "removeFile": "Убрать",
   "timeLeft": "≈ {time} осталось",
-  "@timeLeft": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
   "jobSettingsTitle": "Настройки конвертации",
   "jobDetails": "Подробнее",
   "summaryQuality": "CRF {value}",
-  "@summaryQuality": {
-    "placeholders": {
-      "value": {
-        "type": "int"
-      }
-    }
-  },
   "summaryBitrate": "{value} кбит/с",
-  "@summaryBitrate": {
-    "placeholders": {
-      "value": {
-        "type": "int"
-      }
-    }
-  },
   "summaryTargetSize": "≤ {size}",
-  "@summaryTargetSize": {
-    "placeholders": {
-      "size": {
-        "type": "String"
-      }
-    }
-  },
   "summaryEnhanced": "Улучшено",
   "summaryMetadataStripped": "Метаданные удалены",
-  "summaryMerge": "Склейка {count} роликов",
-  "@summaryMerge": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
+  "summaryMerge": "Склеено роликов: {count}",
   "shareApp": "Поделиться приложением",
   "shareAppText": "Eluna Media — бесплатный конвертер фото, видео и аудио, полностью офлайн. Без подписок, без вотермарок, без аккаунтов.",
   "appVersionLabel": "Версия {version}",
-  "@appVersionLabel": {
-    "placeholders": {
-      "version": {
-        "type": "String"
-      }
-    }
-  },
   "openFile": "Открыть",
   "openFolder": "Показать папку",
   "noAppToOpen": "На устройстве нет приложения, которое откроет этот файл.",
@@ -434,16 +223,6 @@
   "whatsNew5": "У достижений появились медали, три вкладки и прогресс, которым можно поделиться картинкой.",
   "achievementsTitle": "Достижения",
   "achievementsProgress": "{done} из {total}",
-  "@achievementsProgress": {
-    "placeholders": {
-      "done": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      }
-    }
-  },
   "achievementsPrivacyNote": "Считается только на этом устройстве. Никуда не отправляется.",
   "achFirstConversionTitle": "Первые шаги",
   "achFirstConversionBody": "Сконвертируйте первый файл.",

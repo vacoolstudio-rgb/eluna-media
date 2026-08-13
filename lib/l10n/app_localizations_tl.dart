@@ -170,7 +170,7 @@ class L10nTl extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'I-convert ang $count file';
+    return 'I-convert ang mga file ($count)';
   }
 
   @override
@@ -250,13 +250,7 @@ class L10nTl extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'Na-convert ang $done file',
-      one: 'Na-convert ang 1 file',
-    );
-    return '$_temp0';
+    return 'Na-convert na file: $done';
   }
 
   @override
@@ -397,7 +391,7 @@ class L10nTl extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Pinagsamang video ($count clip).mp4';
+    return 'Pinagsamang video ($count).mp4';
   }
 
   @override
@@ -455,13 +449,7 @@ class L10nTl extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count file ang napili',
-      one: '1 file ang napili',
-    );
-    return '$_temp0';
+    return 'Napiling file: $count';
   }
 
   @override
@@ -561,13 +549,7 @@ class L10nTl extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Nakatanggap ng $count file',
-      one: 'Nakatanggap ng 1 file',
-    );
-    return '$_temp0';
+    return 'Natanggap na file: $count';
   }
 
   @override
@@ -739,7 +721,7 @@ class L10nTl extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count clip ang pinagsama';
+    return 'Pinagsamang clip: $count';
   }
 
   @override

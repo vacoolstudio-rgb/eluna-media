@@ -165,7 +165,7 @@ class L10nAm extends L10n {
 
   @override
   String startConversion(int count) {
-    return '$count ፋይሎችን ቀይር';
+    return 'ፋይሎችን ቀይር ($count)';
   }
 
   @override
@@ -243,13 +243,7 @@ class L10nAm extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '$done ፋይሎች ተቀይረዋል',
-      one: '1 ፋይል ተቀይሯል',
-    );
-    return '$_temp0';
+    return 'የተቀየሩ ፋይሎች፦ $done';
   }
 
   @override
@@ -386,7 +380,7 @@ class L10nAm extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'የተዋሃደ ቪዲዮ ($count ቅንጫቢዎች).mp4';
+    return 'የተዋሃደ ቪዲዮ ($count).mp4';
   }
 
   @override
@@ -442,13 +436,7 @@ class L10nAm extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count ፋይሎች ተመርጠዋል',
-      one: '1 ፋይል ተመርጧል',
-    );
-    return '$_temp0';
+    return 'የተመረጡ ፋይሎች፦ $count';
   }
 
   @override
@@ -547,13 +535,7 @@ class L10nAm extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count ፋይሎች ደርሰዋል',
-      one: '1 ፋይል ደርሷል',
-    );
-    return '$_temp0';
+    return 'የደረሱ ፋይሎች፦ $count';
   }
 
   @override
@@ -723,7 +705,7 @@ class L10nAm extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count ቅንጫቢዎች ተዋህደዋል';
+    return 'የተዋሃዱ ቅንጫቢዎች፦ $count';
   }
 
   @override

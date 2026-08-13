@@ -170,7 +170,7 @@ class L10nZu extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'Guqula amafayela angu-$count';
+    return 'Guqula amafayela ($count)';
   }
 
   @override
@@ -250,13 +250,7 @@ class L10nZu extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'Kuguqulwe amafayela angu-$done',
-      one: 'Kuguqulwe ifayela elingu-1',
-    );
-    return '$_temp0';
+    return 'Amafayela aguquliwe: $done';
   }
 
   @override
@@ -397,7 +391,7 @@ class L10nZu extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Ividiyo ehlanganisiwe (amavidiyo angu-$count).mp4';
+    return 'Ividiyo ehlanganisiwe ($count).mp4';
   }
 
   @override
@@ -454,13 +448,7 @@ class L10nZu extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Kukhethwe amafayela angu-$count',
-      one: 'Kukhethwe ifayela elingu-1',
-    );
-    return '$_temp0';
+    return 'Amafayela akhethiwe: $count';
   }
 
   @override
@@ -561,13 +549,7 @@ class L10nZu extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Kutholwe amafayela angu-$count',
-      one: 'Kutholwe ifayela elingu-1',
-    );
-    return '$_temp0';
+    return 'Amafayela atholiwe: $count';
   }
 
   @override
@@ -740,7 +722,7 @@ class L10nZu extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return 'Kuhlanganiswe amavidiyo angu-$count';
+    return 'Amavidiyo ahlanganisiwe: $count';
   }
 
   @override

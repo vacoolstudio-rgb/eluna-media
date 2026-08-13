@@ -170,7 +170,7 @@ class L10nMy extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'ဖိုင် $count ခု ပြောင်းရန်';
+    return 'ဖိုင်များ ပြောင်းရန် ($count)';
   }
 
   @override
@@ -251,12 +251,7 @@ class L10nMy extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'ဖိုင် $done ခု ပြောင်းပြီးပါပြီ',
-    );
-    return '$_temp0';
+    return 'ပြောင်းပြီးသော ဖိုင်များ: $done';
   }
 
   @override
@@ -397,7 +392,7 @@ class L10nMy extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'ပေါင်းစပ်ထားသော ဗီဒီယို (ကလစ် $count ခု).mp4';
+    return 'ပေါင်းစပ်ထားသော ဗီဒီယို ($count).mp4';
   }
 
   @override
@@ -453,12 +448,7 @@ class L10nMy extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'ဖိုင် $count ခု ရွေးထားသည်',
-    );
-    return '$_temp0';
+    return 'ရွေးထားသော ဖိုင်များ: $count';
   }
 
   @override
@@ -558,12 +548,7 @@ class L10nMy extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'ဖိုင် $count ခု လက်ခံရရှိသည်',
-    );
-    return '$_temp0';
+    return 'လက်ခံရရှိသော ဖိုင်များ: $count';
   }
 
   @override
@@ -738,7 +723,7 @@ class L10nMy extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return 'ကလစ် $count ခု ပေါင်းစပ်ပြီး';
+    return 'ပေါင်းစပ်ပြီးသော ကလစ်များ: $count';
   }
 
   @override

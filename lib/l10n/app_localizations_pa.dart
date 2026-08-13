@@ -168,7 +168,7 @@ class L10nPa extends L10n {
 
   @override
   String startConversion(int count) {
-    return '$count ਫ਼ਾਈਲਾਂ ਬਦਲੋ';
+    return 'ਫ਼ਾਈਲਾਂ ਬਦਲੋ ($count)';
   }
 
   @override
@@ -247,13 +247,7 @@ class L10nPa extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '$done ਫ਼ਾਈਲਾਂ ਬਦਲੀਆਂ ਗਈਆਂ',
-      one: '1 ਫ਼ਾਈਲ ਬਦਲੀ ਗਈ',
-    );
-    return '$_temp0';
+    return 'ਬਦਲੀਆਂ ਫ਼ਾਈਲਾਂ: $done';
   }
 
   @override
@@ -390,7 +384,7 @@ class L10nPa extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'ਜੋੜੀ ਵੀਡੀਓ ($count ਕਲਿੱਪਾਂ).mp4';
+    return 'ਜੋੜੀ ਵੀਡੀਓ ($count).mp4';
   }
 
   @override
@@ -447,13 +441,7 @@ class L10nPa extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count ਫ਼ਾਈਲਾਂ ਚੁਣੀਆਂ ਗਈਆਂ',
-      one: '1 ਫ਼ਾਈਲ ਚੁਣੀ ਗਈ',
-    );
-    return '$_temp0';
+    return 'ਚੁਣੀਆਂ ਫ਼ਾਈਲਾਂ: $count';
   }
 
   @override
@@ -553,13 +541,7 @@ class L10nPa extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count ਫ਼ਾਈਲਾਂ ਮਿਲੀਆਂ',
-      one: '1 ਫ਼ਾਈਲ ਮਿਲੀ',
-    );
-    return '$_temp0';
+    return 'ਮਿਲੀਆਂ ਫ਼ਾਈਲਾਂ: $count';
   }
 
   @override
@@ -730,7 +712,7 @@ class L10nPa extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count ਕਲਿੱਪਾਂ ਜੋੜੀਆਂ';
+    return 'ਜੋੜੀਆਂ ਕਲਿੱਪਾਂ: $count';
   }
 
   @override

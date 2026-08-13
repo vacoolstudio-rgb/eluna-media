@@ -166,7 +166,7 @@ class L10nKm extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'បម្លែងឯកសារ $count';
+    return 'បម្លែងឯកសារ ($count)';
   }
 
   @override
@@ -246,12 +246,7 @@ class L10nKm extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'បានបម្លែងឯកសារ $done',
-    );
-    return '$_temp0';
+    return 'ឯកសារដែលបានបម្លែង៖ $done';
   }
 
   @override
@@ -389,7 +384,7 @@ class L10nKm extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'វីដេអូបញ្ចូលគ្នា (ឈុត $count).mp4';
+    return 'វីដេអូបញ្ចូលគ្នា ($count).mp4';
   }
 
   @override
@@ -445,12 +440,7 @@ class L10nKm extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'បានជ្រើសរើសឯកសារ $count',
-    );
-    return '$_temp0';
+    return 'ឯកសារដែលបានជ្រើសរើស៖ $count';
   }
 
   @override
@@ -549,12 +539,7 @@ class L10nKm extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'បានទទួលឯកសារ $count',
-    );
-    return '$_temp0';
+    return 'ឯកសារដែលបានទទួល៖ $count';
   }
 
   @override
@@ -726,7 +711,7 @@ class L10nKm extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return 'បានបញ្ចូលឈុត $count';
+    return 'ឈុតដែលបានបញ្ចូល៖ $count';
   }
 
   @override

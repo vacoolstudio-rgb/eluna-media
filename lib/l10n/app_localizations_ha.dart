@@ -170,7 +170,7 @@ class L10nHa extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'Sauya fayiloli $count';
+    return 'Sauya fayiloli ($count)';
   }
 
   @override
@@ -250,13 +250,7 @@ class L10nHa extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'An sauya fayiloli $done',
-      one: 'An sauya fayil 1',
-    );
-    return '$_temp0';
+    return 'Fayilolin da aka sauya: $done';
   }
 
   @override
@@ -395,7 +389,7 @@ class L10nHa extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Bidiyo da aka haɗa (bidiyo $count).mp4';
+    return 'Bidiyo da aka haɗa ($count).mp4';
   }
 
   @override
@@ -452,13 +446,7 @@ class L10nHa extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'An zaɓi fayiloli $count',
-      one: 'An zaɓi fayil 1',
-    );
-    return '$_temp0';
+    return 'Fayilolin da aka zaɓa: $count';
   }
 
   @override
@@ -558,13 +546,7 @@ class L10nHa extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'An karɓi fayiloli $count',
-      one: 'An karɓi fayil 1',
-    );
-    return '$_temp0';
+    return 'Fayilolin da aka karɓa: $count';
   }
 
   @override
@@ -735,7 +717,7 @@ class L10nHa extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return 'An haɗa bidiyo $count';
+    return 'Bidiyon da aka haɗa: $count';
   }
 
   @override

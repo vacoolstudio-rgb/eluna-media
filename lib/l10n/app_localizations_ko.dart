@@ -162,7 +162,7 @@ class L10nKo extends L10n {
 
   @override
   String startConversion(int count) {
-    return '파일 $count개 변환';
+    return '파일 변환 ($count)';
   }
 
   @override
@@ -239,13 +239,7 @@ class L10nKo extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '파일 $done개를 변환했어요',
-      one: '파일 1개를 변환했어요',
-    );
-    return '$_temp0';
+    return '변환한 파일: $done';
   }
 
   @override
@@ -380,7 +374,7 @@ class L10nKo extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return '이어 붙인 동영상 ($count개 클립).mp4';
+    return '이어 붙인 동영상 ($count).mp4';
   }
 
   @override
@@ -436,13 +430,7 @@ class L10nKo extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '파일 $count개 선택됨',
-      one: '파일 1개 선택됨',
-    );
-    return '$_temp0';
+    return '선택한 파일: $count';
   }
 
   @override
@@ -539,13 +527,7 @@ class L10nKo extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '파일 $count개를 받았어요',
-      one: '파일 1개를 받았어요',
-    );
-    return '$_temp0';
+    return '받은 파일: $count';
   }
 
   @override
@@ -714,7 +696,7 @@ class L10nKo extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '클립 $count개 병합';
+    return '병합한 클립: $count';
   }
 
   @override

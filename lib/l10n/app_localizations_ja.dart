@@ -162,7 +162,7 @@ class L10nJa extends L10n {
 
   @override
   String startConversion(int count) {
-    return '$count 件のファイルを変換';
+    return 'ファイルを変換（$count）';
   }
 
   @override
@@ -240,13 +240,7 @@ class L10nJa extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '$done 件のファイルを変換しました',
-      one: '1 件のファイルを変換しました',
-    );
-    return '$_temp0';
+    return '変換したファイル: $done';
   }
 
   @override
@@ -382,7 +376,7 @@ class L10nJa extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return '結合した動画（$count クリップ）.mp4';
+    return '結合した動画（$count）.mp4';
   }
 
   @override
@@ -437,13 +431,7 @@ class L10nJa extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count 件のファイルを選択中',
-      one: '1 件のファイルを選択中',
-    );
-    return '$_temp0';
+    return '選択したファイル: $count';
   }
 
   @override
@@ -539,13 +527,7 @@ class L10nJa extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count 件のファイルを受け取りました',
-      one: '1 件のファイルを受け取りました',
-    );
-    return '$_temp0';
+    return '受け取ったファイル: $count';
   }
 
   @override
@@ -714,7 +696,7 @@ class L10nJa extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count クリップを結合';
+    return '結合したクリップ: $count';
   }
 
   @override

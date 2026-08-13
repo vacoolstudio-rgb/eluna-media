@@ -168,7 +168,7 @@ class L10nRu extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'Конвертировать: $count';
+    return 'Конвертировать файлы ($count)';
   }
 
   @override
@@ -247,15 +247,7 @@ class L10nRu extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'Конвертировано $done файла',
-      many: 'Конвертировано $done файлов',
-      few: 'Конвертировано $done файла',
-      one: 'Конвертирован $done файл',
-    );
-    return '$_temp0';
+    return 'Конвертировано файлов: $done';
   }
 
   @override
@@ -392,7 +384,7 @@ class L10nRu extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Склеенное видео ($count роликов).mp4';
+    return 'Склеенное видео ($count).mp4';
   }
 
   @override
@@ -448,15 +440,7 @@ class L10nRu extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Выбрано $count файла',
-      many: 'Выбрано $count файлов',
-      few: 'Выбрано $count файла',
-      one: 'Выбран $count файл',
-    );
-    return '$_temp0';
+    return 'Выбрано файлов: $count';
   }
 
   @override
@@ -556,15 +540,7 @@ class L10nRu extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Получено $count файла',
-      many: 'Получено $count файлов',
-      few: 'Получено $count файла',
-      one: 'Получен $count файл',
-    );
-    return '$_temp0';
+    return 'Получено файлов: $count';
   }
 
   @override
@@ -735,7 +711,7 @@ class L10nRu extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return 'Склейка $count роликов';
+    return 'Склеено роликов: $count';
   }
 
   @override

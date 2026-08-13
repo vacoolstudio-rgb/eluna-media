@@ -169,7 +169,7 @@ class L10nHu extends L10n {
 
   @override
   String startConversion(int count) {
-    return '$count fájl átalakítása';
+    return 'Fájlok átalakítása ($count)';
   }
 
   @override
@@ -249,13 +249,7 @@ class L10nHu extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '$done fájl átalakítva',
-      one: '1 fájl átalakítva',
-    );
-    return '$_temp0';
+    return 'Átalakított fájlok: $done';
   }
 
   @override
@@ -394,7 +388,7 @@ class L10nHu extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Egyesített videó ($count klip).mp4';
+    return 'Egyesített videó ($count).mp4';
   }
 
   @override
@@ -451,13 +445,7 @@ class L10nHu extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count fájl kiválasztva',
-      one: '1 fájl kiválasztva',
-    );
-    return '$_temp0';
+    return 'Kiválasztott fájlok: $count';
   }
 
   @override
@@ -557,13 +545,7 @@ class L10nHu extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count fájl fogadva',
-      one: '1 fájl fogadva',
-    );
-    return '$_temp0';
+    return 'Fogadott fájlok: $count';
   }
 
   @override
@@ -736,7 +718,7 @@ class L10nHu extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count klip egyesítve';
+    return 'Egyesített klipek: $count';
   }
 
   @override

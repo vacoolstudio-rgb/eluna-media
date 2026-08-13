@@ -169,7 +169,7 @@ class L10nBg extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'Конвертиране на $count файла';
+    return 'Конвертиране на файлове ($count)';
   }
 
   @override
@@ -249,13 +249,7 @@ class L10nBg extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'Конвертирани са $done файла',
-      one: 'Конвертиран е 1 файл',
-    );
-    return '$_temp0';
+    return 'Конвертирани файлове: $done';
   }
 
   @override
@@ -395,7 +389,7 @@ class L10nBg extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Слято видео ($count клипа).mp4';
+    return 'Слято видео ($count).mp4';
   }
 
   @override
@@ -452,13 +446,7 @@ class L10nBg extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Избрани са $count файла',
-      one: 'Избран е 1 файл',
-    );
-    return '$_temp0';
+    return 'Избрани файлове: $count';
   }
 
   @override
@@ -558,13 +546,7 @@ class L10nBg extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Получени са $count файла',
-      one: 'Получен е 1 файл',
-    );
-    return '$_temp0';
+    return 'Получени файлове: $count';
   }
 
   @override
@@ -736,7 +718,7 @@ class L10nBg extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count клипа са слети';
+    return 'Слети клипове: $count';
   }
 
   @override

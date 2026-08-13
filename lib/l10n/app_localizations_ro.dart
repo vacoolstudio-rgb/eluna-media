@@ -170,7 +170,7 @@ class L10nRo extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'Convertește $count fișiere';
+    return 'Convertește fișiere ($count)';
   }
 
   @override
@@ -250,14 +250,7 @@ class L10nRo extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '$done de fișiere convertite',
-      few: '$done fișiere convertite',
-      one: 'Un fișier convertit',
-    );
-    return '$_temp0';
+    return 'Fișiere convertite: $done';
   }
 
   @override
@@ -397,7 +390,7 @@ class L10nRo extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Videoclip unit ($count clipuri).mp4';
+    return 'Videoclip unit ($count).mp4';
   }
 
   @override
@@ -455,14 +448,7 @@ class L10nRo extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count de fișiere selectate',
-      few: '$count fișiere selectate',
-      one: 'Un fișier selectat',
-    );
-    return '$_temp0';
+    return 'Fișiere selectate: $count';
   }
 
   @override
@@ -562,14 +548,7 @@ class L10nRo extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count de fișiere primite',
-      few: '$count fișiere primite',
-      one: 'Un fișier primit',
-    );
-    return '$_temp0';
+    return 'Fișiere primite: $count';
   }
 
   @override
@@ -741,7 +720,7 @@ class L10nRo extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count clipuri unite';
+    return 'Clipuri unite: $count';
   }
 
   @override

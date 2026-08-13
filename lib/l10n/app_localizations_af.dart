@@ -168,7 +168,7 @@ class L10nAf extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'Skakel $count lêers om';
+    return 'Skakel lêers om ($count)';
   }
 
   @override
@@ -247,13 +247,7 @@ class L10nAf extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '$done lêers omgeskakel',
-      one: '1 lêer omgeskakel',
-    );
-    return '$_temp0';
+    return 'Lêers omgeskakel: $done';
   }
 
   @override
@@ -391,7 +385,7 @@ class L10nAf extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Saamgevoegde video ($count grepe).mp4';
+    return 'Saamgevoegde video ($count).mp4';
   }
 
   @override
@@ -447,13 +441,7 @@ class L10nAf extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count lêers gekies',
-      one: '1 lêer gekies',
-    );
-    return '$_temp0';
+    return 'Lêers gekies: $count';
   }
 
   @override
@@ -553,13 +541,7 @@ class L10nAf extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count lêers ontvang',
-      one: '1 lêer ontvang',
-    );
-    return '$_temp0';
+    return 'Lêers ontvang: $count';
   }
 
   @override
@@ -730,7 +712,7 @@ class L10nAf extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count grepe saamgevoeg';
+    return 'Grepe saamgevoeg: $count';
   }
 
   @override

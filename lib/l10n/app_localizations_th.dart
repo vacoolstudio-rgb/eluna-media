@@ -166,7 +166,7 @@ class L10nTh extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'แปลง $count ไฟล์';
+    return 'แปลงไฟล์ ($count)';
   }
 
   @override
@@ -244,12 +244,7 @@ class L10nTh extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'แปลงแล้ว $done ไฟล์',
-    );
-    return '$_temp0';
+    return 'ไฟล์ที่แปลงแล้ว: $done';
   }
 
   @override
@@ -386,7 +381,7 @@ class L10nTh extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'วิดีโอที่รวมแล้ว ($count คลิป).mp4';
+    return 'วิดีโอที่รวมแล้ว ($count).mp4';
   }
 
   @override
@@ -442,12 +437,7 @@ class L10nTh extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'เลือกไว้ $count ไฟล์',
-    );
-    return '$_temp0';
+    return 'ไฟล์ที่เลือก: $count';
   }
 
   @override
@@ -546,12 +536,7 @@ class L10nTh extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'ได้รับ $count ไฟล์',
-    );
-    return '$_temp0';
+    return 'ไฟล์ที่ได้รับ: $count';
   }
 
   @override
@@ -722,7 +707,7 @@ class L10nTh extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return 'รวม $count คลิปแล้ว';
+    return 'คลิปที่รวมแล้ว: $count';
   }
 
   @override

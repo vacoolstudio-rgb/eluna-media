@@ -169,7 +169,7 @@ class L10nTe extends L10n {
 
   @override
   String startConversion(int count) {
-    return '$count ఫైళ్లను మార్చు';
+    return 'ఫైళ్లను మార్చు ($count)';
   }
 
   @override
@@ -249,13 +249,7 @@ class L10nTe extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '$done ఫైళ్లు మార్చబడ్డాయి',
-      one: '1 ఫైల్ మార్చబడింది',
-    );
-    return '$_temp0';
+    return 'మార్చిన ఫైళ్లు: $done';
   }
 
   @override
@@ -393,7 +387,7 @@ class L10nTe extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'కలిపిన వీడియో ($count క్లిప్‌లు).mp4';
+    return 'కలిపిన వీడియో ($count).mp4';
   }
 
   @override
@@ -449,13 +443,7 @@ class L10nTe extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count ఫైళ్లు ఎంపికయ్యాయి',
-      one: '1 ఫైల్ ఎంపికైంది',
-    );
-    return '$_temp0';
+    return 'ఎంచుకున్న ఫైళ్లు: $count';
   }
 
   @override
@@ -555,13 +543,7 @@ class L10nTe extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count ఫైళ్లు అందాయి',
-      one: '1 ఫైల్ అందింది',
-    );
-    return '$_temp0';
+    return 'అందిన ఫైళ్లు: $count';
   }
 
   @override
@@ -734,7 +716,7 @@ class L10nTe extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count క్లిప్‌లు కలిపారు';
+    return 'కలిపిన క్లిప్‌లు: $count';
   }
 
   @override

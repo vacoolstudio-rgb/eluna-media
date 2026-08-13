@@ -168,7 +168,7 @@ class L10nFa extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'تبدیل $count فایل';
+    return 'تبدیل فایل‌ها ($count)';
   }
 
   @override
@@ -248,13 +248,7 @@ class L10nFa extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: '$done فایل تبدیل شد',
-      one: 'یک فایل تبدیل شد',
-    );
-    return '$_temp0';
+    return 'فایل‌های تبدیل‌شده: $done';
   }
 
   @override
@@ -392,7 +386,7 @@ class L10nFa extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'ویدیوی ادغام‌شده ($count کلیپ).mp4';
+    return 'ویدیوی ادغام‌شده ($count).mp4';
   }
 
   @override
@@ -448,13 +442,7 @@ class L10nFa extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count فایل انتخاب شد',
-      one: 'یک فایل انتخاب شد',
-    );
-    return '$_temp0';
+    return 'فایل‌های انتخاب‌شده: $count';
   }
 
   @override
@@ -554,13 +542,7 @@ class L10nFa extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count فایل دریافت شد',
-      one: 'یک فایل دریافت شد',
-    );
-    return '$_temp0';
+    return 'فایل‌های دریافت‌شده: $count';
   }
 
   @override
@@ -731,7 +713,7 @@ class L10nFa extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return '$count کلیپ ادغام شد';
+    return 'کلیپ‌های ادغام‌شده: $count';
   }
 
   @override

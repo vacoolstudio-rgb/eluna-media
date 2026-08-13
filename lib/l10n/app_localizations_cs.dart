@@ -166,7 +166,7 @@ class L10nCs extends L10n {
 
   @override
   String startConversion(int count) {
-    return 'Převést $count souborů';
+    return 'Převést soubory ($count)';
   }
 
   @override
@@ -246,14 +246,7 @@ class L10nCs extends L10n {
 
   @override
   String batchCompleted(int done) {
-    String _temp0 = intl.Intl.pluralLogic(
-      done,
-      locale: localeName,
-      other: 'Převedeno $done souborů',
-      few: 'Převedeny $done soubory',
-      one: 'Převeden 1 soubor',
-    );
-    return '$_temp0';
+    return 'Převedené soubory: $done';
   }
 
   @override
@@ -392,7 +385,7 @@ class L10nCs extends L10n {
 
   @override
   String mergedVideoName(int count) {
-    return 'Spojené video ($count klipů).mp4';
+    return 'Spojené video ($count).mp4';
   }
 
   @override
@@ -448,14 +441,7 @@ class L10nCs extends L10n {
 
   @override
   String selectedFiles(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Vybráno $count souborů',
-      few: 'Vybrány $count soubory',
-      one: 'Vybrán 1 soubor',
-    );
-    return '$_temp0';
+    return 'Vybrané soubory: $count';
   }
 
   @override
@@ -555,14 +541,7 @@ class L10nCs extends L10n {
 
   @override
   String filesReceived(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Přijato $count souborů',
-      few: 'Přijaty $count soubory',
-      one: 'Přijat 1 soubor',
-    );
-    return '$_temp0';
+    return 'Přijaté soubory: $count';
   }
 
   @override
@@ -733,7 +712,7 @@ class L10nCs extends L10n {
 
   @override
   String summaryMerge(int count) {
-    return 'Spojeno $count klipů';
+    return 'Spojené klipy: $count';
   }
 
   @override
