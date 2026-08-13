@@ -286,7 +286,7 @@
   "compareHint": "मूल देखने के लिए दबाकर रखें।",
   "trimStart": "प्रारंभ",
   "trimEnd": "समाप्ति",
-  "trimTimeHelp": "m:ss, अधिकतम {duration}",
+  "trimTimeHelp": "मि:से, अधिकतम {duration}",
   "imageScaleLabel": "स्केल",
   "audioChannelsLabel": "चैनल",
   "audioMono": "मोनो",
@@ -313,5 +313,5 @@
   "codecLossless": "{codec} (दोषरहित)",
   "formatAnimated": "{format} (एनिमेटेड)",
   "sizeTargetEmail": "ईमेल",
-  "trimTimeHint": "मि:सेसे"
+  "trimTimeHint": "मि:से"
 }

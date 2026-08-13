@@ -5,26 +5,62 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_af.dart';
+import 'app_localizations_am.dart';
 import 'app_localizations_ar.dart';
+import 'app_localizations_bg.dart';
+import 'app_localizations_bn.dart';
+import 'app_localizations_ca.dart';
+import 'app_localizations_cs.dart';
+import 'app_localizations_da.dart';
 import 'app_localizations_de.dart';
+import 'app_localizations_el.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
+import 'app_localizations_fa.dart';
+import 'app_localizations_fi.dart';
 import 'app_localizations_fr.dart';
+import 'app_localizations_gu.dart';
+import 'app_localizations_ha.dart';
+import 'app_localizations_he.dart';
 import 'app_localizations_hi.dart';
+import 'app_localizations_hr.dart';
+import 'app_localizations_hu.dart';
 import 'app_localizations_id.dart';
 import 'app_localizations_it.dart';
 import 'app_localizations_ja.dart';
+import 'app_localizations_kk.dart';
+import 'app_localizations_km.dart';
+import 'app_localizations_kn.dart';
 import 'app_localizations_ko.dart';
+import 'app_localizations_ml.dart';
+import 'app_localizations_mr.dart';
+import 'app_localizations_ms.dart';
+import 'app_localizations_my.dart';
 import 'app_localizations_nl.dart';
+import 'app_localizations_no.dart';
+import 'app_localizations_or.dart';
+import 'app_localizations_pa.dart';
 import 'app_localizations_pl.dart';
 import 'app_localizations_pt.dart';
+import 'app_localizations_ro.dart';
 import 'app_localizations_ru.dart';
+import 'app_localizations_sk.dart';
+import 'app_localizations_sl.dart';
+import 'app_localizations_sr.dart';
 import 'app_localizations_sv.dart';
+import 'app_localizations_sw.dart';
+import 'app_localizations_ta.dart';
+import 'app_localizations_te.dart';
 import 'app_localizations_th.dart';
+import 'app_localizations_tl.dart';
 import 'app_localizations_tr.dart';
 import 'app_localizations_uk.dart';
+import 'app_localizations_ur.dart';
+import 'app_localizations_uz.dart';
 import 'app_localizations_vi.dart';
 import 'app_localizations_zh.dart';
+import 'app_localizations_zu.dart';
 
 // ignore_for_file: type=lint
 
@@ -111,31 +147,67 @@ abstract class L10n {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('af'),
+    Locale('am'),
     Locale('ar'),
+    Locale('bg'),
+    Locale('bn'),
+    Locale('ca'),
+    Locale('cs'),
+    Locale('da'),
     Locale('de'),
+    Locale('el'),
     Locale('en'),
     Locale('es'),
     Locale('es', '419'),
     Locale('es', 'US'),
+    Locale('fa'),
+    Locale('fi'),
     Locale('fr'),
     Locale('fr', 'CA'),
+    Locale('gu'),
+    Locale('ha'),
+    Locale('he'),
     Locale('hi'),
+    Locale('hr'),
+    Locale('hu'),
     Locale('id'),
     Locale('it'),
     Locale('ja'),
+    Locale('kk'),
+    Locale('km'),
+    Locale('kn'),
     Locale('ko'),
+    Locale('ml'),
+    Locale('mr'),
+    Locale('ms'),
+    Locale('my'),
     Locale('nl'),
+    Locale('no'),
+    Locale('or'),
+    Locale('pa'),
     Locale('pl'),
     Locale('pt'),
     Locale('pt', 'BR'),
+    Locale('ro'),
     Locale('ru'),
+    Locale('sk'),
+    Locale('sl'),
+    Locale('sr'),
     Locale('sv'),
+    Locale('sw'),
+    Locale('ta'),
+    Locale('te'),
     Locale('th'),
+    Locale('tl'),
     Locale('tr'),
     Locale('uk'),
+    Locale('ur'),
+    Locale('uz'),
     Locale('vi'),
     Locale('zh'),
     Locale('zh', 'TW'),
+    Locale('zu'),
   ];
 
   /// No description provided for @appTitle.
@@ -2033,26 +2105,62 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
 
   @override
   bool isSupported(Locale locale) => <String>[
+    'af',
+    'am',
     'ar',
+    'bg',
+    'bn',
+    'ca',
+    'cs',
+    'da',
     'de',
+    'el',
     'en',
     'es',
+    'fa',
+    'fi',
     'fr',
+    'gu',
+    'ha',
+    'he',
     'hi',
+    'hr',
+    'hu',
     'id',
     'it',
     'ja',
+    'kk',
+    'km',
+    'kn',
     'ko',
+    'ml',
+    'mr',
+    'ms',
+    'my',
     'nl',
+    'no',
+    'or',
+    'pa',
     'pl',
     'pt',
+    'ro',
     'ru',
+    'sk',
+    'sl',
+    'sr',
     'sv',
+    'sw',
+    'ta',
+    'te',
     'th',
+    'tl',
     'tr',
     'uk',
+    'ur',
+    'uz',
     'vi',
     'zh',
+    'zu',
   ].contains(locale.languageCode);
 
   @override
@@ -2100,46 +2208,118 @@ L10n lookupL10n(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'af':
+      return L10nAf();
+    case 'am':
+      return L10nAm();
     case 'ar':
       return L10nAr();
+    case 'bg':
+      return L10nBg();
+    case 'bn':
+      return L10nBn();
+    case 'ca':
+      return L10nCa();
+    case 'cs':
+      return L10nCs();
+    case 'da':
+      return L10nDa();
     case 'de':
       return L10nDe();
+    case 'el':
+      return L10nEl();
     case 'en':
       return L10nEn();
     case 'es':
       return L10nEs();
+    case 'fa':
+      return L10nFa();
+    case 'fi':
+      return L10nFi();
     case 'fr':
       return L10nFr();
+    case 'gu':
+      return L10nGu();
+    case 'ha':
+      return L10nHa();
+    case 'he':
+      return L10nHe();
     case 'hi':
       return L10nHi();
+    case 'hr':
+      return L10nHr();
+    case 'hu':
+      return L10nHu();
     case 'id':
       return L10nId();
     case 'it':
       return L10nIt();
     case 'ja':
       return L10nJa();
+    case 'kk':
+      return L10nKk();
+    case 'km':
+      return L10nKm();
+    case 'kn':
+      return L10nKn();
     case 'ko':
       return L10nKo();
+    case 'ml':
+      return L10nMl();
+    case 'mr':
+      return L10nMr();
+    case 'ms':
+      return L10nMs();
+    case 'my':
+      return L10nMy();
     case 'nl':
       return L10nNl();
+    case 'no':
+      return L10nNo();
+    case 'or':
+      return L10nOr();
+    case 'pa':
+      return L10nPa();
     case 'pl':
       return L10nPl();
     case 'pt':
       return L10nPt();
+    case 'ro':
+      return L10nRo();
     case 'ru':
       return L10nRu();
+    case 'sk':
+      return L10nSk();
+    case 'sl':
+      return L10nSl();
+    case 'sr':
+      return L10nSr();
     case 'sv':
       return L10nSv();
+    case 'sw':
+      return L10nSw();
+    case 'ta':
+      return L10nTa();
+    case 'te':
+      return L10nTe();
     case 'th':
       return L10nTh();
+    case 'tl':
+      return L10nTl();
     case 'tr':
       return L10nTr();
     case 'uk':
       return L10nUk();
+    case 'ur':
+      return L10nUr();
+    case 'uz':
+      return L10nUz();
     case 'vi':
       return L10nVi();
     case 'zh':
       return L10nZh();
+    case 'zu':
+      return L10nZu();
   }
 
   throw FlutterError(

@@ -142,6 +142,25 @@ void main() {
     expect(find.text('إزالة'), findsOneWidget);
   });
 
+  // Три остальных языка справа налево. Дело не в повторении: у иврита,
+  // фарси и урду заметно разная длина слов, а ряд кнопок на 320 dp — самое
+  // узкое место в приложении, и переполняется он именно от длины подписи.
+  for (final (code, finished, share, remove) in <(String, String, String, String)>[
+    ('he', "הושלמו", "שיתוף", "הסרה"),
+    ('fa', "پایان‌یافته", "اشتراک‌گذاری", "حذف"),
+    ('ur', "مکمل", "شیئر کریں", "ہٹائیں"),
+  ]) {
+    testWidgets('the queue lays out right-to-left in $code', (tester) async {
+      await seedCompleted();
+      await pumpAt(tester, narrow, Locale(code));
+      expect(Directionality.of(tester.element(find.byType(QueueTab))),
+          TextDirection.rtl);
+      await openFinishedTab(tester, finished.split(' ').first);
+      expect(find.text(share), findsOneWidget);
+      expect(find.text(remove), findsOneWidget);
+    });
+  }
+
   testWidgets('the action row survives a large text scale', (tester) async {
     await seedCompleted();
 

@@ -983,7 +983,7 @@ class L10nKo extends L10n {
 
   @override
   String trimTimeHelp(String duration) {
-    return 'm:ss 형식, 최대 $duration';
+    return '분:초 형식, 최대 $duration';
   }
 
   @override

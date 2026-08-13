@@ -980,7 +980,7 @@ class L10nJa extends L10n {
 
   @override
   String trimTimeHelp(String duration) {
-    return 'm:ss 形式、最大 $duration';
+    return '分:秒 形式、最大 $duration';
   }
 
   @override

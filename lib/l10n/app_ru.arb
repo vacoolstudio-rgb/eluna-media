@@ -129,7 +129,7 @@
       }
     }
   },
-  "batchCompleted": "{done, plural, =1{Конвертирован 1 файл} few{Конвертировано {done} файла} many{Конвертировано {done} файлов} other{Конвертировано {done} файла}}",
+  "batchCompleted": "{done, plural, one{Конвертирован {done} файл} few{Конвертировано {done} файла} many{Конвертировано {done} файлов} other{Конвертировано {done} файла}}",
   "@batchCompleted": {
     "placeholders": {
       "done": {
@@ -263,7 +263,7 @@
       }
     }
   },
-  "selectedFiles": "{count, plural, =1{Выбран 1 файл} few{Выбрано {count} файла} many{Выбрано {count} файлов} other{Выбрано {count} файла}}",
+  "selectedFiles": "{count, plural, one{Выбран {count} файл} few{Выбрано {count} файла} many{Выбрано {count} файлов} other{Выбрано {count} файла}}",
   "@selectedFiles": {
     "placeholders": {
       "count": {
@@ -316,7 +316,7 @@
   "lowBatteryContinue": "Всё равно конвертировать",
   "commonCancel": "Отмена",
   "commonOk": "ОК",
-  "filesReceived": "{count, plural, =1{Получен 1 файл} few{Получено {count} файла} many{Получено {count} файлов} other{Получено {count} файла}}",
+  "filesReceived": "{count, plural, one{Получен {count} файл} few{Получено {count} файла} many{Получено {count} файлов} other{Получено {count} файла}}",
   "@filesReceived": {
     "placeholders": {
       "count": {

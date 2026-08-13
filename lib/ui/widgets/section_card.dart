@@ -85,7 +85,7 @@ class LabelledSlider extends StatelessWidget {
         ),
         if (hint != null)
           Padding(
-            padding: const EdgeInsets.only(left: 4),
+            padding: const EdgeInsetsDirectional.only(start: 4),
             child: Text(
               hint!,
               style: theme.textTheme.bodySmall?.copyWith(

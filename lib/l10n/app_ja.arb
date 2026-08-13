@@ -286,7 +286,7 @@
   "compareHint": "長押しすると元の画像が表示されます。",
   "trimStart": "開始",
   "trimEnd": "終了",
-  "trimTimeHelp": "m:ss 形式、最大 {duration}",
+  "trimTimeHelp": "分:秒 形式、最大 {duration}",
   "imageScaleLabel": "拡大縮小",
   "audioChannelsLabel": "チャンネル",
   "audioMono": "モノラル",

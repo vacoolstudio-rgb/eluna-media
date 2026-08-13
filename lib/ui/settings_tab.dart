@@ -428,7 +428,7 @@ class SettingsTab extends ConsumerWidget {
               Text(l10n.licenseBody, style: theme.textTheme.bodyMedium),
               const SizedBox(height: 12),
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: AlignmentDirectional.centerStart,
                 child: TextButton(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
@@ -717,7 +717,7 @@ class _StorageSection extends ConsumerWidget {
         ),
         if (!isEmpty)
           Align(
-            alignment: Alignment.centerLeft,
+            alignment: AlignmentDirectional.centerStart,
             child: TextButton.icon(
               onPressed: () => _confirmAndClear(context, ref),
               icon: const Icon(Icons.delete_sweep_outlined, size: 18),

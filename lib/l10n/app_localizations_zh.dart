@@ -966,7 +966,7 @@ class L10nZh extends L10n {
 
   @override
   String trimTimeHelp(String duration) {
-    return '格式 m:ss，最长 $duration';
+    return '格式 分:秒，最长 $duration';
   }
 
   @override

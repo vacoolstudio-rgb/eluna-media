@@ -1010,7 +1010,7 @@ class L10nHi extends L10n {
 
   @override
   String trimTimeHelp(String duration) {
-    return 'm:ss, अधिकतम $duration';
+    return 'मि:से, अधिकतम $duration';
   }
 
   @override
@@ -1107,5 +1107,5 @@ class L10nHi extends L10n {
   String get sizeTargetEmail => 'ईमेल';
 
   @override
-  String get trimTimeHint => 'मि:सेसे';
+  String get trimTimeHint => 'मि:से';
 }

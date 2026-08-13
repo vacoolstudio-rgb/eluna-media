@@ -286,7 +286,7 @@
   "compareHint": "길게 누르면 원본이 보입니다.",
   "trimStart": "시작",
   "trimEnd": "끝",
-  "trimTimeHelp": "m:ss 형식, 최대 {duration}",
+  "trimTimeHelp": "분:초 형식, 최대 {duration}",
   "imageScaleLabel": "크기 비율",
   "audioChannelsLabel": "채널",
   "audioMono": "모노",

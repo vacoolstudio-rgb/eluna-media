@@ -253,7 +253,7 @@ class L10nRu extends L10n {
       other: 'Конвертировано $done файла',
       many: 'Конвертировано $done файлов',
       few: 'Конвертировано $done файла',
-      one: 'Конвертирован 1 файл',
+      one: 'Конвертирован $done файл',
     );
     return '$_temp0';
   }
@@ -454,7 +454,7 @@ class L10nRu extends L10n {
       other: 'Выбрано $count файла',
       many: 'Выбрано $count файлов',
       few: 'Выбрано $count файла',
-      one: 'Выбран 1 файл',
+      one: 'Выбран $count файл',
     );
     return '$_temp0';
   }
@@ -562,7 +562,7 @@ class L10nRu extends L10n {
       other: 'Получено $count файла',
       many: 'Получено $count файлов',
       few: 'Получено $count файла',
-      one: 'Получен 1 файл',
+      one: 'Получен $count файл',
     );
     return '$_temp0';
   }

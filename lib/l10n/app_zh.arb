@@ -286,7 +286,7 @@
   "compareHint": "长按可查看原图。",
   "trimStart": "起点",
   "trimEnd": "终点",
-  "trimTimeHelp": "格式 m:ss，最长 {duration}",
+  "trimTimeHelp": "格式 分:秒，最长 {duration}",
   "imageScaleLabel": "缩放",
   "audioChannelsLabel": "声道",
   "audioMono": "单声道",

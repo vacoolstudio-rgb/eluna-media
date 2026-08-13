@@ -254,7 +254,7 @@ class L10nUk extends L10n {
       other: 'Конвертовано $done файлу',
       many: 'Конвертовано $done файлів',
       few: 'Конвертовано $done файли',
-      one: 'Конвертовано 1 файл',
+      one: 'Конвертовано $done файл',
     );
     return '$_temp0';
   }
@@ -456,7 +456,7 @@ class L10nUk extends L10n {
       other: 'Вибрано $count файлу',
       many: 'Вибрано $count файлів',
       few: 'Вибрано $count файли',
-      one: 'Вибрано 1 файл',
+      one: 'Вибрано $count файл',
     );
     return '$_temp0';
   }
@@ -564,7 +564,7 @@ class L10nUk extends L10n {
       other: 'Отримано $count файлу',
       many: 'Отримано $count файлів',
       few: 'Отримано $count файли',
-      one: 'Отримано 1 файл',
+      one: 'Отримано $count файл',
     );
     return '$_temp0';
   }
