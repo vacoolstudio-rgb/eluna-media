@@ -167,6 +167,45 @@ void main() {
       expect(valueOf(args, '-crf'), '30');
     });
 
+    test('a hardware VP9 encoder replaces libvpx on the bitrate path', () {
+      // `EncoderCatalog` probes for vp9_mediacodec and the queue passes whatever
+      // it finds, so a VP9 job on a phone that has the block must land on it.
+      // Left out of the builder's hardware list, the encoder is discovered,
+      // handed over, and silently ignored — libvpx encodes the file instead, at
+      // the battery cost the probe exists to avoid.
+      final args = FFmpegArgs.build(
+        inputPath: '/in.mp4',
+        outputPath: '/out',
+        settings: const ConversionSettings(
+          container: ContainerFormat.webm,
+          videoCodec: VideoCodec.vp9,
+          audioCodec: AudioCodec.opus,
+          rateControl: RateControl.bitrate,
+          videoBitrateKbps: 1500,
+        ),
+        hwVideoEncoder: 'vp9_mediacodec',
+      );
+      expect(valueOf(args, '-c:v'), 'vp9_mediacodec');
+      expect(args, isNot(contains('-crf')));
+    });
+
+    test('constant-quality VP9 stays on software even when hardware is offered', () {
+      final args = FFmpegArgs.build(
+        inputPath: '/in.mp4',
+        outputPath: '/out',
+        settings: const ConversionSettings(
+          container: ContainerFormat.webm,
+          videoCodec: VideoCodec.vp9,
+          audioCodec: AudioCodec.opus,
+          rateControl: RateControl.quality,
+          crf: 32,
+        ),
+        hwVideoEncoder: 'vp9_mediacodec',
+      );
+      expect(valueOf(args, '-c:v'), 'libvpx-vp9');
+      expect(valueOf(args, '-crf'), '32');
+    });
+
     test('CRF is clamped to the codec range', () {
       final vp9 = build(const ConversionSettings(
         container: ContainerFormat.webm,

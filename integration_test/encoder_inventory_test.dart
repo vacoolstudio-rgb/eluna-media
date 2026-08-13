@@ -74,6 +74,21 @@ void main() {
   });
 
   group('inventory', () {
+    test('report which FFmpeg this build actually is', () async {
+      // `docs/FFMPEG_BUILD.md` reasons about the bundle by version — which
+      // libraries it carries, whether the HEIF-reading mov demuxer is a 7.x
+      // addition we would lose by rebuilding. That reasoning is only as good
+      // as the version being right, and nothing was checking it. The banner
+      // is the binary's own answer.
+      final out = await capabilities('-version');
+      final first = out.split('\n').where((l) => l.trim().isNotEmpty);
+      for (final line in first.take(3)) {
+        // ignore: avoid_print
+        print('BUILD: ${line.trim()}');
+      }
+      expect(out, contains('ffmpeg version'));
+    });
+
     test('report which encoders this build registers', () async {
       final out = await capabilities('-encoders');
       // Everything the full-gpl bundle plausibly carries that the app does not

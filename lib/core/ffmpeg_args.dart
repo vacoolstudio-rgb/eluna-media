@@ -562,9 +562,15 @@ abstract final class FFmpegArgs {
       final usesBitrate = targetKbps != null ||
           s.rateControl == RateControl.bitrate ||
           !codec.supportsCrf;
+      // Every codec `EncoderCatalog` can name a hardware encoder for belongs
+      // here. Omitting one does not disable the accelerator loudly: the probe
+      // still finds it and the queue still hands it over, and only this line
+      // decides whether it is used — so a missing entry reads as "the phone has
+      // no such block" while the software encoder quietly drains the battery.
       final hwCapable = codec == VideoCodec.h264 ||
           codec == VideoCodec.h265 ||
-          codec == VideoCodec.av1;
+          codec == VideoCodec.av1 ||
+          codec == VideoCodec.vp9;
       final hw = usesBitrate && hwCapable ? hwVideoEncoder : null;
 
       args.addAll(['-c:v', hw ?? codec.encoder!]);

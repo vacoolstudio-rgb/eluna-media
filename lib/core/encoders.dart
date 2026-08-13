@@ -57,8 +57,15 @@ class EncoderCatalog {
   /// Whether `-encoders` lists [name]. A decoder of the same name does not
   /// count, which is exactly the distinction that matters for `av1_mediacodec`:
   /// FFmpeg has shipped an AV1 MediaCodec *decoder* far longer than it has
-  /// shipped the encoder, and only devices with an AV1 encoding block expose
-  /// the latter.
+  /// shipped the encoder.
+  ///
+  /// What this does **not** establish is that the phone can encode. A
+  /// `*_mediacodec` entry is a wrapper the FFmpeg build carries unconditionally;
+  /// whether silicon sits behind it is only discovered when MediaCodec is asked
+  /// for one. The WP30 Pro advertises `vp9_mediacodec` and answers
+  /// NAME_NOT_FOUND. So a hit here means "worth trying", not "will work" — the
+  /// guarantee that the user still gets a file comes from the queue's retry on
+  /// the software encoder, not from this probe.
   Future<bool> has(String name) async => (await _available()).contains(name);
 
   /// The hardware encoder for [codec], or null when the build has none.
