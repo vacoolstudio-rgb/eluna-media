@@ -1,5 +1,5 @@
 {
-  "@@locale": "fr",
+  "@@locale": "fr_CA",
   "appTitle": "Eluna Media",
   "tabConvert": "Convertir",
   "tabQueue": "File",
@@ -93,7 +93,7 @@
   "presetCompressVideoTitle": "Compresser une vidéo",
   "presetCompressVideoBody": "MP4 bien plus léger, la qualité reste bonne",
   "presetFitToSizeTitle": "Ajuster à une taille",
-  "presetFitToSizeBody": "Viser une limite exacte — Discord, e-mail, messageries",
+  "presetFitToSizeBody": "Viser une limite exacte — Discord, courriel, messageries",
   "presetCompatibleMp4Title": "MP4 compatible",
   "presetCompatibleMp4Body": "H.264 + AAC. Se lit partout",
   "presetExtractAudioTitle": "Extraire l'audio",
@@ -312,6 +312,6 @@
   "codecNoAudio": "Sans audio",
   "codecLossless": "{codec} (sans perte)",
   "formatAnimated": "{format} (animé)",
-  "sizeTargetEmail": "E-mail",
+  "sizeTargetEmail": "Courriel",
   "trimTimeHint": "m:ss"
 }

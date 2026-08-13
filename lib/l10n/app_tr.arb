@@ -178,8 +178,8 @@
   "twoPassHint": "Boyuta sığdırma işleri iki kez kodlanır ve bayt bütçesini belirgin biçimde daha isabetli tutturur — yaklaşık iki kat süre ve pil karşılığında.",
   "whatsNewTitle": "Yenilikler",
   "whatsNew1": "Video artık AV1 olabiliyor: beklemeye vaktin varsa dosyalar belirgin şekilde küçülüyor.",
-  "whatsNew2": "Görseller için yenilik: JPEG\u0027in yaklaşık yarısı kadar AVIF ve GIF yerine hareketli WebP.",
-  "whatsNew3": "M4A artık kayıpsız olabiliyor: AAC\u0027nin yanına ALAC geldi.",
+  "whatsNew2": "Görseller için yenilik: JPEG'in yaklaşık yarısı kadar AVIF ve GIF yerine hareketli WebP.",
+  "whatsNew3": "M4A artık kayıpsız olabiliyor: AAC'nin yanına ALAC geldi.",
   "whatsNew4": "Görünüm tek ekranda: parlaklık, vurgu rengi, saf siyah OLED ve Material You.",
   "whatsNew5": "Başarımlarda madalyalar, üç sekme ve görsel olarak paylaşılabilen ilerleme var.",
   "achievementsTitle": "Başarımlar",
@@ -305,5 +305,13 @@
   "originalsNoneDeleted": "Hiçbir şey silinmedi. Yalnızca galerinin özgün adıyla tuttuğu dosyalar bulunabiliyor.",
   "reclaimedTotal": "Bu uygulamayla açılan yer: {size}",
   "deleteAllData": "Tüm verileri sil",
-  "deleteAllDataHint": "Uygulamanın bu cihazda sakladığı her şeyi siler: kuyruğu, dönüştürülen dosyaları, önizlemeleri, başarımları ve ayarları. Galeriye zaten kaydettiğiniz dosyalara dokunulmaz."
+  "deleteAllDataHint": "Uygulamanın bu cihazda sakladığı her şeyi siler: kuyruğu, dönüştürülen dosyaları, önizlemeleri, başarımları ve ayarları. Galeriye zaten kaydettiğiniz dosyalara dokunulmaz.",
+  "codecCopy": "Kopyala",
+  "codecCopyRemux": "Kopyala (remux)",
+  "codecNoVideo": "Video yok",
+  "codecNoAudio": "Ses yok",
+  "codecLossless": "{codec} (kayıpsız)",
+  "formatAnimated": "{format} (hareketli)",
+  "sizeTargetEmail": "E-posta",
+  "trimTimeHint": "d:ss"
 }

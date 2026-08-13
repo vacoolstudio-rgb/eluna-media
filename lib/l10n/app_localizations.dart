@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_ar.dart';
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
@@ -14,11 +15,15 @@ import 'app_localizations_id.dart';
 import 'app_localizations_it.dart';
 import 'app_localizations_ja.dart';
 import 'app_localizations_ko.dart';
+import 'app_localizations_nl.dart';
 import 'app_localizations_pl.dart';
 import 'app_localizations_pt.dart';
 import 'app_localizations_ru.dart';
+import 'app_localizations_sv.dart';
+import 'app_localizations_th.dart';
 import 'app_localizations_tr.dart';
 import 'app_localizations_uk.dart';
+import 'app_localizations_vi.dart';
 import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
@@ -106,21 +111,31 @@ abstract class L10n {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
     Locale('de'),
     Locale('en'),
     Locale('es'),
+    Locale('es', '419'),
+    Locale('es', 'US'),
     Locale('fr'),
+    Locale('fr', 'CA'),
     Locale('hi'),
     Locale('id'),
     Locale('it'),
     Locale('ja'),
     Locale('ko'),
+    Locale('nl'),
     Locale('pl'),
     Locale('pt'),
+    Locale('pt', 'BR'),
     Locale('ru'),
+    Locale('sv'),
+    Locale('th'),
     Locale('tr'),
     Locale('uk'),
+    Locale('vi'),
     Locale('zh'),
+    Locale('zh', 'TW'),
   ];
 
   /// No description provided for @appTitle.
@@ -1958,6 +1973,54 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Erases everything the app keeps on this device: the queue, converted files, previews, achievements and settings. Files you have already saved to your gallery are left alone.'**
   String get deleteAllDataHint;
+
+  /// No description provided for @codecCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get codecCopy;
+
+  /// No description provided for @codecCopyRemux.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy (remux)'**
+  String get codecCopyRemux;
+
+  /// No description provided for @codecNoVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'No video'**
+  String get codecNoVideo;
+
+  /// No description provided for @codecNoAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'No audio'**
+  String get codecNoAudio;
+
+  /// Lossless audio codec name, e.g. "FLAC (lossless)"
+  ///
+  /// In en, this message translates to:
+  /// **'{codec} (lossless)'**
+  String codecLossless(String codec);
+
+  /// Animated variant of an image format
+  ///
+  /// In en, this message translates to:
+  /// **'{format} (animated)'**
+  String formatAnimated(String format);
+
+  /// No description provided for @sizeTargetEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get sizeTargetEmail;
+
+  /// No description provided for @trimTimeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'m:ss'**
+  String get trimTimeHint;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
@@ -1970,6 +2033,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
 
   @override
   bool isSupported(Locale locale) => <String>[
+    'ar',
     'de',
     'en',
     'es',
@@ -1979,11 +2043,15 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
     'it',
     'ja',
     'ko',
+    'nl',
     'pl',
     'pt',
     'ru',
+    'sv',
+    'th',
     'tr',
     'uk',
+    'vi',
     'zh',
   ].contains(locale.languageCode);
 
@@ -1992,8 +2060,48 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
 }
 
 L10n lookupL10n(Locale locale) {
+  // Lookup logic when language+country codes are specified.
+  switch (locale.languageCode) {
+    case 'es':
+      {
+        switch (locale.countryCode) {
+          case '419':
+            return L10nEs419();
+          case 'US':
+            return L10nEsUs();
+        }
+        break;
+      }
+    case 'fr':
+      {
+        switch (locale.countryCode) {
+          case 'CA':
+            return L10nFrCa();
+        }
+        break;
+      }
+    case 'pt':
+      {
+        switch (locale.countryCode) {
+          case 'BR':
+            return L10nPtBr();
+        }
+        break;
+      }
+    case 'zh':
+      {
+        switch (locale.countryCode) {
+          case 'TW':
+            return L10nZhTw();
+        }
+        break;
+      }
+  }
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'ar':
+      return L10nAr();
     case 'de':
       return L10nDe();
     case 'en':
@@ -2012,16 +2120,24 @@ L10n lookupL10n(Locale locale) {
       return L10nJa();
     case 'ko':
       return L10nKo();
+    case 'nl':
+      return L10nNl();
     case 'pl':
       return L10nPl();
     case 'pt':
       return L10nPt();
     case 'ru':
       return L10nRu();
+    case 'sv':
+      return L10nSv();
+    case 'th':
+      return L10nTh();
     case 'tr':
       return L10nTr();
     case 'uk':
       return L10nUk();
+    case 'vi':
+      return L10nVi();
     case 'zh':
       return L10nZh();
   }

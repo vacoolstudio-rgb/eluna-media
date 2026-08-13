@@ -1087,4 +1087,32 @@ class L10nPl extends L10n {
   @override
   String get deleteAllDataHint =>
       'Kasuje wszystko, co aplikacja przechowuje na tym urządzeniu: kolejkę, przekonwertowane pliki, miniatury, osiągnięcia i ustawienia. Pliki zapisane już w galerii pozostają nietknięte.';
+
+  @override
+  String get codecCopy => 'Kopiuj';
+
+  @override
+  String get codecCopyRemux => 'Kopiuj (remux)';
+
+  @override
+  String get codecNoVideo => 'Bez wideo';
+
+  @override
+  String get codecNoAudio => 'Bez dźwięku';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec (bezstratny)';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format (animowany)';
+  }
+
+  @override
+  String get sizeTargetEmail => 'E-mail';
+
+  @override
+  String get trimTimeHint => 'm:ss';
 }

@@ -1049,4 +1049,32 @@ class L10nJa extends L10n {
   @override
   String get deleteAllDataHint =>
       'このアプリが端末に保存しているものをすべて消去します。キュー、変換したファイル、プレビュー、実績、設定が対象です。すでにギャラリーに保存したファイルはそのまま残ります。';
+
+  @override
+  String get codecCopy => 'コピー';
+
+  @override
+  String get codecCopyRemux => 'コピー（再多重化）';
+
+  @override
+  String get codecNoVideo => '映像なし';
+
+  @override
+  String get codecNoAudio => '音声なし';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec（可逆圧縮）';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format（アニメーション）';
+  }
+
+  @override
+  String get sizeTargetEmail => 'メール';
+
+  @override
+  String get trimTimeHint => '分:秒';
 }

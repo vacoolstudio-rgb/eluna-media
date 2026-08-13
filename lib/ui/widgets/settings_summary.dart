@@ -5,6 +5,7 @@ import '../../domain/conversion_job.dart';
 import '../../domain/conversion_settings.dart';
 import '../../domain/media_format.dart';
 import '../../l10n/app_localizations.dart';
+import '../format_labels.dart';
 
 /// One line per setting that actually applies to this job — what a user who
 /// queued eight files an hour ago needs in order to remember what they asked
@@ -21,7 +22,7 @@ List<String> summariseSettings(L10n l10n, ConversionJob job) {
   final s = job.settings;
   final out = <String>[];
 
-  out.add('${s.container.label}  ·  .${s.container.extension}');
+  out.add('${containerLabel(l10n, s.container)}  ·  .${s.container.extension}');
 
   if (job.isMerge) {
     out.add(l10n.summaryMerge(job.extraInputPaths.length + 1));
@@ -31,7 +32,7 @@ List<String> summariseSettings(L10n l10n, ConversionJob job) {
   final reencoding = s.videoCodec != VideoCodec.copy && s.videoCodec != VideoCodec.none;
 
   if (kind == MediaKind.video) {
-    out.add('${l10n.videoCodec}: ${s.videoCodec.label}');
+    out.add('${l10n.videoCodec}: ${videoCodecLabel(l10n, s.videoCodec)}');
     if (reencoding) {
       out.add(switch (s.rateControl) {
         RateControl.quality => '${l10n.rateControlQuality}: ${l10n.summaryQuality(s.crf)}',
@@ -54,7 +55,7 @@ List<String> summariseSettings(L10n l10n, ConversionJob job) {
     final bitrate = s.audioCodec.supportsBitrate
         ? '  ·  ${l10n.summaryBitrate(s.audioBitrateKbps)}'
         : '';
-    out.add('${l10n.audioCodec}: ${s.audioCodec.label}$bitrate');
+    out.add('${l10n.audioCodec}: ${audioCodecLabel(l10n, s.audioCodec)}$bitrate');
     if (s.audioCodec != AudioCodec.copy) {
       if (s.audioChannels != AudioChannels.keep) {
         out.add('${l10n.audioChannelsLabel}: '
@@ -125,7 +126,7 @@ List<String> summaryChips(L10n l10n, ConversionJob job) {
   if (s.container.kind == MediaKind.video &&
       s.videoCodec != VideoCodec.none &&
       s.videoCodec != VideoCodec.copy) {
-    chips.add(s.videoCodec.label.split(' / ').first);
+    chips.add(videoCodecShort(l10n, s.videoCodec));
     if (s.rateControl == RateControl.size && s.sizeTargetBytes != null) {
       chips.add(l10n.summaryTargetSize(OutputPaths.humanBytes(s.sizeTargetBytes!)));
     } else if (s.rateControl == RateControl.bitrate) {

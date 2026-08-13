@@ -1087,4 +1087,32 @@ class L10nIt extends L10n {
   @override
   String get deleteAllDataHint =>
       'Cancella tutto ciò che l\'app conserva su questo dispositivo: la coda, i file convertiti, le anteprime, gli obiettivi e le impostazioni. I file già salvati nella galleria non vengono toccati.';
+
+  @override
+  String get codecCopy => 'Copia';
+
+  @override
+  String get codecCopyRemux => 'Copia (remux)';
+
+  @override
+  String get codecNoVideo => 'Nessun video';
+
+  @override
+  String get codecNoAudio => 'Nessun audio';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec (senza perdita)';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format (animato)';
+  }
+
+  @override
+  String get sizeTargetEmail => 'E-mail';
+
+  @override
+  String get trimTimeHint => 'm:ss';
 }

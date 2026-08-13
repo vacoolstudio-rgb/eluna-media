@@ -14,6 +14,7 @@ import '../domain/conversion_settings.dart';
 import '../domain/media_format.dart';
 import '../domain/quick_presets.dart';
 import '../l10n/app_localizations.dart';
+import 'format_labels.dart';
 import '../services/device_storage.dart';
 import '../state/queue_controller.dart';
 import '../state/selection_controller.dart';
@@ -925,9 +926,10 @@ class _SizeTargetPicker extends ConsumerWidget {
         for (final t in SizeTarget.values)
           ChoiceChip(
             label: Text(
-              t.service != null
-                  ? l10n.sizeTargetNamed(t.service!, t.megabytes)
-                  : l10n.sizeTargetMb(t.megabytes),
+              switch (sizeTargetService(l10n, t)) {
+                final service? => l10n.sizeTargetNamed(service, t.megabytes),
+                _ => l10n.sizeTargetMb(t.megabytes),
+              },
             ),
             selected: targetBytes == t.bytes,
             onSelected: (_) => ref.read(sizeTargetProvider.notifier).set(t.bytes),
@@ -1178,7 +1180,7 @@ class _OutputSection extends ConsumerWidget {
           label: l10n.outputFormat,
           value: value,
           items: options,
-          labelOf: (f) => '${f.label}  ·  .${f.extension}',
+          labelOf: (f) => '${containerLabel(l10n, f)}  ·  .${f.extension}',
           onChanged: controller.setContainer,
         ),
         const SizedBox(height: 8),
@@ -1224,7 +1226,7 @@ class _VideoSection extends ConsumerWidget {
             for (final c in ContainerRules.videoCodecsFor(settings.container))
               if (c != VideoCodec.av1 || c == codec || av1Available) c,
           ],
-          labelOf: (c) => c.label,
+          labelOf: (c) => videoCodecLabel(l10n, c),
           onChanged: controller.setVideoCodec,
         ),
         if (isReencoding) ...[
@@ -1390,7 +1392,7 @@ class _AudioSection extends StatelessWidget {
           value: codec,
           items: choices,
           onChanged: choices.length > 1 ? controller.setAudioCodec : null,
-          labelOf: (c) => c.label,
+          labelOf: (c) => audioCodecLabel(l10n, c),
         ),
         if (codec.supportsBitrate) ...[
           const SizedBox(height: 8),
@@ -1534,7 +1536,7 @@ class _TrimSection extends ConsumerWidget {
           autofocus: true,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
-            hintText: 'm:ss',
+            hintText: l10n.trimTimeHint,
             helperText: l10n.trimTimeHelp(TimeInput.format(durationMs)),
           ),
           onSubmitted: (v) => Navigator.of(context).pop(TimeInput.parse(v)),

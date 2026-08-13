@@ -305,5 +305,13 @@
   "originalsNoneDeleted": "Nic nie zostało usunięte. Odnaleźć można tylko pliki, które galeria trzyma pod pierwotną nazwą.",
   "reclaimedTotal": "Zwolnione dzięki tej aplikacji: {size}",
   "deleteAllData": "Usuń wszystkie dane",
-  "deleteAllDataHint": "Kasuje wszystko, co aplikacja przechowuje na tym urządzeniu: kolejkę, przekonwertowane pliki, miniatury, osiągnięcia i ustawienia. Pliki zapisane już w galerii pozostają nietknięte."
+  "deleteAllDataHint": "Kasuje wszystko, co aplikacja przechowuje na tym urządzeniu: kolejkę, przekonwertowane pliki, miniatury, osiągnięcia i ustawienia. Pliki zapisane już w galerii pozostają nietknięte.",
+  "codecCopy": "Kopiuj",
+  "codecCopyRemux": "Kopiuj (remux)",
+  "codecNoVideo": "Bez wideo",
+  "codecNoAudio": "Bez dźwięku",
+  "codecLossless": "{codec} (bezstratny)",
+  "formatAnimated": "{format} (animowany)",
+  "sizeTargetEmail": "E-mail",
+  "trimTimeHint": "m:ss"
 }

@@ -1084,4 +1084,32 @@ class L10nTr extends L10n {
   @override
   String get deleteAllDataHint =>
       'Uygulamanın bu cihazda sakladığı her şeyi siler: kuyruğu, dönüştürülen dosyaları, önizlemeleri, başarımları ve ayarları. Galeriye zaten kaydettiğiniz dosyalara dokunulmaz.';
+
+  @override
+  String get codecCopy => 'Kopyala';
+
+  @override
+  String get codecCopyRemux => 'Kopyala (remux)';
+
+  @override
+  String get codecNoVideo => 'Video yok';
+
+  @override
+  String get codecNoAudio => 'Ses yok';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec (kayıpsız)';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format (hareketli)';
+  }
+
+  @override
+  String get sizeTargetEmail => 'E-posta';
+
+  @override
+  String get trimTimeHint => 'd:ss';
 }

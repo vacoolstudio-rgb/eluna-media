@@ -1087,4 +1087,32 @@ class L10nDe extends L10n {
   @override
   String get deleteAllDataHint =>
       'Löscht alles, was die App auf diesem Gerät speichert: die Warteschlange, konvertierte Dateien, Vorschaubilder, Erfolge und Einstellungen. Bereits in der Galerie gespeicherte Dateien bleiben unberührt.';
+
+  @override
+  String get codecCopy => 'Kopieren';
+
+  @override
+  String get codecCopyRemux => 'Kopieren (Remux)';
+
+  @override
+  String get codecNoVideo => 'Kein Video';
+
+  @override
+  String get codecNoAudio => 'Kein Ton';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec (verlustfrei)';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format (animiert)';
+  }
+
+  @override
+  String get sizeTargetEmail => 'E-Mail';
+
+  @override
+  String get trimTimeHint => 'm:ss';
 }

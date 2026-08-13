@@ -127,6 +127,21 @@ void main() {
     expect(find.text('Удалить'), findsOneWidget);
   });
 
+  testWidgets('the queue lays out right-to-left in Arabic', (tester) async {
+    // Arabic is the first RTL language the app ships, and RTL is not a
+    // translation problem — it is a layout one. Flutter mirrors the tree only
+    // where widgets ask for directional geometry; a stray EdgeInsets.only(left:)
+    // or a hand-placed Positioned stays put and lands under something else.
+    // Nothing had ever rendered this app in an RTL locale before.
+    await seedCompleted();
+    await pumpAt(tester, narrow, const Locale('ar'));
+    expect(Directionality.of(tester.element(find.byType(QueueTab))),
+        TextDirection.rtl);
+    await openFinishedTab(tester, 'مكتمل');
+    expect(find.text('مشاركة'), findsOneWidget);
+    expect(find.text('إزالة'), findsOneWidget);
+  });
+
   testWidgets('the action row survives a large text scale', (tester) async {
     await seedCompleted();
 

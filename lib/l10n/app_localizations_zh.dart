@@ -1033,4 +1033,1087 @@ class L10nZh extends L10n {
   @override
   String get deleteAllDataHint =>
       '清除应用保存在本机上的一切：队列、已转换的文件、预览图、成就和设置。已保存到相册的文件不受影响。';
+
+  @override
+  String get codecCopy => '复制';
+
+  @override
+  String get codecCopyRemux => '复制（封装转换）';
+
+  @override
+  String get codecNoVideo => '无视频';
+
+  @override
+  String get codecNoAudio => '无音频';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec（无损）';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format（动图）';
+  }
+
+  @override
+  String get sizeTargetEmail => '电子邮件';
+
+  @override
+  String get trimTimeHint => '分:秒';
+}
+
+/// The translations for Chinese, as used in Taiwan (`zh_TW`).
+class L10nZhTw extends L10nZh {
+  L10nZhTw() : super('zh_TW');
+
+  @override
+  String get appTitle => 'Eluna Media';
+
+  @override
+  String get tabConvert => '轉換';
+
+  @override
+  String get tabQueue => '佇列';
+
+  @override
+  String get addFiles => '加入檔案';
+
+  @override
+  String get emptySelectionTitle => '尚無檔案';
+
+  @override
+  String get emptySelectionBody => '加入相片、影片或音訊。所有處理都在這部裝置上完成。';
+
+  @override
+  String get sectionOutput => '輸出';
+
+  @override
+  String get sectionVideo => '影片';
+
+  @override
+  String get sectionAudio => '音訊';
+
+  @override
+  String get sectionImage => '圖片';
+
+  @override
+  String get sectionPrivacy => '隱私';
+
+  @override
+  String get outputFormat => '格式';
+
+  @override
+  String get videoCodec => '視訊編碼器';
+
+  @override
+  String get audioCodec => '音訊編碼器';
+
+  @override
+  String get rateControl => '位元率控制';
+
+  @override
+  String get rateControlQuality => '固定品質（CRF）';
+
+  @override
+  String get rateControlBitrate => '目標位元率';
+
+  @override
+  String crfLabel(int value) {
+    return '品質（CRF $value）';
+  }
+
+  @override
+  String get crfHint => '數值越低品質越好，檔案也越大。';
+
+  @override
+  String videoBitrate(int value) {
+    return '視訊位元率：$value kbps';
+  }
+
+  @override
+  String audioBitrate(int value) {
+    return '音訊位元率：$value kbps';
+  }
+
+  @override
+  String get encodingPreset => '編碼器預設';
+
+  @override
+  String get encodingPresetHint => '較慢的預設壓縮效果較好，但裝置也會更熱。';
+
+  @override
+  String get presetOriginal => '原始';
+
+  @override
+  String get resolution => '解析度';
+
+  @override
+  String get frameRate => '影格率';
+
+  @override
+  String imageQuality(int value) {
+    return '品質：$value';
+  }
+
+  @override
+  String get lossless => '無損';
+
+  @override
+  String get losslessHint => '檔案較大，輸出與原圖完全一致。';
+
+  @override
+  String get sectionEnhance => '增強';
+
+  @override
+  String get sharpenLabel => '銳利度';
+
+  @override
+  String get sharpenHint => '讓邊緣更清晰。但無法救回模糊或失焦的照片——那些細節本來就不在檔案裡。';
+
+  @override
+  String get sharpenStrongHint => '強烈銳化可能在邊緣留下明顯光暈。建議先試中等。';
+
+  @override
+  String get denoiseLabel => '降噪';
+
+  @override
+  String get denoiseHint => '清除暗處與夜景照片的雜訊。過度使用會抹平細節。';
+
+  @override
+  String get autoColorLabel => '自動色彩與色階';
+
+  @override
+  String get autoColorHint => '拉開對比，並稍微提亮平淡的色彩。';
+
+  @override
+  String get upscaleLabel => '放大 2×';
+
+  @override
+  String get upscaleHint => '寬與高各加倍。不會增加細節——但列印或裁切時有幫助。';
+
+  @override
+  String get upscaleConflictHint => '將「解析度」改回「原始」才能放大。';
+
+  @override
+  String get upscaleChip => '2×';
+
+  @override
+  String get enhanceOff => '關閉';
+
+  @override
+  String get enhanceLight => '輕微';
+
+  @override
+  String get enhanceMedium => '中等';
+
+  @override
+  String get enhanceStrong => '強烈';
+
+  @override
+  String get stripMetadata => '移除中繼資料';
+
+  @override
+  String get stripMetadataHint => '從輸出檔案中移除 EXIF、GPS 與時間戳記。';
+
+  @override
+  String startConversion(int count) {
+    return '轉換 $count 個檔案';
+  }
+
+  @override
+  String get batchResumed => '已繼續中斷的轉換。';
+
+  @override
+  String get converting => '轉換中…';
+
+  @override
+  String get cancelBatch => '停止';
+
+  @override
+  String get cancelJob => '取消';
+
+  @override
+  String get clearFinished => '清除已完成';
+
+  @override
+  String get removeJob => '移除';
+
+  @override
+  String get shareFile => '分享';
+
+  @override
+  String get retryJob => '重試';
+
+  @override
+  String get queueEmptyTitle => '佇列是空的';
+
+  @override
+  String get queueEmptyBody => '你在「轉換」分頁加入的檔案會顯示在這裡。';
+
+  @override
+  String queueActiveTab(int count) {
+    return '進行中 · $count';
+  }
+
+  @override
+  String queueFinishedTab(int count) {
+    return '已完成 · $count';
+  }
+
+  @override
+  String get queueNoActiveTitle => '目前沒有工作';
+
+  @override
+  String get queueNoActiveBody => '等待中或轉換中的檔案會出現在這裡。';
+
+  @override
+  String get queueNoFinishedTitle => '尚未完成任何項目';
+
+  @override
+  String get queueNoFinishedBody => '轉換完成的檔案會出現在這裡，可以開啟、儲存或分享。';
+
+  @override
+  String get statusQueued => '等待中';
+
+  @override
+  String get statusRunning => '轉換中';
+
+  @override
+  String get statusCompleted => '完成';
+
+  @override
+  String get statusFailed => '失敗';
+
+  @override
+  String get statusCancelled => '已取消';
+
+  @override
+  String batchSummary(int done, int total) {
+    return '已完成 $done / $total';
+  }
+
+  @override
+  String batchCompleted(int done) {
+    String _temp0 = intl.Intl.pluralLogic(
+      done,
+      locale: localeName,
+      other: '已轉換 $done 個檔案',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String batchCompletedWithFailures(int done, int failed) {
+    return '已轉換 $done 個，失敗 $failed 個。';
+  }
+
+  @override
+  String savedPercent(int percent) {
+    return '縮小了 $percent%';
+  }
+
+  @override
+  String grewPercent(int percent) {
+    return '變大了 $percent%';
+  }
+
+  @override
+  String sizeChange(String from, String to) {
+    return '$from → $to';
+  }
+
+  @override
+  String get appearance => '外觀';
+
+  @override
+  String get themeSystem => '跟隨系統';
+
+  @override
+  String get language => '語言';
+
+  @override
+  String get languageSystem => '跟隨系統';
+
+  @override
+  String get privacyTitle => '隱私';
+
+  @override
+  String get privacyBody =>
+      'Eluna Media 使用內建的 FFmpeg，完全在這部裝置上轉換你的檔案。檔案永遠不會離開裝置，不需要帳號，也沒有遙測。這個應用程式完全不使用網路——它甚至沒有網際網路權限。\n\n預設會移除中繼資料，因此匯出的檔案不會帶有 EXIF、GPS 座標與時間戳記。';
+
+  @override
+  String get licenseTitle => '授權';
+
+  @override
+  String get licenseBody =>
+      '本應用程式內含以 x264、x265 及其他 GPL 元件建置的 FFmpeg，因此整個應用程式依 GNU GPL v3 散布。';
+
+  @override
+  String get sourceMissing => '來源檔案已不存在。';
+
+  @override
+  String get tabSettings => '設定';
+
+  @override
+  String get introTitle => '從設計上就保護隱私';
+
+  @override
+  String get introOfflineTitle => '在這部裝置上轉換';
+
+  @override
+  String get introOfflineBody => '所有工作都由內建的 FFmpeg 完成。檔案永遠不會離開手機——開飛航模式也能轉換。';
+
+  @override
+  String get introTelemetryTitle => '零遙測';
+
+  @override
+  String get introTelemetryBody => '沒有帳號、沒有分析、沒有當機回報。應用程式不知道你是誰。';
+
+  @override
+  String get introMetadataTitle => '中繼資料由你掌握';
+
+  @override
+  String get introMetadataBody => '預設會從每個輸出檔案移除 EXIF、GPS 與時間戳記。你也可以關掉。';
+
+  @override
+  String get introFreeNote =>
+      '免費，沒有廣告也沒有訂閱。所有功能，包含批次轉換，一開始就是你的——唯一能買的只有小費，而且它不會解鎖任何東西。';
+
+  @override
+  String get introContinue => '開始使用';
+
+  @override
+  String get modeSimple => '簡易';
+
+  @override
+  String get modeAdvanced => '進階';
+
+  @override
+  String get modeAdvancedHint => '顯示所有編碼器、位元率與變換選項，取代預設卡片。';
+
+  @override
+  String get presetCompressVideoTitle => '壓縮影片';
+
+  @override
+  String get presetCompressVideoBody => 'MP4 小很多，品質依然良好';
+
+  @override
+  String get presetFitToSizeTitle => '符合大小';
+
+  @override
+  String get presetFitToSizeBody => '命中精確上限——Discord、電子郵件、聊天';
+
+  @override
+  String get presetCompatibleMp4Title => '相容 MP4';
+
+  @override
+  String get presetCompatibleMp4Body => 'H.264 + AAC，到哪都能播';
+
+  @override
+  String get presetExtractAudioTitle => '擷取音訊';
+
+  @override
+  String get presetExtractAudioBody => '從任何影片取出 MP3';
+
+  @override
+  String get presetVideoToGifTitle => '影片轉 GIF';
+
+  @override
+  String get presetVideoToGifBody => '短片變成動態 GIF';
+
+  @override
+  String get presetMergeTitle => '合併影片';
+
+  @override
+  String get presetMergeBody => '依順序把片段接成一個 MP4';
+
+  @override
+  String get mergeNeedsTwo => '請至少選擇兩部影片才能合併。';
+
+  @override
+  String mergedVideoName(int count) {
+    return '合併影片（$count 個片段）.mp4';
+  }
+
+  @override
+  String get presetCompressImageTitle => '壓縮相片';
+
+  @override
+  String get presetCompressImageBody => '更小的 JPEG，幾乎看不出差別';
+
+  @override
+  String get presetEnhancePhotoTitle => '增強相片';
+
+  @override
+  String get presetEnhancePhotoBody => '更乾淨、更清晰、色彩更好';
+
+  @override
+  String get presetImageToWebpTitle => '相片轉 WebP';
+
+  @override
+  String get presetImageToWebpBody => '現代格式，比 JPEG 更小';
+
+  @override
+  String get sizeTargetTitle => '目標大小';
+
+  @override
+  String sizeTargetMb(int mb) {
+    return '$mb MB';
+  }
+
+  @override
+  String sizeTargetNamed(String service, int mb) {
+    return '$service · $mb MB';
+  }
+
+  @override
+  String get sizeTargetCustom => '自訂…';
+
+  @override
+  String get sizeTargetDialogTitle => '目標大小（MB）';
+
+  @override
+  String get sizeTargetTooSmall => '以這段長度來說目標太小了；將使用最接近的品質。';
+
+  @override
+  String estimatePerFile(String size) {
+    return '每個檔案約 $size';
+  }
+
+  @override
+  String estimateTotal(String size) {
+    return '預估輸出：約 $size';
+  }
+
+  @override
+  String selectedFiles(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '已選擇 $count 個檔案',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get promiseOffline => '100% 離線轉換';
+
+  @override
+  String get promiseBatchFree => '批次轉換免費';
+
+  @override
+  String get promiseNoWatermark => '沒有浮水印';
+
+  @override
+  String get sectionTransform => '變換';
+
+  @override
+  String get rotateLabel => '旋轉';
+
+  @override
+  String get flipLabel => '水平鏡射';
+
+  @override
+  String get speedLabel => '速度';
+
+  @override
+  String get cropLabel => '裁切';
+
+  @override
+  String get cropHint => '從中心裁切為選定比例——動態消息用正方形，限時動態用 9:16。';
+
+  @override
+  String volumeLabel(int percent) {
+    return '音量：$percent%';
+  }
+
+  @override
+  String get addAudioFiles => '音訊與其他檔案';
+
+  @override
+  String get hwEncoderLabel => '硬體編碼';
+
+  @override
+  String get hwEncoderHint =>
+      '在位元率與符合大小模式下使用裝置的視訊晶片——快得多也涼得多。品質（CRF）模式一律使用精確的軟體編碼器；硬體工作若失敗，會自動改用軟體重試。';
+
+  @override
+  String get transformNeedsReencode => '旋轉、鏡射與速度都需要重新編碼，因此在串流複製時無法使用。';
+
+  @override
+  String get capBitrateLabel => '永不讓檔案變大';
+
+  @override
+  String get capBitrateHint => '把編碼限制在來源本身的位元率。固定品質沒有上限，否則已經壓縮過的影片可能會變得更大。';
+
+  @override
+  String get keepSubtitles => '保留字幕';
+
+  @override
+  String get keepSubtitlesHint => '把字幕軌帶入輸出檔案。僅限文字字幕。';
+
+  @override
+  String get sectionTrim => '剪裁';
+
+  @override
+  String get trimEnable => '剪裁來源';
+
+  @override
+  String get trimHint => '佇列中剛好只有一個已知長度的檔案時可用。';
+
+  @override
+  String trimRangeLabel(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get rateControlSize => '目標大小';
+
+  @override
+  String get lowBatteryTitle => '電量偏低';
+
+  @override
+  String get lowBatteryBody => '轉換會讓處理器全力運作。你可以先接上電源，或直接繼續。';
+
+  @override
+  String get lowBatteryContinue => '仍要轉換';
+
+  @override
+  String get commonCancel => '取消';
+
+  @override
+  String get commonOk => '確定';
+
+  @override
+  String filesReceived(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '已接收 $count 個檔案',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get saveFile => '儲存';
+
+  @override
+  String get savedToGallery => '已儲存至相簿「Eluna Media」。';
+
+  @override
+  String get savedToDownloads => '已儲存至「下載」。';
+
+  @override
+  String get saveFailed => '無法儲存檔案。';
+
+  @override
+  String get jobRemovedUndo => '已移除工作。';
+
+  @override
+  String get finishedClearedUndo => '已清除完成的工作。';
+
+  @override
+  String get undo => '復原';
+
+  @override
+  String get errorDetailsTitle => '錯誤詳情';
+
+  @override
+  String get sectionConversionPrefs => '轉換';
+
+  @override
+  String get powerModeLabel => '效能模式';
+
+  @override
+  String get powerEfficiency => '低溫快速';
+
+  @override
+  String get powerBalanced => '平衡';
+
+  @override
+  String get powerQuality => '最大壓縮';
+
+  @override
+  String get powerModeHint => '視訊編碼器要多賣力。越涼越快，檔案就稍大一些。其他部分永遠不會被降速。';
+
+  @override
+  String get hapticsLabel => '震動回饋';
+
+  @override
+  String get networkPrivacyTitle => '網路與隱私';
+
+  @override
+  String get netAuditIntro => '這個應用程式裡所有可能碰到網路的東西，完整列在下面。';
+
+  @override
+  String get netAuditNoneTitle => '完全沒有網路存取';
+
+  @override
+  String get netAuditNoneBody =>
+      '應用程式沒有申請網際網路權限，因此就算想連也連不上——你可以在系統的應用程式資訊裡查證。沒有廣告、沒有分析、不檢查更新。「為應用程式評分」會交給商店應用程式，由它自己去連線。';
+
+  @override
+  String get netAuditConversionTitle => '轉換';
+
+  @override
+  String get netAuditConversionBody => '透過內建的 FFmpeg 完全在這部裝置上執行。開飛航模式試試——照樣能轉。';
+
+  @override
+  String get netAuditTelemetryTitle => '遙測';
+
+  @override
+  String get netAuditTelemetryBody => '完全沒有。不收集分析資料、不收集當機報告、不收集識別碼，也沒有帳號系統。';
+
+  @override
+  String get netAuditTipsTitle => '小費';
+
+  @override
+  String get netAuditTipsBody =>
+      '小費由 Play 商店應用程式處理，不是這個應用程式——它依然沒有網際網路權限。不過付款機制確實會在權限清單多出兩項：「應用程式內購買」與「查看網路連線」，後者只讀取是否有連線，並不能使用連線。永遠不會自動購買，小費也不解鎖任何東西：這裡的一切都是免費的。';
+
+  @override
+  String get sectionSupport => '支援';
+
+  @override
+  String get rateApp => '為應用程式評分';
+
+  @override
+  String get openLicenses => '開放原始碼授權';
+
+  @override
+  String get presetAudioToMp3Title => '轉換音訊';
+
+  @override
+  String get presetAudioToMp3Body => '轉成 MP3——什麼都能播';
+
+  @override
+  String get presetCompressAudioTitle => '壓縮音訊';
+
+  @override
+  String get presetCompressAudioBody => '更精簡的 AAC——語音備忘、Podcast';
+
+  @override
+  String get convertTo => '轉換為';
+
+  @override
+  String get formatSectionHint => '只會列出你的檔案真正能變成的格式。';
+
+  @override
+  String get sourceVideo => '影片';
+
+  @override
+  String get sourceImage => '相片';
+
+  @override
+  String get sourceAudio => '音訊';
+
+  @override
+  String get sourceUnknown => '檔案';
+
+  @override
+  String get mixedSelectionTitle => '已選擇不同類型的檔案';
+
+  @override
+  String get mixedSelectionBody => '每個檔案都會用最適合它類型的預設來轉換。想完全掌控，請一次只加入一種類型。';
+
+  @override
+  String get filesTitle => '檔案';
+
+  @override
+  String get removeFile => '移除';
+
+  @override
+  String timeLeft(String time) {
+    return '約剩 $time';
+  }
+
+  @override
+  String get jobSettingsTitle => '轉換設定';
+
+  @override
+  String get jobDetails => '詳細資料';
+
+  @override
+  String summaryQuality(int value) {
+    return 'CRF $value';
+  }
+
+  @override
+  String summaryBitrate(int value) {
+    return '$value kbps';
+  }
+
+  @override
+  String summaryTargetSize(String size) {
+    return '≤ $size';
+  }
+
+  @override
+  String get summaryEnhanced => '已增強';
+
+  @override
+  String get summaryMetadataStripped => '已移除中繼資料';
+
+  @override
+  String summaryMerge(int count) {
+    return '已合併 $count 個片段';
+  }
+
+  @override
+  String get shareApp => '分享應用程式';
+
+  @override
+  String get shareAppText =>
+      'Eluna Media——免費、完全離線的相片、影片與音訊轉換工具。沒有訂閱、沒有浮水印、沒有帳號。';
+
+  @override
+  String appVersionLabel(String version) {
+    return '版本 $version';
+  }
+
+  @override
+  String get openFile => '開啟';
+
+  @override
+  String get openFolder => '顯示資料夾';
+
+  @override
+  String get noAppToOpen => '這部裝置上沒有應用程式能開啟該檔案。';
+
+  @override
+  String get openFailed => '無法開啟檔案。';
+
+  @override
+  String get twoPassLabel => '兩階段編碼以求精確大小';
+
+  @override
+  String get twoPassHint => '符合大小的工作會編碼兩次，命中位元組上限明顯更準確——代價是大約兩倍的時間與電力。';
+
+  @override
+  String get whatsNewTitle => '最新消息';
+
+  @override
+  String get whatsNew1 => '影片現在可以用 AV1：檔案明顯更小，前提是你等得起。';
+
+  @override
+  String get whatsNew2 => '圖片新增：AVIF 大約只有 JPEG 的一半，還有動態 WebP 可以取代 GIF。';
+
+  @override
+  String get whatsNew3 => 'M4A 也能無損了——ALAC 現在與 AAC 並列。';
+
+  @override
+  String get whatsNew4 => '外觀集中到同一個畫面：亮度、強調色、純黑 OLED 與 Material You。';
+
+  @override
+  String get whatsNew5 => '成就有了獎章、三個分頁，以及可以做成圖片分享的進度。';
+
+  @override
+  String get achievementsTitle => '成就';
+
+  @override
+  String achievementsProgress(int done, int total) {
+    return '$done / $total';
+  }
+
+  @override
+  String get achievementsPrivacyNote => '只在這部裝置上計算，不會上傳到任何地方。';
+
+  @override
+  String get achFirstConversionTitle => '第一步';
+
+  @override
+  String get achFirstConversionBody => '轉換你的第一個檔案。';
+
+  @override
+  String get achTenConversionsTitle => '暖身完畢';
+
+  @override
+  String get achTenConversionsBody => '轉換 10 個檔案。';
+
+  @override
+  String get achFiftyConversionsTitle => '常客';
+
+  @override
+  String get achFiftyConversionsBody => '轉換 50 個檔案。';
+
+  @override
+  String get achTwoHundredConversionsTitle => '主力';
+
+  @override
+  String get achTwoHundredConversionsBody => '轉換 200 個檔案。';
+
+  @override
+  String get achThousandConversionsTitle => '生產線';
+
+  @override
+  String get achThousandConversionsBody => '轉換 1000 個檔案。';
+
+  @override
+  String get achSaved100MbTitle => '空間節省者';
+
+  @override
+  String get achSaved100MbBody => '總共釋出 100 MB。';
+
+  @override
+  String get achSaved1GbTitle => 'GB 獵人';
+
+  @override
+  String get achSaved1GbBody => '總共釋出 1 GB。';
+
+  @override
+  String get achSaved10GbTitle => '儲存空間英雄';
+
+  @override
+  String get achSaved10GbBody => '總共釋出 10 GB。';
+
+  @override
+  String get achBatchOfFiveTitle => '批次工';
+
+  @override
+  String get achBatchOfFiveBody => '完成一批 5 個以上的檔案。';
+
+  @override
+  String get achBatchOfTwentyTitle => '裝配線';
+
+  @override
+  String get achBatchOfTwentyBody => '完成一批 20 個以上的檔案。';
+
+  @override
+  String get achSniperTitle => '狙擊手';
+
+  @override
+  String get achSniperBody => '用「符合大小」命中精確的檔案大小。';
+
+  @override
+  String get achMemeSmithTitle => '迷因鐵匠';
+
+  @override
+  String get achMemeSmithBody => '把影片變成 GIF。';
+
+  @override
+  String get achSoundHunterTitle => '獵音者';
+
+  @override
+  String get achSoundHunterBody => '從影片中擷取音訊。';
+
+  @override
+  String get achSubtitleKeeperTitle => '字幕守護者';
+
+  @override
+  String get achSubtitleKeeperBody => '轉換影片並保留字幕。';
+
+  @override
+  String get achDirectorTitle => '導演';
+
+  @override
+  String get achDirectorBody => '套用一項變換——旋轉、裁切、速度或音量。';
+
+  @override
+  String get achAllRounderTitle => '全能';
+
+  @override
+  String get achAllRounderBody => '影片、音訊與圖片都轉換過。';
+
+  @override
+  String get achNightOwlTitle => '夜貓子';
+
+  @override
+  String get achNightOwlBody => '在午夜到清晨 5 點之間完成一次轉換。';
+
+  @override
+  String get achPlatinumTitle => '白金';
+
+  @override
+  String get achPlatinumBody => '取得其他所有成就。';
+
+  @override
+  String get storageTitle => '儲存空間';
+
+  @override
+  String get storageBody => '轉換後的檔案會留在應用程式內，直到你儲存或分享為止；在那之前任何檔案管理員都碰不到。';
+
+  @override
+  String get storageEmpty => '沒有儲存任何東西';
+
+  @override
+  String storageUsage(String size) {
+    return '已佔用：$size';
+  }
+
+  @override
+  String get storageClearTitle => '清除已儲存的檔案？';
+
+  @override
+  String get storageClearBody => '刪除應用程式仍保留的所有完成結果。你已經儲存或分享過的檔案不受影響。';
+
+  @override
+  String get storageClearAction => '清除';
+
+  @override
+  String storageCleared(String size) {
+    return '已釋出 $size';
+  }
+
+  @override
+  String get autoSaveLabel => '自動儲存結果';
+
+  @override
+  String get autoSaveHint => '每個檔案一完成就放進相簿——音訊放進「下載」。';
+
+  @override
+  String get lowSpaceTitle => '剩餘空間不多';
+
+  @override
+  String lowSpaceBody(String needed, String free) {
+    return '這批工作大約需要 $needed，但只剩 $free。轉換可能會中途停止。';
+  }
+
+  @override
+  String saveAll(int count) {
+    return '全部儲存（$count）';
+  }
+
+  @override
+  String savedAll(int count) {
+    return '已儲存：$count';
+  }
+
+  @override
+  String savedSome(int saved, int total) {
+    return '已儲存 $saved / $total';
+  }
+
+  @override
+  String get presetFitPhotoTitle => '相片符合大小';
+
+  @override
+  String get presetFitPhotoBody => '把相片壓到精確上限以下——上傳表單、申請文件。';
+
+  @override
+  String get photoFitHint => '應用程式會逐一嘗試品質，直到有一個符合。若上限對這張相片來說太小，也會一併縮小尺寸。';
+
+  @override
+  String sizeTargetKb(int kb) {
+    return '$kb KB';
+  }
+
+  @override
+  String get sizeTargetDialogTitleKb => '目標大小（KB）';
+
+  @override
+  String get compareAction => '比較';
+
+  @override
+  String get compareBefore => '轉換前';
+
+  @override
+  String get compareAfter => '轉換後';
+
+  @override
+  String get compareHint => '長按可查看原圖。';
+
+  @override
+  String get trimStart => '起點';
+
+  @override
+  String get trimEnd => '終點';
+
+  @override
+  String trimTimeHelp(String duration) {
+    return '分:秒，最多 $duration';
+  }
+
+  @override
+  String get imageScaleLabel => '縮放';
+
+  @override
+  String get audioChannelsLabel => '聲道';
+
+  @override
+  String get audioMono => '單聲道';
+
+  @override
+  String get audioStereo => '立體聲';
+
+  @override
+  String get sampleRateLabel => '取樣率';
+
+  @override
+  String get voiceAudioHint =>
+      '單聲道 22.05 kHz 大約能把語音錄音縮到四分之一，而且聽不出差別。音樂請兩項都保持原始。';
+
+  @override
+  String get moveUp => '上移';
+
+  @override
+  String get moveDown => '下移';
+
+  @override
+  String get renameOutput => '重新命名結果';
+
+  @override
+  String get renameOutputHint => '新名稱';
+
+  @override
+  String get renameOutputHelp => '副檔名由輸出格式決定。留空則沿用來源檔案的名稱。';
+
+  @override
+  String deleteOriginalsAction(int count) {
+    return '刪除原始檔（$count）';
+  }
+
+  @override
+  String get deleteOriginalsAuto => '轉換後刪除原始檔';
+
+  @override
+  String get deleteOriginalsHint => '在結果儲存後，請系統移除來源檔案。系統一定會顯示將被刪除的內容並等待你確認。';
+
+  @override
+  String originalsDeleted(String size) {
+    return '已刪除原始檔——釋出 $size';
+  }
+
+  @override
+  String get originalsNoneDeleted => '沒有刪除任何東西。只有相簿仍以原始名稱保存的檔案才找得到。';
+
+  @override
+  String reclaimedTotal(String size) {
+    return '用這個應用程式釋出：$size';
+  }
+
+  @override
+  String get deleteAllData => '刪除所有資料';
+
+  @override
+  String get deleteAllDataHint =>
+      '清除應用程式在這部裝置上保存的一切：佇列、轉換後的檔案、預覽圖、成就與設定。你已經存進相簿的檔案不受影響。';
+
+  @override
+  String get codecCopy => '複製';
+
+  @override
+  String get codecCopyRemux => '複製（重新封裝）';
+
+  @override
+  String get codecNoVideo => '無視訊';
+
+  @override
+  String get codecNoAudio => '無音訊';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec（無損）';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format（動態）';
+  }
+
+  @override
+  String get sizeTargetEmail => '電子郵件';
+
+  @override
+  String get trimTimeHint => '分:秒';
 }

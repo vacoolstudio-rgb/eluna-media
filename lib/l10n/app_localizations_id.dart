@@ -1086,4 +1086,32 @@ class L10nId extends L10n {
   @override
   String get deleteAllDataHint =>
       'Menghapus semua yang disimpan aplikasi di perangkat ini: antrean, berkas hasil konversi, pratinjau, pencapaian, dan pengaturan. Berkas yang sudah Anda simpan ke galeri tidak disentuh.';
+
+  @override
+  String get codecCopy => 'Salin';
+
+  @override
+  String get codecCopyRemux => 'Salin (remux)';
+
+  @override
+  String get codecNoVideo => 'Tanpa video';
+
+  @override
+  String get codecNoAudio => 'Tanpa audio';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec (lossless)';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format (animasi)';
+  }
+
+  @override
+  String get sizeTargetEmail => 'Email';
+
+  @override
+  String get trimTimeHint => 'm:dd';
 }

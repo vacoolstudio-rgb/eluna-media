@@ -1087,4 +1087,32 @@ class L10nUk extends L10n {
   @override
   String get deleteAllDataHint =>
       'Стирає все, що застосунок зберігає на пристрої: чергу, конвертовані файли, мініатюри, досягнення та налаштування. Файли, уже збережені в галерею, не чіпає.';
+
+  @override
+  String get codecCopy => 'Копіювати';
+
+  @override
+  String get codecCopyRemux => 'Копіювати (без перекодування)';
+
+  @override
+  String get codecNoVideo => 'Без відео';
+
+  @override
+  String get codecNoAudio => 'Без звуку';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec (без втрат)';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format (анімований)';
+  }
+
+  @override
+  String get sizeTargetEmail => 'Ел. пошта';
+
+  @override
+  String get trimTimeHint => 'хв:сс';
 }

@@ -305,5 +305,13 @@
   "originalsNoneDeleted": "没有删除任何内容。只能找到仍以原名保存在相册中的文件。",
   "reclaimedTotal": "通过本应用释放：{size}",
   "deleteAllData": "删除所有数据",
-  "deleteAllDataHint": "清除应用保存在本机上的一切：队列、已转换的文件、预览图、成就和设置。已保存到相册的文件不受影响。"
+  "deleteAllDataHint": "清除应用保存在本机上的一切：队列、已转换的文件、预览图、成就和设置。已保存到相册的文件不受影响。",
+  "codecCopy": "复制",
+  "codecCopyRemux": "复制（封装转换）",
+  "codecNoVideo": "无视频",
+  "codecNoAudio": "无音频",
+  "codecLossless": "{codec}（无损）",
+  "formatAnimated": "{format}（动图）",
+  "sizeTargetEmail": "电子邮件",
+  "trimTimeHint": "分:秒"
 }

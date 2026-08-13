@@ -1052,4 +1052,32 @@ class L10nKo extends L10n {
   @override
   String get deleteAllDataHint =>
       '앱이 이 기기에 저장한 모든 것을 지웁니다. 대기열, 변환된 파일, 미리보기, 업적, 설정이 대상입니다. 이미 갤러리에 저장한 파일은 그대로 남습니다.';
+
+  @override
+  String get codecCopy => '복사';
+
+  @override
+  String get codecCopyRemux => '복사(리먹스)';
+
+  @override
+  String get codecNoVideo => '영상 없음';
+
+  @override
+  String get codecNoAudio => '소리 없음';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec(무손실)';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format(애니메이션)';
+  }
+
+  @override
+  String get sizeTargetEmail => '이메일';
+
+  @override
+  String get trimTimeHint => '분:초';
 }

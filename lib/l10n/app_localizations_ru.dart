@@ -1086,4 +1086,32 @@ class L10nRu extends L10n {
   @override
   String get deleteAllDataHint =>
       'Стирает всё, что приложение хранит на устройстве: очередь, сконвертированные файлы, миниатюры, достижения и настройки. Файлы, уже сохранённые в галерею, не трогает.';
+
+  @override
+  String get codecCopy => 'Копировать';
+
+  @override
+  String get codecCopyRemux => 'Копировать (без перекодирования)';
+
+  @override
+  String get codecNoVideo => 'Без видео';
+
+  @override
+  String get codecNoAudio => 'Без звука';
+
+  @override
+  String codecLossless(String codec) {
+    return '$codec (без потерь)';
+  }
+
+  @override
+  String formatAnimated(String format) {
+    return '$format (анимированный)';
+  }
+
+  @override
+  String get sizeTargetEmail => 'Эл. почта';
+
+  @override
+  String get trimTimeHint => 'м:сс';
 }

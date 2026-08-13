@@ -305,5 +305,13 @@
   "originalsNoneDeleted": "Es wurde nichts gelöscht. Gefunden werden nur Dateien, die die Galerie noch unter ihrem ursprünglichen Namen führt.",
   "reclaimedTotal": "Mit dieser App frei geworden: {size}",
   "deleteAllData": "Alle Daten löschen",
-  "deleteAllDataHint": "Löscht alles, was die App auf diesem Gerät speichert: die Warteschlange, konvertierte Dateien, Vorschaubilder, Erfolge und Einstellungen. Bereits in der Galerie gespeicherte Dateien bleiben unberührt."
+  "deleteAllDataHint": "Löscht alles, was die App auf diesem Gerät speichert: die Warteschlange, konvertierte Dateien, Vorschaubilder, Erfolge und Einstellungen. Bereits in der Galerie gespeicherte Dateien bleiben unberührt.",
+  "codecCopy": "Kopieren",
+  "codecCopyRemux": "Kopieren (Remux)",
+  "codecNoVideo": "Kein Video",
+  "codecNoAudio": "Kein Ton",
+  "codecLossless": "{codec} (verlustfrei)",
+  "formatAnimated": "{format} (animiert)",
+  "sizeTargetEmail": "E-Mail",
+  "trimTimeHint": "m:ss"
 }
