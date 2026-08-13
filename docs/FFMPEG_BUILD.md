@@ -49,17 +49,32 @@ Derived from the code, not from guesswork.
 
 **Decoders it must keep.** Everything, plus specifically `dav1d` — it is what
 decodes AV1 and AVIF, and `ContainerFormat.kindOfFile` accepts `.avif`. HEIC and
-HEIF still images decode through the mov demuxer plus the *native* HEVC decoder;
-the shipped `libavformat` lists `avif,heic,heif` among the mov demuxer's
-extensions, so this works without libheif. libheif would only be needed to
-**write** HEIC.
+HEIF still images are expected to decode through the mov demuxer plus the
+*native* HEVC decoder; the shipped `libavformat` lists `avif,heic,heif` among
+the mov demuxer's extensions, so no libheif should be needed to read them.
+libheif would only be needed to **write** HEIC.
+
+That last claim rests on a string found in the binary, not on a file that ever
+went through: the build cannot write a HEIC, so no test can make one to read.
+The doubtful part is the *tiled grid* an iPhone stores its photos as, which is
+what reading HEIC mostly means in practice. See step 4 of the verification pass.
+
+**What the shipped binary actually is** (2026-08-13, read off the device rather
+than inferred): `ffmpeg version n8.1.2`, built with `--enable-mediacodec
+--enable-gpl` and, among others, `libx264 libx265 libvpx libaom libdav1d
+libmp3lame libopus libvorbis libwebp libopencore-amrnb libvo-amrwbenc libass
+libvidstab librubberband libsoxr`. **No libheif**, which settles HEIC output.
+`integration_test/encoder_inventory_test.dart` prints the whole banner and
+configure line on every run, so this never has to be guessed again — and the
+last two entries above are capabilities the app does not use yet (see
+`FEATURE_AUDIT.md`).
 
 **Filters it uses** — all native, none from an external library:
 `anullsrc atempo aformat atrim concat crop eq fps hqdn3d normalize pad
 palettegen paletteuse scale setpts setsar split transpose unsharp volume hflip
 vflip`.
 
-**Hardware encoding**: `mediacodec` (see `lib/core/hw_encoders.dart`).
+**Hardware encoding**: `mediacodec` (see `lib/core/encoders.dart`).
 
 ## The build
 
@@ -188,23 +203,41 @@ because those are the GPL ones.
 Size is worthless if something silently stops working, and the failure mode of a
 missing encoder is a job that dies with one line of FFmpeg log. Run all of it:
 
+Most of this used to say "by hand". It does not any more —
+`integration_test/conversion_matrix_test.dart` builds the matrix *out of
+`ContainerRules` itself*, so a codec added to the catalogue appears in the run
+without anyone remembering to add it.
+
 1. `flutter test` — `test/ffmpeg_args_test.dart` and friends assert the argument
    vectors, not the binary, so they will pass either way. They are necessary,
    not sufficient.
-2. `integration_test/conversion_test.dart` and
-   `integration_test/photo_enhance_test.dart` on a device — these run **real**
-   FFmpeg and are the only things that catch a filter or encoder that is no
-   longer there.
-3. `integration_test/no_growth_test.dart` — guards the "compression never
-   inflates" promise.
-4. By hand, one file per output container the UI offers: MP4/H.264, MP4/H.265,
-   MKV, WebM/VP9, AVI, MOV, GIF, JPEG, PNG, WebP (lossy **and** lossless), BMP,
-   TIFF, MP3, M4A, WAV, FLAC, OGG, Opus. Every one of these is a promise the
-   format chips make.
-5. By hand, one input per exotic decoder the app claims:
-   `heic heif avif jfif ico 3gp m4v mpg mpeg ts wmv flv m2ts wma aiff alac amr ape`.
-6. Hardware encoding on a real device (`useHardwareEncoder`), since
+2. `flutter test integration_test -d <device>` — all eight suites on a real
+   phone. Between them they cover every container×codec pair the catalogue
+   allows, every processing control, target size, two-pass, subtitles, all
+   twelve quick presets, merging (including a silent clip), cancellation, and
+   every input extension the app claims **except** `heic`, `heif` and `ape` —
+   see below.
+3. Read the run's own notes. `encoder_inventory_test` prints the FFmpeg banner
+   and which encoders and muxers are registered; the hardware group prints
+   `АППАРАТНО` or `НЕТ БЛОКА` per codec. A rebuild that quietly drops a library
+   shows up there before it shows up as a failure.
+4. The three formats no test can synthesise, because this build has no encoder
+   or muxer for them: `heic`, `heif`, `ape`. They are covered only by a
+   decoder-registration check. To cover them properly, paste a real file into
+   `_fixtures` at the top of `conversion_matrix_test.dart` — for HEIC use an
+   iPhone photo, since the tiled-grid layout is the part in doubt.
+5. Hardware encoding on a real device (`useHardwareEncoder`), since
    `--enable-android-media-codec` is what makes `h264_mediacodec` exist.
+
+**A hardware encoder in `-encoders` does not mean the phone has one.** The
+`*_mediacodec` entries are wrappers the build carries unconditionally; whether
+silicon sits behind one is only discovered by asking MediaCodec at encode time.
+The WP30 Pro lists `vp9_mediacodec` and answers `NAME_NOT_FOUND`. So a rebuild
+that appears to gain or lose a hardware encoder has changed the *build*, and
+says nothing about any device — and the thing that keeps users unaffected is
+the software retry in `QueueController`, not the probe. Measured on device: the
+failed hardware attempt costs 50 ms against a 5.3 s software encode, which is
+why no failure memo was added.
 
 ## Later, in the same rebuild
 

@@ -11,6 +11,11 @@ Product docs: `docs/REQUIREMENTS.md` (что и почему) and
 `docs/IMPLEMENTATION_PLAN.md` (как, по этапам). Both are grounded in a
 competitor/review analysis from July 2026.
 
+**`docs/IOS.md` — read this before touching iOS.** Every line of iOS code here
+was written without a Mac: it has never been compiled, let alone run. That
+document says what is implemented blind, what is genuinely missing, and what to
+check first, in the order to do it.
+
 ## What works
 
 ### Converting
@@ -379,14 +384,28 @@ plain: GPL v3 in, GPL v3 out, F-Droid included, nothing to argue.
   not publish file size, and the ways to read it are private API), where
   Android matches on name *and* exact byte count.
 - **HEIC output** — needs `libheif`, which this build genuinely does not carry,
-  so it would take a custom FFmpeg. Reading HEIC/HEIF works. (AV1 output used to
-  be listed here on the same grounds and the grounds were wrong: `libaom` was in
-  the bundle all along, and AV1, AVIF and animated WebP shipped in 0.5.0.)
+  so it would take a custom FFmpeg. Confirmed on a device: there is no `heif`
+  muxer at all, and forcing a `.heic` filename just writes an MP4. (AV1 output
+  used to be listed here on the same grounds and the grounds were wrong:
+  `libaom` was in the bundle all along, and AV1, AVIF and animated WebP shipped
+  in 0.5.0.)
+- **Reading HEIC/HEIF is claimed but not proven end to end.** The HEVC decoder
+  is certainly present, and the mov demuxer lists `avif,heic,heif` among its
+  extensions — but nothing has ever fed this build a real HEIC, because it
+  cannot write one to test with. The specific untested part is not the decoder,
+  it is whether the demuxer assembles a *tiled* still: an iPhone stores its
+  photos as a grid of tiles, and iPhone photos are what "read HEIC" mostly
+  means. `integration_test/conversion_matrix_test.dart` carries the test and an
+  empty fixture slot; dropping a real file in closes it. The same holds for APE,
+  which FFmpeg has never had an encoder for.
 - **Reverse playback** — FFmpeg's `reverse` buffers the whole clip in RAM,
   which on phones means OOM crashes on real-world videos; crashes on large
   files are the category's #6 complaint, so the feature is omitted rather
   than shipped booby-trapped.
 - AI upscaling / denoise, in-app preview.
-- Alternative app icons — the switching plumbing is straightforward, but it
-  needs designed icon assets; wire it when those exist.
+- **A monochrome layer for Android 13+ themed icons.** The nine launcher icons
+  are detailed 3D renders, and a silhouette derived from one automatically reads
+  as a blob — this needs a drawn single-colour layer, not a filter over the
+  artwork. Everything else about the icons is in place: adaptive layers, nine
+  alternates, and a picker.
 - Resolution presets larger than the source will upscale rather than clamp.
