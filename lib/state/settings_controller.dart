@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../domain/app_icons.dart';
 import '../domain/conversion_settings.dart';
 import '../domain/media_format.dart';
 
@@ -204,7 +205,14 @@ class AppPrefs {
     this.simpleMode = true,
     this.autoSaveResults = true,
     this.deleteOriginalsAfterConversion = false,
+    this.appIconId = kDefaultAppIconId,
   });
+
+  /// Иконка, выбранная на рабочем столе. Хранится здесь, а не вычитывается у
+  /// платформы: `PackageManager` умеет сказать состояние компонента, но ответ
+  /// «включён» приходит и для тех, кого никто не трогал, поэтому источником
+  /// истины для галочки в списке остаётся выбор пользователя.
+  final String appIconId;
 
   /// After a batch, offer the sources it converted to the system's delete
   /// dialog instead of waiting to be asked.
@@ -263,6 +271,7 @@ class AppPrefs {
     bool? simpleMode,
     bool? autoSaveResults,
     bool? deleteOriginalsAfterConversion,
+    String? appIconId,
   }) =>
       AppPrefs(
         localeCode: clearLocale ? null : (localeCode ?? this.localeCode),
@@ -274,6 +283,7 @@ class AppPrefs {
         autoSaveResults: autoSaveResults ?? this.autoSaveResults,
         deleteOriginalsAfterConversion:
             deleteOriginalsAfterConversion ?? this.deleteOriginalsAfterConversion,
+        appIconId: appIconId ?? this.appIconId,
       );
 }
 
@@ -286,6 +296,7 @@ class AppPrefsController extends Notifier<AppPrefs> {
   static const _kSimpleMode = 'app.simpleMode';
   static const _kAutoSave = 'app.autoSaveResults';
   static const _kDeleteOriginals = 'app.deleteOriginalsAfterConversion';
+  static const _kAppIcon = 'app.appIconId';
 
   SharedPreferences get _prefs => ref.read(sharedPreferencesProvider);
 
@@ -301,6 +312,7 @@ class AppPrefsController extends Notifier<AppPrefs> {
       simpleMode: p.getBool(_kSimpleMode) ?? true,
       autoSaveResults: p.getBool(_kAutoSave) ?? true,
       deleteOriginalsAfterConversion: p.getBool(_kDeleteOriginals) ?? false,
+      appIconId: p.getString(_kAppIcon) ?? kDefaultAppIconId,
     );
   }
 
@@ -346,6 +358,14 @@ class AppPrefsController extends Notifier<AppPrefs> {
   void setDeleteOriginalsAfterConversion(bool v) {
     state = state.copyWith(deleteOriginalsAfterConversion: v);
     _prefs.setBool(_kDeleteOriginals, v);
+  }
+
+  /// Записывается ТОЛЬКО после того, как платформа согласилась сменить иконку:
+  /// сохранённый выбор, которого нет на рабочем столе, переживёт перезапуск и
+  /// будет спорить с тем, что человек видит.
+  void setAppIconId(String id) {
+    state = state.copyWith(appIconId: id);
+    _prefs.setString(_kAppIcon, id);
   }
 }
 

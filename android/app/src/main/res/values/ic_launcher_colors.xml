@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_bg_loop">#16182C</color>
+    <color name="ic_bg_petals">#EDE3D9</color>
+    <color name="ic_bg_toolbox">#E6DFE0</color>
+    <color name="ic_bg_neon">#0F1639</color>
+    <color name="ic_bg_orbit">#C1E1E5</color>
+    <color name="ic_bg_unbox">#1B1E3F</color>
+    <color name="ic_bg_clamp">#FAEBDB</color>
+    <color name="ic_bg_envelope">#F9EFE5</color>
+    <color name="ic_bg_satchel">#DDC7CD</color>
+</resources>

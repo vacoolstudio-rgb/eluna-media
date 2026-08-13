@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/logging/error_handlers.dart';
+import 'domain/app_icons.dart';
 import 'core/platform/eluna_adapters.dart';
 import 'services/notification_service.dart';
 import 'services/share_intake.dart';
@@ -56,7 +57,8 @@ Future<void> main() async {
       // адрес, и письма со второго домена не приходили никуда.
       supportEmail: 'support@eluna-apps.com',
       websiteUrl: 'https://eluna-apps.com',
-      appIcons: [],
+      appIcons: kAppIcons,
+      defaultAppIconId: kDefaultAppIconId,
       tipProductIds: kTipProductIds,
       // Монохромной ic_notification в drawable нет, а ненайденный ресурс роняет
       // инициализацию плагина уведомлений — молча, вместе со всеми

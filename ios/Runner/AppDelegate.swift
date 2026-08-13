@@ -60,6 +60,22 @@ import UIKit
             return
           }
           AppDelegate.deleteOriginals(items: items, result: result)
+        case "setAppIcon":
+          // iOS names the alternate icon set; nil means "back to the primary
+          // one", which is why Dart sends an explicit null for the default
+          // rather than the set's own name. `supportsAlternateIcons` is false
+          // on iPad multitasking and in some enterprise configurations, and a
+          // refusal has to come back as false so the picker does not tick an
+          // icon the home screen never got.
+          let args = call.arguments as? [String: Any]
+          let name = args?["iosName"] as? String
+          guard UIApplication.shared.supportsAlternateIcons else {
+            result(false)
+            return
+          }
+          UIApplication.shared.setAlternateIconName(name) { error in
+            DispatchQueue.main.async { result(error == nil) }
+          }
         default:
           result(FlutterMethodNotImplemented)
         }

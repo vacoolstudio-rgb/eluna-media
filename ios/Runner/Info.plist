@@ -95,5 +95,10 @@
 	<string>Used to place saved files into the “Eluna Media” album in your photo library.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- Иконки НЕ перечислены здесь вручную. Их генерирует Xcode из
+	     каталога ассетов по ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES
+	     (см. project.pbxproj и docs/IOS.md). Рукописный CFBundleIcons
+	     ссылался бы на файлы в корне бандла, которых больше нет, и
+	     переписывал бы сгенерированный. -->
 </dict>
 </plist>

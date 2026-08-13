@@ -6,7 +6,9 @@ import 'package:share_plus/share_plus.dart';
 
 import '../core/output_paths.dart';
 import '../domain/achievements.dart';
+import '../domain/app_icons.dart';
 import '../l10n/app_localizations.dart';
+import '../services/app_icon.dart';
 import '../state/achievements_controller.dart';
 import '../state/app_lock_controller.dart';
 import '../state/app_meta_controller.dart';
@@ -148,6 +150,48 @@ class SettingsTab extends ConsumerWidget {
               // «чисто чёрный» и Material You. Здесь остаётся строка, которая
               // туда ведёт и называет выбранное.
               const _AppearanceControls(),
+              // Иконка на рабочем столе. Экран выбора — общий, а сам арт живёт
+              // в приложении: иконка и есть то единственное, чем приложения
+              // семьи отличаются друг от друга снаружи.
+              Builder(builder: (context) {
+                final el = ElunaL10n.of(context);
+                final current = resolveAppIcon(
+                  kAppIcons,
+                  prefs.appIconId,
+                  defaultId: kDefaultAppIconId,
+                );
+                return ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: current == null
+                      ? const Icon(Icons.apps_outlined)
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(current.asset, width: 24, height: 24),
+                        ),
+                  title: Text(el.appIconTitle),
+                  subtitle: Text(el.appIconDesc),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => ElunaAppIconScreen(
+                        currentId: prefs.appIconId,
+                        onSelect: (id) async {
+                          final icon = resolveAppIcon(kAppIcons, id,
+                              defaultId: kDefaultAppIconId);
+                          if (icon == null) return false;
+                          final ok =
+                              await ref.read(appIconServiceProvider).apply(icon);
+                          // Сохраняем ТОЛЬКО после согласия платформы: иначе
+                          // выбор переживёт перезапуск и будет спорить с тем,
+                          // что человек видит на рабочем столе.
+                          if (ok) controller.setAppIconId(id);
+                          return ok;
+                        },
+                      ),
+                    ),
+                  ),
+                );
+              }),
               // Выбор языка — общий экран пакета: список с поиском по родному
               // названию, английскому и коду. Автонимы больше не переписаны
               // здесь от руки — их знает `kAppLanguages`, и пятнадцатая копия

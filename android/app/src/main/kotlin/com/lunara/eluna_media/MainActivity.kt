@@ -28,6 +28,18 @@ class MainActivity : FlutterActivity() {
     /** Files copied out of shared content:// URIs, waiting for Dart to be ready. */
     private val pendingShared = mutableListOf<Map<String, String>>()
 
+    /**
+     * Launcher aliases declared in AndroidManifest.xml, in the same order as
+     * `kAppIcons` on the Dart side. Kept as an allow-list rather than trusting
+     * the argument: `setComponentEnabledSetting` on a name that is not a real
+     * component throws, and one that *is* real but is not an icon alias would
+     * let Dart disable arbitrary parts of the app.
+     */
+    private val iconAliases = listOf(
+        "IconLoop", "IconPetals", "IconToolbox", "IconNeon", "IconOrbit",
+        "IconUnbox", "IconClamp", "IconEnvelope", "IconSatchel",
+    )
+
     /** Set once Dart has installed its handler and asked for the backlog. */
     private var dartReady = false
 
@@ -155,6 +167,23 @@ class MainActivity : FlutterActivity() {
                                 deleteOriginals(items, result)
                             }
                         }
+
+                        // Swaps the launcher icon by enabling one activity-alias
+                        // and disabling the rest. See applyAppIcon.
+                        "setAppIcon" -> {
+                            val alias = call.argument<String>("alias")
+                            if (alias == null) {
+                                result.error("args", "alias is required", null)
+                            } else {
+                                result.success(applyAppIcon(alias))
+                            }
+                        }
+
+                        // Which alias the package manager currently has on.
+                        // Read back rather than remembered: "the call did not
+                        // throw" and "the launcher entry changed" are different
+                        // claims, and only this one is the second.
+                        "appIconAlias" -> result.success(currentAppIcon())
 
                         else -> result.notImplemented()
                     }
@@ -344,6 +373,76 @@ class MainActivity : FlutterActivity() {
     // -------------------------------------------------------------------------
 
     /** The Dart call waiting for the delete dialog to come back. */
+    /**
+     * Makes [alias] the launcher entry and turns the other eight off.
+     *
+     * Order matters and is the whole trick: the wanted alias is enabled
+     * **first**. Disabling the currently enabled one before another exists
+     * leaves the package with no MAIN/LAUNCHER component at all, and for as
+     * long as that lasts the app is gone from the home screen — on some
+     * launchers permanently, because the shortcut it left behind no longer
+     * resolves.
+     *
+     * DONT_KILL_APP keeps the process alive; without it Android is free to stop
+     * the app the moment its own component list changes, which from the user's
+     * side looks exactly like a crash on tapping an icon.
+     */
+    /**
+     * The alias the launcher is currently drawing, or null if the state makes
+     * no sense.
+     *
+     * `COMPONENT_ENABLED_STATE_DEFAULT` means "whatever the manifest says", and
+     * the manifest enables exactly one — the first entry. An alias nobody has
+     * ever switched reports DEFAULT, not DISABLED, so treating DEFAULT as off
+     * would report "no icon at all" on a fresh install.
+     */
+    private fun currentAppIcon(): String? {
+        val pm = packageManager
+        for (alias in iconAliases) {
+            val state = try {
+                pm.getComponentEnabledSetting(
+                    android.content.ComponentName(this, "$packageName.$alias"),
+                )
+            } catch (_: Exception) {
+                continue
+            }
+            val on = when (state) {
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED -> true
+                PackageManager.COMPONENT_ENABLED_STATE_DEFAULT -> alias == iconAliases.first()
+                else -> false
+            }
+            if (on) return alias
+        }
+        return null
+    }
+
+    private fun applyAppIcon(alias: String): Boolean {
+        if (alias !in iconAliases) return false
+        return try {
+            val pm = packageManager
+            pm.setComponentEnabledSetting(
+                android.content.ComponentName(this, "$packageName.$alias"),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP,
+            )
+            for (other in iconAliases) {
+                if (other == alias) continue
+                pm.setComponentEnabledSetting(
+                    android.content.ComponentName(this, "$packageName.$other"),
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP,
+                )
+            }
+            true
+        } catch (_: Exception) {
+            // A refusal has to reach Dart as `false`: the picker only marks a
+            // tile as current once the platform accepted it, so a silent
+            // failure would show a tick next to an icon the home screen does
+            // not have.
+            false
+        }
+    }
+
     private var deleteResult: MethodChannel.Result? = null
 
     /** Requested (name, size) pairs, in the order Dart sent them. */
