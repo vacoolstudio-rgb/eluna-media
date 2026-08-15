@@ -44,14 +44,39 @@ void main() {
     if (work.existsSync()) work.deleteSync(recursive: true);
   });
 
-  /// A source that is *already* squeezed: low motion, aggressive CRF. Exactly
-  /// the kind of file a naive re-encode inflates.
+  /// A source that is *already* squeezed: detailed, low motion, aggressive
+  /// CRF. Exactly the kind of file a naive re-encode inflates — measured, this
+  /// one goes from 204 KB to 331 KB when the cap is switched off, so the
+  /// assertion below is guarding something real rather than passing by luck.
+  ///
+  /// The fixture used to be a bare `gradients` with everything left to the
+  /// filter's own random colours and endpoints, and it was a coin flip in two
+  /// separate ways.
+  ///
+  /// *Not repeatable.* Unpinned, it came out at 67 552, 71 498 and 75 446
+  /// bytes across three runs. `seed` alone does not fix that — seeded runs
+  /// still varied. x264 is not the culprit: with every knob pinned, three runs
+  /// produced byte-identical files.
+  ///
+  /// *And sitting on a cliff.* A near-blank gradient encodes to about
+  /// **6 kbps**, and 85 % of 6 kbps is a ceiling x264 physically cannot meet
+  /// for 640×480 at 24 fps — per-frame overhead alone costs more. So the cap
+  /// was computed, ignored by the encoder, and the file grew by ~0.8 %
+  /// whichever way the random fixture landed. Below roughly 10 kbps the
+  /// promise this file makes does not hold, and no argument-building change
+  /// can make it hold; the honest fix would be for the app to keep the
+  /// original when a re-encode comes out bigger. That is a product decision,
+  /// so it is written down here rather than quietly asserted.
+  ///
+  /// A detailed source keeps the test on the side of the cliff where the
+  /// guarantee is real: at 200 kbps the cap bites and the file shrinks by 5 %.
   Future<String> alreadyCompressedVideo(String name) async {
     final path = '${work.path}/$name';
     await synthesise([
       '-y', '-f', 'lavfi',
-      // A near-static gradient compresses to almost nothing…
-      '-i', 'gradients=size=640x480:duration=6:rate=24',
+      // Fine detail, almost no motion: expensive to store, cheap to re-encode
+      // badly. `testsrc2` is deterministic, unlike the gradient it replaced.
+      '-i', 'testsrc2=size=640x480:duration=6:rate=24',
       '-f', 'lavfi',
       '-i', 'sine=frequency=440:duration=6',
       '-c:v', 'libx264', '-preset', 'veryslow', '-crf', '34',
