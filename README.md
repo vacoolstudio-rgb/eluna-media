@@ -12,9 +12,10 @@ Product docs: `docs/REQUIREMENTS.md` (что и почему) and
 competitor/review analysis from July 2026.
 
 **`docs/IOS.md` — read this before touching iOS.** Every line of iOS code here
-was written without a Mac: it has never been compiled, let alone run. That
-document says what is implemented blind, what is genuinely missing, and what to
-check first, in the order to do it.
+was written without a Mac. On 16 August 2026 it was compiled and run for the
+first time, on an iPhone 17 Pro Max simulator: it built unchanged, and all 165
+integration tests passed. That document now says what the simulator proved,
+what it could not prove, and what is left — a real device above all.
 
 ## What works
 
@@ -51,6 +52,15 @@ check first, in the order to do it.
   does not become a 128 kbps one). The ceiling is never allowed above the
   source — a device test caught an earlier version doing exactly that. Toggle
   it off in Advanced to deliberately encode *up*.
+
+  **Known hole, measured:** below roughly 10 kbps of video the promise stops
+  holding. 85 % of 6 kbps is a ceiling x264 physically cannot meet at 640×480 —
+  per-frame overhead alone costs more — so the cap is computed, ignored by the
+  encoder, and the file grows by about a percent. Nothing in the argument
+  builder can fix that; the honest fix is for the app to keep the original when
+  a re-encode comes out bigger. From 11 kbps upward the cap bites as intended:
+  a 200 kbps source shrinks 5 % with it and grows 62 % without.
+  `integration_test/no_growth_test.dart` carries the numbers.
 - Constant-quality (CRF) or target-bitrate rate control, resolution and frame
   rate presets, encoder speed presets, trimming (single file, range slider).
 - **Hardware encoding** (MediaCodec / VideoToolbox) in bitrate and fit-to-size
@@ -389,15 +399,32 @@ plain: GPL v3 in, GPL v3 out, F-Droid included, nothing to argue.
   used to be listed here on the same grounds and the grounds were wrong:
   `libaom` was in the bundle all along, and AV1, AVIF and animated WebP shipped
   in 0.5.0.)
-- **Reading HEIC/HEIF is claimed but not proven end to end.** The HEVC decoder
-  is certainly present, and the mov demuxer lists `avif,heic,heif` among its
-  extensions — but nothing has ever fed this build a real HEIC, because it
-  cannot write one to test with. The specific untested part is not the decoder,
-  it is whether the demuxer assembles a *tiled* still: an iPhone stores its
-  photos as a grid of tiles, and iPhone photos are what "read HEIC" mostly
-  means. `integration_test/conversion_matrix_test.dart` carries the test and an
-  empty fixture slot; dropping a real file in closes it. The same holds for APE,
-  which FFmpeg has never had an encoder for.
+- **Reading a *tiled* HEIC on Android.** The suspicion recorded here for months
+  turned out to be right, and it is now fixed on iOS only.
+
+  A real HEIC written by Apple's own encoder lives in
+  `integration_test/fixtures.dart`. On it, FFmpeg decoded **one 512×512 tile
+  instead of the assembled 1024×768 frame** — an iPhone stores photos exactly
+  that way, so a snapshot converted to its top-left corner and the job reported
+  success. Not an error anyone could see: a quietly wrong result.
+
+  It is not a missing-FFmpeg problem. The demuxer parses the grid and announces
+  the true size (`Stream group #0:0: Tile Grid: hevc, 1024x768`); only the CLI's
+  stitching is absent, so the default mapping, `-map 0:g:0` and `-map 0:v` all
+  hand over a single tile. **iOS now sidesteps it entirely**: `StillDecoder`
+  asks the platform to decode HEIC through ImageIO into a full-resolution PNG,
+  and FFmpeg gets an ordinary picture — which also settles EXIF orientation and
+  colour space for free. `docs/IOS.md` §8 has the measurements and the
+  alternative that was rejected.
+
+  **Android still decodes one tile.** Its half of the `decodeStill` channel is
+  unwritten: `ImageDecoder` (HEIF from API 28) would do the same job in about
+  twenty lines, but there is no Android SDK on the machine where this was fixed,
+  so it was not written blind. `conversion_matrix_test.dart` fails there on
+  purpose, with a message saying so.
+
+  APE is still unproven for the older reason: FFmpeg has never had an encoder
+  for it, so there is nothing to synthesise a fixture with.
 - **Reverse playback** — FFmpeg's `reverse` buffers the whole clip in RAM,
   which on phones means OOM crashes on real-world videos; crashes on large
   files are the category's #6 complaint, so the feature is omitted rather
