@@ -44,8 +44,40 @@ class AppIconService {
   /// Не то же самое, что сохранённый выбор: сохранённое — намерение, а это
   /// факт. Расхождение и есть тот случай, ради которого чтение существует —
   /// вызов, который «не бросил», ещё не значит, что запись в лаунчере сменилась.
+  ///
+  /// Понятие андроидное: `<activity-alias>` у iOS аналога не имеет. Кому нужен
+  /// ответ на обеих платформах — [currentIconId].
   Future<String?> currentAlias() async {
     if (!Platform.isAndroid) return null;
+    return _ask();
+  }
+
+  /// Тот же факт, но выраженный в [ElunaAppIcon.id], — и потому знакомый обеим
+  /// платформам.
+  ///
+  /// Разница только в том, чем платформа называет включённое: Android отдаёт
+  /// псевдоним компонента, iOS — имя набора иконок (`AppIcon-petals`), причём
+  /// у основной иконки имени нет вовсе и в ответе стоит null. Это не «не
+  /// знаю», а «включена стандартная», и путать эти два случая нельзя: null от
+  /// платформы, которая канала не знает вовсе, тоже null.
+  Future<String?> currentIconId() async {
+    if (Platform.isAndroid) {
+      final alias = await _ask();
+      if (alias == null) return null;
+      for (final icon in kAppIcons) {
+        if (icon.alias == alias) return icon.id;
+      }
+      // Псевдоним, которого нет в каталоге: манифест и Dart разошлись.
+      return null;
+    }
+    if (!Platform.isIOS) return null;
+    final name = await _ask();
+    if (name == null) return kDefaultAppIconId;
+    const prefix = 'AppIcon-';
+    return name.startsWith(prefix) ? name.substring(prefix.length) : null;
+  }
+
+  Future<String?> _ask() async {
     try {
       return await _channel.invokeMethod<String>('appIconAlias');
     } on PlatformException {

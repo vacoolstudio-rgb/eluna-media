@@ -76,6 +76,16 @@ import UIKit
           UIApplication.shared.setAlternateIconName(name) { error in
             DispatchQueue.main.async { result(error == nil) }
           }
+        case "appIconAlias":
+          // Что включено на самом деле, а не что мы просили. `apply` возвращает
+          // true просто потому, что UIKit не передал ошибку; отличить это от
+          // сработавшего переключения можно только чтением.
+          //
+          // Отвечает именем набора (`AppIcon-petals`), а у основной иконки
+          // имени нет вовсе — там nil, и это единственный способ, которым iOS
+          // её называет. Перевод в id делает Dart, чтобы обе платформы
+          // отвечали на один вопрос одинаково.
+          result(UIApplication.shared.alternateIconName)
         default:
           result(FlutterMethodNotImplemented)
         }
