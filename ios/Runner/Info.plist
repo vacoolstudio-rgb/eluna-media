@@ -93,6 +93,13 @@
 	     create the album, not just add-only. -->
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to place saved files into the “Eluna Media” album in your photo library.</string>
+	<!-- The app lock offers biometrics (local_auth). On a Face ID device iOS
+	     terminates the process the moment it is asked for one without this
+	     string — a SIGABRT from the system, not a Dart exception, so the
+	     try/catch around BiometricGate cannot soften it. Touch ID needs no
+	     key of its own. -->
+	<key>NSFaceIDUsageDescription</key>
+	<string>Unlocks Eluna Media with Face ID instead of the passcode you set.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<!-- Иконки НЕ перечислены здесь вручную. Их генерирует Xcode из
