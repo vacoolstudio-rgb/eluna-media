@@ -10,6 +10,7 @@ import '../domain/conversion_settings.dart';
 import '../domain/media_format.dart';
 import 'ffmpeg_args.dart';
 import 'quality_search.dart';
+import 'still_decoder.dart';
 
 enum ConversionOutcome { success, cancelled, failed }
 
@@ -47,6 +48,12 @@ class ConversionResult {
 /// All work happens in FFmpeg's own native threads, off the Dart isolate, so
 /// the UI stays responsive without any manual isolate plumbing.
 class FFmpegConverter {
+  FFmpegConverter({StillDecoder? stillDecoder})
+      : _stillDecoder = stillDecoder ?? const StillDecoder();
+
+  /// Injectable so the substitution can be exercised without a platform.
+  final StillDecoder _stillDecoder;
+
   /// Reads the source duration in milliseconds. Returns null for stills or when
   /// the container carries no duration.
   Future<int?> probeDurationMs(String path) async {
@@ -127,6 +134,59 @@ class FFmpegConverter {
   /// opposed to [totalDurationMs], which is the raw source duration the
   /// bitrate maths needs. Passing null falls back to the raw duration.
   Future<ConversionResult> convert({
+    required String inputPath,
+    required String outputPath,
+    required ConversionSettings settings,
+    int? totalDurationMs,
+    int? progressDurationMs,
+    SourceRates sourceRates = const SourceRates(),
+    String? hwVideoEncoder,
+    List<String> extraInputPaths = const [],
+    List<bool?> extraInputsHaveAudio = const [],
+    List<int?> extraInputDurationsMs = const [],
+    bool twoPass = false,
+    void Function(int sessionId)? onSession,
+    void Function(double progress)? onProgress,
+  }) async {
+    // Some stills reach FFmpeg only partly readable — a tiled HEIC arrives as
+    // one tile of itself. Where the platform can decode the whole picture, it
+    // does, and everything downstream sees an ordinary PNG. Null means nothing
+    // was substituted, which is also what every non-iOS platform returns.
+    final decoded = StillDecoder.worthDecoding(inputPath)
+        ? await _stillDecoder.decode(inputPath)
+        : null;
+    try {
+      return await _convertFrom(
+        inputPath: decoded ?? inputPath,
+        outputPath: outputPath,
+        settings: settings,
+        totalDurationMs: totalDurationMs,
+        progressDurationMs: progressDurationMs,
+        sourceRates: sourceRates,
+        hwVideoEncoder: hwVideoEncoder,
+        extraInputPaths: extraInputPaths,
+        extraInputsHaveAudio: extraInputsHaveAudio,
+        extraInputDurationsMs: extraInputDurationsMs,
+        twoPass: twoPass,
+        onSession: onSession,
+        onProgress: onProgress,
+      );
+    } finally {
+      // A 12-megapixel intermediate is tens of megabytes; leaving one behind
+      // per photo would fill a phone over a batch. Failure to delete is not
+      // worth failing a finished conversion over — the cache is purgeable.
+      if (decoded != null) {
+        try {
+          final file = File(decoded);
+          if (file.existsSync()) file.deleteSync();
+        } on FileSystemException {
+          // Ignored on purpose: see above.
+        }
+      }
+    }
+  }
+
+  Future<ConversionResult> _convertFrom({
     required String inputPath,
     required String outputPath,
     required ConversionSettings settings,

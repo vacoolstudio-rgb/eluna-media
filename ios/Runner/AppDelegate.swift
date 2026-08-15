@@ -1,4 +1,5 @@
 import Flutter
+import ImageIO
 import Photos
 import UIKit
 
@@ -76,6 +77,21 @@ import UIKit
           UIApplication.shared.setAlternateIconName(name) { error in
             DispatchQueue.main.async { result(error == nil) }
           }
+        case "decodeStill":
+          // Раскодировать картинку системой и положить рядом обычным PNG.
+          // Нужно там, где FFmpeg читает файл не целиком, — см. decodeStill.
+          guard
+            let args = call.arguments as? [String: Any],
+            let path = args["path"] as? String,
+            let outputPath = args["outputPath"] as? String
+          else {
+            result(false)
+            return
+          }
+          DispatchQueue.global(qos: .userInitiated).async {
+            let ok = AppDelegate.decodeStill(path: path, outputPath: outputPath)
+            DispatchQueue.main.async { result(ok) }
+          }
         case "appIconAlias":
           // Что включено на самом деле, а не что мы просили. `apply` возвращает
           // true просто потому, что UIKit не передал ошибку; отличить это от
@@ -142,6 +158,78 @@ import UIKit
       return nil
     }
     return NSNumber(value: capacity)
+  }
+
+  // ---------------------------------------------------------------------------
+  // Decode a still the bundled FFmpeg cannot read whole
+  // ---------------------------------------------------------------------------
+
+  /// Renders [path] at full resolution into a PNG at [outputPath].
+  ///
+  /// Exists because of one measured defect. An iPhone stores a photo as HEIC
+  /// whose picture is cut into 512×512 tiles referenced by a `grid` item, and
+  /// the bundled FFmpeg parses that grid — it even reports the true size — but
+  /// its command-line layer never stitches the tiles: every mapping, including
+  /// `-map 0:g:0`, hands one tile to the encoder. A 4032×3024 snapshot would
+  /// come out as its top-left 512×512 corner, and the conversion would report
+  /// success. Silently wrong beats loudly broken only in the wrong direction.
+  ///
+  /// ImageIO is the same decoder that draws the photo in Photos, so the grid,
+  /// the EXIF orientation, the colour space and any auxiliary images are
+  /// handled by definition rather than by us re-implementing HEIF.
+  ///
+  /// PNG rather than JPEG on purpose: this is an intermediate, and the real
+  /// encode happens after it. A lossy step here would be a second generation
+  /// of loss the user never asked for — including on lossless targets. The
+  /// cost is a big temporary file (a 12-megapixel photo lands around 30 MB),
+  /// which the Dart side deletes as soon as FFmpeg is done with it.
+  ///
+  /// Fails closed: `false` means "use the original file", which is exactly the
+  /// behaviour that existed before this method.
+  private static func decodeStill(path: String, outputPath: String) -> Bool {
+    let url = URL(fileURLWithPath: path)
+    guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else { return false }
+
+    // Full resolution means asking for it: the thumbnail API caps at the size
+    // you name, and naming the image's own longest side is what makes it the
+    // whole picture rather than a preview.
+    guard
+      let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any],
+      let width = properties[kCGImagePropertyPixelWidth] as? Int,
+      let height = properties[kCGImagePropertyPixelHeight] as? Int,
+      width > 0, height > 0
+    else {
+      return false
+    }
+
+    let options: [CFString: Any] = [
+      kCGImageSourceCreateThumbnailFromImageAlways: true,
+      // Bakes the EXIF rotation into the pixels. Without it a portrait photo
+      // arrives sideways, because PNG has nowhere to carry the flag.
+      kCGImageSourceCreateThumbnailWithTransform: true,
+      kCGImageSourceThumbnailMaxPixelSize: max(width, height),
+    ]
+    guard
+      let image = CGImageSourceCreateThumbnailAtIndex(source, 0, options as CFDictionary)
+    else {
+      return false
+    }
+
+    let destinationURL = URL(fileURLWithPath: outputPath)
+    guard
+      let destination = CGImageDestinationCreateWithURL(
+        destinationURL as CFURL, "public.png" as CFString, 1, nil
+      )
+    else {
+      return false
+    }
+    CGImageDestinationAddImage(destination, image, nil)
+    guard CGImageDestinationFinalize(destination) else {
+      // A half-written file would be read by FFmpeg as a corrupt input.
+      try? FileManager.default.removeItem(at: destinationURL)
+      return false
+    }
+    return true
   }
 
   // ---------------------------------------------------------------------------

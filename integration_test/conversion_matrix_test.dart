@@ -5,10 +5,13 @@ import 'package:eluna_media/core/converter.dart';
 import 'package:eluna_media/domain/conversion_settings.dart';
 import 'package:eluna_media/domain/media_format.dart';
 import 'package:ffmpeg_kit_flutter_new/ffmpeg_kit.dart';
+import 'package:ffmpeg_kit_flutter_new/ffprobe_kit.dart';
 import 'package:ffmpeg_kit_flutter_new/return_code.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:path_provider/path_provider.dart';
+
+import 'fixtures.dart';
 
 /// Каждая конверсия, которую приложение вообще разрешает выбрать, — на живом
 /// FFmpeg.
@@ -33,14 +36,25 @@ import 'package:path_provider/path_provider.dart';
 /// base64 -w0 sample.heic
 /// ```
 ///
-/// HEIC лучше брать со снимка айфона: там картинка обычно разложена плиткой в
-/// grid-элемент, и собрать её — отдельная способность демуксера, которой у
-/// «просто HEIC» может не потребоваться. Именно этот случай и есть настоящий
-/// риск: HEIC на входе — это в первую очередь фотографии с айфона.
+/// **HEIC закрыт — и опасение подтвердилось.** [kHeicFixtureBase64] сделан
+/// системным кодировщиком Apple и разложен плиткой в `grid`, как снимок с
+/// айфона. На нём выяснилось, что собрать плитку эта сборка не умеет: см. тест
+/// «плитка grid НЕ собирается» ниже. Слабая проверка «результат больше 2000
+/// байт» это пропускала — одна плитка тоже весит килобайты.
+///
+/// APE всё ещё ждёт своего файла.
 const Map<String, (MediaKind, String?)> _fixtures = {
-  'heic': (MediaKind.image, null),
+  'heic': (MediaKind.image, kHeicFixtureBase64),
   'ape': (MediaKind.audio, null),
 };
+
+/// Кадр, из которого собран [kHeicFixtureBase64], и размер одной его плитки.
+/// Apple режет по 512×512, так что 1024×768 — это ровно четыре плитки, и
+/// демуксер, собравший одну вместо четырёх, отдаст первую.
+const _heicWidth = 1024;
+const _heicHeight = 768;
+const _heicTileWidth = 512;
+const _heicTileHeight = 512;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -566,6 +580,74 @@ void main() {
                 'не вся картинка');
       }, timeout: long);
     });
+
+    // Третий этаж, и единственный, который отличает «декодировалось что-то» от
+    // «декодировалось всё». Размер файла тут плохой свидетель: одна плитка из
+    // четырёх — это тоже несколько килобайт JPEG, и проверка выше её честно
+    // пропустила. Разрешение не спутать.
+    //
+    // Опасение из шапки файла подтвердилось, и в этом весь смысл фикстуры:
+    // **сам FFmpeg плитку не собирает**. Кадр 1024×768, разрезанный Apple на
+    // четыре плитки 512×512, выходил из его командного слоя как 512×512 —
+    // левый верхний угол вместо картинки. Не ошибка, которую видно, а тихо
+    // неправильный результат, то есть худший из возможных исходов: снимок с
+    // айфона (а HEIC на входе — в первую очередь он) молча обрезался.
+    //
+    // Чинит это [StillDecoder]: HEIC раскодировывает система, и до FFmpeg
+    // доезжает обычный полноразмерный PNG. Поэтому проверка требует именно
+    // целый кадр — и **покраснеет на любой платформе, где системной половины
+    // канала нет** (сегодня это Android). Так и задумано: молчаливо
+    // обрезанная фотография — не то, о чём тест должен помалкивать.
+    test('.heic: плитка grid собирается в полный кадр', () async {
+      final path = '${work.path}/grid.heic';
+      File(path).writeAsBytesSync(base64Decode(kHeicFixtureBase64));
+
+      final file = await convert(
+        path,
+        const ConversionSettings(container: ContainerFormat.jpg, imageQuality: 85),
+        'grid.jpg',
+      );
+
+      final info = await FFprobeKit.getMediaInformation(file.path);
+      final streams = info.getMediaInformation()?.getStreams() ?? [];
+      final video = streams.where((s) => s.getType() == 'video').toList();
+      expect(video, isNotEmpty, reason: 'в результате нет картинки');
+
+      final w = video.first.getWidth();
+      final h = video.first.getHeight();
+      // ignore: avoid_print
+      print('HEIC grid: исходник $_heicWidth×$_heicHeight, получилось $w×$h');
+
+      final oneTile = w == _heicTileWidth && h == _heicTileHeight;
+      expect(w, _heicWidth,
+          reason: oneTile
+              ? 'пришла ровно одна плитка $w×$h — значит StillDecoder не '
+                  'сработал и файл ушёл в FFmpeg как есть. На Android это '
+                  'ожидаемо и означает ровно то, что написано в README: '
+                  'половина канала `decodeStill` там не написана, потому что '
+                  'писать её было не на чем. Не «почините тест» — почините '
+                  'платформу или снимите обещание читать HEIC.'
+              : 'ширина $w вместо $_heicWidth');
+      expect(h, _heicHeight,
+          reason: 'высота $h вместо $_heicHeight (плитка — $_heicTileHeight)');
+    }, timeout: long);
+
+    test('.heic: после подстановки не остаётся временного PNG', () async {
+      // Промежуточный файл на 12-мегапиксельном снимке весит десятки
+      // мегабайт. Один забытый на фотографию — и батч из сотни снимков
+      // забивает телефон молча.
+      final path = '${work.path}/leftover.heic';
+      File(path).writeAsBytesSync(base64Decode(kHeicFixtureBase64));
+
+      await convert(
+        path,
+        const ConversionSettings(container: ContainerFormat.jpg, imageQuality: 85),
+        'leftover.jpg',
+      );
+
+      expect(File('$path.decoded.png').existsSync(), isFalse,
+          reason: 'промежуточный PNG пережил конверсию');
+    }, timeout: long);
   });
 
   group('обработка: каждая ручка отдельно', () {
