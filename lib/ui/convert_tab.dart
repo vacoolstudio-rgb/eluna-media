@@ -21,6 +21,7 @@ import '../state/selection_controller.dart';
 import '../state/app_lock_controller.dart';
 import '../state/settings_controller.dart';
 import 'queue_strings.dart';
+import 'widgets/adaptive_content.dart';
 import 'widgets/media_thumbnail.dart';
 import 'widgets/section_card.dart';
 
@@ -143,26 +144,78 @@ class ConvertTab extends ConsumerWidget {
       backgroundColor: Colors.transparent,
       body: SafeArea(
         bottom: false,
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-          children: [
-            _ModeSwitch(simpleMode: simpleMode),
-            const SizedBox(height: 14),
-            _SourceCard(pending: pending),
-            const SizedBox(height: 16),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 250),
-              child: simpleMode
-                  ? const _SimpleView(key: ValueKey('simple'))
-                  : const _AdvancedView(key: ValueKey('advanced')),
-            ),
-          ],
+        child: AdaptiveContent(
+          child: _CenteredWhenShort(
+            padding: EdgeInsets.fromLTRB(
+                context.space.lg, context.space.sm, context.space.lg, context.space.lg),
+            children: [
+              _ModeSwitch(simpleMode: simpleMode),
+              SizedBox(height: context.space.md),
+              _SourceCard(pending: pending),
+              SizedBox(height: context.space.lg),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 250),
+                child: simpleMode
+                    ? const _SimpleView(key: ValueKey('simple'))
+                    : const _AdvancedView(key: ValueKey('advanced')),
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: _StartBar(
         pendingCount: pending.length,
         isRunning: queue.isRunning,
       ),
+    );
+  }
+}
+
+/// Прокручиваемая колонка, которая на просторной поверхности встаёт по центру,
+/// пока ей хватает места, и ведёт себя как обычный список, когда не хватает.
+///
+/// Нужна из-за пустого состояния. На телефоне форма занимает экран целиком, а
+/// на планшете в портрете она занимает верхнюю треть — и оставшиеся две трети
+/// читаются не как воздух, а как «здесь что-то не загрузилось». Стоит поставить
+/// тот же блок по центру, и пустота становится полем вокруг, то есть намеренной.
+///
+/// Как только файлы добавлены и содержимое перерастает экран, `minHeight`
+/// перестаёт что-либо значить, центрирование выключается само, и это снова
+/// обычная прокрутка.
+///
+/// На телефоне (`compact`) не включается вовсе: там центрировать нечего, а
+/// смена `ListView` на `SingleChildScrollView` без нужды меняла бы поведение
+/// прокрутки на экране, который и так в порядке.
+class _CenteredWhenShort extends StatelessWidget {
+  const _CenteredWhenShort({required this.padding, required this.children});
+
+  final EdgeInsets padding;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    if (context.sizeClass == WindowSizeClass.compact) {
+      return ListView(padding: padding, children: children);
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          padding: padding,
+          child: ConstrainedBox(
+            // Минус поля: иначе колонка ровно во весь экран плюс отступы даёт
+            // прокрутку на несколько точек там, где прокручивать нечего.
+            constraints: BoxConstraints(
+              minHeight: constraints.maxHeight - padding.vertical,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: children,
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -1922,57 +1975,63 @@ class _StartBar extends ConsumerWidget {
         Divider(height: 1, color: theme.colorScheme.outlineVariant.withValues(alpha: 0.5)),
         SafeArea(
           top: false,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-            child: SizedBox(
-              height: 52,
-              child: isRunning
-                ? GradientButton(
-                    label: l10n.cancelBatch,
-                    icon: HugeIcons.strokeRoundedStop,
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Color(0xFFEF4444), Color(0xFFF87171)],
-                    ),
-                    onPressed: () => ref.read(queueProvider.notifier).cancelBatch(),
-                  )
-                : GradientButton(
-                    label: l10n.startConversion(pendingCount),
-                    icon: HugeIcons.strokeRoundedFlash,
-                    onPressed: pendingCount == 0
-                        ? null
-                        : () async {
-                            if (!await _confirmSpace(context, ref)) return;
-                            if (!context.mounted) return;
-                            if (!await _confirmBattery(context)) return;
-                            if (!context.mounted) return;
+          // Полоса во всю ширину, а кнопка внутри неё — по той же колонке, что
+          // и содержимое над ней. Кнопка шириной в тысячу точек не становится
+          // удобнее, зато перестаёт читаться как продолжение списка.
+          child: AdaptiveContent(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.space.lg, vertical: context.space.sm + 2),
+              child: SizedBox(
+                height: 52,
+                child: isRunning
+                  ? GradientButton(
+                      label: l10n.cancelBatch,
+                      icon: HugeIcons.strokeRoundedStop,
+                      gradient: const LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [Color(0xFFEF4444), Color(0xFFF87171)],
+                      ),
+                      onPressed: () => ref.read(queueProvider.notifier).cancelBatch(),
+                    )
+                  : GradientButton(
+                      label: l10n.startConversion(pendingCount),
+                      icon: HugeIcons.strokeRoundedFlash,
+                      onPressed: pendingCount == 0
+                          ? null
+                          : () async {
+                              if (!await _confirmSpace(context, ref)) return;
+                              if (!context.mounted) return;
+                              if (!await _confirmBattery(context)) return;
+                              if (!context.mounted) return;
 
-                            final queue = ref.read(queueProvider.notifier);
-                            final prefs = ref.read(appPrefsProvider);
+                              final queue = ref.read(queueProvider.notifier);
+                              final prefs = ref.read(appPrefsProvider);
 
-                            // Every pending job already carries the profile it
-                            // will convert with (the queue is kept in sync as
-                            // the controls change); this only re-asserts it and
-                            // strips a trim that no longer applies.
-                            syncPendingSettings(ref);
-                            if (!prefs.simpleMode) {
-                              queue.updatePendingSettings(_advancedSettings(ref));
-                            }
+                              // Every pending job already carries the profile it
+                              // will convert with (the queue is kept in sync as
+                              // the controls change); this only re-asserts it and
+                              // strips a trim that no longer applies.
+                              syncPendingSettings(ref);
+                              if (!prefs.simpleMode) {
+                                queue.updatePendingSettings(_advancedSettings(ref));
+                              }
 
-                            if (prefs.simpleMode &&
-                                ref.read(selectedPresetProvider).isMerge) {
-                              final count = ref.read(queueProvider).pending.length;
-                              if (count < 2) return;
-                              queue.mergePending(
-                                ref.read(effectiveSettingsProvider(MediaKind.video)),
-                                L10n.of(context).mergedVideoName(count),
-                              );
-                            }
+                              if (prefs.simpleMode &&
+                                  ref.read(selectedPresetProvider).isMerge) {
+                                final count = ref.read(queueProvider).pending.length;
+                                if (count < 2) return;
+                                queue.mergePending(
+                                  ref.read(effectiveSettingsProvider(MediaKind.video)),
+                                  L10n.of(context).mergedVideoName(count),
+                                );
+                              }
 
-                            queue.start(queueStringsFrom(L10n.of(context)));
-                          },
-                    ),
+                              queue.start(queueStringsFrom(L10n.of(context)));
+                            },
+                      ),
+              ),
             ),
           ),
         ),

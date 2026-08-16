@@ -32,8 +32,6 @@ class HomeShell extends ConsumerStatefulWidget {
 class _HomeShellState extends ConsumerState<HomeShell> {
   int _index = 0;
 
-  static const _railBreakpoint = 720.0;
-
   @override
   void initState() {
     super.initState();
@@ -256,9 +254,17 @@ class _HomeShellState extends ConsumerState<HomeShell> {
 
     final scheme = Theme.of(context).colorScheme;
 
+    // Рейка — вопрос о *форме* оболочки, и решается он по короткой стороне
+    // окна, а не по его ширине. Прежний порог «ширина ≥ 720» выдавал рейку
+    // телефону, положенному набок: там 900 точек ширины и 400 высоты, то есть
+    // поверхность телефонная, а оболочка получалась планшетная. Общий
+    // `WindowSizeClass` спрашивает ровно то, что нужно, — «это физически
+    // крупный экран?», — и заодно правильно ведёт себя в Split View.
+    final metrics = ShellMetrics.of(context.sizeClass);
+
     return LayoutBuilder(
       builder: (context, constraints) {
-        final wide = constraints.maxWidth >= _railBreakpoint;
+        final wide = context.sizeClass != WindowSizeClass.compact;
 
         if (wide) {
           return Scaffold(
@@ -269,6 +275,13 @@ class _HomeShellState extends ConsumerState<HomeShell> {
                   selectedIndex: _index,
                   onDestinationSelected: (i) => setState(() => _index = i),
                   labelType: NavigationRailLabelType.all,
+                  // Шире телефонной полоски — на тринадцати дюймах рейка в 72
+                  // точки читается как случайно оставшийся край, а не как
+                  // навигация.
+                  minWidth: metrics.railMinWidth,
+                  // По центру высоты: прижатые к самому верху три пункта
+                  // оставляют под собой пустой столб во весь экран.
+                  groupAlignment: 0,
                   destinations: [
                     for (final d in destinations)
                       NavigationRailDestination(

@@ -19,16 +19,33 @@ class PrivacyIntroScreen extends ConsumerWidget {
     final l10n = L10n.of(context);
     final theme = Theme.of(context);
 
+    // Читается как абзац, а не как форма, поэтому колонка уже общей: строка в
+    // тысячу точек шириной не читается, сколько бы места ни было.
+    const readingWidth = 560.0;
+
+    // На телефоне — как было: список сверху, кнопка прижата к низу. На планшете
+    // прижимать её к низу нечестно: под текстом остаётся полэкрана пустоты, и
+    // кнопка оказывается в другом конце страницы от того, что предлагает
+    // принять. Там весь блок ставится по центру одним куском.
+    final roomy = context.sizeClass != WindowSizeClass.compact;
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
+          padding: EdgeInsets.all(context.space.xl),
+          child: Align(
+            alignment: roomy ? Alignment.center : Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: readingWidth),
+              child: Column(
+            mainAxisSize: roomy ? MainAxisSize.min : MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
+              Flexible(
+                fit: roomy ? FlexFit.loose : FlexFit.tight,
                 child: ListView(
+                  shrinkWrap: roomy,
                   children: [
                     const SizedBox(height: 20),
                     Center(
@@ -84,13 +101,15 @@ class PrivacyIntroScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: context.space.lg),
               GradientButton(
                 label: l10n.introContinue,
                 icon: HugeIcons.strokeRoundedArrowRight01,
                 onPressed: () => ref.read(appMetaProvider.notifier).markIntroSeen(),
               ),
             ],
+              ),
+            ),
           ),
         ),
       ),

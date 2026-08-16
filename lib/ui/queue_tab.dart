@@ -18,6 +18,7 @@ import '../state/queue_controller.dart';
 import 'compare_screen.dart';
 import 'convert_tab.dart' show accentOfKind, iconOfKind;
 import 'queue_strings.dart';
+import 'widgets/adaptive_content.dart';
 import 'widgets/media_thumbnail.dart';
 import 'widgets/progress_ring.dart';
 import 'widgets/settings_summary.dart';
@@ -105,10 +106,12 @@ class _QueueTabState extends ConsumerState<QueueTab> with SingleTickerProviderSt
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
-        child: Column(
+        child: AdaptiveContent(
+          child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+              padding: EdgeInsets.fromLTRB(
+                  context.space.lg, context.space.sm, context.space.lg, context.space.xs),
               child: TabBar(
                 controller: _tabs,
                 dividerColor: Colors.transparent,
@@ -152,6 +155,7 @@ class _QueueTabState extends ConsumerState<QueueTab> with SingleTickerProviderSt
               ),
             ),
           ],
+          ),
         ),
       ),
       floatingActionButton:
@@ -563,7 +567,11 @@ class _JobCardBody extends ConsumerWidget {
     final theme = Theme.of(context);
     final failure = _failureText(l10n, job);
 
-    showModalBottomSheet<void>(
+    // Шторка — идиома телефона: она поднимается снизу, туда, где большой палец.
+    // Растянутая по низу тринадцатидюймового экрана, она превращается в узкую
+    // полосу у дальнего края. На крупной поверхности пакет показывает вместо
+    // неё диалог по центру; на телефоне это ровно тот же вызов, что и был.
+    showAdaptiveModal<void>(
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
