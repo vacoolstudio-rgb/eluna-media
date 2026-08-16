@@ -53,12 +53,15 @@ flutter build ios --debug --simulator     # или --no-codesign для устр
   `Release.xcconfig`, а под неё сгенерирован отдельный
   `Pods-Runner.profile.xcconfig`. На Debug и Release не влияет; `flutter build
   ios --profile` до этого никто не собирал.
-- **Bundle id разный на платформах.** iOS: `com.lunara.elunaMedia`
-  (`PRODUCT_BUNDLE_IDENTIFIER` в `project.pbxproj`). Android:
-  `com.lunara.eluna_media`. В `Eluna.configure` (`lib/main.dart`) записан
-  андроидный — это **осознанно**, он там используется для ссылок на магазин, а
-  не как идентификатор сборки. Не «чинить» их в одинаковые: переименование
-  bundle id на iOS создаёт новое приложение.
+- **Bundle id — `com.eluna.media`, один на обе платформы** и на семейном
+  шаблоне `com.eluna.*`, как у читалки, трекера и бюджета
+  (`PRODUCT_BUNDLE_IDENTIFIER` в `project.pbxproj`, `applicationId` и
+  `namespace` в `android/app/build.gradle.kts`, `packageId` в `Eluna.configure`).
+  До 2026-08-16 здесь стояли `com.lunara.elunaMedia` и `com.lunara.eluna_media`
+  — разные на платформах и вне шаблона. Переименовать вышло без последствий
+  ровно потому, что приложение ещё нигде не выпущено: **после первой публикации
+  этого сделать уже нельзя** — на iOS новый bundle id это новое приложение, на
+  Android новый `applicationId` рвёт обновления у тех, кто уже поставил.
 - **Подписи нет.** `DEVELOPMENT_TEAM` в проекте не задан, поэтому на настоящий
   iPhone это пока не ставится — нужен Apple ID и команда в Xcode.
 - **Свободных иконок в корне бандла больше нет** — см. раздел 1.
@@ -196,7 +199,7 @@ Xcode — добавить файлы в target вручную. Для прое�
 `requestPhotoAccess`, а тот на свежей установке поднимает системный запрос
 доступа. Нажать в нём из интеграционного теста некому, и прогон не падает, а
 **встаёт** до таймаута. Выдать доступ заранее тоже не получается:
-`xcrun simctl privacy <udid> grant photos com.lunara.elunaMedia` на iOS 26 не
+`xcrun simctl privacy <udid> grant photos com.eluna.media` на iOS 26 не
 покрывает readWrite-доступ к `PHPhotoLibrary`, и `grant all` тоже — запрос
 появляется всё равно (проверены оба). А дальше, даже с доступом, стоит второй
 системный диалог — само подтверждение удаления, и вот он там по замыслу.

@@ -18,7 +18,7 @@ void main() {
   final manifest =
       File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
   final kotlin = File(
-    'android/app/src/main/kotlin/com/lunara/eluna_media/MainActivity.kt',
+    'android/app/src/main/kotlin/com/eluna/media/MainActivity.kt',
   ).readAsStringSync();
 
   test('каталог не пуст и иконка по умолчанию в нём есть', () {

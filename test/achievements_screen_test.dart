@@ -24,7 +24,7 @@ void main() {
     // `Eluna.config` throws rather than guessing.
     Eluna.configure(const ElunaAppConfig(
       appName: 'Eluna Media',
-      packageId: 'com.lunara.eluna_media',
+      packageId: 'com.eluna.media',
       supportEmail: 'support@eluna-apps.com',
       appIcons: [],
       tipProductIds: [],

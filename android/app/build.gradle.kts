@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.lunara.eluna_media"
+    namespace = "com.eluna.media"
     compileSdk = flutter.compileSdkVersion
     // Highest NDK required by any plugin (ffmpeg-kit and friends); NDK releases
     // are backward compatible. Raised to 28.2 for `integration_test`, which
@@ -27,7 +27,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.lunara.eluna_media"
+        applicationId = "com.eluna.media"
         // ffmpeg-kit's native libraries require API 24.
         minSdk = 24
         targetSdk = flutter.targetSdkVersion

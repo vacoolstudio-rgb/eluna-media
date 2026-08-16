@@ -1,4 +1,4 @@
-package com.lunara.eluna_media
+package com.eluna.media
 
 import android.app.Activity
 import android.app.DownloadManager

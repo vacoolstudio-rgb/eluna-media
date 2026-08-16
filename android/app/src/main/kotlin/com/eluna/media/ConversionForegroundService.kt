@@ -1,4 +1,4 @@
-package com.lunara.eluna_media
+package com.eluna.media
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -156,8 +156,8 @@ class ConversionForegroundService : Service() {
     }
 
     companion object {
-        const val ACTION_STOP = "com.lunara.eluna_media.STOP"
-        const val ACTION_CANCEL = "com.lunara.eluna_media.CANCEL_BATCH"
+        const val ACTION_STOP = "com.eluna.media.STOP"
+        const val ACTION_CANCEL = "com.eluna.media.CANCEL_BATCH"
         const val EXTRA_TITLE = "title"
         const val EXTRA_TEXT = "text"
         const val EXTRA_PROGRESS = "progress"
