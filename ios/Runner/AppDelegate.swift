@@ -19,6 +19,13 @@ import UIKit
 @objc class AppDelegate: FlutterAppDelegate {
   private static let shareChannelName = "eluna/share_intake"
 
+  /// Общая земля с расширением «Поделиться». Дублируется в
+  /// `ShareViewController` и в обоих entitlements — расширение это отдельный
+  /// бинарник и импортировать код приложения не может, поэтому единственной
+  /// константы на всех не бывает.
+  private static let appGroupIdentifier = "group.com.eluna.media"
+  private static let sharedInboxName = "SharedInbox"
+
   private var shareChannel: FlutterMethodChannel?
 
   /// Files copied out before Dart signalled that it is listening (a cold start
@@ -112,8 +119,17 @@ import UIKit
     if let url = launchOptions?[.url] as? URL {
       handle(url: url)
     }
+    drainSharedInbox()
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+
+  /// Второй момент, когда стоит заглянуть в ящик расширения: холодного старта
+  /// может не быть вовсе — приложение всё это время висело в фоне, а человек
+  /// поделился в «Фото» и переключился обратно.
+  override func applicationDidBecomeActive(_ application: UIApplication) {
+    super.applicationDidBecomeActive(application)
+    drainSharedInbox()
   }
 
   override func application(
@@ -340,15 +356,88 @@ import UIKit
     let scoped = url.startAccessingSecurityScopedResource()
     defer { if scoped { url.stopAccessingSecurityScopedResource() } }
 
+    guard let target = AppDelegate.freeSlot(for: url.lastPathComponent) else { return nil }
+    do {
+      try FileManager.default.copyItem(at: url, to: target)
+    } catch {
+      return nil
+    }
+    return ["path": target.path, "name": target.lastPathComponent]
+  }
+
+  // ---------------------------------------------------------------------------
+  // Inbox of the share extension
+  // ---------------------------------------------------------------------------
+
+  /// Забирает файлы, которые положило расширение «Поделиться».
+  ///
+  /// Расширение и приложение — разные песочницы, и общая земля у них одна:
+  /// контейнер App Group. Расширение туда кладёт, приложение отсюда забирает.
+  /// Зовётся на запуске и при каждом возвращении на экран, потому что поделиться
+  /// могли в любой из этих моментов, а не открывать приложение сразу — обычное
+  /// поведение: человек шлёт три ролика подряд и только потом заходит.
+  ///
+  /// Файлы **переносятся**, а не копируются: контейнер группы делится квотой с
+  /// приложением, и оставленная там копия гигабайтного ролика — это гигабайт,
+  /// который пользователь не найдёт ни в одной папке и не сможет удалить.
+  private func drainSharedInbox() {
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      let fm = FileManager.default
+      guard
+        let container = fm.containerURL(
+          forSecurityApplicationGroupIdentifier: AppDelegate.appGroupIdentifier
+        ),
+        let waiting = try? fm.contentsOfDirectory(
+          at: container.appendingPathComponent(AppDelegate.sharedInboxName, isDirectory: true),
+          includingPropertiesForKeys: nil
+        ),
+        !waiting.isEmpty
+      else {
+        return
+      }
+
+      // По имени, чтобы порядок в очереди не зависел от того, в каком порядке
+      // файловая система решила перечислить каталог.
+      let adopted = waiting
+        .sorted { $0.lastPathComponent < $1.lastPathComponent }
+        .compactMap { AppDelegate.adopt($0) }
+      guard !adopted.isEmpty else { return }
+
+      DispatchQueue.main.async {
+        guard let self else { return }
+        self.pendingShared.append(contentsOf: adopted)
+        if self.dartReady { self.flushPending() }
+      }
+    }
+  }
+
+  /// Переносит один файл из контейнера группы в кэш приложения.
+  ///
+  /// Отказывает закрыто: файл, который не удалось перенести, остаётся лежать в
+  /// контейнере и будет предложен снова при следующем заходе — это лучше, чем
+  /// потерять то, что пользователь явно отправил.
+  private static func adopt(_ url: URL) -> [String: String]? {
+    guard let target = freeSlot(for: url.lastPathComponent) else { return nil }
+    do {
+      try FileManager.default.moveItem(at: url, to: target)
+    } catch {
+      return nil
+    }
+    return ["path": target.path, "name": target.lastPathComponent]
+  }
+
+  /// Свободное имя в `caches/shared` — общая часть обоих путей приёма.
+  ///
+  /// Совпадения разводятся суффиксом, а не перезаписью: два `IMG_0001.HEIC` из
+  /// разных альбомов — обычное дело, и потерять первый молча нельзя.
+  private static func freeSlot(for name: String) -> URL? {
     let fm = FileManager.default
     guard let caches = fm.urls(for: .cachesDirectory, in: .userDomainMask).first else {
       return nil
     }
-
     let dir = caches.appendingPathComponent("shared", isDirectory: true)
     try? fm.createDirectory(at: dir, withIntermediateDirectories: true)
 
-    let name = url.lastPathComponent
     var target = dir.appendingPathComponent(name)
     var suffix = 1
     while fm.fileExists(atPath: target.path) {
@@ -358,12 +447,6 @@ import UIKit
       target = dir.appendingPathComponent(candidate)
       suffix += 1
     }
-
-    do {
-      try fm.copyItem(at: url, to: target)
-    } catch {
-      return nil
-    }
-    return ["path": target.path, "name": target.lastPathComponent]
+    return target
   }
 }
