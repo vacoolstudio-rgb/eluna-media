@@ -46,3 +46,7 @@ app.*.map.json
 
 # Scratch worktrees created for parallel agent runs — never part of a release.
 /.claude/worktrees/
+
+# Снимки витрины: сотни файлов по 2–4 МБ, которые пересобираются одной командой.
+# В репозитории от них только вес; рецепт лежит в integration_test/screenshots_test.dart.
+docs/ASO/screenshots/
