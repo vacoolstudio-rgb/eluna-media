@@ -1045,6 +1045,10 @@ class L10nNo extends L10n {
       'Ber systemet fjerne kildefilene når resultatet er lagret. Systemet viser alltid hva som forsvinner, og venter på bekreftelsen din.';
 
   @override
+  String get mediaAccessRequired =>
+      'Tilgang til mediebiblioteket kreves for å slette originalene.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originalene ble slettet — $size frigjort';
   }

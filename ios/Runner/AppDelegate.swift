@@ -84,6 +84,27 @@ import UIKit
           UIApplication.shared.setAlternateIconName(name) { error in
             DispatchQueue.main.async { result(error == nil) }
           }
+        case "requestMediaAccess":
+          // Спросить доступ заранее — в момент, когда пользователь включает
+          // удаление оригиналов, а не через полчаса, когда батч закончился.
+          //
+          // На iOS это единственный шанс: системный запрос показывается **один
+          // раз за установку**, и после отказа он молчит навсегда. Спросив в
+          // момент включения, приложение узнаёт ответ тогда же, когда его
+          // узнаёт человек, и может честно не включать переключатель.
+          AppDelegate.requestPhotoAccess { granted in
+            DispatchQueue.main.async { result(granted) }
+          }
+        case "openAppSettings":
+          // Дорога назад после отказа. Своего запроса у приложения больше не
+          // будет, и без этой кнопки функция остаётся мёртвой без объяснения.
+          guard let url = URL(string: UIApplication.openSettingsURLString) else {
+            result(false)
+            return
+          }
+          UIApplication.shared.open(url) { opened in
+            DispatchQueue.main.async { result(opened) }
+          }
         case "decodeStill":
           // Раскодировать картинку системой и положить рядом обычным PNG.
           // Нужно там, где FFmpeg читает файл не целиком, — см. decodeStill.

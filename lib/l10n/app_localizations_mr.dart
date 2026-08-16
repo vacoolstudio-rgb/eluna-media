@@ -1042,6 +1042,10 @@ class L10nMr extends L10n {
       'निकाल सेव्ह झाल्यावर स्रोत फाइल्स हटवण्यास सिस्टमला सांगते. काय हटणार आहे हे सिस्टम नेहमी दाखवते आणि तुमच्या पुष्टीची वाट पाहते.';
 
   @override
+  String get mediaAccessRequired =>
+      'मूळ फाइल हटवण्यासाठी मीडिया लायब्ररीचा प्रवेश आवश्यक आहे.';
+
+  @override
   String originalsDeleted(String size) {
     return 'मूळ फाइल्स हटवल्या — $size मोकळे झाले';
   }

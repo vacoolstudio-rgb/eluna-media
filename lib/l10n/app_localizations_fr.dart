@@ -1055,6 +1055,10 @@ class L10nFr extends L10n {
       'Demande au système de supprimer les fichiers source une fois le résultat enregistré. Le système montre toujours ce qui va disparaître et attend votre confirmation.';
 
   @override
+  String get mediaAccessRequired =>
+      'L\'accès à la photothèque est nécessaire pour supprimer les originaux.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originaux supprimés — $size libérés';
   }
@@ -2153,6 +2157,10 @@ class L10nFrCa extends L10nFr {
   @override
   String get deleteOriginalsHint =>
       'Demande au système de supprimer les fichiers source une fois le résultat enregistré. Le système montre toujours ce qui va disparaître et attend votre confirmation.';
+
+  @override
+  String get mediaAccessRequired =>
+      'L\'accès à la photothèque est nécessaire pour supprimer les originaux.';
 
   @override
   String originalsDeleted(String size) {

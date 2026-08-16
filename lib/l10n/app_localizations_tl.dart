@@ -1054,6 +1054,10 @@ class L10nTl extends L10n {
       'Hinihiling sa system na alisin ang mga pinagmulang file kapag na-save na ang resulta. Palaging ipinapakita ng system kung ano ang mawawala at hinihintay ang kumpirmasyon mo.';
 
   @override
+  String get mediaAccessRequired =>
+      'Kailangan ng access sa media library para burahin ang mga orihinal.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Binura ang mga orihinal — nabakante ang $size';
   }

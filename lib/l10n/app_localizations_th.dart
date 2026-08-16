@@ -1034,6 +1034,10 @@ class L10nTh extends L10n {
       'ขอให้ระบบลบไฟล์ต้นฉบับเมื่อบันทึกผลลัพธ์แล้ว ระบบจะแสดงสิ่งที่กำลังจะถูกลบและรอการยืนยันจากคุณเสมอ';
 
   @override
+  String get mediaAccessRequired =>
+      'ต้องมีสิทธิ์เข้าถึงคลังสื่อจึงจะลบไฟล์ต้นฉบับได้';
+
+  @override
   String originalsDeleted(String size) {
     return 'ลบไฟล์ต้นฉบับแล้ว — เพิ่มพื้นที่ว่าง $size';
   }

@@ -1054,6 +1054,10 @@ class L10nMs extends L10n {
       'Meminta sistem membuang fail sumber setelah hasilnya disimpan. Sistem sentiasa menunjukkan apa yang akan hilang dan menunggu pengesahan anda.';
 
   @override
+  String get mediaAccessRequired =>
+      'Akses kepada pustaka media diperlukan untuk memadam fail asal.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Fail asal dipadam — $size dibebaskan';
   }

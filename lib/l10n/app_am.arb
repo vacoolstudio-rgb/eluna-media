@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "ዋናዎቹን ሰርዝ ({count})",
   "deleteOriginalsAuto": "ከመቀየር በኋላ ዋናዎቹን ሰርዝ",
   "deleteOriginalsHint": "ውጤቱ ከተቀመጠ በኋላ የመነሻ ፋይሎቹን እንዲያስወግድ ሥርዓቱን ይጠይቃል። ሥርዓቱ ሁልጊዜ ምን እንደሚሰረዝ ያሳያል፤ የአንተንም ማረጋገጫ ይጠብቃል።",
+  "mediaAccessRequired": "የመጀመሪያዎቹን ፋይሎች ለመሰረዝ የሚዲያ ቤተ-መጻሕፍት መዳረሻ ያስፈልጋል።",
   "originalsDeleted": "ዋናዎቹ ተሰርዘዋል — {size} ነጻ ወጥቷል",
   "originalsNoneDeleted": "ምንም አልተሰረዘም። ጋለሪው አሁንም በዋናው ስማቸው የያዛቸው ፋይሎች ብቻ ሊገኙ ይችላሉ።",
   "reclaimedTotal": "በዚህ መተግበሪያ ነጻ የወጣ፦ {size}",

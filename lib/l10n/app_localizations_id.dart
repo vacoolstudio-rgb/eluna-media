@@ -1049,6 +1049,10 @@ class L10nId extends L10n {
       'Meminta sistem menghapus file sumber setelah hasilnya tersimpan. Sistem selalu menampilkan apa yang akan hilang dan menunggu konfirmasimu.';
 
   @override
+  String get mediaAccessRequired =>
+      'Akses ke pustaka media diperlukan untuk menghapus file asli.';
+
+  @override
   String originalsDeleted(String size) {
     return 'File asli dihapus — $size dibebaskan';
   }

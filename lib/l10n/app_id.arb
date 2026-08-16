@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Hapus file asli ({count})",
   "deleteOriginalsAuto": "Hapus file asli setelah konversi",
   "deleteOriginalsHint": "Meminta sistem menghapus file sumber setelah hasilnya tersimpan. Sistem selalu menampilkan apa yang akan hilang dan menunggu konfirmasimu.",
+  "mediaAccessRequired": "Akses ke pustaka media diperlukan untuk menghapus file asli.",
   "originalsDeleted": "File asli dihapus — {size} dibebaskan",
   "originalsNoneDeleted": "Tidak ada yang dihapus. Hanya file yang masih tersimpan di galeri dengan nama aslinya yang bisa ditemukan.",
   "reclaimedTotal": "Dibebaskan lewat aplikasi ini: {size}",

@@ -1041,6 +1041,10 @@ class L10nCs extends L10n {
       'Požádá systém o odstranění zdrojových souborů, jakmile je výsledek uložený. Systém vždy ukáže, co zmizí, a počká na vaše potvrzení.';
 
   @override
+  String get mediaAccessRequired =>
+      'K mazání originálů je potřeba přístup ke knihovně médií.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originály smazány — uvolněno $size';
   }

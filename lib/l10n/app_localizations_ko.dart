@@ -1015,6 +1015,9 @@ class L10nKo extends L10n {
       '결과를 저장한 뒤 원본 파일을 지워 달라고 시스템에 요청해요. 무엇이 사라지는지는 항상 시스템이 보여 주고 확인을 기다려요.';
 
   @override
+  String get mediaAccessRequired => '원본을 삭제하려면 미디어 라이브러리 접근 권한이 필요합니다.';
+
+  @override
   String originalsDeleted(String size) {
     return '원본을 삭제했어요 — $size 확보';
   }

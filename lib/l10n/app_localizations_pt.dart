@@ -1049,6 +1049,10 @@ class L10nPt extends L10n {
       'Pede ao sistema para remover os arquivos de origem depois que o resultado for salvo. O sistema sempre mostra o que vai sumir e espera sua confirmação.';
 
   @override
+  String get mediaAccessRequired =>
+      'É necessário acesso à biblioteca de multimédia para apagar os originais.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originais excluídos — $size liberados';
   }
@@ -2141,6 +2145,10 @@ class L10nPtBr extends L10nPt {
   @override
   String get deleteOriginalsHint =>
       'Pede ao sistema para remover os arquivos de origem depois que o resultado for salvo. O sistema sempre mostra o que vai sumir e espera sua confirmação.';
+
+  @override
+  String get mediaAccessRequired =>
+      'É preciso acesso à biblioteca de mídia para excluir os originais.';
 
   @override
   String originalsDeleted(String size) {

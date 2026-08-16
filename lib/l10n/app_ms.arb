@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Padam fail asal ({count})",
   "deleteOriginalsAuto": "Padam fail asal selepas menukar",
   "deleteOriginalsHint": "Meminta sistem membuang fail sumber setelah hasilnya disimpan. Sistem sentiasa menunjukkan apa yang akan hilang dan menunggu pengesahan anda.",
+  "mediaAccessRequired": "Akses kepada pustaka media diperlukan untuk memadam fail asal.",
   "originalsDeleted": "Fail asal dipadam — {size} dibebaskan",
   "originalsNoneDeleted": "Tiada apa-apa yang dipadam. Hanya fail yang masih dipegang oleh galeri di bawah nama asalnya boleh ditemui.",
   "reclaimedTotal": "Dibebaskan dengan aplikasi ini: {size}",

@@ -1044,6 +1044,10 @@ class L10nFa extends L10n {
       'از سیستم می‌خواهد فایل‌های مبدأ را پس از ذخیرهٔ نتیجه حذف کند. سیستم همیشه نشان می‌دهد چه چیزی حذف می‌شود و منتظر تأیید شما می‌ماند.';
 
   @override
+  String get mediaAccessRequired =>
+      'برای حذف فایل‌های اصلی، دسترسی به کتابخانه رسانه لازم است.';
+
+  @override
   String originalsDeleted(String size) {
     return 'نسخه‌های اصلی حذف شدند — $size آزاد شد';
   }

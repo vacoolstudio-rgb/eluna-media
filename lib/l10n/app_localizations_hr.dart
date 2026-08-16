@@ -1044,6 +1044,10 @@ class L10nHr extends L10n {
       'Traži od sustava da ukloni izvorne datoteke nakon što se rezultat spremi. Sustav uvijek prikazuje što će nestati i čeka vašu potvrdu.';
 
   @override
+  String get mediaAccessRequired =>
+      'Za brisanje izvornika potreban je pristup medijskoj biblioteci.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Izvornici izbrisani — oslobođeno $size';
   }

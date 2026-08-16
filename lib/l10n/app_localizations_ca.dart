@@ -1051,6 +1051,10 @@ class L10nCa extends L10n {
       'Demana al sistema que elimini els fitxers d\'origen un cop desat el resultat. El sistema sempre mostra què s\'esborrarà i espera la teva confirmació.';
 
   @override
+  String get mediaAccessRequired =>
+      'Cal accés a la biblioteca multimèdia per suprimir els originals.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originals suprimits: s\'han alliberat $size';
   }

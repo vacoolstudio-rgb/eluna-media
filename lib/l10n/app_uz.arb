@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Asl fayllarni oʻchirish ({count})",
   "deleteOriginalsAuto": "Konvertatsiyadan keyin asl fayllarni oʻchirish",
   "deleteOriginalsHint": "Natija saqlangach, manba fayllarni oʻchirishni tizimdan soʻraydi. Tizim doim nima oʻchishini koʻrsatadi va tasdigʻingizni kutadi.",
+  "mediaAccessRequired": "Asl fayllarni o'chirish uchun media kutubxonasiga ruxsat kerak.",
   "originalsDeleted": "Asl fayllar oʻchirildi — {size} boʻshadi",
   "originalsNoneDeleted": "Hech narsa oʻchirilmadi. Faqat galereya asl nomi bilan saqlab turgan fayllarni topish mumkin.",
   "reclaimedTotal": "Shu ilova bilan boʻshatilgani: {size}",

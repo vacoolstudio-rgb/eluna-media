@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Share asalin fayiloli ({count})",
   "deleteOriginalsAuto": "Share asalin fayiloli bayan sauyawa",
   "deleteOriginalsHint": "Yana neman tsarin ya cire asalin fayilolin da zarar an ajiye sakamakon. Tsarin koyaushe yana nuna abin da zai tafi kuma yana jiran tabbatarwarka.",
+  "mediaAccessRequired": "Ana buƙatar izinin shiga ɗakin karatun kafofin watsa labarai don goge fayilolin asali.",
   "originalsDeleted": "An share asalin fayiloli — an kwato {size}",
   "originalsNoneDeleted": "Ba a share komai ba. Fayilolin da gallery ke riƙe da sunansu na asali kaɗai ake iya samu.",
   "reclaimedTotal": "An kwato da wannan aikace-aikacen: {size}",

@@ -1042,6 +1042,10 @@ class L10nOr extends L10n {
       'ଫଳାଫଳ ସାଇତା ହେବା ପରେ ମୂଳ ଫାଇଲ ହଟାଇବାକୁ ସିଷ୍ଟମକୁ କୁହେ। ସିଷ୍ଟମ ସର୍ବଦା ଦେଖାଏ କଣ ଯିବ ଏବଂ ଆପଣଙ୍କ ନିଶ୍ଚିତିକରଣ ପାଇଁ ଅପେକ୍ଷା କରେ।';
 
   @override
+  String get mediaAccessRequired =>
+      'ମୂଳ ଫାଇଲଗୁଡ଼ିକ ବିଲୋପ କରିବାକୁ ମିଡିଆ ଲାଇବ୍ରେରୀ ଆକ୍ସେସ୍ ଆବଶ୍ୟକ।';
+
+  @override
   String originalsDeleted(String size) {
     return 'ମୂଳ ଫାଇଲ ବିଲୋପ ହେଲା — $size ଖାଲି ହେଲା';
   }

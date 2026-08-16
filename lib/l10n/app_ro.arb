@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Șterge originalele ({count})",
   "deleteOriginalsAuto": "Șterge originalele după conversie",
   "deleteOriginalsHint": "Cere sistemului să elimine fișierele sursă după ce rezultatul a fost salvat. Sistemul arată întotdeauna ce urmează să dispară și așteaptă confirmarea ta.",
+  "mediaAccessRequired": "Pentru a șterge originalele este nevoie de acces la biblioteca media.",
   "originalsDeleted": "Originalele au fost șterse — {size} eliberați",
   "originalsNoneDeleted": "Nu s-a șters nimic. Pot fi găsite doar fișierele pe care galeria le mai păstrează sub numele lor original.",
   "reclaimedTotal": "Eliberat cu această aplicație: {size}",

@@ -1050,6 +1050,10 @@ class L10nIt extends L10n {
       'Chiede al sistema di rimuovere i file di origine una volta salvato il risultato. Il sistema mostra sempre cosa sparirà e attende la tua conferma.';
 
   @override
+  String get mediaAccessRequired =>
+      'Per eliminare gli originali serve l\'accesso alla libreria multimediale.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originali eliminati — $size liberati';
   }

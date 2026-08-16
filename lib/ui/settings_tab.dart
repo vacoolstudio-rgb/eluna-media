@@ -9,6 +9,7 @@ import '../domain/achievements.dart';
 import '../domain/app_icons.dart';
 import '../l10n/app_localizations.dart';
 import '../services/app_icon.dart';
+import '../services/original_media.dart';
 import '../state/achievements_controller.dart';
 import '../state/app_lock_controller.dart';
 import '../state/app_meta_controller.dart';
@@ -606,6 +607,51 @@ class _VersionCaption extends StatelessWidget {
 class _StorageSection extends ConsumerWidget {
   const _StorageSection();
 
+  /// Включение «удалять оригиналы» сначала спрашивает доступ к медиатеке.
+  ///
+  /// Раньше переключатель просто записывал настройку, а системный запрос
+  /// приходил через полчаса — в момент, когда батч закончился. Человек включал
+  /// функцию и не получал никакого сигнала, что она вообще будет работать.
+  ///
+  /// На iOS это к тому же единственный шанс спросить: системный запрос
+  /// показывается один раз за установку, и после отказа функция осталась бы
+  /// мёртвой без объяснения. Поэтому при отказе переключатель **не включается**
+  /// и предлагает дорогу в системные настройки.
+  ///
+  /// Выключение ничего не спрашивает: отзывать разрешение приложение не умеет,
+  /// да и незачем.
+  Future<void> _setDeleteOriginals(
+    BuildContext context,
+    WidgetRef ref,
+    bool on,
+  ) async {
+    final controller = ref.read(appPrefsProvider.notifier);
+    if (!on) {
+      controller.setDeleteOriginalsAfterConversion(false);
+      return;
+    }
+
+    final service = ref.read(originalMediaProvider);
+    final l10n = L10n.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final granted = await service.requestAccess();
+    if (granted) {
+      controller.setDeleteOriginalsAfterConversion(true);
+      return;
+    }
+
+    // Переключатель остаётся выключенным — он и так не включался, значение
+    // меняется только по успеху. Сказать об этом всё равно надо: молчащий
+    // переключатель, который не переключается, читается как поломка.
+    messenger.showSnackBar(SnackBar(
+      content: Text(l10n.mediaAccessRequired),
+      action: SnackBarAction(
+        label: l10n.tabSettings,
+        onPressed: service.openSystemSettings,
+      ),
+    ));
+  }
+
   Future<void> _confirmAndClear(BuildContext context, WidgetRef ref) async {
     final l10n = L10n.of(context);
     final messenger = ScaffoldMessenger.of(context);
@@ -688,8 +734,7 @@ class _StorageSection extends ConsumerWidget {
           value: ref.watch(
             appPrefsProvider.select((p) => p.deleteOriginalsAfterConversion),
           ),
-          onChanged:
-              ref.read(appPrefsProvider.notifier).setDeleteOriginalsAfterConversion,
+          onChanged: (on) => _setDeleteOriginals(context, ref, on),
         ),
         // The payoff of compressing, stated. Hidden at zero: a counter that
         // starts at "0 B freed" advertises a feature the user has not used

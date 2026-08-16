@@ -1042,6 +1042,10 @@ class L10nAf extends L10n {
       'Vra die stelsel om die bronlêers te verwyder sodra die resultaat gestoor is. Die stelsel wys altyd wat sal verdwyn en wag vir jou bevestiging.';
 
   @override
+  String get mediaAccessRequired =>
+      'Toegang tot jou mediabiblioteek is nodig om oorspronklikes te skrap.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Oorspronklikes uitgevee — $size vrygemaak';
   }

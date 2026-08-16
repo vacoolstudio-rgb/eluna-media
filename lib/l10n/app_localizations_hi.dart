@@ -1043,6 +1043,10 @@ class L10nHi extends L10n {
       'नतीजा सेव हो जाने के बाद सिस्टम से स्रोत फ़ाइलें हटाने को कहता है। सिस्टम हमेशा दिखाता है कि क्या हटेगा और आपकी पुष्टि का इंतज़ार करता है।';
 
   @override
+  String get mediaAccessRequired =>
+      'मूल फ़ाइलें हटाने के लिए मीडिया लाइब्रेरी तक पहुँच ज़रूरी है.';
+
+  @override
   String originalsDeleted(String size) {
     return 'मूल फ़ाइलें हटा दी गईं — $size खाली हुआ';
   }

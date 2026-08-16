@@ -1048,6 +1048,10 @@ class L10nTe extends L10n {
       'ఫలితం సేవ్ అయ్యాక మూల ఫైళ్లను తీసివేయమని సిస్టమ్‌ను అడుగుతుంది. ఏవి పోతాయో సిస్టమ్ ఎప్పుడూ చూపి, మీ నిర్ధారణ కోసం వేచి ఉంటుంది.';
 
   @override
+  String get mediaAccessRequired =>
+      'అసలు ఫైళ్లను తొలగించడానికి మీడియా లైబ్రరీకి యాక్సెస్ అవసరం.';
+
+  @override
   String originalsDeleted(String size) {
     return 'అసలైనవి తొలగించబడ్డాయి — $size ఖాళీ అయింది';
   }

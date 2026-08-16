@@ -1042,6 +1042,10 @@ class L10nSr extends L10n {
       'Тражи од система да уклони изворне датотеке након што се резултат сачува. Систем увек приказује шта ће нестати и чека вашу потврду.';
 
   @override
+  String get mediaAccessRequired =>
+      'За брисање оригинала потребан је приступ медијској библиотеци.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Оригинали обрисани — ослобођено $size';
   }

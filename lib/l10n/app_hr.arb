@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Izbriši izvornike ({count})",
   "deleteOriginalsAuto": "Izbriši izvornike nakon pretvorbe",
   "deleteOriginalsHint": "Traži od sustava da ukloni izvorne datoteke nakon što se rezultat spremi. Sustav uvijek prikazuje što će nestati i čeka vašu potvrdu.",
+  "mediaAccessRequired": "Za brisanje izvornika potreban je pristup medijskoj biblioteci.",
   "originalsDeleted": "Izvornici izbrisani — oslobođeno {size}",
   "originalsNoneDeleted": "Ništa nije izbrisano. Mogu se pronaći samo datoteke koje galerija još drži pod njihovim izvornim nazivom.",
   "reclaimedTotal": "Oslobođeno ovom aplikacijom: {size}",

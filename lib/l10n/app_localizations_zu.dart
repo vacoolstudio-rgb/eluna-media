@@ -1057,6 +1057,10 @@ class L10nZu extends L10n {
       'Icela isistimu ukuthi isuse amafayela omthombo lapho umphumela usugciniwe. Isistimu ihlala ibonisa okuzohamba futhi ilinde ukuqinisekisa kwakho.';
 
   @override
+  String get mediaAccessRequired =>
+      'Kudingeka ukufinyelela emtapweni wolwazi wemidiya ukuze kususwe amafayela wokuqala.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Amafayela asekuqaleni asusiwe — kukhululwe $size';
   }

@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Izbriši izvirnike ({count})",
   "deleteOriginalsAuto": "Po pretvorbi izbriši izvirnike",
   "deleteOriginalsHint": "Sistem zaprosi, naj izvorne datoteke odstrani, ko je rezultat shranjen. Sistem vedno pokaže, kaj bo izbrisano, in počaka na vašo potrditev.",
+  "mediaAccessRequired": "Za brisanje izvirnikov je potreben dostop do knjižnice predstavnosti.",
   "originalsDeleted": "Izvirniki izbrisani — sproščeno {size}",
   "originalsNoneDeleted": "Nič ni bilo izbrisano. Najti je mogoče le datoteke, ki jih galerija še hrani pod izvirnim imenom.",
   "reclaimedTotal": "S to aplikacijo sproščeno: {size}",

@@ -997,6 +997,9 @@ class L10nZh extends L10n {
   String get deleteOriginalsHint => '在结果保存之后，请求系统删除源文件。系统始终会显示将要删除的内容并等待你确认。';
 
   @override
+  String get mediaAccessRequired => '删除原始文件需要访问媒体库的权限。';
+
+  @override
   String originalsDeleted(String size) {
     return '已删除原文件——释放 $size';
   }
@@ -2035,6 +2038,9 @@ class L10nZhTw extends L10nZh {
 
   @override
   String get deleteOriginalsHint => '在結果儲存後，請系統移除來源檔案。系統一定會顯示將被刪除的內容並等待你確認。';
+
+  @override
+  String get mediaAccessRequired => '刪除原始檔案需要存取媒體庫的權限。';
 
   @override
   String originalsDeleted(String size) {

@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Burahin ang mga orihinal ({count})",
   "deleteOriginalsAuto": "Burahin ang mga orihinal pagkatapos mag-convert",
   "deleteOriginalsHint": "Hinihiling sa system na alisin ang mga pinagmulang file kapag na-save na ang resulta. Palaging ipinapakita ng system kung ano ang mawawala at hinihintay ang kumpirmasyon mo.",
+  "mediaAccessRequired": "Kailangan ng access sa media library para burahin ang mga orihinal.",
   "originalsDeleted": "Binura ang mga orihinal — nabakante ang {size}",
   "originalsNoneDeleted": "Walang nabura. Ang mahahanap lang ay ang mga file na hawak pa ng gallery sa ilalim ng orihinal nilang pangalan.",
   "reclaimedTotal": "Nabakante gamit ang app na ito: {size}",

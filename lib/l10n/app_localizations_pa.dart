@@ -1041,6 +1041,10 @@ class L10nPa extends L10n {
       'ਨਤੀਜਾ ਸੰਭਾਲੇ ਜਾਣ ਪਿੱਛੋਂ ਸਿਸਟਮ ਨੂੰ ਸਰੋਤ ਫ਼ਾਈਲਾਂ ਹਟਾਉਣ ਲਈ ਕਹਿੰਦਾ ਹੈ। ਸਿਸਟਮ ਹਮੇਸ਼ਾ ਵਿਖਾਉਂਦਾ ਹੈ ਕਿ ਕੀ ਜਾਵੇਗਾ ਅਤੇ ਤੁਹਾਡੀ ਪੁਸ਼ਟੀ ਦੀ ਉਡੀਕ ਕਰਦਾ ਹੈ।';
 
   @override
+  String get mediaAccessRequired =>
+      'ਮੂਲ ਫ਼ਾਈਲਾਂ ਮਿਟਾਉਣ ਲਈ ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਤੱਕ ਪਹੁੰਚ ਲੋੜੀਂਦੀ ਹੈ।';
+
+  @override
   String originalsDeleted(String size) {
     return 'ਅਸਲ ਫ਼ਾਈਲਾਂ ਮਿਟਾ ਦਿੱਤੀਆਂ — $size ਖ਼ਾਲੀ ਹੋਈ';
   }

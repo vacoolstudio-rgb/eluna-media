@@ -1045,6 +1045,10 @@ class L10nDa extends L10n {
       'Beder systemet fjerne kildefilerne, når resultatet er gemt. Systemet viser altid, hvad der forsvinder, og venter på din bekræftelse.';
 
   @override
+  String get mediaAccessRequired =>
+      'Der kræves adgang til mediebiblioteket for at slette originalerne.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originalerne blev slettet — $size frigjort';
   }

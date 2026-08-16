@@ -1035,6 +1035,10 @@ class L10nHe extends L10n {
       'מבקש מהמערכת להסיר את קובצי המקור לאחר שהתוצאה נשמרה. המערכת תמיד מציגה מה עומד להימחק וממתינה לאישור שלכם.';
 
   @override
+  String get mediaAccessRequired =>
+      'כדי למחוק את הקבצים המקוריים נדרשת גישה לספריית המדיה.';
+
+  @override
   String originalsDeleted(String size) {
     return 'המקורות נמחקו — פונו $size';
   }

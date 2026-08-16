@@ -1057,6 +1057,10 @@ class L10nUz extends L10n {
       'Natija saqlangach, manba fayllarni oʻchirishni tizimdan soʻraydi. Tizim doim nima oʻchishini koʻrsatadi va tasdigʻingizni kutadi.';
 
   @override
+  String get mediaAccessRequired =>
+      'Asl fayllarni o\'chirish uchun media kutubxonasiga ruxsat kerak.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Asl fayllar oʻchirildi — $size boʻshadi';
   }

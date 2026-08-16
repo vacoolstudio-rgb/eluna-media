@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Supprimer les originaux ({count})",
   "deleteOriginalsAuto": "Supprimer les originaux après la conversion",
   "deleteOriginalsHint": "Demande au système de supprimer les fichiers source une fois le résultat enregistré. Le système montre toujours ce qui va disparaître et attend votre confirmation.",
+  "mediaAccessRequired": "L'accès à la photothèque est nécessaire pour supprimer les originaux.",
   "originalsDeleted": "Originaux supprimés — {size} libérés",
   "originalsNoneDeleted": "Rien n'a été supprimé. Seuls les fichiers que la galerie conserve sous leur nom d'origine peuvent être retrouvés.",
   "reclaimedTotal": "Libéré avec cette application : {size}",

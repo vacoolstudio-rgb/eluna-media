@@ -1050,6 +1050,10 @@ class L10nDe extends L10n {
       'Bittet das System, die Quelldateien zu entfernen, sobald das Ergebnis gesichert ist. Das System zeigt immer, was verschwindet, und wartet auf deine Bestätigung.';
 
   @override
+  String get mediaAccessRequired =>
+      'Zum Löschen der Originale wird Zugriff auf die Mediathek benötigt.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originale gelöscht — $size frei geworden';
   }

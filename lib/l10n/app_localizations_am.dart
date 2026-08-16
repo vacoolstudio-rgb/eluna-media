@@ -1030,6 +1030,10 @@ class L10nAm extends L10n {
       'ውጤቱ ከተቀመጠ በኋላ የመነሻ ፋይሎቹን እንዲያስወግድ ሥርዓቱን ይጠይቃል። ሥርዓቱ ሁልጊዜ ምን እንደሚሰረዝ ያሳያል፤ የአንተንም ማረጋገጫ ይጠብቃል።';
 
   @override
+  String get mediaAccessRequired =>
+      'የመጀመሪያዎቹን ፋይሎች ለመሰረዝ የሚዲያ ቤተ-መጻሕፍት መዳረሻ ያስፈልጋል።';
+
+  @override
   String originalsDeleted(String size) {
     return 'ዋናዎቹ ተሰርዘዋል — $size ነጻ ወጥቷል';
   }

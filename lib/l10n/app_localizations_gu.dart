@@ -1040,6 +1040,10 @@ class L10nGu extends L10n {
       'પરિણામ સચવાઈ ગયા પછી સ્રોત ફાઇલો દૂર કરવાનું સિસ્ટમને કહે છે. શું જશે એ સિસ્ટમ હંમેશાં બતાવે છે અને તમારી પુષ્ટિની રાહ જુએ છે.';
 
   @override
+  String get mediaAccessRequired =>
+      'મૂળ ફાઇલો કાઢી નાખવા માટે મીડિયા લાઇબ્રેરીની ઍક્સેસ જરૂરી છે.';
+
+  @override
   String originalsDeleted(String size) {
     return 'મૂળ ફાઇલો કાઢી નાખી — $size ખાલી થયું';
   }

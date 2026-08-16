@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Susa amafayela asekuqaleni ({count})",
   "deleteOriginalsAuto": "Susa amafayela asekuqaleni ngemva kokuguqula",
   "deleteOriginalsHint": "Icela isistimu ukuthi isuse amafayela omthombo lapho umphumela usugciniwe. Isistimu ihlala ibonisa okuzohamba futhi ilinde ukuqinisekisa kwakho.",
+  "mediaAccessRequired": "Kudingeka ukufinyelela emtapweni wolwazi wemidiya ukuze kususwe amafayela wokuqala.",
   "originalsDeleted": "Amafayela asekuqaleni asusiwe — kukhululwe {size}",
   "originalsNoneDeleted": "Akukho okususiwe. Kutholakala kuphela amafayela igalari esawagcinile ngegama lawo lasekuqaleni.",
   "reclaimedTotal": "Kukhululwe ngalolu hlelo: {size}",

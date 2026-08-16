@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Eliminar originales ({count})",
   "deleteOriginalsAuto": "Eliminar los originales tras convertir",
   "deleteOriginalsHint": "Pide al sistema que borre los archivos de origen una vez guardado el resultado. El sistema siempre muestra qué se va a borrar y espera tu confirmación.",
+  "mediaAccessRequired": "Se necesita acceso a la galería para eliminar los originales.",
   "originalsDeleted": "Originales eliminados: {size} liberados",
   "originalsNoneDeleted": "No se eliminó nada. Solo se encuentran los archivos que la galería conserva con su nombre original.",
   "reclaimedTotal": "Liberado con esta app: {size}",

@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Futa asili ({count})",
   "deleteOriginalsAuto": "Futa asili baada ya kubadilisha",
   "deleteOriginalsHint": "Huuomba mfumo kuondoa faili chanzo mara tokeo linapohifadhiwa. Mfumo huonyesha daima kitakachoondoka na husubiri uthibitisho wako.",
+  "mediaAccessRequired": "Ufikiaji wa maktaba ya midia unahitajika ili kufuta faili asili.",
   "originalsDeleted": "Asili zimefutwa — {size} zimeachiliwa",
   "originalsNoneDeleted": "Hakuna kilichofutwa. Ni faili tu ambazo matunzio bado yanazishikilia kwa jina lake la awali zinazoweza kupatikana.",
   "reclaimedTotal": "Zilizoachiliwa kwa programu hii: {size}",

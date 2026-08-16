@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Slett originalene ({count})",
   "deleteOriginalsAuto": "Slett originalene etter konvertering",
   "deleteOriginalsHint": "Ber systemet fjerne kildefilene når resultatet er lagret. Systemet viser alltid hva som forsvinner, og venter på bekreftelsen din.",
+  "mediaAccessRequired": "Tilgang til mediebiblioteket kreves for å slette originalene.",
   "originalsDeleted": "Originalene ble slettet — {size} frigjort",
   "originalsNoneDeleted": "Ingenting ble slettet. Bare filer galleriet fortsatt har under sitt opprinnelige navn, lar seg finne.",
   "reclaimedTotal": "Frigjort med denne appen: {size}",

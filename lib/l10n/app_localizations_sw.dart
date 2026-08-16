@@ -1049,6 +1049,10 @@ class L10nSw extends L10n {
       'Huuomba mfumo kuondoa faili chanzo mara tokeo linapohifadhiwa. Mfumo huonyesha daima kitakachoondoka na husubiri uthibitisho wako.';
 
   @override
+  String get mediaAccessRequired =>
+      'Ufikiaji wa maktaba ya midia unahitajika ili kufuta faili asili.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Asili zimefutwa — $size zimeachiliwa';
   }

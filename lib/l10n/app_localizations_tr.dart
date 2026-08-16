@@ -1047,6 +1047,10 @@ class L10nTr extends L10n {
       'Sonuç kaydedildikten sonra kaynak dosyaları kaldırmasını sistemden ister. Sistem neyin gideceğini her zaman gösterir ve onayınızı bekler.';
 
   @override
+  String get mediaAccessRequired =>
+      'Orijinalleri silmek için medya kitaplığına erişim gerekir.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Orijinaller silindi — $size yer açıldı';
   }

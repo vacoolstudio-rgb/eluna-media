@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Smazat originály ({count})",
   "deleteOriginalsAuto": "Mazat originály po převodu",
   "deleteOriginalsHint": "Požádá systém o odstranění zdrojových souborů, jakmile je výsledek uložený. Systém vždy ukáže, co zmizí, a počká na vaše potvrzení.",
+  "mediaAccessRequired": "K mazání originálů je potřeba přístup ke knihovně médií.",
   "originalsDeleted": "Originály smazány — uvolněno {size}",
   "originalsNoneDeleted": "Nic se nesmazalo. Najít lze jen soubory, které galerie stále vede pod původním názvem.",
   "reclaimedTotal": "Uvolněno touto aplikací: {size}",

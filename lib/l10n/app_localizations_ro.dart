@@ -1054,6 +1054,10 @@ class L10nRo extends L10n {
       'Cere sistemului să elimine fișierele sursă după ce rezultatul a fost salvat. Sistemul arată întotdeauna ce urmează să dispară și așteaptă confirmarea ta.';
 
   @override
+  String get mediaAccessRequired =>
+      'Pentru a șterge originalele este nevoie de acces la biblioteca media.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originalele au fost șterse — $size eliberați';
   }

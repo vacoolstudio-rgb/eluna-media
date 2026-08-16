@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Originelen verwijderen ({count})",
   "deleteOriginalsAuto": "Originelen verwijderen na converteren",
   "deleteOriginalsHint": "Vraagt het systeem de bronbestanden te verwijderen zodra het resultaat is opgeslagen. Het systeem toont altijd wat weggaat en wacht op je bevestiging.",
+  "mediaAccessRequired": "Toegang tot je mediabibliotheek is nodig om originelen te verwijderen.",
   "originalsDeleted": "Originelen verwijderd — {size} vrijgemaakt",
   "originalsNoneDeleted": "Er is niets verwijderd. Alleen bestanden die de galerij nog onder hun oorspronkelijke naam bewaart, kunnen worden gevonden.",
   "reclaimedTotal": "Vrijgemaakt met deze app: {size}",

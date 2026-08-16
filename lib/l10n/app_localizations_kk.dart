@@ -1047,6 +1047,10 @@ class L10nKk extends L10n {
       'Нәтиже сақталған соң бастапқы файлдарды өшіруді жүйеден сұрайды. Жүйе әрқашан не жойылатынын көрсетіп, растауыңызды күтеді.';
 
   @override
+  String get mediaAccessRequired =>
+      'Түпнұсқаларды жою үшін медиатекаға рұқсат қажет.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Түпнұсқалар жойылды — $size босады';
   }

@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Orijinalleri sil ({count})",
   "deleteOriginalsAuto": "Dönüştürmeden sonra orijinalleri sil",
   "deleteOriginalsHint": "Sonuç kaydedildikten sonra kaynak dosyaları kaldırmasını sistemden ister. Sistem neyin gideceğini her zaman gösterir ve onayınızı bekler.",
+  "mediaAccessRequired": "Orijinalleri silmek için medya kitaplığına erişim gerekir.",
   "originalsDeleted": "Orijinaller silindi — {size} yer açıldı",
   "originalsNoneDeleted": "Hiçbir şey silinmedi. Yalnızca galerinin özgün adıyla tuttuğu dosyalar bulunabiliyor.",
   "reclaimedTotal": "Bu uygulamayla açılan yer: {size}",

@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "刪除原始檔（{count}）",
   "deleteOriginalsAuto": "轉換後刪除原始檔",
   "deleteOriginalsHint": "在結果儲存後，請系統移除來源檔案。系統一定會顯示將被刪除的內容並等待你確認。",
+  "mediaAccessRequired": "刪除原始檔案需要存取媒體庫的權限。",
   "originalsDeleted": "已刪除原始檔——釋出 {size}",
   "originalsNoneDeleted": "沒有刪除任何東西。只有相簿仍以原始名稱保存的檔案才找得到。",
   "reclaimedTotal": "用這個應用程式釋出：{size}",

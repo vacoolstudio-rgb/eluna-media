@@ -1040,6 +1040,10 @@ class L10nEn extends L10n {
       'Asks the system to remove the source files once the result has been saved. The system always shows what will go and waits for your confirmation.';
 
   @override
+  String get mediaAccessRequired =>
+      'Access to your media library is needed to delete originals.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originals deleted — $size freed';
   }

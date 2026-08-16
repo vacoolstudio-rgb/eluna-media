@@ -1048,6 +1048,10 @@ class L10nNl extends L10n {
       'Vraagt het systeem de bronbestanden te verwijderen zodra het resultaat is opgeslagen. Het systeem toont altijd wat weggaat en wacht op je bevestiging.';
 
   @override
+  String get mediaAccessRequired =>
+      'Toegang tot je mediabibliotheek is nodig om originelen te verwijderen.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originelen verwijderd — $size vrijgemaakt';
   }

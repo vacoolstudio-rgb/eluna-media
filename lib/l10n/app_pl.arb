@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Usuń oryginały ({count})",
   "deleteOriginalsAuto": "Usuwaj oryginały po konwersji",
   "deleteOriginalsHint": "Prosi system o usunięcie plików źródłowych po zapisaniu wyniku. System zawsze pokazuje, co zniknie, i czeka na Twoje potwierdzenie.",
+  "mediaAccessRequired": "Do usuwania oryginałów potrzebny jest dostęp do biblioteki multimediów.",
   "originalsDeleted": "Oryginały usunięte — zwolniono {size}",
   "originalsNoneDeleted": "Nic nie zostało usunięte. Odnaleźć można tylko pliki, które galeria trzyma pod pierwotną nazwą.",
   "reclaimedTotal": "Zwolnione dzięki tej aplikacji: {size}",

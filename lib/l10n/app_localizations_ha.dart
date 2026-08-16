@@ -1048,6 +1048,10 @@ class L10nHa extends L10n {
       'Yana neman tsarin ya cire asalin fayilolin da zarar an ajiye sakamakon. Tsarin koyaushe yana nuna abin da zai tafi kuma yana jiran tabbatarwarka.';
 
   @override
+  String get mediaAccessRequired =>
+      'Ana buƙatar izinin shiga ɗakin karatun kafofin watsa labarai don goge fayilolin asali.';
+
+  @override
   String originalsDeleted(String size) {
     return 'An share asalin fayiloli — an kwato $size';
   }

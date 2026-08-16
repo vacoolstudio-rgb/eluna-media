@@ -1044,6 +1044,10 @@ class L10nUr extends L10n {
       'نتیجہ محفوظ ہو جانے کے بعد سسٹم سے ماخذ فائلیں ہٹانے کو کہتا ہے۔ سسٹم ہمیشہ دکھاتا ہے کہ کیا حذف ہوگا اور آپ کی تصدیق کا انتظار کرتا ہے۔';
 
   @override
+  String get mediaAccessRequired =>
+      'اصل فائلیں حذف کرنے کے لیے میڈیا لائبریری تک رسائی درکار ہے۔';
+
+  @override
   String originalsDeleted(String size) {
     return 'اصل فائلیں حذف ہو گئیں — $size خالی ہوئی';
   }

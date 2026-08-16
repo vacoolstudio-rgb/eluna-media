@@ -2016,6 +2016,12 @@ abstract class L10n {
   /// **'Asks the system to remove the source files once the result has been saved. The system always shows what will go and waits for your confirmation.'**
   String get deleteOriginalsHint;
 
+  /// Snackbar shown when the user turns on "delete originals" and the system refuses media access. The action button reuses tabSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Access to your media library is needed to delete originals.'**
+  String get mediaAccessRequired;
+
   /// No description provided for @originalsDeleted.
   ///
   /// In en, this message translates to:

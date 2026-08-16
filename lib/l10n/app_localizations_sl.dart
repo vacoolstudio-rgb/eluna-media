@@ -1049,6 +1049,10 @@ class L10nSl extends L10n {
       'Sistem zaprosi, naj izvorne datoteke odstrani, ko je rezultat shranjen. Sistem vedno pokaže, kaj bo izbrisano, in počaka na vašo potrditev.';
 
   @override
+  String get mediaAccessRequired =>
+      'Za brisanje izvirnikov je potreben dostop do knjižnice predstavnosti.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Izvirniki izbrisani — sproščeno $size';
   }

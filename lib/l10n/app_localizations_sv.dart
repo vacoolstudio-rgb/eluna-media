@@ -1045,6 +1045,10 @@ class L10nSv extends L10n {
       'Ber systemet ta bort källfilerna när resultatet har sparats. Systemet visar alltid vad som försvinner och väntar på din bekräftelse.';
 
   @override
+  String get mediaAccessRequired =>
+      'Åtkomst till mediebiblioteket krävs för att radera originalen.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originalen togs bort — $size frigjordes';
   }

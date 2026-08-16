@@ -83,6 +83,15 @@ class _FakeOriginalMedia implements OriginalMediaService {
 
   final calls = <List<OriginalRef>>[];
 
+  // Доступ здесь всегда есть: этот файл про само удаление, а про запрос
+  // доступа есть свои наборы — `media_access_test` и
+  // `delete_originals_toggle_test`.
+  @override
+  Future<bool> requestAccess() async => true;
+
+  @override
+  Future<bool> openSystemSettings() async => true;
+
   @override
   Future<ReclaimOutcome> delete(List<OriginalRef> items) async {
     calls.add(items);

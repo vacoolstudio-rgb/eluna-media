@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "حذف الأصول ({count})",
   "deleteOriginalsAuto": "حذف الأصول بعد التحويل",
   "deleteOriginalsHint": "يطلب من النظام إزالة الملفات المصدر بعد حفظ النتيجة. ويعرض النظام دائمًا ما سيُحذف وينتظر تأكيدك.",
+  "mediaAccessRequired": "يلزم الوصول إلى مكتبة الوسائط لحذف الملفات الأصلية.",
   "originalsDeleted": "حُذفت الأصول — تحرّر {size}",
   "originalsNoneDeleted": "لم يُحذف شيء. لا يمكن العثور إلا على الملفات التي ما زال المعرض يحفظها باسمها الأصلي.",
   "reclaimedTotal": "تحرّر بهذا التطبيق: {size}",

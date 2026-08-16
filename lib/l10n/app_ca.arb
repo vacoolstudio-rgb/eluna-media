@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Suprimeix els originals ({count})",
   "deleteOriginalsAuto": "Suprimeix els originals després de convertir",
   "deleteOriginalsHint": "Demana al sistema que elimini els fitxers d'origen un cop desat el resultat. El sistema sempre mostra què s'esborrarà i espera la teva confirmació.",
+  "mediaAccessRequired": "Cal accés a la biblioteca multimèdia per suprimir els originals.",
   "originalsDeleted": "Originals suprimits: s'han alliberat {size}",
   "originalsNoneDeleted": "No s'ha suprimit res. Només es poden trobar els fitxers que la galeria encara conserva amb el nom original.",
   "reclaimedTotal": "Alliberat amb aquesta aplicació: {size}",

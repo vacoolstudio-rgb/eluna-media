@@ -1038,6 +1038,10 @@ class L10nAr extends L10n {
       'يطلب من النظام إزالة الملفات المصدر بعد حفظ النتيجة. ويعرض النظام دائمًا ما سيُحذف وينتظر تأكيدك.';
 
   @override
+  String get mediaAccessRequired =>
+      'يلزم الوصول إلى مكتبة الوسائط لحذف الملفات الأصلية.';
+
+  @override
   String originalsDeleted(String size) {
     return 'حُذفت الأصول — تحرّر $size';
   }

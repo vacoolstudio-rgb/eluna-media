@@ -570,6 +570,10 @@
   },
   "deleteOriginalsAuto": "Delete originals after converting",
   "deleteOriginalsHint": "Asks the system to remove the source files once the result has been saved. The system always shows what will go and waits for your confirmation.",
+  "mediaAccessRequired": "Access to your media library is needed to delete originals.",
+  "@mediaAccessRequired": {
+    "description": "Snackbar shown when the user turns on \"delete originals\" and the system refuses media access. The action button reuses tabSettings."
+  },
   "originalsDeleted": "Originals deleted — {size} freed",
   "@originalsDeleted": {
     "placeholders": {

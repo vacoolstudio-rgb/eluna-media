@@ -1052,6 +1052,10 @@ class L10nHu extends L10n {
       'Megkéri a rendszert, hogy távolítsa el a forrásfájlokat, miután az eredmény mentésre került. A rendszer mindig megmutatja, mi tűnik el, és megvárja a jóváhagyásodat.';
 
   @override
+  String get mediaAccessRequired =>
+      'Az eredeti fájlok törléséhez hozzáférés kell a médiatárhoz.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Eredetik törölve — $size felszabadítva';
   }

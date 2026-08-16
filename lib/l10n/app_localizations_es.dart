@@ -1050,6 +1050,10 @@ class L10nEs extends L10n {
       'Pide al sistema que borre los archivos de origen una vez guardado el resultado. El sistema siempre muestra qué se va a borrar y espera tu confirmación.';
 
   @override
+  String get mediaAccessRequired =>
+      'Se necesita acceso a la fototeca para eliminar los originales.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originales eliminados: $size liberados';
   }
@@ -2145,6 +2149,10 @@ class L10nEs419 extends L10nEs {
       'Pide al sistema que borre los archivos de origen una vez guardado el resultado. El sistema siempre muestra qué se va a borrar y espera tu confirmación.';
 
   @override
+  String get mediaAccessRequired =>
+      'Se necesita acceso a la galería para eliminar los originales.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Originales eliminados: $size liberados';
   }
@@ -3238,6 +3246,10 @@ class L10nEsUs extends L10nEs {
   @override
   String get deleteOriginalsHint =>
       'Pide al sistema que borre los archivos de origen una vez guardado el resultado. El sistema siempre muestra qué se va a borrar y espera tu confirmación.';
+
+  @override
+  String get mediaAccessRequired =>
+      'Se necesita acceso a la galería para eliminar los originales.';
 
   @override
   String originalsDeleted(String size) {

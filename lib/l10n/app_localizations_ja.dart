@@ -1012,6 +1012,9 @@ class L10nJa extends L10n {
       '変換結果を保存したあと、元のファイルの削除をシステムに依頼します。何が消えるかは必ずシステムが表示し、確認を待ちます。';
 
   @override
+  String get mediaAccessRequired => 'オリジナルを削除するには、メディアライブラリへのアクセスが必要です。';
+
+  @override
   String originalsDeleted(String size) {
     return '元のファイルを削除しました（$size の空き）';
   }

@@ -1044,6 +1044,10 @@ class L10nPl extends L10n {
       'Prosi system o usunięcie plików źródłowych po zapisaniu wyniku. System zawsze pokazuje, co zniknie, i czeka na Twoje potwierdzenie.';
 
   @override
+  String get mediaAccessRequired =>
+      'Do usuwania oryginałów potrzebny jest dostęp do biblioteki multimediów.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Oryginały usunięte — zwolniono $size';
   }

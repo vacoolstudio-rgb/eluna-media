@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Vee oorspronklikes uit ({count})",
   "deleteOriginalsAuto": "Vee oorspronklikes uit na omskakeling",
   "deleteOriginalsHint": "Vra die stelsel om die bronlêers te verwyder sodra die resultaat gestoor is. Die stelsel wys altyd wat sal verdwyn en wag vir jou bevestiging.",
+  "mediaAccessRequired": "Toegang tot jou mediabiblioteek is nodig om oorspronklikes te skrap.",
   "originalsDeleted": "Oorspronklikes uitgevee — {size} vrygemaak",
   "originalsNoneDeleted": "Niks is uitgevee nie. Slegs lêers wat die galery steeds onder hul oorspronklike naam hou, kan gevind word.",
   "reclaimedTotal": "Met hierdie program vrygemaak: {size}",

@@ -1045,6 +1045,10 @@ class L10nVi extends L10n {
       'Yêu cầu hệ thống xoá các tệp nguồn sau khi kết quả đã được lưu. Hệ thống luôn hiện những gì sắp mất và chờ bạn xác nhận.';
 
   @override
+  String get mediaAccessRequired =>
+      'Cần quyền truy cập thư viện phương tiện để xoá tệp gốc.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Đã xoá bản gốc — giải phóng $size';
   }

@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Eredetik törlése ({count})",
   "deleteOriginalsAuto": "Eredetik törlése átalakítás után",
   "deleteOriginalsHint": "Megkéri a rendszert, hogy távolítsa el a forrásfájlokat, miután az eredmény mentésre került. A rendszer mindig megmutatja, mi tűnik el, és megvárja a jóváhagyásodat.",
+  "mediaAccessRequired": "Az eredeti fájlok törléséhez hozzáférés kell a médiatárhoz.",
   "originalsDeleted": "Eredetik törölve — {size} felszabadítva",
   "originalsNoneDeleted": "Semmi nem lett törölve. Csak azok a fájlok találhatók meg, amelyeket a galéria még az eredeti nevükön őriz.",
   "reclaimedTotal": "Ezzel az alkalmazással felszabadítva: {size}",

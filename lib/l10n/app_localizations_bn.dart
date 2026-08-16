@@ -1046,6 +1046,10 @@ class L10nBn extends L10n {
       'ফল সংরক্ষিত হয়ে গেলে সিস্টেমকে উৎস ফাইলগুলো সরাতে বলে। সিস্টেম সবসময় দেখায় কী কী যাবে এবং আপনার নিশ্চিতকরণের অপেক্ষা করে।';
 
   @override
+  String get mediaAccessRequired =>
+      'মূল ফাইল মুছতে মিডিয়া লাইব্রেরিতে অ্যাক্সেস প্রয়োজন।';
+
+  @override
   String originalsDeleted(String size) {
     return 'মূল ফাইল মোছা হয়েছে — $size খালি হয়েছে';
   }

@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Xoá bản gốc ({count})",
   "deleteOriginalsAuto": "Xoá bản gốc sau khi chuyển đổi",
   "deleteOriginalsHint": "Yêu cầu hệ thống xoá các tệp nguồn sau khi kết quả đã được lưu. Hệ thống luôn hiện những gì sắp mất và chờ bạn xác nhận.",
+  "mediaAccessRequired": "Cần quyền truy cập thư viện phương tiện để xoá tệp gốc.",
   "originalsDeleted": "Đã xoá bản gốc — giải phóng {size}",
   "originalsNoneDeleted": "Không có gì bị xoá. Chỉ tìm được những tệp mà thư viện còn giữ đúng tên gốc.",
   "reclaimedTotal": "Đã giải phóng bằng ứng dụng này: {size}",

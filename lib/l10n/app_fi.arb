@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Poista alkuperäiset ({count})",
   "deleteOriginalsAuto": "Poista alkuperäiset muunnoksen jälkeen",
   "deleteOriginalsHint": "Pyytää järjestelmää poistamaan lähdetiedostot, kun tulos on tallennettu. Järjestelmä näyttää aina, mikä on katoamassa, ja odottaa vahvistustasi.",
+  "mediaAccessRequired": "Alkuperäisten poistaminen vaatii pääsyn mediakirjastoon.",
   "originalsDeleted": "Alkuperäiset poistettiin — {size} vapautui",
   "originalsNoneDeleted": "Mitään ei poistettu. Vain tiedostot, jotka galleria yhä pitää alkuperäisellä nimellään, löytyvät.",
   "reclaimedTotal": "Vapautettu tällä sovelluksella: {size}",

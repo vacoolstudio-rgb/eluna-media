@@ -301,6 +301,7 @@
   "deleteOriginalsAction": "Ta bort originalen ({count})",
   "deleteOriginalsAuto": "Ta bort originalen efter konvertering",
   "deleteOriginalsHint": "Ber systemet ta bort källfilerna när resultatet har sparats. Systemet visar alltid vad som försvinner och väntar på din bekräftelse.",
+  "mediaAccessRequired": "Åtkomst till mediebiblioteket krävs för att radera originalen.",
   "originalsDeleted": "Originalen togs bort — {size} frigjordes",
   "originalsNoneDeleted": "Ingenting togs bort. Bara filer som galleriet fortfarande har kvar under sitt ursprungliga namn går att hitta.",
   "reclaimedTotal": "Frigjort med den här appen: {size}",

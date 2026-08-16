@@ -170,6 +170,42 @@ class MainActivity : FlutterActivity() {
                             }
                         }
 
+                        // Ask for media access up front — the moment the user
+                        // turns "delete originals" on, not half an hour later
+                        // when a batch ends and the dialog would arrive out of
+                        // nowhere. Answering here also lets the switch refuse
+                        // to turn on when access is refused.
+                        "requestMediaAccess" -> {
+                            if (hasMediaReadPermission()) {
+                                result.success(true)
+                            } else if (accessResult != null) {
+                                // Диалог уже висит: второй запрос система
+                                // проигнорирует, а ответ придёт один.
+                                result.success(false)
+                            } else {
+                                accessResult = result
+                                ActivityCompat.requestPermissions(
+                                    this, mediaReadPermissions(), REQUEST_MEDIA_ACCESS,
+                                )
+                            }
+                        }
+
+                        // Дорога назад после отказа: на Android «больше не
+                        // спрашивать» тоже существует, и своего запроса у
+                        // приложения после него не будет.
+                        "openAppSettings" -> {
+                            val intent = Intent(
+                                android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                Uri.fromParts("package", packageName, null),
+                            ).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
+                            try {
+                                startActivity(intent)
+                                result.success(true)
+                            } catch (_: ActivityNotFoundException) {
+                                result.success(false)
+                            }
+                        }
+
                         // Decode a still through the platform and leave it next
                         // to the source as an ordinary PNG. Needed wherever
                         // FFmpeg reads the file but not all of it — see
@@ -546,6 +582,9 @@ class MainActivity : FlutterActivity() {
 
     private var deleteResult: MethodChannel.Result? = null
 
+    /** The `requestMediaAccess` call waiting for the permission dialog. */
+    private var accessResult: MethodChannel.Result? = null
+
     /** Requested (name, size) pairs, in the order Dart sent them. */
     private var deleteItems: List<Pair<String, Long>> = emptyList()
 
@@ -618,6 +657,12 @@ class MainActivity : FlutterActivity() {
         grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_MEDIA_ACCESS) {
+            val pending = accessResult
+            accessResult = null
+            pending?.success(hasMediaReadPermission())
+            return
+        }
         if (requestCode != REQUEST_MEDIA_READ) return
         if (deleteResult == null) return
         if (hasMediaReadPermission()) {
@@ -763,6 +808,16 @@ class MainActivity : FlutterActivity() {
 
         /** Permission-request code for the media read access the lookup needs. */
         private const val REQUEST_MEDIA_READ = 8022
+
+        /**
+         * Permission-request code for asking *ahead of time*, when the user
+         * switches "delete originals" on rather than when a batch ends.
+         *
+         * Separate from REQUEST_MEDIA_READ on purpose: the two answers finish
+         * different pending calls, and sharing one code would hand the toggle's
+         * reply to a deletion that nobody started.
+         */
+        private const val REQUEST_MEDIA_ACCESS = 8023
 
         /**
          * The live foreground-service channel, held statically so the service —

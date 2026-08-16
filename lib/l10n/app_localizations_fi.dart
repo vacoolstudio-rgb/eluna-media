@@ -1047,6 +1047,10 @@ class L10nFi extends L10n {
       'Pyytää järjestelmää poistamaan lähdetiedostot, kun tulos on tallennettu. Järjestelmä näyttää aina, mikä on katoamassa, ja odottaa vahvistustasi.';
 
   @override
+  String get mediaAccessRequired =>
+      'Alkuperäisten poistaminen vaatii pääsyn mediakirjastoon.';
+
+  @override
   String originalsDeleted(String size) {
     return 'Alkuperäiset poistettiin — $size vapautui';
   }

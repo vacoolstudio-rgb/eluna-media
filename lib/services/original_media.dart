@@ -51,6 +51,24 @@ class ReclaimOutcome {
 /// never unlinks a file the user has not been shown.
 abstract class OriginalMediaService {
   Future<ReclaimOutcome> delete(List<OriginalRef> items);
+
+  /// Спрашивает доступ к медиатеке заранее — когда пользователь **включает**
+  /// удаление оригиналов, а не когда батч закончился.
+  ///
+  /// Раньше доступ просился внутри самого удаления, и это выглядело так:
+  /// переключатель включается молча, а системный запрос приходит через полчаса,
+  /// посреди чужого дела. Хуже того, на iOS системный запрос показывается **один
+  /// раз за установку** — после отказа он не появится никогда, и функция
+  /// осталась бы мёртвой без единого слова о причине.
+  ///
+  /// `false` означает «доступа нет» на любом основании: отказали сейчас,
+  /// отказали когда-то, платформа не умеет. Переключателю этого достаточно —
+  /// включать его нельзя ни в одном из этих случаев.
+  Future<bool> requestAccess();
+
+  /// Открывает системные настройки приложения. Единственная дорога назад после
+  /// отказа: своего запроса у приложения больше не будет.
+  Future<bool> openSystemSettings();
 }
 
 class ChannelOriginalMediaService implements OriginalMediaService {
@@ -104,6 +122,28 @@ class ChannelOriginalMediaService implements OriginalMediaService {
       freedBytes: freed,
       cancelled: reply['cancelled'] == true,
     );
+  }
+
+  @override
+  Future<bool> requestAccess() async {
+    try {
+      return await _channel.invokeMethod<bool>('requestMediaAccess') ?? false;
+    } on MissingPluginException {
+      return false;
+    } on PlatformException {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> openSystemSettings() async {
+    try {
+      return await _channel.invokeMethod<bool>('openAppSettings') ?? false;
+    } on MissingPluginException {
+      return false;
+    } on PlatformException {
+      return false;
+    }
   }
 }
 
