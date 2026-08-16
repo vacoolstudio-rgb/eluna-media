@@ -12,9 +12,16 @@ import '../core/platform/eluna_adapters.dart';
 /// Идентификаторы обязаны совпадать с товарами в Play Console (и в App Store
 /// Connect, когда до него дойдёт). **Цену приложение не знает и не пишет** —
 /// её называет магазин, потому что только он знает страну и валюту.
-const kTipCoffee = 'tip_coffee';
-const kTipSnack = 'tip_snack';
-const kTipGenerous = 'tip_generous';
+/// Суффикс `_media` — не украшение. Идентификаторы уникальны лишь в пределах
+/// одного приложения, поэтому три `tip_coffee` в семье законны и неразличимы:
+/// в отчётах по продажам и в обеих консолях они сливаются в одну строку. У
+/// читалки по той же причине `_reader`.
+///
+/// Менять их после первой одобренной покупки нельзя — ни идентификатор, ни тип;
+/// можно только завести новые. Поэтому суффикс появился до релиза, а не после.
+const kTipCoffee = 'tip_coffee_media';
+const kTipSnack = 'tip_snack_media';
+const kTipGenerous = 'tip_generous_media';
 
 /// Порядок показа.
 const kTipProductIds = <String>[kTipCoffee, kTipSnack, kTipGenerous];

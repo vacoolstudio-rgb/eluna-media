@@ -234,9 +234,13 @@ Two things about it are open questions for the owner rather than settled facts:
    FFmpeg and covers the whole binary. It is a smaller surface (no ad SDK, no
    identifiers, no network in-process) but it is the same class of problem, and
    `NOTICE.md` records the reasoning either way.
-2. **The products must exist in the Play Console** (`tip_coffee`, `tip_snack`,
-   `tip_generous`, all *consumable*). Until they do, the store returns an empty
-   list and the screen honestly shows nothing to buy.
+2. **The products must exist in both consoles** (`tip_coffee_media`,
+   `tip_snack_media`, `tip_generous_media`, all *consumable*). Until they do,
+   the store returns an empty list and the screen honestly shows nothing to buy.
+   The `_media` suffix exists because product ids are unique per app but not per
+   account: three `tip_coffee` across the family are legal and indistinguishable
+   in the sales reports. Renaming after the first approved purchase is
+   impossible — only creating new ones is — so the suffix landed before release.
 
 ## Architecture
 
