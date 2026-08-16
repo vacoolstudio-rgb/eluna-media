@@ -10,6 +10,7 @@ import 'core/logging/error_handlers.dart';
 import 'domain/app_icons.dart';
 import 'core/platform/eluna_adapters.dart';
 import 'services/notification_service.dart';
+import 'services/privacy_shade.dart';
 import 'services/share_intake.dart';
 import 'state/app_lock_controller.dart';
 import 'state/data_erasers.dart';
@@ -139,9 +140,22 @@ Future<void> main() async {
     // Замок — до первого кадра, иначе очередь с именами файлов успевает
     // мелькнуть под шторкой. Ответ заодно прогревает синхронный кэш сервиса,
     // из которого потом читает обработчик паузы: ему ждать нельзя.
-    container.read(appLockStateProvider.notifier).resolve(
-          configured: await container.read(appLockServiceProvider).isLockConfigured(),
-        );
+    final lockConfigured =
+        await container.read(appLockServiceProvider).isLockConfigured();
+    container.read(appLockStateProvider.notifier).resolve(configured: lockConfigured);
+
+    // Нативной накладке нужно знать, есть ли вообще что скрывать. Дальше за
+    // ней следит подписка ниже: замок включают и выключают в настройках, а
+    // платформа об этом сама не узнает.
+    final shade = container.read(privacyShadeProvider);
+    unawaited(shade.setEnabled(lockConfigured));
+    container.listen<AsyncValue<({bool bio, bool pin})>>(
+      appLockStatusProvider,
+      (_, next) {
+        final status = next.value;
+        if (status != null) unawaited(shade.setEnabled(status.pin || status.bio));
+      },
+    );
 
     // Announce readiness to the native side; files shared while the app was
     // dead flush through right after this.

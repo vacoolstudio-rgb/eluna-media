@@ -93,6 +93,12 @@ import UIKit
             }
             DispatchQueue.main.async { result(error == nil) }
           }
+        case "setPrivacyShade":
+          // Включён ли на приложении замок. От этого зависит, накрывать ли окно
+          // при уходе с экрана — см. `privacyShade`.
+          AppDelegate.privacyShadeEnabled =
+            (call.arguments as? [String: Any])?["enabled"] as? Bool ?? false
+          result(nil)
         case "requestMediaAccess":
           // Спросить доступ заранее — в момент, когда пользователь включает
           // удаление оригиналов, а не через полчаса, когда батч закончился.
@@ -159,7 +165,58 @@ import UIKit
   /// поделился в «Фото» и переключился обратно.
   override func applicationDidBecomeActive(_ application: UIApplication) {
     super.applicationDidBecomeActive(application)
+    hidePrivacyShade()
     drainSharedInbox()
+  }
+
+  // ---------------------------------------------------------------------------
+  // Экран приватности при уходе с экрана
+  // ---------------------------------------------------------------------------
+
+  /// Есть ли на приложении замок. Ставится из Dart при запуске и при каждом
+  /// изменении настроек безопасности.
+  private static var privacyShadeEnabled = false
+
+  /// Накладка, которой окно закрывается на время отлучки.
+  private var privacyShade: UIView?
+
+  /// Закрыть окно **до** того, как iOS снимет картинку для списка задач.
+  ///
+  /// Флаттеровская шторка этого не успевает, и это не её вина. `paused` в Dart
+  /// приходит из `applicationDidEnterBackground`, а снимок система делает
+  /// раньше — сразу после `willResignActive`. Между ними Flutter не рисует ни
+  /// одного кадра, поэтому в снимок попадала очередь с именами файлов, и на
+  /// возврате человек видел именно её: сначала свой экран, потом уже шторку.
+  /// Ровно об это и споткнулись на живом телефоне.
+  ///
+  /// Тем же движением закрывается всё остальное, что показывается поверх
+  /// приложения: лист Face ID, переключатель приложений, Пункт управления.
+  ///
+  /// Накладка — вид с экрана запуска, а не свой прямоугольник: он уже нарисован
+  /// в цветах приложения и в обеих темах, и совпадает с тем, что человек видит
+  /// при старте. Если сториборд почему-то не читается, остаётся непрозрачный
+  /// чёрный: показать хоть что-то важнее, чем показать очередь.
+  override func applicationWillResignActive(_ application: UIApplication) {
+    super.applicationWillResignActive(application)
+    guard AppDelegate.privacyShadeEnabled, privacyShade == nil, let window else { return }
+
+    let cover: UIView
+    if let launch = UIStoryboard(name: "LaunchScreen", bundle: nil)
+      .instantiateInitialViewController()?.view {
+      cover = launch
+    } else {
+      cover = UIView()
+      cover.backgroundColor = .black
+    }
+    cover.frame = window.bounds
+    cover.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    window.addSubview(cover)
+    privacyShade = cover
+  }
+
+  private func hidePrivacyShade() {
+    privacyShade?.removeFromSuperview()
+    privacyShade = nil
   }
 
   override func application(

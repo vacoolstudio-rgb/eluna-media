@@ -392,20 +392,23 @@ class SettingsTab extends ConsumerWidget {
               // Чаевые. Ничего не открывают и ничего не обещают: приложение
               // целиком бесплатно, и эта строка — единственное место, где о
               // деньгах вообще заходит речь.
-              // Кнопкой, а не строкой списка. Строкой она стояла шестой среди
-              // одинаковых пунктов и не читалась вовсе — а это единственное
-              // место во всём приложении, где вообще заходит речь о деньгах.
-              // Градиент здесь не «продажа»: приложение бесплатно целиком, и
-              // чаевые ничего не открывают. Он про видимость — пропустить их
-              // теперь можно намеренно, а не по недосмотру.
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: GradientButton(
-                  icon: HugeIcons.strokeRoundedCoffee01,
-                  label: ElunaL10n.of(context).tipTitle,
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(builder: (_) => const TipScreen()),
-                  ),
+              // Чаевые. Ничего не открывают и ничего не обещают: приложение
+              // целиком бесплатно, и эта строка — единственное место, где о
+              // деньгах вообще заходит речь.
+              //
+              // Строкой, а не кнопкой. Кнопка с градиентом во всю ширину здесь
+              // уже стояла и была снята: на экране, где всё остальное —
+              // спокойные строки, она читалась как реклама внутри настроек.
+              // Заметность даёт цвет иконки, тёплый среди фиолетовых, — этого
+              // хватает, чтобы строку находили глазами, и не хватает, чтобы она
+              // требовала внимания.
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const _RowIcon(Icons.coffee_outlined, SectionAccents.amber),
+                title: Text(ElunaL10n.of(context).tipTitle),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(builder: (_) => const TipScreen()),
                 ),
               ),
               // Остальные приложения семьи. Каталог, тексты и ссылки на сторы
