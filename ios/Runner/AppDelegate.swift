@@ -78,10 +78,19 @@ import UIKit
           let args = call.arguments as? [String: Any]
           let name = args?["iosName"] as? String
           guard UIApplication.shared.supportsAlternateIcons else {
+            // Две совершенно разные беды раньше приходили в Dart одинаковым
+            // `false`, и разобрать их можно было только гаданием. Отказ наружу
+            // остаётся тем же — интерфейс не должен отмечать иконку, которой
+            // не будет, — но причина теперь есть в логе устройства.
+            NSLog("[eluna] setAppIcon: supportsAlternateIcons == false")
             result(false)
             return
           }
           UIApplication.shared.setAlternateIconName(name) { error in
+            if let error {
+              NSLog("[eluna] setAppIcon(%@) отказано: %@",
+                    name ?? "nil", error.localizedDescription)
+            }
             DispatchQueue.main.async { result(error == nil) }
           }
         case "requestMediaAccess":

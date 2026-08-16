@@ -20,9 +20,17 @@ void main() {
     service = AppLockService();
   });
 
-  ProviderContainer boot() {
+  /// [systemUiBackgroundsApp] задаёт платформу явно: `true` — андроидная
+  /// картина мира (пикер это чужая Activity), `false` — iOS, где системные
+  /// листы показываются поверх нашего же процесса.
+  ProviderContainer boot({bool systemUiBackgroundsApp = true}) {
     final container = ProviderContainer(
-      overrides: [appLockServiceProvider.overrideWithValue(service)],
+      overrides: [
+        appLockServiceProvider.overrideWithValue(service),
+        appLockStateProvider.overrideWith(
+          () => AppLockGate(systemUiBackgroundsApp: systemUiBackgroundsApp),
+        ),
+      ],
     );
     addTearDown(container.dispose);
     return container;
@@ -108,5 +116,53 @@ void main() {
     // бы запертую очередь.
     gate.resumed(now: DateTime(2026, 8, 13, 12));
     expect(container.read(appLockStateProvider), AppLockState.locked);
+  });
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // iOS: паузы нет вовсе
+  // ─────────────────────────────────────────────────────────────────────────
+
+  test('на iOS короткая отлучка код всё равно требует', () async {
+    // Живой баг, найденный на iPhone 13: свернул, вернулся через десять
+    // секунд — пауза снимала замок ровно в тот момент, когда шторка запускала
+    // Face ID. Системный лист висел поверх УЖЕ открытого приложения: очередь,
+    // имена файлов и настройки были видны под ним. Замок стоял и не защищал
+    // ничего.
+    //
+    // Паузе неоткуда взяться на iOS: пикер, лист «Поделиться» и подтверждение
+    // удаления там не уводят приложение в фон, а `paused` означает буквально
+    // «свернули».
+    final container = boot(systemUiBackgroundsApp: false);
+    await service.setPin('4321');
+    await service.isLockConfigured();
+    final gate = container.read(appLockStateProvider.notifier);
+    gate.resolve(configured: true);
+    gate.unlock();
+
+    final left = DateTime(2026, 8, 16, 12);
+    gate.paused(now: left);
+    gate.resumed(now: left.add(const Duration(seconds: 5)));
+
+    expect(container.read(appLockStateProvider), AppLockState.locked,
+        reason: 'на iOS возврат из фона обязан спрашивать код');
+  });
+
+  test('на iOS своя отлучка в системный лист кода не требует', () async {
+    // Обратная сторона: без паузы единственное, что отличает поход в пикер от
+    // сворачивания, — отметка, которую приложение ставит само. Если сломать и
+    // её, замок станет спрашивать код после каждого выбора файла.
+    final container = boot(systemUiBackgroundsApp: false);
+    await service.setPin('4321');
+    await service.isLockConfigured();
+    final gate = container.read(appLockStateProvider.notifier);
+    gate.resolve(configured: true);
+    gate.unlock();
+
+    final opened = DateTime(2026, 8, 16, 12);
+    gate.expectSystemUi(now: opened);
+    gate.paused(now: opened);
+    gate.resumed(now: opened.add(const Duration(minutes: 3)));
+
+    expect(container.read(appLockStateProvider), AppLockState.unlocked);
   });
 }

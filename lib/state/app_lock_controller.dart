@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:eluna_shared/core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,6 +17,26 @@ final appLockServiceProvider = Provider<AppLockService>((ref) => AppLockService(
 enum AppLockState { checking, locked, unlocked }
 
 class AppLockGate extends Notifier<AppLockState> {
+  /// Уводит ли системный интерфейс приложение в фон по-настоящему.
+  ///
+  /// На Android — да: пикер, лист «Поделиться» и подтверждение удаления это
+  /// **чужие Activity**, наша уходит в `paused`, и отличить их от сворачивания
+  /// нечем. Отсюда и пауза [graceOnReturn].
+  ///
+  /// На iOS — **нет**: всё это листы, показанные поверх нашего же процесса.
+  /// Приложение уходит только в `inactive`, а `paused` там означает ровно то,
+  /// что написано: человек свернул приложение. Значит, прощать возврат нельзя.
+  ///
+  /// Прощали — и вот чем это оказалось на живом телефоне. Свернул, вернулся
+  /// через десять секунд: пауза снимала замок в тот же миг, когда шторка
+  /// запускала Face ID. Системный лист повисал поверх **уже открытого**
+  /// приложения — со всей очередью, именами файлов и настройками под ним.
+  /// Замок стоял, выглядел работающим и не защищал ничего.
+  AppLockGate({bool? systemUiBackgroundsApp})
+      : _systemUiBackgroundsApp = systemUiBackgroundsApp ?? !Platform.isIOS;
+
+  final bool _systemUiBackgroundsApp;
+
   /// Когда приложение ушло в фон. Нужно на возврате: см. [resumed].
   DateTime? _leftAt;
 
@@ -85,7 +107,10 @@ class AppLockGate extends Notifier<AppLockState> {
     if (left == null || state != AppLockState.locked) return;
 
     final ourOwnTrip = expected != null && at.difference(expected) < _excursionTtl;
-    if (ourOwnTrip || at.difference(left) < graceOnReturn) {
+    // Пауза — страховка от ЧУЖИХ Activity, и только там, где они бывают. Своя
+    // отлучка засчитывается всегда: её приложение отметило само.
+    final forgiven = _systemUiBackgroundsApp && at.difference(left) < graceOnReturn;
+    if (ourOwnTrip || forgiven) {
       unlock();
     }
   }
