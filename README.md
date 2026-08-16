@@ -399,8 +399,9 @@ plain: GPL v3 in, GPL v3 out, F-Droid included, nothing to argue.
   used to be listed here on the same grounds and the grounds were wrong:
   `libaom` was in the bundle all along, and AV1, AVIF and animated WebP shipped
   in 0.5.0.)
-- **Reading a *tiled* HEIC on Android.** The suspicion recorded here for months
-  turned out to be right, and it is now fixed on iOS only.
+- ~~**Reading a *tiled* HEIC on Android.**~~ **Closed 16 August 2026 — on both
+  platforms.** Kept here because the defect is worth knowing about and the entry
+  is what the fix is measured against.
 
   A real HEIC written by Apple's own encoder lives in
   `integration_test/fixtures.dart`. On it, FFmpeg decoded **one 512×512 tile
@@ -417,11 +418,19 @@ plain: GPL v3 in, GPL v3 out, F-Droid included, nothing to argue.
   colour space for free. `docs/IOS.md` §8 has the measurements and the
   alternative that was rejected.
 
-  **Android still decodes one tile.** Its half of the `decodeStill` channel is
-  unwritten: `ImageDecoder` (HEIF from API 28) would do the same job in about
-  twenty lines, but there is no Android SDK on the machine where this was fixed,
-  so it was not written blind. `conversion_matrix_test.dart` fails there on
-  purpose, with a message saying so.
+  **Android now does the same** through `ImageDecoder` (`MainActivity.decodeStill`)
+  — the platform decoder, not `BitmapFactory`, which cannot read HEIF before
+  API 30 and honours EXIF orientation nowhere, and so would have traded a
+  cropped photo for a sideways one. Verified rather than assumed: on an API 36
+  emulator `conversion_matrix_test.dart` now prints
+  `HEIC grid: исходник 1024×768, получилось 1024×768` where it used to report
+  the single 512×512 tile. Below API 28 the method returns false and the old behaviour stands —
+  the system has no HEIF decoder there to borrow.
+
+  This entry stood open for months for one reason worth recording: there was no
+  Android SDK on the machine, and writing the twenty lines blind is what had
+  already produced a year of wrong claims elsewhere in this file. The SDK is
+  installed now, and every `integration_test/` suite has been run on Android.
 
   APE is still unproven for the older reason: FFmpeg has never had an encoder
   for it, so there is nothing to synthesise a fixture with.

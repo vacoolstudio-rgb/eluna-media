@@ -7,6 +7,8 @@ import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -165,6 +167,26 @@ class MainActivity : FlutterActivity() {
                                 result.error("args", "items are required", null)
                             } else {
                                 deleteOriginals(items, result)
+                            }
+                        }
+
+                        // Decode a still through the platform and leave it next
+                        // to the source as an ordinary PNG. Needed wherever
+                        // FFmpeg reads the file but not all of it — see
+                        // decodeStill below.
+                        "decodeStill" -> {
+                            val path = call.argument<String>("path")
+                            val outputPath = call.argument<String>("outputPath")
+                            if (path == null || outputPath == null) {
+                                // false, not error(): the Dart side treats every
+                                // failure as "use the original", and an error
+                                // would only differ by being noisier about it.
+                                result.success(false)
+                            } else {
+                                Thread {
+                                    val ok = decodeStill(path, outputPath)
+                                    runOnUiThread { result.success(ok) }
+                                }.start()
                             }
                         }
 
@@ -366,6 +388,85 @@ class MainActivity : FlutterActivity() {
         val ext = name.substringAfterLast('.', "").lowercase()
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext)
             ?: "application/octet-stream"
+    }
+
+    // -------------------------------------------------------------------------
+    // Decode a still the way the system would
+    // -------------------------------------------------------------------------
+
+    /**
+     * Write [path] out as a full-resolution PNG at [outputPath], decoded by the
+     * platform instead of by FFmpeg.
+     *
+     * This exists for one measured defect, described in full on the Dart side
+     * (`lib/core/still_decoder.dart`): an iPhone stores a photo as a HEIC cut
+     * into 512x512 tiles assembled by a `grid` item, and the bundled FFmpeg
+     * hands its encoder **one tile** rather than the assembled frame. A 4032-
+     * wide snapshot came out as its top-left corner, and the job reported
+     * success — a quietly wrong result, which is the worst kind.
+     *
+     * `ImageDecoder` rather than `BitmapFactory`: the latter cannot read HEIF
+     * at all before API 30, and nowhere honours EXIF orientation, so it would
+     * trade a cropped photo for a sideways one. ImageDecoder is the same code
+     * that draws the picture in the gallery, which is what makes the tiling,
+     * the rotation and the colour space right by definition rather than by us
+     * re-implementing HEIF.
+     *
+     * PNG rather than JPEG, matching iOS: this is an intermediate and the real
+     * encode happens after it, so a lossy step here would be a second
+     * generation of loss nobody asked for — including on lossless targets. The
+     * cost is a big temporary file (tens of megabytes for a 12-megapixel
+     * photo), which Dart deletes as soon as FFmpeg is done with it.
+     *
+     * Fails closed. `false` means "use the original file", which is exactly the
+     * behaviour that existed before this method — a cropped result on a tiled
+     * HEIC, and a correct one on everything else.
+     */
+    private fun decodeStill(path: String, outputPath: String): Boolean {
+        // Platform HEIF decoding arrived in API 28. Below it there is nothing
+        // here that FFmpeg does not already do, and pretending otherwise would
+        // write a PNG of whatever the older decoder guessed.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return false
+
+        val source = File(path)
+        if (!source.isFile) return false
+        val output = File(outputPath)
+
+        var bitmap: Bitmap? = null
+        return try {
+            bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(source)) { decoder, _, _ ->
+                // A hardware bitmap has no pixels to read back, and compressing
+                // one is a copy at best and a failure at worst.
+                decoder.allocator = ImageDecoder.ALLOCATOR_SOFTWARE
+                decoder.isMutableRequired = false
+                // No partial-image listener on purpose: without one the decoder
+                // throws on a truncated file instead of handing back the part
+                // it managed. Half a photo written confidently as a whole one
+                // is the very failure this method exists to remove.
+            }
+            val written = FileOutputStream(output).use { out ->
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+            }
+            if (!written) {
+                // A half-written PNG would reach FFmpeg as a corrupt input.
+                output.delete()
+                false
+            } else {
+                true
+            }
+        } catch (_: Exception) {
+            output.delete()
+            false
+        } catch (_: OutOfMemoryError) {
+            // Realistic, not theoretical: a 48-megapixel source is around
+            // 190 MB as ARGB_8888, and the PNG encoder wants room beside it.
+            // Falling back to FFmpeg costs correctness on tiled HEIC; killing
+            // the process costs the whole batch.
+            output.delete()
+            false
+        } finally {
+            bitmap?.recycle()
+        }
     }
 
     // -------------------------------------------------------------------------
