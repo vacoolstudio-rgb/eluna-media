@@ -19,6 +19,7 @@ import 'achievements_screen.dart';
 import 'network_privacy_screen.dart';
 import 'support_screen.dart';
 import 'tip_screen.dart';
+import 'widgets/adaptive_content.dart';
 import 'widgets/section_card.dart';
 
 /// Один блок настроек: общая карточка пакета плюс её же шапка.
@@ -76,6 +77,42 @@ class _Section extends StatelessWidget {
 /// Слова берутся из таблицы пакета: те же самые там переведены на 59 языков
 /// вместо пятнадцати и ровно так, как подпишет себя сам экран. Исключение —
 /// «Системная»: в общей таблице её нет, и она приходит из ARB приложения.
+/// Иконка строки настроек в цветной плашке.
+///
+/// До этого все строки экрана несли серые иконки размера по умолчанию: восемь
+/// пунктов подряд, ни один из которых не отличался от соседа, — глазу не за что
+/// зацепиться, и раздел читался как список, а не как набор разных дел.
+///
+/// Цвет берётся у секции, а не у строки: «один оттенок на домен» — правило
+/// всего приложения, и радуга внутри одной карточки нарушила бы его громче,
+/// чем помогла. Исключение — разрушающие действия: у них красный, потому что
+/// цвет здесь несёт смысл, а не украшает.
+class _RowIcon extends StatelessWidget {
+  const _RowIcon(this.icon, this.accent);
+
+  final IconData icon;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 34,
+      height: 34,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        // Плашка лежит на карточке ТОГО ЖЕ оттенка, поэтому заливки в 14%
+        // не хватало: на снимке иконки читались как грязь на фоне. Плотнее
+        // заливка плюс контурная линия — и плашка отделяется от карточки, не
+        // становясь при этом кнопкой, которой она не является.
+        color: accent.withValues(alpha: 0.26),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: accent.withValues(alpha: 0.42)),
+      ),
+      child: Icon(icon, size: 19, color: accent),
+    );
+  }
+}
+
 class _AppearanceControls extends ConsumerWidget {
   const _AppearanceControls();
 
@@ -113,7 +150,7 @@ class _AppearanceControls extends ConsumerWidget {
 
         return ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: const Icon(Icons.palette_outlined),
+          leading: const _RowIcon(Icons.palette_outlined, SectionAccents.purple),
           title: Text(l.theme),
           subtitle: Text(parts.join(' · ')),
           trailing: const Icon(Icons.chevron_right),
@@ -139,8 +176,9 @@ class SettingsTab extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(16),
+        child: AdaptiveContent(
+          child: ListView(
+          padding: EdgeInsets.all(context.space.lg),
           children: [
           _Section(
             title: l10n.appearance,
@@ -200,7 +238,7 @@ class SettingsTab extends ConsumerWidget {
               // живёт до жалобы.
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.translate),
+                leading: const _RowIcon(Icons.translate, SectionAccents.purple),
                 title: Text(l10n.language),
                 subtitle: Text(
                   languageByCode(prefs.localeCode)?.nativeName ?? l10n.languageSystem,
@@ -305,7 +343,7 @@ class SettingsTab extends ConsumerWidget {
               const SizedBox(height: 4),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.wifi_off_outlined),
+                leading: const _RowIcon(Icons.wifi_off_outlined, SectionAccents.green),
                 title: Text(l10n.networkPrivacyTitle),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => Navigator.of(context).push(
@@ -324,7 +362,7 @@ class SettingsTab extends ConsumerWidget {
             children: [
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.emoji_events_outlined),
+                leading: const _RowIcon(Icons.emoji_events_outlined, SectionAccents.purple),
                 title: Text(l10n.achievementsTitle),
                 subtitle: Text(l10n.achievementsProgress(
                   ref.watch(achievementsProvider.select((s) => s.unlockedCount)),
@@ -343,7 +381,7 @@ class SettingsTab extends ConsumerWidget {
               // `Eluna.configure`.
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.star_outline),
+                leading: const _RowIcon(Icons.star_outline, SectionAccents.purple),
                 title: Text(l10n.rateApp),
                 // Пятизвёздочная оценка уводит в магазин — тоже отлучка.
                 onTap: () => awayInSystemUi(
@@ -354,13 +392,20 @@ class SettingsTab extends ConsumerWidget {
               // Чаевые. Ничего не открывают и ничего не обещают: приложение
               // целиком бесплатно, и эта строка — единственное место, где о
               // деньгах вообще заходит речь.
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.coffee_outlined),
-                title: Text(ElunaL10n.of(context).tipTitle),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const TipScreen()),
+              // Кнопкой, а не строкой списка. Строкой она стояла шестой среди
+              // одинаковых пунктов и не читалась вовсе — а это единственное
+              // место во всём приложении, где вообще заходит речь о деньгах.
+              // Градиент здесь не «продажа»: приложение бесплатно целиком, и
+              // чаевые ничего не открывают. Он про видимость — пропустить их
+              // теперь можно намеренно, а не по недосмотру.
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: GradientButton(
+                  icon: HugeIcons.strokeRoundedCoffee01,
+                  label: ElunaL10n.of(context).tipTitle,
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(builder: (_) => const TipScreen()),
+                  ),
                 ),
               ),
               // Остальные приложения семьи. Каталог, тексты и ссылки на сторы
@@ -369,7 +414,7 @@ class SettingsTab extends ConsumerWidget {
               // открыли, а в `kElunaFamily` её ещё нет.
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.apps_rounded),
+                leading: const _RowIcon(Icons.apps_rounded, SectionAccents.purple),
                 title: Text(ElunaL10n.of(context).settingsOurApps),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => showElunaOurAppsSheet(context),
@@ -377,7 +422,7 @@ class SettingsTab extends ConsumerWidget {
               Builder(
                 builder: (context) => ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.share_outlined),
+                  leading: const _RowIcon(Icons.share_outlined, SectionAccents.purple),
                   title: Text(l10n.shareApp),
                   onTap: () {
                     // iPads present the share sheet as a popover and crash
@@ -401,7 +446,7 @@ class SettingsTab extends ConsumerWidget {
               // отправить что-либо самостоятельно приложение не может.
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.bug_report_outlined),
+                leading: const _RowIcon(Icons.bug_report_outlined, SectionAccents.purple),
                 title: Text(ElunaL10n.of(context).supportTitle),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => Navigator.of(context).push(
@@ -447,6 +492,7 @@ class SettingsTab extends ConsumerWidget {
           // не ведёт; внизу это выходные данные, куда и приходят посмотреть.
           const Center(child: _VersionCaption()),
           ],
+          ),
         ),
       ),
     );
@@ -492,7 +538,7 @@ class _SecuritySection extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: const Icon(Icons.edit_outlined),
+                leading: const _RowIcon(Icons.edit_outlined, SectionAccents.teal),
                 title: Text(l.lockChangeCode),
                 onTap: () {
                   Navigator.pop(sheetContext);
@@ -500,7 +546,7 @@ class _SecuritySection extends ConsumerWidget {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.delete_outline),
+                leading: const _RowIcon(Icons.delete_outline, SectionAccents.teal),
                 title: Text(l.lockRemoveCode),
                 onTap: () {
                   Navigator.pop(sheetContext);
@@ -545,7 +591,7 @@ class _SecuritySection extends ConsumerWidget {
       children: [
         ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: const Icon(Icons.lock_outline),
+          leading: const _RowIcon(Icons.lock_outline, SectionAccents.teal),
           title: Text(l.lockPinTitle),
           subtitle: Text(hasPin ? l.lockEnabled : l.lockPinSubtitleOff),
           trailing: const Icon(Icons.chevron_right),
@@ -556,7 +602,7 @@ class _SecuritySection extends ConsumerWidget {
         // устройства.
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
-          secondary: const Icon(Icons.fingerprint),
+          secondary: const _RowIcon(Icons.fingerprint, SectionAccents.teal),
           title: Text(l.lockBiometricTitle),
           subtitle: Text(l.lockBiometricSubtitle),
           value: status?.bio ?? false,
@@ -744,14 +790,14 @@ class _StorageSection extends ConsumerWidget {
           const SizedBox(height: 4),
           ListTile(
             contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.cleaning_services_outlined),
+            leading: const _RowIcon(Icons.cleaning_services_outlined, SectionAccents.teal),
             title: Text(l10n.reclaimedTotal(OutputPaths.humanBytes(freed))),
           ),
         ],
         const SizedBox(height: 4),
         ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: const Icon(Icons.save_outlined),
+          leading: const _RowIcon(Icons.save_outlined, SectionAccents.teal),
           title: Text(
             isEmpty
                 ? l10n.storageEmpty
@@ -777,7 +823,7 @@ class _StorageSection extends ConsumerWidget {
         const Divider(height: 28),
         ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: Icon(Icons.delete_forever_outlined, color: theme.colorScheme.error),
+          leading: const _RowIcon(Icons.delete_forever_outlined, SectionAccents.red),
           title: Text(
             l10n.deleteAllData,
             style: TextStyle(
