@@ -98,6 +98,14 @@
 	     string — a SIGABRT from the system, not a Dart exception, so the
 	     try/catch around BiometricGate cannot soften it. Touch ID needs no
 	     key of its own. -->
+	<!-- Обязательна, хотя камеру приложение не открывает. `file_picker` тянет
+	     DKImagePickerController, а тот ссылается на API камеры. Статическая
+	     проверка Apple смотрит на ссылки в бинарнике, а не на то, вызываются ли
+	     они: доставка сборки 4 отклонена с ITMS-90683 (16.08.2026). Строка
+	     честная — камеру может предложить системный выборщик, сам конвертер её
+	     не трогает. -->
+	<key>NSCameraUsageDescription</key>
+	<string>Only used if you pick Camera inside the system file picker. Eluna Media converts files you already have and never opens the camera by itself.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Unlocks Eluna Media with Face ID instead of the passcode you set.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
