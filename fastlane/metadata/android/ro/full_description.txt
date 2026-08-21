@@ -1,0 +1,50 @@
+Eluna Media este un convertor și un compresor video, foto și audio care funcționează integral pe telefonul tău. Convertește și comprimă fără să încarce nimic nicăieri: fără cont, fără așteptare la server. Fiecare conversie rulează local, prin copia de FFmpeg inclusă în aplicație, iar fișierele nu părăsesc dispozitivul.
+
+Versiunea publicată nu are permisiunea de internet: informațiile despre aplicație din Android arată că nu are acces la rețea, iar ecranul „Rețea și confidențialitate” din Setări listează fiecare canal pe care l-ar putea folosi — aici, niciunul. Pornește modul avion și convertește: merge la fel.
+
+CE CONVERTEȘTE
+
+• Video — MP4, MKV, MOV, WebM, AVI. Codare cu H.264, H.265, AV1, VP9 sau MPEG-4, ori copierea fluxului, care schimbă containerul fără recodare.
+• Audio — MP3, M4A (AAC, sau ALAC fără pierderi), WAV, FLAC, OGG Vorbis, Opus. Extrage sunetul din orice videoclip și transformă un video în MP3.
+• Fotografii — JPEG, PNG, WebP, AVIF, BMP, TIFF, plus GIF animat și WebP animat făcute dintr-un clip.
+
+ÎNCADREAZĂ ÎN DIMENSIUNE
+
+Alegi o limită — 10 MB, 16 MB, 25 MB, 50 MB, 100 MB sau o valoare a ta — iar aplicația calculează rata de biți din durata reală a fișierului, păstrează o marjă și pune un plafon pe flux, așa că rezultatul iese sub limită, nu pe lângă ea. Atașamentele de e-mail și limitele din conversații nu mai sunt o loterie. Modul în două treceri nimerește ținta și mai exact.
+
+NU MĂREȘTE NICIODATĂ UN FIȘIER
+
+Calitatea constantă nu are un plafon propriu, așa că un clip trecut deja printr-o aplicație de mesagerie poate ieși mai mare decât a intrat. Aici ambele fluxuri sunt limitate la cât a consumat sursa, deci fișierul iese mai mic sau rămâne la fel. Protecția poate fi oprită.
+
+ELIBEREAZĂ SPAȚIU
+
+Comprimi un lot, salvezi rezultatele, iar aplicația poate cere sistemului să șteargă originalele — dialogul Android îți arată fișierele reale și așteaptă aprobarea ta. În Setări vezi totalul spațiului eliberat.
+
+FĂCUTĂ PENTRU LOTURI
+
+Pui în coadă câte fișiere vrei și vezi progresul și timpul rămas pentru fiecare. Un fișier stricat nu oprește lotul. Conversia merge mai departe când ieși din aplicație, cu progresul în notificare, iar un lot întrerupt se reia singur după o repornire. Ce eșuează se reîncearcă printr-o atingere.
+
+SIMPLU SAU AVANSAT
+
+Modul Simplu e o listă scurtă de carduri — comprimă videoclipul, MP4 compatibil, extrage sunetul, video în GIF, unește videoclipuri — și arată doar ce se potrivește fișierelor adăugate. Modul Avansat deschide toate controalele: codec, calitate constantă (CRF) sau rată de biți țintă, rezoluție, rată de cadre, presetarea codorului și codarea hardware.
+
+EDITEZI FĂRĂ ALTĂ APLICAȚIE
+
+• Tai sursa la intervalul dorit, cu un glisor.
+• Rotire de 90/180/270°, oglindire sau decupare la 1:1, 9:16, 16:9 și 4:3.
+• Viteză de la 0,25x la 4x, cu sunetul păstrat sincron.
+• Volum de la 0 la 200%.
+• Unești mai multe clipuri într-unul, chiar dacă au codecuri, rezoluții și rate de cadre diferite.
+• Păstrezi subtitrările când convertești MKV în MP4, MOV sau MKV.
+
+CONFIDENȚIALITATE
+
+Datele EXIF, coordonatele GPS și marcajele de timp sunt eliminate implicit, așa că o fotografie trimisă nu duce cu ea locul unde a fost făcută. Nu există date de analiză, rapoarte de eroare sau identificatori — n-ar avea pe unde pleca. Poți bloca aplicația cu PIN sau amprentă, iar ecranul aplicațiilor recente arată o perdea în locul fișierelor.
+
+CÂT COSTĂ
+
+Nimic. Convertorul e complet din prima zi: fără reclame, fără abonament, fără funcții blocate, fără filigran și fără limită de exporturi. Singura achiziție este un bacșiș, iar el nu deblochează nimic.
+
+Teme luminoase și întunecate, negru pur pentru OLED, culoare de accent, opțional Material You, aspect de telefon și de tabletă, 61 de limbi și 18 realizări pe dispozitiv.
+
+Convertor video, compresor video, convertor foto și extragerea sunetului, toate în aceeași aplicație și complet offline. Construită cu software open source; licențele sunt listate în aplicație.

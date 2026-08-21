@@ -1,0 +1,52 @@
+Eluna Media är en videokonverterare som arbetar helt offline. Video, foto och ljud komprimeras direkt i telefonen. Ingenting laddas upp, du behöver inget konto och du väntar inte i någon serverkö — varje konvertering körs lokalt med en medföljande FFmpeg-motor, och filerna lämnar aldrig enheten.
+
+Det behöver du inte ta vårt ord för. Den publicerade versionen saknar behörigheten INTERNET: Androids egen appinformation visar att appen inte har någon nätverksåtkomst alls, och sidan Nätverk och integritet i Inställningar listar varje kanal appen skulle kunna använda — listan är tom.
+
+DET HÄR KONVERTERAR APPEN
+
+• Video — MP4, MKV, MOV, WebM, AVI. Koda om med H.264, H.265, AV1, VP9 eller MPEG-4, eller kopiera strömmen och byt behållare helt utan omkodning.
+• Ljud — MP3, M4A (AAC, eller ALAC för förlustfritt), WAV, FLAC, OGG Vorbis, Opus. Extrahera ljudet ur vilken video som helst och gör om en video till MP3.
+• Foto — JPEG, PNG, WebP, AVIF, BMP, TIFF, samt animerad GIF och animerad WebP gjord ur ett videoklipp.
+
+ANPASSA TILL STORLEK
+
+Välj en målstorlek — 10, 16, 25, 50 eller 100 MB, eller skriv ett eget tal — så räknar appen ut bithastigheten från filens verkliga längd, håller en säkerhetsmarginal och sätter ett tak på strömmen. Resultatet hamnar under gränsen i stället för nära den, så en bilaga eller ett formulär med storleksgräns slutar vara en gissningslek. Två pass träffar siffran ännu exaktare.
+
+KOMPRIMERING GÖR ALDRIG FILEN STÖRRE
+
+Konstant kvalitet har inget eget tak, så ett klipp som redan har komprimerats en gång kan komma tillbaka större än det var. Här begränsas både video och ljud till vad källan själv använde, så resultatet blir mindre än originalet — aldrig större. Spärren går att stänga av om du medvetet vill höja bithastigheten.
+
+FRIGÖR LAGRING
+
+Komprimera en batch, spara resultaten, och appen kan be Android att ta bort originalen åt dig — systemets egen dialog visar filerna och väntar på ditt godkännande. Inställningarna räknar ihop hur mycket utrymme du har frigjort.
+
+BYGGD FÖR MÅNGA FILER
+
+Lägg så många filer du vill i kön och följ förlopp och återstående tid för var och en. En trasig fil stoppar aldrig resten. Konverteringen fortsätter när du lämnar appen, med aktuellt förlopp i aviseringen, och kön överlever en omstart — ett avbrutet jobb återupptas nästa gång du startar appen. Misslyckade filer gör du om med en knapptryckning.
+
+ENKELT ELLER AVANCERAT
+
+Enkelt läge är en handfull färdiga val: komprimera video, konvertera till MP4, extrahera ljud, video till GIF — och det visar bara det som passar filerna du har lagt till. Avancerat läge öppnar hela kontrollpanelen: kodek, konstant kvalitet (CRF) eller målbithastighet, upplösning, bildfrekvens, kodningshastighet och hårdvarukodning.
+
+REDIGERA UTAN ATT BYTA APP
+
+• Klipp ut en bit med reglaget.
+• Rotera 90/180/270°, spegelvänd eller beskär till 1:1, 9:16, 16:9 eller 4:3.
+• Ändra hastigheten från 0,25x till 4x med ljudet i synk.
+• Justera volymen mellan 0 och 200 %.
+• Slå ihop flera klipp till ett, även när kodek, upplösning och bildfrekvens skiljer sig åt.
+• Behåll undertexterna när MKV blir MP4, MOV eller MKV.
+
+INTEGRITET FRÅN GRUNDEN
+
+EXIF, GPS-koordinater och tidsstämplar tas bort som standard, så ett foto du delar bär inte med sig platsen där det togs. Ingen analysdata, inga kraschrapporter, inga identifierare — och ingen anslutning att skicka dem över. Du kan låsa appen med PIN-kod eller biometri, och i appväxlaren döljs dina filer bakom en tom ruta.
+
+VAD DET KOSTAR
+
+Ingenting. Ingen reklam, inga prenumerationer, inga funktioner bakom en betalvägg, inga vattenstämplar, inga exportgränser och ingen daglig gräns. Det enda köpet i appen är en dricks, och den låser inte upp någonting alls — appen är komplett utan den.
+
+OCKSÅ I APPEN
+
+Ljust, mörkt och OLED-svart tema med val av accentfärg och Material You om du vill, layouter för telefon och surfplatta, 61 språk och 18 prestationer som räknas på enheten.
+
+Byggd med öppen källkod; licenserna listas i appen.

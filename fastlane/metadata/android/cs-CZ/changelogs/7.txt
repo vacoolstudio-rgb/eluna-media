@@ -1,0 +1,9 @@
+Verze 1.0 — první veřejné vydání.
+
+• Převod a zmenšení videa, fotek i zvuku — celé v zařízení.
+• Vejít se do velikosti: zvolte 10, 16, 25, 50 nebo 100 MB a výsledek se pod limit vejde.
+• Jednoduchý i pokročilý režim.
+• Fronta dávek běží i na pozadí a přežije restart aplikace.
+• Zkrácení, otočení, ořez, spojení klipů, rychlost, zvuk z videa, GIF.
+• EXIF a GPS se odstraňují ve výchozím nastavení. Tato verze nemá oprávnění k internetu.
+• 61 jazyků, rozvržení pro tablety, světlý, tmavý a OLED motiv.

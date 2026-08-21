@@ -1,0 +1,8 @@
+Version 1.0 — den första publika utgåvan.
+
+• Konvertera och komprimera video, foto och ljud helt på enheten.
+• Anpassa till storlek: välj 10, 16, 25, 50 eller 100 MB — resultatet hamnar under gränsen.
+• Kö som fortsätter i bakgrunden och överlever en omstart.
+• Klipp, rotera, beskär, slå ihop, ändra hastighet, extrahera ljud, video till GIF.
+• EXIF och GPS tas bort som standard. Appen har ingen internetbehörighet alls.
+• 61 språk, layouter för surfplatta samt ljust, mörkt och OLED-tema.

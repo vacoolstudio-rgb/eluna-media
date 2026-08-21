@@ -1,0 +1,52 @@
+Eluna Media converts and compresses video, photos and audio directly on your phone. Nothing is uploaded, there is no account to create and there is no server queue to wait in — every conversion runs locally through a bundled FFmpeg engine, so your files never leave the device.
+
+You do not have to take that on trust. The release build ships without the INTERNET permission: Android's own app info screen will tell you the app has no network access at all, and the Network & privacy audit inside Settings lists every channel the app could use — for this one, none.
+
+WHAT IT CONVERTS
+
+• Video — MP4, MKV, MOV, WebM, AVI. Encode with H.264, H.265, AV1, VP9 or MPEG-4, or use stream copy to change the container without re-encoding.
+• Audio — MP3, M4A (AAC, or ALAC for lossless), WAV, FLAC, OGG Vorbis, Opus. Extract the soundtrack from any video and turn a video into MP3.
+• Photos — JPEG, PNG, WebP, AVIF, BMP, TIFF, plus animated GIF and animated WebP made from a video clip.
+
+FIT TO SIZE
+
+Choose a size — 10 MB, 16 MB, 25 MB, 50 MB, 100 MB, or type your own — and the app works out the bitrate from the real duration of your file, keeps a safety margin and pins a ceiling on the stream, so the result lands under your limit instead of just near it. Attachments and chat uploads stop being a guessing game. Turn on two-pass mode and it hits the number more precisely still.
+
+COMPRESSING NEVER MAKES A FILE BIGGER
+
+Quality-based compression has no ceiling of its own, so a clip that has already been through a chat app can come back larger than it started. Here both streams are held to what the source itself spent, so it comes back smaller or stays as it is. You can switch that guard off if you deliberately want to encode upward.
+
+FREE UP STORAGE
+
+Compress a batch, save the results, and the app can ask Android to delete the originals for you — the system shows the real files and waits for your approval, so nothing disappears behind your back. Settings keeps a running total of the space you have reclaimed.
+
+BUILT FOR BATCHES
+
+Queue as many files as you like and watch each one's progress and time remaining. One bad file never kills the batch. Conversion keeps running when you leave the app, with live progress in the notification, and the queue survives a restart — an interrupted batch picks itself back up on the next launch. Failed jobs retry with one tap.
+
+SIMPLE OR ADVANCED, YOUR CHOICE
+
+Simple mode is a short list of outcome cards — compress video, convert to MP4, extract audio, make a GIF — and it only ever offers what fits the files you actually added. Advanced mode opens the full control surface: codec, quality (CRF) or target bitrate, resolution, frame rate, encoder speed preset and hardware encoding.
+
+EDIT WHAT USUALLY NEEDS A SECOND APP
+
+• Trim to a range with a slider.
+• Rotate 90/180/270°, mirror, or crop to 1:1, 9:16, 16:9 or 4:3.
+• Change playback speed from 0.25x to 4x, with the audio kept in sync.
+• Adjust volume from 0 to 200%.
+• Merge several clips into one, even when their codecs, resolutions and frame rates do not match.
+• Keep subtitles when converting MKV to MP4, MOV or MKV.
+
+PRIVACY BY DESIGN
+
+EXIF, GPS coordinates and timestamps are stripped by default, so a photo you share does not carry the place it was taken. There are no analytics, no crash reporting and no identifiers, because there is nothing to send them over. You can lock the app with a PIN or biometrics, and the recents screen shows a shade instead of your files.
+
+WHAT IT COSTS
+
+Nothing. No ads, no subscriptions, no paywalled features, no watermarks, no export limits and no daily quota. The only purchase in the app is a tip, and it unlocks nothing at all — the app is complete without it.
+
+ALSO INSIDE
+
+Light, dark and OLED black themes with an accent picker and optional Material You colours, phone and tablet layouts, 61 languages, and 18 on-device achievements.
+
+Built with open-source software; the licences are listed in the app.

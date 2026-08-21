@@ -1,0 +1,8 @@
+Versiunea 1.0 — prima lansare publică.
+
+• Conversie și comprimare video, foto și sunet, integral pe dispozitiv.
+• Încadrare în dimensiune: alegi 10, 16, 25, 50 sau 100 MB, iar rezultatul iese sub limită.
+• Conversie în lot, care merge în fundal și rezistă la o repornire.
+• Tăiere, rotire, decupare, unire, viteză, extragerea sunetului, GIF-uri.
+• EXIF și GPS eliminate implicit. Fără permisiune de rețea în această versiune.
+• 61 de limbi, aspect pentru tabletă, teme luminoase, întunecate și OLED.

@@ -1,0 +1,8 @@
+Version 1.0 — the first public release.
+
+• Convert and compress video, photos and audio entirely on the device.
+• Fit to size: pick 10, 16, 25, 50 or 100 MB and the result lands under it.
+• Batch queue that keeps running in the background and survives a restart.
+• Trim, rotate, crop, merge, change speed, extract audio, build GIFs.
+• EXIF and GPS stripped by default. No network permission in this build.
+• 61 languages, tablet layouts, light, dark and OLED themes.

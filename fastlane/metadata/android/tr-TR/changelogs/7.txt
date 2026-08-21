@@ -1,0 +1,8 @@
+Sürüm 1.0 — ilk genel sürüm.
+
+• Videoyu, fotoğrafı ve sesi tamamen cihazda dönüştürün ve sıkıştırın.
+• Boyuta sığdır: 10, 16, 25, 50 veya 100 MB seçin, sonuç sınırın altında kalsın.
+• Arka planda çalışan, uygulama yeniden başlasa bile kaybolmayan toplu kuyruk.
+• Kesme, döndürme, kırpma, birleştirme, hız, sesi çıkarma, GIF yapma.
+• EXIF ve GPS varsayılan olarak silinir. Bu sürümde ağ izni yok.
+• 61 dil, tablet düzenleri, açık, koyu ve OLED temalar.

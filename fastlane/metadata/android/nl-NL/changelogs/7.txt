@@ -1,0 +1,8 @@
+Versie 1.0 — de eerste openbare release.
+
+• Video's, foto's en audio comprimeren en converteren, volledig op je apparaat.
+• Passend maken: kies 10, 16, 25, 50 of 100 MB en het resultaat blijft eronder.
+• Een wachtrij die op de achtergrond doorloopt en een herstart overleeft.
+• Inkorten, draaien, bijsnijden, samenvoegen, snelheid, audio naar MP3, GIF's.
+• EXIF en GPS standaard verwijderd. De app heeft geen internettoestemming.
+• 61 talen, tabletindelingen, licht, donker en OLED-thema's.

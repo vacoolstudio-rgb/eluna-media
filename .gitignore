@@ -50,3 +50,9 @@ app.*.map.json
 # Снимки витрины: сотни файлов по 2–4 МБ, которые пересобираются одной командой.
 # В репозитории от них только вес; рецепт лежит в integration_test/screenshots_test.dart.
 docs/ASO/screenshots/
+
+# Play Console service-account key. Never commit this.
+play-service-account*.json
+
+# Upload key passwords. Never commit this.
+android/key.properties

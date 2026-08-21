@@ -1,0 +1,8 @@
+Versione 1.0 — la prima uscita pubblica.
+
+• Comprimi e converti video, foto e audio interamente sul dispositivo.
+• Adatta alla dimensione: scegli 10, 16, 25, 50 o 100 MB e il risultato resta sotto.
+• Conversione in blocco che continua in background e sopravvive a un riavvio.
+• Taglia, ruota, ritaglia, unisci, cambia velocità, estrai l'audio, crea GIF.
+• EXIF e GPS rimossi per impostazione predefinita. Nessun permesso di rete.
+• 61 lingue, layout per tablet, temi chiaro, scuro e nero OLED.

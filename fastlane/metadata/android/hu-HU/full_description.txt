@@ -1,0 +1,52 @@
+Az Eluna Media a telefonodon konvertálja és tömöríti a videóidat, a fényképeidet és a hangfájljaidat. Semmi nem kerül fel sehová: nincs regisztráció, és nem kell egy szerver sorára várni. A munkát a beépített FFmpeg végzi, helyben — a fájljaid soha nem hagyják el az eszközt. Reklám nélkül, vízjel nélkül, exportkorlát nélkül.
+
+Nem kell hinned nekünk: ellenőrizheted. A kiadott változatnak nincs INTERNET engedélye, így az Android is azt írja az alkalmazás adatlapján, hogy nincs hálózati hozzáférése. A Beállításokban a Hálózat és adatvédelem képernyő felsorolja, milyen csatornákon kommunikálhatna — egy sincs. A konvertálás repülőgép üzemmódban ugyanúgy megy, mint wifin.
+
+MIT KONVERTÁL
+
+• Videó — MP4, MKV, MOV, WebM, AVI. Kódolás H.264, H.265, AV1, VP9 vagy MPEG-4 kodekkel, illetve másolás újracsomagolással: konténercsere újrakódolás nélkül.
+• Hang — MP3, M4A (AAC vagy veszteségmentes ALAC), WAV, FLAC, OGG Vorbis, Opus. Bármelyik videóból kinyerheted a hangsávot, így a videóból MP3 lesz.
+• Fénykép — JPEG, PNG, WebP, AVIF, BMP, TIFF, valamint animált GIF és WebP egy rövid klipből.
+
+MÉRETRE IGAZÍTÁS
+
+Válaszd ki a méretet — 10, 16, 25, 50, 100 MB, vagy írd be a sajátodat —, és az alkalmazás a fájl valódi hosszából számolja ki a bitrátát, biztonsági tartalékot hagy, és felső határt szab neki. Az eredmény a korlát alatt landol, nem csak a közelében: a csevegőalkalmazások és a levelezők méretkorlátja többé nem találgatás. A kétmenetes mód még pontosabban céloz, cserébe kétszer annyi ideig tart.
+
+A TÖMÖRÍTÉS SOHA NEM NÖVELI MEG A FÁJLT
+
+Az állandó minőségnek (CRF) nincs saját felső határa, így egy már tömörített videó a végén nagyobb is lehet az eredetinél. Itt a kódolás felső határa a forrás saját bitrátája: az eredmény kisebb lesz, vagy marad akkora, amekkora volt. Ha mégis felfelé kódolnál, a védelem kikapcsolható.
+
+HELY FELSZABADÍTÁSA
+
+Mentés után az alkalmazás felajánlja az eredeti fájlok törlését: a rendszer megmutatja, mi tűnik el, és megvárja a jóváhagyásodat. A Beállításokban látod, mennyi helyet szabadítottál fel.
+
+KÖTEGELT SOR
+
+Tegyél a sorba annyi fájlt, amennyit akarsz, és fájlonként követheted a haladást és a hátralévő időt. Egyetlen hibás fájl sem viszi el az egész köteget. A konvertálás akkor is fut tovább, ha kilépsz: az értesítésben ott a friss állapot. A sor túléli az újraindítást, a sikertelen feladatokat pedig egy koppintással újrapróbálhatod.
+
+EGYSZERŰ VAGY HALADÓ MÓD
+
+Az Egyszerű módban rövid kártyalista fogad: videó tömörítése, konvertálás MP4-re, hang kinyerése, videóból GIF — és csak az jelenik meg, ami a hozzáadott fájlokhoz illik. A Haladó mód minden átalakítási beállítást megnyit: kodek, állandó minőség (CRF) vagy cél-bitráta, felbontás, képkockasebesség és hardveres kódolás.
+
+AMIHEZ MÁSHOL MÁSODIK ALKALMAZÁS KELL
+
+• Vágás: csúszkával jelölöd ki a pontos szakaszt.
+• Forgatás 90/180/270 fokkal, tükrözés, vágás 1:1, 9:16, 16:9 vagy 4:3 képarányra.
+• Lejátszási sebesség 0,25x és 4x között, a hang szinkronban marad.
+• Hangerő 0 és 200% között.
+• Több klip egyesítése egy fájlba akkor is, ha eltér a kodekjük vagy a felbontásuk.
+• A feliratok megmaradnak, amikor MKV-ből MP4, MOV vagy MKV lesz.
+
+ADATVÉDELEM ALAPÉRTELMEZETTEN
+
+Az EXIF-adatok, a GPS-koordináták és az időbélyegek alapból lekerülnek a fájlokról, így a megosztott fénykép nem viszi magával, hol készült. Nincs analitika, nincs hibajelentés-küldés, nincs azonosító — nincs is min elküldeni őket. Az alkalmazást PIN-kóddal vagy biometrikusan zárhatod, a legutóbbi alkalmazások nézetében pedig takarás fedi a tartalmat.
+
+MENNYIBE KERÜL
+
+Semmibe. Nincs reklám, nincs előfizetés, nincs fizetős funkció, nincs vízjel, nincs exportkorlát és nincs napi keret. Az egyetlen vásárlás a borravaló, ami semmit nem old fel.
+
+AMI MÉG BENNE VAN
+
+Világos, sötét és OLED-fekete téma, kiemelőszín, Material You, telefonos és táblagépes elrendezés, 61 nyelv és 18 eredmény, amit csak ez az eszköz számol.
+
+Nyílt forráskódú szoftverekre épül; a licencek az alkalmazásban olvashatók.

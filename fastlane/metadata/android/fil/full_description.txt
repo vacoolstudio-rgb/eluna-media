@@ -1,0 +1,54 @@
+Kino-convert at pinapaliit ng Eluna Media ang video, litrato at audio nang diretso sa telepono mo. Walang ina-upload at walang account — sa device mismo tumatakbo ang conversion, gamit ang kasamang kopya ng FFmpeg, kaya hindi umaalis sa telepono ang mga file mo.
+
+Hindi mo naman kailangang basta maniwala. Walang INTERNET permission ang release build: makikita mo mismo sa app info ng system na wala itong access sa network, at inililista ng Network at privacy sa Mga setting ang bawat channel na magagamit ng app — wala ni isa.
+
+I-compress ang video para magkasya sa 25 MB na limitasyon sa chat. Video sa MP3 para sa voice note, lecture o podcast. Litrato sa JPEG o WebP para gumaan ang storage. Lahat offline, kahit naka-airplane mode.
+
+ANO ANG KINO-CONVERT NITO
+
+• Video — MP4, MKV, MOV, WebM, AVI. I-encode sa H.264, H.265, AV1, VP9 o MPEG-4, o stream copy para palitan ang container nang hindi na ini-encode ulit.
+• Audio — MP3, M4A (AAC, o ALAC kung lossless), WAV, FLAC, OGG Vorbis, Opus. Kunin ang audio ng kahit anong video at gawin itong MP3.
+• Litrato — JPEG, PNG, WebP, AVIF, BMP, TIFF, at animated GIF o animated WebP mula sa video clip.
+
+IAKMA SA LAKI
+
+Pumili ng laki — 10, 16, 25, 50, 100 MB, o sarili mong numero — at kukuwentahin ng app ang bitrate mula sa totoong haba ng file, may safety margin, kaya laging mas maliit sa limit mo ang resulta. Hindi mo na kailangang hulaan kung kakasya. May two-pass mode para mas tumpak pa.
+
+HINDI NITO PINAPALAKI ANG FILE
+
+Ang clip na dumaan na sa chat ay puwedeng bumalik na mas malaki pa, dahil walang sariling hangganan ang compression na batay sa kalidad. Dito, nililimitahan ang encode sa sariling bitrate ng pinagmulan, kaya mas maliit o ganoon pa rin ang balik. Puwede mo itong patayin kung talagang kailangan.
+
+MAGBAKANTE NG STORAGE
+
+Pagkatapos i-compress at i-save ang resulta, puwedeng hilingin ng app sa Android na burahin ang mga orihinal — ipinapakita ng system ang totoong mga file at naghihintay ng pahintulot mo. Nakatala sa Mga setting ang espasyong nabakante mo.
+
+GAWA PARA SA MARAMING FILE
+
+Ipila ang kahit ilang file at tingnan ang progreso at natitirang oras ng bawat isa. Hindi pumapatay sa buong batch ang isang sirang file. Tumutuloy ang conversion kahit lumabas ka sa app, may progreso sa notification, at ipinagpapatuloy ang naantalang pila pagkatapos ng restart. Isang pindot lang para ulitin ang nabigong job.
+
+SIMPLE O ADVANCED, IKAW ANG BAHALA
+
+Ang Simple mode ay maikling listahan ng mga card — i-compress ang video, i-convert sa MP4, kunin ang audio, gumawa ng GIF — at ang inaalok lang nito ay ang kayang gawin sa mga file mo. Sa Advanced mode nakabukas ang buong kontrol: codec, kalidad (CRF) o target na bitrate, resolusyon, frame rate, preset ng encoder at hardware encoding.
+
+MGA PAG-EDIT NA HINAHANAP MO PA SA IBANG APP
+
+• Putulin ang pinagmulan sa gustong bahagi gamit ang slider.
+• Iikot nang 90/180/270°, i-mirror, o i-crop sa 1:1, 9:16, 16:9 o 4:3.
+• Baguhin ang bilis mula 0.25x hanggang 4x, sabay pa rin ang audio.
+• Iayos ang lakas ng tunog mula 0 hanggang 200%.
+• Pagsamahin ang ilang clip sa isa, kahit hindi magkatugma ang codec, resolusyon at frame rate.
+• Panatilihin ang subtitle kapag ini-convert ang MKV sa MP4, MOV o MKV.
+
+PRIVACY MULA SA SIMULA
+
+Inaalis bilang default ang EXIF, mga koordinada ng GPS at mga timestamp, kaya hindi dala ng litrato mo kung saan ito kinunan. Walang analytics, walang crash reporting, walang identifier — wala namang daanan para dito. Puwede mo ring i-lock ang app gamit ang PIN o biometrics.
+
+MAGKANO ITO
+
+Wala. Walang ads, walang subscription, walang naka-paywall na feature, walang watermark at walang limitasyon sa pag-export. Ang tanging mabibili sa app ay tip, at wala itong binubuksan.
+
+IBA PANG NASA LOOB
+
+Light, dark at OLED black na tema, accent picker at Material You, layout para sa telepono at tablet, 61 na wika, at 18 na nagawa (achievement) na binibilang sa device.
+
+Binuo gamit ang open-source na software; nakalista sa app ang mga lisensya.

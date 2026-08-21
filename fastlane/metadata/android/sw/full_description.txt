@@ -1,0 +1,52 @@
+Eluna Media hubana na kubadilisha video, picha na sauti moja kwa moja ndani ya simu yako. Hakuna kinachopakiwa mtandaoni, huhitaji akaunti wala kungoja foleni ya seva — kila ubadilishaji hufanyika hapa hapa kwa nakala ya FFmpeg iliyojumuishwa ndani ya programu, hivyo faili zako hazitoki kamwe kwenye kifaa.
+
+Huna haja ya kuamini maneno tu. Toleo hili halina ruhusa ya intaneti: taarifa za programu za mfumo zitakuonyesha kwamba haina ufikiaji wa mtandao kabisa, na ukurasa wa Mtandao na faragha ndani ya Mipangilio huorodhesha kila njia ambayo programu ingeweza kupitia — kwa hii, orodha ni tupu. Kila kitu hufanya kazi bila mtandao na bila bando.
+
+HUBADILISHA NINI
+
+• Video — MP4, MKV, MOV, WebM, AVI. Simba kwa H.264, H.265, AV1, VP9 au MPEG-4, au nakili mtiririko ili kubadilisha muundo bila kusimba upya.
+• Sauti — MP3, M4A (AAC, au ALAC bila hasara), WAV, FLAC, OGG Vorbis, Opus. Toa sauti kutoka video yoyote na ugeuze video kuwa MP3.
+• Picha — JPEG, PNG, WebP, AVIF, BMP, TIFF, pamoja na GIF na WebP zenye mwendo kutoka klipu fupi ya video.
+
+FIKIA UKUBWA LENGWA
+
+Chagua ukubwa — MB 10, 16, 25, 50, 100 au andika namba yako — nayo programu hukokotoa kasi ya biti kutokana na muda halisi wa faili, huacha nafasi ya usalama na huweka kikomo kwenye mtiririko, hivyo tokeo huishia chini ya kikomo chako, si karibu nacho tu. Kutuma kiambatisho kwenye gumzo, barua pepe au fomu ya kupakia si kubahatisha tena. Washa mizunguko miwili ili kufikia namba hiyo kwa usahihi zaidi.
+
+UBANAJI HAUKUZI FAILI
+
+Ubora thabiti (CRF) hauna kikomo chake, hivyo klipu iliyokwisha kubanwa inaweza kutoka ikiwa kubwa zaidi. Hapa mitiririko yote miwili hushikiliwa kwenye kiwango ambacho chanzo chenyewe kilitumia, hivyo faili hurudi ndogo au hubaki kama ilivyo. Unaweza kuzima ulinzi huo ukitaka.
+
+PATA NAFASI KWENYE SIMU
+
+Bana kundi la faili, hifadhi matokeo, na programu inaweza kuiomba Android ifute asili — mfumo huonyesha faili halisi na husubiri uthibitisho wako, hivyo hakuna kinachopotea kwa siri. Mipangilio huhesabu nafasi uliyoachilia.
+
+FOLENI YA FAILI NYINGI
+
+Weka faili nyingi upendavyo kwenye foleni, uone maendeleo na muda uliobaki wa kila moja. Faili moja mbovu haiharibu kundi zima. Ubadilishaji huendelea hata ukitoka kwenye programu, huku maendeleo yakionekana kwenye arifa, na foleni haipotei: kundi lililokatizwa huendelezwa ukifungua tena. Kazi zilizoshindikana hujaribiwa tena kwa mguso mmoja.
+
+RAHISI AU YA KINA
+
+Hali ya Rahisi ni orodha fupi ya kadi: bana video, badilisha kuwa MP4, toa sauti, tengeneza GIF — na huonyesha tu kinachoendana na faili ulizoongeza. Hali ya Kina hufungua vidhibiti vyote: kodeki, ubora (CRF) au kasi lengwa ya biti, azimio, kasi ya fremu, mpangilio wa kisimbaji na usimbaji wa maunzi.
+
+HARIRI BILA PROGRAMU YA PILI
+
+• Kata sehemu unayoitaka kwa kitelezi.
+• Zungusha 90/180/270°, akisi, au punguza pembeni hadi 1:1, 9:16, 16:9 au 4:3.
+• Badilisha kasi kutoka 0.25x hadi 4x, sauti ikibaki sambamba.
+• Rekebisha sauti kutoka 0 hadi 200%.
+• Unganisha klipu kadhaa kuwa moja, hata kodeki, azimio na kasi ya fremu zikitofautiana.
+• Hifadhi manukuu unapobadilisha MKV kuwa MP4, MOV au MKV.
+
+FARAGHA TANGU MWANZO
+
+EXIF, viwianishi vya GPS na alama za wakati huondolewa kwa chaguomsingi, hivyo picha unayoshiriki haibebi mahali ilipopigwa. Hakuna uchanganuzi, ripoti za hitilafu wala vitambulisho — hakuna njia ya kuvituma. Unaweza kufunga programu kwa PIN au kibayometriki, na skrini ya programu za hivi karibuni huonyesha kivuli badala ya faili zako.
+
+GHARAMA
+
+Hakuna. Bila matangazo, bila usajili, bila vipengele vilivyofungiwa malipo, bila alama ya maji na bila kikomo cha kuhamisha. Kinachoweza kununuliwa ni bakshishi tu, nayo haifungui chochote — programu imekamilika bila hiyo.
+
+PIA UTAPATA
+
+Mandhari ya mwangaza, giza na OLED nyeusi kabisa, kichagua rangi ya lafudhi na Material You ya hiari, muonekano wa simu na kompyuta kibao, lugha 61 na mafanikio 18 yanayohesabiwa kwenye kifaa.
+
+Imejengwa kwa programu huria; leseni zimeorodheshwa ndani ya programu.

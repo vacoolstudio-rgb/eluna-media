@@ -1,0 +1,8 @@
+Verzija 1.0 — prvo javno izdanje.
+
+• Pretvaranje i sažimanje videozapisa, fotografija i zvuka u cijelosti na uređaju.
+• Prilagodi veličini: odaberite 10, 16, 25, 50 ili 100 MB i rezultat stane ispod toga.
+• Red čekanja radi u pozadini i sam se nastavlja nakon prekida.
+• Skraćivanje, zakretanje, izrezivanje, spajanje, brzina, zvuk iz videa, GIF.
+• EXIF i GPS uklanjaju se prema zadanome. Ova verzija nema dopuštenje za internet.
+• 61 jezik, rasporedi za tablete, svijetla, tamna i OLED tema.

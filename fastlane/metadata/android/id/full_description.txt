@@ -1,0 +1,54 @@
+Eluna Media mengompres dan mengonversi video, foto, dan audio langsung di ponselmu. Tidak ada yang diunggah, tidak perlu bikin akun, tidak ada antrean server — semua dikerjakan FFmpeg bawaan di dalam aplikasi, jadi file kamu tidak pernah meninggalkan perangkat.
+
+Tidak perlu percaya begitu saja. Versi rilis ini dibuat tanpa izin INTERNET: info aplikasi di Android akan menunjukkan bahwa aplikasi ini tidak punya akses jaringan sama sekali, dan layar Jaringan & privasi di Setelan mencantumkan semua jalur jaringan yang ada — dan tidak ada satu pun. Nyalakan mode pesawat, konversi tetap jalan.
+
+SESUAIKAN UKURAN, PAS DI BAWAH BATAS
+
+Pilih ukuran target — 10 MB, 16 MB, 25 MB, 50 MB, 100 MB, atau ketik angkamu sendiri — lalu bitrate dihitung dari durasi asli file dengan margin aman, sehingga hasilnya benar-benar di bawah batas, bukan sekadar mendekatinya. Perkecil ukuran video untuk lampiran email atau kiriman chat tanpa main tebak-tebakan lagi. Aktifkan mode two-pass kalau ingin makin presisi.
+
+Untuk foto, targetnya dihitung dalam KB: pas untuk formulir unggah, berkas lamaran kerja, atau pendaftaran yang membatasi ukuran foto. Aplikasi mencoba beberapa tingkat kualitas sampai muat.
+
+APA SAJA YANG BISA DIKONVERSI
+
+• Video — MP4, MKV, MOV, WebM, AVI. Encode dengan H.264, H.265, AV1, VP9, atau MPEG-4, atau pakai stream copy untuk ganti kontainer tanpa encode ulang.
+• Audio — MP3, M4A (AAC, atau ALAC untuk lossless), WAV, FLAC, OGG Vorbis, Opus. Ekstrak suara dari video apa pun dan ubah video jadi MP3.
+• Foto — JPEG, PNG, WebP, AVIF, BMP, TIFF, plus GIF animasi dan WebP animasi yang dibuat dari potongan video.
+
+KOMPRESI YANG TIDAK PERNAH MEMBESARKAN FILE
+
+Kompresi berbasis kualitas tidak punya batas atas, jadi klip yang sudah pernah lewat chat bisa keluar lebih besar. Di sini kedua stream dibatasi pada bitrate file sumbernya sendiri, jadi hasilnya lebih kecil atau tetap sama. Pengaman ini bisa dimatikan.
+
+BEBASKAN RUANG PENYIMPANAN
+
+Kompres satu batch, simpan hasilnya, lalu aplikasi bisa meminta Android menghapus file aslinya — sistem menampilkan file yang akan hilang dan menunggu konfirmasimu. Setelan mencatat total ruang yang dibebaskan.
+
+DIBUAT UNTUK BANYAK FILE SEKALIGUS
+
+Masukkan file sebanyak apa pun ke antrean, lihat progres dan sisa waktu tiap file. Satu file yang gagal tidak menggagalkan sisanya, dan bisa diulang sekali ketuk. Konversi tetap jalan saat aplikasi ditinggal, dengan progres di notifikasi, dan batch yang terputus lanjut sendiri setelah restart.
+
+SEDERHANA ATAU LANJUTAN
+
+Mode Sederhana hanya berisi kartu preset — kompres video, MP4 kompatibel, ekstrak audio, video ke GIF — dan cuma menawarkan yang cocok dengan file kamu. Mode Lanjutan membuka semua kontrol: codec, kualitas (CRF) atau bitrate target, resolusi, frame rate, preset encoder, dan encoding hardware.
+
+EDIT YANG BIASANYA BUTUH APLIKASI LAIN
+
+• Trim ke rentang tertentu lewat slider.
+• Putar 90/180/270°, cermin horizontal, atau pangkas ke 1:1, 9:16, 16:9, atau 4:3.
+• Ubah kecepatan dari 0,25x sampai 4x, dengan audio tetap sinkron.
+• Atur volume dari 0 sampai 200%.
+• Gabung beberapa klip jadi satu, walau codec, resolusi, dan frame rate-nya berbeda.
+• Pertahankan subtitle saat mengonversi MKV ke MP4, MOV, atau MKV.
+
+PRIVASI SEJAK DIRANCANG
+
+EXIF, koordinat GPS, dan stempel waktu dihapus secara default, jadi foto yang kamu bagikan tidak membawa lokasi pengambilannya. Tidak ada analitik, laporan crash, maupun ID pelacak — tidak ada jalur untuk mengirimnya. Aplikasi bisa dikunci dengan PIN atau biometrik.
+
+BERAPA HARGANYA
+
+Gratis. Tanpa iklan, tanpa langganan, tanpa fitur berbayar, tanpa watermark, tanpa batas ekspor, tanpa kuota harian. Satu-satunya pembelian adalah tip, dan tip tidak membuka apa pun.
+
+ADA JUGA DI DALAMNYA
+
+Tema terang, gelap, dan hitam pekat OLED, pemilih warna aksen, Material You opsional, tata letak ponsel dan tablet, 61 bahasa, dan 18 pencapaian di perangkat.
+
+Dibuat dengan perangkat lunak open source; daftar lisensinya ada di dalam aplikasi.

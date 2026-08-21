@@ -1,0 +1,52 @@
+O Eluna Media é um compressor e conversor de vídeo, foto e áudio que funciona direto no seu celular. Nada é enviado para lugar nenhum, não tem conta para criar nem fila para encarar: cada conversão roda no aparelho, com uma cópia do FFmpeg embutida no app, e nenhum arquivo sai do celular.
+
+Dá para conferir: a versão publicada é compilada sem a permissão de internet, e a tela de informações do app, no Android, mostra que ele não tem acesso à rede. Nas Configurações, a auditoria "Rede e privacidade" lista os canais de rede que o app poderia usar: nenhum. Ative o modo avião e converta — funciona igual.
+
+O QUE DÁ PARA CONVERTER
+
+• Vídeo — MP4, MKV, MOV, WebM, AVI. Codifique em H.264, H.265, AV1, VP9 ou MPEG-4, ou troque o contêiner sem recodificar, no modo Copiar (remux).
+• Áudio — MP3, M4A (AAC, ou ALAC sem perdas), WAV, FLAC, OGG Vorbis e Opus. Extraia o áudio de qualquer vídeo e converta vídeo para MP3.
+• Foto — JPEG, PNG, WebP, AVIF, BMP, TIFF, além de GIF animado e WebP animado feitos a partir de um trecho de vídeo.
+
+AJUSTAR AO TAMANHO
+
+Precisa reduzir o tamanho de um vídeo até um número exato? Escolha um limite — 10 MB, 16 MB, 25 MB, 50 MB, 100 MB ou digite o seu — e o app calcula o bitrate pela duração real do arquivo, guarda uma margem de segurança e coloca um teto no stream, para o resultado ficar abaixo do limite, e não só perto dele. Mandar um vídeo num chat com limite de anexo deixa de ser tentativa e erro. Com as duas passagens, ele acerta o número com precisão ainda maior.
+
+COMPRIMIR NUNCA DEIXA O ARQUIVO MAIOR
+
+A qualidade constante não tem teto próprio: um vídeo que já passou por um app de mensagens pode voltar maior do que era. Aqui os dois streams ficam limitados ao que o original gastou: o resultado sai menor ou igual, nunca maior. Dá para desligar a trava se você quiser mesmo subir a qualidade.
+
+LIBERE ESPAÇO NO CELULAR
+
+Comprima um lote, salve os resultados e o app pode pedir ao Android para excluir os originais — o sistema mostra os arquivos e espera sua confirmação, nada some pelas suas costas. As Configurações mostram quanto espaço você já recuperou.
+
+FEITO PARA LOTES
+
+Coloque quantos arquivos quiser na fila e veja o progresso e o tempo restante de cada um. Um arquivo ruim não derruba o lote. A conversão continua quando você sai do app, com progresso na notificação, e um lote interrompido volta sozinho na próxima vez. Tarefas que falharam são refeitas com um toque.
+
+SIMPLES OU AVANÇADO
+
+O modo Simples é uma lista curta de cartões — comprimir vídeo, ajustar ao tamanho, MP4 compatível, extrair áudio, vídeo em GIF, juntar vídeos, comprimir foto — e só mostra o que combina com os arquivos que você adicionou. O modo Avançado abre tudo: codec, qualidade (CRF) ou bitrate alvo, resolução, taxa de quadros, preset e codificação por hardware.
+
+EDIÇÃO QUE COSTUMA PEDIR OUTRO APP
+
+• Cortar por tempo, arrastando o início e o fim.
+• Girar 90/180/270°, espelhar ou recortar em 1:1, 9:16, 16:9 e 4:3.
+• Mudar a velocidade de 0,25x a 4x, com o áudio em sincronia.
+• Ajustar o volume de 0 a 200%.
+• Juntar vários clipes em um só, mesmo com codecs, resoluções e taxas de quadros diferentes.
+• Manter as legendas ao converter MKV para MP4, MOV ou MKV.
+
+PRIVACIDADE POR PADRÃO
+
+EXIF, coordenadas de GPS e datas ficam de fora dos resultados por padrão: a foto que você compartilha não leva junto o lugar onde foi tirada. Não há análises, relatórios de falhas nem identificadores: não existe por onde enviá-los. Dá para bloquear o app com PIN ou biometria, e a tela de apps recentes aparece coberta.
+
+QUANTO CUSTA
+
+Nada. Sem anúncios, sem assinatura, sem recursos pagos, sem marca d'água, sem limite de exportação e sem cota diária. A única compra é uma gorjeta, e ela não libera nada: o app já vem completo.
+
+E AINDA TEM
+
+Temas claro, escuro e preto OLED, cor de destaque e Material You opcional, layouts para celular e tablet, 61 idiomas e 18 conquistas contadas só no aparelho.
+
+Feito com software de código aberto; as licenças estão no app.

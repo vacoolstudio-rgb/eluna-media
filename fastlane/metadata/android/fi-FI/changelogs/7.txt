@@ -1,0 +1,9 @@
+Versio 1.0 — ensimmäinen julkinen versio.
+
+• Muunna ja pakkaa videot, kuvat ja äänet kokonaan laitteessa.
+• Sovita kokoon: valitse 10, 16, 25, 50 tai 100 MB, tulos jää rajan alle.
+• Jono jatkuu taustalla ja selviää uudelleenkäynnistyksestä.
+• Leikkaa, käännä, rajaa, yhdistä, muuta nopeutta, pura ääni, tee GIF.
+• EXIF ja GPS poistetaan oletuksena. Tässä versiossa ei ole internet-lupaa.
+• 61 kieltä, tablettiasettelut sekä vaalea, tumma ja OLED-teema.
+• Ei mainoksia, ei tilauksia, ei vesileimoja.

@@ -1,0 +1,8 @@
+Verzia 1.0 — prvé verejné vydanie.
+
+• Prevod a zmenšenie videa, fotiek aj zvuku priamo v zariadení.
+• Zmestiť do veľkosti: zvoľte 10, 16, 25, 50 alebo 100 MB a výsledok sa pod limit zmestí.
+• Rad beží aj na pozadí a prežije reštart aplikácie.
+• Skrátenie, otočenie, orez, spojenie klipov, rýchlosť, zvuk z videa, GIF.
+• EXIF a GPS sa odstraňujú predvolene. Toto vydanie nemá povolenie na internet.
+• 61 jazykov, rozloženie pre tablety, svetlý, tmavý a OLED motív.

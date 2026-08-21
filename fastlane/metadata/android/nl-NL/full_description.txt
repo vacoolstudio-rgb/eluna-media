@@ -1,0 +1,52 @@
+Eluna Media comprimeert en converteert video's, foto's en audio, rechtstreeks op je apparaat. Er wordt niets geüpload, je hebt geen account nodig en je wacht niet op een server: elke conversie draait lokaal via een meegeleverde FFmpeg. Geen advertenties, geen abonnement, geen watermerk, geen exportlimiet.
+
+Je hoeft ons niet op ons woord te geloven. Deze versie vraagt de internettoestemming niet aan: in de app-info van Android zie je zelf dat de app geen netwerktoegang heeft, en het scherm Netwerk en privacy in de instellingen somt elk kanaal op dat de app zou kunnen gebruiken. Het zijn er nul.
+
+WAT JE KUNT CONVERTEREN
+
+• Video — MP4, MKV, MOV, WebM, AVI. Coderen met H.264, H.265, AV1, VP9 of MPEG-4, of een stream-kopie die de container verandert zonder opnieuw te coderen.
+• Audio — MP3, M4A (AAC, of ALAC voor verliesvrij), WAV, FLAC, OGG Vorbis, Opus. Haal het geluid uit elke video en zet een video om naar MP3.
+• Foto — JPEG, PNG, WebP, AVIF, BMP, TIFF, plus geanimeerde GIF en geanimeerde WebP uit een videofragment.
+
+PASSEND MAKEN: VIDEO VERKLEINEN TOT EEN EXACTE LIMIET
+
+Kies een doelgrootte — 10, 16, 25, 50 of 100 MB, of typ je eigen getal — en de app berekent de bitrate uit de echte duur van je bestand, houdt een veiligheidsmarge aan en begrenst de stream. Het resultaat komt onder je limiet uit in plaats van er net naast. Voor een bijlage of een chatlimiet hoef je dus niet meer te gokken. Zet Twee doorgangen aan en de limiet wordt nog nauwkeuriger gehaald.
+
+COMPRIMEREN MAAKT EEN BESTAND NOOIT GROTER
+
+Constante kwaliteit heeft geen eigen plafond: een clip die al door een chat-app is gegaan, kan groter uitvallen. Hier worden beide streams begrensd op wat de bron zelf verbruikte, dus het bestand wordt kleiner of blijft gelijk. Wil je bewust naar een hogere bitrate coderen, dan zet je dat uit.
+
+RUIMTE VRIJMAKEN
+
+Comprimeer een reeks bestanden, sla het resultaat op en de app kan Android vragen de originelen te verwijderen. Het systeem toont altijd wat weggaat en wacht op je bevestiging. In de instellingen zie je hoeveel ruimte je zo al hebt vrijgemaakt.
+
+GEMAAKT VOOR HELE BATCHES
+
+Zet zoveel bestanden in de wachtrij als je wilt en volg per bestand de voortgang en resterende tijd. Eén mislukt bestand houdt de batch niet tegen. Het converteren loopt door als je de app verlaat, met live voortgang in de melding, en de wachtrij overleeft een herstart. Mislukte taken herstart je met één tik.
+
+EENVOUDIG OF GEAVANCEERD
+
+Eenvoudig is een korte lijst met kaarten die elk één ding doen — video comprimeren, converteren naar MP4, audio extraheren, een GIF maken — en toont alleen wat bij je bestanden past. Geavanceerd opent de volledige bediening: codec, kwaliteit (CRF) of doelbitrate, resolutie, beeldsnelheid, encoder-preset en hardwarecodering met de videochip van het apparaat, met automatische terugval op software.
+
+BEWERKEN ZONDER TWEEDE APP
+
+• Met een schuifregelaar inkorten tot het stuk dat je wilt.
+• Draaien over 90, 180 of 270 graden, spiegelen, of bijsnijden naar 1:1, 9:16, 16:9 of 4:3.
+• Snelheid van 0,25x tot 4x, met het geluid synchroon.
+• Volume van 0 tot 200%.
+• Video's samenvoegen tot één bestand, ook als codec, resolutie en beeldsnelheid verschillen.
+• Ondertitels behouden bij MKV naar MP4, MOV of MKV.
+
+PRIVACY IS DE STANDAARD
+
+EXIF, GPS-coördinaten en tijdstempels worden standaard verwijderd, dus een foto die je deelt verraadt niet waar hij is gemaakt. Er is geen analytics, geen crashrapportage en geen identifier. Je kunt de app vergrendelen met een pincode of biometrie, en bij recente apps zie je een afdekscherm in plaats van je bestanden.
+
+WAT HET KOST
+
+Niets. Alles zit erin, batchconversie inbegrepen. Het enige wat je kunt kopen is een fooi, en die ontgrendelt helemaal niets.
+
+VERDER NOG
+
+Licht, donker en pikzwart OLED met accentkleur en optioneel Material You, indelingen voor telefoon en tablet, 61 talen en 18 prestaties, op dit apparaat geteld.
+
+Gebouwd met opensourcesoftware; de licenties staan in de app.

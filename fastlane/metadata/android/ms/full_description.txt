@@ -1,0 +1,56 @@
+Eluna Media menukar dan memampatkan video, foto dan audio terus di dalam telefon anda. Tiada fail dimuat naik, tiada akaun dan tiada giliran pelayan untuk ditunggu — setiap penukaran dijalankan pada peranti ini melalui FFmpeg yang disertakan.
+
+Kecilkan saiz video supaya cukup kecil untuk dihantar, tukar video kepada MP3, atau tukar foto kepada JPEG — semuanya luar talian (offline), tanpa iklan dan tanpa tera air.
+
+Anda tidak perlu percaya pada kata-kata kami. Versi keluaran ini dibina tanpa kebenaran INTERNET: skrin maklumat aplikasi Android sendiri menunjukkan bahawa aplikasi ini langsung tiada akses rangkaian. Hidupkan mod pesawat dan mampatkan video: ia tetap berfungsi.
+
+APA YANG BOLEH DITUKAR
+
+• Video — MP4, MKV, MOV, WebM, AVI. Pilih kodek H.264, H.265, AV1, VP9 atau MPEG-4, atau salin strim untuk menukar bekas tanpa mengekod semula.
+• Audio — MP3, M4A (AAC atau ALAC), WAV, FLAC, OGG Vorbis, Opus. Ekstrak audio daripada mana-mana video dan jadikannya MP3.
+• Foto — JPEG, PNG, WebP, AVIF, BMP, TIFF, serta GIF beranimasi dan WebP beranimasi daripada klip video.
+
+MUAT IKUT SAIZ
+
+Pilih saiz — 10 MB, 16 MB, 25 MB, 50 MB, 100 MB, atau taip nombor sendiri — dan aplikasi mengira kadar bit daripada tempoh sebenar fail itu, dengan margin keselamatan, supaya hasilnya kekal di bawah had anda. Had saiz lampiran e-mel dan sembang tidak lagi jadi kerja meneka. Mod dua laluan lebih tepat lagi.
+
+Foto ada mod yang sama: tetapkan had dalam KB untuk borang muat naik, dan aplikasi mencuba tahap kualiti sehingga ada yang muat.
+
+MAMPATAN TIDAK MEMBESARKAN FAIL
+
+Mampatan berasaskan kualiti tiada had atasnya sendiri, jadi klip yang sudah dimampatkan boleh keluar lebih besar daripada asalnya. Di sini kedua-dua strim dihadkan pada kadar bit fail sumber, jadi hasilnya lebih kecil atau kekal sama saiz.
+
+BEBASKAN RUANG SIMPANAN
+
+Selepas hasilnya disimpan, aplikasi boleh meminta Android membuang fail asal — sistem menunjukkan fail sebenar dan menunggu pengesahan anda. Tetapan menyimpan jumlah ruang yang anda bebaskan.
+
+DIBINA UNTUK KELOMPOK
+
+Masukkan seberapa banyak fail ke dalam baris gilir dan lihat kemajuan serta baki masa setiap satu. Satu fail rosak tidak menghentikan kelompok. Penukaran terus berjalan di latar dengan kemajuan dalam pemberitahuan, dan kelompok yang terganggu disambung semula selepas aplikasi dibuka semula. Kerja yang gagal dicuba semula dengan satu ketikan.
+
+RINGKAS ATAU LANJUTAN
+
+Mod Ringkas ialah kad hasil — mampatkan video, tukar kepada MP4, ekstrak audio, buat GIF — dan hanya menawarkan yang sesuai dengan fail anda. Mod Lanjutan membuka kawalan penuh: kodek, kualiti malar (CRF) atau kadar bit sasaran, resolusi, kadar bingkai, praset pengekod dan pengekodan perkakasan.
+
+SUNTINGAN YANG BIASANYA MEMERLUKAN APLIKASI LAIN
+
+• Potong sumber kepada julat yang anda mahu.
+• Putar 90/180/270°, cermin mendatar, atau pangkas kepada 1:1, 9:16, 16:9 atau 4:3.
+• Ubah kelajuan dari 0.25x hingga 4x, dengan audio kekal segerak.
+• Laraskan kelantangan dari 0 hingga 200%.
+• Gabungkan beberapa klip menjadi satu, walaupun kodek, resolusi dan kadar bingkainya berbeza.
+• Kekalkan sari kata semasa menukar MKV kepada MP4, MOV atau MKV.
+
+PRIVASI SEBAGAI ASAS
+
+EXIF, koordinat GPS dan cap masa dibuang secara lalai, jadi foto yang anda kongsi tidak membawa lokasi tempat ia diambil. Tiada analitik, tiada laporan ranap, tiada pengecam. Aplikasi boleh dikunci dengan PIN atau biometrik.
+
+HARGANYA
+
+Percuma sepenuhnya. Tanpa iklan, tanpa langganan, tanpa ciri berbayar, tiada tera air, tiada had eksport, tiada kuota harian. Satu-satunya pembelian ialah tip, dan tip itu tidak membuka apa-apa — aplikasi ini sudah lengkap tanpanya.
+
+TURUT ADA DI DALAM
+
+Tema terang, gelap dan hitam OLED, pemilih warna aksen, warna Material You, susun atur telefon dan tablet, 61 bahasa, dan 18 pencapaian pada peranti. Fail yang dikongsi daripada aplikasi lain terus masuk ke baris gilir.
+
+Dibina dengan perisian sumber terbuka; lesennya disenaraikan dalam aplikasi.

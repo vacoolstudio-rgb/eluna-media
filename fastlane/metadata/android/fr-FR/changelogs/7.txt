@@ -1,0 +1,8 @@
+Version 1.0 — première version publique.
+
+• Convertir et compresser vidéos, photos et audio sur l'appareil.
+• Ajuster à une taille : 10, 16, 25, 50 ou 100 Mo, et le résultat reste sous la limite.
+• File d'attente qui continue en arrière-plan et survit à un redémarrage.
+• Découper, faire pivoter, recadrer, fusionner, régler la vitesse, extraire l'audio, créer des GIF.
+• EXIF et GPS retirés par défaut. Aucun accès à Internet.
+• 61 langues, mises en page tablette, thèmes clair, sombre et OLED.

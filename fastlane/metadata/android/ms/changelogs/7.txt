@@ -1,0 +1,8 @@
+Versi 1.0 — keluaran awam pertama.
+
+• Tukar dan mampatkan video, foto dan audio sepenuhnya pada peranti.
+• Muat ikut saiz: pilih 10, 16, 25, 50 atau 100 MB dan hasilnya kekal di bawah had itu.
+• Baris gilir kelompok terus berjalan di latar dan disambung semula selepas aplikasi dibuka.
+• Potong, putar, pangkas, gabung, ubah kelajuan, ekstrak audio, bina GIF.
+• EXIF dan GPS dibuang secara lalai. Tiada kebenaran internet langsung.
+• 61 bahasa, susun atur tablet, tema terang, gelap dan OLED.

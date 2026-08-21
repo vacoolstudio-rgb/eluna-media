@@ -1,0 +1,8 @@
+Različica 1.0 — prva javna izdaja.
+
+• Pretvorba in stiskanje videa, fotografij in zvoka v celoti na napravi.
+• Prilagodi velikosti: izberite 10, 16, 25, 50 ali 100 MB in rezultat pristane pod mejo.
+• Paketna čakalna vrsta teče v ozadju in preživi ponovni zagon.
+• Skrajšanje, zasuk, obrez, združevanje, hitrost, izločanje zvoka, GIF.
+• EXIF in GPS privzeto odstranjena. Ta različica nima dovoljenja za internet.
+• 61 jezikov, postavitve za tablice ter svetla, temna in OLED tema.

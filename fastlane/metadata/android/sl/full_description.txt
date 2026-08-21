@@ -1,0 +1,54 @@
+Eluna Media pretvarja in stiska video, fotografije in zvok kar na vaši napravi. Nič se ne naloži na strežnik, računa ni treba ustvarjati in v nobeni vrsti ni treba čakati — vsako pretvorbo opravi vgrajeni pogon FFmpeg, zato vaše datoteke telefona nikoli ne zapustijo.
+
+Brez oglasov, brez naročnin, brez vodnih žigov in brez omejitev pri izvozu.
+
+Ni vam treba verjeti na besedo. Objavljena različica je zgrajena brez dovoljenja INTERNET: sistemski podatki o aplikaciji povedo, da do omrežja sploh nima dostopa, zaslon »Omrežje in zasebnost« v nastavitvah pa našteje vse poti, po katerih bi aplikacija lahko prišla na omrežje — pri tej ni nobene.
+
+KAJ PRETVARJA
+
+• Video — MP4, MKV, MOV, WebM, AVI. Kodirajte s H.264, H.265, AV1, VP9 ali MPEG-4 ali s kopiranjem toka (remux) zamenjajte le vsebnik, brez ponovnega kodiranja.
+• Zvok — MP3, M4A (AAC ali ALAC brez izgub), WAV, FLAC, OGG Vorbis, Opus. Izločite zvok iz katerega koli videa in pretvorite video v MP3.
+• Fotografije — JPEG, PNG, WebP, AVIF, BMP, TIFF ter animiran GIF in animiran WebP iz videa.
+
+PRILAGODI VELIKOSTI
+
+Izberite velikost — 10, 16, 25, 50 ali 100 MB ali vpišite svojo — in aplikacija iz dejanskega trajanja datoteke izračuna bitno hitrost, pusti varnostno rezervo in toku postavi zgornjo mejo. Rezultat pristane pod vašo omejitvijo, ne le blizu nje: priloge k e-pošti in omejitve velikosti v klepetih niso več ugibanje. Z dvoprehodnim načinom zadene cilj še natančneje.
+
+STISKANJE DATOTEKE NIKOLI NE POVEČA
+
+Stiskanje po stalni kakovosti (CRF) svoje zgornje meje nima, zato lahko posnetek, ki je že šel skozi klepet, nastane večji, kot je bil. Tukaj sta oba toka omejena na to, kar je porabil izvirnik, zato je rezultat manjši ali enak izvirniku. Varovalo lahko izklopite, če želite kodirati navzgor.
+
+SPROSTITE PROSTOR
+
+Ko rezultate shranite, lahko aplikacija sistem zaprosi, naj izvirnike izbriše — sistem pokaže dejanske datoteke in počaka na vašo potrditev, zato nič ne izgine za vašim hrbtom. Nastavitve seštevajo, koliko prostora ste že sprostili.
+
+PAKETNA PRETVORBA
+
+V čakalno vrsto dajte poljubno število datotek in pri vsaki spremljajte napredek in čas do konca. Ena pokvarjena datoteka nikoli ne ustavi paketa, neuspela opravila pa ponovite z enim dotikom. Delo teče naprej, ko zapustite aplikacijo, z napredkom v obvestilu, čakalna vrsta pa preživi ponovni zagon.
+
+PREPROSTO ALI NAPREDNO
+
+Preprosti način je kratek seznam kartic z opravili — stisni video, pretvori v MP4, izloči zvok, video v GIF — in ponudi le tisto, kar je z dodanimi datotekami res mogoče. Napredni način odpre vse: kodek, stalno kakovost (CRF) ali ciljno bitno hitrost, ločljivost, hitrost sličic, prednastavitev kodirnika in strojno kodiranje.
+
+UREJANJE BREZ DRUGE APLIKACIJE
+
+• Skrajšajte posnetek na izbrani odsek z drsnikom.
+• Zasukajte za 90/180/270°, zrcalite ali obrežite na 1:1, 9:16, 16:9 ali 4:3.
+• Spremenite hitrost predvajanja od 0,25x do 4x, zvok ostane usklajen.
+• Nastavite glasnost med 0 in 200 %.
+• Združite več posnetkov v enega, tudi če se kodeki in ločljivosti razlikujejo.
+• Ohranite podnapise pri pretvorbi MKV v MP4, MOV ali MKV.
+
+ZASEBNOST ŽE V ZASNOVI
+
+EXIF, koordinate GPS in časovne oznake so privzeto odstranjeni, zato fotografija, ki jo delite, ne izda kraja, kjer je nastala. Analitike ni, poročanja o sesutjih ni, identifikatorjev ni — poslati jih tudi ni po čem. Aplikacijo zaklenete s kodo PIN ali biometrijo, na zaslonu nedavnih aplikacij pa je namesto datotek zastor.
+
+KOLIKO STANE
+
+Nič. Brez oglasov, brez naročnin, brez zaklenjenih funkcij, brez vodnih žigov in brez dnevne kvote. Edini nakup v aplikaciji je napitnina, ki ne odklene prav ničesar — vse deluje tudi brez nje.
+
+ŠE V APLIKACIJI
+
+Svetla, temna in čisto črna tema za OLED, izbira poudarne barve in izbirni Material You, postavitve za telefon in tablico, 61 jezikov ter 18 dosežkov, ki se štejejo samo na tej napravi.
+
+Zgrajeno z odprtokodno programsko opremo; licence so navedene v aplikaciji.

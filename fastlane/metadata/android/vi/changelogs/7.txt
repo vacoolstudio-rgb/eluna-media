@@ -1,0 +1,8 @@
+Phiên bản 1.0 — bản phát hành công khai đầu tiên.
+
+• Nén và chuyển đổi video, ảnh và âm thanh hoàn toàn trên thiết bị.
+• Vừa dung lượng: chọn 10, 16, 25, 50 hay 100 MB, kết quả nằm dưới mức đó.
+• Hàng đợi hàng loạt chạy nền, không mất đi sau một lần khởi động lại.
+• Cắt đoạn, xoay, cắt khung, ghép, đổi tốc độ, tách âm thanh, tạo ảnh GIF.
+• Xoá EXIF và GPS theo mặc định. Bản dựng này không có quyền mạng.
+• 61 ngôn ngữ, bố cục máy tính bảng, giao diện sáng, tối và đen OLED.

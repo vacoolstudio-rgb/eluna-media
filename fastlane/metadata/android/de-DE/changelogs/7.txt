@@ -1,0 +1,8 @@
+Version 1.0 – die erste öffentliche Version.
+
+• Video, Fotos und Audio komplett auf dem Gerät konvertieren und komprimieren.
+• Auf Größe bringen: 10, 16, 25, 50 oder 100 MB – das Ergebnis bleibt darunter.
+• Stapel-Warteschlange, läuft im Hintergrund und übersteht einen Neustart.
+• Schneiden, drehen, zuschneiden, zusammenfügen, Tempo, Audio extrahieren, GIF.
+• EXIF und GPS standardmäßig entfernt, ganz ohne Internet-Berechtigung.
+• 61 Sprachen, Tablet-Layouts, helles, dunkles und OLED-Design.

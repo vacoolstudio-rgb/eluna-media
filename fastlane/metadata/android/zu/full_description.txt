@@ -1,0 +1,54 @@
+I-Eluna Media icindezela futhi iguqula amavidiyo, izithombe nomsindo ngqo kule divayisi yakho. Akukho okulayishwayo, akudingeki akhawunti, futhi awulindi ulayini weseva — umsebenzi wonke wenziwa yi-FFmpeg efakwe ngaphakathi kohlelo, ngakho amafayela akho awaphumi efonini.
+
+Lokho kusho nokuthi ukuguqula akudli i-data yakho. Vula isimo sendiza bese ucindezela ividiyo — kuyasebenza. Kumahhala: azikho izikhangiso, alukho uphawu lwamanzi.
+
+Awudingi ukusithemba nje — ungazibonela. Uhlelo olukhishwayo lwakhiwa ngaphandle kwemvume ye-INTERNET: ulwazi lohlelo lwe-Android ngokwalo luzokutshela ukuthi alunakho ukufinyelela inethiwekhi, futhi isikrini esithi Inethiwekhi nobumfihlo sibala wonke amathuba okuxhumana — awekho.
+
+OKUGUQULWAYO
+
+• Ividiyo — MP4, MKV, MOV, WebM, AVI. Bhala nge-H.264, H.265, AV1, VP9 noma MPEG-4, noma ukopishe ngqo ushintshe isiqukathi ungabhali kabusha.
+• Umsindo — MP3, M4A (AAC, noma ALAC engalahli lutho), WAV, FLAC, OGG Vorbis, Opus. Khipha umsindo kunoma iyiphi ividiyo — ividiyo ibe yi-MP3.
+• Isithombe — JPEG, PNG, WebP, AVIF, BMP, TIFF, kanye ne-GIF ne-WebP enyakazayo eyenziwe ngevidiyo emfushane.
+
+LINGANISA NGOBUKHULU
+
+Khetha ubukhulu — 10 MB, 16 MB, 25 MB, 50 MB, 100 MB, noma ubhale obakho — bese uhlelo lubala i-bitrate ngobude bangempela befayela lakho, lukhawule umzila, ukuze umphumela uwele ngaphansi komkhawulo, hhayi eduze nje kwawo. Umkhawulo wezingxoxo noma we-imeyili awusayona indida. Imodi yokudlula kabili inemba nakakhulu.
+
+UKUCINDEZELA AKUSOZE KWANDISE IFAYELA
+
+Ikhwalithi engaguquki ayinawo umkhawulo wayo, ngakho ividiyo esivele icindeziwe ingabuya inkulu. Lapha imizila yomibili ikhawulelwa kulokho umthombo uqobo owakusebenzisa, ngakho ifayela libuya lincane noma lihlale linjalo. Ungawuvala lo mlindi uma ufuna.
+
+KHULULA ISIKHALA
+
+Ngemva kokugcina imiphumela, uhlelo lungacela i-Android ukuba isuse amafayela asekuqaleni — isistimu ibonisa amafayela angempela futhi ilinde imvume yakho. Izilungiselelo zigcina inani lesikhala osesibuyisile.
+
+WENZELWE AMAFAYELA AMANINGI
+
+Faka kulayini amafayela amaningi bese ubuka inqubekelaphambili nesikhathi esisele efayeleni ngalinye. Ifayela elilodwa elonakele alibulali lonke ulayini. Ukuguqula kuyaqhubeka nawuphuma ohlelweni, inqubekelaphambili ibonakala esazisweni, futhi ulayini uyasinda ekuqaleni kabusha. Okwehlulekile kuzanywa futhi ngokuchofoza kanye.
+
+OKULULA NOMA OKUTHUTHUKISIWE
+
+Imodi ethi Okulula iwuhlu olufushane lwamakhadi emiphumela — cindezela ividiyo, guqulela ku-MP4, khipha umsindo, yenza i-GIF — ibonisa kuphela okufanele amafayela owafakile. Imodi ethi Okuthuthukisiwe ivula zonke izilawuli: i-codec, ikhwalithi (CRF) noma i-bitrate ehlosiwe, ubukhulu besithombe, ijubane lamafreyimu, isethingi se-encoder nokubhala nge-hardware.
+
+HLELA NGAPHANDLE KOLUNYE UHLELO
+
+• Nquma ibanga olifunayo ngesilayidi.
+• Phendula ngo-90/180/270°, uphendule ngokuvundlile, noma unqume ku-1:1, 9:16, 16:9 noma 4:3.
+• Shintsha ijubane ku-0.25x kuya ku-4x, umsindo uhambisane.
+• Lungisa ivolumu ku-0 kuya ku-200%.
+• Hlanganisa amavidiyo amaningi abe yividiyo eyodwa, ngisho noma ama-codec nobukhulu bengafani.
+• Gcina imibhalo engezansi lapho uguqula i-MKV ibe yi-MP4, MOV noma MKV.
+
+UBUMFIHLO KUSUKELA EKUQALENI
+
+I-EXIF, izixhumanisi ze-GPS nezikhathi kususwa ngokuzenzakalelayo, ngakho isithombe owabelana ngaso asiphathi indawo esithathwe kuyo. Awukho umhlaziyo, akukho ukubika kokuphahlazeka, azikho izikhombisi — akukho nendlela yokuzithumela. Ungakhiya uhlelo nge-PIN noma nge-biometrics.
+
+KUBIZA MALINI
+
+Lutho. Azikho izikhangiso, akukho ukubhalisa, azikho izici ezivalelwe ngemuva kwentengo. Okuwukuphela kwento engathengwa yithiphu, futhi ayivuli lutho — uhlelo luphelele ngaphandle kwayo.
+
+OKUNYE NGAPHAKATHI
+
+Ukubukeka okukhanyayo, okumnyama nokumnyama ncimishi kwe-OLED, umkhethi wombala ogqamile, imibala ye-Material You, ukuma kwefoni nokwethebulethi, izilimi ezingu-61, nempumelelo engu-18 ebalwa kule divayisi.
+
+Lwakhiwe ngesofthiwe yomthombo ovulekile; amalayisensi asohlelweni.

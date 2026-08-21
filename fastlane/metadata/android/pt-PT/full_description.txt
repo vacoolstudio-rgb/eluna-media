@@ -1,0 +1,52 @@
+O Eluna Media é um conversor e compressor de vídeo, fotos e áudio para o seu telemóvel. Nada é enviado para um servidor, não é preciso criar conta nem esperar numa fila online: cada conversão corre localmente no FFmpeg incluído na aplicação, por isso os seus ficheiros nunca saem do aparelho.
+
+E não tem de acreditar só na nossa palavra: a versão publicada é compilada sem a permissão INTERNET. O ecrã de informações do próprio Android mostra que a aplicação não tem acesso à rede, e a auditoria de rede e privacidade, nas definições, lista todos os canais que ela poderia usar — neste caso, nenhum.
+
+O QUE PODE CONVERTER
+
+• Vídeo — MP4, MKV, MOV, WebM, AVI. Codifique em H.264, H.265, AV1, VP9 ou MPEG-4, ou copie os fluxos para mudar de contentor sem voltar a codificar.
+• Áudio — MP3, M4A (AAC, ou ALAC sem perdas), WAV, FLAC, OGG Vorbis e Opus. Extraia o som de qualquer vídeo e converta um vídeo para MP3.
+• Fotos — JPEG, PNG, WebP, AVIF, BMP e TIFF, além de GIF animado e WebP animado feitos a partir de um clipe.
+
+AJUSTAR AO TAMANHO
+
+Escolha um limite — 10 MB, 16 MB, 25 MB, 50 MB, 100 MB ou o número que quiser — e a aplicação calcula o bitrate a partir da duração real do ficheiro, com margem de segurança e um teto no fluxo, para o resultado ficar abaixo do limite e não apenas perto dele. Enviar um anexo deixa de ser um jogo de adivinhas. Com o modo de duas passagens, acerta no número com ainda mais precisão.
+
+COMPRIMIR NUNCA AUMENTA UM FICHEIRO
+
+A compressão por qualidade não tem teto próprio, por isso um clipe já comprimido pode ficar maior do que era. Aqui os dois fluxos ficam limitados ao que o original gastou: o ficheiro sai mais pequeno ou fica igual. Pode desligar esta proteção se quiser mesmo codificar com um bitrate mais alto.
+
+LIBERTAR ESPAÇO
+
+Comprima um lote, guarde os resultados e a aplicação pode pedir ao Android que elimine os originais por si — o sistema mostra os ficheiros e espera pela sua aprovação. As definições mostram o total de espaço já recuperado.
+
+FEITO PARA LOTES
+
+Ponha na fila os ficheiros que quiser e veja o progresso e o tempo restante de cada um. Um ficheiro problemático nunca deita o lote abaixo. A conversão continua quando sai da aplicação, com o progresso na notificação, e um lote interrompido retoma sozinho no arranque seguinte. As tarefas falhadas repetem-se com um toque.
+
+SIMPLES OU AVANÇADO
+
+O modo simples é uma lista curta de cartões de resultado — comprimir vídeo, converter para MP4, extrair áudio, criar um GIF — e só oferece o que serve para os ficheiros que adicionou. O modo avançado abre todos os controlos: codec, qualidade (CRF) ou bitrate alvo, resolução, taxa de fotogramas, preset do codificador e codificação por hardware.
+
+EDITAR SEM OUTRA APLICAÇÃO
+
+• Cortar um intervalo com um cursor.
+• Rodar 90/180/270°, espelhar ou recortar para 1:1, 9:16, 16:9 ou 4:3.
+• Mudar a velocidade de 0,25x a 4x, com o áudio sincronizado.
+• Ajustar o volume de 0 a 200%.
+• Juntar vários clipes num só, mesmo com codecs, resoluções e taxas de fotogramas diferentes.
+• Manter as legendas ao converter MKV para MP4, MOV ou MKV.
+
+PRIVACIDADE DE RAIZ
+
+EXIF, coordenadas de GPS e datas são removidos por predefinição, para que uma foto que partilha não leve consigo o sítio onde foi tirada. Não há recolha de dados, relatórios de erros nem identificadores — não há sequer por onde os enviar. Pode bloquear a aplicação com um PIN ou com biometria, e o ecrã de aplicações recentes fica tapado em vez de mostrar os ficheiros.
+
+QUANTO CUSTA
+
+Nada. Sem anúncios, sem subscrições, sem funcionalidades pagas, sem marca de água, sem limite de exportações e sem quota diária. A única compra é uma gorjeta, e não desbloqueia nada: a aplicação está completa sem ela.
+
+TAMBÉM INCLUÍDO
+
+Temas claro, escuro e preto OLED, com cor de destaque à escolha e cores Material You opcionais, esquemas para telemóvel e tablet, 61 idiomas e 18 conquistas guardadas no aparelho.
+
+Criado com software de código aberto; as licenças estão listadas na aplicação.

@@ -1,0 +1,9 @@
+Version 1.0 — the first public release.
+
+• Compress and convert video, photos and audio fully offline.
+• Reduce a video to an exact 10, 16, 25, 50 or 100 MB — the result lands under it.
+• Resize a photo to a size in KB for online form uploads.
+• Video to MP3, and free up storage by deleting the originals.
+• Batch queue that runs in the background and survives a restart.
+• Trim, rotate, crop, merge, change speed, make GIFs.
+• EXIF and GPS removed by default. No internet permission in this build.

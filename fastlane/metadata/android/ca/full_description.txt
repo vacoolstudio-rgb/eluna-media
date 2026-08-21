@@ -1,0 +1,52 @@
+Eluna Media converteix i comprimeix vídeos, fotos i àudio directament al teu telèfon. No es puja res enlloc, no cal cap compte i no hi ha cap cua de servidor: cada conversió s'executa al dispositiu amb una còpia integrada de FFmpeg, i els teus fitxers no surten mai d'aquí.
+
+No cal que t'ho creguis a ulls clucs. La versió que es publica no porta el permís INTERNET: la informació de l'aplicació del sistema dirà que no té cap accés a la xarxa, i la pantalla «Xarxa i privadesa» de la configuració enumera tots els canals de xarxa de l'aplicació: cap.
+
+QUÈ CONVERTEIX
+
+• Vídeo: MP4, MKV, MOV, WebM i AVI. Codifica amb H.264, H.265, AV1, VP9 o MPEG-4, o fes una còpia directa del flux per canviar de contenidor sense recodificar.
+• Àudio: MP3, M4A (AAC, o ALAC sense pèrdua), WAV, FLAC, OGG Vorbis i Opus. Extreu l'àudio de qualsevol vídeo i converteix un vídeo a MP3.
+• Fotos: JPEG, PNG, WebP, AVIF, BMP i TIFF, i també GIF animat o WebP animat fets a partir d'un clip.
+
+AJUSTA A LA MIDA
+
+Tria una mida (10 MB, 16 MB, 25 MB, 50 MB, 100 MB o la que escriguis) i l'aplicació calcula la taxa de bits a partir de la durada real del fitxer, hi deixa un marge de seguretat i posa un sostre al flux: el resultat queda per sota del límit, no només a prop. Enviar un vídeo per correu o per un xat amb límit d'adjunt deixa de ser una travessa. Amb la doble passada encara hi encerta més.
+
+COMPRIMIR NO FA MAI UN FITXER MÉS GRAN
+
+La compressió per qualitat constant no té sostre propi: un clip que ja ha passat per una aplicació de missatgeria pot sortir més gran del que era. Aquí els dos fluxos es limiten al que va gastar l'original, així que surt més petit o es queda igual. Ho pots desactivar si vols apujar la taxa de bits a propòsit.
+
+ALLIBERA ESPAI
+
+Comprimeix un lot, desa els resultats i l'aplicació pot demanar a Android que esborri els originals: el sistema mostra els fitxers reals i espera la teva confirmació. La configuració porta el compte de l'espai recuperat.
+
+PENSAT PER A LOTS
+
+Posa a la cua tants fitxers com vulguis i segueix el progrés i el temps restant de cadascun. Un fitxer defectuós no atura mai el lot. La conversió continua en segon pla, amb el progrés a la notificació, i un lot interromput es reprèn tot sol després d'un reinici. Les tasques fallides es tornen a provar amb un toc.
+
+SIMPLE O AVANÇAT
+
+El mode Simple és una llista curta de targetes (comprimeix el vídeo, ajusta a la mida, extreu l'àudio, vídeo a GIF, uneix vídeos) i només ofereix el que encaixa amb els fitxers afegits. El mode Avançat obre tots els controls: còdec, qualitat constant (CRF) o taxa de bits objectiu, resolució, imatges per segon i codificació per maquinari.
+
+EDITA SENSE OBRIR UNA SEGONA APLICACIÓ
+
+• Talla l'origen a l'interval que vulguis amb un lliscador.
+• Gira 90/180/270°, reflecteix o retalla a 1:1, 9:16, 16:9 o 4:3.
+• Canvia la velocitat de 0,25x a 4x, amb l'àudio sincronitzat.
+• Ajusta el volum del 0 al 200 %.
+• Uneix diversos clips en un de sol, encara que no coincideixin el còdec, la resolució o les imatges per segon.
+• Conserva els subtítols en convertir MKV a MP4, MOV o MKV.
+
+PRIVADA PER DISSENY
+
+L'EXIF, les coordenades GPS i les marques de temps s'eliminen per defecte, de manera que una foto que comparteixes no porta el lloc on la vas fer. No hi ha analítiques, ni informes d'error, ni identificadors. Pots bloquejar l'aplicació amb un PIN o amb biometria, i a les aplicacions recents es veu una pantalla opaca en lloc dels teus fitxers.
+
+QUANT COSTA
+
+Res. Sense anuncis, sense subscripcions, sense funcions de pagament, sense marques d'aigua, sense límits d'exportació ni quota diària. L'única compra és una propina, i no desbloqueja res: l'aplicació ja és completa sense ella.
+
+TAMBÉ HI TROBARÀS
+
+Temes clar, fosc i negre pur per a OLED amb selector de color d'accent i Material You opcional, interfície per a telèfon i tauleta, 61 idiomes i 18 assoliments que es compten en aquest dispositiu.
+
+Fet amb programari lliure; trobaràs les llicències dins de l'aplicació.

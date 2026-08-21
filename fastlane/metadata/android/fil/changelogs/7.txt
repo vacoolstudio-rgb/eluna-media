@@ -1,0 +1,8 @@
+Bersyon 1.0 — ang unang pampublikong release.
+
+• I-convert at i-compress ang video, litrato at audio nang buo sa device.
+• Iakma sa laki: pumili ng 10, 16, 25, 50 o 100 MB at kakasya ang resulta.
+• Pilang tumatakbo sa background at nagpapatuloy pagkatapos ng restart.
+• Putulin, iikot, i-crop, pagsamahin, baguhin ang bilis, kunin ang audio, gumawa ng GIF.
+• Inaalis ang EXIF at GPS bilang default. Walang network permission ang build.
+• 61 na wika, layout sa tablet, light, dark at OLED na tema.

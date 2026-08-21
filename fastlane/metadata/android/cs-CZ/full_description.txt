@@ -1,0 +1,52 @@
+Eluna Media zmenšuje a převádí videa, fotky i zvuk přímo v telefonu. Nic se nikam nenahrává, nemusíte zakládat účet a nečekáte ve frontě na cizím serveru — každý převod odbaví přibalená kopie FFmpeg uvnitř zařízení, takže vaše soubory z telefonu nikam neodejdou.
+
+Nemusíte nám věřit na slovo. Vydaná verze nemá oprávnění k internetu — v informacích o aplikaci uvidíte, že k síti nemá přístup vůbec. V Nastavení je navíc audit Síť a soukromí: vypisuje každý kanál, kterým by aplikace mohla komunikovat ven, a nenajde ani jeden. Zapněte režim letadla a převeďte soubor. Funguje to.
+
+CO PŘEVÁDÍ
+
+• Video — MP4, MKV, MOV, WebM, AVI. Kódování H.264, H.265, AV1, VP9 nebo MPEG-4, případně kopie stopy (remux), která jen vymění kontejner.
+• Zvuk — MP3, M4A (AAC nebo ALAC bezztrátově), WAV, FLAC, OGG Vorbis, Opus. Z libovolného videa vytáhnete zvuk: převod videa na MP3 i zmenšení hlasovek.
+• Fotky — JPEG, PNG, WebP, AVIF, BMP, TIFF a k tomu animovaný GIF nebo animovaný WebP z krátkého klipu.
+
+VEJÍT SE DO VELIKOSTI
+
+Zvolíte velikost — 10, 16, 25, 50 nebo 100 MB, případně vlastní číslo — a aplikace si ze skutečné délky souboru spočítá datový tok, nechá si bezpečnostní rezervu a nasadí stropy, takže výsledek se pod váš limit opravdu vejde, ne že se k němu jen přiblíží. E-mailové přílohy a limity v chatech přestanou být hádankou. Dvouprůchodový režim se do zadaného čísla trefí ještě přesněji.
+
+KOMPRESE, KTERÁ SOUBOR NIKDY NEZVĚTŠÍ
+
+Konstantní kvalita nemá vlastní strop, takže video, které už jednou prošlo chatem, může vyjít větší, než bylo. Tady jsou obě stopy omezené tím, co spotřeboval samotný zdroj, takže soubor vyjde menší, nebo zůstane stejný. Pojistku lze vypnout, pokud chcete datový tok zvednout záměrně.
+
+UVOLNĚTE MÍSTO V TELEFONU
+
+Zmenšíte dávku videí, výsledky uložíte a aplikace může požádat systém o smazání originálů — Android vždy ukáže konkrétní soubory a počká na vaše potvrzení, takže nic nemizí za vašimi zády. V Nastavení se sčítá, kolik místa jste tím uvolnili.
+
+DÁVKOVÝ KOMPRESOR I PŘEVODNÍK
+
+Do fronty přidáte klidně desítky souborů a u každého vidíte průběh i zbývající čas. Jeden vadný soubor celou dávku nezastaví. Převod běží dál, i když z aplikace odejdete — průběh vidíte v oznámení — a fronta přežije i restart: přerušená dávka se sama rozjede při dalším spuštění. Neúspěšné úlohy zopakujete klepnutím.
+
+JEDNODUCHÝ REŽIM, NEBO POKROČILÝ
+
+Jednoduchý režim je krátký seznam karet s předvolbami — zmenšit video, převést na MP4, vytáhnout zvuk, video na GIF — a nabídne jen ty, které se k přidaným souborům hodí. Pokročilý režim otevře celý ovládací panel: kodek, konstantní kvalitu (CRF) nebo cílový datový tok, rozlišení, snímkovou frekvenci, předvolbu kodéru a hardwarové kódování.
+
+ÚPRAVY, NA KTERÉ JINDY POTŘEBUJETE DRUHOU APLIKACI
+
+• Zkrácení na vybraný úsek posuvníkem.
+• Otočení o 90/180/270°, překlopení, ořez na 1:1, 9:16, 16:9 nebo 4:3.
+• Rychlost přehrávání 0,25x až 4x, zvuk zůstane synchronizovaný.
+• Hlasitost od 0 do 200 %.
+• Spojení několika klipů do jednoho, i když se liší kodekem, rozlišením nebo snímkovou frekvencí.
+• Zachování titulků při převodu MKV na MP4, MOV nebo MKV.
+
+SOUKROMÍ OD ZÁKLADU
+
+EXIF, souřadnice GPS a časová razítka se odstraňují ve výchozím nastavení, takže sdílená fotka s sebou nenese místo, kde vznikla. Není tu žádná analytika, žádná hlášení o pádech a žádné identifikátory — nebylo by je ani kudy poslat. Aplikaci můžete zamknout PINem nebo biometrickým ověřením a náhled v přehledu spuštěných aplikací zakryje clona.
+
+CO TO STOJÍ
+
+Nic. Žádné reklamy, žádné předplatné, žádné funkce zamčené za platbu, žádné vodoznaky, žádné limity exportů ani denní kvóty. Koupit se dá jedině spropitné, které neodemyká vůbec nic — aplikace je kompletní i bez něj.
+
+CO JEŠTĚ NAJDETE
+
+Světlý, tmavý a čistě černý motiv pro OLED, výběr barvy zvýraznění a volitelné barvy Material You, rozvržení pro telefon i tablet, 61 jazyků a 18 úspěchů počítaných jen v zařízení.
+
+Postaveno na otevřeném softwaru, licence najdete v aplikaci.

@@ -1,0 +1,54 @@
+Eluna Media est un convertisseur vidéo, photo et audio qui travaille hors ligne, entièrement sur votre appareil. Rien n'est téléversé, aucun compte à créer : tout passe par une copie de FFmpeg intégrée, et vos fichiers ne quittent jamais le téléphone.
+
+Pas besoin de nous croire sur parole : la version publiée est compilée sans l'autorisation INTERNET. Android le confirme dans les informations sur l'application, et l'audit « Réseau et confidentialité » des réglages liste tous les canaux réseau possibles — ici, aucun. En mode avion, le convertisseur marche pareil.
+
+Et c'est gratuit : aucune publicité, aucun abonnement, aucun filigrane.
+
+CE QUE L'APPLICATION CONVERTIT
+
+• Vidéo — MP4, MKV, MOV, WebM, AVI. Encodage H.264, H.265, AV1, VP9 ou MPEG-4, ou copie de flux pour changer de conteneur sans réencoder.
+• Audio — MP3, M4A (AAC, ou ALAC sans perte), WAV, FLAC, OGG Vorbis, Opus. Extrayez la trame sonore d'une vidéo ou convertissez une vidéo en MP3.
+• Photos — JPEG, PNG, WebP, AVIF, BMP, TIFF, ainsi que GIF animé et WebP animé créés à partir d'un clip.
+
+AJUSTER À UNE TAILLE
+
+Choisissez une taille cible — 10, 16, 25, 50, 100 Mo, ou la vôtre — et l'application calcule le débit d'après la durée réelle, garde une marge et plafonne le flux. Le résultat passe sous votre limite au lieu de la frôler : compresser une vidéo pour un courriel ou une messagerie qui bloque à 25 Mo n'a plus rien d'une devinette. Deux passes pour viser plus juste encore.
+
+COMPRESSER N'AGRANDIT JAMAIS UN FICHIER
+
+La qualité constante n'a pas de plafond propre : un clip déjà passé par une messagerie peut ressortir plus lourd qu'à l'entrée. Ici, les deux flux sont limités à ce que la source dépensait déjà : le fichier ressort plus léger, ou identique. Garde-fou désactivable.
+
+LIBÉRER DE L'ESPACE
+
+Compressez un lot, enregistrez, et l'application peut demander à Android de supprimer les originaux : le système montre les fichiers et attend votre confirmation. Les réglages tiennent le compte de l'espace libéré.
+
+CONÇUE POUR LES LOTS
+
+Mettez autant de fichiers que vous voulez dans la file : chacun affiche sa progression et son temps restant, et un fichier qui bloque n'emporte jamais le reste du lot. La conversion se poursuit quand vous quittez l'application, progression dans la notification, et une file interrompue repart au lancement suivant. Une tâche en échec se relance d'une touche.
+
+SIMPLE OU AVANCÉ
+
+Le mode Simple, c'est une courte liste de cartes — compresser une vidéo, convertir en MP4, extraire l'audio, faire un GIF — filtrée selon les fichiers ajoutés. Le mode Avancé ouvre tout : codec, qualité constante (CRF) ou débit cible, résolution, fréquence d'images, préréglage d'encodage et encodage matériel.
+
+MODIFIER SANS CHANGER D'APPLICATION
+
+• Découpez la source à la glissière.
+• Rotation de 90/180/270°, miroir, recadrage en 1:1, 9:16, 16:9 ou 4:3.
+• Vitesse de 0,25x à 4x, l'audio reste synchronisé.
+• Volume de 0 à 200 %.
+• Fusionnez plusieurs clips en un seul, même si les codecs, les résolutions et les fréquences d'images diffèrent.
+• Gardez les sous-titres en convertissant un MKV en MP4, MOV ou MKV.
+
+LA CONFIDENTIALITÉ PAR DÉFAUT
+
+Les EXIF, les coordonnées GPS et les horodatages sont retirés par défaut : une photo partagée ne trahit pas où elle a été prise. Tout se passe hors ligne : ni analytique, ni rapport de plantage, ni identifiant. Verrouillez l'application par NIP ou par biométrie ; un voile masque l'aperçu dans les applications récentes.
+
+COMBIEN ÇA COÛTE
+
+Rien. Pas de publicité, pas d'abonnement, aucune fonction payante, pas de filigrane, pas de limite d'exportation. Le seul achat possible est un pourboire, et il ne débloque rien : le convertisseur est déjà complet.
+
+ET AUSSI
+
+Thèmes clair, sombre et noir OLED, couleur d'accent au choix, Material You en option, dispositions téléphone et tablette, 61 langues et 18 succès comptés sur l'appareil.
+
+Développée avec des logiciels libres ; la liste des licences est dans l'application.

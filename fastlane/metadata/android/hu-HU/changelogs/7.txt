@@ -1,0 +1,8 @@
+Első nyilvános kiadás — 1.0-s verzió.
+
+• Videó, fénykép és hang konvertálása és tömörítése teljes egészében az eszközön.
+• Méretre igazítás: válassz 10, 16, 25, 50 vagy 100 MB-ot, az eredmény alatta marad.
+• Kötegelt sor, amely a háttérben is fut és túléli az újraindítást.
+• Vágás, forgatás, képarány, egyesítés, sebesség, hang kinyerése, GIF készítése.
+• Az EXIF és a GPS alapból lekerül. Ebben a változatban nincs internetengedély.
+• 61 nyelv, táblagépes elrendezés, világos, sötét és OLED téma.

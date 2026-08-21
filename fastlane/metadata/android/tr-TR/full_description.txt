@@ -1,0 +1,52 @@
+Eluna Media videoları, fotoğrafları ve ses dosyalarını doğrudan telefonunuzda dönüştürür ve sıkıştırır. Hiçbir dosya yüklenmez, hesap açmanız gerekmez, sunucu kuyruğunda sıra beklemezsiniz — her işlem, uygulamanın içine gömülü FFmpeg motoruyla tamamen çevrimdışı yapılır. Dosyalarınız cihazdan asla çıkmaz.
+
+Sözümüze güvenmek zorunda değilsiniz. Uygulamanın yayımlanan sürümünde INTERNET izni yok: Android'in uygulama bilgisi ekranında hiçbir ağ erişimi olmadığını görürsünüz. Ayarlar'daki Ağ ve gizlilik ekranı, uygulamada ağa dokunabilecek her şeyi listeler — o listede tek satır bile yok. Uçak modunu açıp deneyin, her şey aynı şekilde çalışır.
+
+NELERİ DÖNÜŞTÜRÜR?
+
+• Video — MP4, MKV, MOV, WebM, AVI. H.264, H.265, AV1, VP9 veya MPEG-4 ile kodlayın ya da yeniden kodlamadan kopyalayarak (remux) kabı değiştirin.
+• Ses — MP3, M4A (AAC ya da kayıpsız ALAC), WAV, FLAC, OGG Vorbis, Opus. Herhangi bir videodan sesi çıkarın, videoyu MP3'e çevirin.
+• Fotoğraf — JPEG, PNG, WebP, AVIF, BMP, TIFF; ayrıca kısa klipten hareketli GIF ve hareketli WebP.
+
+BOYUTA SIĞDIR
+
+Bir boyut seçin — 10, 16, 25, 50, 100 MB ya da kendi değerinizi girin — uygulama dosyanın gerçek süresinden bit hızını hesaplar, güvenlik payı bırakır ve akışa üst sınır koyar. Sonuç sınırın yakınında değil, altında çıkar. E-posta eki ya da sohbet uygulamalarının boyut sınırı artık tahmin işi değil. İki geçiş seçeneği hedefi daha da isabetli tutturur.
+
+SIKIŞTIRMA DOSYAYI ASLA BÜYÜTMEZ
+
+Sabit kalitenin kendi üst sınırı yoktur; bu yüzden zaten sıkıştırılmış bir video, sıkıştırma sonunda daha da büyüyebilir. Burada her iki akış da kaynağın harcadığı bit hızıyla sınırlanır: dosya ya küçülür ya da olduğu gibi kalır. Bilerek daha yüksek bit hızıyla kodlamak isterseniz koruma kapatılabilir.
+
+YER AÇIN
+
+Bir grup dosyayı sıkıştırıp sonuçları kaydedin; uygulama orijinalleri kaldırmasını sistemden ister — sistem neyin gideceğini gösterir ve onayınızı bekler, arkanızdan hiçbir şey kaybolmaz. Ayarlar, açtığınız toplam yeri gösterir.
+
+TOPLU İŞ İÇİN YAPILDI
+
+Kuyruğa istediğiniz kadar dosya ekleyin, her birinin ilerlemesini ve kalan süresini görün. Bozuk tek bir dosya bütün kuyruğu durdurmaz. Uygulamadan çıksanız da dönüştürme sürer, ilerleme bildirimde görünür; uygulama yeniden başlasa bile kuyruk kaybolmaz — yarıda kalan toplu iş bir sonraki açılışta kaldığı yerden devam eder. Başarısız işler tek dokunuşla yeniden denenir.
+
+BASİT YA DA GELİŞMİŞ
+
+Basit mod kısa bir ön ayar kartı listesidir — videoyu sıkıştır, uyumlu MP4'e dönüştür, sesi çıkar, videodan GIF yap — ve yalnızca eklediğiniz dosyalara uyanları gösterir. Gelişmiş mod bütün denetimleri açar: kodek, sabit kalite (CRF) veya hedef bit hızı, çözünürlük, kare hızı, kodlayıcı ön ayarı ve donanımla kodlama.
+
+GENELDE İKİNCİ UYGULAMA GEREKTİREN İŞLER
+
+• Kaydırıcıyla istediğiniz aralığı kesin.
+• 90/180/270° döndürün, yatay aynalayın veya 1:1, 9:16, 16:9, 4:3 oranında kırpın.
+• Oynatma hızını 0,25x ile 4x arasında değiştirin; ses senkron kalır.
+• Ses düzeyini %0 ile %200 arasında ayarlayın.
+• Kodekleri, çözünürlükleri, kare hızları farklı olsa bile klipleri tek videoda birleştirin.
+• MKV'yi MP4, MOV veya MKV'ye dönüştürürken altyazıları koruyun.
+
+VARSAYILAN OLARAK GİZLİ
+
+EXIF, GPS koordinatları ve zaman damgaları varsayılan olarak silinir; paylaştığınız fotoğraf nerede çekildiğini ele vermez. Analitik yok, çökme raporu yok, tanımlayıcı yok — zaten gönderecek bir kanal da yok. Uygulamayı PIN veya parmak iziyle kilitleyin; son uygulamalar ekranında dosyalarınız görünmez.
+
+ÜCRETİ
+
+Yok. Reklam yok, abonelik yok, kilitli özellik yok, filigran yok, dışa aktarma sınırı yok, günlük kota yok. Uygulamadaki tek satın alma bir bahşiştir ve hiçbir şeyin kilidini açmaz — uygulama onsuz da eksiksizdir.
+
+İÇİNDE AYRICA
+
+Açık, koyu ve saf siyah OLED temaları, vurgu rengi seçici, isteğe bağlı Material You renkleri, telefon ve tablet düzenleri, 61 dil ve cihazda tutulan 18 başarım.
+
+Açık kaynaklı yazılımlarla geliştirildi; lisanslar uygulamanın içinde listelenir.

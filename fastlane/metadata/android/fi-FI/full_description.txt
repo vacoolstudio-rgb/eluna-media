@@ -1,0 +1,54 @@
+Eluna Media muuntaa ja pakkaa videot, kuvat ja äänitiedostot suoraan puhelimessasi. Mitään ei lähetetä palvelimelle eikä tiliä tarvita: jokainen muunnos ajetaan mukana tulevalla FFmpegillä, eivätkä tiedostosi koskaan poistu laitteelta.
+
+Tätä ei tarvitse uskoa — sen voi tarkistaa itse. Julkaisuversiosta puuttuu internet-lupa: Androidin sovellustiedot kertovat, ettei sovelluksella ole verkkoyhteyttä lainkaan, ja asetusten Verkko ja yksityisyys -tarkastus luettelee jokaisen kanavan, jonka sovellus voisi avata — niitä ei ole yhtäkään. Laita lentotila päälle ja muunna — se toimii silti.
+
+MITÄ VOIT MUUNTAA
+
+• Video — MP4, MKV, MOV, WebM, AVI. Koodekkeina H.264, H.265, AV1, VP9 ja MPEG-4 tai virran kopiointi, joka vaihtaa säiliön ilman uudelleenpakkausta.
+• Ääni — MP3, M4A (AAC tai häviötön ALAC), WAV, FLAC, OGG Vorbis, Opus. Pura ääniraita mistä tahansa videosta ja tee videosta MP3.
+• Kuva — JPEG, PNG, WebP, AVIF, BMP, TIFF sekä animoitu GIF ja animoitu WebP videopätkästä.
+
+SOVITA KOKOON
+
+Pienennä videon kokoa juuri sen verran kuin on pakko. Valitse koko — 10, 16, 25, 50 tai 100 MB tai kirjoita oma lukusi — ja sovellus laskee bittinopeuden tiedoston todellisesta kestosta, jättää turvamarginaalin ja asettaa raidalle katon. Tulos jää rajan alle eikä vain sen tuntumaan, eikä liitteiden ja chattien kokorajoja tarvitse arvailla. Kaksi ajokertaa -tila osuu tavoitteeseen vielä tarkemmin.
+
+PAKKAUS EI KOSKAAN KASVATA TIEDOSTOA
+
+Vakiolaadulla ei ole omaa kattoa, joten jo kerran pakattu video voi tulla ulos isompana kuin meni sisään. Eluna Media rajaa molemmat raidat siihen, mitä lähde itse käytti: tulos on pienempi tai pysyy ennallaan. Suojan voi kytkeä pois, jos haluat pakata isommaksi.
+
+VAPAUTA TILAA
+
+Kun tulokset on tallennettu, sovellus voi pyytää Androidia poistamaan alkuperäiset — järjestelmä näyttää tiedostot ja odottaa hyväksyntääsi. Asetuksissa näkyy, kuinka paljon tilaa olet kaikkiaan vapauttanut.
+
+TEHTY ERÄMUUNNOKSIIN
+
+Lisää jonoon niin monta tiedostoa kuin haluat ja seuraa jokaisen edistymistä ja jäljellä olevaa aikaa. Yksi kelvoton tiedosto ei kaada koko erää. Muunnos jatkuu taustalla, ja edistyminen näkyy ilmoituksessa. Keskeytynyt erä jatkuu seuraavalla käynnistyksellä, ja epäonnistuneet työt yritetään uudelleen yhdellä napautuksella.
+
+YKSINKERTAINEN TILA TAI LISÄASETUKSET
+
+Yksinkertainen tila on lyhyt korttilista — pakkaa video, muunna MP4:ksi, pura ääni, tee GIF — ja se tarjoaa vain sen, mikä sopii lisäämiisi tiedostoihin. Lisäasetukset avaa kaikki säätimet: koodekki, laatu (CRF) tai tavoitebittinopeus, tarkkuus, kuvataajuus, pakkaimen esiasetus ja laitteistopakkaus.
+
+MUOKKAUKSET, JOIHIN TARVITAAN YLEENSÄ TOINEN SOVELLUS
+
+• Leikkaa haluamasi kohta liukusäätimellä.
+• Käännä 90/180/270°, peilaa tai rajaa kuvasuhteeseen 1:1, 9:16, 16:9 tai 4:3.
+• Muuta toistonopeutta välillä 0,25x–4x, ääni pysyy tahdissa.
+• Säädä äänenvoimakkuutta 0–200 %.
+• Yhdistä useita pätkiä yhdeksi videoksi, vaikka koodekit, tarkkuudet ja kuvataajuudet eroaisivat.
+• Säilytä tekstitykset, kun muunnat MKV:n MP4-, MOV- tai MKV-muotoon.
+
+YKSITYISYYS OLETUKSENA
+
+EXIF, GPS-koordinaatit ja aikaleimat poistetaan oletuksena, joten jakamasi kuva ei kerro, missä se on otettu. Analytiikkaa, kaatumisraportteja tai tunnisteita ei ole, eikä niille olisi mitään lähetyskanavaa. Sovelluksen voi lukita PIN-koodilla tai sormenjäljellä, ja viimeisimmät-näkymässä sisältö peittyy.
+
+MITÄ SE MAKSAA
+
+Ei mitään. Ei mainoksia, ei tilauksia, ei maksumuureja, ei vesileimoja, ei vientirajoja eikä päivittäistä kiintiötä. Ainoa ostettava asia on juomaraha, eikä se avaa yhtään mitään — sovellus on valmis ilman sitä.
+
+MYÖS MUKANA
+
+Vaalea, tumma ja OLED-musta teema, korostusväri ja valinnainen Material You, puhelin- ja tablettiasettelut, 61 kieltä ja 18 saavutusta. Voit jakaa tiedostoja tänne suoraan muista sovelluksista.
+
+Videomuunnin, videon pakkaus, kuvamuunnin ja äänimuunnin — kokonaan offline.
+
+Rakennettu avoimen lähdekoodin ohjelmistoista; lisenssit on lueteltu sovelluksessa.

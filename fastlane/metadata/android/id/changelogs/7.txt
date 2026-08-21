@@ -1,0 +1,8 @@
+Versi 1.0 — rilis publik pertama.
+
+• Kompres dan konversi video, foto, dan audio sepenuhnya di perangkat.
+• Sesuaikan ukuran: pilih 10, 16, 25, 50, atau 100 MB, hasilnya pasti di bawah itu; foto bisa ditarget dalam KB.
+• Antrean batch tetap jalan di latar belakang dan lanjut sendiri setelah restart.
+• Trim, putar, pangkas, gabung, atur kecepatan, ekstrak audio, video ke GIF.
+• EXIF dan GPS dihapus secara default. Tanpa izin internet.
+• 61 bahasa, tata letak tablet, tema terang, gelap, dan OLED.

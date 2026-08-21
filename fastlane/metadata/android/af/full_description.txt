@@ -1,0 +1,54 @@
+Eluna Media verklein video's, foto's en klank en skakel hulle om — reg hier op jou foon. Niks word opgelaai nie, daar is geen rekening om te skep nie en geen bediener om voor te wag nie: elke omskakeling loop deur 'n ingeboude FFmpeg, en jou lêers verlaat nooit die toestel nie.
+
+Dit spaar boonop data: sit die foon in vliegtuigmodus of werk waar die sein swak is — die omskakeling loop presies dieselfde.
+
+Jy hoef ons nie te glo nie, gaan kyk self. Hierdie bou vra nie eens die INTERNET-toestemming aan nie, soos die stelsel se programinligting wys, en die skerm “Netwerk en privaatheid” in Instellings lys elke kanaal wat die program kon gebruik: geen.
+
+WAT DIT OMSKAKEL
+
+• Video — MP4, MKV, MOV, WebM, AVI. Enkodeer met H.264, H.265, AV1, VP9 of MPEG-4, of gebruik 'n stroomkopie om net die houer te verander sonder om weer te enkodeer.
+• Klank — MP3, M4A (AAC, of ALAC vir verliesloos), WAV, FLAC, OGG Vorbis, Opus. Onttrek die klankbaan uit enige video en maak van 'n video 'n MP3.
+• Foto's — JPEG, PNG, WebP, AVIF, BMP, TIFF, plus geanimeerde GIF en WebP uit 'n kort videogreep.
+
+PAS BY GROOTTE
+
+Kies 'n grootte — 10, 16, 25, 50 of 100 MB, of tik jou eie in — en die program bereken die bitspoed uit die werklike duur, hou 'n veiligheidsmarge en sit 'n plafon op die stroom. Die resultaat beland ónder jou limiet, nie net naby daaraan nie. 'n Aanhegsel of 'n greep wat by 'n geselsprogram se limiet moet inpas, is nie meer 'n raaiskoot nie. Met twee deurgange tref dit die syfer nóg presieser.
+
+VERKLEIN MAAK 'N LÊER NOOIT GROTER NIE
+
+Konstante kwaliteit het geen eie plafon nie, dus kan 'n reeds saamgeperste greep groter uitkom as wat hy was. Hier word albei strome beperk tot wat die bron self gebruik het, dus kom die lêer kleiner terug of bly hy net soos hy is — 'n maatreël wat jy kan afskakel as jy doelbewus hoër wil enkodeer.
+
+MAAK BERGING VRY
+
+Verklein 'n hele groep, stoor die resultate, en die program kan die stelsel vra om die oorspronklikes uit te vee — die stelsel wys die werklike lêers en wag vir jou bevestiging. Instellings tel die ruimte wat jy teruggewen het.
+
+GEBOU VIR GROEPE
+
+Sit soveel lêers in die wagry as wat jy wil en kyk hoe elkeen vorder. Een slegte lêer stop nooit die hele groep nie. Die omskakeling loop verder wanneer jy die program verlaat, met vordering in die kennisgewing, en 'n onderbroke wagry word met die volgende oopmaak hervat.
+
+EENVOUDIG OF GEVORDERD
+
+Die eenvoudige modus is 'n kort lys kaarte — verklein video, skakel om na MP4, onttrek klank, maak 'n GIF — en bied net aan wat by jou lêers pas. Die gevorderde modus maak alles oop: kodek, kwaliteit (CRF) of teikenbitspoed, resolusie, raamtempo, voorinstelling en hardeware-enkodering.
+
+REDIGEER SONDER 'N TWEEDE PROGRAM
+
+• Snoei tot 'n bepaalde stuk met 'n skuifbalk.
+• Draai 90/180/270°, spieël, of sny uit na 1:1, 9:16, 16:9 of 4:3.
+• Verander die spoed van 0,25x tot 4x, met die klank in pas.
+• Stel die volume tussen 0 en 200%.
+• Voeg grepe saam tot een video, selfs met verskillende kodeks en resolusies.
+• Behou onderskrifte wanneer jy MKV na MP4, MOV of MKV omskakel.
+
+PRIVAATHEID IS INGEBOU
+
+EXIF, GPS-koördinate en tydstempels word by verstek verwyder, sodat 'n foto wat jy deel nie die plek saamdra waar hy geneem is nie. Daar is geen ontleding, geen foutverslae en geen identifiseerders nie. Jy kan die program met 'n PIN of biometrie toesluit, en die lys van onlangse programme wys 'n dowwe skerm in plaas van jou lêers.
+
+WAT DIT KOS
+
+Niks. Geen advertensies, geen intekeninge, geen funksie agter 'n betaalmuur, geen watermerke en geen uitvoerperke nie. Die enigste aankoop is 'n fooitjie, en dit ontsluit niks — die program is volledig sonder dit.
+
+OOK IN DIE PROGRAM
+
+Ligte, donker en pikswart OLED-temas met 'n aksentkleurkieser en opsionele Material You-kleure, foon- en tabletuitlegte, 61 tale en 18 prestasies wat net op die toestel getel word. Lêers wat jy uit ander programme deel, kom reguit hierheen.
+
+Gebou met oopbronsagteware; die lisensies staan in die program.

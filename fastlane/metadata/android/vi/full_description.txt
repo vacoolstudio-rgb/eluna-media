@@ -1,0 +1,52 @@
+Nén video cho vừa giới hạn dung lượng, chuyển video sang MP3, đổi ảnh sang WebP hay JPEG — Eluna Media làm hết ngay trên điện thoại. Không tệp nào bị tải lên mạng, không cần tài khoản, không phải chờ máy chủ: mọi lần chuyển đổi đều chạy nhờ FFmpeg gói sẵn trong ứng dụng. Không quảng cáo, không hình mờ, không giới hạn số lần xuất tệp.
+
+Bạn không phải tin suông. Bản phát hành này dựng ra mà không hề khai báo quyền INTERNET: màn hình thông tin ứng dụng của Android cho bạn thấy nó không có quyền truy cập mạng, còn mục Mạng và quyền riêng tư trong Cài đặt liệt kê mọi đường mạng ứng dụng có thể dùng — ở đây trống trơn. Cứ bật chế độ máy bay rồi thử.
+
+NÉN VIDEO VỪA ĐÚNG DUNG LƯỢNG
+
+Chọn mức dung lượng — 10, 16, 25, 50, 100 MB hoặc tự nhập con số của bạn — rồi ứng dụng tự tính tốc độ bit từ thời lượng thật của tệp, chừa sẵn khoảng an toàn và chặn trần luồng hình, để kết quả nằm hẳn dưới giới hạn chứ không sát mép. Cần gửi tệp đính kèm 25 MB hay nộp biểu mẫu chặn cứng dung lượng, bạn khỏi phải đoán mò: cứ giảm dung lượng video xuống đúng con số đó. Bật chế độ hai lượt thì kết quả còn sát hơn.
+
+KHÔNG BAO GIỜ LÀM TỆP LỚN HƠN
+
+Chất lượng cố định (CRF) vốn không có trần, nên một video đã qua vài lần gửi nhận có thể nén xong lại phình to hơn bản gốc. Ở đây cả hình lẫn tiếng đều bị giới hạn ở đúng tốc độ bit của nguồn, nên tệp chỉ nhỏ đi hoặc giữ nguyên. Muốn mã hoá lên mức cao hơn thì tắt chốt này đi.
+
+CHUYỂN ĐỔI ĐƯỢC NHỮNG GÌ
+
+• Video — MP4, MKV, MOV, WebM, AVI. Mã hoá bằng H.264, H.265, AV1, VP9 hay MPEG-4, hoặc sao chép luồng để đóng gói lại sang định dạng khác, khỏi mã hoá lại.
+• Âm thanh — MP3, M4A (AAC, hoặc ALAC khi cần không mất dữ liệu), WAV, FLAC, OGG Vorbis, Opus. Tách âm thanh khỏi bất kỳ video nào và chuyển video sang MP3.
+• Ảnh — JPEG, PNG, WebP, AVIF, BMP, TIFF, cùng ảnh GIF động và WebP động dựng từ video.
+
+GIẢI PHÓNG DUNG LƯỢNG MÁY
+
+Nén video và ảnh cả loạt, lưu kết quả, rồi ứng dụng có thể nhờ Android xoá giúp bản gốc — hệ thống luôn hiện đúng những tệp sắp mất và chờ bạn xác nhận. Mục Cài đặt cộng dồn dung lượng bạn đã giải phóng.
+
+CHUYỂN ĐỔI HÀNG LOẠT
+
+Thả bao nhiêu tệp vào hàng đợi cũng được, mỗi tệp có tiến độ và thời gian còn lại riêng. Một tệp lỗi không làm hỏng cả lô. Chuyển đổi vẫn chạy tiếp khi bạn rời khỏi ứng dụng, tiến độ hiện trong thông báo, và hàng đợi không mất đi sau khi khởi động lại — lô đang dở tự chạy tiếp ở lần mở sau. Tệp lỗi thì chạm một lần là thử lại.
+
+ĐƠN GIẢN HAY NÂNG CAO, TUỲ BẠN
+
+Chế độ Đơn giản là dãy thẻ đặt tên theo kết quả bạn muốn — nén video, nén ảnh, chuyển sang MP4, tách âm thanh, làm ảnh GIF — và chỉ hiện thẻ hợp với tệp bạn vừa thêm. Chế độ Nâng cao mở toàn bộ bảng điều khiển: codec, chất lượng cố định (CRF) hay tốc độ bit mục tiêu, độ phân giải, tốc độ khung hình, cài đặt sẵn của bộ mã hoá và mã hoá phần cứng.
+
+KHỎI CẦN ỨNG DỤNG THỨ HAI
+
+• Cắt lấy một đoạn bằng thanh trượt.
+• Xoay 90/180/270°, lật ngang, hoặc cắt khung về 1:1, 9:16, 16:9 hay 4:3.
+• Đổi tốc độ phát từ 0,25x đến 4x, tiếng vẫn khớp hình.
+• Chỉnh âm lượng từ 0 đến 200%.
+• Ghép nhiều đoạn thành một, kể cả khi codec, độ phân giải và tốc độ khung hình khác nhau.
+• Giữ phụ đề khi chuyển MKV sang MP4, MOV hoặc MKV.
+
+MỌI THỨ Ở LẠI TRONG MÁY
+
+EXIF, toạ độ GPS và dấu thời gian bị xoá theo mặc định, nên tấm ảnh bạn gửi đi không mang theo nơi nó được chụp. Không thống kê hành vi, không báo cáo sự cố, không mã định danh — cũng chẳng có đường nào để gửi đi. Bạn có thể khoá ứng dụng bằng mã PIN hoặc sinh trắc học, và màn hình đa nhiệm chỉ hiện tấm che thay cho tệp.
+
+GIÁ BAO NHIÊU
+
+Không đồng nào. Không quảng cáo, không thuê bao, không tính năng nào bị khoá để bắt trả tiền, không hạn mức mỗi ngày. Thứ duy nhất có thể mua là tiền boa, và nó không mở khoá thứ gì — ứng dụng đã đầy đủ mà không cần đến nó.
+
+CÒN CÓ THÊM
+
+Giao diện sáng, tối và đen OLED, bộ chọn màu nhấn và màu Material You, bố cục điện thoại và máy tính bảng, 61 ngôn ngữ, 18 thành tích ghi trên máy.
+
+Dựng từ phần mềm nguồn mở; danh sách giấy phép nằm trong ứng dụng.

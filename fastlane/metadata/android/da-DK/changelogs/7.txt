@@ -1,0 +1,8 @@
+Version 1.0 — den første offentlige udgave.
+
+• Konvertér og komprimér video, fotos og lyd udelukkende på enheden.
+• Tilpas til størrelse: vælg 10, 16, 25, 50 eller 100 MB — resultatet lander under.
+• Batchkø, der kører videre i baggrunden og overlever en genstart.
+• Beskær i tid og format, rotér, sammenføj, skift hastighed, udtræk lyd, lav GIF.
+• EXIF og GPS fjernes som standard. Ingen internettilladelse i denne udgave.
+• 61 sprog, tabletlayout, lyst, mørkt og helsort OLED-tema.

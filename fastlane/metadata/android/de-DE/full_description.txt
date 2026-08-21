@@ -1,0 +1,52 @@
+Eluna Media konvertiert und komprimiert Videos, Fotos und Audio direkt auf deinem Gerät. Nichts wird hochgeladen, kein Konto, keine Warteschlange auf einem fremden Server – jede Konvertierung läuft lokal über ein mitgeliefertes FFmpeg, deine Dateien verlassen das Gerät nie.
+
+Das lässt sich nachprüfen: Die Release-Version kommt ohne die Internet-Berechtigung – die System-Infos zur App zeigen, dass sie keinen Netzzugriff hat. Unter „Netzwerk & Privatsphäre“ in den Einstellungen steht jeder Kanal, über den die App ins Netz könnte: keiner. Schalte den Flugmodus ein und konvertiere weiter.
+
+WAS DER KONVERTER UMWANDELT
+
+• Video – MP4, MKV, MOV, WebM, AVI. H.264, H.265, AV1, VP9, MPEG-4 oder Stream-Copy: nur den Container tauschen, ohne neu zu kodieren.
+• Audio – MP3, M4A (AAC oder ALAC verlustfrei), WAV, FLAC, OGG Vorbis, Opus. Tonspur aus jedem Video extrahieren und ein Video in MP3 umwandeln.
+• Fotos – JPG, PNG, WebP, AVIF, BMP, TIFF, dazu animiertes GIF und animiertes WebP aus einem Videoclip.
+
+AUF GRÖSSE BRINGEN
+
+Wähle eine Größe – 10, 16, 25, 50, 100 MB oder eine eigene Zahl – und die App berechnet die Bitrate aus der echten Länge deiner Datei, hält Sicherheitsabstand und deckelt den Stream. Das Ergebnis landet unter deinem Limit statt knapp daneben. E-Mail-Anhänge und Größenlimits im Chat sind kein Ratespiel mehr. Zwei Durchgänge treffen die Zahl noch genauer.
+
+KOMPRIMIEREN MACHT DIE DATEI NIE GRÖSSER
+
+Konstante Qualität hat keine eigene Obergrenze, deshalb kann ein Clip, der schon durch einen Messenger lief, größer zurückkommen, als er war. Hier werden beide Spuren auf das begrenzt, was das Original selbst verbraucht hat: Es wird kleiner oder bleibt, wie es ist. Wer bewusst höher kodieren will, schaltet die Begrenzung ab.
+
+SPEICHER FREIGEBEN
+
+Einen Stapel komprimieren, speichern – und die App kann Android bitten, die Originale zu löschen. Das System zeigt die echten Dateien und wartet auf deine Bestätigung. In den Einstellungen steht, wie viel Speicher dabei frei geworden ist.
+
+FÜR GANZE STAPEL GEBAUT
+
+Leg beliebig viele Dateien in die Warteschlange – bei jeder siehst du Fortschritt und Restzeit. Eine kaputte Datei reißt nie den Stapel mit. Die Konvertierung läuft weiter, wenn du die App verlässt – mit Fortschritt in der Benachrichtigung – und übersteht einen Neustart. Fehlgeschlagenes wiederholst du mit einem Fingertipp.
+
+EINFACH ODER ERWEITERT
+
+Der einfache Modus ist eine kurze Liste von Karten – Video komprimieren, in MP4 umwandeln, Audio extrahieren, Video zu GIF – und zeigt nur, was zu deinen Dateien passt. Der erweiterte Modus öffnet alles: Codec, konstante Qualität (CRF) oder Ziel-Bitrate, Auflösung, Bildrate, Encoder-Preset und Hardware-Encoding über den Videochip.
+
+BEARBEITEN OHNE ZWEITE APP
+
+• Per Regler auf einen Ausschnitt schneiden.
+• Um 90/180/270° drehen, spiegeln oder auf 1:1, 9:16, 16:9 oder 4:3 zuschneiden.
+• Geschwindigkeit von 0,25x bis 4x, der Ton bleibt synchron.
+• Lautstärke von 0 bis 200 % anpassen.
+• Clips zusammenfügen, auch wenn Codec, Auflösung und Bildrate nicht zusammenpassen.
+• Untertitel behalten, wenn du MKV in MP4, MOV oder MKV umwandelst.
+
+DATENSCHUTZ VON GRUND AUF
+
+EXIF, GPS-Koordinaten und Zeitstempel werden standardmäßig entfernt – ein geteiltes Foto verrät den Aufnahmeort also nicht. Keine Analytics, keine Absturzberichte, keine Kennungen. Die App lässt sich mit PIN oder Biometrie sperren, und in der Übersicht offener Apps liegt eine neutrale Fläche über deinen Dateien.
+
+WAS ES KOSTET
+
+Nichts. Keine Werbung, keine Abos, keine Bezahlschranke, kein Wasserzeichen, kein Exportlimit, kein Tageskontingent. Kaufen lässt sich nur ein Trinkgeld, und das schaltet nichts frei.
+
+AUSSERDEM DABEI
+
+Helles, dunkles und OLED-schwarzes Design, Akzentfarbe und optional Material You, Layouts für Handy und Tablet, 61 Sprachen und 18 Erfolge, die nur auf dem Gerät zählen. Dateien aus anderen Apps nimmt Eluna Media per Teilen entgegen.
+
+Gebaut mit quelloffener Software; die Lizenzen stehen in der App.

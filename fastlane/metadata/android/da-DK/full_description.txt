@@ -1,0 +1,52 @@
+Eluna Media konverterer og komprimerer video, fotos og lyd direkte på din telefon. Intet bliver uploadet, der er ingen konto at oprette, og du står ikke i kø hos en server — hver eneste konvertering kører offline via et medfølgende FFmpeg, så dine filer aldrig forlader enheden.
+
+Det behøver du ikke tage på tro. Udgivelsesversionen er bygget uden internettilladelsen: Androids egne appoplysninger viser, at appen slet ikke har netværksadgang, og under Netværk og privatliv i Indstillinger står alle de kanaler, appen kunne bruge — her er der ingen. Slå flytilstand til og konvertér løs.
+
+HVAD DU KAN KONVERTERE
+
+• Video — MP4, MKV, MOV, WebM, AVI. Vælg H.264, H.265, AV1, VP9 eller MPEG-4 — eller brug streamkopiering og skift container uden at genkode.
+• Lyd — MP3, M4A (AAC, eller ALAC når det skal være tabsfrit), WAV, FLAC, OGG Vorbis, Opus. Udtræk lydsporet fra enhver video, eller konvertér video til MP3.
+• Foto — JPEG, PNG, WebP, AVIF, BMP, TIFF, samt animeret GIF og animeret WebP lavet ud fra et klip.
+
+TILPAS TIL STØRRELSE
+
+Vælg en grænse — 10, 16, 25, 50, 100 MB eller dit eget tal — og appen regner bitraten ud fra filens rigtige varighed, holder en sikkerhedsmargen og sætter et loft over streamen, så resultatet lander under grænsen i stedet for lige omkring den. Så er det slut med at gætte, om filen er lille nok til en chat. Slå to gennemløb til, så rammer den tallet endnu mere præcist.
+
+KOMPRIMERING GØR ALDRIG FILEN STØRRE
+
+Konstant kvalitet har intet loft i sig selv, så et klip, der allerede har været igennem en chat, kan ende med at fylde mere. Her holdes begge spor inden for det, kilden selv brugte, så filen enten bliver mindre eller forbliver uændret. Spærren kan slås fra, hvis du bevidst vil kode i højere kvalitet.
+
+FRIGØR PLADS
+
+Komprimér en bunke filer, gem resultaterne, og appen kan bede Android om at slette originalerne — systemet viser de rigtige filer og venter på dit ja, så intet forsvinder bag din ryg. Indstillinger holder regnskab med den plads, du har fået tilbage.
+
+BYGGET TIL BATCH
+
+Læg lige så mange filer i køen, du vil, og følg fremdrift og resttid for hver enkelt. Én dårlig fil vælter aldrig hele batchen. Konverteringen kører videre, når du forlader appen, med fremdriften i notifikationen, og køen overlever en genstart — en afbrudt batch genoptages af sig selv. Mislykkede job prøves igen med ét tryk.
+
+ENKEL ELLER AVANCERET
+
+Enkel tilstand er en håndfuld kort — komprimér video, kompatibel MP4, udtræk lyd, video til GIF, sammenføj videoer — og appen viser kun dem, dine filer faktisk kan blive til. Avanceret tilstand åbner hele panelet: codec, kvalitet (CRF) eller målbitrate, opløsning, billedhastighed, kodningsforvalg og hardwarekodning.
+
+REDIGERING, DER ELLERS KRÆVER EN APP MERE
+
+• Beskær kilden til et udsnit med en skyder.
+• Rotér 90/180/270°, spejlvend eller beskær til 1:1, 9:16, 16:9 eller 4:3.
+• Skift hastigheden fra 0,25x til 4x, mens lyden følger med.
+• Justér lydstyrken fra 0 til 200 procent.
+• Sammenføj flere klip til én fil, også når codec, opløsning og billedhastighed ikke passer sammen.
+• Behold underteksterne, når MKV bliver til MP4, MOV eller MKV.
+
+PRIVATLIV FRA BUNDEN
+
+EXIF, GPS-koordinater og tidsstempler fjernes som standard, så et foto, du deler, ikke fortæller, hvor det er taget. Der er ingen analyse, ingen nedbrudsrapportering og ingen identifikatorer — der er ingen forbindelse at sende dem over. Du kan låse appen med PIN eller biometri, og i oversigten over åbne apps er dine filer dækket til.
+
+HVAD DET KOSTER
+
+Ingenting. Ingen reklamer, ingen abonnementer, ingen funktioner bag en betalingsmur, ingen vandmærker, ingen eksportgrænse og ingen daglig kvote. Det eneste, der kan købes, er drikkepenge, og de låser ingenting op — appen er komplet uden dem.
+
+OGSÅ I APPEN
+
+Lyst, mørkt og helsort OLED-tema med accentfarve og valgfri Material You-farver, layout til telefon og tablet, 61 sprog og 18 præstationer, der kun tælles på enheden.
+
+Bygget med open source-software; licenserne står i appen.

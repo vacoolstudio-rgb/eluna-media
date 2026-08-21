@@ -1,0 +1,52 @@
+Eluna Media konwertuje i kompresuje wideo, zdjęcia i pliki audio w całości na Twoim telefonie. Nic nie jest nigdzie wysyłane, nie zakładasz konta i nie czekasz na cudzym serwerze — całą pracę wykonuje wbudowany FFmpeg, więc pliki nigdy nie opuszczają urządzenia.
+
+Nie musisz wierzyć na słowo. Ta wersja nie ma uprawnienia do internetu — systemowy ekran informacji o aplikacji pokaże, że dostępu do sieci nie ma wcale, a ekran „Sieć i prywatność” w ustawieniach wypisuje wszystkie kanały sieciowe aplikacji: tutaj nie ma żadnego. Konwersja działa offline, nawet w trybie samolotowym.
+
+OBSŁUGIWANE FORMATY
+
+• Wideo — MP4, MKV, MOV, WebM, AVI. Kodowanie H.264, H.265, AV1, VP9 albo MPEG-4, a gdy chcesz zmienić tylko kontener — kopiowanie strumienia bez ponownego kodowania.
+• Audio — MP3, M4A (AAC albo bezstratny ALAC), WAV, FLAC, OGG Vorbis, Opus. Wyodrębnij dźwięk z dowolnego filmu i zamień wideo na MP3.
+• Zdjęcia — JPEG, PNG, WebP, AVIF, BMP, TIFF, a także animowany GIF i animowany WebP z fragmentu wideo.
+
+ZMIEŚĆ W ROZMIARZE
+
+Wybierz rozmiar — 10, 16, 25, 50 lub 100 MB albo wpisz własny — a aplikacja policzy bitrate z rzeczywistej długości pliku, zostawi margines i nałoży górny limit na strumień, żeby wynik wylądował pod granicą, a nie obok niej. Załącznik do maila albo czat z twardym progiem przestaje być loterią. Dwa przebiegi trafiają w zadany rozmiar jeszcze dokładniej. Zdjęcie też zejdzie pod dokładny limit w KB.
+
+KOMPRESJA NIGDY NIE POWIĘKSZA PLIKU
+
+Tryb stałej jakości nie ma własnego górnego limitu, więc klip, który raz już przeszedł przez komunikator, wraca czasem większy, niż był. Tutaj oba strumienie są ograniczone do bitrate'u oryginalnego pliku, więc wynik wychodzi mniejszy albo zostaje bez zmian. Zabezpieczenie da się wyłączyć.
+
+ZWOLNIJ MIEJSCE
+
+Skompresuj partię, zapisz wyniki, a aplikacja może poprosić system o usunięcie oryginałów — Android pokazuje konkretne pliki i czeka na potwierdzenie, więc nic nie znika po cichu. W ustawieniach rośnie licznik zwolnionego miejsca.
+
+PRZETWARZANIE WSADOWE
+
+Wrzuć do kolejki tyle plików, ile chcesz — przy każdym widzisz postęp i pozostały czas. Jeden wadliwy plik nie przerywa całej partii. Konwersja idzie dalej po wyjściu z aplikacji, z postępem w powiadomieniu, a kolejka przetrwa restart — przerwana partia wznawia się przy następnym uruchomieniu. Nieudane zadanie ponawiasz jednym dotknięciem.
+
+PROSTY ALBO ZAAWANSOWANY
+
+Tryb prosty to krótka lista kart z gotowym efektem — kompresuj wideo, zgodny MP4, wyodrębnij dźwięk, wideo na GIF, sklej filmy — a widzisz tylko te, które pasują do dodanych plików. Tryb zaawansowany daje pełną kontrolę: kodek, stała jakość (CRF) albo docelowy bitrate, rozdzielczość, liczba klatek, preset kodera i kodowanie sprzętowe.
+
+EDYCJA BEZ DRUGIEJ APLIKACJI
+
+• Przytnij w czasie suwakiem.
+• Obróć o 90/180/270°, odbij w poziomie albo skadruj do 1:1, 9:16, 16:9 lub 4:3.
+• Zmień prędkość od 0,25x do 4x, z dźwiękiem zgranym z obrazem.
+• Ustaw głośność od 0 do 200%.
+• Sklej kilka klipów w jeden, nawet gdy różnią się kodekiem, rozdzielczością i liczbą klatek.
+• Zachowaj napisy przy konwersji MKV na MP4, MOV lub MKV.
+
+PRYWATNOŚĆ Z ZAŁOŻENIA
+
+EXIF, współrzędne GPS i znaczniki czasu są usuwane domyślnie, więc udostępnione zdjęcie nie zdradza miejsca, w którym powstało. Nie ma analityki, raportów o awariach ani identyfikatorów — nie ma ich czym wysłać. Aplikację można zablokować kodem PIN lub biometrią, a ekran ostatnich aplikacji pokazuje zasłonę zamiast Twoich plików.
+
+ILE TO KOSZTUJE
+
+Nic. Bez reklam, bez subskrypcji, bez funkcji za opłatą, bez znaku wodnego, bez limitu eksportów i bez dziennego przydziału. Kupić da się tylko napiwek, a on nie odblokowuje niczego — aplikacja jest kompletna bez niego.
+
+CO JESZCZE W ŚRODKU
+
+Motyw jasny, ciemny i czarny OLED, wybór koloru akcentu i opcjonalne kolory Material You, układy na telefon i tablet, 61 języków oraz 18 osiągnięć liczonych tylko na tym urządzeniu.
+
+Aplikacja korzysta z oprogramowania open source; licencje są w środku.

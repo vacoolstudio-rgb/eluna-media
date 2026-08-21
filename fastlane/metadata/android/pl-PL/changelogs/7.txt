@@ -1,0 +1,8 @@
+Wersja 1.0 — pierwsze publiczne wydanie.
+
+• Konwersja i kompresja wideo, zdjęć i audio w całości na urządzeniu.
+• Zmieść w rozmiarze: wybierz 10, 16, 25, 50 albo 100 MB, a wynik zmieści się pod limitem.
+• Kolejka wsadowa pracuje w tle i przetrwa restart aplikacji.
+• Przytnij, obróć, skadruj, sklej, zmień prędkość, wyodrębnij dźwięk, zrób GIF.
+• EXIF i GPS usuwane domyślnie. Ta wersja nie ma uprawnienia do internetu.
+• 61 języków, układy na tablet, motyw jasny, ciemny i OLED.
