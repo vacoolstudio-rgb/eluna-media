@@ -1,0 +1,6 @@
+# Copy to android/key.properties and fill in. That file is git-ignored.
+# storeFile takes forward slashes even on Windows.
+storeFile=C:/Users/DELL/eluna-upload.jks
+storePassword=
+keyAlias=
+keyPassword=
