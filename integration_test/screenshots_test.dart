@@ -34,12 +34,34 @@ void main() {
   // код языка приложения (`zh`, `pt_BR`), которым рисуется экран. У Apple и у
   // Flutter эти списки не совпадают, и подстановка одного вместо другого даёт
   // не ошибку, а молча английский кадр в папке с китайским именем.
+  // Две разные вещи, которые легко спутать. `SHOT_LOCALE` — код витрины
+  // магазина (`zh-Hans`, `pt-BR`), он идёт только в имя папки. `SHOT_LANG` —
+  // код языка приложения (`zh`, `pt_BR`), которым рисуется экран. У Apple и у
+  // Flutter эти списки не совпадают, и подстановка одного вместо другого даёт
+  // не ошибку, а молча английский кадр в папке с китайским именем.
   const locale = String.fromEnvironment('SHOT_LOCALE', defaultValue: 'en-US');
   const lang = String.fromEnvironment('SHOT_LANG', defaultValue: 'en');
   const device = String.fromEnvironment('SHOT_DEVICE', defaultValue: 'phone');
 
-  final parts = lang.split('_');
-  final shotLocale = parts.length > 1 ? Locale(parts[0], parts[1]) : Locale(parts[0]);
+  // `SHOT_LOCALES=en-US:en,ru-RU:ru,…` снимает несколько витрин за один
+  // запуск. Сборка приложения занимает больше времени, чем все кадры вместе, и
+  // повторять её по разу на язык — это часы вместо минут. Пустое значение
+  // оставляет прежнее поведение: одна локаль из `SHOT_LOCALE`/`SHOT_LANG`.
+  const locales = String.fromEnvironment('SHOT_LOCALES');
+
+  final targets = locales.isEmpty
+      ? <List<String>>[
+          [locale, lang]
+        ]
+      : locales
+          .split(',')
+          .map((pair) => pair.trim())
+          .where((pair) => pair.contains(':'))
+          .map((pair) => [
+                pair.split(':')[0].trim(),
+                pair.split(':')[1].trim(),
+              ])
+          .toList();
 
   late Directory work;
   late SharedPreferences prefs;
@@ -54,13 +76,19 @@ void main() {
     if (work.existsSync()) work.deleteSync(recursive: true);
   });
 
-  Future<void> shoot(WidgetTester tester, String name, Widget home,
-      {Future<void> Function(WidgetTester)? after}) async {
+  Future<void> shoot(
+    WidgetTester tester,
+    String store,
+    Locale ui,
+    String name,
+    Widget home, {
+    Future<void> Function(WidgetTester)? after,
+  }) async {
     await tester.pumpWidget(ProviderScope(
       overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        locale: shotLocale,
+        locale: ui,
         theme: ElunaTheme.dark(preset: kElunaThemes.first),
         localizationsDelegates: [
           ...L10n.localizationsDelegates,
@@ -68,6 +96,14 @@ void main() {
           ...kFallbackLocalizationsDelegates,
         ],
         supportedLocales: L10n.supportedLocales,
+        // Каждый экран приложения сидит на фирменном градиенте, который рисует
+        // корневой `ElunaApp`, а сами Scaffold'ы прозрачные. Без этой обёртки
+        // кадр выходит с прозрачным фоном — в PNG это альфа, а в витрине
+        // магазина белый лист под тёмным интерфейсом.
+        builder: (context, child) => AmbientBackground(
+          emphasized: true,
+          child: child!,
+        ),
         home: home,
       ),
     ));
@@ -75,42 +111,69 @@ void main() {
     // экран до того, как на нём появились данные.
     await tester.pumpAndSettle(const Duration(seconds: 1));
     if (after != null) await after(tester);
-    await binding.takeScreenshot('$locale/$device/$name');
+    // Android снимает не Flutter, а поверхность SurfaceView, и до конвертации
+    // её содержимое системе недоступно: `takeScreenshot` бросает StateError.
+    // На iOS этого шага нет — оттого оснастка, написанная под App Store,
+    // падала на каждом кадре в эмуляторе.
+    if (Platform.isAndroid) {
+      await binding.convertFlutterSurfaceToImage();
+      await tester.pumpAndSettle();
+    }
+    await binding.takeScreenshot('$store/$device/$name');
   }
 
-  testWidgets('01 конвертация', (tester) async {
-    await shoot(tester, '01_convert', const HomeShell());
-  });
+  for (final target in targets) {
+    final store = target[0];
+    final parts = target[1].split('_');
+    final ui = parts.length > 1 ? Locale(parts[0], parts[1]) : Locale(parts[0]);
 
-  testWidgets('02 очередь', (tester) async {
-    // Вкладки переключаются по иконке, а не по подписи: подпись переведена на
-    // 61 язык, иконка одна.
-    await shoot(tester, '02_queue', const HomeShell(),
-        after: (tester) async {
-      await tester.tap(find.byIcon(Icons.layers_rounded));
-      await tester.pumpAndSettle();
+    testWidgets('$store 01 конвертация', (tester) async {
+      await shoot(tester, store, ui, '01_convert', const HomeShell());
     });
-  });
 
-  testWidgets('03 настройки', (tester) async {
-    await shoot(tester, '03_settings', const HomeShell(),
-        after: (tester) async {
-      await tester.tap(find.byIcon(Icons.settings_rounded));
-      await tester.pumpAndSettle();
+    testWidgets('$store 02 очередь', (tester) async {
+      // Вкладки переключаются по иконке, а не по подписи: подпись переведена на
+      // 61 язык, иконка одна.
+      await shoot(tester, store, ui, '02_queue', const HomeShell(),
+          after: (tester) async {
+        await tester.tap(find.byIcon(Icons.layers_rounded));
+        await tester.pumpAndSettle();
+      });
     });
-  });
 
-  testWidgets('04 приватность', (tester) async {
-    // Вступительный экран, а НЕ «Сеть и приватность». Тот написан под Android
-    // и на снимке говорит «Play Store» и «разрешение на доступ в интернет» —
-    // в витрине App Store это не только неправда, но и упоминание чужого
-    // магазина, за которое отклоняют. Сам экран надо чинить отдельно.
-    await shoot(tester, '04_privacy', const PrivacyIntroScreen());
-  });
+    testWidgets('$store 03 настройки', (tester) async {
+      await shoot(tester, store, ui, '03_settings', const HomeShell(),
+          after: (tester) async {
+        await tester.tap(find.byIcon(Icons.settings_rounded));
+        await tester.pumpAndSettle();
+      });
+    });
 
-  testWidgets('05 достижения', (tester) async {
-    await shoot(tester, '05_achievements', const AchievementsScreen());
-  });
+    testWidgets('$store 04 приватность', (tester) async {
+      // Вступительный экран, а НЕ «Сеть и приватность». Тот написан под Android
+      // и на снимке говорит «Play Store» и «разрешение на доступ в интернет» —
+      // в витрине App Store это не только неправда, но и упоминание чужого
+      // магазина, за которое отклоняют. Сам экран надо чинить отдельно.
+      await shoot(tester, store, ui, '04_privacy', const PrivacyIntroScreen());
+    });
+
+    testWidgets('$store 05 достижения', (tester) async {
+      await shoot(tester, store, ui, '05_achievements', const AchievementsScreen());
+    });
+
+    testWidgets('$store 06 готово', (tester) async {
+      // Обещание витрины целиком: 48 МБ стали 9. Вкладка выбирается по
+      // индексу, а не по подписи, — подписи переведены на 61 язык, порядок
+      // вкладок один.
+      await shoot(tester, store, ui, '06_finished', const HomeShell(),
+          after: (tester) async {
+        await tester.tap(find.byIcon(Icons.layers_rounded));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byType(Tab).at(1));
+        await tester.pumpAndSettle();
+      });
+    });
+  }
 }
 
 /// Состояние, которое видно на кадрах.
