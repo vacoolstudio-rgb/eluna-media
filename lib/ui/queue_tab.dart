@@ -18,6 +18,7 @@ import '../state/queue_controller.dart';
 import 'compare_screen.dart';
 import 'convert_tab.dart' show accentOfKind, iconOfKind;
 import 'queue_strings.dart';
+import 'widgets/dialog_fields.dart';
 import 'widgets/adaptive_content.dart';
 import 'widgets/media_thumbnail.dart';
 import 'widgets/progress_ring.dart';
@@ -54,7 +55,8 @@ class QueueTab extends ConsumerStatefulWidget {
   ConsumerState<QueueTab> createState() => _QueueTabState();
 }
 
-class _QueueTabState extends ConsumerState<QueueTab> with SingleTickerProviderStateMixin {
+class _QueueTabState extends ConsumerState<QueueTab>
+    with SingleTickerProviderStateMixin {
   late final TabController _tabs = TabController(length: 2, vsync: this);
 
   @override
@@ -95,7 +97,10 @@ class _QueueTabState extends ConsumerState<QueueTab> with SingleTickerProviderSt
     final isRunning = ref.watch(queueProvider.select((q) => q.isRunning));
 
     if (activeIds.isEmpty && finishedIds.isEmpty) {
-      return _EmptyState(title: l10n.queueEmptyTitle, body: l10n.queueEmptyBody);
+      return _EmptyState(
+        title: l10n.queueEmptyTitle,
+        body: l10n.queueEmptyBody,
+      );
     }
 
     // Land the user where the news is: a finished batch jumps to the results.
@@ -108,58 +113,68 @@ class _QueueTabState extends ConsumerState<QueueTab> with SingleTickerProviderSt
       body: SafeArea(
         child: AdaptiveContent(
           child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                  context.space.lg, context.space.sm, context.space.lg, context.space.xs),
-              child: TabBar(
-                controller: _tabs,
-                dividerColor: Colors.transparent,
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicator: BoxDecoration(
-                  gradient: context.elunaColors.gradient,
-                  borderRadius: BorderRadius.circular(14),
-                  boxShadow: [
-                    BoxShadow(
-                      color: context.elunaColors.primary.withValues(alpha: 0.32),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  context.space.lg,
+                  context.space.sm,
+                  context.space.lg,
+                  context.space.xs,
+                ),
+                child: TabBar(
+                  controller: _tabs,
+                  dividerColor: Colors.transparent,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicator: BoxDecoration(
+                    gradient: context.elunaColors.gradient,
+                    borderRadius: BorderRadius.circular(14),
+                    boxShadow: [
+                      BoxShadow(
+                        color: context.elunaColors.primary.withValues(
+                          alpha: 0.32,
+                        ),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  labelColor: Colors.white,
+                  unselectedLabelColor: theme.colorScheme.onSurfaceVariant,
+                  labelStyle: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 13.5,
+                  ),
+                  tabs: [
+                    Tab(text: l10n.queueActiveTab(activeIds.length)),
+                    Tab(text: l10n.queueFinishedTab(finishedIds.length)),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabs,
+                  children: [
+                    _JobList(
+                      ids: activeIds,
+                      header: isRunning ? const _BatchHeader() : null,
+                      emptyTitle: l10n.queueNoActiveTitle,
+                      emptyBody: l10n.queueNoActiveBody,
+                    ),
+                    _JobList(
+                      ids: finishedIds,
+                      emptyTitle: l10n.queueNoFinishedTitle,
+                      emptyBody: l10n.queueNoFinishedBody,
                     ),
                   ],
                 ),
-                labelColor: Colors.white,
-                unselectedLabelColor: theme.colorScheme.onSurfaceVariant,
-                labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13.5),
-                tabs: [
-                  Tab(text: l10n.queueActiveTab(activeIds.length)),
-                  Tab(text: l10n.queueFinishedTab(finishedIds.length)),
-                ],
               ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabs,
-                children: [
-                  _JobList(
-                    ids: activeIds,
-                    header: isRunning ? const _BatchHeader() : null,
-                    emptyTitle: l10n.queueNoActiveTitle,
-                    emptyBody: l10n.queueNoActiveBody,
-                  ),
-                  _JobList(
-                    ids: finishedIds,
-                    emptyTitle: l10n.queueNoFinishedTitle,
-                    emptyBody: l10n.queueNoFinishedBody,
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
           ),
         ),
       ),
-      floatingActionButton:
-          finishedIds.isEmpty || _tabs.index == 0 ? null : const _FinishedActions(),
+      floatingActionButton: finishedIds.isEmpty || _tabs.index == 0
+          ? null
+          : const _FinishedActions(),
     );
   }
 }
@@ -185,18 +200,25 @@ class _FinishedActions extends ConsumerWidget {
     final gate = ref.read(appLockStateProvider.notifier);
     var saved = 0;
     for (final job in pending) {
-      final destination = await awayInSystemUi(gate, () => queue.saveOutput(job.id));
+      final destination = await awayInSystemUi(
+        gate,
+        () => queue.saveOutput(job.id),
+      );
       if (destination == SaveDestination.gallery ||
           destination == SaveDestination.downloads) {
         saved++;
       }
     }
 
-    messenger.showSnackBar(SnackBar(
-      content: Text(
-        saved == pending.length ? l10n.savedAll(saved) : l10n.savedSome(saved, pending.length),
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          saved == pending.length
+              ? l10n.savedAll(saved)
+              : l10n.savedSome(saved, pending.length),
+        ),
       ),
-    ));
+    );
   }
 
   Future<void> _clear(BuildContext context, WidgetRef ref) async {
@@ -243,28 +265,36 @@ class _FinishedActions extends ConsumerWidget {
     if (outcome.cancelled || outcome.unsupported) return;
 
     ref.read(hapticsProvider).destructiveTap();
-    messenger.showSnackBar(SnackBar(
-      content: Text(
-        outcome.deletedCount == 0
-            ? l10n.originalsNoneDeleted
-            : l10n.originalsDeleted(OutputPaths.humanBytes(outcome.freedBytes)),
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          outcome.deletedCount == 0
+              ? l10n.originalsNoneDeleted
+              : l10n.originalsDeleted(
+                  OutputPaths.humanBytes(outcome.freedBytes),
+                ),
+        ),
       ),
-    ));
+    );
   }
 
   static List<ConversionJob> _unsaved(List<ConversionJob> jobs) => [
-        for (final job in jobs)
-          if (job.status == JobStatus.completed &&
-              job.savedTo == null &&
-              job.outputPath != null)
-            job,
-      ];
+    for (final job in jobs)
+      if (job.status == JobStatus.completed &&
+          job.savedTo == null &&
+          job.outputPath != null)
+        job,
+  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
-    final unsaved = ref.watch(queueProvider.select((q) => _unsaved(q.jobs).length));
-    final reclaimable = ref.watch(queueProvider.select((q) => q.reclaimable.length));
+    final unsaved = ref.watch(
+      queueProvider.select((q) => _unsaved(q.jobs).length),
+    );
+    final reclaimable = ref.watch(
+      queueProvider.select((q) => q.reclaimable.length),
+    );
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -372,7 +402,10 @@ class _BatchHeader extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        l10n.batchSummary(queue.completedCount, queue.jobs.length),
+                        l10n.batchSummary(
+                          queue.completedCount,
+                          queue.jobs.length,
+                        ),
                         style: theme.textTheme.titleSmall,
                       ),
                       const SizedBox(height: 4),
@@ -392,8 +425,10 @@ class _BatchHeader extends ConsumerWidget {
                               color: theme.colorScheme.onSurfaceVariant,
                             ),
                             const SizedBox(width: 4),
-                            Text(l10n.timeLeft(formatEta(eta)),
-                                style: theme.textTheme.labelSmall),
+                            Text(
+                              l10n.timeLeft(formatEta(eta)),
+                              style: theme.textTheme.labelSmall,
+                            ),
                           ],
                         ),
                       ],
@@ -410,9 +445,9 @@ class _BatchHeader extends ConsumerWidget {
 }
 
 String? _failureText(L10n l10n, ConversionJob job) => switch (job.failure) {
-      JobFailure.sourceMissing => l10n.sourceMissing,
-      _ => job.errorMessage,
-    };
+  JobFailure.sourceMissing => l10n.sourceMissing,
+  _ => job.errorMessage,
+};
 
 /// Watches exactly one job, so a progress tick on the running file does not
 /// rebuild the cards above and below it.
@@ -442,45 +477,49 @@ class _JobCardBody extends ConsumerWidget {
   /// dropped by the same sanitiser the output path uses.
   Future<void> _rename(BuildContext context, WidgetRef ref) async {
     final l10n = L10n.of(context);
-    final controller = TextEditingController(
-      text: job.outputName ?? OutputPaths.sanitiseBaseName(job.inputName),
-    );
 
     final name = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.renameOutput),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              controller: controller,
-              autofocus: true,
-              textInputAction: TextInputAction.done,
-              decoration: InputDecoration(
-                labelText: l10n.renameOutputHint,
-                suffixText: '.${job.settings.container.extension}',
+      builder: (context) => DialogFields(
+        initial: [
+          job.outputName ?? OutputPaths.sanitiseBaseName(job.inputName),
+        ],
+        builder: (context, fields) => AlertDialog(
+          title: Text(l10n.renameOutput),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                controller: fields[0],
+                autofocus: true,
+                textInputAction: TextInputAction.done,
+                decoration: InputDecoration(
+                  labelText: l10n.renameOutputHint,
+                  suffixText: '.${job.settings.container.extension}',
+                ),
+                onSubmitted: (value) => Navigator.of(context).pop(value),
               ),
-              onSubmitted: (value) => Navigator.of(context).pop(value),
+              const SizedBox(height: 10),
+              Text(
+                l10n.renameOutputHelp,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(l10n.commonCancel),
             ),
-            const SizedBox(height: 10),
-            Text(l10n.renameOutputHelp, style: Theme.of(context).textTheme.bodySmall),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(fields[0].text),
+              child: Text(l10n.commonOk),
+            ),
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(l10n.commonCancel),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(controller.text),
-            child: Text(l10n.commonOk),
-          ),
-        ],
       ),
     );
-    controller.dispose();
     if (name == null) return;
     ref.read(queueProvider.notifier).renameOutput(job.id, name);
   }
@@ -493,11 +532,14 @@ class _JobCardBody extends ConsumerWidget {
     final box = context.findRenderObject() as RenderBox?;
     await awayInSystemUi(
       ref.read(appLockStateProvider.notifier),
-      () => SharePlus.instance.share(ShareParams(
-        files: [XFile(path)],
-        sharePositionOrigin:
-            box == null ? null : box.localToGlobal(Offset.zero) & box.size,
-      )),
+      () => SharePlus.instance.share(
+        ShareParams(
+          files: [XFile(path)],
+          sharePositionOrigin: box == null
+              ? null
+              : box.localToGlobal(Offset.zero) & box.size,
+        ),
+      ),
     );
   }
 
@@ -539,21 +581,25 @@ class _JobCardBody extends ConsumerWidget {
     );
     switch (destination) {
       case SaveDestination.gallery:
-        messenger.showSnackBar(SnackBar(
-          content: Text(l10n.savedToGallery),
-          action: SnackBarAction(
-            label: l10n.openFile,
-            onPressed: () => opener.openFile(path),
+        messenger.showSnackBar(
+          SnackBar(
+            content: Text(l10n.savedToGallery),
+            action: SnackBarAction(
+              label: l10n.openFile,
+              onPressed: () => opener.openFile(path),
+            ),
           ),
-        ));
+        );
       case SaveDestination.downloads:
-        messenger.showSnackBar(SnackBar(
-          content: Text(l10n.savedToDownloads),
-          action: SnackBarAction(
-            label: l10n.openFolder,
-            onPressed: opener.openDownloads,
+        messenger.showSnackBar(
+          SnackBar(
+            content: Text(l10n.savedToDownloads),
+            action: SnackBarAction(
+              label: l10n.openFolder,
+              onPressed: opener.openDownloads,
+            ),
           ),
-        ));
+        );
       case SaveDestination.unsupported:
         // iOS audio: the share sheet is how files leave the sandbox.
         if (context.mounted) await _share(context, ref);
@@ -606,7 +652,9 @@ class _JobCardBody extends ConsumerWidget {
                           color: theme.colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(width: 8),
-                        Expanded(child: Text(line, style: theme.textTheme.bodyMedium)),
+                        Expanded(
+                          child: Text(line, style: theme.textTheme.bodyMedium),
+                        ),
                       ],
                     ),
                   ),
@@ -639,7 +687,9 @@ class _JobCardBody extends ConsumerWidget {
     final isDark = theme.brightness == Brightness.dark;
     final colors = context.elunaColors;
 
-    final kind = ContainerFormat.kindOfFile(job.inputName) ?? job.settings.container.kind;
+    final kind =
+        ContainerFormat.kindOfFile(job.inputName) ??
+        job.settings.container.kind;
     final accent = switch (job.status) {
       JobStatus.completed => colors.success,
       JobStatus.failed => colors.danger,
@@ -653,8 +703,10 @@ class _JobCardBody extends ConsumerWidget {
     final failureText = _failureText(l10n, job);
 
     final base = isDark ? scheme.surfaceContainer : Colors.white;
-    Color tint(double amount, double alpha) =>
-        Color.alphaBlend(accent.withValues(alpha: amount), base).withValues(alpha: alpha);
+    Color tint(double amount, double alpha) => Color.alphaBlend(
+      accent.withValues(alpha: amount),
+      base,
+    ).withValues(alpha: alpha);
 
     return Container(
       clipBehavior: Clip.antiAlias,
@@ -667,7 +719,9 @@ class _JobCardBody extends ConsumerWidget {
               : [tint(0.12, 0.82), tint(0.02, 0.6)],
         ),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: accent.withValues(alpha: isDark ? 0.28 : 0.20)),
+        border: Border.all(
+          color: accent.withValues(alpha: isDark ? 0.28 : 0.20),
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: isDark ? 0.28 : 0.05),
@@ -743,9 +797,16 @@ class _JobCardBody extends ConsumerWidget {
               const SizedBox(height: 10),
               Row(
                 children: [
-                  Icon(Icons.schedule_rounded, size: 13, color: scheme.onSurfaceVariant),
+                  Icon(
+                    Icons.schedule_rounded,
+                    size: 13,
+                    color: scheme.onSurfaceVariant,
+                  ),
                   const SizedBox(width: 4),
-                  Text(l10n.timeLeft(formatEta(eta)), style: theme.textTheme.labelSmall),
+                  Text(
+                    l10n.timeLeft(formatEta(eta)),
+                    style: theme.textTheme.labelSmall,
+                  ),
                 ],
               ),
             ],
@@ -759,14 +820,20 @@ class _JobCardBody extends ConsumerWidget {
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    Icon(Icons.check_circle_outline, size: 14, color: colors.success),
+                    Icon(
+                      Icons.check_circle_outline,
+                      size: 14,
+                      color: colors.success,
+                    ),
                     const SizedBox(width: 5),
                     Text(
                       switch (savedTo) {
                         SavedTo.gallery => l10n.savedToGallery,
                         SavedTo.downloads => l10n.savedToDownloads,
                       },
-                      style: theme.textTheme.labelSmall?.copyWith(color: colors.success),
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: colors.success,
+                      ),
                     ),
                   ],
                 ),
@@ -832,14 +899,17 @@ class _JobCardBody extends ConsumerWidget {
                     ),
                   ),
                 ],
-                if (job.status == JobStatus.failed || job.status == JobStatus.cancelled)
+                if (job.status == JobStatus.failed ||
+                    job.status == JobStatus.cancelled)
                   TextButton.icon(
                     onPressed: () {
                       ref.read(queueProvider.notifier).retryJob(job.id);
                       // A retry outside a running batch should convert now, not
                       // sit queued until the user finds the other tab.
                       if (!ref.read(queueProvider).isRunning) {
-                        ref.read(queueProvider.notifier).start(queueStringsFrom(l10n));
+                        ref
+                            .read(queueProvider.notifier)
+                            .start(queueStringsFrom(l10n));
                       }
                     },
                     icon: const Icon(Icons.refresh, size: 17),
@@ -853,9 +923,11 @@ class _JobCardBody extends ConsumerWidget {
                     icon: const Icon(Icons.drive_file_rename_outline, size: 17),
                     label: Text(l10n.renameOutput),
                   ),
-                if (job.status == JobStatus.running || job.status == JobStatus.queued)
+                if (job.status == JobStatus.running ||
+                    job.status == JobStatus.queued)
                   TextButton.icon(
-                    onPressed: () => ref.read(queueProvider.notifier).cancelJob(job.id),
+                    onPressed: () =>
+                        ref.read(queueProvider.notifier).cancelJob(job.id),
                     icon: const Icon(Icons.close, size: 17),
                     label: Text(l10n.cancelJob),
                   ),
@@ -876,7 +948,8 @@ class _JobCardBody extends ConsumerWidget {
                             ),
                           )
                           .closed;
-                      if (closed != SnackBarClosedReason.action) queue.purgeOutputs([job]);
+                      if (closed != SnackBarClosedReason.action)
+                        queue.purgeOutputs([job]);
                     },
                     icon: const Icon(Icons.delete_outline, size: 17),
                     label: Text(l10n.removeJob),
@@ -911,8 +984,12 @@ class _SizeSummary extends StatelessWidget {
     if (ratio != null) {
       final percent = (ratio.abs() * 100).round();
       if (percent >= 1) {
-        delta = ratio > 0 ? l10n.savedPercent(percent) : l10n.grewPercent(percent);
-        deltaColor = ratio > 0 ? context.elunaColors.success : theme.colorScheme.error;
+        delta = ratio > 0
+            ? l10n.savedPercent(percent)
+            : l10n.grewPercent(percent);
+        deltaColor = ratio > 0
+            ? context.elunaColors.success
+            : theme.colorScheme.error;
       }
     }
 

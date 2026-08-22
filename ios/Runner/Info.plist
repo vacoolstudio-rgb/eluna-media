@@ -10,6 +10,73 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<!-- Языки приложения. Без этого списка App Store
+	     показывает один английский: переводы лежат в Dart,
+	     и сборка о них не сообщает. -->
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>af</string>
+		<string>am</string>
+		<string>ar</string>
+		<string>bg</string>
+		<string>bn</string>
+		<string>ca</string>
+		<string>cs</string>
+		<string>da</string>
+		<string>de</string>
+		<string>el</string>
+		<string>es</string>
+		<string>es-419</string>
+		<string>es-US</string>
+		<string>fa</string>
+		<string>fi</string>
+		<string>fr</string>
+		<string>fr-CA</string>
+		<string>gu</string>
+		<string>ha</string>
+		<string>he</string>
+		<string>hi</string>
+		<string>hr</string>
+		<string>hu</string>
+		<string>id</string>
+		<string>it</string>
+		<string>ja</string>
+		<string>kk</string>
+		<string>km</string>
+		<string>kn</string>
+		<string>ko</string>
+		<string>ml</string>
+		<string>mr</string>
+		<string>ms</string>
+		<string>my</string>
+		<string>nl</string>
+		<string>no</string>
+		<string>or</string>
+		<string>pa</string>
+		<string>pl</string>
+		<string>pt</string>
+		<string>pt-BR</string>
+		<string>ro</string>
+		<string>ru</string>
+		<string>sk</string>
+		<string>sl</string>
+		<string>sr</string>
+		<string>sv</string>
+		<string>sw</string>
+		<string>ta</string>
+		<string>te</string>
+		<string>th</string>
+		<string>tl</string>
+		<string>tr</string>
+		<string>uk</string>
+		<string>ur</string>
+		<string>uz</string>
+		<string>vi</string>
+		<string>zh</string>
+		<string>zh-TW</string>
+		<string>zu</string>
+	</array>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

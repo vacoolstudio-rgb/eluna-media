@@ -28,6 +28,7 @@
         android:label="Eluna Media"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
+        android:localeConfig="@xml/locales_config"
         android:requestLegacyExternalStorage="true">
 
         <activity

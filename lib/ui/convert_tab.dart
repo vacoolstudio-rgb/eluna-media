@@ -21,6 +21,7 @@ import '../state/selection_controller.dart';
 import '../state/app_lock_controller.dart';
 import '../state/settings_controller.dart';
 import 'queue_strings.dart';
+import 'widgets/dialog_fields.dart';
 import 'widgets/adaptive_content.dart';
 import 'widgets/media_thumbnail.dart';
 import 'widgets/section_card.dart';
@@ -28,7 +29,10 @@ import 'widgets/section_card.dart';
 /// [FileType.media] opens the platform's photo/video picker — thumbnails,
 /// newest first — which is what people expect for media. Audio and anything
 /// exotic go through the generic document picker via the secondary button.
-Future<void> pickFilesIntoQueue(WidgetRef ref, {FileType type = FileType.media}) async {
+Future<void> pickFilesIntoQueue(
+  WidgetRef ref, {
+  FileType type = FileType.media,
+}) async {
   // Пикер — чужая Activity, и для замка это неотличимо от сворачивания.
   // Предупреждаем его заранее, иначе выбор файла, занявший больше минуты (а он
   // столько и занимает: открыть папку, переключить фильтр, найти нужное),
@@ -55,24 +59,24 @@ Future<void> pickFilesIntoQueue(WidgetRef ref, {FileType type = FileType.media})
 /// Каждый вид носителя держит свой оттенок из палитры пакета: раньше те же
 /// цвета назывались по домену (video/audio/image), теперь — по цвету.
 Color accentOfKind(MediaKind kind) => switch (kind) {
-      MediaKind.video => SectionAccents.violet,
-      MediaKind.audio => SectionAccents.blue,
-      MediaKind.image => SectionAccents.amber,
-    };
+  MediaKind.video => SectionAccents.violet,
+  MediaKind.audio => SectionAccents.blue,
+  MediaKind.image => SectionAccents.amber,
+};
 
 HugeIconData iconOfKind(MediaKind? kind) => switch (kind) {
-      MediaKind.video => HugeIcons.strokeRoundedVideo01,
-      MediaKind.audio => HugeIcons.strokeRoundedMusicNote01,
-      MediaKind.image => HugeIcons.strokeRoundedImage01,
-      null => HugeIcons.strokeRoundedFile01,
-    };
+  MediaKind.video => HugeIcons.strokeRoundedVideo01,
+  MediaKind.audio => HugeIcons.strokeRoundedMusicNote01,
+  MediaKind.image => HugeIcons.strokeRoundedImage01,
+  null => HugeIcons.strokeRoundedFile01,
+};
 
 String labelOfKind(L10n l10n, MediaKind? kind) => switch (kind) {
-      MediaKind.video => l10n.sourceVideo,
-      MediaKind.audio => l10n.sourceAudio,
-      MediaKind.image => l10n.sourceImage,
-      null => l10n.sourceUnknown,
-    };
+  MediaKind.video => l10n.sourceVideo,
+  MediaKind.audio => l10n.sourceAudio,
+  MediaKind.image => l10n.sourceImage,
+  null => l10n.sourceUnknown,
+};
 
 /// Блок настроек: общая карточка пакета с её же шапкой над содержимым.
 ///
@@ -147,7 +151,11 @@ class ConvertTab extends ConsumerWidget {
         child: AdaptiveContent(
           child: _CenteredWhenShort(
             padding: EdgeInsets.fromLTRB(
-                context.space.lg, context.space.sm, context.space.lg, context.space.lg),
+              context.space.lg,
+              context.space.sm,
+              context.space.lg,
+              context.space.lg,
+            ),
             children: [
               _ModeSwitch(simpleMode: simpleMode),
               SizedBox(height: context.space.md),
@@ -244,7 +252,8 @@ class _ModeSwitch extends ConsumerWidget {
         ],
         selected: {simpleMode},
         showSelectedIcon: false,
-        onSelectionChanged: (s) => ref.read(appPrefsProvider.notifier).setSimpleMode(s.first),
+        onSelectionChanged: (s) =>
+            ref.read(appPrefsProvider.notifier).setSimpleMode(s.first),
       ),
     );
   }
@@ -268,10 +277,12 @@ class _SourceCard extends ConsumerWidget {
     final theme = Theme.of(context);
     final mixed = ref.watch(isMixedSelectionProvider);
     final kind = ref.watch(primaryKindProvider);
-    final ordered = ref.watch(appPrefsProvider.select((p) => p.simpleMode)) &&
+    final ordered =
+        ref.watch(appPrefsProvider.select((p) => p.simpleMode)) &&
         ref.watch(selectedPresetProvider).isMerge;
 
-    if (pending.isEmpty) return _EmptyPicker(onPick: () => pickFilesIntoQueue(ref));
+    if (pending.isEmpty)
+      return _EmptyPicker(onPick: () => pickFilesIntoQueue(ref));
 
     return _Section(
       title: l10n.filesTitle,
@@ -288,7 +299,8 @@ class _SourceCard extends ConsumerWidget {
             // Order is only meaningful for a merge — everywhere else the queue
             // runs jobs independently and arrows would be noise.
             position: ordered ? (index: index, total: pending.length) : null,
-            onMove: (delta) => ref.read(queueProvider.notifier).movePending(job.id, delta),
+            onMove: (delta) =>
+                ref.read(queueProvider.notifier).movePending(job.id, delta),
             onRemove: () => ref.read(queueProvider.notifier).removeJob(job.id),
           ),
         if (mixed) ...[
@@ -377,7 +389,11 @@ class _EmptyPicker extends ConsumerWidget {
                   ),
                 ],
               ),
-              child: const Icon(Icons.add_rounded, size: 30, color: Colors.white),
+              child: const Icon(
+                Icons.add_rounded,
+                size: 30,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(height: 14),
             Text(l10n.emptySelectionTitle, style: theme.textTheme.titleMedium),
@@ -443,7 +459,9 @@ class _FileRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final kind = ContainerFormat.kindOfFile(job.inputName);
-    final accent = kind == null ? theme.colorScheme.outline : accentOfKind(kind);
+    final accent = kind == null
+        ? theme.colorScheme.outline
+        : accentOfKind(kind);
     final duration = _duration(job.sourceDurationMs);
 
     final meta = [
@@ -561,34 +579,67 @@ class _Notice extends StatelessWidget {
 /// hugeicons нет отдельного «compress», а в один список эти два пресета не
 /// попадают никогда — набор всегда отфильтрован по виду носителя.
 HugeIconData _presetIcon(QuickPreset p) => switch (p) {
-      QuickPreset.compressVideo => HugeIcons.strokeRoundedArrowShrink02,
-      QuickPreset.fitToSize => HugeIcons.strokeRoundedRuler,
-      QuickPreset.compatibleMp4 => HugeIcons.strokeRoundedMp401,
-      QuickPreset.extractAudio => HugeIcons.strokeRoundedMusicNote01,
-      QuickPreset.videoToGif => HugeIcons.strokeRoundedGif01,
-      QuickPreset.mergeVideos => HugeIcons.strokeRoundedCombine,
-      QuickPreset.compressImage => HugeIcons.strokeRoundedArrowShrink02,
-      QuickPreset.fitPhotoToSize => HugeIcons.strokeRoundedRuler,
-      QuickPreset.enhancePhoto => HugeIcons.strokeRoundedSparkles,
-      QuickPreset.imageToWebp => HugeIcons.strokeRoundedImage01,
-      QuickPreset.audioToMp3 => HugeIcons.strokeRoundedMp301,
-      QuickPreset.compressAudio => HugeIcons.strokeRoundedAudioWave01,
-    };
+  QuickPreset.compressVideo => HugeIcons.strokeRoundedArrowShrink02,
+  QuickPreset.fitToSize => HugeIcons.strokeRoundedRuler,
+  QuickPreset.compatibleMp4 => HugeIcons.strokeRoundedMp401,
+  QuickPreset.extractAudio => HugeIcons.strokeRoundedMusicNote01,
+  QuickPreset.videoToGif => HugeIcons.strokeRoundedGif01,
+  QuickPreset.mergeVideos => HugeIcons.strokeRoundedCombine,
+  QuickPreset.compressImage => HugeIcons.strokeRoundedArrowShrink02,
+  QuickPreset.fitPhotoToSize => HugeIcons.strokeRoundedRuler,
+  QuickPreset.enhancePhoto => HugeIcons.strokeRoundedSparkles,
+  QuickPreset.imageToWebp => HugeIcons.strokeRoundedImage01,
+  QuickPreset.audioToMp3 => HugeIcons.strokeRoundedMp301,
+  QuickPreset.compressAudio => HugeIcons.strokeRoundedAudioWave01,
+};
 
 (String, String) _presetTexts(L10n l10n, QuickPreset p) => switch (p) {
-      QuickPreset.compressVideo => (l10n.presetCompressVideoTitle, l10n.presetCompressVideoBody),
-      QuickPreset.fitToSize => (l10n.presetFitToSizeTitle, l10n.presetFitToSizeBody),
-      QuickPreset.compatibleMp4 => (l10n.presetCompatibleMp4Title, l10n.presetCompatibleMp4Body),
-      QuickPreset.extractAudio => (l10n.presetExtractAudioTitle, l10n.presetExtractAudioBody),
-      QuickPreset.videoToGif => (l10n.presetVideoToGifTitle, l10n.presetVideoToGifBody),
-      QuickPreset.mergeVideos => (l10n.presetMergeTitle, l10n.presetMergeBody),
-      QuickPreset.compressImage => (l10n.presetCompressImageTitle, l10n.presetCompressImageBody),
-      QuickPreset.fitPhotoToSize => (l10n.presetFitPhotoTitle, l10n.presetFitPhotoBody),
-      QuickPreset.enhancePhoto => (l10n.presetEnhancePhotoTitle, l10n.presetEnhancePhotoBody),
-      QuickPreset.imageToWebp => (l10n.presetImageToWebpTitle, l10n.presetImageToWebpBody),
-      QuickPreset.audioToMp3 => (l10n.presetAudioToMp3Title, l10n.presetAudioToMp3Body),
-      QuickPreset.compressAudio => (l10n.presetCompressAudioTitle, l10n.presetCompressAudioBody),
-    };
+  QuickPreset.compressVideo => (
+    l10n.presetCompressVideoTitle,
+    l10n.presetCompressVideoBody,
+  ),
+  QuickPreset.fitToSize => (
+    l10n.presetFitToSizeTitle,
+    l10n.presetFitToSizeBody,
+  ),
+  QuickPreset.compatibleMp4 => (
+    l10n.presetCompatibleMp4Title,
+    l10n.presetCompatibleMp4Body,
+  ),
+  QuickPreset.extractAudio => (
+    l10n.presetExtractAudioTitle,
+    l10n.presetExtractAudioBody,
+  ),
+  QuickPreset.videoToGif => (
+    l10n.presetVideoToGifTitle,
+    l10n.presetVideoToGifBody,
+  ),
+  QuickPreset.mergeVideos => (l10n.presetMergeTitle, l10n.presetMergeBody),
+  QuickPreset.compressImage => (
+    l10n.presetCompressImageTitle,
+    l10n.presetCompressImageBody,
+  ),
+  QuickPreset.fitPhotoToSize => (
+    l10n.presetFitPhotoTitle,
+    l10n.presetFitPhotoBody,
+  ),
+  QuickPreset.enhancePhoto => (
+    l10n.presetEnhancePhotoTitle,
+    l10n.presetEnhancePhotoBody,
+  ),
+  QuickPreset.imageToWebp => (
+    l10n.presetImageToWebpTitle,
+    l10n.presetImageToWebpBody,
+  ),
+  QuickPreset.audioToMp3 => (
+    l10n.presetAudioToMp3Title,
+    l10n.presetAudioToMp3Body,
+  ),
+  QuickPreset.compressAudio => (
+    l10n.presetCompressAudioTitle,
+    l10n.presetCompressAudioBody,
+  ),
+};
 
 class _SimpleView extends ConsumerWidget {
   const _SimpleView({super.key});
@@ -618,38 +669,51 @@ class _SimpleView extends ConsumerWidget {
           alignment: WrapAlignment.center,
           children: [
             _PromiseChip(icon: Icons.cloud_off, label: l10n.promiseOffline),
-            _PromiseChip(icon: Icons.all_inclusive, label: l10n.promiseBatchFree),
-            _PromiseChip(icon: Icons.verified_outlined, label: l10n.promiseNoWatermark),
+            _PromiseChip(
+              icon: Icons.all_inclusive,
+              label: l10n.promiseBatchFree,
+            ),
+            _PromiseChip(
+              icon: Icons.verified_outlined,
+              label: l10n.promiseNoWatermark,
+            ),
           ],
         ),
         const SizedBox(height: 16),
-        LayoutBuilder(builder: (context, constraints) {
-          final twoColumns = constraints.maxWidth >= 560;
-          final cards = [
-            for (final p in presets)
-              _PresetCard(
-                preset: p,
-                accent: accent,
-                selected: p == preset,
-                onTap: () => ref.read(selectedPresetProvider.notifier).select(p),
-              ),
-          ];
-          if (!twoColumns) {
-            return Column(
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final twoColumns = constraints.maxWidth >= 560;
+            final cards = [
+              for (final p in presets)
+                _PresetCard(
+                  preset: p,
+                  accent: accent,
+                  selected: p == preset,
+                  onTap: () =>
+                      ref.read(selectedPresetProvider.notifier).select(p),
+                ),
+            ];
+            if (!twoColumns) {
+              return Column(
+                children: [
+                  for (final c in cards)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: c,
+                    ),
+                ],
+              );
+            }
+            return Wrap(
+              spacing: 8,
+              runSpacing: 8,
               children: [
                 for (final c in cards)
-                  Padding(padding: const EdgeInsets.only(bottom: 8), child: c),
+                  SizedBox(width: (constraints.maxWidth - 8) / 2, child: c),
               ],
             );
-          }
-          return Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              for (final c in cards) SizedBox(width: (constraints.maxWidth - 8) / 2, child: c),
-            ],
-          );
-        }),
+          },
+        ),
         const SizedBox(height: 8),
         // The answer to "I want AVI → MP4 and I can't find where": an explicit
         // format row, listing only what this source can legally become.
@@ -693,7 +757,11 @@ class _SimpleView extends ConsumerWidget {
 /// The output-format row. Chips rather than a dropdown: the choice is short,
 /// and the recommendation deserves to be visible rather than buried.
 class _FormatSection extends ConsumerWidget {
-  const _FormatSection({required this.kind, required this.preset, required this.accent});
+  const _FormatSection({
+    required this.kind,
+    required this.preset,
+    required this.accent,
+  });
 
   final MediaKind kind;
   final QuickPreset preset;
@@ -772,10 +840,14 @@ class _FormatChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
         decoration: BoxDecoration(
           gradient: selected ? colors.gradient : null,
-          color: selected ? null : scheme.surfaceContainerHigh.withValues(alpha: 0.7),
+          color: selected
+              ? null
+              : scheme.surfaceContainerHigh.withValues(alpha: 0.7),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: selected ? Colors.transparent : scheme.outlineVariant.withValues(alpha: 0.5),
+            color: selected
+                ? Colors.transparent
+                : scheme.outlineVariant.withValues(alpha: 0.5),
           ),
           boxShadow: selected
               ? [
@@ -872,8 +944,10 @@ class _PresetCard extends StatelessWidget {
     final (title, body) = _presetTexts(l10n, preset);
     final base = isDark ? theme.colorScheme.surfaceContainer : Colors.white;
 
-    Color tint(double amount, double alpha) =>
-        Color.alphaBlend(accent.withValues(alpha: amount), base).withValues(alpha: alpha);
+    Color tint(double amount, double alpha) => Color.alphaBlend(
+      accent.withValues(alpha: amount),
+      base,
+    ).withValues(alpha: alpha);
 
     return PressableScale(
       onTap: onTap,
@@ -886,12 +960,18 @@ class _PresetCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: selected
-                ? (isDark ? [tint(0.30, 0.85), tint(0.12, 0.6)] : [tint(0.22, 0.95), tint(0.06, 0.8)])
-                : (isDark ? [tint(0.10, 0.5), tint(0.03, 0.35)] : [tint(0.06, 0.7), tint(0.02, 0.5)]),
+                ? (isDark
+                      ? [tint(0.30, 0.85), tint(0.12, 0.6)]
+                      : [tint(0.22, 0.95), tint(0.06, 0.8)])
+                : (isDark
+                      ? [tint(0.10, 0.5), tint(0.03, 0.35)]
+                      : [tint(0.06, 0.7), tint(0.02, 0.5)]),
           ),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: accent.withValues(alpha: selected ? 0.7 : (isDark ? 0.2 : 0.14)),
+            color: accent.withValues(
+              alpha: selected ? 0.7 : (isDark ? 0.2 : 0.14),
+            ),
             width: selected ? 1.6 : 1,
           ),
           boxShadow: selected
@@ -937,31 +1017,33 @@ class _SizeTargetPicker extends ConsumerWidget {
 
   Future<void> _askCustom(BuildContext context, WidgetRef ref) async {
     final l10n = L10n.of(context);
-    final controller = TextEditingController();
     final mb = await showDialog<int>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.sizeTargetDialogTitle),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(suffixText: 'MB'),
-          onSubmitted: (v) => Navigator.of(context).pop(int.tryParse(v)),
+      builder: (context) => DialogFields(
+        initial: const [''],
+        builder: (context, fields) => AlertDialog(
+          title: Text(l10n.sizeTargetDialogTitle),
+          content: TextField(
+            controller: fields[0],
+            autofocus: true,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(suffixText: 'MB'),
+            onSubmitted: (v) => Navigator.of(context).pop(int.tryParse(v)),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(l10n.commonCancel),
+            ),
+            FilledButton(
+              onPressed: () =>
+                  Navigator.of(context).pop(int.tryParse(fields[0].text)),
+              child: Text(l10n.commonOk),
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(l10n.commonCancel),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(int.tryParse(controller.text)),
-            child: Text(l10n.commonOk),
-          ),
-        ],
       ),
     );
-    controller.dispose();
     if (mb != null && mb > 0) {
       ref.read(sizeTargetProvider.notifier).set(mb * 1000 * 1000);
     }
@@ -978,18 +1060,19 @@ class _SizeTargetPicker extends ConsumerWidget {
       children: [
         for (final t in SizeTarget.values)
           ChoiceChip(
-            label: Text(
-              switch (sizeTargetService(l10n, t)) {
-                final service? => l10n.sizeTargetNamed(service, t.megabytes),
-                _ => l10n.sizeTargetMb(t.megabytes),
-              },
-            ),
+            label: Text(switch (sizeTargetService(l10n, t)) {
+              final service? => l10n.sizeTargetNamed(service, t.megabytes),
+              _ => l10n.sizeTargetMb(t.megabytes),
+            }),
             selected: targetBytes == t.bytes,
-            onSelected: (_) => ref.read(sizeTargetProvider.notifier).set(t.bytes),
+            onSelected: (_) =>
+                ref.read(sizeTargetProvider.notifier).set(t.bytes),
           ),
         ChoiceChip(
           label: Text(
-            isNamed ? l10n.sizeTargetCustom : l10n.sizeTargetMb(targetBytes ~/ (1000 * 1000)),
+            isNamed
+                ? l10n.sizeTargetCustom
+                : l10n.sizeTargetMb(targetBytes ~/ (1000 * 1000)),
           ),
           selected: !isNamed,
           onSelected: (_) => _askCustom(context, ref),
@@ -1011,31 +1094,33 @@ class _PhotoSizeTargetPicker extends ConsumerWidget {
 
   Future<void> _askCustom(BuildContext context, WidgetRef ref) async {
     final l10n = L10n.of(context);
-    final controller = TextEditingController();
     final kb = await showDialog<int>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.sizeTargetDialogTitleKb),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(suffixText: 'KB'),
-          onSubmitted: (v) => Navigator.of(context).pop(int.tryParse(v)),
+      builder: (context) => DialogFields(
+        initial: const [''],
+        builder: (context, fields) => AlertDialog(
+          title: Text(l10n.sizeTargetDialogTitleKb),
+          content: TextField(
+            controller: fields[0],
+            autofocus: true,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(suffixText: 'KB'),
+            onSubmitted: (v) => Navigator.of(context).pop(int.tryParse(v)),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(l10n.commonCancel),
+            ),
+            FilledButton(
+              onPressed: () =>
+                  Navigator.of(context).pop(int.tryParse(fields[0].text)),
+              child: Text(l10n.commonOk),
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(l10n.commonCancel),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(int.tryParse(controller.text)),
-            child: Text(l10n.commonOk),
-          ),
-        ],
       ),
     );
-    controller.dispose();
     if (kb != null && kb > 0) {
       ref.read(photoSizeTargetProvider.notifier).set(kb * 1000);
     }
@@ -1058,10 +1143,13 @@ class _PhotoSizeTargetPicker extends ConsumerWidget {
           ChoiceChip(
             label: Text(label(t.kilobytes)),
             selected: targetBytes == t.bytes,
-            onSelected: (_) => ref.read(photoSizeTargetProvider.notifier).set(t.bytes),
+            onSelected: (_) =>
+                ref.read(photoSizeTargetProvider.notifier).set(t.bytes),
           ),
         ChoiceChip(
-          label: Text(isNamed ? l10n.sizeTargetCustom : label(targetBytes ~/ 1000)),
+          label: Text(
+            isNamed ? l10n.sizeTargetCustom : label(targetBytes ~/ 1000),
+          ),
           selected: !isNamed,
           onSelected: (_) => _askCustom(context, ref),
         ),
@@ -1090,7 +1178,9 @@ class _SizeEstimate extends ConsumerWidget {
       return RateCalc.videoKbpsForTarget(
             targetBytes: targetBytes,
             durationMs: ms,
-            audioKbps: settings.audioCodec == AudioCodec.none ? 0 : settings.audioBitrateKbps,
+            audioKbps: settings.audioCodec == AudioCodec.none
+                ? 0
+                : settings.audioBitrateKbps,
           ) ==
           null;
     });
@@ -1106,7 +1196,9 @@ class _SizeEstimate extends ConsumerWidget {
           const SizedBox(height: 6),
           Text(
             l10n.sizeTargetTooSmall,
-            style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.error),
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.error,
+            ),
           ),
         ],
       ],
@@ -1217,7 +1309,10 @@ class _OutputSection extends ConsumerWidget {
     // that is not among its items.
     final unavailable = ref.watch(unavailableContainersProvider);
     final options = [
-      for (final f in ContainerFormat.outputsFor(sourceKind, animatedSource: animatedSource))
+      for (final f in ContainerFormat.outputsFor(
+        sourceKind,
+        animatedSource: animatedSource,
+      ))
         if (!unavailable.contains(f) || f == settings.container) f,
     ];
     final value = options.contains(settings.container)
@@ -1256,10 +1351,13 @@ class _VideoSection extends ConsumerWidget {
     final av1Available = ref.watch(av1AvailableProvider).value ?? false;
 
     final isReencoding = codec != VideoCodec.copy && codec != VideoCodec.none;
-    final useCrf = settings.rateControl == RateControl.quality && codec.supportsCrf;
-    final useSize = settings.rateControl == RateControl.size && codec.supportsCrf;
+    final useCrf =
+        settings.rateControl == RateControl.quality && codec.supportsCrf;
+    final useSize =
+        settings.rateControl == RateControl.size && codec.supportsCrf;
 
-    final subtitleCapable = settings.container == ContainerFormat.mp4 ||
+    final subtitleCapable =
+        settings.container == ContainerFormat.mp4 ||
         settings.container == ContainerFormat.mov ||
         settings.container == ContainerFormat.mkv;
 
@@ -1303,9 +1401,18 @@ class _VideoSection extends ConsumerWidget {
           if (codec.supportsCrf)
             SegmentedButton<RateControl>(
               segments: [
-                ButtonSegment(value: RateControl.quality, label: Text(l10n.rateControlQuality)),
-                ButtonSegment(value: RateControl.bitrate, label: Text(l10n.rateControlBitrate)),
-                ButtonSegment(value: RateControl.size, label: Text(l10n.rateControlSize)),
+                ButtonSegment(
+                  value: RateControl.quality,
+                  label: Text(l10n.rateControlQuality),
+                ),
+                ButtonSegment(
+                  value: RateControl.bitrate,
+                  label: Text(l10n.rateControlBitrate),
+                ),
+                ButtonSegment(
+                  value: RateControl.size,
+                  label: Text(l10n.rateControlSize),
+                ),
               ],
               selected: {settings.rateControl},
               showSelectedIcon: false,
@@ -1315,7 +1422,10 @@ class _VideoSection extends ConsumerWidget {
           if (useSize) ...[
             _SizeTargetPicker(targetBytes: ref.watch(sizeTargetProvider)),
             const SizedBox(height: 8),
-            _SizeEstimate(settings: settings, targetBytes: ref.watch(sizeTargetProvider)),
+            _SizeEstimate(
+              settings: settings,
+              targetBytes: ref.watch(sizeTargetProvider),
+            ),
           ] else if (useCrf)
             LabelledSlider(
               label: l10n.crfLabel(settings.crf),
@@ -1348,7 +1458,10 @@ class _VideoSection extends ConsumerWidget {
               onChanged: controller.setPreset,
             ),
             const SizedBox(height: 8),
-            Text(l10n.encodingPresetHint, style: Theme.of(context).textTheme.bodySmall),
+            Text(
+              l10n.encodingPresetHint,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
           ],
         ],
         if (isReencoding && useCrf) ...[
@@ -1390,7 +1503,8 @@ class _BitrateEstimate extends ConsumerWidget {
     final theme = Theme.of(context);
     final pending = ref.watch(queueProvider.select((q) => q.pending));
 
-    final audioKbps = settings.audioCodec == AudioCodec.none ||
+    final audioKbps =
+        settings.audioCodec == AudioCodec.none ||
             !settings.audioCodec.supportsBitrate
         ? 0
         : settings.audioBitrateKbps;
@@ -1477,11 +1591,15 @@ class _AudioSection extends StatelessWidget {
             label: l10n.sampleRateLabel,
             value: settings.sampleRate,
             items: SampleRate.values,
-            labelOf: (r) => r == SampleRate.keep ? l10n.presetOriginal : r.label,
+            labelOf: (r) =>
+                r == SampleRate.keep ? l10n.presetOriginal : r.label,
             onChanged: controller.setSampleRate,
           ),
           const SizedBox(height: 6),
-          Text(l10n.voiceAudioHint, style: Theme.of(context).textTheme.bodySmall),
+          Text(
+            l10n.voiceAudioHint,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
         ],
       ],
     );
@@ -1499,7 +1617,8 @@ class _TransformSection extends StatelessWidget {
     final l10n = L10n.of(context);
     final theme = Theme.of(context);
 
-    final canTransform = settings.videoCodec != VideoCodec.copy &&
+    final canTransform =
+        settings.videoCodec != VideoCodec.copy &&
         settings.videoCodec != VideoCodec.none &&
         settings.audioCodec != AudioCodec.copy;
 
@@ -1578,43 +1697,51 @@ class _TrimSection extends ConsumerWidget {
   }) async {
     final l10n = L10n.of(context);
     final current = isStart ? trim.startMs : trim.endMs;
-    final field = TextEditingController(text: TimeInput.format(current));
 
     final entered = await showDialog<int>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(isStart ? l10n.trimStart : l10n.trimEnd),
-        content: TextField(
-          controller: field,
-          autofocus: true,
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration(
-            hintText: l10n.trimTimeHint,
-            helperText: l10n.trimTimeHelp(TimeInput.format(durationMs)),
+      builder: (context) => DialogFields(
+        initial: [TimeInput.format(current)],
+        builder: (context, fields) => AlertDialog(
+          title: Text(isStart ? l10n.trimStart : l10n.trimEnd),
+          content: TextField(
+            controller: fields[0],
+            autofocus: true,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            decoration: InputDecoration(
+              hintText: l10n.trimTimeHint,
+              helperText: l10n.trimTimeHelp(TimeInput.format(durationMs)),
+            ),
+            onSubmitted: (v) => Navigator.of(context).pop(TimeInput.parse(v)),
           ),
-          onSubmitted: (v) => Navigator.of(context).pop(TimeInput.parse(v)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(l10n.commonCancel),
+            ),
+            FilledButton(
+              onPressed: () =>
+                  Navigator.of(context).pop(TimeInput.parse(fields[0].text)),
+              child: Text(l10n.commonOk),
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(l10n.commonCancel),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(TimeInput.parse(field.text)),
-            child: Text(l10n.commonOk),
-          ),
-        ],
       ),
     );
-    field.dispose();
     if (entered == null) return;
 
     final clamped = entered.clamp(0, durationMs);
     // A range that starts after it ends is not a range; the edited bound wins
     // and the other one gives way rather than the edit being thrown out.
     final next = isStart
-        ? TrimRange(startMs: clamped, endMs: clamped < trim.endMs ? trim.endMs : durationMs)
-        : TrimRange(startMs: clamped > trim.startMs ? trim.startMs : 0, endMs: clamped);
+        ? TrimRange(
+            startMs: clamped,
+            endMs: clamped < trim.endMs ? trim.endMs : durationMs,
+          )
+        : TrimRange(
+            startMs: clamped > trim.startMs ? trim.startMs : 0,
+            endMs: clamped,
+          );
     if (next.isValid) controller.setTrim(next);
   }
 
@@ -1624,7 +1751,9 @@ class _TrimSection extends ConsumerWidget {
     final theme = Theme.of(context);
     final pending = ref.watch(queueProvider.select((q) => q.pending));
 
-    final int? durationMs = pending.length == 1 ? pending.first.sourceDurationMs : null;
+    final int? durationMs = pending.length == 1
+        ? pending.first.sourceDurationMs
+        : null;
     final available = durationMs != null && durationMs > 0;
 
     final trim = settings.trim;
@@ -1644,7 +1773,9 @@ class _TrimSection extends ConsumerWidget {
               ? null
               : (on) {
                   if (on) {
-                    controller.setTrim(TrimRange(startMs: 0, endMs: durationMs));
+                    controller.setTrim(
+                      TrimRange(startMs: 0, endMs: durationMs),
+                    );
                   } else {
                     controller.clearTrim();
                   }
@@ -1675,7 +1806,9 @@ class _TrimSection extends ConsumerWidget {
                     trim: trim,
                     durationMs: durationMs,
                   ),
-                  child: Text('${l10n.trimStart}  ${TimeInput.format(trim.startMs)}'),
+                  child: Text(
+                    '${l10n.trimStart}  ${TimeInput.format(trim.startMs)}',
+                  ),
                 ),
               ),
               const SizedBox(width: 8),
@@ -1687,7 +1820,9 @@ class _TrimSection extends ConsumerWidget {
                     trim: trim,
                     durationMs: durationMs,
                   ),
-                  child: Text('${l10n.trimEnd}  ${TimeInput.format(trim.endMs)}'),
+                  child: Text(
+                    '${l10n.trimEnd}  ${TimeInput.format(trim.endMs)}',
+                  ),
                 ),
               ),
             ],
@@ -1719,9 +1854,11 @@ class _ImageSection extends StatelessWidget {
 
     // AVIF reads the same slider through libaom's CRF scale; animated WebP
     // reads it as libwebp's -quality, exactly as the still one does.
-    final losslessCapable = container == ContainerFormat.webp ||
+    final losslessCapable =
+        container == ContainerFormat.webp ||
         container == ContainerFormat.webpAnimated;
-    final hasQuality = container == ContainerFormat.jpg ||
+    final hasQuality =
+        container == ContainerFormat.jpg ||
         container == ContainerFormat.avif ||
         (losslessCapable && !settings.lossless);
     final hasLosslessToggle = losslessCapable;
@@ -1746,7 +1883,8 @@ class _ImageSection extends StatelessWidget {
             label: l10n.imageScaleLabel,
             value: settings.imageScale,
             items: ImageScale.values,
-            labelOf: (s) => s == ImageScale.keep ? l10n.presetOriginal : s.label,
+            labelOf: (s) =>
+                s == ImageScale.keep ? l10n.presetOriginal : s.label,
             onChanged: controller.setImageScale,
           ),
         ],
@@ -1785,11 +1923,11 @@ class _ImageSection extends StatelessWidget {
 }
 
 String _enhanceLabel(L10n l10n, EnhanceLevel level) => switch (level) {
-      EnhanceLevel.none => l10n.enhanceOff,
-      EnhanceLevel.light => l10n.enhanceLight,
-      EnhanceLevel.medium => l10n.enhanceMedium,
-      EnhanceLevel.strong => l10n.enhanceStrong,
-    };
+  EnhanceLevel.none => l10n.enhanceOff,
+  EnhanceLevel.light => l10n.enhanceLight,
+  EnhanceLevel.medium => l10n.enhanceMedium,
+  EnhanceLevel.strong => l10n.enhanceStrong,
+};
 
 class _EnhanceSection extends StatelessWidget {
   const _EnhanceSection({required this.settings, required this.controller});
@@ -1820,7 +1958,9 @@ class _EnhanceSection extends StatelessWidget {
         // rescue a blurred shot; sharpening raises edge contrast and nothing
         // more, and a user who expects a rescue leaves a one-star review.
         Text(
-          settings.sharpen == EnhanceLevel.strong ? l10n.sharpenStrongHint : l10n.sharpenHint,
+          settings.sharpen == EnhanceLevel.strong
+              ? l10n.sharpenStrongHint
+              : l10n.sharpenHint,
           style: theme.textTheme.bodySmall,
         ),
         const SizedBox(height: 16),
@@ -1846,7 +1986,9 @@ class _EnhanceSection extends StatelessWidget {
           title: Text(l10n.upscaleLabel),
           // A downscale target and a 2× upscale are the same filter slot. The
           // toggle goes dead rather than silently doing nothing, and says why.
-          subtitle: Text(downscaling ? l10n.upscaleConflictHint : l10n.upscaleHint),
+          subtitle: Text(
+            downscaling ? l10n.upscaleConflictHint : l10n.upscaleHint,
+          ),
           value: settings.upscaleActive,
           onChanged: downscaling ? null : controller.setUpscale2x,
         ),
@@ -1878,7 +2020,8 @@ class _StartBar extends ConsumerWidget {
     } catch (_) {
       return true;
     }
-    final charging = state == BatteryState.charging || state == BatteryState.full;
+    final charging =
+        state == BatteryState.charging || state == BatteryState.full;
     if (level >= 20 || charging) return true;
     if (!context.mounted) return true;
 
@@ -1924,10 +2067,12 @@ class _StartBar extends ConsumerWidget {
       builder: (context) => AlertDialog(
         icon: const Icon(Icons.sd_card_alert_outlined),
         title: Text(l10n.lowSpaceTitle),
-        content: Text(l10n.lowSpaceBody(
-          OutputPaths.humanBytes(SpaceCheck.requiredBytes(total)),
-          OutputPaths.humanBytes(free ?? 0),
-        )),
+        content: Text(
+          l10n.lowSpaceBody(
+            OutputPaths.humanBytes(SpaceCheck.requiredBytes(total)),
+            OutputPaths.humanBytes(free ?? 0),
+          ),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -1950,7 +2095,8 @@ class _StartBar extends ConsumerWidget {
     // profile must not attach a megabyte-scale budget to a photo, where it
     // would send the fit-to-size search hunting for a limit the picture is
     // nowhere near.
-    if (s.rateControl == RateControl.size && s.container.kind == MediaKind.video) {
+    if (s.rateControl == RateControl.size &&
+        s.container.kind == MediaKind.video) {
       s = s.copyWith(sizeTargetBytes: ref.read(sizeTargetProvider));
     }
     // Trim is offered only while exactly one file is queued, but the range
@@ -1972,7 +2118,10 @@ class _StartBar extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Divider(height: 1, color: theme.colorScheme.outlineVariant.withValues(alpha: 0.5)),
+        Divider(
+          height: 1,
+          color: theme.colorScheme.outlineVariant.withValues(alpha: 0.5),
+        ),
         SafeArea(
           top: false,
           // Полоса во всю ширину, а кнопка внутри неё — по той же колонке, что
@@ -1981,55 +2130,67 @@ class _StartBar extends ConsumerWidget {
           child: AdaptiveContent(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: context.space.lg, vertical: context.space.sm + 2),
+                horizontal: context.space.lg,
+                vertical: context.space.sm + 2,
+              ),
               child: SizedBox(
                 height: 52,
                 child: isRunning
-                  ? GradientButton(
-                      label: l10n.cancelBatch,
-                      icon: HugeIcons.strokeRoundedStop,
-                      gradient: const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Color(0xFFEF4444), Color(0xFFF87171)],
-                      ),
-                      onPressed: () => ref.read(queueProvider.notifier).cancelBatch(),
-                    )
-                  : GradientButton(
-                      label: l10n.startConversion(pendingCount),
-                      icon: HugeIcons.strokeRoundedFlash,
-                      onPressed: pendingCount == 0
-                          ? null
-                          : () async {
-                              if (!await _confirmSpace(context, ref)) return;
-                              if (!context.mounted) return;
-                              if (!await _confirmBattery(context)) return;
-                              if (!context.mounted) return;
+                    ? GradientButton(
+                        label: l10n.cancelBatch,
+                        icon: HugeIcons.strokeRoundedStop,
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Color(0xFFEF4444), Color(0xFFF87171)],
+                        ),
+                        onPressed: () =>
+                            ref.read(queueProvider.notifier).cancelBatch(),
+                      )
+                    : GradientButton(
+                        label: l10n.startConversion(pendingCount),
+                        icon: HugeIcons.strokeRoundedFlash,
+                        onPressed: pendingCount == 0
+                            ? null
+                            : () async {
+                                if (!await _confirmSpace(context, ref)) return;
+                                if (!context.mounted) return;
+                                if (!await _confirmBattery(context)) return;
+                                if (!context.mounted) return;
 
-                              final queue = ref.read(queueProvider.notifier);
-                              final prefs = ref.read(appPrefsProvider);
+                                final queue = ref.read(queueProvider.notifier);
+                                final prefs = ref.read(appPrefsProvider);
 
-                              // Every pending job already carries the profile it
-                              // will convert with (the queue is kept in sync as
-                              // the controls change); this only re-asserts it and
-                              // strips a trim that no longer applies.
-                              syncPendingSettings(ref);
-                              if (!prefs.simpleMode) {
-                                queue.updatePendingSettings(_advancedSettings(ref));
-                              }
+                                // Every pending job already carries the profile it
+                                // will convert with (the queue is kept in sync as
+                                // the controls change); this only re-asserts it and
+                                // strips a trim that no longer applies.
+                                syncPendingSettings(ref);
+                                if (!prefs.simpleMode) {
+                                  queue.updatePendingSettings(
+                                    _advancedSettings(ref),
+                                  );
+                                }
 
-                              if (prefs.simpleMode &&
-                                  ref.read(selectedPresetProvider).isMerge) {
-                                final count = ref.read(queueProvider).pending.length;
-                                if (count < 2) return;
-                                queue.mergePending(
-                                  ref.read(effectiveSettingsProvider(MediaKind.video)),
-                                  L10n.of(context).mergedVideoName(count),
-                                );
-                              }
+                                if (prefs.simpleMode &&
+                                    ref.read(selectedPresetProvider).isMerge) {
+                                  final count = ref
+                                      .read(queueProvider)
+                                      .pending
+                                      .length;
+                                  if (count < 2) return;
+                                  queue.mergePending(
+                                    ref.read(
+                                      effectiveSettingsProvider(
+                                        MediaKind.video,
+                                      ),
+                                    ),
+                                    L10n.of(context).mergedVideoName(count),
+                                  );
+                                }
 
-                              queue.start(queueStringsFrom(L10n.of(context)));
-                            },
+                                queue.start(queueStringsFrom(L10n.of(context)));
+                              },
                       ),
               ),
             ),

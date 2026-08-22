@@ -29,6 +29,7 @@ import argparse
 import json
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 import requests
@@ -75,6 +76,25 @@ def shot_key(path: Path) -> tuple[int, str]:
     return (SHOT_ORDER.index(stem) if stem in SHOT_ORDER else len(SHOT_ORDER), stem)
 
 
+# Google отвечает 503 и 429 сам по себе, без нашей вины, а один сорвавшийся
+# запрос из четырёхсот откатывает весь edit. Поэтому переходное — не ошибка, а
+# повод подождать.
+TRANSIENT = {408, 429, 500, 502, 503, 504}
+
+
+class RetryingSession(AuthorizedSession):
+    def request(self, method, url, **kwargs):
+        delay = 2
+        for attempt in range(6):
+            response = super().request(method, url, **kwargs)
+            if response.status_code not in TRANSIENT or attempt == 5:
+                return response
+            print(f"  HTTP {response.status_code}, повтор через {delay} c")
+            time.sleep(delay)
+            delay *= 2
+        return response
+
+
 def read(path: Path) -> str | None:
     if not path.exists():
         return None
@@ -103,6 +123,7 @@ def main() -> int:
     ap.add_argument("--package", default=PACKAGE)
     ap.add_argument("--only", nargs="*", help="upload only these locales")
     ap.add_argument("--no-images", action="store_true", help="text only")
+    ap.add_argument("--devices", help="comma-separated screenshot sets to send (phone, sevenInch, tenInch); default all that exist")
     ap.add_argument("--screenshots-root", default="docs/ASO/screenshots",
                     help="tree of <locale>/<device>/<frame>.png rendered by integration_test/screenshots_test.dart")
     ap.add_argument("--dry-run", action="store_true", help="print what would be sent, touch nothing")
@@ -153,7 +174,12 @@ def main() -> int:
         shots_root = Path(args.screenshots_root)
         if not shots_root.is_absolute():
             shots_root = ROOT / shots_root
+        # Наборы перезаливаются целиком, поэтому без выбора повторный прогон
+        # ради планшетов гонит заново и все телефонные кадры.
+        picked = [d.strip() for d in args.devices.split(",")] if args.devices else list(SHOT_DEVICE_SETS)
         for device, name in SHOT_DEVICE_SETS.items():
+            if device not in picked:
+                continue
             for loc in targets:
                 d = shots_root / loc / device
                 if d.is_dir():
@@ -169,7 +195,7 @@ def main() -> int:
         return 0
 
     creds = service_account.Credentials.from_service_account_file(args.key, scopes=SCOPES)
-    session = AuthorizedSession(creds)
+    session = RetryingSession(creds)
 
     edit = check(session, session.post(f"{API}/applications/{args.package}/edits"), "opening an edit")
     eid = edit["id"]

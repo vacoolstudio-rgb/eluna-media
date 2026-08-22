@@ -149,11 +149,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "v0.18.2"
-      resolved-ref: "137295c955d7966ae2b391d0122687bb9cd69b6d"
+      ref: "v0.19.1"
+      resolved-ref: cb99b77398b0de140535a4d067a982bae0efa287
       url: "https://github.com/vacoolstudio-rgb/eluna-shared.git"
     source: git
-    version: "0.18.2"
+    version: "0.19.0"
   fake_async:
     dependency: transitive
     description:

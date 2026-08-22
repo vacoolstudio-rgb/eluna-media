@@ -56,3 +56,5 @@ play-service-account*.json
 
 # Upload key passwords. Never commit this.
 android/key.properties
+tmp/
+enc_test.txt
