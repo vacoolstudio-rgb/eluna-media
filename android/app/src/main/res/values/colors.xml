@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The launch screen's background, on Android 12+ via
+         windowSplashScreenBackground and below it via the launch_background
+         drawable.
+
+         Deliberately NOT night qualified: there is no values-night twin of this
+         file on purpose. The launch screen is brand dark on every device, in
+         both system themes. Anything that follows the system here is the bug
+         this colour exists to fix.
+
+         #FF0D0F17 is eluna_shared's dark ColorScheme.surface, the one surface the
+         whole family shares (only the accents differ per app). -->
+    <color name="eluna_splash_bg">#FF0D0F17</color>
+</resources>

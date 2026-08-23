@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is off -->
-    <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
+    <!-- The launch window. Same in values/ and values-night/ on purpose: the
+         launch screen is brand dark on every device, in both system themes.
+
+         The day copy used to inherit a Light parent with a windowBackground of
+         ?android:colorBackground, which is white on a phone whose SYSTEM is in
+         light mode. Cold starting the app flashed a white screen with the icon
+         on it before the (dark) app appeared, and the phones this was checked
+         on were all in dark mode, where the same code looks right.
+
+         windowSplashScreenBackground is what Android 12+ actually paints; the
+         windowBackground drawable covers 11 and below. The attribute is API 31
+         and is ignored below it, which is why both are set.
+
+         No windowSplashScreenAnimatedIcon: leaving it unset lets the system use
+         the icon of the launcher entry that was tapped. No
+         windowSplashScreenIconBackgroundColor either: an adaptive icon carries
+         its own background, and setting one makes the system shrink the icon to
+         leave room for a disc we do not need.
+
+         Full story: eluna_shared docs/ANDROID-SPLASH.md. -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <!-- Show a splash screen on the activity. Automatically removed when
              the Flutter engine draws its first frame -->
         <item name="android:windowBackground">@drawable/launch_background</item>
+        <item name="android:windowSplashScreenBackground">@color/eluna_splash_bg</item>
     </style>
     <!-- Theme applied to the Android Window as soon as the process has started.
          This theme determines the color of the Android Window while your

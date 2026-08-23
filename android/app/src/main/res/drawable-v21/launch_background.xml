@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Modify this file to customize your launch splash screen -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="?android:colorBackground" />
+<!-- The launch window's background.
 
-    <!-- You can insert your own image assets here -->
-    <!-- <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@mipmap/launch_image" />
-    </item> -->
+     Was the Flutter template's `@android:color/white` here and
+     `?android:colorBackground` in drawable-v21, both of which resolve against
+     the SYSTEM theme. On a phone whose system is in light mode that is white,
+     so cold starting the app flashed a white screen with the icon on it before
+     the (dark) app appeared. The app's own theme is a separate, in-app setting,
+     so the system setting must not decide this.
+
+     Pinned to the family's dark surface instead. See eluna_shared
+     docs/ANDROID-SPLASH.md. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/eluna_splash_bg" />
 </layer-list>
