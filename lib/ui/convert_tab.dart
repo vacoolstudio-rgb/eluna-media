@@ -281,8 +281,9 @@ class _SourceCard extends ConsumerWidget {
         ref.watch(appPrefsProvider.select((p) => p.simpleMode)) &&
         ref.watch(selectedPresetProvider).isMerge;
 
-    if (pending.isEmpty)
+    if (pending.isEmpty) {
       return _EmptyPicker(onPick: () => pickFilesIntoQueue(ref));
+    }
 
     return _Section(
       title: l10n.filesTitle,
@@ -1022,6 +1023,10 @@ class _SizeTargetPicker extends ConsumerWidget {
       builder: (context) => DialogFields(
         initial: const [''],
         builder: (context, fields) => AlertDialog(
+          // Клавиатура поднимается сама (`autofocus`), и на оставшейся высоте
+          // окно не помещалось: аудит раскладки намерил 68 точек по-английски
+          // и 37 по-арабски. Прокрутка вместо обрезки.
+          scrollable: true,
           title: Text(l10n.sizeTargetDialogTitle),
           content: TextField(
             controller: fields[0],
@@ -1099,6 +1104,9 @@ class _PhotoSizeTargetPicker extends ConsumerWidget {
       builder: (context) => DialogFields(
         initial: const [''],
         builder: (context, fields) => AlertDialog(
+          // То же самое, что и у окна ввода мегабайт: поле с автофокусом,
+          // клавиатура и 65 точек переполнения.
+          scrollable: true,
           title: Text(l10n.sizeTargetDialogTitleKb),
           content: TextField(
             controller: fields[0],
@@ -1703,6 +1711,10 @@ class _TrimSection extends ConsumerWidget {
       builder: (context) => DialogFields(
         initial: [TimeInput.format(current)],
         builder: (context, fields) => AlertDialog(
+          // Самое высокое из окон ввода: под полем стоят и подсказка формата, и
+          // строка «всего 3:00:00». Соседние два (мегабайты и килобайты) при
+          // поднятой клавиатуре переполнялись, а это выше их обоих.
+          scrollable: true,
           title: Text(isStart ? l10n.trimStart : l10n.trimEnd),
           content: TextField(
             controller: fields[0],

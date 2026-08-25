@@ -425,9 +425,15 @@ class _BatchHeader extends ConsumerWidget {
                               color: theme.colorScheme.onSurfaceVariant,
                             ),
                             const SizedBox(width: 4),
-                            Text(
-                              l10n.timeLeft(formatEta(eta)),
-                              style: theme.textTheme.labelSmall,
+                            // Та же болезнь, что у строки «сохранено в…»:
+                            // остаток времени бывает и «1 ч 12 м», и переведён
+                            // он на 61 язык, а места в этой колонке — меньше
+                            // половины ширины экрана.
+                            Expanded(
+                              child: Text(
+                                l10n.timeLeft(formatEta(eta)),
+                                style: theme.textTheme.labelSmall,
+                              ),
                             ),
                           ],
                         ),
@@ -485,6 +491,12 @@ class _JobCardBody extends ConsumerWidget {
           job.outputName ?? OutputPaths.sanitiseBaseName(job.inputName),
         ],
         builder: (context, fields) => AlertDialog(
+          // Поле с автофокусом поднимает клавиатуру, под полем стоит абзац
+          // пояснения — и на оставшейся половине экрана окно переполнялось
+          // (аудит: 128 точек по-английски при ×1.5, 22 с поднятой клавиатурой
+          // по-арабски). Прокрутка — единственное, что здесь помогает: убрать
+          // из окна нечего.
+          scrollable: true,
           title: Text(l10n.renameOutput),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -803,9 +815,13 @@ class _JobCardBody extends ConsumerWidget {
                     color: scheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 4),
-                  Text(
-                    l10n.timeLeft(formatEta(eta)),
-                    style: theme.textTheme.labelSmall,
+                  // См. соседнюю строку остатка в шапке батча: голому Text
+                  // сжиматься нечем.
+                  Expanded(
+                    child: Text(
+                      l10n.timeLeft(formatEta(eta)),
+                      style: theme.textTheme.labelSmall,
+                    ),
                   ),
                 ],
               ),
@@ -826,13 +842,19 @@ class _JobCardBody extends ConsumerWidget {
                       color: colors.success,
                     ),
                     const SizedBox(width: 5),
-                    Text(
-                      switch (savedTo) {
-                        SavedTo.gallery => l10n.savedToGallery,
-                        SavedTo.downloads => l10n.savedToDownloads,
-                      },
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: colors.success,
+                    // Expanded, а не голый Text: сжиматься строке было нечем, и
+                    // «Сохранено в «Загрузки»» вылезала за карточку — по-русски
+                    // даже при обычном шрифте. Аудит раскладки намерил 9 точек
+                    // при ×1.0, 33 по-английски при ×1.5 и 69 по-русски.
+                    Expanded(
+                      child: Text(
+                        switch (savedTo) {
+                          SavedTo.gallery => l10n.savedToGallery,
+                          SavedTo.downloads => l10n.savedToDownloads,
+                        },
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: colors.success,
+                        ),
                       ),
                     ),
                   ],
@@ -948,8 +970,9 @@ class _JobCardBody extends ConsumerWidget {
                             ),
                           )
                           .closed;
-                      if (closed != SnackBarClosedReason.action)
+                      if (closed != SnackBarClosedReason.action) {
                         queue.purgeOutputs([job]);
+                      }
                     },
                     icon: const Icon(Icons.delete_outline, size: 17),
                     label: Text(l10n.removeJob),

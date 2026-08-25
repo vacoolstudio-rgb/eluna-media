@@ -118,6 +118,12 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
+        // Пять пунктов списка — это пять абзацев, и высота у них не своя, а
+        // языка: по-русски окно перерастало экран на 173 точки даже при обычном
+        // шрифте, а на 320×480 при крупном — на 566. Диалог `Material` сам по
+        // себе не прокручивается: без этого флага содержимое просто обрезается
+        // полосой переполнения.
+        scrollable: true,
         icon: const Icon(Icons.new_releases_outlined),
         title: Text(l10n.whatsNewTitle),
         content: Column(
