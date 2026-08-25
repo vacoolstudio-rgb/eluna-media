@@ -23,6 +23,16 @@
 //
 //   flutter test integration_test/layout_audit_test.dart -d <device>
 //
+// Телефон при этом обязан быть разбужен и разблокирован, и экран не должен
+// гаснуть за время прогона. Причина не в удобстве: `tester.pump()` в живом
+// режиме ждёт настоящего кадра, а погасший или закрытый шторкой экран кадров не
+// рисует — прогон встаёт намертво и выглядит как зависший тест. Полчаса ушло
+// ровно на это, поэтому:
+//
+//   adb -s <device> shell input keyevent 224            # разбудить
+//   adb -s <device> shell settings put system screen_off_timeout 3600000
+//   adb -s <device> shell dumpsys deviceidle disable    # без Doze
+//
 // Контекст здесь берётся у верхнего маршрута заново перед каждым вызовом
 // (`_App.topContext`), поэтому «через await» он не переносится ни разу —
 // анализатор же видит только то, что между вызовами есть await.
@@ -271,7 +281,18 @@ class _App {
   /// тап на 320 точках упирался бы в то, что строка ушла под нижнюю панель.
   Future<void> tapTile(IconData icon) async {
     final row = find.ancestor(of: find.byIcon(icon), matching: find.byType(ListTile));
-    await reveal(row);
+    // Несколько заходов, а не один. Под баннером об аварийном завершении на
+    // экране 320×480 списку настроек остаётся полсотни точек высоты, и на
+    // первом кадре он не успевает построить ни одной строки: `ListView`
+    // создаёт только то, что попадает в окно просмотра, а окна ещё нет. Через
+    // кадр-другой баннер доезжает, высота устаканивается, и строка появляется.
+    // Без этой петли аудит сообщал «строка не найдена» — то есть свою
+    // собственную поспешность вместо дефекта приложения.
+    for (var attempt = 0; attempt < 6 && row.evaluate().isEmpty; attempt++) {
+      await real();
+      await settle();
+      await reveal(row);
+    }
     final tile = tester.widgetList<ListTile>(row).firstWhere(
           (t) => t.onTap != null,
           orElse: () => throw StateError('строка со значком $icon не найдена'),
@@ -300,11 +321,8 @@ class _App {
   /// создаётся вовсе. Без прокрутки тест падал на пустом списке с «RangeError
   /// (length)» — и выглядело это как ошибка раскладки, хотя раскладка тут ни
   /// при чём.
-  Future<void> tapButton<T extends ButtonStyleButton>({
-    int at = 0,
-    bool exactType = false,
-  }) async {
-    final finder = exactType ? find.byType(T) : _byKind<T>();
+  Future<void> tapButton<T extends ButtonStyleButton>({int at = 0}) async {
+    final finder = _byKind<T>();
     var buttons = tester.widgetList<T>(finder).toList();
     for (var attempt = 0; buttons.length <= at && attempt < 6; attempt++) {
       await real();
@@ -317,6 +335,34 @@ class _App {
     }
     buttons[at].onPressed!();
     await _breathe();
+  }
+
+  /// Кнопка [T] без значка внутри.
+  ///
+  /// Так отличаются кнопки границ обрезки от кнопки «добавить файлы»: у первых
+  /// внутри только текст, у второй — значок. Порядковым номером их не
+  /// различить, и это не мелочь: `OutlinedButton.icon` начиная с Flutter 3.2x
+  /// строит НЕ приватный подкласс, а сам `OutlinedButton`, поэтому строгий
+  /// `find.byType` его больше не отсеивает. Аудит из-за этого двенадцать раз
+  /// подряд открывал системный выборщик файлов — чужую Activity, поверх
+  /// которой наше приложение перестаёт получать кадры, — и прогон вставал
+  /// намертво.
+  Future<void> tapButtonWithoutIcon<T extends ButtonStyleButton>() async {
+    await reveal(find.byType(_Never));
+    final buttons = find.byType(T);
+    for (final element in buttons.evaluate()) {
+      final hasIcon = find
+          .descendant(of: find.byElementPredicate((e) => e == element), matching: find.byType(Icon))
+          .evaluate()
+          .isNotEmpty;
+      final button = element.widget as T;
+      if (!hasIcon && button.onPressed != null) {
+        button.onPressed!();
+        await _breathe();
+        return;
+      }
+    }
+    throw StateError('$T без значка на экране не найдена');
   }
 
   /// Последняя кнопка этого типа на экране. Так нажимается «Лицензии»: она
@@ -1213,9 +1259,9 @@ void main() {
               trim: const TrimRange(startMs: 61200, endMs: 3 * 3600 * 1000 - 1),
             ),
           );
-          // Строгий тип: `OutlinedButton.icon` («добавить файлы») — приватный
-          // подкласс, и он открыл бы системный выборщик вместо диалога.
-          await app.tapButton<OutlinedButton>(exactType: true);
+          // Кнопка без значка: с ним — «добавить файлы», и она открыла бы
+          // системный выборщик вместо диалога.
+          await app.tapButtonWithoutIcon<OutlinedButton>();
         },
         sizes: _withKeyboard,
       );
